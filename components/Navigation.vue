@@ -4,7 +4,7 @@
       <img src="@/assets/images/abedo-logo.png" class="navigation__logo-image"/>
       <img src="@/assets/images/abedo-logo-text.png" class="navigation__logo-image"/>
       </NuxtLink>
-      
+      <ButtonIcon color='red' icon='squares' text='Партнеры'/>
   </div>
 </template>
 
