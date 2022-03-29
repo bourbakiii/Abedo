@@ -1,4 +1,5 @@
 <template>
+  <div class="navigation-wrapper">
   <div class="navigation">
     <NuxtLink to="/" class="navigation__logo">
       <img
@@ -10,7 +11,7 @@
         class="navigation__logo-image"
       />
     </NuxtLink>
-    <ButtonIcon color="red" icon="squares" text="Партнеры" />
+    <ButtonIcon color="red" icon="squares" text="Магазины" />
 
     <div class="navigation__links">
       <NuxtLink to="#" class="navigation__links-link">
@@ -61,6 +62,73 @@
         <p class="navigation__links-link-text">Акции магазинов</p>
       </NuxtLink>
     </div>
+
+    <div class="navigation__icons">
+      <NuxtLink to="#" class="navigation__icons-icon">
+        <svg
+          class="navigation__icons-icon-svg"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0_1887_4787)">
+            <path
+              d="M8.80758 0C3.95121 0 0 3.95121 0 8.80758C0 13.6642 3.95121 17.6152 8.80758 17.6152C13.6642 17.6152 17.6152 13.6642 17.6152 8.80758C17.6152 3.95121 13.6642 0 8.80758 0ZM8.80758 15.9892C4.8477 15.9892 1.62602 12.7675 1.62602 8.80762C1.62602 4.84773 4.8477 1.62602 8.80758 1.62602C12.7675 1.62602 15.9891 4.8477 15.9891 8.80758C15.9891 12.7675 12.7675 15.9892 8.80758 15.9892Z"
+              fill="#A6A8A8"
+            />
+            <path
+              d="M19.7617 18.6122L15.1005 13.9509C14.7829 13.6333 14.2685 13.6333 13.9509 13.9509C13.6332 14.2683 13.6332 14.7832 13.9509 15.1005L18.6121 19.7618C18.7709 19.9206 18.9788 20 19.1869 20C19.3948 20 19.6029 19.9206 19.7617 19.7618C20.0793 19.4444 20.0793 18.9295 19.7617 18.6122Z"
+              fill="#A6A8A8"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_1887_4787">
+              <rect width="20" height="20" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      </NuxtLink>
+      <NuxtLink to="#" class="navigation__icons-icon">
+        <svg
+          width="20"
+          height="18"
+          viewBox="0 0 20 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M18.5408 1.90117C17.5543 0.781872 16.1859 0.165466 14.6875 0.165466C12.5802 0.165466 11.246 1.42406 10.4979 2.47992C10.3038 2.7539 10.1386 3.02863 10 3.28715C9.86137 3.02863 9.69629 2.7539 9.50215 2.47992C8.75402 1.42406 7.41984 0.165466 5.3125 0.165466C3.81414 0.165466 2.44566 0.781912 1.45918 1.90121C0.518242 2.96894 0 4.39894 0 5.92777C0 7.59195 0.649727 9.1398 2.04473 10.7989C3.29148 12.2817 5.08512 13.8101 7.16211 15.58C7.93605 16.2395 8.73641 16.9216 9.58848 17.6671L9.61406 17.6895C9.72453 17.7862 9.86227 17.8345 10 17.8345C10.1377 17.8345 10.2755 17.7862 10.3859 17.6895L10.4115 17.6671C11.2636 16.9216 12.0639 16.2396 12.838 15.5799C14.9149 13.8102 16.7085 12.2817 17.9553 10.7989C19.3503 9.13976 20 7.59195 20 5.92777C20 4.39894 19.4818 2.96894 18.5408 1.90117ZM12.0779 14.688C11.4107 15.2566 10.724 15.8417 10 16.4711C9.27602 15.8418 8.58934 15.2566 7.92203 14.688C3.85723 11.2242 1.17188 8.93586 1.17188 5.92777C1.17188 4.68441 1.58613 3.52957 2.33836 2.67601C3.09922 1.81277 4.15543 1.33734 5.3125 1.33734C6.9191 1.33734 7.95766 2.32711 8.54594 3.15742C9.07363 3.90211 9.34898 4.65281 9.44289 4.94097C9.52145 5.18218 9.74633 5.34543 10 5.34543C10.2537 5.34543 10.4786 5.18218 10.5571 4.94097C10.651 4.65281 10.9264 3.90211 11.4541 3.15738C12.0423 2.32711 13.0809 1.33734 14.6875 1.33734C15.8446 1.33734 16.9008 1.81277 17.6616 2.67601C18.4139 3.52957 18.8281 4.68441 18.8281 5.92777C18.8281 8.93586 16.1428 11.2242 12.0779 14.688Z"
+            fill="#A6A8A8"
+          />
+        </svg>
+      </NuxtLink>
+    </div>
+
+    <NuxtLink to="#" class="navigation__cart-block">
+      <span
+        class="navigation__cart-block-icon"
+        :class="{ indicator: true }"
+        indicator-count="0"
+      >
+        <svg
+          class="navigation__cart-block-icon-svg"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19.8249 4.54601C19.6766 4.36351 19.4539 4.25757 19.2187 4.25757H18.9372L14.9082 0.228593C14.6031 -0.0765233 14.1084 -0.0765233 13.8033 0.228593L12.1096 1.9223L10.4158 0.228593C10.1107 -0.0765233 9.61604 -0.0765233 9.31096 0.228593L5.28198 4.25757H5.0678L5.00983 3.72507L5.00776 3.70796C4.73042 1.59394 2.91339 -0.000234371 0.781249 -0.000234371C0.349765 -0.000234371 0 0.349531 0 0.781014C0 1.2125 0.349765 1.56226 0.781249 1.56226C2.12914 1.56226 3.27824 2.56808 3.45749 3.9032L4.3862 12.4352C3.57421 12.8038 3.00781 13.6218 3.00781 14.57C3.00781 14.5767 3.00863 14.583 3.00878 14.5896C3.00863 14.5961 3.00781 14.6025 3.00781 14.6091C3.00781 15.9015 4.05921 16.9529 5.35155 16.9529H5.67018C5.59065 17.1859 5.54686 17.4354 5.54686 17.695C5.54686 18.9659 6.58077 19.9997 7.85155 19.9997C9.12233 19.9997 10.1562 18.9659 10.1562 17.695C10.1562 17.4354 10.1124 17.1859 10.0329 16.9529H13.4045C13.325 17.1859 13.2812 17.4354 13.2812 17.695C13.2812 18.9659 14.3151 19.9997 15.5859 19.9997C16.8567 19.9997 17.8906 18.9659 17.8906 17.695C17.8906 16.4242 16.8567 15.3904 15.5859 15.3904H5.35155C4.92077 15.3904 4.5703 15.0399 4.5703 14.6091C4.5703 14.6025 4.56948 14.5961 4.56933 14.5896C4.56948 14.583 4.5703 14.5767 4.5703 14.57C4.5703 14.1393 4.92077 13.7888 5.35155 13.7888H15.3254C16.7122 13.7888 17.985 12.9308 18.5678 11.6028C18.7412 11.2077 18.5615 10.7468 18.1665 10.5734C17.7714 10.4 17.3105 10.5797 17.1371 10.9748C16.8085 11.7234 16.0805 12.2263 15.3254 12.2263H5.93518L5.23788 5.82007H18.2577L17.8755 7.65276C17.7874 8.07514 18.0584 8.48897 18.4807 8.57705C18.5346 8.5883 18.5882 8.59365 18.6411 8.59365C19.0032 8.59365 19.3282 8.34033 19.4051 7.97178L19.9836 5.19835C20.0315 4.96811 19.9732 4.72851 19.8249 4.54601ZM15.5859 16.9529C15.9952 16.9529 16.3281 17.2858 16.3281 17.695C16.3281 18.1043 15.9952 18.4372 15.5859 18.4372C15.1767 18.4372 14.8437 18.1043 14.8437 17.695C14.8437 17.2858 15.1767 16.9529 15.5859 16.9529ZM7.85155 16.9529C8.2608 16.9529 8.59373 17.2858 8.59373 17.695C8.59373 18.1043 8.2608 18.4372 7.85155 18.4372C7.44229 18.4372 7.10936 18.1043 7.10936 17.695C7.10936 17.2858 7.44229 16.9529 7.85155 16.9529ZM9.77432 4.25757H7.4917L9.86342 1.88586L11.0047 3.02718L9.77432 4.25757ZM11.984 4.25757L14.3558 1.88586L16.7274 4.25757H11.984Z"
+            fill="#5C6784"
+          />
+        </svg>
+      </span>
+      <p class="navigation__cart-block-text">Корзина</p>
+    </NuxtLink>
+  </div>
   </div>
 </template>
 
@@ -69,14 +137,19 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-.navigation {
+.navigation-wrapper{
+  display: flex;align-items: center;justify-content: center;
   width: 100%;
   height: 100px;
   background-color: $white;
-  border: 1px solid black;
+.navigation {
+  margin: 0px 10px;
+  width: 100%;
+  height:100%;
+  max-width: $maxwidth;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   &__logo {
     display: flex;
     align-items: center;
@@ -113,5 +186,77 @@ export default {};
       }
     }
   }
+  &__icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 120px;
+    &-icon {
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 90px;
+      border: 1px solid $gray_four;
+    }
+  }
+  &__cart-block {
+    display: flex;align-items: center;justify-content: center;
+      text-decoration: none;
+    &-icon {
+      position: relative;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 90px;
+      border: 1px solid $darkblue;
+      margin-right: 15px;
+      &.indicator:after {
+        height: 24px;
+        min-width: 20px;
+        padding: 0px 2px;
+        width: auto;
+        position: absolute;
+        top: 5px;
+        left: 87%;
+        transform: translate(-50%, -50%);
+        background-color: $red;
+        border-radius: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $white;
+        z-index: 2;
+
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 11px;
+        line-height: 13px;
+        display: flex;
+        align-items: center;
+        content: attr(indicator-count);
+      }
+    }
+    &-text{
+      font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+    }
+  }
 }
+}
+
 </style>

@@ -19,3 +19,12 @@ body{
 button{
     cursor: pointer;
 }
+
+html{
+    /* хром, сафари */
+&::-webkit-scrollbar { width: 0; }
+
+.element { -ms-overflow-style: none; }
+
+.element { overflow: -moz-scrollbars-none; }
+}
