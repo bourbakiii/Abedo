@@ -18,6 +18,7 @@ export default {
     '@/assets/scss/style.scss',
     '@/assets/scss/variables.scss',
     '@/assets/scss/transitions.scss',
+    '@/assets/scss/fonts.scss',
 ],
   plugins: ['@/plugins/clientHook.client.js'],
   components: true,
@@ -29,6 +30,7 @@ export default {
       '@assets/scss/variables.scss',
       '@assets/scss/style.scss',
       '@assets/scss/transitions.scss',
+      '@/assets/scss/fonts.scss',
     ]
   },
   axios: {
