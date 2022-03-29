@@ -1,6 +1,6 @@
 <template>
   <div class="navigation">
-      Navigation is here
+      
   </div>
 </template>
 
@@ -10,6 +10,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.navigation{
+    width:100%;
+    height:100px;
+    background-color: $white;
+    border: 1px solid black;
+}
 </style>

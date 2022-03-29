@@ -5,7 +5,12 @@
 html {
     min-height: 100vh;
     min-width: 360px;
-    background-color: red;
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    margin: 0px;
+    padding: 0px;
 }
 .html_overflow{
     overflow: hidden;
