@@ -14,7 +14,7 @@
     <ButtonIcon color="red" icon="squares" text="Магазины" />
 
     <div class="navigation__links">
-      <NuxtLink to="#" class="navigation__links-link">
+      <NuxtLink to="#" class="navigation__links-link navigation__links-link__dropdown" @mousedown="log" @mouseleave="show_dropdown = false">
         <svg
           class="navigation__links-link-svg"
           width="24"
@@ -33,8 +33,24 @@
             stroke-linecap="round"
           />
         </svg>
-
         <p class="navigation__links-link-text">Кабинет</p>
+        <transition name='opacity'>
+        <div v-if='show_dropdown' class="navigation__links-link__dropdown-content">
+          <NuxtLink to='#' class="navigation__links-link__dropdown-content-link">
+            Мои данные
+          </NuxtLink>
+          <NuxtLink to='#' class="navigation__links-link__dropdown-content-link">
+            Адреса доставки
+          </NuxtLink>
+          <NuxtLink to='#' class="navigation__links-link__dropdown-content-link">
+            История заказов
+          </NuxtLink>
+          <NuxtLink to='#' class="navigation__links-link__dropdown-content-link">
+            Выход
+          </NuxtLink>
+        </div>
+          </transition>
+
       </NuxtLink>
       <NuxtLink to="#" class="navigation__links-link">
         <svg
@@ -133,7 +149,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return{
+      show_dropdown: false
+    }
+  },
+  methods:{
+    log(){
+      console.log("looo")
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -184,6 +211,33 @@ export default {};
         display: flex;
         align-items: center;
       }
+      &__dropdown{
+        position: relative;
+        &-content{
+          position: absolute;
+          top:100%;
+          left:0%;
+          width:257px;
+          border-radius: 0px 0px 20px 20px;
+          overflow: hidden;
+          height:auto;
+          display: flex;align-items: center;justify-content: flex-start;flex-direction:column;
+          box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);;
+          padding-top: 7px;
+          padding-bottom: 17px;
+          &-link{
+            width:100%;
+            box-sizing: border-box;
+            text-decoration: none;
+            border-bottom: 1px solid $gray_three;
+            min-height:50px;
+            padding: 10px 30px;
+            display: flex;align-items: center;justify-content: flex-start;flex-direction: row;
+            &:last-of-type{
+              border:none;
+            }
+          }
+      }}
     }
   }
   &__icons {
