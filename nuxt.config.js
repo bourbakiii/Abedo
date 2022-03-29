@@ -15,25 +15,26 @@ export default {
     ]
   },
 
-  css: [
-  ],
-
-  plugins: [
-  ],
-
-  components: true,
-
-  buildModules: [
-  ],
-
-  modules: [
-    '@nuxtjs/axios',
-  ],
-
-  axios: {
-   baseURL: 'http://127.0.0.1:8000',
-  },
-
-  build: {
-  }
+  plugins: ['@/plugins/clientHook.client.js'],
+    components: true,
+    build:{},
+    buildModules: [],
+    modules: ['@nuxtjs/axios','@nuxtjs/style-resources'],
+    styleResources: {
+        scss: [
+            '@assets/scss/variables.scss',
+            '@assets/scss/effects.scss',
+            '@assets/scss/style.scss',
+            '@assets/scss/titles.scss',
+            '@assets/scss/transitions.scss',
+        ]
+    },
+    axios:{
+        baseUrl: "http://localhost:5000"
+    },
+    
+    pageTransition: {
+        name: 'page',
+        mode: 'out-in',
+      }
 }

@@ -1,6 +1,6 @@
 <template>
-  <div class="layout-default-layout">
-      <Navigation/>
+  <div class="navigation">
+      Navigation is here
   </div>
 </template>
 
