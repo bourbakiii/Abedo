@@ -164,8 +164,9 @@ export default {
   width: 100%;
   height: 100px;
   background-color: $white;
+  padding:0px 10px;
+  box-sizing: border-box;
 .navigation {
-  margin: 0px 10px;
   width: 100%;
   height:100%;
   max-width: $maxwidth;
@@ -209,6 +210,7 @@ export default {
       &__dropdown{
         position: relative;
         &-content{
+          background-color: $white;
           position: absolute;
           top:100%;
           left:0%;
