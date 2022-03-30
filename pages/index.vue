@@ -26,4 +26,15 @@ export default {
   name: "IndexPage",
 };
 </script>
+<style lang="scss" scoped>
+.search-wrapper{
+  margin-bottom: 73px;
+}
+.new-shops{
+  margin-bottom: 70px;
+}
+.stocks-slider{
+  margin-bottom: 63px;
+}
+</style>
 

@@ -2,43 +2,45 @@
   <div class="search-wrapper index-page-search">
     <div class="search">
       <h1 class="title title-big lightblack">Быстрая доставка еды</h1>
-      <form class="search__input">
-        <svg
-          class="search__input-icon"
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g clip-path="url(#clip0_1887_4787)">
-            <path
-              d="M8.80758 0C3.95121 0 0 3.95121 0 8.80758C0 13.6642 3.95121 17.6152 8.80758 17.6152C13.6642 17.6152 17.6152 13.6642 17.6152 8.80758C17.6152 3.95121 13.6642 0 8.80758 0ZM8.80758 15.9892C4.8477 15.9892 1.62602 12.7675 1.62602 8.80762C1.62602 4.84773 4.8477 1.62602 8.80758 1.62602C12.7675 1.62602 15.9891 4.8477 15.9891 8.80758C15.9891 12.7675 12.7675 15.9892 8.80758 15.9892Z"
-              fill="#A6A8A8"
-            />
-            <path
-              d="M19.7617 18.6122L15.1005 13.9509C14.7829 13.6333 14.2685 13.6333 13.9509 13.9509C13.6332 14.2683 13.6332 14.7832 13.9509 15.1005L18.6121 19.7618C18.7709 19.9206 18.9788 20 19.1869 20C19.3948 20 19.6029 19.9206 19.7617 19.7618C20.0793 19.4444 20.0793 18.9295 19.7617 18.6122Z"
-              fill="#A6A8A8"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_1887_4787">
-              <rect width="20" height="20" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
+      <form @submit.prevent="search" class="search__input">
+        <button class="search__input-button">
+          <svg
+            class="search__input-button-icon"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_1887_4787)">
+              <path
+                d="M8.80758 0C3.95121 0 0 3.95121 0 8.80758C0 13.6642 3.95121 17.6152 8.80758 17.6152C13.6642 17.6152 17.6152 13.6642 17.6152 8.80758C17.6152 3.95121 13.6642 0 8.80758 0ZM8.80758 15.9892C4.8477 15.9892 1.62602 12.7675 1.62602 8.80762C1.62602 4.84773 4.8477 1.62602 8.80758 1.62602C12.7675 1.62602 15.9891 4.8477 15.9891 8.80758C15.9891 12.7675 12.7675 15.9892 8.80758 15.9892Z"
+                fill="#A6A8A8"
+              />
+              <path
+                d="M19.7617 18.6122L15.1005 13.9509C14.7829 13.6333 14.2685 13.6333 13.9509 13.9509C13.6332 14.2683 13.6332 14.7832 13.9509 15.1005L18.6121 19.7618C18.7709 19.9206 18.9788 20 19.1869 20C19.3948 20 19.6029 19.9206 19.7617 19.7618C20.0793 19.4444 20.0793 18.9295 19.7617 18.6122Z"
+                fill="#A6A8A8"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_1887_4787">
+                <rect width="20" height="20" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+        </button>
         <input
           placeholder="Найти магазин товар или услугу "
           type="text"
           minlength="3"
           class="search__input-input"
         />
+        <div class="search__input__dropdown-content"></div>
       </form>
       <div class="search__categories" v-if="categories.length">
         <CategoryItem
           v-for="category in categories"
           :key="category.id"
-          class="black"
           :category="category"
         />
       </div>
@@ -50,6 +52,7 @@
 export default {
   data() {
     return {
+      show_result: false,
       categories: [
         { id: 1, name: "Lorem ipsum dolor mi met megretto consis" },
         { id: 2, name: "Lorem ipsum dolor mi met megretto consis" },
@@ -65,6 +68,11 @@ export default {
         { id: 12, name: "Lorem ipsum dolor mi met megretto consis" },
       ],
     };
+  },
+  methods: {
+    search() {
+      console.log("search function");
+    },
   },
 };
 </script>
@@ -96,8 +104,21 @@ export default {
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
-    overflow: hidden;
-    &-icon {
+    position: relative;
+    &__dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 25px;
+      height:100px;
+      width: calc(100% - 50px);
+      background-color: $white;
+      border-radius: 0px 0px 10px 10px;
+      padding: 10px 20px 20px 20px;
+    }
+    &-button {
+      outline: none;
+      border: none;
+      background-color: transparent;
       margin: 0px 20px;
     }
     &-input {

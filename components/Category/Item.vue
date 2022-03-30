@@ -8,7 +8,6 @@
 <style lang="scss" scoped>
 .category {
   height: 50px;
-  border: 1px solid $orange;
   padding: 0px 50px;
   display: flex;
   align-items: center;
@@ -17,8 +16,17 @@
   text-decoration: none;
   border-radius: 50px;
   transition: 0.3s;
+  * {
+    transition: 0.3s;
+  }
+    border: 1px solid $orange;
   &:hover {
-    transform: scale(1.01);
+    border: 2px solid $orange;
+    transform: scale(1.005);
+  }
+  &:active {
+    transition: 0.07s;
+    transform: scale(0.98);
   }
   &-image {
     height: 18px;
