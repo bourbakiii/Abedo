@@ -2,6 +2,7 @@
   <div class="page index-page">
     <IndexPageSearch/>
     <IndexPageStocksSlider/>
+    <IndexPageNewShops/>
   </div>
 </template>
 

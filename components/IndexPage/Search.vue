@@ -77,7 +77,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 70px 0px;
+  padding: 70px 10px;
 }
 .search {
   width: 100%;
