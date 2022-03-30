@@ -5,9 +5,7 @@
         <img v-if="false" class="stock__hood__logo" />
         <p class="stock__hood__name">Кафе “Лимончелло”</p>
       </div>
-      <p class="stock__text">
-          Получайте 1% бонусами и скидку до 99% 
-      </p>
+      <p class="stock__text">Получайте 1% бонусами и скидку до 99%</p>
     </div>
   </div>
 </template>
@@ -33,11 +31,15 @@ export default {};
   height: 100%;
   background-color: rgba($orange, 0.9);
   padding: 20px;
+  display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
+  cursor: pointer;
   &__hood {
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
+    width:100%;
+    flex-shrink: 0;
     margin-bottom: 22px;
     &.befored {
       margin-bottom: 57px;
@@ -75,15 +77,18 @@ export default {};
       text-align: left;
     }
   }
-  &__text{
-      font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 22px;
-line-height: 27px;
-display: flex;
-align-items: center;
-color:$white;
+  &__text {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    color: $white;
+    width:100%;
+    max-height: 100%;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 </style>
