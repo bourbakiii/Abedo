@@ -34,9 +34,13 @@
           class="search__input-input"
         />
       </form>
-      {{categories.length}}
-      <div class="search__categories" v-if='categories'>
-        <CategoryItem v-for='category in categories' :key='category.id' class='black' :category='category'/>
+      <div class="search__categories" v-if="categories.length">
+        <CategoryItem
+          v-for="category in categories"
+          :key="category.id"
+          class="black"
+          :category="category"
+        />
       </div>
     </div>
   </div>
@@ -44,36 +48,30 @@
 
 <script>
 export default {
-  data(){
-    return{
-      categories:[
-        {id:1,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:2,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:3,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:4,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:5,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:6,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:7,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:8,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:9,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:10,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:11,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:12,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:13,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:14,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:15,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:16,name:'Lorem ipsum dolor mi met megretto consis'},
-        {id:17,name:'Lorem ipsum dolor mi met megretto consis'},
-      ]
-    }
-  }
+  data() {
+    return {
+      categories: [
+        { id: 1, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 2, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 3, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 4, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 5, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 6, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 7, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 8, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 9, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 10, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 11, name: "Lorem ipsum dolor mi met megretto consis" },
+        { id: 12, name: "Lorem ipsum dolor mi met megretto consis" },
+      ],
+    };
+  },
 };
 </script>
 
 <style lang='scss' scoped>
 .search-wrapper {
   width: 100%;
-  min-height: 319px;
   background-color: $gray_three;
   display: flex;
   align-items: center;
@@ -129,13 +127,15 @@ export default {
       }
     }
   }
-  &__categories{
-    width:100%; max-width:100%;
+  &__categories {
+    width: 100%;
+    max-width: 100%;
     display: grid;
+    margin-top: 40px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 30px;
     overflow: hidden;
-    .category{
+    .category {
       width: 295px;
     }
   }
