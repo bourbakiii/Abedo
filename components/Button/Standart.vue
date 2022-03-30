@@ -1,5 +1,15 @@
 <template>
-  <button class="button button-standart">
+  <button
+    :style="
+      'height: ' +
+      parseInt(height) +
+      'px; padding: 0px ' +
+      parseInt(padding) +
+      'px; text-transform: '+ (uppercase?'uppercase;':'none;')
+    "
+    @click.prevent="$emit('action')"
+    class="button button-standart"
+  >
     {{ text }}
   </button>
 </template>
@@ -10,16 +20,27 @@ export default {
     text: {
       required: true,
     },
+    height: {
+      required: false,
+      default: "50px",
+    },
+    padding: {
+      required: false,
+      default: "30px",
+    },
+    uppercase: {
+      required: false,
+      default: false,
+    },
   },
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .button {
   text-align: center;
   outline: none;
   border: none;
-  height: 50px;
   border-radius: 50px;
   white-space: nowrap;
   overflow: hidden;
@@ -35,8 +56,13 @@ export default {
   font-size: 14px;
   line-height: 17px;
   text-transform: uppercase;
+
   &:hover {
     color: $white;
+    background-color: $darkblue;
+    border-color: $darkblue;
+  }
+  &.green:hover {
     background-color: $green;
     border-color: $green;
   }

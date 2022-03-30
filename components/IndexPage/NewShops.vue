@@ -90,7 +90,7 @@
         <ShopItem />
         <ShopItem />
       </div>
-      <ButtonStandart class='catalog__button' text='Все магазины'/>
+      <ButtonStandart  class='catalog__button' height='50' :uppercase='true' text='Все магазины'/>
     </div>
   </div>
 </template>

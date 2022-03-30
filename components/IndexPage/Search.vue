@@ -35,7 +35,103 @@
           minlength="3"
           class="search__input-input"
         />
-        <div class="search__input__dropdown-content"></div>
+        <div class="search__input__dropdown-content" v-if='show_result==true'>
+          <div class="search__input__dropdown-content__shops">
+            <NuxtLink
+              to="#"
+              class="search__input__dropdown-content__shops-shop"
+            >
+              <img
+                src="@/assets/images/limonchello.png"
+                class="search__input__dropdown-content__shops-shop-image"
+              />
+              <p class="search__input__dropdown-content__shops-shop-name">
+                Ресторан “Тангос”
+              </p>
+            </NuxtLink>
+            <NuxtLink
+              to="#"
+              class="search__input__dropdown-content__shops-shop"
+            >
+              <p class="search__input__dropdown-content__shops-shop-name">
+                Ресторан “Тангос”
+              </p>
+            </NuxtLink>
+            <NuxtLink
+              to="#"
+              class="search__input__dropdown-content__shops-shop"
+            >
+              <img
+                src="@/assets/images/limonchello.png"
+                class="search__input__dropdown-content__shops-shop-image"
+              />
+              <p class="search__input__dropdown-content__shops-shop-name">
+                Ресторан “Тангос”
+              </p>
+            </NuxtLink>
+            <NuxtLink
+              to="#"
+              class="search__input__dropdown-content__shops-shop"
+            >
+              <p class="search__input__dropdown-content__shops-shop-name">
+                Ресторан “Тангос”
+              </p>
+            </NuxtLink>
+            <NuxtLink
+              to="#"
+              class="search__input__dropdown-content__shops-shop"
+            >
+              <img
+                src="@/assets/images/limonchello.png"
+                class="search__input__dropdown-content__shops-shop-image"
+              />
+              <p class="search__input__dropdown-content__shops-shop-name">
+                Ресторан “Тангос”
+              </p>
+            </NuxtLink>
+          </div>
+          <div class="search__input__dropdown-content__products">
+            <div class="search__input__dropdown-content__products-product">
+              <img
+                src="@/assets/images/shop-placeholder.png"
+                class="search__input__dropdown-content__products-product-image"
+              />
+              <div
+                class="search__input__dropdown-content__products-product-content"
+              >
+                <div
+                  class="search__input__dropdown-content__products-product-content-top"
+                >
+                  <p
+                    class="search__input__dropdown-content__products-product-content-top-name"
+                  >
+                    Салат с лососем и помидорами
+                  </p>
+                  <p
+                    class="search__input__dropdown-content__products-product-content-top-shop"
+                  >
+                    / Ресторан “Тангос”
+                  </p>
+                </div>
+                <div
+                  class="search__input__dropdown-content__products-product-content-bottom"
+                >
+                  <p
+                    class="search__input__dropdown-content__products-product-content-bottom-price"
+                  >
+                    450руб.
+                  </p>
+                  <p
+                    class="search__input__dropdown-content__products-product-content-bottom-weight"
+                  >
+                    320г.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ButtonStandart height='32' padding='30' :uppercase='false' @action='watchAll' class="search__input__dropdown-content__watch-all-button" text='Cмотреть все'/>
+        </div>
       </form>
       <div class="search__categories" v-if="categories.length">
         <CategoryItem
@@ -71,13 +167,26 @@ export default {
   },
   methods: {
     search() {
-      console.log("search function");
+      this.show_result = true;
+      document.addEventListener('click',(event)=>{
+        const dropdown_content = document.querySelector('.search__input__dropdown-content');
+        if(!dropdown_content) return;
+        let element_data = dropdown_content.getBoundingClientRect();
+        console.log(element_data.x<dropdown_content.x&& element_data.x>dropdown_content.x)
+        if((element_data.x<dropdown_content.x && element_data.x>dropdown_content.x) || (element_data.y<dropdown_content.y&&element_data.y>dropdown_content.y)){
+          this.show_result =false;
+          console.log(1);
+        }
+      })
     },
+    watchAll(){
+      console.log("watch all button");
+    }
   },
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .search-wrapper {
   width: 100%;
   background-color: $gray_three;
@@ -105,15 +214,152 @@ export default {
     justify-content: flex-start;
     flex-direction: row;
     position: relative;
+    z-index: 5;
     &__dropdown-content {
+      box-shadow:  0px 10px 10px rgba(0, 0, 0, 0.1);
       position: absolute;
       top: 100%;
       left: 25px;
-      height:100px;
       width: calc(100% - 50px);
       background-color: $white;
       border-radius: 0px 0px 10px 10px;
       padding: 10px 20px 20px 20px;
+      &__shops {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        border-bottom: 1px solid $gray_three;
+        padding-bottom: 10px;
+        &-shop {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          text-decoration: none;
+          overflow: hidden;
+          &-image {
+            background-color: $gray_two;
+            width: 120px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 9px;
+          }
+          &-name {
+            font-family: "SF Pro Display";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+      &__products {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        &-product {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-direction: row;
+          min-height: 75px;
+          padding:10px 0px;
+          border-bottom: 1px solid $gray_three;
+          &-image {
+            width: 50px;
+            height: 40px;
+            border-radius: 5px;
+            object-fit: contain;
+            margin-right: 10px;
+            flex-shrink: 0;
+            flex-grow: 0;
+          }
+          &-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            flex-grow: 1;
+            overflow: hidden;
+            &-top {
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              flex-direction: row;
+              width: 100%;
+              margin-bottom: 4px;
+              &-name {
+                font-family: "SF Pro Display";
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 17px;
+                margin-right: 5px;
+                white-space: nowrap;
+                max-width: 60%;
+                width: max-content;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+              &-shop {
+                font-family: "SF Pro Display";
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 17px;
+                color: $darkblue;
+                white-space: nowrap;
+                max-width: 40%;
+                width: max-content;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
+            &-bottom {
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              flex-direction: row;
+              width: 100%;
+              &-price {
+                font-family: "SF Pro Display";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                margin-right: 5px;
+                white-space: nowrap;
+                max-width: 60%;
+                width: max-content;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+              &-weight {
+                font-family: "SF Pro Display";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                color: $darkblue;
+                white-space: nowrap;
+                max-width: 40%;
+                width: max-content;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
+          }
+        }
+      }
+      &__watch-all-button{
+        margin-top:15px;
+      }
     }
     &-button {
       outline: none;

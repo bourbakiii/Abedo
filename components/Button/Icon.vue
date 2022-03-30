@@ -1,5 +1,5 @@
 <template>
-  <button class="button button-icon">
+  <button @click.prevent='$emit("action")' class="button button-icon">
     <span v-if="icon" class="button__icon">
       <img
         v-if="icon == 'squares'"
