@@ -1,6 +1,8 @@
 <template>
-  <div class="layout-default-layout">
+  <div class="layout layout-default-layout">
       <Navigation/>
+      <nuxt/>
+      <Footer/>
   </div>
 </template>
 
@@ -10,6 +12,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
 </style>

@@ -155,11 +155,6 @@ export default {
       show_dropdown: false
     }
   },
-  methods:{
-    log(){
-      console.log("looo")
-    }
-  }
 };
 </script>
 

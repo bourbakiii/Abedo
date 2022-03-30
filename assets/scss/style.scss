@@ -12,14 +12,27 @@ html {
 body{
     margin: 0px;
     padding: 0px;
+    min-height:100vh;
+    display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
 }
+#__nuxt, #__layout, .layout{
+    display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
+    width:100%;
+    height: 100%;
+    flex-grow: 1;
+}
+
 .html_overflow{
     overflow: hidden;
 }
 button{
     cursor: pointer;
 }
-
+.page{
+    width:100%;
+    background-color: lightgray;
+    flex-grow: 1;
+}
 html{
     /* хром, сафари */
 &::-webkit-scrollbar { width: 0; }
