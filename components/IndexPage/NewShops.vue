@@ -76,7 +76,7 @@
           <p class="catalog__top__filter-button-text">Фильтр</p>
         </button>
       </div>
-      <div class="catalog-content">
+      <div class="catalog__content">
         <ShopItem />
         <ShopItem />
         <ShopItem />
@@ -90,6 +90,7 @@
         <ShopItem />
         <ShopItem />
       </div>
+      <ButtonStandart class='catalog__button' text='Все магазины'/>
     </div>
   </div>
 </template>
@@ -107,6 +108,7 @@ export default {};
   margin: 0px;
 }
 .catalog {
+  display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
   width: 100%;
   max-width: $maxwidth;
   &__top {
@@ -136,20 +138,22 @@ export default {};
         display: flex;
         align-items: center;
       }
-      &:hover {
-        transform: scale(1.01);
-      }
       &:active{
           transition: 0.05s;
           transform: scale(0.96);
       }
     }
   }
-  &-content {
+  &__content {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
+  }
+  &__button{
+    margin-top: 70px;
+    align-self: center;
+    justify-content: center;
   }
 }
 </style>
