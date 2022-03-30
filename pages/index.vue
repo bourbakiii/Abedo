@@ -1,6 +1,7 @@
 <template>
   <div class="page index-page">
     <IndexPageSearch/>
+    <IndexPageStocksSlider/>
   </div>
 </template>
 

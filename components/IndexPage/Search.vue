@@ -84,7 +84,6 @@ export default {
   height: 100%;
   flex-grow: 1;
   max-width: $maxwidth;
-  border: 1px solid black;
   .title {
     margin-bottom: 40px;
   }

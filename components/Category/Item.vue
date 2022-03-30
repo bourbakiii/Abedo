@@ -16,7 +16,7 @@
   flex-direction: row;
   text-decoration: none;
   border-radius: 50px;
-  transition: 0;
+  transition: 0.3s;
   &:hover {
     transform: scale(1.01);
   }
