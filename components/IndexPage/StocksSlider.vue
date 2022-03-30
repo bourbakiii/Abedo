@@ -3,6 +3,9 @@
   <div class="slider stocks-slider wrapper">
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide class="slide"><StockItem/></swiper-slide>
+      <swiper-slide class="slide"><StockItem/></swiper-slide>
+      <swiper-slide class="slide"><StockItem/></swiper-slide>
+      <swiper-slide class="slide"><StockItem/></swiper-slide>
       <div class="stocks-slider-pagination" slot="pagination"></div>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
