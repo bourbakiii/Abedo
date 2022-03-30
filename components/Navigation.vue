@@ -14,7 +14,7 @@
     <ButtonIcon color="red" icon="squares" text="Магазины" />
 
     <div class="navigation__links">
-      <NuxtLink to="#" class="navigation__links-link navigation__links-link__dropdown" @mousedown="log" @mouseleave="show_dropdown = false">
+      <NuxtLink to="#" class="navigation__links-link navigation__links-link__dropdown" @mouseenter.native="show_dropdown = true" @mouseleave.native="show_dropdown = false">
         <svg
           class="navigation__links-link-svg"
           width="24"
@@ -233,6 +233,11 @@ export default {
             min-height:50px;
             padding: 10px 30px;
             display: flex;align-items: center;justify-content: flex-start;flex-direction: row;
+            transition: 0.3s;
+            &:hover{
+              color: $darkblue;
+              transform: scale(1.02);
+            }
             &:last-of-type{
               border:none;
             }
@@ -255,11 +260,27 @@ export default {
       justify-content: center;
       border-radius: 90px;
       border: 1px solid $gray_four;
+      transition: 0.3s;
+      *{
+        transition: 0.3s;
+      }
+      &:hover{
+        border-color: $darkblue;
+        *{
+          fill: $darkblue;
+        }
+      }
     }
   }
   &__cart-block {
     display: flex;align-items: center;justify-content: center;
       text-decoration: none;
+      &:hover{
+        .navigation__cart-block-text{
+          color:$darkblue;
+          text-decoration: underline;
+        }
+      }
     &-icon {
       position: relative;
       cursor: pointer;
@@ -299,6 +320,7 @@ export default {
       }
     }
     &-text{
+      transition: 0.3s;
       font-family: 'Montserrat';
 font-style: normal;
 font-weight: 400;
