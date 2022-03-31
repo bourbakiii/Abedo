@@ -72,6 +72,12 @@
           </NuxtLink>
         </span>
       </div>
+      <div class="footer__contacts">
+        <p class="footer__contacts-text">Служба качества:</p>
+        <a href="tel:+7%20(495)%20989-10-85" class="footer__contacts-phone"
+          >+7 (495) 989-10-85</a
+        >
+      </div>
     </div>
     <div class="footer-wrapper__bottom-wrapper">
       <div class="footer-wrapper__bottom">
@@ -238,6 +244,39 @@ export default {};
         &:last-of-type {
           margin-right: 0px;
         }
+      }
+    }
+  }
+  &__contacts {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-left: auto;
+    &-text {
+      color: $white;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      margin-bottom: 16px;
+    }
+    &-phone {
+      text-decoration: none;
+      color: $white;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      display: flex;
+      align-items: center;
+      text-align: right;
+
+      &:hover{
+        text-decoration: underline;
       }
     }
   }
