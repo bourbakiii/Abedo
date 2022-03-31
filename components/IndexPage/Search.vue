@@ -221,28 +221,28 @@ export default {
   methods: {
     search() {
       this.show_result = true;
-      document.addEventListener("click", this.dropdownClick);
+      const dropdownClick = (event) => {
+        console.log("Clicked");
+        const dropdown_content = document.querySelector(
+          ".search__input__dropdown-content"
+        );
+        if (!dropdown_content) return;
+        let element_data = dropdown_content.getBoundingClientRect();
+        if (
+          !(
+            event.x >= element_data.x &&
+            event.x <= element_data.x + element_data.width &&
+            event.y >= element_data.y &&
+            event.y <= element_data.y + element_data.height
+          )
+        ) {
+          this.show_result = false;
+          document.removeEventListener("click", dropdownClick);
+        }
+      };
+      document.addEventListener("click", dropdownClick);
     },
-    dropdownClick(event) {
-      console.log("Click event");
-      const dropdown_content = document.querySelector(
-        ".search__input__dropdown-content"
-      );
-      if (!dropdown_content) return;
-      let element_data = dropdown_content.getBoundingClientRect();
-      if (
-        !(
-          event.x >= element_data.x &&
-          event.x <= element_data.x + element_data.width &&
-          event.y >= element_data.y &&
-          event.y <= element_data.y + element_data.height
-        )
-      ) {
-        console.log(this);
-        this.show_result = false;
-        document.removeEventListener("click", this.dropdownClick);
-      }
-    },
+
     watchAll() {
       console.log("watch all button");
     },
