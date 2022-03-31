@@ -29,7 +29,6 @@ export default {
 .founded-shops {
   width: 100%;
   max-width: $maxwidth;
-  border: 1px solid black;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;

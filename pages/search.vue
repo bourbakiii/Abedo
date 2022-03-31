@@ -2,6 +2,7 @@
   <div class="page search-page">
     <PagesSearchInput />
     <PagesSearchFoundedShops/>
+    <PagesSearchFoundedProducts/>
   </div>
 </template>
 
@@ -12,7 +13,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page{
-  background-color: gray;
+  background-color: $gray_one;
 }
 </style>
 
