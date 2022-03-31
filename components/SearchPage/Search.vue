@@ -1,8 +1,5 @@
 <template>
-  <div class="search-wrapper index-page-search">
-    <div class="search">
-      <h1 class="title title-big lightblack">Быстрая доставка еды</h1>
-      <form @submit.prevent="search" class="search__input">
+   <form @submit.prevent="search" class="search__input">
         <button class="search__input-button">
           <svg
             class="search__input-button-icon"
@@ -185,95 +182,16 @@
           </div>
         </transition>
       </form>
-      <div class="search__categories" v-if="categories.length">
-        <CategoryItem
-          v-for="category in categories"
-          :key="category.id"
-          :category="category"
-        />
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      show_result: false,
-      query: "",
-      categories: [
-        { id: 1, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 2, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 3, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 4, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 5, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 6, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 7, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 8, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 9, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 10, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 11, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 12, name: "Lorem ipsum dolor mi met megretto consis" },
-      ],
-    };
-  },
-  methods: {
-    search() {
-      this.showResult();
-    },
-    showResult(){
-      this.show_result = true;
-      this.dropdownClick();
-    },
-    dropdownClick(){
-       const dropdownClick = (event) => {
-        const dropdown_content = document.querySelector(
-          ".search__input__dropdown-content"
-        );
-        if (!dropdown_content) return;
-        let element_data = dropdown_content.getBoundingClientRect();
-        if (
-          !(
-            event.x >= element_data.x &&
-            event.x <= element_data.x + element_data.width &&
-            event.y >= element_data.y &&
-            event.y <= element_data.y + element_data.height
-          )
-        ) {
-          this.show_result = false;
-          document.removeEventListener("click", dropdownClick);
-        }
-      };
-      document.addEventListener("click", dropdownClick);
-    },
-    watchAll() {
-      this.$router.push('/search')
-      console.log("watch all button");
-    },
-  },
-};
+
+}
 </script>
 
-<style lang="scss" scoped>
-.search-wrapper {
-  width: 100%;
-  background-color: $gray_three;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 70px 10px;
-}
-.search {
-  width: 100%;
-  height: 100%;
-  flex-grow: 1;
-  max-width: $maxwidth;
-  .title {
-    margin-bottom: 40px;
-  }
-  &__input {
+<style lang="scss">
+.search__input {
     width: 730px;
     height: 60px;
     background-color: $white;
@@ -470,17 +388,4 @@ export default {
       }
     }
   }
-  &__categories {
-    width: 100%;
-    max-width: 100%;
-    display: grid;
-    margin-top: 40px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 30px;
-    overflow: hidden;
-    .category {
-      width: 295px;
-    }
-  }
-}
 </style>
