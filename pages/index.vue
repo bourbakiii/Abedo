@@ -1,9 +1,9 @@
 <template>
   <div class="page index-page">
-    <IndexPageSearch />
-    <IndexPageStocksSlider />
-    <IndexPageNewShops />
-    <IndexPageAbout>
+    <PagesIndexSearch />
+    <PagesIndexStocksSlider />
+    <PagesIndexNewShops />
+    <PagesIndexAbout>
       Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать
       несколько абзацев более менее осмысленного текста рыбы на русском языке, а
       начинающему оратору отточить навык публичных выступлений в домашних
@@ -17,7 +17,7 @@
       текст. В отличии от lorem ipsum, текст рыба на русском языке наполнит
       любой макет непонятным смыслом и придаст неповторимый колорит советских
       времен.
-    </IndexPageAbout>
+    </PagesIndexAbout>
   </div>
 </template>
 
