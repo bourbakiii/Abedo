@@ -40,7 +40,7 @@
         <transition name="opacity">
           <button
             v-if="query.length"
-            @click="query = ''"
+            @click.prevent="query = ''"
             class="search__input-button search__input-button-close"
           >
             <svg
@@ -61,7 +61,7 @@
         <transition name="opacity">
           <div
             class="search__input__dropdown-content"
-            @mouseenter="show_result = true"
+            @mouseenter="showResult"
             v-if="show_result == true"
           >
             <div class="search__input__dropdown-content__shops">
@@ -220,9 +220,14 @@ export default {
   },
   methods: {
     search() {
+      this.showResult();
+    },
+    showResult(){
       this.show_result = true;
-      const dropdownClick = (event) => {
-        console.log("Clicked");
+      this.dropdownClick();
+    },
+    dropdownClick(){
+       const dropdownClick = (event) => {
         const dropdown_content = document.querySelector(
           ".search__input__dropdown-content"
         );
@@ -242,7 +247,6 @@ export default {
       };
       document.addEventListener("click", dropdownClick);
     },
-
     watchAll() {
       console.log("watch all button");
     },
