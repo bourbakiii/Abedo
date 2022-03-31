@@ -35,8 +35,9 @@
           minlength="3"
           class="search__input-input"
         />
-        <div class="search__input__dropdown-content" v-if='show_result==true'>
-          <div class="search__input__dropdown-content__shops">
+        <transition name='opacity'>
+        <div class="search__input__dropdown-content" @mouseenter="show_result=true" v-if="show_result == true">
+          <div class="search__input__dropdown-content__shops" >
             <NuxtLink
               to="#"
               class="search__input__dropdown-content__shops-shop"
@@ -97,32 +98,46 @@
                 class="search__input__dropdown-content__products-product-image"
               />
               <div
-                class="search__input__dropdown-content__products-product-content"
+                class="
+                  search__input__dropdown-content__products-product-content
+                "
               >
                 <div
-                  class="search__input__dropdown-content__products-product-content-top"
+                  class="
+                    search__input__dropdown-content__products-product-content-top
+                  "
                 >
                   <p
-                    class="search__input__dropdown-content__products-product-content-top-name"
+                    class="
+                      search__input__dropdown-content__products-product-content-top-name
+                    "
                   >
                     Салат с лососем и помидорами
                   </p>
                   <p
-                    class="search__input__dropdown-content__products-product-content-top-shop"
+                    class="
+                      search__input__dropdown-content__products-product-content-top-shop
+                    "
                   >
                     / Ресторан “Тангос”
                   </p>
                 </div>
                 <div
-                  class="search__input__dropdown-content__products-product-content-bottom"
+                  class="
+                    search__input__dropdown-content__products-product-content-bottom
+                  "
                 >
                   <p
-                    class="search__input__dropdown-content__products-product-content-bottom-price"
+                    class="
+                      search__input__dropdown-content__products-product-content-bottom-price
+                    "
                   >
                     450руб.
                   </p>
                   <p
-                    class="search__input__dropdown-content__products-product-content-bottom-weight"
+                    class="
+                      search__input__dropdown-content__products-product-content-bottom-weight
+                    "
                   >
                     320г.
                   </p>
@@ -130,8 +145,16 @@
               </div>
             </div>
           </div>
-          <ButtonStandart height='32' padding='30' :uppercase='false' @action='watchAll' class="search__input__dropdown-content__watch-all-button" text='Cмотреть все'/>
+          <ButtonStandart
+            height="32"
+            padding="30"
+            :uppercase="false"
+            @action="watchAll"
+            class="search__input__dropdown-content__watch-all-button"
+            text="Cмотреть все"
+          />
         </div>
+        </transition>
       </form>
       <div class="search__categories" v-if="categories.length">
         <CategoryItem
@@ -168,20 +191,30 @@ export default {
   methods: {
     search() {
       this.show_result = true;
-      document.addEventListener('click',(event)=>{
-        const dropdown_content = document.querySelector('.search__input__dropdown-content');
-        if(!dropdown_content) return;
+      document.addEventListener("click", (event) => {
+        const dropdown_content = document.querySelector(
+          ".search__input__dropdown-content"
+        );
+        if (!dropdown_content) return;
         let element_data = dropdown_content.getBoundingClientRect();
-        console.log(element_data.x<dropdown_content.x&& element_data.x>dropdown_content.x)
-        if((element_data.x<dropdown_content.x && element_data.x>dropdown_content.x) || (element_data.y<dropdown_content.y&&element_data.y>dropdown_content.y)){
-          this.show_result =false;
+        console.log(event.x < element_data.x, event.x > element_data.width);
+        console.log(event.y < element_data.x, event.y > element_data.height);
+        if (
+          !(
+            event.x >= element_data.x &&
+            event.x <= element_data.x + element_data.width &&
+            event.y >= element_data.y &&
+            event.y <= element_data.y + element_data.height
+          )
+        ) {
+          this.show_result = false;
           console.log(1);
         }
-      })
+      });
     },
-    watchAll(){
+    watchAll() {
       console.log("watch all button");
-    }
+    },
   },
 };
 </script>
@@ -216,7 +249,7 @@ export default {
     position: relative;
     z-index: 5;
     &__dropdown-content {
-      box-shadow:  0px 10px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
       position: absolute;
       top: 100%;
       left: 25px;
@@ -269,7 +302,7 @@ export default {
           justify-content: flex-start;
           flex-direction: row;
           min-height: 75px;
-          padding:10px 0px;
+          padding: 10px 0px;
           border-bottom: 1px solid $gray_three;
           &-image {
             width: 50px;
@@ -357,8 +390,8 @@ export default {
           }
         }
       }
-      &__watch-all-button{
-        margin-top:15px;
+      &__watch-all-button {
+        margin-top: 15px;
       }
     }
     &-button {
