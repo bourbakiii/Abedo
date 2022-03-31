@@ -89,9 +89,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0px 10px;
   .stocks-slider-buttons {
     position: relative;
+    padding: 0px 10px;
   }
   .swiper-button-prev {
     width: 50px;

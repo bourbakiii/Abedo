@@ -106,6 +106,7 @@ export default {};
   align-items: center;
   justify-content: center;
   margin: 0px;
+  padding: 0px 10px;
 }
 .catalog {
   display: flex;align-items: center;justify-content: flex-start;flex-direction: column;

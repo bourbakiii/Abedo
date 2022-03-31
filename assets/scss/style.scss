@@ -10,6 +10,10 @@ html {
     min-width: 360px;
     margin: 0px;
     padding: 0px;
+    overflow-x: hidden !important;
+    @media screen and (max-width: $maxwidth) {
+        min-width: $maxwidth;
+    }
 }
 body{
     margin: 0px;

@@ -16,7 +16,7 @@ export default {};
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 70px 0px;
+  padding: 70px 10px;
   background-color: $gray_two;
 }
 .about {
