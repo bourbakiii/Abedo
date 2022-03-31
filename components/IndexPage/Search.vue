@@ -33,127 +33,156 @@
           placeholder="Найти магазин товар или услугу "
           type="text"
           minlength="3"
+          required
           class="search__input-input"
+          v-model="query"
         />
-        <transition name='opacity'>
-        <div class="search__input__dropdown-content" @mouseenter="show_result=true" v-if="show_result == true">
-          <div class="search__input__dropdown-content__shops" >
-            <NuxtLink
-              to="#"
-              class="search__input__dropdown-content__shops-shop"
+        <transition name="opacity">
+          <button
+            v-if="query.length"
+            @click="query = ''"
+            class="search__input-button search__input-button-close"
+          >
+            <svg
+              class="search__input-button-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <img
-                src="@/assets/images/limonchello.png"
-                class="search__input__dropdown-content__shops-shop-image"
+              <path
+                d="M8.89533 10.0005L0.229061 1.33421C-0.0760555 1.02909 -0.0760555 0.534404 0.229061 0.229326C0.534178 -0.0757519 1.02886 -0.075791 1.33394 0.229326L10.0003 8.89565L18.6665 0.229326C18.9716 -0.075791 19.4663 -0.075791 19.7714 0.229326C20.0765 0.534443 20.0765 1.02913 19.7714 1.33421L11.1051 10.0005L19.7714 18.6668C20.0765 18.9719 20.0765 19.4666 19.7714 19.7717C19.6189 19.9242 19.4189 20.0005 19.2189 20.0005C19.019 20.0005 18.8191 19.9242 18.6665 19.7717L10.0003 11.1054L1.33398 19.7717C1.18144 19.9242 0.981482 20.0005 0.781521 20.0005C0.58156 20.0005 0.381639 19.9242 0.229061 19.7717C-0.0760555 19.4666 -0.0760555 18.9719 0.229061 18.6668L8.89533 10.0005Z"
+                fill="#A6A8A8"
               />
-              <p class="search__input__dropdown-content__shops-shop-name">
-                Ресторан “Тангос”
-              </p>
-            </NuxtLink>
-            <NuxtLink
-              to="#"
-              class="search__input__dropdown-content__shops-shop"
-            >
-              <p class="search__input__dropdown-content__shops-shop-name">
-                Ресторан “Тангос”
-              </p>
-            </NuxtLink>
-            <NuxtLink
-              to="#"
-              class="search__input__dropdown-content__shops-shop"
-            >
-              <img
-                src="@/assets/images/limonchello.png"
-                class="search__input__dropdown-content__shops-shop-image"
-              />
-              <p class="search__input__dropdown-content__shops-shop-name">
-                Ресторан “Тангос”
-              </p>
-            </NuxtLink>
-            <NuxtLink
-              to="#"
-              class="search__input__dropdown-content__shops-shop"
-            >
-              <p class="search__input__dropdown-content__shops-shop-name">
-                Ресторан “Тангос”
-              </p>
-            </NuxtLink>
-            <NuxtLink
-              to="#"
-              class="search__input__dropdown-content__shops-shop"
-            >
-              <img
-                src="@/assets/images/limonchello.png"
-                class="search__input__dropdown-content__shops-shop-image"
-              />
-              <p class="search__input__dropdown-content__shops-shop-name">
-                Ресторан “Тангос”
-              </p>
-            </NuxtLink>
-          </div>
-          <div class="search__input__dropdown-content__products">
-            <div class="search__input__dropdown-content__products-product">
-              <img
-                src="@/assets/images/shop-placeholder.png"
-                class="search__input__dropdown-content__products-product-image"
-              />
-              <div
-                class="
-                  search__input__dropdown-content__products-product-content
-                "
+            </svg>
+          </button>
+        </transition>
+        <transition name="opacity">
+          <div
+            class="search__input__dropdown-content"
+            @mouseenter="show_result = true"
+            v-if="show_result == true"
+          >
+            <div class="search__input__dropdown-content__shops">
+              <NuxtLink
+                to="#"
+                class="search__input__dropdown-content__shops-shop"
               >
+                <img
+                  src="@/assets/images/limonchello.png"
+                  class="search__input__dropdown-content__shops-shop-image"
+                />
+                <p class="search__input__dropdown-content__shops-shop-name">
+                  Ресторан “Тангос”
+                </p>
+              </NuxtLink>
+              <NuxtLink
+                to="#"
+                class="search__input__dropdown-content__shops-shop"
+              >
+                <p class="search__input__dropdown-content__shops-shop-name">
+                  Ресторан “Тангос”
+                </p>
+              </NuxtLink>
+              <NuxtLink
+                to="#"
+                class="search__input__dropdown-content__shops-shop"
+              >
+                <img
+                  src="@/assets/images/limonchello.png"
+                  class="search__input__dropdown-content__shops-shop-image"
+                />
+                <p class="search__input__dropdown-content__shops-shop-name">
+                  Ресторан “Тангос”
+                </p>
+              </NuxtLink>
+              <NuxtLink
+                to="#"
+                class="search__input__dropdown-content__shops-shop"
+              >
+                <p class="search__input__dropdown-content__shops-shop-name">
+                  Ресторан “Тангос”
+                </p>
+              </NuxtLink>
+              <NuxtLink
+                to="#"
+                class="search__input__dropdown-content__shops-shop"
+              >
+                <img
+                  src="@/assets/images/limonchello.png"
+                  class="search__input__dropdown-content__shops-shop-image"
+                />
+                <p class="search__input__dropdown-content__shops-shop-name">
+                  Ресторан “Тангос”
+                </p>
+              </NuxtLink>
+            </div>
+            <div class="search__input__dropdown-content__products">
+              <div class="search__input__dropdown-content__products-product">
+                <img
+                  src="@/assets/images/shop-placeholder.png"
+                  class="
+                    search__input__dropdown-content__products-product-image
+                  "
+                />
                 <div
                   class="
-                    search__input__dropdown-content__products-product-content-top
+                    search__input__dropdown-content__products-product-content
                   "
                 >
-                  <p
+                  <div
                     class="
-                      search__input__dropdown-content__products-product-content-top-name
+                      search__input__dropdown-content__products-product-content-top
                     "
                   >
-                    Салат с лососем и помидорами
-                  </p>
-                  <p
+                    <p
+                      class="
+                        search__input__dropdown-content__products-product-content-top-name
+                      "
+                    >
+                      Салат с лососем и помидорами
+                    </p>
+                    <p
+                      class="
+                        search__input__dropdown-content__products-product-content-top-shop
+                      "
+                    >
+                      / Ресторан “Тангос”
+                    </p>
+                  </div>
+                  <div
                     class="
-                      search__input__dropdown-content__products-product-content-top-shop
+                      search__input__dropdown-content__products-product-content-bottom
                     "
                   >
-                    / Ресторан “Тангос”
-                  </p>
-                </div>
-                <div
-                  class="
-                    search__input__dropdown-content__products-product-content-bottom
-                  "
-                >
-                  <p
-                    class="
-                      search__input__dropdown-content__products-product-content-bottom-price
-                    "
-                  >
-                    450руб.
-                  </p>
-                  <p
-                    class="
-                      search__input__dropdown-content__products-product-content-bottom-weight
-                    "
-                  >
-                    320г.
-                  </p>
+                    <p
+                      class="
+                        search__input__dropdown-content__products-product-content-bottom-price
+                      "
+                    >
+                      450руб.
+                    </p>
+                    <p
+                      class="
+                        search__input__dropdown-content__products-product-content-bottom-weight
+                      "
+                    >
+                      320г.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+            <ButtonStandart
+              height="32"
+              padding="30"
+              :uppercase="false"
+              @action="watchAll"
+              class="search__input__dropdown-content__watch-all-button"
+              text="Cмотреть все"
+            />
           </div>
-          <ButtonStandart
-            height="32"
-            padding="30"
-            :uppercase="false"
-            @action="watchAll"
-            class="search__input__dropdown-content__watch-all-button"
-            text="Cмотреть все"
-          />
-        </div>
         </transition>
       </form>
       <div class="search__categories" v-if="categories.length">
@@ -172,6 +201,7 @@ export default {
   data() {
     return {
       show_result: false,
+      query: "",
       categories: [
         { id: 1, name: "Lorem ipsum dolor mi met megretto consis" },
         { id: 2, name: "Lorem ipsum dolor mi met megretto consis" },
@@ -191,26 +221,27 @@ export default {
   methods: {
     search() {
       this.show_result = true;
-      document.addEventListener("click", (event) => {
-        const dropdown_content = document.querySelector(
-          ".search__input__dropdown-content"
-        );
-        if (!dropdown_content) return;
-        let element_data = dropdown_content.getBoundingClientRect();
-        console.log(event.x < element_data.x, event.x > element_data.width);
-        console.log(event.y < element_data.x, event.y > element_data.height);
-        if (
-          !(
-            event.x >= element_data.x &&
-            event.x <= element_data.x + element_data.width &&
-            event.y >= element_data.y &&
-            event.y <= element_data.y + element_data.height
-          )
-        ) {
-          this.show_result = false;
-          console.log(1);
-        }
-      });
+      document.addEventListener("click", this.dropdownClick);
+    },
+    dropdownClick(event) {
+      console.log("Click event");
+      const dropdown_content = document.querySelector(
+        ".search__input__dropdown-content"
+      );
+      if (!dropdown_content) return;
+      let element_data = dropdown_content.getBoundingClientRect();
+      if (
+        !(
+          event.x >= element_data.x &&
+          event.x <= element_data.x + element_data.width &&
+          event.y >= element_data.y &&
+          event.y <= element_data.y + element_data.height
+        )
+      ) {
+        console.log(this);
+        this.show_result = false;
+        document.removeEventListener("click", this.dropdownClick);
+      }
     },
     watchAll() {
       console.log("watch all button");
@@ -248,6 +279,7 @@ export default {
     flex-direction: row;
     position: relative;
     z-index: 5;
+
     &__dropdown-content {
       box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
       position: absolute;
@@ -399,10 +431,18 @@ export default {
       border: none;
       background-color: transparent;
       margin: 0px 20px;
+      &-close {
+        margin-left: 0px 8px !important;
+      }
+      transition: 0.3s;
+      &:active {
+        transition: 0.05s;
+        transform: scale(0.9);
+      }
     }
     &-input {
       height: 100%;
-      width: 100%;
+      flex-grow: 1;
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;
@@ -413,7 +453,6 @@ export default {
       outline: none;
       border: none;
       overflow: hidden;
-      padding-right: 15px;
       border-radius: 0px 50px 50px 0px;
       &::placeholder {
         font-family: "SF Pro Display";
