@@ -56,7 +56,8 @@ export default {
       document.addEventListener("click", dropdownClick);
     },
     watchAll() {
-      this.$router.push('/search');
+      this.$router.push('/search')
+      console.log("watch all button");
     },
   },
 };
