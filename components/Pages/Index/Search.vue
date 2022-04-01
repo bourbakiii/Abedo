@@ -1,5 +1,5 @@
 <template>
-  <div class="search-wrapper index-page-search">
+  <div class="search-wrapper index-page-search wrapper">
     <div class="search">
       <h1 class="title title-big lightblack">Быстрая доставка еды</h1>
       <form @submit.prevent="search" class="search__input">
@@ -256,20 +256,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.search-wrapper {
-  width: 100%;
-  background-color: $gray_three;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 70px 10px;
-}
+
 .search {
   width: 100%;
   height: 100%;
   flex-grow: 1;
   max-width: $maxwidth;
+  &-wrapper{
+  background-color: $gray_three;
+  padding: 70px 10px !important;
+  }
   .title {
     margin-bottom: 40px;
   }

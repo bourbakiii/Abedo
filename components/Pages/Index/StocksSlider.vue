@@ -1,6 +1,6 @@
 
 <template>
-  <div class="slider stocks-slider wrapper">
+  <div class="slider stocks-slider-wrapper wrapper">
     <div class="stocks-slider-buttons">
       <div class="swiper-button swiper-button-prev">
         <svg
@@ -67,7 +67,6 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 3,
-        spaceBetween: 30,
         slidesPerGroup: 1,
         pagination: {
           el: ".stocks-slider-pagination",
@@ -83,14 +82,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.wrapper {
+.stocks-slider-wrapper {
   position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0px 10px;
   .stocks-slider-pagination {
     margin-top: 20px;
     width: 100%;

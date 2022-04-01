@@ -1,5 +1,5 @@
 <template>
-  <div class="breacrumbs-wrapper wrapper">
+  <div class="breadcrumbs-wrapper wrapper">
     <div class="breadcrumbs">
       <span class="breadcrumbs__item">Главная</span>
       <span class="breadcrumbs__item">Кафе “Лимончелло”</span>

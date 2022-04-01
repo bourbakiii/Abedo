@@ -19,13 +19,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  padding: 0px 10px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .founded-shops {
   width: 100%;
   max-width: $maxwidth;
