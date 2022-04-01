@@ -19,7 +19,7 @@ $product_inner_padding: 9px;
 .product-small {
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid $gray_three;
+  border: 1px solid $dark_grey;
   width:172px;
   &__image {
     height: 119px;

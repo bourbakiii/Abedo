@@ -1,24 +1,32 @@
-.title-big{
-    font-family: 'Montserrat';
-font-style: normal;
-font-weight: 700;
-font-size: 40px;
-line-height: 49px;
+.title-big {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 49px;
 }
-.title-normal{
-    font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 32px;
-line-height: 39px;
-text-align: left;
+.title-normal {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 39px;
+  text-align: left;
 }
-.lightblack{
-    color:$lightblack;
+.title-small {
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: left;
 }
-.black{
-    color:black;
+.lightblack {
+  color: $lightblack;
 }
-.white{
-    color:$white;
+.black {
+  color: black;
+}
+.white {
+  color: $white;
 }

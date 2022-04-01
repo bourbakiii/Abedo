@@ -14,7 +14,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page {
-  background-color: $gray_one;
+  background-color: $light_grey;
 }
 .breadcrumbs-wrapper {
   margin-top: 25px;

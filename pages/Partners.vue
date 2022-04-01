@@ -1,11 +1,11 @@
 <template>
-  <div class="new-shops catalog-wrapper wrapper">
-    <div class="catalog">
-      <div class="catalog__top">
-        <h2 class="catalog__top__title title-normal">Новые магазины</h2>
-        <button class="catalog__top__filter-button">
+  <div class="page partners-page wrapper">
+    <Breadcrumbs/>
+    <div class="partners-page__top">
+        <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
+        <button class="partners-page__top__filter-button">
           <svg
-            class="catalog__top__filter-button-icon"
+            class="partners-page__top__filter-button-icon"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -73,43 +73,32 @@
               stroke-linecap="round"
             />
           </svg>
-          <p class="catalog__top__filter-button-text">Фильтр</p>
+          <p class="partners-page__top__filter-button-text">Фильтр</p>
         </button>
       </div>
-      <div class="catalog__content">
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
+
+      <div class="partners-page__content">
+          <CategorySidebar/>
       </div>
-      <ButtonStandart @action='$router.push("/partners")' class='catalog__button' height='50' :uppercase='true' text='Все магазины'/>
-    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "PartnersPage",
+};
 </script>
+<style lang="scss" scoped>
 
-<style lang='scss' scoped>
-
-.catalog {
-  display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
-  width: 100%;
-  max-width: $maxwidth;
-  &__top {
+.partners-page{
+    background-color: $light_grey;
+    align-items: center;justify-content: flex-start;
+    &__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width:100%;
+    max-width: $maxwidth;
     margin-bottom: 35px;
     &__filter-button {
       height: 30px;
@@ -138,16 +127,14 @@ export default {};
       }
     }
   }
-  &__content {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 30px;
-  }
-  &__button{
-    margin-top: 70px;
-    align-self: center;
-    justify-content: center;
-  }
 }
+
+
+
+
+.breadcrumbs-wrapper {
+  margin-top: 25px;
+}
+
 </style>
+
