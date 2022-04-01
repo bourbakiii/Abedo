@@ -90,6 +90,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 0px 10px;
   .stocks-slider-pagination {
     margin-top: 20px;
     width: 100%;
