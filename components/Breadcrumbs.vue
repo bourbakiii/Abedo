@@ -1,15 +1,12 @@
 <template>
-  <div class="breadcrumbs-wrapper wrapper">
     <div class="breadcrumbs">
       <span class="breadcrumbs__item">Главная</span>
       <span class="breadcrumbs__item">Кафе “Лимончелло”</span>
     </div>
-  </div>
 </template>
 <style lang="scss" scoped>
 .breadcrumbs {
   width: 100%;
-  max-width: $maxwidth;
   display: flex;
   align-items: center;
   justify-content: flex-start;

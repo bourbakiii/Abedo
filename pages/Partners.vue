@@ -1,7 +1,8 @@
 <template>
   <div class="page partners-page wrapper">
-    <Breadcrumbs/>
-    <div class="partners-page__top">
+    <div class="partners-page__content content">
+      <Breadcrumbs />
+      <div class="partners-page__top">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
         <button class="partners-page__top__filter-button">
           <svg
@@ -77,9 +78,16 @@
         </button>
       </div>
 
-      <div class="partners-page__content">
-          <CategorySidebar/>
+      <div class="partners-page__partners">
+        <CategorySidebar class="partners-page__partners__sidebar" />
+        <div class="partners-page__partners__content">
+          <ShopItem
+            v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+            :key="item"
+          />
+        </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -89,17 +97,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
-.partners-page{
-    background-color: $light_grey;
-    align-items: center;justify-content: flex-start;
-    &__top {
+.partners-page {
+  background-color: $light_grey;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 100px;
+  &__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width:100%;
-    max-width: $maxwidth;
-    margin-bottom: 35px;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 70px;
     &__filter-button {
       height: 30px;
       width: 120px;
@@ -121,20 +130,34 @@ export default {
         display: flex;
         align-items: center;
       }
-      &:active{
-          transition: 0.05s;
-          transform: scale(0.96);
+      &:active {
+        transition: 0.05s;
+        transform: scale(0.96);
       }
+    }
+  }
+  &__partners {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    &__sidebar {
+      flex-shrink: 0;
+    }
+    &__content {
+      flex-grow: 1;
+      flex-shrink: 0;
+      height: 100%;
+      border: 1px solid red;
+      display: flex;flex-direction: row; align-items: flex-start; justify-content: flex-start; flex-wrap: wrap;
     }
   }
 }
 
-
-
-
-.breadcrumbs-wrapper {
+.breadcrumbs {
   margin-top: 25px;
 }
-
 </style>
 

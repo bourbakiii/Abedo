@@ -51,3 +51,8 @@ html{
     display: flex;align-items: center;justify-content: center;flex-direction: column;
     padding: 0px 10px;
 }
+.content{
+    width:100%;
+    max-width: $maxwidth;
+    display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
+}
