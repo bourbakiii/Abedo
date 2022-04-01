@@ -1,9 +1,9 @@
 <template>
   <div class="page search-page">
-    <Breadcrumbs/>
-    <PagesSearchInput/>
-    <PagesSearchFoundedShops/>
-    <PagesSearchFoundedProducts/>
+    <Breadcrumbs />
+    <PagesSearchInput />
+    <PagesSearchFoundedShops />
+    <PagesSearchFoundedProducts />
   </div>
 </template>
 
@@ -13,8 +13,19 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.page{
+.page {
   background-color: $gray_one;
+}
+.breadcrumbs-wrapper {
+  margin-top: 25px;
+}
+.search-input-wrapper {
+  margin: 50px 0px;
+}
+.founded-shops-wrapper,
+.founded-products-wrapper {
+  margin-top: 50px;
+  margin-bottom: 70px;
 }
 </style>
 

@@ -59,7 +59,6 @@ export default {
 .founded-products {
   width: 100%;
   max-width: $maxwidth;
-  border: 1px solid black;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -89,7 +88,7 @@ export default {
         flex-direction: row;
         width: 100%;
         padding-bottom: 17px;
-        border-bottom: 1px solid red;
+        border-bottom: 1px solid $gray_two;
         padding: 0px 30px 17px;
         &__image {
           height: 60px;
@@ -138,7 +137,7 @@ export default {
         }
       }
       &__products{
-        background-color: lightcoral;
+        background-color: rgb(253, 209, 209);
         padding:30px 30px 0px; width:100%;
         display: grid; grid-template-columns: repeat(6,1fr); grid-gap: 39px;
        

@@ -1,10 +1,10 @@
 <template>
-  <div class="search__input-wrapper wrapper">
-    <div class="search__input__content">
-      <form @submit.prevent="search" class="search__input">
-        <button class="search__input-button">
+  <div class="search-input-wrapper wrapper">
+    <div class="search-input__content">
+      <form @submit.prevent="search_request" class="search-input">
+        <button class="search-input-button">
           <svg
-            class="search__input-button-icon"
+            class="search-input-button-icon"
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -33,17 +33,17 @@
           type="text"
           minlength="3"
           required
-          class="search__input-input"
+          class="search-input-input"
           v-model="query"
         />
         <transition name="opacity">
           <button
             v-if="query.length"
             @click.prevent="query = ''"
-            class="search__input-button search__input-button-close"
+            class="search-input-button search-input-button-close"
           >
             <svg
-              class="search__input-button-icon"
+              class="search-input-button-icon"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -84,7 +84,7 @@ export default {
 </script>
 
 <style lang="scss"scoped>
-.search__input {
+.search-input {
   &__content{
     width:100%; max-width: $maxwidth;
     display: flex;align-items: center;justify-content: flex-start;
