@@ -1,6 +1,7 @@
 <template>
   <div class="page search-page">
-    <PagesSearchInput />
+    <Breadcrumbs/>
+    <PagesSearchInput/>
     <PagesSearchFoundedShops/>
     <PagesSearchFoundedProducts/>
   </div>
