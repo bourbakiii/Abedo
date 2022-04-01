@@ -1,5 +1,4 @@
 <template>
-  <div class="founded-shops-wrapper wrapper">
     <div class="founded-shops">
       <h1 class="founded-shops__title title-normal">Найденные заведения</h1>
       <div class="founded-shops__content content">
@@ -8,7 +7,6 @@
         <ShopItem />
         <ShopItem />
       </div>
-    </div>
   </div>
 </template>
 
@@ -19,13 +17,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  padding: 0px 10px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .founded-shops {
   width: 100%;
   max-width: $maxwidth;
@@ -38,6 +29,7 @@ export default {
   }
   &__content {
     width: 100%;
+    overflow: hidden;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;

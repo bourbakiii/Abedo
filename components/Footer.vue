@@ -1,5 +1,5 @@
 <template>
-  <div class="footer-wrapper">
+  <div class="footer-wrapper wrapper">
     <div class="footer">
       <div class="footer__logo-block">
         <NuxtLink to="/" class="footer__logo-block-logo">
@@ -98,13 +98,8 @@ export default {};
 
 <style lang="scss" scoped>
 .footer-wrapper {
-  width: 100%;
   background-color: $black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column !important;
-  padding: 0px 10px;
   box-sizing: border-box;
   &__bottom-wrapper {
     width: 100%;

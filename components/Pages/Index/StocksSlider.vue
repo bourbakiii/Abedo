@@ -1,6 +1,6 @@
 
 <template>
-  <div class="slider stocks-slider wrapper">
+  <div class="slider stocks-slider stocks-slider-wrapper wrapper">
     <div class="stocks-slider-buttons">
       <div class="swiper-button-prev">
         <svg
@@ -83,12 +83,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.wrapper {
+.stocks-slider-wrapper {
   position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 0px 10px;
   .stocks-slider-buttons {
     position: relative;

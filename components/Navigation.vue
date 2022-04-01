@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation-wrapper">
+  <div class="navigation-wrapper wrapper">
   <div class="navigation">
     <NuxtLink to="/" class="navigation__logo">
       <img
@@ -160,11 +160,9 @@ export default {
 
 <style lang="scss" scoped>
 .navigation-wrapper{
-  display: flex;align-items: center;justify-content: center;
-  width: 100%;
+  flex-direction: row;
   height: 100px;
   background-color: $white;
-  padding:0px 10px;
   box-sizing: border-box;
 .navigation {
   width: 100%;
@@ -209,6 +207,7 @@ export default {
       }
       &__dropdown{
         position: relative;
+        z-index: 10;
         &-content{
           background-color: $white;
           position: absolute;

@@ -1,5 +1,5 @@
 <template>
-  <div class="new-shops catalog-wrapper">
+  <div class="new-shops catalog-wrapper wrapper">
     <div class="catalog">
       <div class="catalog__top">
         <h2 class="catalog__top__title title-normal">Новые магазины</h2>
@@ -100,13 +100,7 @@ export default {};
 </script>
 
 <style lang='scss' scoped>
-.catalog-wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0px;
-}
+
 .catalog {
   display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
   width: 100%;

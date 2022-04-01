@@ -1,7 +1,6 @@
 <template>
-  <div class="founded-products-wrapper wrapper">
     <div class="founded-products">
-      <h1 class="founded-products__title title-normal">Найденные заведения</h1>
+      <h1 class="founded-products__title title-normal">Найденные позиции меню</h1>
       <div class="founded-products__content content">
         <div class="founded-products__content__item">
           <div class="founded-products__content__item__shop">
@@ -43,7 +42,6 @@
             <ProductSmall class='founded-products__content__item__products__product'/>
             <ProductSmall class='founded-products__content__item__products__product'/>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -56,17 +54,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  padding: 0px 10px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .founded-products {
-  width: 100%;
+  width: 100% !important;
   max-width: $maxwidth;
-  border: 1px solid black;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -145,9 +136,12 @@ export default {
         }
       }
       &__products{
+        width:100%;
+        overflow: hidden;
+        max-width:100%;
         background-color: lightcoral;
-        padding:30px 30px 0px; width:100%;
-        display: grid; grid-template-columns: repeat(6,1fr); grid-gap: 39px;
+        padding: 30px 30px 0px; width:100%;
+        display: grid; grid-template-columns: repeat(6,1fr); grid-gap: 34px;
        
       }
     }

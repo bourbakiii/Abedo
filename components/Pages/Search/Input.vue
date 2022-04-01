@@ -1,5 +1,7 @@
 <template>
-   <form @submit.prevent="search" class="search__input">
+  <div class="wrapper-wrapper">
+    <div class="search__input">
+      <form @submit.prevent="search" class="search__input">
         <button class="search__input-button">
           <svg
             class="search__input-button-icon"
@@ -55,60 +57,74 @@
             </svg>
           </button>
         </transition>
-        
       </form>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'SearchPageSearch',
-  fetch(){
-    if(this.$route.query.query) this.search_request(this.$route.query.query);
+  name: "SearchPageSearch",
+  fetch() {
+    if (this.$route.query.query) this.search_request(this.$route.query.query);
   },
-  fetchOnServer:false,
-  methods:{
-    search_request(query){
+  fetchOnServer: false,
+  methods: {
+    search_request(query) {
       console.log("query for the fetch");
-      console.log("the query is:"+ query);
-    }
+      console.log("the query is:" + query);
+    },
   },
-  data(){
-    return{
-      query:this.$route.query.query??""
-    }
+  data() {
+    return {
+      query: this.$route.query.query ?? "",
+    };
   },
-}
+};
 </script>
 
-<style lang="scss"scoped>
+<style lang="scss" scoped>
 .search__input {
-    width: 650px;
-    height: 60px;
-    background-color: $white;
-    border-radius: 50px;
+  
+  width: 650px;
+  height: 60px;
+  background-color: $white;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  position: relative;
+  z-index: 5;
+  &-button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    margin: 0px 20px;
+    &-close {
+      margin-left: 0px 8px !important;
+    }
+    transition: 0.3s;
+    &:active {
+      transition: 0.05s;
+      transform: scale(0.9);
+    }
+  }
+  &-input {
+    height: 100%;
+    flex-grow: 1;
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    flex-direction: row;
-    position: relative;
-    z-index: 5;
-    &-button {
-      outline: none;
-      border: none;
-      background-color: transparent;
-      margin: 0px 20px;
-      &-close {
-        margin-left: 0px 8px !important;
-      }
-      transition: 0.3s;
-      &:active {
-        transition: 0.05s;
-        transform: scale(0.9);
-      }
-    }
-    &-input {
-      height: 100%;
-      flex-grow: 1;
+    outline: none;
+    border: none;
+    overflow: hidden;
+    border-radius: 0px 50px 50px 0px;
+    &::placeholder {
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;
@@ -116,19 +132,7 @@ export default {
       line-height: 19px;
       display: flex;
       align-items: center;
-      outline: none;
-      border: none;
-      overflow: hidden;
-      border-radius: 0px 50px 50px 0px;
-      &::placeholder {
-        font-family: "SF Pro Display";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
-        display: flex;
-        align-items: center;
-      }
     }
   }
+}
 </style>

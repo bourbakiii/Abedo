@@ -1,7 +1,7 @@
 <template>
-  <div class="about-wrapper">
+  <div class="about-wrapper wrapper">
     <div class="about">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>
@@ -10,18 +10,14 @@
 export default {};
 </script>
 
-<style lang='scss' scoped>
-.about-wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 70px 0px;
-  background-color: $gray_two;
-}
+<style lang="scss" scoped>
 .about {
-    width:100%;
-    max-width: $maxwidth;
+  &-wrapper {
+    padding: 70px 0px;
+    background-color: $gray_two;
+  }
+  width: 100%;
+  max-width: $maxwidth;
   font-family: "SF Pro Display";
   font-style: normal;
   font-weight: 400;

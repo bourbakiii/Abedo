@@ -1,5 +1,6 @@
 <template>
-  <div class="page search-page">
+  <div class="page search-page wrapper">
+    <Breadcrumbs/>
     <PagesSearchInput />
     <PagesSearchFoundedShops/>
     <PagesSearchFoundedProducts/>
@@ -8,7 +9,7 @@
 
 <script>
 export default {
-  name: "SearchPage",
+  name: "Поиск",
 };
 </script>
 <style lang="scss" scoped>
