@@ -303,7 +303,7 @@ export default {
           text-decoration: none;
           overflow: hidden;
           &-image {
-            background-color: $gray_two;
+            background-color: $blue_grey;
             width: 120px;
             height: 60px;
             object-fit: contain;

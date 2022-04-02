@@ -19,7 +19,7 @@
     line-height: 17px;
     display: flex;
     align-items: center;
-    color: $gray_four;
+    color: $extra_dark_grey;
     position: relative;
     transition: 0.3s;
     cursor: pointer;
@@ -56,7 +56,7 @@
       font-weight: 400;
       font-size: 14px;
       line-height: 17px;
-      color: $gray_four;
+      color: $extra_dark_grey;
     }
   }
 }

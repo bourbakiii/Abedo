@@ -287,7 +287,7 @@ export default {
         align-items: center;
         justify-content: center;
         border-radius: 90px;
-        border: 1px solid $gray_four;
+        border: 1px solid $extra_dark_grey;
         transition: 0.3s;
         * {
           transition: 0.3s;

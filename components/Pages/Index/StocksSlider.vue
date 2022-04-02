@@ -95,7 +95,7 @@ export default {
     width: 50px;
     height: 50px;
     border-radius: 90px;
-    background-color: $gray_two;
+    background-color: $blue_grey;
     transition: 0.3s;
     &:active {
       transition: 0.05s;

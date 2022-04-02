@@ -13,7 +13,7 @@ export default {};
 <style lang='scss' scoped>
 .about {
   &-wrapper {
-    background-color: $gray_two;
+    background-color: $blue_grey;
     padding: 70px 10px !important;
   }
   width: 100%;

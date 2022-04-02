@@ -86,7 +86,7 @@ export default {
         flex-direction: row;
         width: 100%;
         padding-bottom: 17px;
-        border-bottom: 1px solid $gray_two;
+        border-bottom: 1px solid $blue_grey;
         padding: 0px 30px 17px;
         &__image {
           height: 60px;
@@ -122,7 +122,7 @@ export default {
             font-weight: 400;
             font-size: 14px;
             line-height: 17px;
-            color: $gray_four;
+            color: $extra_dark_grey;
           }
           &__value {
             margin-left:10px;

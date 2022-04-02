@@ -72,7 +72,7 @@ $product_inner_padding: 9px;
       font-size: 13px;
       line-height: 16px;
       text-decoration-line: line-through;
-      color: $gray_four;
+      color: $extra_dark_grey;
       justify-content: flex-end;
       margin-left: auto;
     }
