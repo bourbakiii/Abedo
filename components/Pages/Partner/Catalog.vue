@@ -63,8 +63,12 @@
         :active="false"
       />
     </div>
-    <div class="catalog__catalog">
-        <ProductItem v-for='item in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]' :key='item'/>
+    <div class="catalog__products">
+      <ProductItem
+        class="catalog__products__item"
+        v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]"
+        :key="item"
+      />
     </div>
   </div>
 </template>
@@ -78,16 +82,29 @@
     align-self: flex-start;
     margin-bottom: 30px;
   }
-  &__chapters{
-      width:100%;
-      display: flex;align-items: center; justify-content: flex-start; flex-direction: row; flex-wrap: wrap;
-      margin-bottom: 50px;
-      &__item{
-          flex-grow: 0;
-          flex-shrink: 0;
-          margin-right:5px;
-          margin-bottom: 10px;
-      }
+  &__chapters {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    &__item {
+      flex-grow: 0;
+      flex-shrink: 0;
+      margin-right: 5px;
+      margin-bottom: 10px;
+    }
+  }
+  &__products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    &__item {
+      width: 295px;
+      height: 381px;
+    }
   }
 }
 </style>
