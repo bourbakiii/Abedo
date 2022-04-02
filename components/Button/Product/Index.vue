@@ -68,11 +68,11 @@ export default {
   transition: 0.3s;
   background-color: $white;
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
   }
   &:active {
     transition: 0.05s;
-    transform: scale(0.98);
+    transform: scale(0.95);
   }
 }
 </style>

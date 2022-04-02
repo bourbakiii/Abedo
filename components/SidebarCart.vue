@@ -36,7 +36,11 @@
       </div>
     </div>
     <div class="sidebar-cart__products">
-      <div class="sidebar-cart__products__item">
+      <div
+        v-for="item in [1, 2]"
+        :key="item"
+        class="sidebar-cart__products__item"
+      >
         <button class="sidebar-cart__products__item__close">
           <svg
             class="sidebar-cart__products__item__close__icon"
@@ -58,10 +62,7 @@
             src="@/assets/images/sidebar-cart-product-placeholder.png"
             class="sidebar-cart__products__item__info__image"
           />
-          <p class="sidebar-cart__products__item__info__name">
-            Сырное ассортиСырное ассортиСырное ассортиСырное ассортиСырное
-            ассорти
-          </p>
+          <p class="sidebar-cart__products__item__info__name">Сырное ассорти</p>
         </div>
         <div class="sidebar-cart__products__item__actions">
           <div class="sidebar-cart__products__item__actions__buttons">
@@ -79,20 +80,40 @@
               icon="plus"
             />
           </div>
-          <div class="sidebar-cart__products__item__actions__buttons__prices">
+          <div class="sidebar-cart__products__item__actions__prices">
             <p
-              class="sidebar-cart__products__item__actions__buttons__prices__price"
-            >
-              350 ₽
-            </p>
-            <p
-              class="sidebar-cart__products__item__actions__buttons__prices__price_full"
+              class="sidebar-cart__products__item__actions__prices__price_full"
             >
               400 ₽
+            </p>
+            <p class="sidebar-cart__products__item__actions__prices__price">
+              350 ₽
             </p>
           </div>
         </div>
       </div>
+    </div>
+    <div class="sidebar-cart__row sidebar-cart__row_delivery">
+      <p class="sidebar-cart__row__name sidebar-cart__row_delivery__name">
+        Доставка
+      </p>
+      <p class="sidebar-cart__row__value sidebar-cart__row_delivery__value">
+        Бесплатно
+      </p>
+    </div>
+    <div class="sidebar-cart__row sidebar-cart__row_least">
+      <p class="sidebar-cart__row__name sidebar-cart__row_least__name">
+        Итого:
+      </p>
+      <p class="sidebar-cart__row__value sidebar-cart__row_least__value">
+        330 ₽
+      </p>
+    </div>
+    <div class="sidebar-cart__button">
+      <ButtonStandart
+        text="Оформить заказ"
+        class="sidebar-cart__button__button"
+      />
     </div>
   </div>
 </template>
@@ -105,6 +126,10 @@
   border-radius: 20px;
   border: 1px solid $dark_grey;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
   &__icon {
     position: absolute;
     left: 26px;
@@ -124,6 +149,7 @@
     }
   }
   &__hood {
+    width: 100%;
     padding: 0px 20px;
     border-bottom: 1px solid $dark_grey;
     &__title-row {
@@ -196,6 +222,9 @@
       flex-direction: column;
       border-bottom: 1px dashed $dark_grey;
       position: relative;
+      &:last-of-type {
+        border-bottom: none;
+      }
       &__close {
         top: 20px;
         right: 0px;
@@ -205,6 +234,12 @@
         border: none;
         width: 15px;
         height: 15px;
+        &:hover {
+          transform: sclae(1.05);
+        }
+        &:active {
+          transform: scale(0.95);
+        }
       }
       &__info {
         width: 100%;
@@ -252,7 +287,86 @@
             white-space: nowrap;
           }
         }
+        &__prices {
+          &__price {
+            font-family: "Montserrat";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            display: flex;
+            align-items: center;
+            &_full {
+              font-family: "Montserrat";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 19px;
+              display: flex;
+              align-items: center;
+              text-decoration: line-through;
+              color: $extra_dark_grey;
+            }
+          }
+        }
       }
+    }
+  }
+  &__row {
+    width: 100%;
+    min-height: 47px;
+    padding: 8px 20px;
+    border-top: 1px solid $dark_grey;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    &__name {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      flex-grow: 1;
+      margin-right: 5px;
+    }
+    &__value {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      flex-grow: 1;
+      text-align: right;
+    }
+    &_least {
+      min-height: max-content;
+      padding-top: 15px;
+      &__name {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      &__value {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: $darkblue;
+      }
+    }
+  }
+  &__button {
+    height: 50px;
+    width: 100%;
+    padding: 0px 20px;
+    margin-top:30px;
+    &__button {
+      width: 100%;
+      height: 100%;
     }
   }
 }
