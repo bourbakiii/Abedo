@@ -25,6 +25,10 @@ export default {};
   position: relative;
   border-radius: 20px;
   overflow: hidden;
+  transition: 0.3s;
+  &:hover{
+    transform: scale(1.02);
+  }
 }
 .stock {
   width: 100%;
