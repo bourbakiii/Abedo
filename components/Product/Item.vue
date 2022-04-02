@@ -1,14 +1,17 @@
 <template>
-  <div class="product product-item product_in-cart">
+  <div
+    @click="$store.dispatch('modals/open', { name: 'product', product: {
+        name:'Ты забыл вставить продукт'
+    } })"
+    class="product product-item product_in-cart"
+  >
     <div class="product__discount">-10%</div>
     <img
       src="@/assets/images/product-item-placeholder.png"
       class="product__image"
     />
     <div class="product__info">
-      <p class="product__info__name">
-        Сырное ассорasdasd 
-        </p>
+      <p class="product__info__name">Сырное ассорasdasd</p>
       <div class="product__info__prices">
         <p class="product__info__prices__price">3 500 ₽</p>
         <p class="product__info__prices__weight">/ 150 г</p>
@@ -22,9 +25,9 @@
         text="В корзину"
       />
       <div class="product__buttons__button_creases">
-        <ButtonProduct size='40' icon="minus" />
+        <ButtonProduct size="40" icon="minus" />
         <p class="product__buttons__button_creases__count">10</p>
-        <ButtonProduct size='40' icon="plus" />
+        <ButtonProduct size="40" icon="plus" />
       </div>
     </div>
   </div>
@@ -39,6 +42,7 @@
   background-color: $white;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
   &_in-cart {
     border: 2px solid $orange;
   }
