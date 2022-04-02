@@ -1,8 +1,8 @@
 
 <template>
-  <div class="slider stocks-slider stocks-slider-wrapper wrapper">
+  <div class="slider stocks-slider-wrapper wrapper">
     <div class="stocks-slider-buttons">
-      <div class="swiper-button-prev">
+      <div class="swiper-button swiper-button-prev">
         <svg
           width="20"
           height="20"
@@ -28,7 +28,7 @@
           </defs>
         </svg>
       </div>
-      <div class="swiper-button-next">
+      <div class="swiper-button swiper-button-next">
         <svg
           width="12"
           height="20"
@@ -47,15 +47,15 @@
         <swiper-slide class="slide"><StockItem /></swiper-slide>
         <swiper-slide class="slide"><StockItem /></swiper-slide>
         <swiper-slide class="slide"><StockItem /></swiper-slide>
-        <div class="stocks-slider-pagination" slot="pagination"></div>
       </swiper>
     </div>
+    <div class="stocks-slider-pagination" slot="pagination"></div>
   </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.min.css";
+import "@/assets/scss/swiper/stocks-slider.scss";
 
 export default {
   name: "stocks-swiper",
@@ -67,7 +67,6 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 3,
-        spaceBetween: 30,
         slidesPerGroup: 1,
         pagination: {
           el: ".stocks-slider-pagination",
@@ -85,51 +84,48 @@ export default {
 <style lang="scss" scoped>
 .stocks-slider-wrapper {
   position: relative;
-  padding: 0px 10px;
+  .stocks-slider-pagination {
+    margin-top: 20px;
+    width: 100%;
+    max-width: $maxwidth;
+    text-align: center;
+    overflow: hidden;
+  }
+  .swiper-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 90px;
+    background-color: $gray_two;
+    transition: 0.3s;
+    &:active {
+      transition: 0.05s;
+    }
+    &::before,
+    &::after {
+      display: none;
+    }
+    &-prev {
+      transform: translate(-50%, -50%);
+      left: -40px;
+      &:active {
+        transform: translate(-50%, -50%) scale(0.95);
+      }
+    }
+    &-next {
+      transform: translate(50%, -50%);
+      right: -40px;
+      &:active {
+        transform: translate(50%, -50%) scale(0.95);
+      }
+    }
+  }
   .stocks-slider-buttons {
     position: relative;
-  }
-  .swiper-button-prev {
-    width: 50px;
-    height: 50px;
-    border-radius: 90px;
-    background-color: $gray_two;
-    &::before,
-    &::after {
-      display: none;
-    }
-    transform: translateX(-50%);
-    left: -40px;
-  }
-  .swiper-button-next {
-    width: 50px;
-    height: 50px;
-    border-radius: 90px;
-    background-color: $gray_two;
-    &::before,
-    &::after {
-      display: none;
-    }
-    transform: translateX(50%);
-    right: -40px;
+    padding: 0px 10px;
   }
   .swiper {
     width: 100%;
     max-width: $maxwidth;
-    .stocks-slider-pagination {
-      margin-top: 20px;
-      width: 100%;
-      text-align: center;
-      .swiper-pagination-bullet {
-        width: 10px;
-        height: 10px;
-        background-color: $darkblue;
-        opacity: 1;
-        &-active {
-          background-color: $orange;
-        }
-      }
-    }
   }
 }
 </style>

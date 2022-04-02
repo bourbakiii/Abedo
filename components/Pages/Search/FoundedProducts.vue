@@ -54,7 +54,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .founded-products {
   width: 100% !important;
   max-width: $maxwidth;
@@ -87,7 +86,7 @@ export default {
         flex-direction: row;
         width: 100%;
         padding-bottom: 17px;
-        border-bottom: 1px solid red;
+        border-bottom: 1px solid $gray_two;
         padding: 0px 30px 17px;
         &__image {
           height: 60px;
@@ -136,12 +135,9 @@ export default {
         }
       }
       &__products{
-        width:100%;
-        overflow: hidden;
-        max-width:100%;
-        background-color: lightcoral;
-        padding: 30px 30px 0px; width:100%;
-        display: grid; grid-template-columns: repeat(6,1fr); grid-gap: 34px;
+        background-color: rgb(253, 209, 209);
+        padding:30px 30px 0px; width:100%;
+        display: grid; grid-template-columns: repeat(6,1fr); grid-gap: 39px;
        
       }
     }

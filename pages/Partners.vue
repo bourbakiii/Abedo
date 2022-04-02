@@ -1,11 +1,12 @@
 <template>
-  <div class="new-shops catalog-wrapper wrapper">
-    <div class="catalog">
-      <div class="catalog__top">
-        <h2 class="catalog__top__title title-normal">Новые магазины</h2>
-        <button class="catalog__top__filter-button">
+  <div class="page partners-page wrapper">
+    <div class="partners-page__content content">
+      <Breadcrumbs />
+      <div class="partners-page__top">
+        <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
+        <button class="partners-page__top__filter-button">
           <svg
-            class="catalog__top__filter-button-icon"
+            class="partners-page__top__filter-button-icon"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -73,44 +74,41 @@
               stroke-linecap="round"
             />
           </svg>
-          <p class="catalog__top__filter-button-text">Фильтр</p>
+          <p class="partners-page__top__filter-button-text">Фильтр</p>
         </button>
       </div>
-      <div class="catalog__content">
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
+
+      <div class="partners-page__partners">
+        <CategorySidebar class="partners-page__partners__sidebar" />
+        <div class="partners-page__partners__content">
+          <ShopItem
+            v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+            :key="item"
+          />
+        </div>
       </div>
-      <ButtonStandart @action='$router.push("/partners")' class='catalog__button' height='50' :uppercase='true' text='Все магазины'/>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "PartnersPage",
+};
 </script>
-
-<style lang='scss' scoped>
-
-.catalog {
-  display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
-  width: 100%;
-  max-width: $maxwidth;
+<style lang="scss" scoped>
+.partners-page {
+  background-color: $light_grey;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 100px;
   &__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width:100%;
-    margin-bottom: 35px;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 70px;
     &__filter-button {
       height: 30px;
       width: 120px;
@@ -132,22 +130,34 @@ export default {};
         display: flex;
         align-items: center;
       }
-      &:active{
-          transition: 0.05s;
-          transform: scale(0.96);
+      &:active {
+        transition: 0.05s;
+        transform: scale(0.96);
       }
     }
   }
-  &__content {
+  &__partners {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row;
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 30px;
-  }
-  &__button{
-    margin-top: 70px;
-    align-self: center;
-    justify-content: center;
+    height: auto;
+    &__sidebar {
+      flex-shrink: 0;
+    }
+    &__content {
+      flex-grow: 1;
+      flex-shrink: 0;
+      height: 100%;
+      border: 1px solid red;
+      display: flex;flex-direction: row; align-items: flex-start; justify-content: flex-start; flex-wrap: wrap;
+    }
   }
 }
+
+.breadcrumbs {
+  margin-top: 25px;
+}
 </style>
+

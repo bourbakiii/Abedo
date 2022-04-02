@@ -258,15 +258,14 @@ export default {
 <style lang="scss" scoped>
 
 .search {
-  &-wrapper {
-  background-color: $gray_three;
-
-  padding: 70px 10px;
-}
   width: 100%;
   height: 100%;
   flex-grow: 1;
   max-width: $maxwidth;
+  &-wrapper{
+  background-color: $dark_grey;
+  padding: 70px 10px !important;
+  }
   .title {
     margin-bottom: 40px;
   }
@@ -294,7 +293,7 @@ export default {
       &__shops {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        border-bottom: 1px solid $gray_three;
+        border-bottom: 1px solid $dark_grey;
         padding-bottom: 10px;
         &-shop {
           display: flex;
@@ -337,7 +336,7 @@ export default {
           flex-direction: row;
           min-height: 75px;
           padding: 10px 0px;
-          border-bottom: 1px solid $gray_three;
+          border-bottom: 1px solid $dark_grey;
           &-image {
             width: 50px;
             height: 40px;

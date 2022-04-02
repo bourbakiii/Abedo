@@ -1,5 +1,5 @@
 <template>
-  <div class="about-wrapper wrapper">
+  <div class="wrapper about-wrapper">
     <div class="about">
       <slot />
     </div>
@@ -10,11 +10,11 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 .about {
   &-wrapper {
-    padding: 70px 0px;
     background-color: $gray_two;
+    padding: 70px 10px !important;
   }
   width: 100%;
   max-width: $maxwidth;

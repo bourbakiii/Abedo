@@ -225,7 +225,7 @@ export default {
             width:100%;
             box-sizing: border-box;
             text-decoration: none;
-            border-bottom: 1px solid $gray_three;
+            border-bottom: 1px solid $dark_grey;
             min-height:50px;
             padding: 10px 30px;
             display: flex;align-items: center;justify-content: flex-start;flex-direction: row;
