@@ -4,6 +4,7 @@
   font-weight: 700;
   font-size: 40px;
   line-height: 49px;
+  text-align: left;
 }
 .title-normal {
   font-family: "Montserrat";
@@ -13,12 +14,28 @@
   line-height: 39px;
   text-align: left;
 }
+.title-extra-normal {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: left;
+}
 .title-small {
   font-family: "SF Pro Display";
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
+  text-align: left;
+}
+.title-extra-small {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
   text-align: left;
 }
 .lightblack {

@@ -59,3 +59,14 @@
             transition: all 0.3s;
         }
     }
+
+    .push-hover-active{
+        transition: 0.3s;
+        &:hover{
+            transform: scale(1.03);
+        }
+        &:active{
+            transition: 0.05s;
+            transform: scale(0.97);
+        }
+    }

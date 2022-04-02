@@ -7,6 +7,7 @@
           class="partner-page__content__main__shop__block"
         />
         <PagesPartnerStocks class="partner-page__content__main__stocks" />
+        <PagesPartnerCatalog class="partner-page__content__main__catalog" />
       </div>
       <SidebarCart class="partner-page__content__sidebar" />
     </div>
@@ -37,9 +38,12 @@
       }
     }
     &__sidebar {
+      position: sticky;
+      top:40px;
       margin-top: 77px;
       flex-shrink: 0;
       margin-left: 30px;
+      margin-bottom: 10px;
     }
   }
 }

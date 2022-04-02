@@ -17,7 +17,7 @@
     </div>
     <div class="sidebar-cart__hood">
       <div class="sidebar-cart__hood__title-row">
-        <h3 class="sidebar-cart__hood__title-row__title title-small">
+        <h3 class="sidebar-cart__hood__title-row__title title-extra-small">
           Корзина:
         </h3>
         <button class="sidebar-cart__hood__title-row__button">Очистить</button>
