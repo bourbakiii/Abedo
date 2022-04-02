@@ -81,10 +81,13 @@
       <div class="partners-page__partners">
         <CategorySidebar class="partners-page__partners__sidebar" />
         <div class="partners-page__partners__content">
-          <ShopItem
-            v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-            :key="item"
-          />
+          <div class="partners-page__partners__content__cards">
+            <ShopItem
+              v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+              :key="item"
+            />
+          </div>
+          <ButtonStandart class='partners-page__partners__content__button' padding='85px' uppercase='true' text='Загрузить еще'/>
         </div>
       </div>
     </div>
@@ -112,7 +115,7 @@ export default {
     &__filter-button {
       height: 30px;
       width: 120px;
-      background-color: $light_grey;
+      background-color: $white;
       border-radius: 5px;
       transition: 0.3s;
       border: none;
@@ -145,13 +148,28 @@ export default {
     height: auto;
     &__sidebar {
       flex-shrink: 0;
+      margin-right: 30px;
     }
+
     &__content {
-      flex-grow: 1;
-      flex-shrink: 0;
-      height: 100%;
-      border: 1px solid red;
-      display: flex;flex-direction: row; align-items: flex-start; justify-content: flex-start; flex-wrap: wrap;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-direction: column;
+      width:100%;
+      &__cards {
+        flex-grow: 1;
+        flex-shrink: 0;
+        max-width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 30px;
+      }
+      &__button{
+        margin-top: 60px;
+        background-color: $light_grey;
+      }
     }
   }
 }
@@ -160,4 +178,3 @@ export default {
   margin-top: 25px;
 }
 </style>
-
