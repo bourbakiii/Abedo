@@ -1,5 +1,10 @@
 <template>
-  <div class="page partner-page wrapper">
+  <div @click="$store.commit('modals/open',{
+    modal_name: 'product',
+    product: {
+      name: 'Забыл передать продукт'
+    }
+  })" class="page partner-page wrapper">
     <div class="partner-page__content content">
       <div class="partner-page__content__main">
         <Breadcrumbs class="partner-page__content__main__breadcrumbs" />
@@ -26,6 +31,7 @@
     flex-direction: row;
     &__main {
       width: 100%;
+      padding-bottom: 290px;
       &__breadcrumbs {
         margin-top: 20px;
         margin-bottom: 40px;

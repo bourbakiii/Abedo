@@ -20,7 +20,7 @@
         <h3 class="sidebar-cart__hood__title-row__title title-extra-small">
           Корзина:
         </h3>
-        <button class="sidebar-cart__hood__title-row__button">Очистить</button>
+        <button class="sidebar-cart__hood__title-row__button push-hover-active">Очистить</button>
       </div>
       <div class="sidebar-cart__hood__shop-block">
         <div class="sidebar-cart__hood__shop-block__name-block">
@@ -41,7 +41,7 @@
         :key="item"
         class="sidebar-cart__products__item"
       >
-        <button class="sidebar-cart__products__item__close">
+        <button class="sidebar-cart__products__item__close push-hover-active">
           <svg
             class="sidebar-cart__products__item__close__icon"
             width="15"
@@ -234,12 +234,7 @@
         border: none;
         width: 15px;
         height: 15px;
-        &:hover {
-          transform: sclae(1.05);
-        }
-        &:active {
-          transform: scale(0.95);
-        }
+        
       }
       &__info {
         width: 100%;
@@ -302,8 +297,6 @@
               font-weight: 400;
               font-size: 14px;
               line-height: 19px;
-              display: flex;
-              align-items: center;
               text-decoration: line-through;
               color: $extra_dark_grey;
             }

@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink to="#" class="category category-item">
+  <NuxtLink to="#" class="category category-item push-hover-active">
     <img v-if="category.image" :src="category.image" class="category-image" />
     <!-- <img src="@/assets/images/category-item-image-placeholder.png" class="category-image" /> -->
     <p class="category-name">{{ category.name }}</p>
@@ -20,14 +20,6 @@
     transition: 0.3s;
   }
     border: 1px solid $orange;
-  &:hover {
-    border: 2px solid $orange;
-    transform: scale(1.005);
-  }
-  &:active {
-    transition: 0.07s;
-    transform: scale(0.98);
-  }
   &-image {
     height: 18px;
     width: auto;

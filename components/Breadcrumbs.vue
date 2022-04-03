@@ -1,6 +1,6 @@
 <template>
     <div class="breadcrumbs">
-      <span class="breadcrumbs__item">Главная</span>
+      <span class="breadcrumbs__item push-hover-active">Главная</span>
       <span class="breadcrumbs__item">Кафе “Лимончелло”</span>
     </div>
 </template>
@@ -23,10 +23,7 @@
     position: relative;
     transition: 0.3s;
     cursor: pointer;
-    &:active {
-      transition: 0.05s;
-      transform: scale(0.95);
-    }
+
     &:last-of-type {
       text-decoration: none !important;
       cursor: default;
@@ -38,17 +35,12 @@
       display: flex;
       align-items: center;
       color: $black;
-      &:active {
-        transform: scale(1);
-      }
+      
       &::after {
         display: none;
       }
     }
     &::after {
-        &:active {
-        transform: scale(1);
-      }
       content: "/";
       margin: 0px 5px;
       font-family: "Montserrat";

@@ -8,7 +8,7 @@
       'px; text-transform: '+ (uppercase?'uppercase;':'none;')
     "
     @click.prevent="$emit('action')"
-    class="button button-standart"
+    class="button button-standart push-hover-active"
   >
     {{ text }}
   </button>
@@ -65,10 +65,6 @@ export default {
   &.green:hover {
     background-color: $green;
     border-color: $green;
-  }
-  &:active {
-    transition: 0.05s;
-    transform: scale(0.98);
   }
 }
 </style>

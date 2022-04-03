@@ -2,7 +2,7 @@
   <button
   @click.prevent='$emit("action")'
     :style="{ width: parseInt(size) + 'px', height: parseInt(size) + 'px' }"
-    class="button button-product"
+    class="button button-product push-hover-active"
   >
     <svg
       v-if="icon == 'minus'"
@@ -67,12 +67,5 @@ export default {
   justify-content: center;
   transition: 0.3s;
   background-color: $white;
-  &:hover {
-    transform: scale(1.05);
-  }
-  &:active {
-    transition: 0.05s;
-    transform: scale(0.95);
-  }
 }
 </style>

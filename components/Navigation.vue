@@ -46,32 +46,32 @@
             >
               <NuxtLink
                 to="#"
-                class="navigation__links-link__dropdown-content-link"
+                class="navigation__links-link__dropdown-content-link push-hover-active"
               >
                 Мои данные
               </NuxtLink>
               <NuxtLink
                 to="#"
-                class="navigation__links-link__dropdown-content-link"
+                class="navigation__links-link__dropdown-content-link push-hover-active"
               >
                 Адреса доставки
               </NuxtLink>
               <NuxtLink
                 to="#"
-                class="navigation__links-link__dropdown-content-link"
+                class="navigation__links-link__dropdown-content-link push-hover-active"
               >
                 История заказов
               </NuxtLink>
               <NuxtLink
                 to="#"
-                class="navigation__links-link__dropdown-content-link"
+                class="navigation__links-link__dropdown-content-link push-hover-active"
               >
                 Выход
               </NuxtLink>
             </div>
           </transition>
         </NuxtLink>
-        <NuxtLink to="#" class="navigation__links-link">
+        <NuxtLink to="#" class="navigation__links-link push-hover-active">
           <svg
             width="24"
             height="24"
@@ -261,10 +261,7 @@ export default {
               justify-content: flex-start;
               flex-direction: row;
               transition: 0.3s;
-              &:hover {
-                color: $darkblue;
-                transform: scale(1.02);
-              }
+              
               &:last-of-type {
                 border: none;
               }

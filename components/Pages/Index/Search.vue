@@ -3,7 +3,7 @@
     <div class="search">
       <h1 class="title title-big lightblack">Быстрая доставка еды</h1>
       <form @submit.prevent="search" class="search__input">
-        <button class="search__input-button">
+        <button class="search__input-button push-hover-active">
           <svg
             class="search__input-button-icon"
             width="20"
@@ -60,7 +60,7 @@
         </transition>
         <transition name="opacity">
           <div
-            class="search__input__dropdown-content"
+            class="search__input__dropdown-content push-hover-active"
             @mouseenter="showResult"
             v-if="show_result == true"
           >
@@ -436,10 +436,7 @@ export default {
         margin-left: 0px 8px !important;
       }
       transition: 0.3s;
-      &:active {
-        transition: 0.05s;
-        transform: scale(0.9);
-      }
+      
     }
     &-input {
       height: 100%;

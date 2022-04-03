@@ -3,7 +3,7 @@
     <div class="catalog">
       <div class="catalog__top">
         <h2 class="catalog__top__title title-normal">Новые магазины</h2>
-        <button class="catalog__top__filter-button">
+        <button class="catalog__top__filter-button push-hover-active">
           <svg
             class="catalog__top__filter-button-icon"
             width="24"
@@ -131,10 +131,6 @@ export default {};
         line-height: 19px;
         display: flex;
         align-items: center;
-      }
-      &:active{
-          transition: 0.05s;
-          transform: scale(0.96);
       }
     }
   }

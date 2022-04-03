@@ -2,7 +2,7 @@
   <div class="search-input-wrapper wrapper">
     <div class="search-input__content">
       <form @submit.prevent="search_request" class="search-input">
-        <button class="search-input-button">
+        <button class="search-input-button push-hover-active">
           <svg
             class="search-input-button-icon"
             width="20"
@@ -108,10 +108,6 @@ export default {
       margin-left: 0px 8px !important;
     }
     transition: 0.3s;
-    &:active {
-      transition: 0.05s;
-      transform: scale(0.9);
-    }
   }
   &-input {
     height: 100%;

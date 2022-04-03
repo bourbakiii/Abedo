@@ -22,9 +22,11 @@ export const mutations = {
       }
     }
   },
-  close(state, props) {
+  close(state, props={modal_name:null}) {
+    console.log("Это работает вообще или нет?");
     for (let modal_key in state) state[modal_key].show = false;
     document.lastChild.classList.remove("html_overflow");
+    if (!props.modal_name) return;
     switch (props.modal_name) {
       case "product": {
         state.product.product = null;

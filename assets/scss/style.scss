@@ -23,11 +23,27 @@ html {
         width: 0;
     }
 
-    .element {
+    & {
         -ms-overflow-style: none;
     }
 
-    .element {
+    & {
+        overflow: -moz-scrollbars-none;
+    }
+    &.html_overflow {
+        overflow: hidden !important;
+    }
+}
+.non-scrollbar {
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+
+    & {
+        -ms-overflow-style: none;
+    }
+
+    & {
         overflow: -moz-scrollbars-none;
     }
 }
@@ -52,9 +68,6 @@ body {
     flex-grow: 1;
 }
 
-.html_overflow {
-    overflow: hidden;
-}
 button {
     cursor: pointer;
 }
@@ -62,21 +75,19 @@ button {
     width: 100%;
     flex-grow: 1;
 }
-html{
-    /* хром, сафари */
-&::-webkit-scrollbar { width: 0; }
-
-.element { -ms-overflow-style: none; }
-
-.element { overflow: -moz-scrollbars-none; }
-}
-.wrapper{
-    width:100%;
-    display: flex;align-items: center;justify-content: center;flex-direction: column;
+.wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     padding: 0px 10px;
 }
-.content{
-    width:100%;
+.content {
+    width: 100%;
     max-width: $maxwidth;
-    display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
 }
