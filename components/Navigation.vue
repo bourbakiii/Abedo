@@ -71,7 +71,7 @@
             </div>
           </transition>
         </NuxtLink>
-        <NuxtLink to="#" class="navigation__links-link push-hover-active">
+        <NuxtLink to="#" class="navigation__links-link">
           <svg
             width="24"
             height="24"
@@ -261,7 +261,9 @@ export default {
               justify-content: flex-start;
               flex-direction: row;
               transition: 0.3s;
-              
+              &:active{
+                transform: scale(0.98);
+              }
               &:last-of-type {
                 border: none;
               }

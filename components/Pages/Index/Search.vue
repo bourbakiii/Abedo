@@ -470,7 +470,6 @@ export default {
     margin-top: 40px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 30px;
-    overflow: hidden;
     .category {
       width: 295px;
     }
