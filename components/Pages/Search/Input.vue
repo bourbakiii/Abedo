@@ -2,7 +2,7 @@
   <div class="search-input-wrapper wrapper">
     <div class="search-input__content">
       <form @submit.prevent="search_request" class="search-input">
-        <button class="search-input-button push-hover-active">
+        <button class="search-input-button">
           <svg
             class="search-input-button-icon"
             width="20"

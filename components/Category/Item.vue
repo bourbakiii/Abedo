@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink to="#" class="category category-item push-hover-active">
+  <NuxtLink to="#" class="category category-item">
     <img v-if="category.image" :src="category.image" class="category-image" />
     <!-- <img src="@/assets/images/category-item-image-placeholder.png" class="category-image" /> -->
     <p class="category-name">{{ category.name }}</p>

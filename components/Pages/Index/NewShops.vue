@@ -3,7 +3,7 @@
     <div class="catalog">
       <div class="catalog__top">
         <h2 class="catalog__top__title title-normal">Новые магазины</h2>
-        <button class="catalog__top__filter-button push-hover-active">
+        <button class="catalog__top__filter-button">
           <svg
             class="catalog__top__filter-button-icon"
             width="24"

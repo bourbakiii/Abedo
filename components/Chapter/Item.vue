@@ -1,5 +1,5 @@
 <template>
-  <button :class="{'active': active, 'push-hover-active': !active}" class="chapter-item">
+  <button :class="{'active': active}" class="chapter-item">
       {{text}}
       </button>
 </template>

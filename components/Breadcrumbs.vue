@@ -1,6 +1,6 @@
 <template>
     <div class="breadcrumbs">
-      <span class="breadcrumbs__item push-hover-active">Главная</span>
+      <span class="breadcrumbs__item">Главная</span>
       <span class="breadcrumbs__item">Кафе “Лимончелло”</span>
     </div>
 </template>

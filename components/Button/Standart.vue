@@ -8,7 +8,7 @@
       'px; text-transform: '+ (uppercase?'uppercase;':'none;')
     "
     @click.prevent="$emit('action')"
-    class="button button-standart push-hover-active"
+    class="button button-standart"
   >
     {{ text }}
   </button>

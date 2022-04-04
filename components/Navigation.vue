@@ -175,6 +175,16 @@
 
 <script>
 export default {
+  mounted() {
+    document.addEventListener("scroll", () => {
+      if (window.scrollY > 100)
+        document.querySelector(".navigation-wrapper").classList.add("scaled");
+      else if (window.scrollY < 60)
+        document
+          .querySelector(".navigation-wrapper")
+          .classList.remove("scaled");
+    });
+  },
   data() {
     return {
       show_dropdown: false,
@@ -185,11 +195,21 @@ export default {
 
 <style lang="scss" scoped>
 .navigation-wrapper {
+  position: sticky;
+  top: 0px;
   flex-direction: row;
   height: 90px;
   background-color: $white;
   box-sizing: border-box;
   padding: 5px 0px;
+  z-index: $z_navigation;
+  transition: height 0.3s;
+  &.scaled {
+    height: 70px;
+    .navigation > * {
+      transform: scale(0.8);
+    }
+  }
   .navigation {
     width: 100%;
     height: 100%;
@@ -198,7 +218,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     > * {
-      transform: scale(0.8);
+      transition: transform 0.3s !important;
     }
     &__logo {
       display: flex;
