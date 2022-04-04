@@ -4,7 +4,7 @@ export const state = () => ({
     product: null,
   },
   rate: {
-    show:true
+    show: false
   },
   authorisation: {
     show: false,
