@@ -46,25 +46,25 @@
             >
               <NuxtLink
                 to="#"
-                class="navigation__links-link__dropdown-content-link push-hover-active"
+                class="navigation__links-link__dropdown-content-link"
               >
                 Мои данные
               </NuxtLink>
               <NuxtLink
                 to="#"
-                class="navigation__links-link__dropdown-content-link push-hover-active"
+                class="navigation__links-link__dropdown-content-link"
               >
                 Адреса доставки
               </NuxtLink>
               <NuxtLink
                 to="#"
-                class="navigation__links-link__dropdown-content-link push-hover-active"
+                class="navigation__links-link__dropdown-content-link"
               >
                 История заказов
               </NuxtLink>
               <NuxtLink
                 to="#"
-                class="navigation__links-link__dropdown-content-link push-hover-active"
+                class="navigation__links-link__dropdown-content-link"
               >
                 Выход
               </NuxtLink>
@@ -186,9 +186,10 @@ export default {
 <style lang="scss" scoped>
 .navigation-wrapper {
   flex-direction: row;
-  height: 100px;
+  height: 90px;
   background-color: $white;
   box-sizing: border-box;
+  padding: 5px 0px;
   .navigation {
     width: 100%;
     height: 100%;
@@ -196,6 +197,9 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    > * {
+      transform: scale(0.8);
+    }
     &__logo {
       display: flex;
       align-items: center;
@@ -261,7 +265,7 @@ export default {
               justify-content: flex-start;
               flex-direction: row;
               transition: 0.3s;
-              &:active{
+              &:active {
                 transform: scale(0.98);
               }
               &:last-of-type {

@@ -1,37 +1,45 @@
 <template>
   <div
-    @click="$store.dispatch('modals/open', { name: 'product', product: {
-        name:'Ты забыл вставить продукт'
-    } })"
+    @click.self="openProductModal"
     class="product product-item product_in-cart"
   >
-    <div class="product__discount">-10%</div>
+    <div @click.self="openProductModal" class="product__discount">-10%</div>
     <img
+      @click.self="openProductModal"
       src="@/assets/images/product-item-placeholder.png"
       class="product__image"
     />
-    <div class="product__info">
-      <p class="product__info__name">Сырное ассорasdasd</p>
-      <div class="product__info__prices">
+    <div @click.self="openProductModal" class="product__info">
+      <p @click.self="openProductModal" class="product__info__name">
+        Сырное ассорasdasd
+      </p>
+      <div @click="openProductModal" class="product__info__prices">
         <p class="product__info__prices__price">3 500 ₽</p>
         <p class="product__info__prices__weight">/ 150 г</p>
         <p class="product__info__prices__price_full">4000 ₽</p>
       </div>
     </div>
-    <div class="product__buttons">
+    <div @click.self="openProductModal" class="product__buttons">
       <ButtonStandart
         v-if="false"
         class="product__buttons__button_add"
         text="В корзину"
       />
-      <div class="product__buttons__button_creases">
+      <div @click.self="openProductModal" class="product__buttons__button_creases">
         <ButtonProduct size="40" icon="minus" />
-        <p class="product__buttons__button_creases__count">10</p>
+        <p @click.self="openProductModal" class="product__buttons__button_creases__count">10</p>
         <ButtonProduct size="40" icon="plus" />
       </div>
     </div>
   </div>
 </template>
+<script>
+  import productsMixin from '@/mixins/products-mixin.js'
+
+export default {
+  mixins: [productsMixin]
+}
+</script>
 <style lang="scss" scoped>
 .product {
   display: flex;

@@ -1,19 +1,25 @@
 <template>
-  <div class="product product-small">
-    <img
+  <div @click.self='openProductModal' class="product product-small">
+    <img @click.self='openProductModal'
       src="@/assets/images/product-placeholder.png"
       class="product-small__image"
     />
-    <p class="product-small__name">
+    <p @click.self='openProductModal' class="product-small__name">
       Сырное ассорти
     </p>
-    <div class="product-small__info">
+    <div @click.self='openProductModal' class="product-small__info">
       <p class="product-small__info__price">350 ₽</p>
       <p class="product-small__info__weight">/ 150 г</p>
       <div class="product-small__info__full-price">450 ₽</div>
     </div>
   </div>
 </template>
+<script>
+import productsMixin from '@/mixins/products-mixin.js'
+export default {
+  mixins: [productsMixin]
+}
+</script>
 <style lang="scss" scoped>
 $product_inner_padding: 9px;
 .product-small {
