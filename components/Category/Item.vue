@@ -19,7 +19,19 @@
   * {
     transition: 0.3s;
   }
-    border: 1px solid $orange;
+  border: 1px solid $orange;
+  &:hover {
+    background-color: $orange;
+   
+  }
+  &:hover &{
+    &-image{
+      fill:$white;
+    }
+    &-name{
+    color: $white;
+    }
+  }
   &-image {
     height: 18px;
     width: auto;

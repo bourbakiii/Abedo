@@ -207,7 +207,7 @@ export default {
   &.scaled {
     height: 70px;
     .navigation > * {
-      transform: scale(0.8);
+      transform: scale(0.85);
     }
   }
   .navigation {

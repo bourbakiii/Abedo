@@ -9,6 +9,10 @@
         v-if="$store.state.modals.product.show"
         class="modals-wrapper__content modal-content"
       />
+      <ModalsRate
+        v-else-if="$store.state.modals.rate.show"
+        class="modals-wrapper__content modal-content"
+      />
     </div>
   </transition>
 </template>

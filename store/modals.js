@@ -3,6 +3,9 @@ export const state = () => ({
     show: false,
     product: null,
   },
+  rate: {
+    show:true
+  },
   authorisation: {
     show: false,
   },
