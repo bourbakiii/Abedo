@@ -21,7 +21,10 @@ export default {
     '@/assets/scss/fonts.scss',
     '@/assets/scss/titles.scss',
   ],
-  plugins: ['@/plugins/clientHook.client.js'],
+  plugins: [
+    '@plugins/v-mask.js',
+    '@/plugins/clientHook.client.js'
+  ],
   components: true,
   build: {},
   buildModules: [],
