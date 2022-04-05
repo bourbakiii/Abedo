@@ -61,15 +61,30 @@
                 profile-page__form__content__input-block__input
                 profile-page__form__content__input-block__input_dropdown
               "
-              @click.self="()=>{if(show_sex)disableSex();else enableSex();}"
-              @mouseleave="()=>{disableSex();sex_index=-1;}"
+              @click.self="
+                () => {
+                  if (show_sex) disableSex();
+                  else enableSex();
+                }
+              "
+              @mouseleave="
+                () => {
+                  disableSex();
+                  sex_index = -1;
+                }
+              "
               required
               placeholder="Введите ваш пол"
               id="sex"
               name="sex"
             >
               <p
-                @click.self="()=>{if(show_sex)disableSex();else enableSex();}"
+                @click.self="
+                  () => {
+                    if (show_sex) disableSex();
+                    else enableSex();
+                  }
+                "
                 class="
                   profile-page__form__content__input-block__input_dropdown__selected
                 "
@@ -81,28 +96,23 @@
                 <div
                   @mouseenter="enableSex"
                   v-if="show_sex"
+                  @mouseleave="sex_index = -1"
                   class="
                     profile-page__form__content__input-block__input_dropdown__content
                   "
                 >
-                  <button
-                  @mouseenter="sex_index = -1"
-                    @click.prevent="selectSex('Мужской')"
+                 <button
+                 v-for='(sexItem,index) in sexes' :key='index'
+                    @mouseenter="sex_index = index"
+                    @click.prevent="selectSex(sexItem.value)"
+                    :class="{ indexed: sex_index == index }"
                     class="
                       profile-page__form__content__input-block__input_dropdown__content__button
                     "
                   >
-                    Мужской
+                    {{sexItem.value}}
                   </button>
-                  <button
-                  @mouseenter="sex_index = 1"
-                    @click.prevent="selectSex('Женский')"
-                    class="
-                      profile-page__form__content__input-block__input_dropdown__content__button
-                    "
-                  >
-                    Женский
-                  </button>
+                  
                 </div>
               </transition>
             </div>
@@ -210,7 +220,17 @@ export default {
     return {
       sex: null,
       show_sex: false,
-      sex_index: -1
+      sex_index: -1,
+      sexes: [
+        {
+          id: 1,
+          value: "Мужской",
+        },
+        {
+          id: 2,
+          value: "Женский",
+        },
+      ],
     };
   },
   methods: {
@@ -218,18 +238,36 @@ export default {
       this.sex = value;
       this.disableSex();
     },
-    disableSex(){
+    disableSex() {
       this.show_sex = false;
       document.removeEventListener("keydown", this.watch_sex);
     },
-    enableSex(){
-      this.show_sex=true;
+    enableSex() {
+      this.show_sex = true;
       document.addEventListener("keydown", this.watch_sex);
     },
-    watch_sex(event){
+    watch_sex(event) {
       event.preventDefault();
-      console.log("Потерлоя себя нема не")
-    }
+      console.log(event.key);
+      switch (event.key) {
+        case "ArrowDown": {
+          this.sex_index = Math.min(this.sex_index + 1, 1);
+          break;
+        }
+        case "ArrowUp": {
+          console.log("rrr");
+          this.sex_index = Math.max(0, this.sex_index - 1);
+          break;
+        }
+        case "Enter": {
+          if(this.sex_index>=0){
+             this.sex = this.sexes[this.sex_index].value;
+             this.disableSex();
+          }
+          break;
+        }
+      }
+    },
   },
 };
 </script>
@@ -323,9 +361,11 @@ export default {
                 border: none;
                 padding: 6px 10px;
                 border-bottom: 1px solid $dark_grey;
-                
+                &.indexed {
+                  background-color: $light_grey;
+                }
                 &:last-of-type {
-              padding-bottom: 10px;
+                  padding-bottom: 10px;
                   border: none;
                 }
               }
