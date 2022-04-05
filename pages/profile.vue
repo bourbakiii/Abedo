@@ -122,16 +122,36 @@
           />
         </div>
         <div class="profile-page__form__messages">
-          <div class="profile-page__form__messages__item_success profile-page__form__messages__item">
-              <div class="profile-page__form__messages__item__icon-block">
-                  <svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9.84 0.62371L9.51244 0.296149C9.40951 0.193141 9.27228 0.136475 9.12577 0.136475C8.97927 0.136475 8.84195 0.193141 8.73902 0.296149L4.13634 4.89875L1.26065 2.02298C1.15772 1.92013 1.02041 1.86339 0.873902 1.86339C0.72748 1.86339 0.590244 1.92013 0.487236 2.02298L0.159593 2.35046C0.0565854 2.45363 0 2.59103 0 2.73737C0 2.88379 0.0565854 3.02111 0.159593 3.12412L3.40642 6.37079C3.41073 6.37688 3.41528 6.38257 3.42057 6.38778L3.74821 6.70997C3.85114 6.81257 3.98846 6.86387 4.1361 6.86387H4.1378C4.28439 6.86387 4.42171 6.81257 4.52447 6.70997L4.85219 6.38493C4.85748 6.37973 4.86195 6.37542 4.86463 6.37103L9.83992 1.39623C10.0533 1.1833 10.0533 0.836881 9.84 0.62371Z" fill="#0EA976"/>
-</svg>
-
-              </div>
+          <div
+            class="
+              profile-page__form__messages__item_success
+              profile-page__form__messages__item
+            "
+          >
+            <div class="profile-page__form__messages__item__icon-block">
+              <svg
+                class="profile-page__form__messages__item__icon-block__icon"
+                width="10"
+                height="7"
+                viewBox="0 0 10 7"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9.84 0.62371L9.51244 0.296149C9.40951 0.193141 9.27228 0.136475 9.12577 0.136475C8.97927 0.136475 8.84195 0.193141 8.73902 0.296149L4.13634 4.89875L1.26065 2.02298C1.15772 1.92013 1.02041 1.86339 0.873902 1.86339C0.72748 1.86339 0.590244 1.92013 0.487236 2.02298L0.159593 2.35046C0.0565854 2.45363 0 2.59103 0 2.73737C0 2.88379 0.0565854 3.02111 0.159593 3.12412L3.40642 6.37079C3.41073 6.37688 3.41528 6.38257 3.42057 6.38778L3.74821 6.70997C3.85114 6.81257 3.98846 6.86387 4.1361 6.86387H4.1378C4.28439 6.86387 4.42171 6.81257 4.52447 6.70997L4.85219 6.38493C4.85748 6.37973 4.86195 6.37542 4.86463 6.37103L9.83992 1.39623C10.0533 1.1833 10.0533 0.836881 9.84 0.62371Z"
+                  fill="#0EA976"
+                />
+              </svg>
+            </div>
+            <p class="profile-page__form__messages__item__text">Ваши данные успешно обновлены</p>
           </div>
-          <div class="profile-page__form__messages__item_error profile-page__form__messages__item">
-
+         <div
+            class="
+              profile-page__form__messages__item_error
+              profile-page__form__messages__item
+            "
+          >
+            <p class="profile-page__form__messages__item__text">Введенные пароли не совпадают</p>
           </div>
         </div>
       </form>
@@ -202,11 +222,46 @@
           }
         }
       }
-     
     }
-     &__buttons{
-          margin-top:60px;
+    &__buttons {
+      margin-top: 60px;
+    }
+    &__messages{
+      display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
+      width:100%;
+      &__item{
+        width:100%;
+        background-color: $dark_grey;
+        display: flex;align-items: center;justify-content: flex-start;flex-direction: row;
+        padding: 15px 30px;
+        border-radius: 20px;
+        min-height: 60px;
+        &__icon-block{
+          width: 30px;
+          height: 30px;
+          display: flex;align-items: center;justify-content: center;
+          border-radius: 90px;
+          background-color: $light_green;
+          margin-right: 15px;
+          *{
+            fill:$white;
+          }
+        }
+        &__text{
+          font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+        }
+        &_success p{
+          color: $light_green !important;
+        }
+        &_error p{
+          color: $red !important;
+        }
       }
+    }
   }
 }
 </style>
