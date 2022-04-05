@@ -54,17 +54,59 @@
               placeholder="Введите вашу фамилию"
             />
           </label>
-          <label for="sex" class="profile-page__form__content__input-block">
+          <div class="profile-page__form__content__input-block">
             <p class="profile-page__form__content__input-block__name">Пол</p>
-            <input
-              class="profile-page__form__content__input-block__input"
+            <div
+              class="
+                profile-page__form__content__input-block__input
+                profile-page__form__content__input-block__input_dropdown
+              "
+              @click.self="()=>{if(show_sex)disableSex();else enableSex();}"
+              @mouseleave="()=>{disableSex();sex_index=-1;}"
               required
-              type="text"
-              name="sex"
-              id="sex"
               placeholder="Введите ваш пол"
-            />
-          </label>
+              id="sex"
+              name="sex"
+            >
+              <p
+                @click.self="()=>{if(show_sex)disableSex();else enableSex();}"
+                class="
+                  profile-page__form__content__input-block__input_dropdown__selected
+                "
+                :class="{ placeholdered: !sex }"
+              >
+                {{ sex ? sex : "Выберите пол" }}
+              </p>
+              <transition name="opacity">
+                <div
+                  @mouseenter="enableSex"
+                  v-if="show_sex"
+                  class="
+                    profile-page__form__content__input-block__input_dropdown__content
+                  "
+                >
+                  <button
+                  @mouseenter="sex_index = -1"
+                    @click.prevent="selectSex('Мужской')"
+                    class="
+                      profile-page__form__content__input-block__input_dropdown__content__button
+                    "
+                  >
+                    Мужской
+                  </button>
+                  <button
+                  @mouseenter="sex_index = 1"
+                    @click.prevent="selectSex('Женский')"
+                    class="
+                      profile-page__form__content__input-block__input_dropdown__content__button
+                    "
+                  >
+                    Женский
+                  </button>
+                </div>
+              </transition>
+            </div>
+          </div>
           <label for="date" class="profile-page__form__content__input-block">
             <p class="profile-page__form__content__input-block__name">
               Дата рождения
@@ -93,7 +135,7 @@
             />
           </label>
           <label
-            for="password"
+            for="password_repeat"
             class="profile-page__form__content__input-block"
           >
             <p class="profile-page__form__content__input-block__name">Пароль</p>
@@ -102,7 +144,7 @@
               required
               type="password"
               name="password_repeat"
-              id="password"
+              id="password_repeat"
               placeholder="Повторите ваш пароль"
             />
           </label>
@@ -143,21 +185,54 @@
                 />
               </svg>
             </div>
-            <p class="profile-page__form__messages__item__text">Ваши данные успешно обновлены</p>
+            <p class="profile-page__form__messages__item__text">
+              Ваши данные успешно обновлены
+            </p>
           </div>
-         <div
+          <div
             class="
               profile-page__form__messages__item_error
               profile-page__form__messages__item
             "
           >
-            <p class="profile-page__form__messages__item__text">Введенные пароли не совпадают</p>
+            <p class="profile-page__form__messages__item__text">
+              Введенные пароли не совпадают
+            </p>
           </div>
         </div>
       </form>
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      sex: null,
+      show_sex: false,
+      sex_index: -1
+    };
+  },
+  methods: {
+    selectSex(value) {
+      this.sex = value;
+      this.disableSex();
+    },
+    disableSex(){
+      this.show_sex = false;
+      document.removeEventListener("keydown", this.watch_sex);
+    },
+    enableSex(){
+      this.show_sex=true;
+      document.addEventListener("keydown", this.watch_sex);
+    },
+    watch_sex(event){
+      event.preventDefault();
+      console.log("Потерлоя себя нема не")
+    }
+  },
+};
+</script>
 <style lang="scss" scoped>
 .profile-page {
   padding-bottom: 100px;
@@ -186,11 +261,9 @@
     border-radius: 20px;
     &__content {
       width: 100%;
-
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 30px 76px;
-
       &__input-block {
         &__name {
           font-family: "SF Pro Display";
@@ -220,44 +293,90 @@
           &:disabled {
             background-color: $dark_grey;
           }
+          &_dropdown {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: row;
+            &__selected.placeholdered {
+              color: $extra_dark_grey;
+            }
+            &__content {
+              position: absolute;
+              top: 99%;
+              left: 25px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              flex-direction: column;
+              width: calc(100% - 50px);
+              background-color: $white;
+              z-index: $z_dropdown;
+              box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+              border-radius: 0px 0px 20px 20px;
+              &__button {
+                text-align: left;
+                width: 100%;
+                background-color: transparent;
+                border: none;
+                padding: 6px 10px;
+                border-bottom: 1px solid $dark_grey;
+                
+                &:last-of-type {
+              padding-bottom: 10px;
+                  border: none;
+                }
+              }
+            }
+          }
         }
       }
     }
     &__buttons {
       margin-top: 60px;
     }
-    &__messages{
-      display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
-      width:100%;
-      &__item{
-        width:100%;
+    &__messages {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      width: 100%;
+      &__item {
+        width: 100%;
         background-color: $dark_grey;
-        display: flex;align-items: center;justify-content: flex-start;flex-direction: row;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: row;
         padding: 15px 30px;
         border-radius: 20px;
         min-height: 60px;
-        &__icon-block{
+        &__icon-block {
           width: 30px;
           height: 30px;
-          display: flex;align-items: center;justify-content: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           border-radius: 90px;
           background-color: $light_green;
           margin-right: 15px;
-          *{
-            fill:$white;
+          * {
+            fill: $white;
           }
         }
-        &__text{
-          font-family: 'SF Pro Display';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 19px;
+        &__text {
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 19px;
         }
-        &_success p{
+        &_success p {
           color: $light_green !important;
         }
-        &_error p{
+        &_error p {
           color: $red !important;
         }
       }

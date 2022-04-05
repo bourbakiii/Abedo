@@ -73,6 +73,7 @@
         </NuxtLink>
         <NuxtLink to="#" class="navigation__links-link">
           <svg
+            class="navigation__links-link-svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -133,6 +134,7 @@
         </NuxtLink>
         <NuxtLink to="#" class="navigation__icons-icon">
           <svg
+            class="navigation__icons-icon-svg"
             width="20"
             height="18"
             viewBox="0 0 20 18"
@@ -229,7 +231,7 @@ export default {
       }
     }
     &__links {
-      width: 300px;
+      width: max-content;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -239,11 +241,14 @@ export default {
         align-items: center;
         justify-content: center;
         text-decoration: none;
+        &:first-of-type{
+          margin-right:40px;
+        }
         &:hover {
           text-decoration: underline;
         }
         &-svg {
-          margin-right: 18px;
+          margin-right: 13px;
         }
         &-text {
           font-family: "Montserrat";
