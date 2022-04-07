@@ -29,6 +29,10 @@ export default {
   build: {},
   buildModules: [],
   modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
+  generate:{
+    fallback: true,
+    routes: ['partners/1','partners/2']
+  },
   styleResources: {
     scss: [
       '@assets/scss/variables.scss',
