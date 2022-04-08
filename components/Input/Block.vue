@@ -8,11 +8,13 @@
         {{ pre }}
       </span>
       <input
-        v-mask="'(###) ###-##-##'" 
-        id="id"
-        :name="name"
+        v-mask="mask"
+        v-model='value'
+        @input='$emit("input", {name:name,value:value})'
+        :id='id'
         class="input-block__input__input"
         :type="type.toLowerCase()"
+        :name='name'
         :placeholder="placeholder"
       />
     </div>
@@ -20,6 +22,12 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      mounted: false,
+      value: ""
+    };
+  },
   props: {
     id: {
       required: true,
@@ -40,10 +48,14 @@ export default {
       required: false,
       default: null,
     },
-    mask:{
-        require: false,
-        default: false
-    }
+    is_phone: {
+      required: false,
+      default: false,
+    },
+    mask: {
+      required: false,
+      default: ""
+    },
   },
 };
 </script>
@@ -80,8 +92,8 @@ export default {
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    &__pre{
-        margin-right: 1ex;
+    &__pre {
+      margin-right: 1ex;
     }
     &__input {
       width: 100%;
