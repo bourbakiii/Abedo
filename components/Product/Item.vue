@@ -23,8 +23,10 @@
       <ButtonStandart
         v-if="false"
         class="product__buttons__button_add"
-        text="В корзину"
-      />
+      >
+        В корзину
+
+      </ButtonStandart>
       <div @click.self="openProductModal" class="product__buttons__button_creases">
         <ButtonProduct size="40" icon="minus" />
         <p @click.self="openProductModal" class="product__buttons__button_creases__count">10</p>

@@ -1,5 +1,5 @@
 <template>
-  <label :for="id" class="input-block">
+  <label :for="id" class="input-block" :class="{ 'error': error }">
     <p class="input-block__name">
       {{ text }}
     </p>
@@ -9,12 +9,12 @@
       </span>
       <input
         v-mask="mask"
-        v-model='value'
-        @input='$emit("input", {name:name,value:value})'
-        :id='id'
+        v-model="value"
+        @input="$emit('input', { name: name, value: value })"
+        :id="id"
         class="input-block__input__input"
         :type="type.toLowerCase()"
-        :name='name'
+        :name="name"
         :placeholder="placeholder"
       />
     </div>
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       mounted: false,
-      value: ""
+      value: "",
     };
   },
   props: {
@@ -54,7 +54,11 @@ export default {
     },
     mask: {
       required: false,
-      default: ""
+      default: "",
+    },
+    error: {
+      required: true,
+      default: false,
     },
   },
 };
@@ -65,6 +69,12 @@ export default {
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
+  position: relative;
+  &.error & {
+    &__input {
+      border-color: $red;
+    }
+  }
   &__name {
     font-family: "SF Pro Display";
     font-style: normal;
@@ -92,6 +102,7 @@ export default {
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
+    transition: 0.3s;
     &__pre {
       margin-right: 1ex;
     }

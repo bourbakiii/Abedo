@@ -1,11 +1,23 @@
 <template>
   <div class="product-modal modal">
     <h3 class="product-modal__title title-normal">Сырное ассорти</h3>
-    <button @click.prevent='$store.commit("modals/close",{modal_name:"product"})' class="product-modal__close">
-        <svg class="product-modal__close__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M8.89533 10.0005L0.229061 1.33421C-0.0760555 1.02909 -0.0760555 0.534404 0.229061 0.229326C0.534178 -0.0757519 1.02886 -0.075791 1.33394 0.229326L10.0003 8.89565L18.6665 0.229326C18.9716 -0.075791 19.4663 -0.075791 19.7714 0.229326C20.0765 0.534443 20.0765 1.02913 19.7714 1.33421L11.1051 10.0005L19.7714 18.6668C20.0765 18.9719 20.0765 19.4666 19.7714 19.7717C19.6189 19.9242 19.4189 20.0005 19.2189 20.0005C19.019 20.0005 18.8191 19.9242 18.6665 19.7717L10.0003 11.1054L1.33398 19.7717C1.18144 19.9242 0.981482 20.0005 0.781521 20.0005C0.58156 20.0005 0.381639 19.9242 0.229061 19.7717C-0.0760555 19.4666 -0.0760555 18.9719 0.229061 18.6668L8.89533 10.0005Z" fill="#A6A8A8"/>
-</svg>
-
+    <button
+      @click.prevent="$store.commit('modals/close', { modal_name: 'product' })"
+      class="product-modal__close"
+    >
+      <svg
+        class="product-modal__close__icon"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.89533 10.0005L0.229061 1.33421C-0.0760555 1.02909 -0.0760555 0.534404 0.229061 0.229326C0.534178 -0.0757519 1.02886 -0.075791 1.33394 0.229326L10.0003 8.89565L18.6665 0.229326C18.9716 -0.075791 19.4663 -0.075791 19.7714 0.229326C20.0765 0.534443 20.0765 1.02913 19.7714 1.33421L11.1051 10.0005L19.7714 18.6668C20.0765 18.9719 20.0765 19.4666 19.7714 19.7717C19.6189 19.9242 19.4189 20.0005 19.2189 20.0005C19.019 20.0005 18.8191 19.9242 18.6665 19.7717L10.0003 11.1054L1.33398 19.7717C1.18144 19.9242 0.981482 20.0005 0.781521 20.0005C0.58156 20.0005 0.381639 19.9242 0.229061 19.7717C-0.0760555 19.4666 -0.0760555 18.9719 0.229061 18.6668L8.89533 10.0005Z"
+          fill="#A6A8A8"
+        />
+      </svg>
     </button>
     <div class="product-modal__content">
       <div class="product-modal__content__info">
@@ -65,12 +77,23 @@
         <div class="product-modal__content__final__buttons">
           <ButtonStandart
             class="product-modal__content__final__buttons__button"
-            text="В корзину"
-          />
+          >
+            В корзину
+          </ButtonStandart>
           <div class="product-modal__content__final__buttons__creases">
-              <ButtonProduct class='product-modal__content__final__buttons__creases__button' icon='minus' size='50px'/>
-              <p class="product-modal__content__final__buttons__creases__count">100000fasfasfasfasfsaf0</p>
-              <ButtonProduct class='product-modal__content__final__buttons__creases__button' icon='plus' size='50px'/>
+            <ButtonProduct
+              class="product-modal__content__final__buttons__creases__button"
+              icon="minus"
+              size="50px"
+            />
+            <p class="product-modal__content__final__buttons__creases__count">
+              100000fasfasfasfasfsaf0
+            </p>
+            <ButtonProduct
+              class="product-modal__content__final__buttons__creases__button"
+              icon="plus"
+              size="50px"
+            />
           </div>
         </div>
       </div>
@@ -87,19 +110,21 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-    position: relative;
+  position: relative;
   &__title {
     align-self: flex-start;
     margin-bottom: 30px;
   }
-  &__close{
-      cursor: pointer;
-      background-color: transparent;
-      border:none;
-      outline: none;
-      position: absolute; right: 30px; top: 30px;
+  &__close {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 30px;
+    top: 30px;
   }
-  
+
   &__content {
     border: 1px solid $light_grey;
     padding: 50px;
@@ -265,26 +290,28 @@
           height: 100%;
           width: 100%;
         }
-        &__creases{
-            width:100%;
-            height:100%;
-            display: flex;align-items: center;justify-content: space-between;
-            &__count{
-                flex-grow: 1;
-                margin:0px 8px;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-                font-family: "SF Pro Display";
-          font-style: normal;
-          font-weight: 700;
-          font-size: 14px;
-          line-height: 20px;
-          margin-right: 15px;
-            }
-            &__button{
-                flex-shrink: 0;
-            }
+        &__creases {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          &__count {
+            flex-grow: 1;
+            margin: 0px 8px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: "SF Pro Display";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 20px;
+            margin-right: 15px;
+          }
+          &__button {
+            flex-shrink: 0;
+          }
         }
       }
     }

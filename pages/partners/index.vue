@@ -87,7 +87,9 @@
               :key="item"
             />
           </div>
-          <ButtonStandart class='partners-page__partners__content__button' padding='85px' uppercase='true' text='Загрузить еще'/>
+          <ButtonStandart class='partners-page__partners__content__button' padding='85px' uppercase='true'>
+             Загрузить еще
+          </ButtonStandart>
         </div>
       </div>
     </div>

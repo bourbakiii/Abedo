@@ -180,8 +180,9 @@
               :uppercase="false"
               @action="watchAll"
               class="search__input__dropdown-content__watch-all-button"
-              text="Cмотреть все"
-            />
+            >
+              Cмотреть все
+            </ButtonStandart>
           </div>
         </transition>
       </form>
