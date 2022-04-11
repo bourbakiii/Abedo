@@ -10,16 +10,13 @@
     @click.prevent="$emit('action')"
     class="button button-standart"
   >
-    {{ text }}
+    <slot/>
   </button>
 </template>
 
 <script>
 export default {
   props: {
-    text: {
-      required: true,
-    },
     height: {
       required: false,
       default: "50px",

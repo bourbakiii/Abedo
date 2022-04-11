@@ -87,6 +87,20 @@
       flex-grow: 1;
       margin-right: 30px;
     }
+    &__button{
+      font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+color:$red;
+background-color: transparent;
+outline:none;
+border:none;
+&:hover{
+  text-decoration: underline;
+}
+    }
   }
   &__products {
     display: flex;
