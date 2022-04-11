@@ -1,5 +1,5 @@
 <template>
-  <label :for="id" class="input-block" :class="{ 'error': error }">
+  <label :for="id" class="input-block">
     <p class="input-block__name">
       {{ text }}
     </p>
@@ -55,11 +55,7 @@ export default {
     mask: {
       required: false,
       default: "",
-    },
-    error: {
-      required: true,
-      default: false,
-    },
+    }
   },
 };
 </script>
