@@ -13,7 +13,20 @@
     </div>
   </div>
 </template>
-
+<script>
+import axios from "axios";
+export default {
+  async asyncData({error, redirect, params, $axios}){
+    await axios.get('http://127.0.0.1:8000/api/shops').then(({data: {shops :{data}}})=>{
+      console.log(data.map(el=>+el.id).includes(+params.partner_id));
+      if(!data.map(el=>+el.id).includes(+params.partner_id)){
+        error({statusCode: 404, message:"Страница партнера не найдена"})
+      }
+    });
+    return {};
+  }
+}
+</script>
 <style lang="scss" scoped>
 .partner-page {
   background-color: $light_grey;

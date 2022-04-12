@@ -31,7 +31,6 @@ export default {
   modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
   generate:{
     fallback: true,
-    routes: ['partners/1','partners/2']
   },
   styleResources: {
     scss: [
@@ -43,7 +42,7 @@ export default {
     ]
   },
   axios: {
-    baseUrl: "http://localhost:5000"
+    baseUrl: "http://127.0.0.1:8000"
   },
   pageTransition: {
     name: 'page',
