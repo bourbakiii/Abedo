@@ -30,6 +30,7 @@ export default {
   buildModules: [],
   modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
   generate:{
+    crawler: false,
     fallback: true,
   },
   styleResources: {
