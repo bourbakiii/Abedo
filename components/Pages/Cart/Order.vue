@@ -104,24 +104,25 @@
     </div>
     <div class="order__payment">
       <h3 class="order__payment__title title-extra-normal">Оплата</h3>
-      {{ payment_type }}
       <label class="order__payment__item">
         <RadiobuttonStandart
+          class="order__payment__item__radio"
           name="payment_type"
           id="payment_type-0"
-          :value='0'
+          val="0"
+          :modelValue="payment_type"
           v-model="payment_type"
         />
         <p class="order__payment__item__name">Наличными при получении</p>
       </label>
       <label class="order__payment__item">
-        <input
+        <RadiobuttonStandart
           class="order__payment__item__radio"
-          type="radio"
-          value="1"
-          v-model="payment_type"
           name="payment_type"
           id="payment_type-1"
+          val="1"
+          :modelValue="payment_type"
+          v-model="payment_type"
         />
         <p class="order__payment__item__name">Перевод на банковсвкую карту</p>
       </label>
@@ -163,7 +164,7 @@ export default {
       apartment: null,
       intercom: null,
       additional: null,
-      payment_type: 0,
+      payment_type: '0',
     };
   },
 };
