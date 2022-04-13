@@ -27,6 +27,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.index-page{
+  display: flex;align-items: center; justify-content: flex-start;flex-direction: column;
+}
 .search-wrapper{
   margin-bottom: 73px;
 }
