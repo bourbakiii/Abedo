@@ -256,7 +256,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .search {
   width: 100%;
   height: 100%;
@@ -466,13 +465,21 @@ export default {
   &__categories {
     width: 100%;
     max-width: 100%;
-    display: grid;
     margin-top: 40px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
     grid-gap: 30px;
-    .category {
-      width: 295px;
-    }
+    box-sizing: border-box;
+  @media screen and (max-width:$notebook){
+    grid-template-columns: repeat(3,1fr);
+
+  }
+
+
+   .category{
+     overflow: hidden;
+     width: 100%;
+   }
   }
 }
 </style>
