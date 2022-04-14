@@ -179,9 +179,9 @@
 export default {
   mounted() {
     document.addEventListener("scroll", () => {
-      if (window.scrollY > 100)
+      if (window.scrollY > this.$store.state.variables.navigation_transtion_to)
         document.querySelector(".navigation-wrapper").classList.add("scaled");
-      else if (window.scrollY < 60)
+      else if (window.scrollY < this.$store.state.variables.navigation_transtion_back)
         document
           .querySelector(".navigation-wrapper")
           .classList.remove("scaled");
@@ -203,7 +203,7 @@ export default {
   height: 90px;
   background-color: $white;
   box-sizing: border-box;
-  padding: 5px 0px;
+  padding: 5px 10px;
   z-index: $z_navigation;
   transition: height 0.3s;
   &.scaled {

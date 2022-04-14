@@ -180,7 +180,6 @@ export default {
 <style lang="scss" scoped>
 .shop-block{
     padding-top: 30px;
-    width: 100%;
     background-color: $white;
     border-radius: 20px;
     overflow: hidden;

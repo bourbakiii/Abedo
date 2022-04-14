@@ -1,6 +1,6 @@
 
 <template>
-  <div class="shop-item item">
+  <NuxtLink to='/partners/1' class="shop-item item">
     <div class="item__block">
       <div class="item__block__content">
         <div class="item__block__content__icons">
@@ -123,7 +123,7 @@
     <p class="item__cuisines">
       Европейская / Кавказская/ Японская кухня
     </p>
-  </div>
+  </NuxtLink>
 </template>
 
 <script>
@@ -134,6 +134,7 @@ export default {};
 .item {
   position: relative;
   width: 295px;
+  text-decoration: none;
   &__block {
     width: 100%;
     height: 230px;

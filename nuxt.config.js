@@ -48,5 +48,6 @@ export default {
   pageTransition: {
     name: 'page',
     mode: 'out-in',
+    appear: true
   }
 }

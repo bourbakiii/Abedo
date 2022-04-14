@@ -16,15 +16,14 @@
 <script>
 import axios from "axios";
 export default {
-  async asyncData({error, redirect, params, $axios}){
+  async asyncData({error, params}){
     await axios.get('https://abedo.ru/api/shops').then(({data: {shops :{data}}})=>{
       console.log(data.map(el=>+el.id).includes(+params.partner_id));
       if(!data.map(el=>+el.id).includes(+params.partner_id)){
         error({statusCode: 404, message:"Страница партнера не найдена"})
       }
     });
-    return {};
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -35,16 +34,18 @@ export default {
   &__content {
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-direction: row;
+    width:100%;
     &__main {
-      width: 100%;
       padding-bottom: 290px;
+      width:100%;
       &__breadcrumbs {
         margin-top: 20px;
         margin-bottom: 40px;
       }
       &__shop__block {
+        width:100%;
         margin-bottom: 70px;
       }
       &__stocks {
@@ -53,10 +54,13 @@ export default {
     }
     &__sidebar {
       position: sticky;
-      top:40px;
+      top: 125px;
       margin-top: 77px;
-      flex-shrink: 0;
       margin-left: 30px;
+      @media screen and (max-width: $maxwidth+ 20px) {
+        margin-left:10px;
+      }
+      flex-shrink: 0;
       margin-bottom: 10px;
     }
   }
