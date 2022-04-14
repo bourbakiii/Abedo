@@ -229,7 +229,8 @@ export default {
             .swiper-wrapper {
               height: 100%;
               max-height:100%;
-              overflow: hidden;
+              background-color: orange !important;
+              overflow: hidden !important;
               .swiper-slide {
               background-color: green;
               width: 100%;
