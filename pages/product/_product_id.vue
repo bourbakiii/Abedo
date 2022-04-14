@@ -11,7 +11,24 @@
           ассорaСырное ассорaСырное ассорa
         </h1>
         <div class="product-page__content__main__images">
-          <div class="product-page__content__main__images__slider"></div>
+          <div class="product-page__content__main__images__slider">
+            <swiper
+              class="product-page__content__main__images__slider__swiper"
+              :options="swiperOption"
+            >
+              <swiper-slide>Slide 1</swiper-slide>
+              <swiper-slide>Slide 2</swiper-slide>
+              <swiper-slide>Slide 3</swiper-slide>
+              <swiper-slide>Slide 4</swiper-slide>
+              <swiper-slide>Slide 5</swiper-slide>
+              <swiper-slide>Slide 6</swiper-slide>
+              <swiper-slide>Slide 7</swiper-slide>
+              <swiper-slide>Slide 8</swiper-slide>
+              <swiper-slide>Slide 9</swiper-slide>
+              <swiper-slide>Slide 10</swiper-slide>
+              <div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
+          </div>
           <div class="product-page__content__main__images__image"></div>
         </div>
         <div class="product-page__content__main__additional">
@@ -139,6 +156,34 @@
     </div>
   </div>
 </template>
+<script>
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
+
+export default {
+  name: "swiper-example-mousewheel-control",
+  title: "Mousewheel control",
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  data() {
+    return {
+      swiperOption: {
+        direction: "vertical",
+        slidesPerView: 3,
+        spaceBetween: 8,
+        mousewheel: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      },
+    };
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 .product-page {
   background-color: $light_grey;
@@ -171,11 +216,28 @@
         &__slider {
           width: 126px;
           height: 100%;
-          background-color: $white;
+          background-color: red;
+          // background-color: $white;
           border-radius: 20px;
           margin-right: 30px;
           flex-shrink: 0;
           flex-grow: 0;
+          &__swiper {
+            height: 100%;
+            width: 100%;
+            padding: 50px 5px;
+            .swiper-wrapper {
+              height: 100%;
+              max-height:100%;
+              overflow: hidden;
+              .swiper-slide {
+              background-color: green;
+              width: 100%;
+              height: auto;
+            }
+            }
+            
+          }
         }
         &__image {
           flex-shrink: 0;
