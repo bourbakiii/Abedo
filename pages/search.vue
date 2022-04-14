@@ -1,9 +1,15 @@
 <template>
-  <div class="page search-page">
-    <Breadcrumbs />
-    <PagesSearchInput />
-    <PagesSearchFoundedShops />
-    <PagesSearchFoundedProducts />
+  <div class="page search-page wrapper">
+    <div class="search-page__content content">
+      <Breadcrumbs class="search-page__content__breadcrumbs" />
+      <PagesSearchInput class="search-page__content__search__input" />
+      <PagesSearchFoundedShops
+        class="search-page__content__search__founded__shops"
+      />
+      <PagesSearchFoundedProducts
+        class="search-page__content__search__founded__products"
+      />
+    </div>
   </div>
 </template>
 
@@ -13,19 +19,21 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.page {
+.search-page {
   background-color: $light_grey;
-}
-.breadcrumbs-wrapper {
-  margin-top: 25px;
-}
-.search-input-wrapper {
-  margin: 50px 0px;
-}
-.founded-shops-wrapper,
-.founded-products-wrapper {
-  margin-top: 50px;
-  margin-bottom: 70px;
+
+  &__content {
+    &__breadcrumbs {
+      margin-top: 25px;
+    }
+    &__search__input {
+      margin: 50px 0px;
+    }
+    &__search__founded__shops,
+    &__search__founded__products {
+      margin-bottom: 70px;
+    }
+  }
 }
 </style>
 

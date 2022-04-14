@@ -2,10 +2,7 @@
     <div class="founded-shops">
       <h1 class="founded-shops__title title-normal">Найденные заведения</h1>
       <div class="founded-shops__content content">
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
+        <ShopItem class="founded-shops__content__item" v-for='(item,index) in 4' :key = 'index' />
       </div>
   </div>
 </template>
@@ -33,6 +30,10 @@ export default {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
+    &__item{
+      width:auto;
+      overflow: hidden;
+    }
   }
 }
 </style>
