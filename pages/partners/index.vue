@@ -1,7 +1,7 @@
 <template>
   <div class="page partners-page wrapper">
     <div class="partners-page__content content">
-      <Breadcrumbs />
+      <Breadcrumbs class='partners-page__breadcrumbs' />
       <div class="partners-page__top">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
         <button class="partners-page__top__filter-button">
@@ -83,7 +83,8 @@
         <div class="partners-page__partners__content">
           <div class="partners-page__partners__content__cards">
             <ShopItem
-              v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+            class="partners-page__partners__content__cards__item"
+              v-for="item in 12"
               :key="item"
             />
           </div>
@@ -165,6 +166,10 @@ export default {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 30px;
+        &__item{
+          width:100%;
+          overflow: hidden;
+        }
       }
       &__button{
         margin-top: 60px;
