@@ -16,11 +16,13 @@
         </div>
         <div class="product-page__content__main__additional">
           <div class="product-page__content__main__additional__description">
-            <p class="product-page__content__main__additional__pre">
+            <p
+              class="product-page__content__main__additional__description__pre"
+            >
               Описание:
             </p>
             <p
-              class="product-page__content__main__additional__description"
+              class="product-page__content__main__additional__description__text"
               contenteditable
             >
               Моцарелла, рикотта или фета (свежие); шаурс, нешатель (мягкие);
@@ -65,11 +67,45 @@
                 product-page__content__main__additional__information__options
               "
             >
+              <p
+                class="
+                  product-page__content__main__additional__information__options__pre
+                "
+              >
+                Дополнительные опции
+              </p>
               <div
                 class="
-                  product-page__content__main__additional__information__options__item
+                  product-page__content__main__additional__information__options__content
                 "
-              ></div>
+              >
+                <div
+                  class="
+                    product-page__content__main__additional__information__options__content__item
+                  "
+                >
+                  <p
+                    class="
+                      product-page__content__main__additional__information__options__content__item__name
+                    "
+                    contenteditable
+                  >
+                    Моцарелла классического итальянского производства
+                  </p>
+                  <span
+                    class="
+                      product-page__content__main__additional__information__options__content__item__checkbox
+                    "
+                  ></span>
+                  <p
+                    class="
+                      product-page__content__main__additional__information__options__content__item__price
+                    "
+                  >
+                    3 000 ₽
+                  </p>
+                </div>
+              </div>
             </div>
             <ButtonStandart
               class="
@@ -95,6 +131,9 @@
             </ButtonStandart>
           </div>
         </div>
+        <button class="product-page__content__main__back">
+          Вернуться к списку товаров
+        </button>
       </div>
       <SidebarCart class="product-page__content__sidebar" />
     </div>
@@ -103,6 +142,7 @@
 <style lang="scss" scoped>
 .product-page {
   background-color: $light_grey;
+  padding-bottom: 20px;
   &__content {
     display: flex;
     align-items: flex-start;
@@ -111,7 +151,6 @@
     &__main {
       width: 80%;
       margin-right: 30px;
-      background-color: red;
       padding-bottom: 100px;
       &__breadcrumbs {
         margin-top: 20px;
@@ -123,7 +162,6 @@
         margin-bottom: 40px;
       }
       &__images {
-        background-color: green;
         height: 662px;
         width: 100%;
         display: flex;
@@ -141,9 +179,152 @@
         }
         &__image {
           flex-shrink: 0;
-          background-color: blue;
           height: 100%;
           flex-grow: 1;
+        }
+      }
+      &__additional {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: row;
+        margin-top: 77px;
+        &__description {
+          width: 55%;
+          margin-right: 60px;
+          &__pre {
+            font-family: "Montserrat";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            margin-bottom: 20px;
+          }
+          &__text {
+            font-family: "SF Pro Display";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+          }
+        }
+        &__information {
+          width: 45%;
+        }
+        &__information {
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          flex-direction: column;
+          &__prices {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: row;
+            margin-bottom: 20px;
+            &__price {
+              font-family: "Montserrat";
+              font-style: normal;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 22px;
+              color: $red;
+              &_full {
+                margin-left: 20px;
+                font-family: "Montserrat";
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 20px;
+                text-decoration-line: line-through;
+              }
+            }
+            &__weight {
+              font-family: "SF Pro Display";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 19px;
+              color: $darkblue;
+            }
+          }
+          &__options {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 40px;
+            &__pre {
+              font-family: "Montserrat";
+              font-style: normal;
+              font-weight: 600;
+              font-size: 16px;
+              line-height: 20px;
+            }
+            &__content {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              flex-direction: column;
+              &__item {
+                width: 100%;
+                min-height: 74px;
+                padding: 10px 0px;
+                border-bottom: 1px solid $dark_grey;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: row;
+                &__name {
+                  font-family: "SF Pro Display";
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 16px;
+                  line-height: 20px;
+                  width: 220px;
+                  margin-right: 40px;
+                }
+                &__checkbox {
+                  width: 26px;
+                  height: 26px;
+                  background-color: yellowgreen;
+                  border-radius: 90px;
+                  margin-right: auto;
+                }
+                &__price {
+                  font-family: "Montserrat";
+                  font-style: normal;
+                  font-weight: 600;
+                  font-size: 16px;
+                  line-height: 20px;
+                  white-space: nowrap;
+                }
+              }
+            }
+          }
+          &__button {
+            width: 228px;
+            &__icon {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+      &__back {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: $darkblue;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        &:hover {
+          text-decoration: underline;
         }
       }
     }
