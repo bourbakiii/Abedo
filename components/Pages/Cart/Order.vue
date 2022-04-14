@@ -1,8 +1,12 @@
 <template>
   <div class="order">
     <div class="order__buttons">
-      <ButtonStandart class="order__buttons__button" text="Доставка" />
-      <ButtonStandart class="order__buttons__button" text="Самовывоз" />
+      <ButtonStandart class="order__buttons__button" >Доставка
+      </ButtonStandart>
+      <ButtonStandart class="order__buttons__button">
+      Самовывоз
+      </ButtonStandart>
+
     </div>
     <InputBlock pre='+7' mask='true' placeholder='000 000 000 00' class='order__phone' name='phone' id='phone' type='text' text='Телефон'/>
   </div>

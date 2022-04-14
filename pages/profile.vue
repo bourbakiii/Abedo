@@ -162,16 +162,20 @@
         <div class="profile-page__form__buttons">
           <ButtonStandart
             class="profile-page__form__buttons__edit"
-            text="Изменить"
-          />
+          >
+            Изменить
+
+          </ButtonStandart>
           <ButtonStandart
             class="profile-page__form__buttons__Save"
-            text="Сохранить"
-          />
+            
+          >Сохранить
+          </ButtonStandart>
           <ButtonStandart
             class="profile-page__form__buttons__Save"
-            text="Отмена"
-          />
+          >
+          Отмена
+          </ButtonStandart>
         </div>
         <div class="profile-page__form__messages">
           <div

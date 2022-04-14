@@ -20,7 +20,10 @@
         <p class="cart-page__content_empty__text">
           Вы пока ничего не добавили в корзину
         </p>
-        <ButtonStandart text="За покупками" />
+        <ButtonStandart>
+           За покупками
+      </ButtonStandart>
+
       </div>
       <div v-else class="cart-page__content">
         <h1 class="cart-page__content_empty__title title-normal">
