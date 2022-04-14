@@ -67,7 +67,7 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 3,
-        slidesPerGroup: 1,
+        spaceBetween: 30,
         pagination: {
           el: ".stocks-slider-pagination",
           clickable: true,
@@ -86,8 +86,16 @@ export default {
   position: relative;
   width: 100%;
   overflow: hidden;
-  @media screen and (max-width: $maxwidth + 200px) {
-    width: calc(100% - 200px);
+  .stock-item{
+    @media screen and (max-width: 1388px) {
+      transform: scale(0.95);
+    }
+    @media screen and (max-width: 1300px) {
+      transform: scale(0.92);
+    }
+     @media screen and (max-width: $maxwidth + 20px) {
+      transform: scale(0.89);
+    }
   }
   .stocks-slider-pagination {
     margin-top: 20px;
@@ -110,24 +118,23 @@ export default {
       display: none;
     }
     &-prev {
-      transform: translate(-50%, 0%);
+      transform: translate(-50%, -25%);
       left: -40px;
       &:active {
-        transform: translate(-50%, 0%) scale(0.95);
+        transform: translate(-50%, -25%) scale(0.95);
       }
     }
     &-next {
-      transform: translate(50%, 0%);
+      transform: translate(50%, -25%);
       right: -40px;
       &:active {
-        transform: translate(50%, 0%) scale(0.95);
+        transform: translate(50%, -25%) scale(0.95);
       }
     }
   }
   .stocks-slider-buttons {
     position: relative;
     padding: 0px 10px;
-    background-color: green;
     max-width: $maxwidth;
     width:calc(100% - 140px);
   }
