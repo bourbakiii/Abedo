@@ -10,7 +10,7 @@
     @click.prevent="$emit('action')"
     class="button button-standart"
   >
-    {{ text }}
+    <slot/>
   </button>
 </template>
 
@@ -56,7 +56,7 @@ export default {
   font-size: 14px;
   line-height: 17px;
   text-transform: uppercase;
-
+  display: flex; align-items: center;
   &:hover {
     color: $white;
     background-color: $darkblue;
