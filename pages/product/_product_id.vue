@@ -376,6 +376,7 @@ export default {
         }
       }
       &__back {
+        margin-top: 80px;
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 500;
