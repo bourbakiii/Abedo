@@ -68,8 +68,8 @@
           d="M6.40481 3.86664H4.08104V1.54287C4.08104 1.22219 3.82136 0.961914 3.50009 0.961914C3.17882 0.961914 2.91913 1.22219 2.91913 1.54287V3.86664H0.595361C0.274092 3.86664 0.0144043 4.12691 0.0144043 4.4476C0.0144043 4.76828 0.274092 5.02855 0.595361 5.02855H2.91913V7.35232C2.91913 7.67301 3.17882 7.93328 3.50009 7.93328C3.82136 7.93328 4.08104 7.67301 4.08104 7.35232V5.02855H6.40481C6.72608 5.02855 6.98577 4.76828 6.98577 4.4476C6.98577 4.12691 6.72608 3.86664 6.40481 3.86664Z"
           fill="#5C6784"
         />
-        
       </svg>
+      Добавить адрес
     </ButtonStandart>
   </div>
 </template>
@@ -78,7 +78,7 @@
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   &__title {
     margin-bottom: 70px;
@@ -89,6 +89,8 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
+
+    border: 1px $dark_grey;
     &__item {
       width: 100%;
       min-height: 185px;
@@ -142,13 +144,13 @@
       }
     }
   }
-  &__add{
-    margin-top:  40px;
+  &__add {
+    margin-top: 40px;
     width: 245px;
-    &__icon{
+    &__icon {
       margin-right: 10px;
       width: 19px;
-      height:19px;
+      height: 19px;
       border-radius: 90px;
       padding: 2px;
       border: 2px solid $darkblue;

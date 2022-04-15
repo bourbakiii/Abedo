@@ -3,6 +3,7 @@
       <div class="information-page__content content">
         <Breadcrumbs class="information-page__content__breadcrumbs"/>
           <PagesInformationAddresses class='information-page__content__addresses'/>
+          <PagesInformationOrders class='information-page__content__orders'/>
       </div>
   </div>
 </template>
