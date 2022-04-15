@@ -11,25 +11,29 @@
           ассорaСырное ассорaСырное ассорa
         </h1>
         <div class="product-page__content__main__images">
-          <div class="product-page__content__main__images__slider">
-            <swiper
-              class="product-page__content__main__images__slider__swiper"
-              :options="swiperOption"
-            >
-              <swiper-slide>Slide 1</swiper-slide>
-              <swiper-slide>Slide 2</swiper-slide>
-              <swiper-slide>Slide 3</swiper-slide>
-              <swiper-slide>Slide 4</swiper-slide>
-              <swiper-slide>Slide 5</swiper-slide>
-              <swiper-slide>Slide 6</swiper-slide>
-              <swiper-slide>Slide 7</swiper-slide>
-              <swiper-slide>Slide 8</swiper-slide>
-              <swiper-slide>Slide 9</swiper-slide>
-              <swiper-slide>Slide 10</swiper-slide>
-              <div class="swiper-pagination" slot="pagination"></div>
-            </swiper>
+          <div class="product-page__content__main__images__slider__wrapper">
+            <div class="product-page__content__main__images__slider">
+              <swiper
+                class="product-page__content__main__images__slider__swiper"
+                :options="swiperOption"
+              >
+                <swiper-slide>Slide 1</swiper-slide>
+                <swiper-slide>Slide 2</swiper-slide>
+                <swiper-slide>Slide 3</swiper-slide>
+                <swiper-slide>Slide 4</swiper-slide>
+                <swiper-slide>Slide 5</swiper-slide>
+                <swiper-slide>Slide 6</swiper-slide>
+                <swiper-slide>Slide 7</swiper-slide>
+                <swiper-slide>Slide 8</swiper-slide>
+                <swiper-slide>Slide 9</swiper-slide>
+                <swiper-slide>Slide 10</swiper-slide>
+              </swiper>
+            </div>
           </div>
-          <div class="product-page__content__main__images__image"></div>
+          <img
+            src="@/assets/images/product-placeholder.png"
+            class="product-page__content__main__images__image"
+          />
         </div>
         <div class="product-page__content__main__additional">
           <div class="product-page__content__main__additional__description">
@@ -174,10 +178,6 @@ export default {
         slidesPerView: 3,
         spaceBetween: 8,
         mousewheel: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
       },
     };
   },
@@ -214,36 +214,35 @@ export default {
         flex-direction: row;
         justify-content: space-between;
         &__slider {
-          width: 126px;
+          overflow: hidden;
+          width: 100%;
           height: 100%;
-          background-color: red;
-          // background-color: $white;
-          border-radius: 20px;
-          margin-right: 30px;
-          flex-shrink: 0;
-          flex-grow: 0;
+          &__wrapper {
+            width: 126px;
+            height: 100%;
+            border-radius: 20px;
+            margin-right: 30px;
+            background-color: $white;
+            flex-shrink: 0;
+            flex-grow: 0;
+            padding: 50px 5px;
+          }
           &__swiper {
             height: 100%;
             width: 100%;
-            padding: 50px 5px;
             .swiper-wrapper {
               height: 100%;
-              max-height:100%;
-              background-color: orange !important;
-              overflow: hidden !important;
+              max-height: 100%;
               .swiper-slide {
-              background-color: green;
-              width: 100%;
-              height: auto;
+                width: 100%;
+                height: auto;
+              }
             }
-            }
-            
           }
         }
         &__image {
-          flex-shrink: 0;
-          height: 100%;
-          flex-grow: 1;
+          width:100%;
+          max-width: 100%;
         }
       }
       &__additional {
