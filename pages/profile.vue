@@ -168,8 +168,8 @@
           <ButtonStandart
             class="profile-page__form__buttons__Save"
             
-          >
-         Сохранить</ButtonStandart>
+          >Сохранить
+          </ButtonStandart>
           <ButtonStandart
             class="profile-page__form__buttons__Save"
           >

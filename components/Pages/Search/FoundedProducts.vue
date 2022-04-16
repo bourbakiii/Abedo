@@ -35,12 +35,7 @@
             </div>
           </div>
           <div class="founded-products__content__item__products">
-            <ProductSmall class='founded-products__content__item__products__product'/>
-            <ProductSmall class='founded-products__content__item__products__product'/>
-            <ProductSmall class='founded-products__content__item__products__product'/>
-            <ProductSmall class='founded-products__content__item__products__product'/>
-            <ProductSmall class='founded-products__content__item__products__product'/>
-            <ProductSmall class='founded-products__content__item__products__product'/>
+            <ProductSmall v-for="(item,index) in 6" :key = "index" class='founded-products__content__item__products__item'/>
           </div>
       </div>
     </div>
@@ -65,6 +60,7 @@ export default {
     margin-bottom: 40px;
   }
   &__content {
+    border: 1px solid $dark_grey;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -135,10 +131,13 @@ export default {
         }
       }
       &__products{
-        background-color: rgb(253, 209, 209);
         padding:30px 30px 0px; width:100%;
-        display: grid; grid-template-columns: repeat(6,1fr); grid-gap: 39px;
-       
+        display: grid; grid-template-columns: repeat(6,1fr); grid-gap: 20px;
+        background-color: lightcoral;
+        &__item{
+          width: 100%;
+          overflow: hidden;
+        }
       }
     }
   }

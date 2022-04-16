@@ -77,18 +77,7 @@
         </button>
       </div>
       <div class="catalog__content">
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
+        <ShopItem class="catalog__content__item" v-for='(item,index) in 12' :key='index' />
       </div>
       <ButtonStandart @action='$router.push("/partners")' class='catalog__button' height='50' :uppercase='true'>Все магазины</ButtonStandart>
     </div>
@@ -139,6 +128,11 @@ export default {};
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
+    overflow: hidden;
+    &__item{
+      overflow: hidden;
+      width:100%;
+    }
   }
   &__button{
     margin-top: 70px;

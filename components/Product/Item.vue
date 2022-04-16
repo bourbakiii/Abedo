@@ -24,8 +24,7 @@
         v-if="false"
         class="product__buttons__button_add"
       >
-        В корзину
-
+      В корзину
       </ButtonStandart>
       <div @click.self="openProductModal" class="product__buttons__button_creases">
         <ButtonProduct size="40" icon="minus" />

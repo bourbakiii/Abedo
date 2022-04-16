@@ -1,33 +1,27 @@
 <template>
-  <div class="page order-page order-page__wrapper">
+  <div class="page order-page wrapper">
     <div class="order-page__content content">
       <Breadcrumbs class="order-page__content__breadcrumbs" />
       <PagesOrderInformation class="order-page__content__information" />
-      <PagesOrderContent class="order-page__content__content" />
-      <div class="order-page__content__final">
-        <p class="order-page__content__final__pre">Итого:</p>
-        <p class="order-page__content__final__value" contenteditable>1 330 ₽</p>
+      <PagesOrderProducts class="order-page__content__products" />
+      <div class="order-page__content__least">
+        <p class="order-page__content__least__pre">Итого:</p>
+        <p class="order-page__content__least__price" contenteditable>1 330 ₽</p>
+        
       </div>
-      <button class="order-page__content__back">
-          Вернуться к списку заказов
-      </button>
+       <button class="order-page__content__back">
+          Вернуться к списку товаров
+        </button>
     </div>
   </div>
 </template>
-
-<script>
-export default {};
-</script>
-
 <style lang="scss" scoped>
 .order-page {
-  &__wrapper {
-    background-color: $light_grey;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: $light_grey;
   padding-bottom: 100px;
   &__content {
     display: flex;
@@ -38,45 +32,51 @@ export default {};
       margin-top: 20px;
       margin-bottom: 40px;
     }
-    &__content {
-      margin-top: 70px;
+    &__information{
+        margin-bottom: 70px;
     }
-    &__final {
-        margin-top: 70px;
-        margin-bottom: 40px;
-      text-align: left;
+    &__products{
+        margin-bottom: 70px;
+    }
+    &__least {
       display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row;
+      width:100%;
+      margin-bottom: 40px;
       &__pre {
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 700;
         font-size: 24px;
         line-height: 29px;
-        text-transform: capitalize;
         margin-right: 15px;
       }
-      &__value {
+      &__price {
         font-family: "Montserrat";
         font-style: normal;
         font-weight: 600;
         font-size: 24px;
         line-height: 29px;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
     }
-    &__back{
-        font-family: 'SF Pro Display';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 19px;
-background-color: transparent;
-border: none;
-outline: none;
-color: $darkblue;
-&:hover{
-text-decoration-line: underline;
-}
-    }
+    &__back {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: $darkblue;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
   }
 }
 </style>

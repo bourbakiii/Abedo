@@ -111,11 +111,8 @@
     </div>
     <div class="sidebar-cart__button">
       <ButtonStandart
-        
         class="sidebar-cart__button__button"
-      >
-      Оформить заказ
-      </ButtonStandart>
+      >Оформить заказ</ButtonStandart>
     </div>
   </div>
 </template>

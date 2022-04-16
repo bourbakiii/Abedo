@@ -1,8 +1,12 @@
 <template>
   <form class="order">
     <div class="order__buttons">
-      <ButtonStandart class="order__buttons__button">Доставка</ButtonStandart>
-      <ButtonStandart class="order__buttons__button">Самовывоз</ButtonStandart>
+      <ButtonStandart class="order__buttons__button" >Доставка
+      </ButtonStandart>
+      <ButtonStandart class="order__buttons__button">
+      Самовывоз
+      </ButtonStandart>
+
     </div>
     <InputBlock
       @input="inputBlockChange"

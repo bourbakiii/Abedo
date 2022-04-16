@@ -29,6 +29,10 @@ export default {
   build: {},
   buildModules: [],
   modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
+  generate:{
+    crawler: false,
+    fallback: true,
+  },
   styleResources: {
     scss: [
       '@assets/scss/variables.scss',
@@ -39,10 +43,11 @@ export default {
     ]
   },
   axios: {
-    baseUrl: "http://localhost:5000"
+    baseUrl: "http://127.0.0.1:8000"
   },
   pageTransition: {
     name: 'page',
     mode: 'out-in',
+    appear: true
   }
 }

@@ -144,7 +144,6 @@
               class="product-modal__content__tabs__tab__buttons__button"
             >
               Отправить
-
             </ButtonStandart>
             <div class="product-modal__content__tabs__tab__buttons__politics">
               <label

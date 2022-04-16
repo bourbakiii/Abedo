@@ -5,12 +5,13 @@
       parseInt(height) +
       'px; padding: 0px ' +
       parseInt(padding) +
-      'px; text-transform: '+ (uppercase?'uppercase;':'none;')
+      'px; text-transform: ' +
+      (uppercase ? 'uppercase;' : 'none;')
     "
     @click.prevent="$emit('action')"
     class="button button-standart"
   >
-    <slot/>
+    <slot />
   </button>
 </template>
 
@@ -53,11 +54,21 @@ export default {
   font-size: 14px;
   line-height: 17px;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;flex-direction: row;
+  svg * {
+    fill: $darkblue;
+    transition: 0.3s;
+  }
 
   &:hover {
     color: $white;
     background-color: $darkblue;
     border-color: $darkblue;
+    svg *{
+      fill: $white;
+    }
   }
   &.green:hover {
     background-color: $green;

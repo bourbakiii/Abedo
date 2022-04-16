@@ -1,150 +1,149 @@
 <template>
   <div class="information">
-      <h1 class="information__title title-normal" contenteditable>Заказ №11234</h1>
-        <div class="information__hood">
-          <img
-            src="@/assets/images/limonchello.png"
-            class="information__hood__image"
-          />
-          <p class="information__hood__name" contenteditable>
-            Кафе “Лимончелло”
-          </p>
-        </div>
-        <div class="information__item">
-          <p class="information__item__name" contenteditable>
+    <h1 class="information__title title-normal">Заказ №11234</h1>
+    <div class="information__content">
+      <div class="information__content__hood">
+        <img
+          src="@/assets/images/limonchello.png"
+          class="information__content__hood__image"
+        />
+        <p class="information__content__hood__name" contenteditable>
+          Кафе “Лимончелло”
+        </p>
+      </div>
+      <div class="information__content__content">
+        <div class="information__content__content__item">
+          <p class="information__content__content__item__name" contenteditable>
             Телефон
           </p>
-          <p class="information__item__value" contenteditable>
+          <p class="information__content__content__item__value" contenteditable>
             +7 999 000 000 00
           </p>
         </div>
-        <div class="information__item">
-          <p class="information__item__name" contenteditable>
-            Адрес доставки
+        <div class="information__content__content__item">
+          <p class="information__content__content__item__name" contenteditable>
+            Телефон
           </p>
-          <p class="information__item__value" contenteditable>
-            г. Владикавказ, ул. Тестовая 112
-          </p>
-        </div>
-        <div class="information__item">
-          <p class="information__item__name" contenteditable>
-            Подъезд
-          </p>
-          <p class="information__item__value" contenteditable>
-            3
+          <p class="information__content__content__item__value" contenteditable>
+            +7 999 000 000 00
           </p>
         </div>
-        <div class="information__item">
-          <p class="information__item__name" contenteditable>
-            Этаж
+        <div class="information__content__content__item">
+          <p class="information__content__content__item__name" contenteditable>
+            Телефон
           </p>
-          <p class="information__item__value" contenteditable>
-            3
-          </p>
-        </div>
-        <div class="information__item">
-          <p class="information__item__name" contenteditable>
-            Этаж
-          </p>
-          <p class="information__item__value" contenteditable>
-            3
+          <p class="information__content__content__item__value" contenteditable>
+            +7 999 000 000 00
           </p>
         </div>
-        <div class="information__item">
-          <p class="information__item__name" contenteditable>
-            № квартиры/офиса
+        <div class="information__content__content__item">
+          <p class="information__content__content__item__name" contenteditable>
+            Телефон
           </p>
-          <p class="information__item__value" contenteditable>
-            33
+          <p class="information__content__content__item__value" contenteditable>
+            +7 999 000 000 00
           </p>
         </div>
-        <div class="information__item">
-          <p class="information__item__name" contenteditable>
-            № домофона
+        <div class="information__content__content__item">
+          <p class="information__content__content__item__name" contenteditable>
+            Телефон
           </p>
-          <p class="information__item__value" contenteditable>
-            33
+          <p class="information__content__content__item__value" contenteditable>
+            +7 999 000 000 00
+          </p>
+        </div>
+        <div class="information__content__content__item">
+          <p class="information__content__content__item__name" contenteditable>
+            Телефон
+          </p>
+          <p class="information__content__content__item__value" contenteditable>
+            +7 999 000 000 00
           </p>
         </div>
       </div>
+    </div>
+  </div>
 </template>
-
-<script>
-export default {
-
-}
-</script>
-
 <style lang="scss" scoped>
 .information {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  min-width: 621px;
+    max-width: 100%;
+  &__title {
+    margin-bottom: 40px;
+  }
+  &__content {
+    width:100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    &__hood {
+      width: 100%;
+      max-width:100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row;
+      margin-bottom: 40px;
+      &__image {
+        margin-right: 30px;
+        background-color: $white;
+        border: 1px solid $blue_grey;
+        border-radius: 10px;
+        flex-shrink: 0;
+        width: 106px;
+        height: auto;
+        object-fit: contain;
+        padding: 10px;
+      }
+      &__name {
+          width:100%;
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 20px;
+      }
+    }
+    &__content {
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
       flex-direction: column;
-      min-width: 620px;
-      width: auto;
-      max-width: 100%;
-      &__title {
-      margin-bottom: 40px;
-    }
-      &__hood {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-direction: row;
-        width: 100%;
-        padding: 5px 0px;
-        margin-bottom: 25px;
-        &__image {
-          margin-right: 30px;
-          background-color: $white;
-          padding: 10px;
-          width: 106px;
-          height: auto;
-          border-radius: 10px;
-        }
-        &__name {
-          font-family: "Montserrat";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 24px;
-          line-height: 20px;
-        }
-      }
+      width:100%;
       &__item {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
+        padding: 10px 0px;
+        width: 100%;
+        display: flex;align-items: center;justify-content: space-between;
         border-bottom: 1px solid $dark_grey;
-        min-height: 60px;
-        min-width: 620px;
-        width: auto;
-        max-width: 100%;
-        padding: 0px 10px;
+        min-height:60px;
         &:last-of-type{
-            border: none;
+            border:none;
         }
         &__name {
-          min-width: 178px;
-          width: auto;
-          max-width: 50%;
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
           font-size: 16px;
           line-height: 19px;
           margin-right: 30px;
+          min-width: 188px;
+          white-space: nowrap;
         }
         &__value {
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
           font-size: 16px;
-          line-height: 19px;
-          max-width: 50%;
-           width: auto;
-          max-width: 50%;
+          line-height: 20px;
+          min-width: 404px;
         }
       }
     }
+  }
+}
 </style>
