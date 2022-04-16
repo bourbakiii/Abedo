@@ -129,6 +129,10 @@ export default {};
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
     overflow: hidden;
+    @media screen and (max-width: $notebook) {
+    grid-template-columns: repeat(3, 1fr);
+      
+    }
     &__item{
       overflow: hidden;
       width:100%;
