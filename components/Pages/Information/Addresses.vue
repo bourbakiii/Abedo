@@ -10,6 +10,7 @@
         <p class="addresses__content__item__name" contenteditable="">Работа</p>
         <div class="addresses__content__item__data">
           <InputBlock
+          id='dadata'
             name="dadata"
             class="
               addresses__content__item__data__input-block
@@ -18,6 +19,8 @@
             text="Адрес доставки"
           />
           <InputBlock
+          id='intercom'
+
             name="intercom"
             class="
               addresses__content__item__data__input-block
@@ -26,6 +29,8 @@
             text="№ домофона"
           />
           <InputBlock
+          id='entrance'
+
             name="entrance"
             class="
               addresses__content__item__data__input-block
@@ -34,6 +39,8 @@
             text="Подъезд"
           />
           <InputBlock
+          id='floor'
+
             name="floor"
             class="
               addresses__content__item__data__input-block
@@ -42,6 +49,8 @@
             text="Этаж"
           />
           <InputBlock
+          id='apartment'
+
             name="apartment"
             class="
               addresses__content__item__data__input-block

@@ -4,7 +4,7 @@
     <div class="orders__content">
       <div class="orders__content__item">
         <div class="orders__content__item__data">
-          <div class="orders__content__item__data__block">
+          <div class="orders__content__item__data__block  orders__content__item__data__block__partner">
             <p class="orders__content__item__data__block__name">
               Кафе “Лимончелло”
             </p>
@@ -15,7 +15,7 @@
               №11234
             </p>
           </div>
-          <div class="orders__content__item__data__block">
+          <div class="orders__content__item__data__block  orders__content__item__data__block__date">
             <p class="orders__content__item__data__block__name">
               Дата и время:
             </p>
@@ -26,7 +26,7 @@
               23.03.2020 12:03
             </p>
           </div>
-          <div class="orders__content__item__data__block">
+          <div class="orders__content__item__data__block orders__content__item__data__block__address">
             <p class="orders__content__item__data__block__name">Адрес:</p>
             <p
               class="orders__content__item__data__block__value"
@@ -35,7 +35,7 @@
               г. Владикавказ, ул. Тестовая 321
             </p>
           </div>
-          <div class="orders__content__item__data__block">
+          <div class="orders__content__item__data__block  orders__content__item__data__block__price">
             <p class="orders__content__item__data__block__name">Стоимость:</p>
             <p
               class="orders__content__item__data__block__value"
@@ -44,7 +44,7 @@
               90 334 ₽
             </p>
           </div>
-          <div class="orders__content__item__data__block">
+          <div class="orders__content__item__data__block  orders__content__item__data__block__status">
             <p class="orders__content__item__data__block__name">
               Статус заказа:
             </p>
@@ -99,6 +99,15 @@
         justify-content: space-between;
         flex-direction: row;
         &__block {
+          &__partner{
+            width: 166px;
+          }
+          &__address{
+            width:293px;
+          }
+          &__date{
+            width: 188px;
+          }
           &__name {
             font-family: "SF Pro Display";
             font-style: normal;
