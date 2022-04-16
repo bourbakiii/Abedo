@@ -7,61 +7,10 @@
       <ChapterItem
         class="catalog__chapters__item"
         text="Салаты"
+        v-for="(item,index) in 12" :key='index'
         :active="true"
       />
-      <ChapterItem
-        class="catalog__chapters__item"
-        text="Блюда из рыбы"
-        :active="false"
-      />
-      <ChapterItem
-        class="catalog__chapters__item"
-        text="Паста"
-        :active="false"
-      />
-      <ChapterItem
-        class="catalog__chapters__item"
-        text="Холодные блюда"
-        :active="false"
-      /><ChapterItem
-        class="catalog__chapters__item"
-        text="Салаты"
-        :active="false"
-      />
-      <ChapterItem
-        class="catalog__chapters__item"
-        text="Блюда из рыбы"
-        :active="false"
-      />
-      <ChapterItem
-        class="catalog__chapters__item"
-        text="Паста"
-        :active="false"
-      />
-      <ChapterItem
-        class="catalog__chapters__item"
-        text="Холодные блюда"
-        :active="false"
-      /><ChapterItem
-        class="catalog__chapters__item"
-        text="Салаты"
-        :active="false"
-      />
-      <ChapterItem
-        class="catalog__chapters__item"
-        text="Блюда из рыбы"
-        :active="false"
-      />
-      <ChapterItem
-        class="catalog__chapters__item"
-        text="Паста"
-        :active="false"
-      />
-      <ChapterItem
-        class="catalog__chapters__item"
-        text="Холодные блюда"
-        :active="false"
-      />
+      
     </div>
     <div class="catalog__products">
       <ProductItem
@@ -78,6 +27,8 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+  width:100%;
+  background-color: red;
   &__title {
     align-self: flex-start;
     margin-bottom: 30px;
@@ -102,8 +53,8 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
     &__item {
-      width: 295px;
-      height: 381px;
+      width: auto;
+      overflow: hidden;
     }
   }
 }
