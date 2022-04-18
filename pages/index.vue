@@ -1,12 +1,11 @@
 <template>
   <div class="page index-page">
-    <PagesIndexSearch class='adaptive-non' />
-    <PagesIndexAdaptiveCategories class="adaptive" />
-
-
-    <PagesIndexStocksSlider />
-    <PagesIndexNewShops />
-    <PagesIndexAbout>
+    <PagesIndexSearch class="index-page__search adaptive-non" />
+    <PagesIndexAdaptiveCategories class="index-page__adaptive-categories adaptive" />
+    <PagesIndexStocksSlider class="index-page__stocks-slider" />
+    <PagesIndexNewShops class="index-page__new-shops adaptive-non" />
+    <PagesIndexAdaptiveNewShops class="index-page__adaptive-new-shops" />
+    <PagesIndexAbout class="adaptive-non">
       Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать
       несколько абзацев более менее осмысленного текста рыбы на русском языке, а
       начинающему оратору отточить навык публичных выступлений в домашних
@@ -30,16 +29,25 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.index-page{
-  display: flex;align-items: center; justify-content: flex-start;flex-direction: column;
+.index-page {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  &__adaptive-categories {
+    margin: 30px 0px;
+  }
+  &__adaptive-new-shops {
+    margin-top: 30px;
+  }
 }
-.search-wrapper{
+.search-wrapper {
   margin-bottom: 73px;
 }
-.new-shops{
+.new-shops {
   margin-bottom: 70px;
 }
-.stocks-slider{
+.stocks-slider {
   margin-bottom: 63px;
 }
 </style>

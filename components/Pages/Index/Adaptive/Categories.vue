@@ -23,6 +23,9 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
+    @media screen and (max-width: 520px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
     &__item {
       width: 100%;
       max-width: 100%;

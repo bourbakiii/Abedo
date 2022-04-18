@@ -1,7 +1,7 @@
 <template>
+    <!-- :style="{ backgroundImage: 'url(image + ')' }" -->
   <NuxtLink
   to='#'
-    :style="{ backgroundImage: 'url(' + image + ')' }"
     class="category category-adaptive"
   >
     <div class="category-adaptive__overlay"></div>

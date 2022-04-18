@@ -2,7 +2,7 @@
 <template>
   <div class="slider stocks-slider-wrapper wrapper">
     <div class="stocks-slider-buttons">
-      <div class="swiper-button swiper-button-prev">
+      <div class="swiper-button swiper-button-prev adaptive-non">
         <svg
           width="20"
           height="20"
@@ -28,7 +28,7 @@
           </defs>
         </svg>
       </div>
-      <div class="swiper-button swiper-button-next">
+      <div class="swiper-button swiper-button-next adaptive-non">
         <svg
           width="12"
           height="20"
@@ -67,7 +67,9 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 3,
-        spaceBetween: 30,
+            spaceBetween: 0,
+        breakpoints: {
+        },
         pagination: {
           el: ".stocks-slider-pagination",
           clickable: true,
@@ -86,15 +88,19 @@ export default {
   position: relative;
   width: 100%;
   overflow: hidden;
-  .stock-item{
+  .stock-item {
     @media screen and (max-width: 1388px) {
       transform: scale(0.95);
     }
     @media screen and (max-width: 1300px) {
       transform: scale(0.92);
     }
-     @media screen and (max-width: $maxwidth + 20px) {
+    @media screen and (max-width: $maxwidth + 20px) {
       transform: scale(0.89);
+    }
+    @media screen and (max-width: $tablet) {
+      transform: scale(1);
+      width: 100%;
     }
   }
   .stocks-slider-pagination {
@@ -136,7 +142,10 @@ export default {
     position: relative;
     padding: 0px 10px;
     max-width: $maxwidth;
-    width:calc(100% - 140px);
+    width: calc(100% - 140px);
+    @media screen and (max-width: $tablet) {
+      width: 100%;
+    }
   }
   .swiper {
     width: 100%;

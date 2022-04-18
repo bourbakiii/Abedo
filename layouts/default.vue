@@ -4,7 +4,8 @@
     <Navigation class='adaptive-non' />
     <nuxt />
     <ModalsWrapper />
-    <Footer />
+    <Footer class='adaptive-non' />
+    <AdaptiveFooter class='adaptive'/>
   </div>
 </template>
 
