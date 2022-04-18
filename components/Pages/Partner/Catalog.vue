@@ -1,21 +1,22 @@
 <template>
   <div class="catalog partner-catalog">
-    <h2 class="catalog__title title-extra-normal">
+    <h2 class="catalog__title title-extra-normal adaptive-non">
       Разделы каталога “Лимончелло”
     </h2>
-    <div class="catalog__chapters">
+    <div class="catalog__chapters adaptive-non">
       <ChapterItem
         class="catalog__chapters__item"
         text="Салаты"
-        v-for="(item,index) in 12" :key='index'
+        v-for="(item, index) in 12"
+        :key="index"
         :active="true"
       />
-      
     </div>
+    <ChapterSlider class="catalog__chapters__slider adaptive" />
     <div class="catalog__products">
       <ProductItem
         class="catalog__products__item"
-        v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]"
+        v-for="item in 16"
         :key="item"
       />
     </div>
@@ -27,7 +28,6 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  width:100%;
   &__title {
     align-self: flex-start;
     margin-bottom: 30px;
@@ -40,6 +40,10 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 50px;
+    &__slider {
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
     &__item {
       flex-grow: 0;
       flex-shrink: 0;
@@ -52,7 +56,15 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
     @media screen and (max-width: $notebook) {
-    grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: $tablet) {
+      grid-gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media screen and (max-width: $phone) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap:15px;
     }
     &__item {
       width: auto;

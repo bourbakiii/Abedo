@@ -95,12 +95,12 @@ button {
   flex-direction: column;
 }
 .adaptive {
-  @media screen and (min-width: $tablet) {
+  @media screen and (min-width: calc($tablet + 1px)) {
     display: none !important;
   }
   &-non {
     @media screen and (max-width: $tablet) {
-      display: none;
+      display: none !important;
     }
   }
 }

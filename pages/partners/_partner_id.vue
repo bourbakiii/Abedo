@@ -2,11 +2,11 @@
   <div class="page partner-page wrapper">
     <div class="partner-page__content content">
       <div class="partner-page__content__main">
-        <Breadcrumbs class="partner-page__content__main__breadcrumbs" />
+        <Breadcrumbs class="partner-page__content__main__breadcrumbs adaptive-non" />
         <PagesPartnerShopBlock
           class="partner-page__content__main__shop-block"
         />
-        <PagesPartnerStocks class="partner-page__content__main__stocks" />
+        <!-- <PagesPartnerStocks class="partner-page__content__main__stocks" /> -->
         <PagesPartnerCatalog class="partner-page__content__main__catalog" />
       </div>
         <SidebarCart
@@ -50,6 +50,7 @@ export default {
     flex-direction: row;
     &__main {
       padding-bottom: 100px;
+      overflow: hidden;
       &__breadcrumbs {
         margin-top: 20px;
         margin-bottom: 40px;
