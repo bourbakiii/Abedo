@@ -1,6 +1,9 @@
 <template>
   <div class="page index-page">
-    <PagesIndexSearch />
+    <PagesIndexSearch class='adaptive-non' />
+    <PagesIndexAdaptiveCategories class="adaptive" />
+
+
     <PagesIndexStocksSlider />
     <PagesIndexNewShops />
     <PagesIndexAbout>

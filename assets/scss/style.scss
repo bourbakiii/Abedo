@@ -82,6 +82,9 @@ button {
   justify-content: center;
   flex-direction: column;
   padding: 0px 10px;
+  @media screen and (max-width: $tablet) {
+    padding: 0px 20px;
+  }
 }
 .content {
   width: 100%;
@@ -91,7 +94,6 @@ button {
   justify-content: flex-start;
   flex-direction: column;
 }
-
 .adaptive {
   @media screen and (min-width: $tablet) {
     display: none !important;
