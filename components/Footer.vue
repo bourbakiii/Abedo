@@ -1,5 +1,5 @@
 <template>
-  <div class="footer-wrapper wrapper">
+  <div class="footer-wrapper wrapper non-adaptive">
     <div class="footer">
       <div class="footer__logo-block">
         <NuxtLink to="/" class="footer__logo-block-logo">

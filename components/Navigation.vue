@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation-wrapper wrapper">
+  <div class="navigation-wrapper wrapper non-adaptive">
     <div class="navigation">
       <NuxtLink to="/" class="navigation__logo">
         <img
@@ -11,7 +11,7 @@
           class="navigation__logo-image"
         />
       </NuxtLink>
-      <ButtonIcon icon="squares" text="Магазины" />
+      <ButtonIcon class="navigation__button" icon="squares" text="Магазины" />
 
       <div class="navigation__links">
         <NuxtLink
@@ -38,7 +38,7 @@
               stroke-linecap="round"
             />
           </svg>
-          <p class="navigation__links-link-text">Кабинет</p>
+          <p class="navigation__links-link__text">Кабинет</p>
           <transition name="opacity">
             <div
               v-if="show_dropdown"
@@ -101,7 +101,7 @@
             />
           </svg>
 
-          <p class="navigation__links-link-text">Акции магазинов</p>
+          <p class="navigation__links-link__text">Акции магазинов</p>
         </NuxtLink>
       </div>
 
@@ -169,7 +169,7 @@
             />
           </svg>
         </span>
-        <p class="navigation__cart-block-text">Корзина</p>
+        <p class="navigation__cart-block__text">Корзина</p>
       </NuxtLink>
     </div>
   </div>
@@ -181,7 +181,9 @@ export default {
     document.addEventListener("scroll", () => {
       if (window.scrollY > this.$store.state.variables.navigation_transtion_to)
         document.querySelector(".navigation-wrapper").classList.add("scaled");
-      else if (window.scrollY < this.$store.state.variables.navigation_transtion_back)
+      else if (
+        window.scrollY < this.$store.state.variables.navigation_transtion_back
+      )
         document
           .querySelector(".navigation-wrapper")
           .classList.remove("scaled");
@@ -226,8 +228,16 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      @media screen and (max-width: $notebook) {
+        transform: scale(0.9);
+      }
       &-image:first-of-type {
         margin-right: 18px;
+      }
+    }
+    &__button {
+      @media screen and (max-width: $notebook) {
+        transform: scale(0.9);
       }
     }
     &__links {
@@ -241,8 +251,11 @@ export default {
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        &:first-of-type{
-          margin-right:40px;
+        &:first-of-type {
+          margin-right: 40px;
+          @media screen and (max-width: $notebook) {
+            margin-right: 10px;
+          }
         }
         &:hover {
           text-decoration: underline;
@@ -250,7 +263,7 @@ export default {
         &-svg {
           margin-right: 13px;
         }
-        &-text {
+        &__text {
           font-family: "Montserrat";
           font-style: normal;
           font-weight: 400;
@@ -307,6 +320,10 @@ export default {
       justify-content: space-between;
       flex-direction: row;
       width: 120px;
+      @media screen and (max-width: $notebook) {
+        width: 110px;
+        transform: scale(0.9);
+      }
       &-icon {
         cursor: pointer;
         width: 50px;
@@ -333,8 +350,11 @@ export default {
       align-items: center;
       justify-content: center;
       text-decoration: none;
+      @media screen and (max-width: $notebook) {
+        transform: scale(0.9);
+      }
       &:hover {
-        .navigation__cart-block-text {
+        .navigation__cart-block__text {
           color: $darkblue;
           text-decoration: underline;
         }
@@ -377,17 +397,17 @@ export default {
           content: attr(indicator-count);
         }
       }
-      &-text {
+      &__text {
         transition: 0.3s;
         font-family: "Montserrat";
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
         line-height: 20px;
-        /* identical to box height */
-
-        display: flex;
-        align-items: center;
+        @media screen and (max-width: $tablet)
+        {
+          display: none;
+        }
       }
     }
   }
