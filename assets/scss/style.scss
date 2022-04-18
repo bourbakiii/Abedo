@@ -1,4 +1,3 @@
-
 * {
   color: $black;
   font-family: "Montserrat";
@@ -93,9 +92,13 @@ button {
   flex-direction: column;
 }
 
-
-.non-adaptive{
-  @media screen and (max-width: $tablet){
-    display: none;
+.adaptive {
+  @media screen and (min-width: $tablet) {
+    display: none !important;
+  }
+  &-non {
+    @media screen and (max-width: $tablet) {
+      display: none;
+    }
   }
 }

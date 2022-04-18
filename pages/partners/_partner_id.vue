@@ -10,7 +10,7 @@
         <PagesPartnerCatalog class="partner-page__content__main__catalog" />
       </div>
         <SidebarCart
-          class="partner-page__content__sidebar non-adaptive"
+          class="partner-page__content__sidebar adaptive-non"
         />
     </div>
   </div>

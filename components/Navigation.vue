@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation-wrapper wrapper non-adaptive">
+  <div class="navigation-wrapper wrapper">
     <div class="navigation">
       <NuxtLink to="/" class="navigation__logo">
         <img

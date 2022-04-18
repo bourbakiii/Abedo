@@ -1,0 +1,33 @@
+<template>
+  <div class="navigation adaptive-navigation__wrapper">
+    <div class="adaptive-navigation">
+      <AdaptiveSlotsLabel v-if="$route.name=='partners-partner_id'" class="adaptive-navigation__slot adaptive-navigation__slot__label"/>
+      <AdaptiveSlotsMain v-else class='adaptive-navigation__slot adaptive-navigation__slot__index'/>
+    </div>
+  </div>
+</template>
+<script>
+</script>
+<style lang="scss" scoped>
+.adaptive-navigation {
+  &__wrapper {
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    height: 60px;
+    background-color: $white;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    z-index: $z_navigation;
+  }
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+</style>

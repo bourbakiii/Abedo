@@ -1,14 +1,11 @@
 <template>
-  <div class="layout layout-default-layout">
-    <Navigation />
+  <div class="layout default-layout">
+    <AdaptiveNavigation class='adaptive'/>
+    <Navigation class='adaptive-non' />
     <nuxt />
     <ModalsWrapper />
     <Footer />
   </div>
 </template>
-
-<script>
-export default {};
-</script>
 
 <style lang="scss" scoped></style>
