@@ -1,7 +1,7 @@
 <template>
   <div class="page partners-page wrapper">
     <div class="partners-page__content content">
-      <Breadcrumbs class='partners-page__breadcrumbs' />
+      <Breadcrumbs class="partners-page__breadcrumbs" />
       <div class="partners-page__top">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
         <button class="partners-page__top__filter-button">
@@ -77,18 +77,22 @@
           <p class="partners-page__top__filter-button-text">Фильтр</p>
         </button>
       </div>
-
       <div class="partners-page__partners">
         <CategorySidebar class="partners-page__partners__sidebar" />
         <div class="partners-page__partners__content">
           <div class="partners-page__partners__content__cards">
             <ShopItem
-            class="partners-page__partners__content__cards__item"
+              class="partners-page__partners__content__cards__item"
               v-for="item in 12"
               :key="item"
             />
           </div>
-          <ButtonStandart class='partners-page__partners__content__button' padding='85px' uppercase='true'>Загрузить еще</ButtonStandart>
+          <ButtonStandart
+            class="partners-page__partners__content__button"
+            padding="85px"
+            uppercase="true"
+            >Загрузить еще</ButtonStandart
+          >
         </div>
       </div>
     </div>
@@ -147,9 +151,20 @@ export default {
     flex-direction: row;
     width: 100%;
     height: auto;
+    @media screen and (max-width: $tablet) {
+      flex-direction: column;
+    }
     &__sidebar {
       flex-shrink: 0;
       margin-right: 30px;
+      width: 295px;
+      max-width: 295px;
+      @media screen and (max-width: $tablet) {
+        width: 100%;
+        max-width:100%;
+        margin-right: 0px;
+        margin-bottom: 30px;
+      }
     }
 
     &__content {
@@ -157,7 +172,7 @@ export default {
       flex-direction: column;
       align-items: center;
       flex-direction: column;
-      width:100%;
+      width: 100%;
       &__cards {
         flex-grow: 1;
         flex-shrink: 0;
@@ -167,14 +182,14 @@ export default {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 30px;
         @media screen and (max-width: $notebook) {
-          grid-template-columns: repeat(2,1fr);
+          grid-template-columns: repeat(2, 1fr);
         }
-        &__item{
-          width:100%;
+        &__item {
+          width: 100%;
           overflow: hidden;
         }
       }
-      &__button{
+      &__button {
         margin-top: 60px;
         background-color: $light_grey;
       }

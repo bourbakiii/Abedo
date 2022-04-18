@@ -31,9 +31,6 @@
 <style lang="scss" scoped>
 .sidebar {
   background-color: $white;
-  width: 100%;
-  max-width: 295px;
-  width: 295px;
   height: auto;
   display: flex;
   align-items: center;
