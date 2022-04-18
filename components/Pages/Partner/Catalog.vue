@@ -28,7 +28,6 @@
   justify-content: flex-start;
   flex-direction: column;
   width:100%;
-  background-color: red;
   &__title {
     align-self: flex-start;
     margin-bottom: 30px;
@@ -52,6 +51,9 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
+    @media screen and (max-width: $notebook) {
+    grid-template-columns: repeat(2, 1fr);
+    }
     &__item {
       width: auto;
       overflow: hidden;

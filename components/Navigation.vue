@@ -11,7 +11,7 @@
           class="navigation__logo-image"
         />
       </NuxtLink>
-      <ButtonIcon color="red" icon="squares" text="Магазины" />
+      <ButtonIcon icon="squares" text="Магазины" />
 
       <div class="navigation__links">
         <NuxtLink

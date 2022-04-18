@@ -3,11 +3,15 @@
     <div class="partner-page__content content">
       <div class="partner-page__content__main">
         <Breadcrumbs class="partner-page__content__main__breadcrumbs" />
-        <PagesPartnerShopBlock  class="partner-page__content__main__shop-block" />
+        <PagesPartnerShopBlock
+          class="partner-page__content__main__shop-block"
+        />
         <PagesPartnerStocks class="partner-page__content__main__stocks" />
         <PagesPartnerCatalog class="partner-page__content__main__catalog" />
       </div>
-      <SidebarCart class="partner-page__content__sidebar" />
+        <SidebarCart
+          class="partner-page__content__sidebar non-adaptive"
+        />
     </div>
   </div>
 </template>
@@ -45,17 +49,16 @@ export default {
     justify-content: space-between;
     flex-direction: row;
     &__main {
-      margin-right: 30px;
       padding-bottom: 100px;
       &__breadcrumbs {
         margin-top: 20px;
         margin-bottom: 40px;
       }
-      &__shop-block{
-          margin-bottom: 70px;
+      &__shop-block {
+        margin-bottom: 70px;
       }
-      &__stocks{
-          margin-bottom: 60px;
+      &__stocks {
+        margin-bottom: 60px;
       }
     }
     &__sidebar {
@@ -64,6 +67,7 @@ export default {
       position: sticky;
       top: 0px;
       top: 125px;
+      margin-left: 30px;
     }
   }
 }

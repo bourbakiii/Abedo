@@ -14,8 +14,8 @@ html {
   @media screen and (max-width: $notebook) {
     min-width: $notebook;
   }
-  @media screen and (max-width: $plan) {
-    min-width: $plan;
+  @media screen and (max-width: $tablet) {
+    min-width: $tablet;
   }
   @media screen and (max-width: $phone) {
     min-width: $phone;
@@ -91,4 +91,11 @@ button {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+}
+
+
+.non-adaptive{
+  @media screen and (max-width: $tablet){
+    display: none;
+  }
 }
