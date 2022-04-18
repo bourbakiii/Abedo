@@ -1,12 +1,10 @@
 <template>
   <form class="order">
     <div class="order__buttons">
-      <ButtonStandart class="order__buttons__button" >Доставка
-      </ButtonStandart>
+      <ButtonStandart class="order__buttons__button">Доставка </ButtonStandart>
       <ButtonStandart class="order__buttons__button">
-      Самовывоз
+        Самовывоз
       </ButtonStandart>
-
     </div>
     <InputBlock
       @input="inputBlockChange"
@@ -168,7 +166,7 @@ export default {
       apartment: null,
       intercom: null,
       additional: null,
-      payment_type: '0',
+      payment_type: "0",
     };
   },
 };
@@ -213,11 +211,18 @@ export default {
       align-items: center;
       justify-content: flex-start;
       flex-direction: row;
+      @media screen and (max-width: $tablet) {
+        flex-direction: column;
+      }
       align-items: flex-start;
       &__select {
         width: 265px;
         margin-right: 60px;
         flex-shrink: 0;
+        @media screen and (max-width: $tablet) {
+          width: 100%;
+          margin-bottom: 30px;
+        }
       }
       &__content {
         display: flex;
@@ -231,9 +236,26 @@ export default {
           grid-gap: 30px;
           grid-template-columns: repeat(4, 1fr);
           margin-bottom: 30px;
+          @media screen and (max-width: $phone) {
+            grid-gap: 30px 15px;
+          }
           &__dadata {
             grid-column-start: 1;
             grid-column-end: 5;
+          }
+          @media screen and (max-width: $phone) {
+            &__apartment,
+            &__entrance {
+              grid-column-start: 1;
+              grid-column-end: 3;
+              background-color: red;
+            }
+            &__intercom,
+            &__floor {
+              grid-column-start: 3;
+              grid-column-end: 5;
+              background-color: green;
+            }
           }
         }
         &__additional {
@@ -248,6 +270,10 @@ export default {
       justify-content: flex-start;
       flex-direction: column;
       margin-top: 70px;
+      margin-bottom: 30px;
+      @media screen and (max-width: $tablet) {
+        margin-top: 30px;
+      }
       &__item {
         width: 100%;
         display: flex;
@@ -293,6 +319,13 @@ export default {
     padding-bottom: 30px;
     &__title {
       margin-bottom: 30px;
+      @media screen and (max-width: $tablet) {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+      }
     }
     &__item {
       cursor: pointer;
@@ -308,6 +341,11 @@ export default {
       justify-content: flex-start;
       flex-direction: row;
       margin-bottom: 20px;
+      @media screen and (max-width: $tablet) {
+        min-height: 50px;
+        margin-bottom: 15px;
+        border: 1px solid $darkblue;
+      }
       &:last-of-type {
         margin-bottom: 0px;
       }
@@ -337,6 +375,14 @@ export default {
       line-height: 20px;
       text-transform: capitalize;
       margin-right: 40px;
+      @media screen and (max-width: $tablet) {
+        font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 24px;
+      }
+
     }
     &__price {
       font-family: "Montserrat";
@@ -344,18 +390,46 @@ export default {
       font-weight: 600;
       font-size: 24px;
       line-height: 29px;
+      @media screen and (max-width: $tablet) {
+      @media screen and (max-width: $tablet) {
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 24px;
+      }
       &_full {
         margin-left: 10px;
         text-decoration: line-through;
-        color: $extra_dark_grey;
+      @media screen and (max-width: $tablet) {
+
+
+
+
+        font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 20px;
       }
-    }
+    }}
   }
   &__button {
+    margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    @media screen and (max-width: $tablet) {
+      align-self: flex-start;
+      width:100%;
+      max-width: 228px;
+      height:40px;
+      &__icon{
+        display: none;
+      }
+    }
     &:hover &,
     &:active & {
       &__icon * {
