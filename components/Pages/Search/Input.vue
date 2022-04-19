@@ -1,6 +1,7 @@
 <template>
-  <div class="search-input-wrapper wrapper">
+  <div class="search-input-wrapper">
     <div class="search-input__content">
+    <h1 class="search-input__content__title title-small">Поиск заведения</h1>
       <form @submit.prevent="search_request" class="search-input">
         <button class="search-input-button">
           <svg
@@ -83,14 +84,31 @@ export default {
 };
 </script>
 
-<style lang="scss"scoped>
+<style lang="scss" scoped>
 .search-input {
-  &__content{
-    width:100%; max-width: $maxwidth;
-    display: flex;align-items: center;justify-content: flex-start;
+  &__content {
+    width: 100%;
+    max-width: $maxwidth;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    &__title{
+      margin-bottom: 20px;
+    }
+  }
+  &-wrapper{
+    width:100%;
   }
   width: 650px;
   height: 60px;
+  @media screen and (max-width: $notebook) {
+    height: 50px;
+  }
+  @media screen and (max-width: $tablet) {
+    width:100%;
+    height: 40px;
+  }
   background-color: $white;
   border-radius: 50px;
   display: flex;
@@ -108,8 +126,21 @@ export default {
       margin-left: 0px 8px !important;
     }
     transition: 0.3s;
+    @media screen and (max-width: $tablet) {
+      svg{
+      width: 14px;
+      height: 14px;
+      }
+    }    
   }
   &-input {
+    @media screen and (max-width: $tablet) {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+    }
     height: 100%;
     flex-grow: 1;
     font-family: "SF Pro Display";
