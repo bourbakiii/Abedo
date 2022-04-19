@@ -101,7 +101,7 @@
             />
           </svg>
 
-          <p class="navigation__links-link__text">Акции магазинов</p>
+          <p class="navigation__links-link__text">Акции <span class="delete-note">магазинов</span></p>
         </NuxtLink>
       </div>
 
@@ -169,7 +169,7 @@
             />
           </svg>
         </span>
-        <p class="navigation__cart-block__text">Корзина</p>
+        <p class="navigation__cart-block__text delete-note">Корзина</p>
       </NuxtLink>
     </div>
   </div>
@@ -208,6 +208,11 @@ export default {
   padding: 5px 10px;
   z-index: $z_navigation;
   transition: height 0.3s;
+  .delete-note{
+    @media screen and (max-width: $notebook){
+      display: none;
+    }
+  }
   &.scaled {
     height: 70px;
     .navigation > * {
@@ -229,7 +234,8 @@ export default {
       align-items: center;
       justify-content: center;
       @media screen and (max-width: $notebook) {
-        transform: scale(0.9);
+        width: 160px;
+        transform: scale(0.8);
       }
       &-image:first-of-type {
         margin-right: 18px;
@@ -238,6 +244,7 @@ export default {
     &__button {
       @media screen and (max-width: $notebook) {
         transform: scale(0.9);
+        width:160px;
       }
     }
     &__links {
@@ -271,6 +278,9 @@ export default {
           line-height: 20px;
           display: flex;
           align-items: center;
+          .delete-note{
+            margin-left: 5px;
+          }
         }
         &__dropdown {
           position: relative;

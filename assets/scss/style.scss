@@ -7,9 +7,10 @@
 }
 html {
   min-height: 100vh;
-  min-width: $maxwidth;
   margin: 0px;
   padding: 0px;
+  min-width: 425px;  
+
   // @media screen and (max-width: $notebook) {
   //   min-width: $notebook;
   // }
