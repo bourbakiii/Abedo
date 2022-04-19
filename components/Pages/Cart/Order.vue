@@ -248,13 +248,11 @@ export default {
             &__entrance {
               grid-column-start: 1;
               grid-column-end: 3;
-              background-color: red;
-            }
             &__intercom,
             &__floor {
               grid-column-start: 3;
               grid-column-end: 5;
-              background-color: green;
+            }
             }
           }
         }
@@ -376,13 +374,12 @@ export default {
       text-transform: capitalize;
       margin-right: 40px;
       @media screen and (max-width: $tablet) {
-        font-family: 'SF Pro Display';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 24px;
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
       }
-
     }
     &__price {
       font-family: "Montserrat";
@@ -391,29 +388,26 @@ line-height: 24px;
       font-size: 24px;
       line-height: 29px;
       @media screen and (max-width: $tablet) {
-      @media screen and (max-width: $tablet) {
-
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 20px;
-line-height: 24px;
+        @media screen and (max-width: $tablet) {
+          font-family: "Montserrat";
+          font-style: normal;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 24px;
+        }
+        &_full {
+          margin-left: 10px;
+          text-decoration: line-through;
+          @media screen and (max-width: $tablet) {
+            font-family: "Montserrat";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+          }
+        }
       }
-      &_full {
-        margin-left: 10px;
-        text-decoration: line-through;
-      @media screen and (max-width: $tablet) {
-
-
-
-
-        font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 20px;
-      }
-    }}
+    }
   }
   &__button {
     margin-top: 30px;
@@ -423,10 +417,10 @@ line-height: 20px;
     flex-direction: row;
     @media screen and (max-width: $tablet) {
       align-self: flex-start;
-      width:100%;
+      width: 100%;
       max-width: 228px;
-      height:40px;
-      &__icon{
+      height: 40px;
+      &__icon {
         display: none;
       }
     }

@@ -6,6 +6,6 @@
 </template>
 <style lang="scss" scoped>
 .error-layout{
-    background-color: green;
+    background-color: rgba(240, 128, 128, 0.452);
 }
 </style>
