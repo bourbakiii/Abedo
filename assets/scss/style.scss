@@ -10,15 +10,15 @@ html {
   min-width: $maxwidth;
   margin: 0px;
   padding: 0px;
-  @media screen and (max-width: $notebook) {
-    min-width: $notebook;
-  }
-  @media screen and (max-width: $tablet) {
-    min-width: $tablet;
-  }
-  @media screen and (max-width: $phone) {
-    min-width: $phone;
-  }
+  // @media screen and (max-width: $notebook) {
+  //   min-width: $notebook;
+  // }
+  // @media screen and (max-width: $tablet) {
+  //   min-width: $tablet;
+  // }
+  // @media screen and (max-width: $phone) {
+  //   min-width: $phone;
+  // }
   &::-webkit-scrollbar {
     width: 0;
   }
