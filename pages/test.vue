@@ -1,10 +1,10 @@
 <template>
     <div class="page wrapper">
-        <ChapterSlider class='chapter-slider'/>
+        <ProductImagesSlider class='images-slider'/>
     </div>
 </template>
 <style lang="scss" scoped>
-.chapter-slider{
+.images-slider{
     background-color: red;
 }
 </style>
