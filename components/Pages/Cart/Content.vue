@@ -66,7 +66,11 @@
       </div>
     </div>
     <div class="cart__products__adaptive adaptive">
-      <div class="cart__products__adaptive__item">
+      <div
+        v-for="(product, index) in 3"
+        :key="index"
+        class="cart__products__adaptive__item"
+      >
         <p class="cart__products__adaptive__item__name" contenteditable>
           Улитки escargots по-бургундски в масле замороженные
         </p>
@@ -426,6 +430,16 @@
     flex-wrap: wrap;
     margin-top: 40px;
     width: 100%;
+    align-self: flex-start;
+    @media screen and (max-width: $tablet) {
+      padding: 30px 0px;
+      border-top: 1px solid $dark_grey;
+      border-bottom: 1px solid $dark_grey;
+      width: 100%;
+      max-width: 336px;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
     &__text {
       font-family: "SF Pro Display";
       font-style: normal;
@@ -434,6 +448,15 @@
       line-height: 19px;
       margin-right: 40px;
       flex-shrink: 0;
+
+      @media screen and (max-width: $tablet) {
+        margin-right: 0px;
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+      }
     }
     &__input {
       border: 1px solid $extra_dark_grey;
@@ -450,6 +473,11 @@
       font-weight: 400;
       font-size: 16px;
       line-height: 20px;
+      @media screen and (max-width: $tablet) {
+        width: 100%;
+        max-width: 161px;
+        height: 40px;
+      }
     }
   }
   &__prices {
@@ -461,6 +489,9 @@
     justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
+    @media screen and (max-width: $tablet) {
+      margin-top: 30px;
+    }
     &__pre {
       font-family: "SF Pro Display";
       font-style: normal;
@@ -468,6 +499,10 @@
       font-size: 24px;
       line-height: 29px;
       text-transform: capitalize;
+      @media screen and (max-width: $tablet) {
+font-size: 20px;
+line-height: 24px;
+      }
     }
     &__price {
       font-family: "Montserrat";
@@ -476,6 +511,13 @@
       font-size: 24px;
       line-height: 29px;
       margin-left: 15px;
+       @media screen and (max-width: $tablet) {
+         
+font-size: 20px;
+line-height: 24px;
+      margin-left: 10px;
+
+       }
       &_full {
         font-family: "Montserrat";
         font-style: normal;
@@ -484,6 +526,11 @@
         line-height: 22px;
         text-decoration-line: line-through;
         margin-left: 15px;
+        @media screen and (max-width: $tablet){
+          margin-left:20px;
+font-size: 16px;
+line-height: 20px;
+        }
       }
     }
   }
