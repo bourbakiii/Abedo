@@ -16,7 +16,6 @@ export default {
 
 <style lang="scss" scoped>
 .information-page{
-  background-color: $light_grey;
   padding-bottom: 100px;
   &__content{
     flex-grow: 1;

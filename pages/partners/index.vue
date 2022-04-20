@@ -106,7 +106,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .partners-page {
-  background-color: $light_grey;
   align-items: center;
   justify-content: flex-start;
   padding-bottom: 100px;

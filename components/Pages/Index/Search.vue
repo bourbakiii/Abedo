@@ -471,7 +471,7 @@ export default {
     box-sizing: border-box;
   @media screen and (max-width:$notebook){
     grid-template-columns: repeat(3,1fr);
-
+    grid-gap: 15px;
   }
 
 

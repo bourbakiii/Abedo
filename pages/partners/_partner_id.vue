@@ -41,7 +41,6 @@ export default {
 
 <style lang="scss" scoped>
 .partner-page {
-  background-color: $light_grey;
   padding-bottom: 20px;
   &__content {
     display: flex;

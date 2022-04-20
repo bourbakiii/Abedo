@@ -40,7 +40,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .search-page {
-  background-color: $light_grey;
   display: flex;align-items: center;justify-content: flex-start;flex-direction:column;
   padding-bottom: 100px;
   &__content {

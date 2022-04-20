@@ -39,7 +39,6 @@
 .cart-page {
   align-items: center;
   justify-content: flex-start;
-  background-color: $light_grey;
   padding-bottom: 100px;
   &__breadcrumbs {
     margin-top: 17px;

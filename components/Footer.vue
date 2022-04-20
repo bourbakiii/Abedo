@@ -101,7 +101,7 @@ export default {};
   background-color: $black;
   flex-direction: column !important;
   box-sizing: border-box;
-  
+
   &__bottom-wrapper {
     width: 100%;
     display: flex;
@@ -110,7 +110,6 @@ export default {};
     border-top: 1px solid $lightblack;
     width: 100%;
     height: 71px;
-    
   }
   &__bottom {
     width: 100%;
@@ -155,9 +154,9 @@ export default {};
     flex-direction: column;
     width: 185px;
     margin-right: 140px;
-       @media screen and (max-width: $notebook) {
-         margin-right:auto;
-       }
+    @media screen and (max-width: $notebook) {
+      margin-right: auto;
+    }
     &-logo {
       display: flex;
       align-items: center;
@@ -221,11 +220,12 @@ export default {};
       color: $white;
       margin-bottom: 20px;
       margin-top: 0px;
-          @media screen and (max-width: $notebook) {
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 18px;
-    }    }
+      @media screen and (max-width: $notebook) {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 18px;
+      }
+    }
     &-content {
       display: flex;
       align-items: center;
@@ -250,7 +250,6 @@ export default {};
         }
       }
     }
-
   }
   &__contacts {
     height: 100%;
@@ -267,11 +266,11 @@ export default {};
       font-size: 18px;
       line-height: 22px;
       margin-bottom: 16px;
-       @media screen and (max-width: $notebook) {
-         font-size: 16px;
-      line-height: 19px;
-      margin-bottom: 10px;
-       }
+      @media screen and (max-width: $notebook) {
+        font-size: 16px;
+        line-height: 19px;
+        margin-bottom: 10px;
+      }
     }
     &-phone {
       text-decoration: none;
@@ -282,11 +281,11 @@ export default {};
       font-size: 20px;
       line-height: 24px;
       text-align: right;
-       @media screen and (max-width: $notebook) {
-         font-size: 17px;
-      line-height: 20px;
-       }
-      &:hover{
+      @media screen and (max-width: $notebook) {
+        font-size: 17px;
+        line-height: 20px;
+      }
+      &:hover {
         text-decoration: underline;
       }
     }

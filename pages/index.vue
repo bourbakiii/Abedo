@@ -4,7 +4,7 @@
     <PagesIndexAdaptiveCategories class="index-page__adaptive-categories adaptive" />
     <PagesIndexStocksSlider class="index-page__stocks-slider" />
     <PagesIndexNewShops class="index-page__new-shops adaptive-non" />
-    <PagesIndexAdaptiveNewShops class="index-page__adaptive-new-shops" />
+    <PagesIndexAdaptiveNewShops class="index-page__adaptive-new-shops adaptive" />
     <PagesIndexAbout class="adaptive-non">
       Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать
       несколько абзацев более менее осмысленного текста рыбы на русском языке, а

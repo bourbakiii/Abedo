@@ -21,7 +21,6 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  background-color: $light_grey;
   padding-bottom: 100px;
   &__content {
     display: flex;
