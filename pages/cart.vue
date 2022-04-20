@@ -1,7 +1,7 @@
 <template>
   <div class="page cart-page wrapper">
     <div class="cart-page__content-wrapper content">
-      <Breadcrumbs class="cart-page__breadcrumbs" />
+      <Breadcrumbs class="cart-page__breadcrumbs adaptive-non" />
       <div v-if="false" class="cart-page__content_empty">
         <h1 class="cart-page__content_empty__title title-normal">Корзина</h1>
         <svg
@@ -20,17 +20,14 @@
         <p class="cart-page__content_empty__text">
           Вы пока ничего не добавили в корзину
         </p>
-        <ButtonStandart>
-           За покупками
-      </ButtonStandart>
-
+        <ButtonStandart class="cart-page__content_empty__button">За покупками</ButtonStandart>
       </div>
       <div v-else class="cart-page__content">
-        <h1 class="cart-page__content_empty__title title-normal">
+        <h1 class="cart-page__content_empty__title title-normal adaptive-non">
           Оформления заказа
         </h1>
-        <PagesCartContent class='cart-page__content__cart' />
-        <PagesCartOrder class='cart-page__content__order' />
+        <PagesCartContent class="cart-page__content__cart" />
+        <PagesCartOrder class="cart-page__content__order" />
       </div>
     </div>
   </div>
@@ -53,11 +50,10 @@
     &__title {
       margin-bottom: 70px;
     }
-    &__cart{
-        margin-bottom: 70px;
+    &__cart {
+      margin-bottom: 70px;
     }
-    &__order{
-        
+    &__order {
     }
     /////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
