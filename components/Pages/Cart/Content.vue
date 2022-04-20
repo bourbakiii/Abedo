@@ -500,8 +500,8 @@
       line-height: 29px;
       text-transform: capitalize;
       @media screen and (max-width: $tablet) {
-font-size: 20px;
-line-height: 24px;
+        font-size: 20px;
+        line-height: 24px;
       }
     }
     &__price {
@@ -511,13 +511,11 @@ line-height: 24px;
       font-size: 24px;
       line-height: 29px;
       margin-left: 15px;
-       @media screen and (max-width: $tablet) {
-         
-font-size: 20px;
-line-height: 24px;
-      margin-left: 10px;
-
-       }
+      @media screen and (max-width: $tablet) {
+        font-size: 20px;
+        line-height: 24px;
+        margin-left: 10px;
+      }
       &_full {
         font-family: "Montserrat";
         font-style: normal;
@@ -526,10 +524,10 @@ line-height: 24px;
         line-height: 22px;
         text-decoration-line: line-through;
         margin-left: 15px;
-        @media screen and (max-width: $tablet){
-          margin-left:20px;
-font-size: 16px;
-line-height: 20px;
+        @media screen and (max-width: $tablet) {
+          margin-left: 20px;
+          font-size: 16px;
+          line-height: 20px;
         }
       }
     }

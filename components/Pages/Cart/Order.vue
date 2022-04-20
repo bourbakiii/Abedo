@@ -196,8 +196,15 @@ export default {
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
+    
     &__button {
       margin-right: 30px;
+     
+      @media screen and (max-width:$tablet) {
+        margin-right: 20px;
+         width: 134px;
+      height: 35px !important;
+      }
       &:last-of-type {
         margin-right: 0px;
       }
@@ -254,16 +261,17 @@ export default {
             grid-column-start: 1;
             grid-column-end: 5;
           }
-          @media screen and (max-width: $phone) {
+          @media screen and (max-width: $tablet) {
             &__apartment,
             &__entrance {
               grid-column-start: 1;
               grid-column-end: 3;
+            }
+
             &__intercom,
             &__floor {
               grid-column-start: 3;
               grid-column-end: 5;
-            }
             }
           }
         }
@@ -280,7 +288,7 @@ export default {
       flex-direction: column;
       margin: 70px 0px;
       @media screen and (max-width: $tablet) {
-        margin-top: 30px;
+        margin: 30px 0px;
       }
       &__item {
         width: 100%;
@@ -384,11 +392,9 @@ export default {
       text-transform: capitalize;
       margin-right: 40px;
       @media screen and (max-width: $tablet) {
-        font-family: "SF Pro Display";
-        font-style: normal;
-        font-weight: 700;
         font-size: 20px;
         line-height: 24px;
+        
       }
     }
     &__price {
