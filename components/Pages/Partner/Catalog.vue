@@ -55,12 +55,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
-    @media screen and (max-width: $notebook) {
-      grid-template-columns: repeat(2, 1fr);
-    }
     @media screen and (max-width: $tablet) {
       grid-gap: 20px;
-      grid-template-columns: repeat(4, 1fr);
     }
     @media screen and (max-width: $phone) {
       grid-template-columns: repeat(2, 1fr);

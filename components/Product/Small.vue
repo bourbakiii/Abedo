@@ -27,6 +27,7 @@ $product_inner_padding: 9px;
   overflow: hidden;
   border: 1px solid $dark_grey;
   width:172px;
+  background-color: red;
   &__image {
     height: 119px;
     width: 100%;

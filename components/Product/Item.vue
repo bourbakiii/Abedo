@@ -38,11 +38,10 @@
       >
         В корзину
       </ButtonStandart>
-      <ButtonSmallCart v-if='true'/>
+      <ButtonSmallCart class="product__buttons__button_add_small adaptive" />
       <div
-        v-else
         @click.self="openProductModal"
-        class="product__buttons__button_creases"
+        class="product__buttons__button_creases adaptive-non"
       >
         <ButtonProduct size="40" icon="minus" />
         <p
@@ -176,20 +175,24 @@ export default {
       align-items: center;
       justify-content: flex-start;
       flex-direction: row;
+      flex-wrap: wrap;
       margin-top: 14px;
       &__mobile {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-direction: row;
+        flex-wrap: wrap;
         margin-top: 7px;
+        max-width:100%;
+        width:100%;
         &__price {
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 500;
           font-size: 14px;
           line-height: 16px;
-          margin-right: 20px;
+          white-space: nowrap;
           &_full {
             font-family: "SF Pro Display";
             font-style: normal;
@@ -197,7 +200,8 @@ export default {
             font-size: 13px;
             line-height: 16px;
             text-decoration-line: line-through;
-
+            margin-left: clamp(0px, 50%, 18px);
+            white-space: nowrap;
             color: $extra_dark_grey;
           }
         }
@@ -217,7 +221,7 @@ export default {
           line-height: 17px;
           text-decoration-line: line-through;
           color: $extra_dark_grey;
-          margin-left: 20px;
+          margin-left: min(10px,100%);
         }
       }
       &__weight {
@@ -249,7 +253,6 @@ export default {
     &__button_add {
       height: 40px;
       width: 228px;
-      
     }
     &__button_creases {
       display: flex;

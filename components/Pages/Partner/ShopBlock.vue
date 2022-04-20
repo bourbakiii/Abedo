@@ -8,7 +8,7 @@
       />
       <div class="shop-block__content__info">
         <div class="shop-block__content__info__top">
-          <span class="shop-block__content__info__top__name">
+          <span class="shop-block__content__info__top__name" contenteditable>
             Кафе “Лимончелло”
           </span>
           <span class="shop-block__content__info__top__rating">
@@ -29,7 +29,7 @@
             <p class="shop-block__content__info__top__rating__value">4,7</p>
           </span>
         </div>
-        <p class="shop-block__content__info__address">
+        <p class="shop-block__content__info__address" contenteditable>
           Европейская, Кавказская, Японская кухня, Детское меню, Фаст-Фуд
         </p>
         <div class="shop-block__content__info__phone">
@@ -226,7 +226,7 @@ export default {};
   overflow: hidden;
   width: 100%;
   max-width: 100%;
-  @media screen and (max-width: $notebook) {
+  @media screen and (max-width: $tablet) {
     background-color: transparent;
     padding-top: 0px;
     margin-right: 10px;
@@ -248,6 +248,11 @@ export default {};
       border: 1px solid $blue_grey;
       padding: 10px;
       flex-shrink: 0;
+      @media screen and (max-width: $notebook) {
+        width: 218px;
+      height: 125px;
+      }
+
     }
     &__info {
       height: 100%;
@@ -259,6 +264,7 @@ export default {};
       width: 100%;
       height: 100%;
       overflow: hidden;
+      
       &__top {
         display: flex;
         align-items: baseline;
@@ -269,6 +275,9 @@ export default {};
         max-width: 100%;
         overflow: hidden;
         margin-bottom: 20px;
+        @media screen and (max-width: $notebook) {
+        flex-direction:column;
+      }
         &__name {
           font-family: "Montserrat";
           font-style: normal;
@@ -280,6 +289,9 @@ export default {};
           word-wrap: break-word;
           width: 100%;
           max-width: 100%;
+        @media screen and (max-width: $notebook) {
+          margin-right:0px;
+        }
         }
         &__rating {
           display: flex;

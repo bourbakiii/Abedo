@@ -2,16 +2,16 @@
   <div class="page partner-page wrapper">
     <div class="partner-page__content content">
       <div class="partner-page__content__main">
-        <Breadcrumbs class="partner-page__content__main__breadcrumbs adaptive-non" />
+        <Breadcrumbs
+          class="partner-page__content__main__breadcrumbs adaptive-non"
+        />
         <PagesPartnerShopBlock
           class="partner-page__content__main__shop-block"
         />
         <!-- <PagesPartnerStocks class="partner-page__content__main__stocks" /> -->
         <PagesPartnerCatalog class="partner-page__content__main__catalog" />
       </div>
-        <SidebarCart
-          class="partner-page__content__sidebar adaptive-non"
-        />
+      <SidebarCart class="partner-page__content__sidebar adaptive-non" />
     </div>
   </div>
 </template>
@@ -68,6 +68,13 @@ export default {
       top: 0px;
       top: 125px;
       margin-left: 30px;
+      @media screen and (max-width: $notebook) {
+        margin-left: 10px;
+        width: 260px;
+      }
+      @media screen and (max-width: $sidebar_dn) {
+        display: none !important;
+      }
     }
   }
 }
