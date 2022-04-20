@@ -66,7 +66,6 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   position: relative;
-  background-color: $white;
   &.error & {
     &__input {
       border-color: $red;
@@ -93,6 +92,8 @@ export default {
     flex-direction: row;
     border: 1px solid $extra_dark_grey;
     border-radius: 90px;
+  background-color: $white;
+
     overflow: hidden;
     font-family: "SF Pro Display";
     font-style: normal;
