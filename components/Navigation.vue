@@ -11,8 +11,58 @@
           class="navigation__logo-image"
         />
       </NuxtLink>
-      <ButtonIcon class="navigation__button" icon="squares" text="Магазины" />
-
+      <ButtonStandart class="navigation__button"
+        ><svg
+          class="navigation__button__icon"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            x="4"
+            y="4"
+            width="6"
+            height="7"
+            rx="1"
+            stroke="white"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+          <rect
+            x="4"
+            y="15"
+            width="6"
+            height="5"
+            rx="1"
+            stroke="white"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+          <rect
+            x="14"
+            y="4"
+            width="6"
+            height="5"
+            rx="1"
+            stroke="white"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+          <rect
+            x="14"
+            y="13"
+            width="6"
+            height="7"
+            rx="1"
+            stroke="white"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Магазины</ButtonStandart
+      >
       <div class="navigation__links">
         <NuxtLink
           to="#"
@@ -45,19 +95,19 @@
               class="navigation__links-link__dropdown-content"
             >
               <NuxtLink
-                to="#"
+                to="/profile"
                 class="navigation__links-link__dropdown-content-link"
               >
                 Мои данные
               </NuxtLink>
               <NuxtLink
-                to="#"
+                to="/addresses"
                 class="navigation__links-link__dropdown-content-link"
               >
                 Адреса доставки
               </NuxtLink>
               <NuxtLink
-                to="#"
+                to="/orders"
                 class="navigation__links-link__dropdown-content-link"
               >
                 История заказов
@@ -71,7 +121,7 @@
             </div>
           </transition>
         </NuxtLink>
-        <NuxtLink to="#" class="navigation__links-link">
+        <NuxtLink to="/stocks" class="navigation__links-link">
           <svg
             class="navigation__links-link-svg"
             width="24"
@@ -101,10 +151,11 @@
             />
           </svg>
 
-          <p class="navigation__links-link__text">Акции <span class="delete-note">магазинов</span></p>
+          <p class="navigation__links-link__text">
+            Акции <span class="delete-note">магазинов</span>
+          </p>
         </NuxtLink>
       </div>
-
       <div class="navigation__icons">
         <NuxtLink to="#" class="navigation__icons-icon">
           <svg
@@ -148,7 +199,6 @@
           </svg>
         </NuxtLink>
       </div>
-
       <NuxtLink to="#" class="navigation__cart-block">
         <span
           class="navigation__cart-block-icon"
@@ -208,8 +258,8 @@ export default {
   padding: 5px 10px;
   z-index: $z_navigation;
   transition: height 0.3s;
-  .delete-note{
-    @media screen and (max-width: $notebook){
+  .delete-note {
+    @media screen and (max-width: $notebook) {
       display: none;
     }
   }
@@ -242,9 +292,22 @@ export default {
       }
     }
     &__button {
+      background-color: $darkblue;
+      color: $white;
+      font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 20px;
+      &__icon{
+        margin-right:10px;
+      }
       @media screen and (max-width: $notebook) {
+        &__icon{
+          display: none;
+        }
         transform: scale(0.9);
-        width:160px;
+        width: 160px;
       }
     }
     &__links {
@@ -278,7 +341,7 @@ export default {
           line-height: 20px;
           display: flex;
           align-items: center;
-          .delete-note{
+          .delete-note {
             margin-left: 5px;
           }
         }
@@ -414,8 +477,7 @@ export default {
         font-weight: 400;
         font-size: 16px;
         line-height: 20px;
-        @media screen and (max-width: $tablet)
-        {
+        @media screen and (max-width: $tablet) {
           display: none;
         }
       }

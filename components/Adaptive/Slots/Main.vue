@@ -11,6 +11,7 @@
       />
     </NuxtLink>
     <svg
+    @click='$router.push("/profile")'
       class="navigation-slot-main__icon"
       width="24"
       height="24"

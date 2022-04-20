@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <button class="footer__button">
+    <NuxtLink to='/partners' class="footer__button">
       <svg
         width="24"
         height="24"
@@ -21,8 +21,8 @@
           fill="#212121"
         />
       </svg>
-    </button>
-    <button class="footer__button">
+    </NuxtLink>
+    <NuxtLink to='#' class="footer__button">
       <svg
         width="20"
         height="18"
@@ -35,8 +35,8 @@
           fill="#212121"
         />
       </svg>
-    </button>
-    <button class="footer__button">
+    </NuxtLink>
+    <NuxtLink to='/cart' class="footer__button">
       <svg
         width="20"
         height="20"
@@ -49,8 +49,8 @@
           fill="#212121"
         />
       </svg>
-    </button>
-    <button class="footer__button">
+    </NuxtLink>
+    <NuxtLink to='/search' class="footer__button">
       <svg
         width="19"
         height="19"
@@ -63,8 +63,8 @@
           fill="#212121"
         />
       </svg>
-    </button>
-    <button class="footer__button">
+    </NuxtLink>
+    <NuxtLink to='#' class="footer__button">
       <svg
         width="24"
         height="24"
@@ -89,7 +89,7 @@
           fill="#212121"
         />
       </svg>
-    </button>
+    </NuxtLink>
   </div>
 </template>
 <style lang="scss" scoped>

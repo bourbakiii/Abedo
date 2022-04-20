@@ -90,6 +90,7 @@
   align-items: center;
   flex-direction: column;
   &__title {
+    align-self: flex-start;
     margin-bottom: 70px;
   }
   &__content {
