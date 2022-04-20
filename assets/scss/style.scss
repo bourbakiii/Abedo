@@ -10,7 +10,9 @@ html {
   margin: 0px;
   padding: 0px;
   min-width: 425px;  
-
+  max-width:100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
   // @media screen and (max-width: $notebook) {
   //   min-width: $notebook;
   // }
