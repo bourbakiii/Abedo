@@ -102,6 +102,14 @@
           </div>
           <p class="order__delivery__prices__item__price">120 ₽</p>
         </div>
+        <div class="order__delivery__prices__item">
+          <div class="order__delivery__prices__item__name-block">
+            <p class="order__delivery__prices__item__name">
+              Стоимость доставки
+            </p>
+          </div>
+          <p class="order__delivery__prices__item__price">120 ₽</p>
+        </div>
       </div>
     </div>
     <div class="order__payment">
@@ -211,7 +219,7 @@ export default {
       align-items: center;
       justify-content: flex-start;
       flex-direction: row;
-      @media screen and (max-width: $tablet) {
+      @media screen and (max-width: $notebook) {
         flex-direction: column;
       }
       align-items: flex-start;
@@ -219,7 +227,7 @@ export default {
         width: 265px;
         margin-right: 60px;
         flex-shrink: 0;
-        @media screen and (max-width: $tablet) {
+        @media screen and (max-width: $notebook) {
           width: 100%;
           margin-bottom: 30px;
         }
@@ -230,6 +238,9 @@ export default {
         align-items: flex-start;
         flex-direction: column;
         flex-grow: 1;
+      @media screen and (max-width: $notebook) {
+        width:100%;
+      }
         &__address {
           width: 100%;
           display: grid;
@@ -267,8 +278,7 @@ export default {
       align-items: center;
       justify-content: flex-start;
       flex-direction: column;
-      margin-top: 70px;
-      margin-bottom: 30px;
+      margin: 70px 0px;
       @media screen and (max-width: $tablet) {
         margin-top: 30px;
       }
@@ -387,7 +397,6 @@ export default {
       font-weight: 600;
       font-size: 24px;
       line-height: 29px;
-      @media screen and (max-width: $tablet) {
         @media screen and (max-width: $tablet) {
           font-family: "Montserrat";
           font-style: normal;
@@ -398,13 +407,13 @@ export default {
         &_full {
           margin-left: 10px;
           text-decoration: line-through;
+          color:$extra_dark_grey;
           @media screen and (max-width: $tablet) {
             font-family: "Montserrat";
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
             line-height: 20px;
-          }
         }
       }
     }

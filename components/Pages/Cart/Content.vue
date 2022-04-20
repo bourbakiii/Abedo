@@ -7,22 +7,43 @@
     </div>
     <div class="cart__products">
       <div
-        v-for="(product, index) in [1, 2, 3]"
+        v-for="(product, index) in 3"
         :key="index"
         class="cart__products__item"
       >
-        <img
-          v-if="true"
-          src="@/assets/images/product-placeholder.png"
-          class="cart__products__item__image"
-        />
-        <p class="cart__products__item__image__text">Сырное ассорти</p>
-        <p class="cart__products__item__price cart__products__item__price_one">
-          350 ₽
-        </p>
-        <p class="cart__products__item__price cart__products__item__price_full">
+        <div class="cart__products__item__image-block">
+          <img
+            v-if="true"
+            src="@/assets/images/product-placeholder.png"
+            class="cart__products__item__image-block__image"
+          />
+          <p class="cart__products__item__image-block__text" contenteditable>
+            Сырное ассорти
+          </p>
+        </div>
+
+        <p class="cart__products__item__price" contenteditable>350 ₽</p>
+        <p
+          class="cart__products__item__price cart__products__item__price_full"
+          contenteditable
+        >
           3500 ₽
         </p>
+        <div class="cart__products__item__buttons">
+          <ButtonProduct
+            class="cart__products__item__buttons__button"
+            size="40"
+            icon="minus"
+          />
+          <p class="cart__products__item__buttons__count" contenteditable>
+            100
+          </p>
+          <ButtonProduct
+            class="cart__products__item__buttons__button"
+            size="40"
+            icon="plus"
+          />
+        </div>
         <button class="cart__products__item__close">
           <svg
             class="cart__products__item__close__icon"
@@ -42,7 +63,7 @@
     </div>
     <div class="cart__promo">
       <p class="cart__promo__text">Введите промокод</p>
-      <input type="text" name="promo" id="proomo" class="cart__promo__input" />
+      <input type="text" name="promo" id="promo" class="cart__promo__input" />
     </div>
     <div class="cart__prices">
       <p class="cart__prices__pre">Итого:</p>
@@ -77,6 +98,11 @@
       padding: 5px;
       margin-right: 30px;
       flex-shrink: 0;
+      @media screen and (max-width: $notebook) {
+        width: 100px;
+        height: 72px;
+        margin-right: 10px;
+      }
     }
     &__name {
       font-family: "Montserrat";
@@ -86,20 +112,29 @@
       line-height: 20px;
       flex-grow: 1;
       margin-right: 30px;
+      @media screen and (max-width: $notebook) {
+        margin-right: 10px;
+        font-size: 20px;
+        line-height: 20px;
+      }
     }
-    &__button{
-      font-family: 'Montserrat';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 20px;
-color:$red;
-background-color: transparent;
-outline:none;
-border:none;
-&:hover{
-  text-decoration: underline;
-}
+    &__button {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: $red;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      @media screen and (max-width: $notebook) {
+        font-size: 14px;
+        line-height: 18px;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
   &__products {
@@ -117,19 +152,74 @@ border:none;
       justify-content: space-between;
       flex-direction: row;
       border-bottom: 1px dashed $extra_dark_grey;
-      &__image {
-        border-radius: 10px;
-        width: 100px;
-        height: auto;
-        object-fit: contain;
-        margin-right: 30px;
+      &__image-block {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: row;
+        width: 40%;
+        max-width: 40%;
+        overflow: hidden;
+        &__image {
+          border-radius: 10px;
+          width: 100px;
+          height: auto;
+          object-fit: contain;
+          margin-right: 30px;
+          @media screen and (max-width: $notebook) {
+            margin-right: 10px;
+          }
+        }
+        &__text {
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 20px;
+          justify-content: flex-start;
+          align-items: flex-start;
+        }
       }
-      &__text {
-        font-family: "SF Pro Display";
+      &__buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &__button {
+          @media screen and (max-width: $notebook) {
+            width: 35px !important;
+            height: 35px !important;
+          }
+        }
+        &__count {
+          width: 60px;
+          max-width: 60px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 19px;
+          text-align: center;
+          margin: 0px 10px;
+          @media screen and (max-width: $notebook) {
+            max-width: 40px;
+            width: 50px;
+            margin: 0px 5px;
+          }
+        }
+      }
+      &__price {
+        font-family: "Montserrat";
         font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        width: 10%;
+        @media screen and (max-width: $notebook) {
+          font-size: 16px;
+          line-height: 19px;
+        }
       }
       &__close {
         background-color: transparent;
