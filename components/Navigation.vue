@@ -11,7 +11,7 @@
           class="navigation__logo-image"
         />
       </NuxtLink>
-      <ButtonStandart class="navigation__button"
+      <ButtonStandart @action="()=>$router.push('/partners')" class="navigation__button"
         ><svg
           class="navigation__button__icon"
           width="24"
@@ -65,7 +65,7 @@
       >
       <div class="navigation__links">
         <NuxtLink
-          to="#"
+          to="/profile"
           class="navigation__links-link navigation__links-link__dropdown"
           @mouseenter.native="show_dropdown = true"
           @mouseleave.native="show_dropdown = false"
@@ -157,7 +157,7 @@
         </NuxtLink>
       </div>
       <div class="navigation__icons">
-        <NuxtLink to="#" class="navigation__icons-icon">
+        <NuxtLink to="/search" class="navigation__icons-icon">
           <svg
             class="navigation__icons-icon-svg"
             width="20"
@@ -199,7 +199,7 @@
           </svg>
         </NuxtLink>
       </div>
-      <NuxtLink to="#" class="navigation__cart-block">
+      <NuxtLink to="/cart" class="navigation__cart-block">
         <span
           class="navigation__cart-block-icon"
           :class="{ indicator: true }"
