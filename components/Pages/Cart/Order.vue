@@ -189,6 +189,11 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   width: 100%;
+  @media screen and (max-width: $tablet) {
+    background-color: transparent;
+    border-radius: 0px;
+    padding:0px;
+  }
   &__buttons {
     width: 100%;
     margin-bottom: 30px;
