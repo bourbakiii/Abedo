@@ -312,9 +312,11 @@
     }
   &__title {
     margin-bottom: 30px;
+     @media screen and (max-width: $notebook) {
+       font-size: 25px;
+     }
     @media screen and (max-width: $tablet) {
-      font-family: "SF Pro Display";
-      font-style: normal;
+      
       font-weight: 700;
       font-size: 20px;
       line-height: 20px;

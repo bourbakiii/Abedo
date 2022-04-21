@@ -57,7 +57,12 @@
 
           <p class="shop-block__content__info__phone__text">+790 000 000 00</p>
         </div>
-        <button class="shop-block__content__info__button">
+        <button @click.prevent="()=>$store.commit('modals/open', {
+                modal_name: 'partner',
+                partner: {
+                    name: 'Забыл передать партнера'
+                }
+            })" class="shop-block__content__info__button">
           <p class="shop-block__content__info__button__text">Подробнее</p>
           <svg
             class="shop-block__content__info__button__icon"

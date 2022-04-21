@@ -7,7 +7,8 @@ export const state = () => ({
     show: false
   },
   partner: {
-    show: true
+    show: false,
+    shop: null
   },
   authorisation: {
     show: false,
@@ -26,6 +27,10 @@ export const mutations = {
         state.product.product = props.product;
         break;
       }
+      case "partner": {
+        state.partner.partner = props.partner;
+        break;
+      }
     }
   },
   close(state, props={modal_name:null}) {
@@ -36,6 +41,10 @@ export const mutations = {
     switch (props.modal_name) {
       case "product": {
         state.product.product = null;
+        break;
+      }
+      case "product": {
+        state.partner.partner = null;
         break;
       }
       case "authorisation": {
