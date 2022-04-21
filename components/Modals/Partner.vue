@@ -83,7 +83,10 @@
             </svg>
             График работы:
           </div>
-          <p class="partner-modal__content__information__item__content" contenteditable>
+          <p
+            class="partner-modal__content__information__item__content"
+            contenteditable
+          >
             Пн-Пт, 10:00-23:00; Сб-Вс, 12:00-22:00, без перерыва
           </p>
         </div>
@@ -132,7 +135,10 @@
             </svg>
             Адрес:
           </div>
-          <p class="partner-modal__content__information__item__content" contenteditable>
+          <p
+            class="partner-modal__content__information__item__content"
+            contenteditable
+          >
             Владикавказ, ул. Ленина 123
           </p>
         </div>
@@ -169,7 +175,10 @@
             </svg>
             +790 000 000 00
           </div>
-          <p class="partner-modal__content__information__item__content" contenteditable>
+          <p
+            class="partner-modal__content__information__item__content"
+            contenteditable
+          >
             +790 000 000 00
           </p>
         </div>
@@ -221,7 +230,6 @@
           <div
             class="partner-modal__content__information__item__content__subcontent"
           >
-           
             <div
               class="partner-modal__content__information__item__content__subcontent__item"
             >
@@ -231,7 +239,8 @@
                 Наименование:
               </p>
               <p
-                class="partner-modal__content__information__item__content__subcontent__item__value" contenteditable
+                class="partner-modal__content__information__item__content__subcontent__item__value"
+                contenteditable
               >
                 ООО “Лимончелло”
               </p>
@@ -245,7 +254,8 @@
                 ИНН:
               </p>
               <p
-                class="partner-modal__content__information__item__content__subcontent__item__value" contenteditable
+                class="partner-modal__content__information__item__content__subcontent__item__value"
+                contenteditable
               >
                 07788956
               </p>
@@ -259,7 +269,8 @@
                 ОГРН:
               </p>
               <p
-                class="partner-modal__content__information__item__content__subcontent__item__value" contenteditable
+                class="partner-modal__content__information__item__content__subcontent__item__value"
+                contenteditable
               >
                 08669934
               </p>
@@ -273,7 +284,8 @@
                 Юр. адрес:
               </p>
               <p
-                class="partner-modal__content__information__item__content__subcontent__item__value" contenteditable
+                class="partner-modal__content__information__item__content__subcontent__item__value"
+                contenteditable
               >
                 Владикавказ, ул. Ленина 123,<br />
                 подъезд 1, ваб. 13
@@ -293,10 +305,20 @@
   max-width: 1028px;
   padding: 60px;
   @media screen and (max-width: $notebook) {
-      padding: 45px;
+    padding: 45px;
+  }
+  @media screen and (max-width: $tablet) {
+      padding: 55px 24px 40px 24px;
     }
   &__title {
     margin-bottom: 30px;
+    @media screen and (max-width: $tablet) {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 20px;
+    }
   }
   &__close {
     cursor: pointer;
@@ -311,6 +333,10 @@
     @media screen and (max-width: $notebook) {
       padding: 30px;
     }
+    @media screen and (max-width: $tablet) {
+      padding: 0px;
+      border:none;
+    }
     padding: 50px;
     width: 100%;
     height: auto;
@@ -324,6 +350,9 @@
       height: auto;
       object-fit: contain;
       margin-bottom: 30px;
+      @media screen and (max-width: $tablet) {
+        margin-bottom: 36px;
+      }
     }
     &__description {
       display: flex;
@@ -338,6 +367,13 @@
         font-weight: 400;
         font-size: 14px;
         line-height: 22px;
+        @media screen and (max-width: $tablet) {
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+        }
       }
     }
     &__information {
@@ -370,6 +406,13 @@
           align-items: center;
           justify-content: flex-start;
           flex-direction: row;
+          @media screen and (max-width: $tablet) {
+            font-family: "SF Pro Display";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+          }
           &__icon {
             margin-right: 5px;
           }
@@ -381,6 +424,13 @@
           font-size: 14px;
           line-height: 20px;
           width: 100%;
+          @media screen and (max-width: $tablet) {
+            font-family: "SF Pro Display";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+          }
           &__subcontent {
             display: flex;
             align-items: flex-start;

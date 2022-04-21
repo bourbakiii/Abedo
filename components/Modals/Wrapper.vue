@@ -77,6 +77,8 @@ export default {
   padding-left: 5%;
   padding-right: 5%;
   overflow: auto;
-
+@media screen and (max-width:$tablet) {
+  padding:0px;
+}
 }
 </style>
