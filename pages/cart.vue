@@ -66,8 +66,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      margin-top: auto;
-      margin-bottom: auto;
+
       &__title {
         margin-bottom: 70px;
       }
