@@ -13,6 +13,10 @@
         v-else-if="$store.state.modals.rate.show"
         class="modals-wrapper__content modal-content"
       />
+      <ModalsPartner
+        v-else-if="$store.state.modals.partner.show"
+        class="modals-wrapper__content modal-content"
+      />
     </div>
   </transition>
 </template>

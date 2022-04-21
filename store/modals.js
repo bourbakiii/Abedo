@@ -6,6 +6,9 @@ export const state = () => ({
   rate: {
     show: false
   },
+  partner: {
+    show: true
+  },
   authorisation: {
     show: false,
   },
