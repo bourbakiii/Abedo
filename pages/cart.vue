@@ -20,7 +20,9 @@
         <p class="cart-page__content_empty__text">
           Вы пока ничего не добавили в корзину
         </p>
-        <ButtonStandart class="cart-page__content_empty__button">За покупками</ButtonStandart>
+        <ButtonStandart @action="()=>$router.push('/partners')" class="cart-page__content_empty__button"
+          >За покупками</ButtonStandart
+        >
       </div>
       <div v-else class="cart-page__content">
         <h1 class="cart-page__content_empty__title title-normal adaptive-non">
@@ -41,13 +43,19 @@
     margin-top: 17px;
     margin-bottom: 40px;
   }
+
   &__content {
     width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    height:100%;
+    &-wrapper {
+      @media screen and (max-width: $tablet) {
+        height: 100%;
+        flex-grow: 1;
+      }
+    }
     &__title {
       margin-bottom: 70px;
     }
@@ -66,12 +74,38 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-
       &__title {
-        margin-bottom: 70px;
+        margin-bottom: 68px;
+        @media screen and (max-width: $tablet) {
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+        }
+      }
+      &__icon {
+        @media screen and (max-width: $tablet) {
+          width: 120px;
+          height: 120px;
+          * {
+            fill: $extra_dark_grey;
+          }
+        }
       }
       &__text {
         margin: 58px 0px;
+        @media screen and (max-width: $tablet) {
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 20px;
+        }
+      }
+      &__button {
+        width: 228px;
+        height: 40px !important;
       }
     }
   }
