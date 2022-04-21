@@ -142,8 +142,8 @@
   flex-direction: row;
   border-radius: 10px;
   padding: 8px 10px;
-  margin-bottom: 15px;
   height: auto;
+  background-color: $white;
   &:last-of-type {
     margin-bottom: 0px;
   }

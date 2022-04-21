@@ -1,10 +1,10 @@
 <template>
   <div class="page partners-page wrapper">
     <div class="partners-page__content content">
-      <Breadcrumbs class="partners-page__breadcrumbs" />
+      <Breadcrumbs class="partners-page__breadcrumbs adaptive-non" />
       <div class="partners-page__top">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
-        <button class="partners-page__top__filter-button">
+        <button class="partners-page__top__filter-button adaptive-non">
           <svg
             class="partners-page__top__filter-button-icon"
             width="24"
@@ -76,13 +76,43 @@
           </svg>
           <p class="partners-page__top__filter-button-text">Фильтр</p>
         </button>
+        <button class="partners-page__top__filter-button_adaptive adaptive">
+          <svg
+            class="partners-page__top__filter-button__icon partners-page__top__filter-button_adaptive__icon"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16.9037 4.39324H7.97944C7.73409 3.66453 7.04483 3.13805 6.23444 3.13805C5.42405 3.13805 4.73479 3.66453 4.48944 4.39324H3.09644C2.77284 4.39324 2.5105 4.65559 2.5105 4.97918C2.5105 5.30277 2.77284 5.56512 3.09644 5.56512H4.48948C4.73483 6.29383 5.42409 6.82031 6.23448 6.82031C7.04487 6.82031 7.73413 6.29383 7.97948 5.56512H16.9037C17.2273 5.56512 17.4897 5.30277 17.4897 4.97918C17.4897 4.65559 17.2273 4.39324 16.9037 4.39324ZM6.23444 5.64844C5.86542 5.64844 5.56519 5.3482 5.56519 4.97918C5.56519 4.61016 5.86542 4.30992 6.23444 4.30992C6.60347 4.30992 6.9037 4.61016 6.9037 4.97918C6.9037 5.3482 6.60347 5.64844 6.23444 5.64844Z"
+              fill="#454545"
+            />
+            <path
+              d="M16.9037 9.41412H15.5107C15.2653 8.6854 14.576 8.15892 13.7657 8.15892C12.9553 8.15892 12.266 8.6854 12.0207 9.41412H3.09644C2.77284 9.41412 2.5105 9.67646 2.5105 10.0001C2.5105 10.3236 2.77284 10.586 3.09644 10.586H12.0207C12.266 11.3147 12.9553 11.8412 13.7657 11.8412C14.576 11.8412 15.2653 11.3147 15.5107 10.586H16.9037C17.2273 10.586 17.4897 10.3236 17.4897 10.0001C17.4897 9.67646 17.2273 9.41412 16.9037 9.41412ZM13.7657 10.6693C13.3967 10.6693 13.0964 10.3691 13.0964 10.0001C13.0964 9.63103 13.3967 9.3308 13.7657 9.3308C14.1347 9.3308 14.4349 9.63103 14.4349 10.0001C14.4349 10.3691 14.1347 10.6693 13.7657 10.6693Z"
+              fill="#454545"
+            />
+            <path
+              d="M16.9037 14.4349H10.4899C10.2445 13.7061 9.55526 13.1797 8.74487 13.1797C7.93448 13.1797 7.24522 13.7061 6.99987 14.4349H3.09644C2.77284 14.4349 2.5105 14.6972 2.5105 15.0208C2.5105 15.3444 2.77284 15.6067 3.09644 15.6067H6.99987C7.24522 16.3354 7.93448 16.8619 8.74487 16.8619C9.55526 16.8619 10.2445 16.3354 10.4899 15.6067H16.9037C17.2273 15.6067 17.4897 15.3444 17.4897 15.0208C17.4897 14.6972 17.2273 14.4349 16.9037 14.4349ZM8.74487 15.6901C8.37585 15.6901 8.07561 15.3899 8.07561 15.0208C8.07561 14.6518 8.37585 14.3516 8.74487 14.3516C9.1139 14.3516 9.41413 14.6518 9.41413 15.0208C9.41413 15.3898 9.1139 15.6901 8.74487 15.6901Z"
+              fill="#454545"
+            />
+          </svg>
+        </button>
       </div>
       <div class="partners-page__partners">
-        <CategorySidebar class="partners-page__partners__sidebar" />
+        <CategorySidebar
+          class="partners-page__partners__sidebar adaptive-non"
+        />
         <div class="partners-page__partners__content">
           <div class="partners-page__partners__content__cards">
             <ShopItem
-              class="partners-page__partners__content__cards__item"
+              class="partners-page__partners__content__cards__item adaptive-non"
+              v-for="item in 12"
+              :key="item"
+            />
+            <ShopAdaptive
+              class="partners-page__partners__content__cards__item_adaptive adaptive"
               v-for="item in 12"
               :key="item"
             />
@@ -116,6 +146,19 @@ export default {
     width: 100%;
     margin-top: 40px;
     margin-bottom: 70px;
+    @media screen and (max-width: $tablet) {
+      margin-top: 0px;
+      margin-bottom: 20px;
+    }
+    &__title {
+      @media screen and (max-width: $tablet) {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 20px;
+      }
+    }
     &__filter-button {
       height: 30px;
       width: 120px;
@@ -141,6 +184,12 @@ export default {
         transition: 0.05s;
         transform: scale(0.96);
       }
+      &_adaptive{
+        background-color: transparent;
+        border:none;
+        outline:none;
+        display: flex;align-items: center;justify-content: center;
+      }
     }
   }
   &__partners {
@@ -160,7 +209,7 @@ export default {
       max-width: 295px;
       @media screen and (max-width: $tablet) {
         width: 100%;
-        max-width:100%;
+        max-width: 100%;
         margin-right: 0px;
         margin-bottom: 30px;
       }
@@ -183,14 +232,27 @@ export default {
         @media screen and (max-width: $notebook) {
           grid-template-columns: repeat(2, 1fr);
         }
+        @media screen {
+          grid-template-columns: repeat(1, 1fr);
+          grid-gap: 15px;
+          width: 100%;
+        }
         &__item {
           width: 100%;
           overflow: hidden;
+          &_adaptive {
+            width: 100%;
+          }
         }
       }
       &__button {
         margin-top: 60px;
         background-color: $light_grey;
+        @media screen and (max-width: $tablet) {
+          margin-top: 30px;
+          width: 228px;
+          height: 40px !important;
+        }
       }
     }
   }

@@ -25,7 +25,6 @@
               fill="#454545"
             />
           </svg>
-
           <p class="catalog__top__filter-button-text">Фильтр</p>
         </button>
       </div>
