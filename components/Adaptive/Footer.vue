@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <NuxtLink to='/partners' class="footer__button">
+    <NuxtLink to="/partners" class="footer__button">
       <svg
         width="24"
         height="24"
@@ -22,7 +22,7 @@
         />
       </svg>
     </NuxtLink>
-    <NuxtLink to='#' class="footer__button">
+    <NuxtLink to="#" class="footer__button">
       <svg
         width="20"
         height="18"
@@ -36,7 +36,7 @@
         />
       </svg>
     </NuxtLink>
-    <NuxtLink to='/cart' class="footer__button">
+    <NuxtLink to="/cart" class="footer__button">
       <svg
         width="20"
         height="20"
@@ -50,7 +50,7 @@
         />
       </svg>
     </NuxtLink>
-    <NuxtLink to='/search' class="footer__button">
+    <NuxtLink to="/search" class="footer__button">
       <svg
         width="19"
         height="19"
@@ -64,7 +64,7 @@
         />
       </svg>
     </NuxtLink>
-    <NuxtLink to='#' class="footer__button">
+    <button @click.prevent='show_left_menu=true' class="footer__button">
       <svg
         width="24"
         height="24"
@@ -89,14 +89,26 @@
           fill="#212121"
         />
       </svg>
-    </NuxtLink>
+    </button>
+    <transition name="left-menu">
+    <LeftMenu v-if='show_left_menu' @close='show_left_menu=false;' class="footer__left-menu"/>
+    </transition>
   </div>
 </template>
+<script>
+export default {
+  data(){
+    return{
+      show_left_menu:false
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 .footer {
-    position: sticky;
-    bottom: 0px;
-    z-index: $z_navigation;
+  position: sticky;
+  bottom: 0px;
+  z-index: $z_navigation;
   width: 100%;
   height: 54px;
   background-color: $white;
@@ -104,10 +116,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 0px 34px;
-  &__button{
-      background-color: transparent;
-      outline: none;
-      border: none;
+  &__button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+  }
+  &__left-menu{
+    position: fixed;
+    top:0px;
+    left:0px;
   }
 }
 </style>

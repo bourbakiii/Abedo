@@ -57,11 +57,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;flex-direction: row;
-  svg * {
-    fill: $darkblue;
-    transition: 0.3s;
-  }
-
   &:hover {
     color: $white;
     background-color: $darkblue;

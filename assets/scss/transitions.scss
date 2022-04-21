@@ -1,61 +1,83 @@
+.page {
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
 
-.page{
-    &-enter,
-    &-leave-to {
-        opacity: 0;
-    }
-    
-    &-enter-active,
-    &-leave-active {
-        transition: all 0.2s ease;
-    }
-    &-move {
-        position: absolute;
-    }
-    }
-    
-    .modal-enter {
-        opacity: 0;
-    }
-    .modal-leave-to {
-        opacity: 0;
-        .content {
-            transform: scale(0.7);
-        }
-    }
-    .modal{
-        &-enter-active, & .content{
-            transition: all 0.5s;
-        }
-        &-enter-active .content{
-            animation: appear_modal 0.4s forwards;
-    
-        @keyframes appear_modal {
-            0%{
-                transform: scale(0);
-            }
-            50%{
-                transform: scale(1.02);
-            }
-            75%{
-                transform: scale(0.99);
-            }
-            100%{
-                transform: scale(1);
-            }
-        }
-    }
-        &-leave-active, & .content{
-            transition: all 0.3s;
-        }
-    }
-    
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.2s ease;
+  }
+  &-move {
+    position: absolute;
+  }
+}
 
-    .opacity{
-        &-enter, &-leave-to{
-            opacity:0;
-        }
-        &-enter-active, &-leave-active{
-            transition: all 0.3s !important;
-        }
+.modal-enter {
+  opacity: 0;
+}
+.modal-leave-to {
+  opacity: 0;
+  .content {
+    transform: scale(0.7);
+  }
+}
+.modal {
+  &-enter-active,
+  & .content {
+    transition: all 0.5s;
+  }
+  &-enter-active .content {
+    animation: appear_modal 0.4s forwards;
+
+    @keyframes appear_modal {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+      75% {
+        transform: scale(0.99);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
+  }
+  &-leave-active,
+  & .content {
+    transition: all 0.3s;
+  }
+}
+
+.opacity {
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.3s !important;
+  }
+}
+
+.left-menu {
+  &-enter {
+    opacity: 0;
+    .anim{
+        transform: translateX(-80%);
+    }
+  }
+  &-leave-to {
+    opacity: 0;
+    .anim{
+        transition: 0.1s;
+        transform: translateX(-80%);
+    }
+  }
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.3s;
+  }
+}
