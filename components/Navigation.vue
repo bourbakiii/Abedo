@@ -11,7 +11,9 @@
           class="navigation__logo-image"
         />
       </NuxtLink>
-      <ButtonStandart @action="()=>$router.push('/partners')" class="navigation__button"
+      <ButtonStandart
+        @action="() => $router.push('/partners')"
+        class="navigation__button"
         ><svg
           class="navigation__button__icon"
           width="24"
@@ -64,11 +66,11 @@
         Магазины</ButtonStandart
       >
       <div class="navigation__links">
-        <NuxtLink
-          to="/profile"
+        <button
           class="navigation__links-link navigation__links-link__dropdown"
-          @mouseenter.native="show_dropdown = true"
-          @mouseleave.native="show_dropdown = false"
+          @mouseenter.prevent="show_dropdown = true"
+          @mouseleave.prevent="show_dropdown = false"
+          @mousedown.prevent="show_dropdown = true"
         >
           <svg
             class="navigation__links-link-svg"
@@ -120,7 +122,7 @@
               </NuxtLink>
             </div>
           </transition>
-        </NuxtLink>
+        </button>
         <NuxtLink to="/stocks" class="navigation__links-link">
           <svg
             class="navigation__links-link-svg"
@@ -244,6 +246,14 @@ export default {
       show_dropdown: false,
     };
   },
+  watch: {
+    "$route.path": {
+      handler() {
+        this.show_dropdown = false;
+      },
+      deep: true,
+    },
+  },
 };
 </script>
 
@@ -294,16 +304,16 @@ export default {
     &__button {
       background-color: $darkblue;
       color: $white;
-      font-family: 'Montserrat';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 20px;
-      &__icon{
-        margin-right:10px;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      &__icon {
+        margin-right: 10px;
       }
       @media screen and (max-width: $notebook) {
-        &__icon{
+        &__icon {
           display: none;
         }
         transform: scale(0.9);
@@ -348,6 +358,9 @@ line-height: 20px;
         &__dropdown {
           position: relative;
           z-index: 10;
+          background-color: transparent;
+          border: none;
+          outline: none;
           &-content {
             background-color: $white;
             position: absolute;

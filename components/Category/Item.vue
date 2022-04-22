@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink to="#" class="category category-item">
+  <NuxtLink to="/category/1" class="category category-item">
     <img v-if="category.image" :src="category.image" class="category-image" />
     <!-- <img src="@/assets/images/category-item-image-placeholder.png" class="category-image" /> -->
     <p class="category-name">{{ category.name }}</p>
@@ -22,14 +22,13 @@
   border: 1px solid $orange;
   &:hover {
     background-color: $orange;
-   
   }
-  &:hover &{
-    &-image{
-      fill:$white;
+  &:hover & {
+    &-image {
+      fill: $white;
     }
-    &-name{
-    color: $white;
+    &-name {
+      color: $white;
     }
   }
   &-image {

@@ -51,6 +51,7 @@
     &__title {
       margin-bottom: 70px;
       align-self: flex-start;
+
     }
     &__inner {
       display: flex;
