@@ -239,7 +239,6 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
     max-width:100%;
-    overflow: hidden;
     &__breadcrumbs {
           margin-top: 20px;
           margin-bottom: 40px;
