@@ -55,8 +55,12 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
+    @media screen and (max-width: $notebook) {
+      grid-gap: 10px;
+    }
     @media screen and (max-width: $tablet) {
       grid-gap: 20px;
+      width:100%;
     }
     @media screen and (max-width: $phone) {
       grid-template-columns: repeat(2, 1fr);
@@ -65,6 +69,10 @@
     &__item {
       width: auto;
       overflow: hidden;
+    @media screen and (max-width: $tablet) {
+      width:100%;
+      overflow: hidden;
+    }
     }
   }
 }

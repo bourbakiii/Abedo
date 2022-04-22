@@ -1,59 +1,60 @@
 <template>
-  <div
+  <NuxtLink
+  to='/product/1'
     @click.self="openProductModal"
     class="product product-item product_in-cart"
   >
-    <div @click.self="openProductModal" class="product__discount">-10%</div>
+    <div @click.self="openProductModal" class="product-item__discount">-10%</div>
     <img
       @click.self="openProductModal"
       src="@/assets/images/product-item-placeholder.png"
-      class="product__image"
+      class="product-item__image"
     />
-    <div @click.self="openProductModal" class="product__info">
-      <p @click.self="openProductModal" class="product__info__name">
+    <div @click.self="openProductModal" class="product-item__info">
+      <p @click.self="openProductModal" class="product-item__info__name">
         Сырное ассорasdasd
       </p>
-      <div @click="openProductModal" class="product__info__prices adaptive-non">
-        <p class="product__info__prices__price">3 500 ₽</p>
-        <p class="product__info__prices__weight">/ 150 г</p>
-        <p class="product__info__prices__price_full">4000 ₽</p>
+      <div @click="openProductModal" class="product-item__info__prices adaptive-non">
+        <p class="product-item__info__prices__price">3 500 ₽</p>
+        <p class="product-item__info__prices__weight">/ 150 г</p>
+        <p class="product-item__info__prices__price_full">4000 ₽</p>
       </div>
-      <div class="product__info__weight adaptive" contenteditable>450 г</div>
+      <div class="product-item__info__weight adaptive" contenteditable>450 г</div>
       <div
         @click="openProductModal"
-        class="product__info__prices__mobile adaptive"
+        class="product-item__info__prices__mobile adaptive"
       >
-        <p class="product__info__prices__mobile__price" contenteditable>
+        <p class="product-item__info__prices__mobile__price" contenteditable>
           10 345 ₽
         </p>
-        <p class="product__info__prices__mobile__price_full" contenteditable>
+        <p class="product-item__info__prices__mobile__price_full" contenteditable>
           10 345 ₽
         </p>
       </div>
     </div>
-    <div @click.self="openProductModal" class="product__buttons">
+    <div @click.self="openProductModal" class="product-item__buttons">
       <ButtonStandart
         v-if="false"
-        class="product__buttons__button_add adaptive-non"
+        class="product-item__buttons__button_add adaptive-non"
       >
         В корзину
       </ButtonStandart>
-      <ButtonSmallCart class="product__buttons__button_add_small adaptive" />
+      <ButtonSmallCart class="product-item__buttons__button_add_small adaptive" />
       <div
         @click.self="openProductModal"
-        class="product__buttons__button_creases adaptive-non"
+        class="product-item__buttons__button_creases adaptive-non"
       >
         <ButtonProduct size="40" icon="minus" />
         <p
           @click.self="openProductModal"
-          class="product__buttons__button_creases__count"
+          class="product-item__buttons__button_creases__count"
         >
           10
         </p>
         <ButtonProduct size="40" icon="plus" />
       </div>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 <script>
 import productsMixin from "@/mixins/products-mixin.js";
@@ -63,7 +64,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.product {
+.product-item {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -73,6 +74,7 @@ export default {
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  text-decoration: none;
   @media screen and (max-width: $tablet) {
     border-radius: 8px;
     height: 249px;
@@ -206,7 +208,6 @@ export default {
           }
         }
       }
-
       &__price {
         font-family: "Montserrat";
         font-style: normal;

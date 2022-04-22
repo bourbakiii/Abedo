@@ -136,6 +136,7 @@ export default {};
     &__item{
       overflow: hidden;
       width:100%;
+     
     }
   }
   &__button{

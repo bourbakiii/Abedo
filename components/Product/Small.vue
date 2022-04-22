@@ -1,5 +1,5 @@
 <template>
-  <div @click.self='openProductModal' class="product product-small">
+  <NuxtLink to='/product/1' @click.self='openProductModal' class="product product-small">
     <img @click.self='openProductModal'
       src="@/assets/images/product-placeholder.png"
       class="product-small__image"
@@ -12,7 +12,7 @@
       <p class="product-small__info__weight">/ 150 г</p>
       <div class="product-small__info__full-price">450 ₽</div>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 <script>
 import productsMixin from '@/mixins/products-mixin.js'
@@ -27,7 +27,7 @@ $product_inner_padding: 9px;
   overflow: hidden;
   border: 1px solid $dark_grey;
   width:172px;
-  background-color: red;
+  text-decoration: none;
   &__image {
     height: 119px;
     width: 100%;

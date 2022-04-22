@@ -82,6 +82,10 @@
     &__item {
       overflow: hidden;
       width: 100%;
+       margin-bottom: 15px;
+      &:last-of-type{
+        margin-bottom: 0px;
+      }
     }
   }
   &__button {

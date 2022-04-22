@@ -5,14 +5,15 @@
       v-if="wrapper_show"
       class="modals-wrapper non-scrollbar"
     >
-      <ModalsProduct
-        v-if="$store.state.modals.product.show"
-        class="modals-wrapper__content modal-content"
-      />
+      
       <ModalsRate
-        v-else-if="$store.state.modals.rate.show"
+        v-if="$store.state.modals.rate.show"
         class="modals-wrapper__content modal-content"
       />
+      <!-- <ModalsProduct
+        v-else-if="$store.state.modals.product.show"
+        class="modals-wrapper__content modal-content"
+      /> -->
       <ModalsPartner
         v-else-if="$store.state.modals.partner.show"
         class="modals-wrapper__content modal-content"

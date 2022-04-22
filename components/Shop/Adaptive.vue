@@ -1,5 +1,5 @@
 <template>
-  <div class="shop-adaptive shop">
+  <NuxtLink to='/partners/1' class="shop-adaptive shop">
     <button class="shop-adaptive__favourite">
       <svg
         class="shop-adaptive__favourite__icon"
@@ -129,7 +129,7 @@
         fill="#5C6784"
       />
     </svg>
-  </div>
+  </NuxtLink>
 </template>
 <style lang="scss" scoped>
 .shop-adaptive {
@@ -144,6 +144,7 @@
   padding: 8px 10px;
   height: auto;
   background-color: $white;
+  text-decoration: none;
   &:last-of-type {
     margin-bottom: 0px;
   }

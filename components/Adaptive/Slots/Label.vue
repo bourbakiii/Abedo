@@ -1,6 +1,7 @@
 <template>
   <div class="navigation-slot navigation-slot-label">
     <svg
+    @click='$router.go(-1)'
       class="navigation-slot-label__back"
       width="12"
       height="18"
