@@ -239,7 +239,6 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
     max-width:100%;
-    overflow: hidden;
     &__breadcrumbs {
           margin-top: 20px;
           margin-bottom: 40px;
@@ -599,7 +598,7 @@ export default {
       &__sidebar {
         width: 294px;
         flex-shrink: 0;
-        position: sticky !important;
+        position: sticky;
         top: 125px;
         margin-left: 30px;
         @media screen and (max-width: $notebook) {
