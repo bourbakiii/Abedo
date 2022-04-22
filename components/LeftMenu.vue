@@ -71,7 +71,7 @@
           </svg>
           Мои данные</NuxtLink
         >
-        <NuxtLink to="/profile" class="left-menu__links__link">
+        <NuxtLink to="/adresses" class="left-menu__links__link">
           <svg
             class="left-menu__links__link__icon"
             width="20"
@@ -88,7 +88,7 @@
 
           Адреса доставок</NuxtLink
         >
-        <NuxtLink to="/profile" class="left-menu__links__link"
+        <NuxtLink to="/orders" class="left-menu__links__link"
           ><svg
             class="left-menu__links__link__icon"
             width="20"
@@ -121,7 +121,7 @@
           </svg>
           История заказов</NuxtLink
         >
-        <NuxtLink to="/profile" class="left-menu__links__link"
+        <NuxtLink to="/favourites" class="left-menu__links__link"
           ><svg
             class="left-menu__links__link__icon"
             width="20"
