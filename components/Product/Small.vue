@@ -1,13 +1,13 @@
 <template>
-  <NuxtLink to='/product/1' @click.self='openProductModal' class="product product-small">
-    <img @click.self='openProductModal'
+  <NuxtLink to='/product/1' class="product product-small">
+    <img
       src="@/assets/images/product-placeholder.png"
       class="product-small__image"
     />
-    <p @click.self='openProductModal' class="product-small__name">
+    <p class="product-small__name">
       Сырное ассорти
     </p>
-    <div @click.self='openProductModal' class="product-small__info">
+    <div class="product-small__info">
       <p class="product-small__info__price">350 ₽</p>
       <p class="product-small__info__weight">/ 150 г</p>
       <div class="product-small__info__full-price">450 ₽</div>

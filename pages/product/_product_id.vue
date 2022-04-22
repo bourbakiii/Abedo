@@ -6,7 +6,6 @@
       />
       <div class="product-page__over__content content">
         <div class="product-page__over__content__main">
-        
           <div
             class="product-page__over__content__main__images__adaptive__slider adaptive"
           >
@@ -16,8 +15,7 @@
             class="product-page__over__content__main__name title-extra-normal"
             contenteditable
           >
-            Сырное ассорaСырное ассорaСырное ассорaСырное ассорaСырное
-            ассорaСырное ассорaСырное ассорa
+            Сырное ассорти
           </h1>
           <div class="product-page__over__content__main__images adaptive-non">
             <div class="product-page__over__content__main__images__slider__wrapper">
@@ -235,6 +233,7 @@ export default {
 <style lang="scss" scoped>
 .product-page {
   &__over {
+    position: relative;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -600,8 +599,7 @@ export default {
       &__sidebar {
         width: 294px;
         flex-shrink: 0;
-        position: sticky;
-        top: 0px;
+        position: sticky !important;
         top: 125px;
         margin-left: 30px;
         @media screen and (max-width: $notebook) {

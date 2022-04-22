@@ -1,27 +1,26 @@
 <template>
   <NuxtLink
   to='/product/1'
-    @click.self="openProductModal"
     class="product product-item product_in-cart"
   >
-    <div @click.self="openProductModal" class="product-item__discount">-10%</div>
+    <div class="product-item__discount">-10%</div>
     <img
-      @click.self="openProductModal"
+     
       src="@/assets/images/product-item-placeholder.png"
       class="product-item__image"
     />
-    <div @click.self="openProductModal" class="product-item__info">
-      <p @click.self="openProductModal" class="product-item__info__name">
+    <div class="product-item__info">
+      <p class="product-item__info__name">
         Сырное ассорasdasd
       </p>
-      <div @click="openProductModal" class="product-item__info__prices adaptive-non">
+      <div  class="product-item__info__prices adaptive-non">
         <p class="product-item__info__prices__price">3 500 ₽</p>
         <p class="product-item__info__prices__weight">/ 150 г</p>
         <p class="product-item__info__prices__price_full">4000 ₽</p>
       </div>
       <div class="product-item__info__weight adaptive" contenteditable>450 г</div>
       <div
-        @click="openProductModal"
+        
         class="product-item__info__prices__mobile adaptive"
       >
         <p class="product-item__info__prices__mobile__price" contenteditable>
@@ -32,7 +31,7 @@
         </p>
       </div>
     </div>
-    <div @click.self="openProductModal" class="product-item__buttons">
+    <div class="product-item__buttons">
       <ButtonStandart
         v-if="false"
         class="product-item__buttons__button_add adaptive-non"
@@ -41,12 +40,12 @@
       </ButtonStandart>
       <ButtonSmallCart class="product-item__buttons__button_add_small adaptive" />
       <div
-        @click.self="openProductModal"
+       
         class="product-item__buttons__button_creases adaptive-non"
       >
         <ButtonProduct size="40" icon="minus" />
         <p
-          @click.self="openProductModal"
+         
           class="product-item__buttons__button_creases__count"
         >
           10
