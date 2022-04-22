@@ -140,6 +140,8 @@ export default {};
     height: 230px;
     border-radius: 20px;
     background: url("@/assets/images/shop-placeholder.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     overflow: hidden;
     &__content {
       display: flex;

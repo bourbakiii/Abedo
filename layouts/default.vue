@@ -9,4 +9,8 @@
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.default-layout{
+  background-color: $light_grey
+}
+</style>

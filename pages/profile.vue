@@ -1,7 +1,7 @@
 <template>
   <div class="page profile-page-wrapper wrapper">
     <div class="profile-page content">
-      <Breadcrumbs class="profile-page__breadcrumbs" />
+      <Breadcrumbs class="profile-page__breadcrumbs adaptive-non" />
       <h1 class="profile-page__title title-normal">Персональная информация</h1>
       <form class="profile-page__form">
         <div class="profile-page__form__content">
@@ -287,6 +287,14 @@ export default {
   }
   &__title {
     margin-bottom: 70px;
+    @media screen and (max-width: $tablet) {
+          font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 24px;
+margin-bottom:30px;
+        }
   }
   &__form {
     width: 100%;
@@ -304,6 +312,13 @@ export default {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 30px 76px;
+          @media screen and (max-width: $tablet) {
+            grid-gap: 30px;
+          }
+          @media screen and (max-width: $tablet) {
+            grid-template-columns: repeat(1, 1fr);
+             grid-gap: 15px;
+          }
       &__input-block {
         &__name {
           font-family: "SF Pro Display";

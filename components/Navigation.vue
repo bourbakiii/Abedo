@@ -183,7 +183,7 @@
             </defs>
           </svg>
         </NuxtLink>
-        <NuxtLink to="#" class="navigation__icons-icon">
+        <NuxtLink to="/favourites" class="navigation__icons-icon">
           <svg
             class="navigation__icons-icon-svg"
             width="20"

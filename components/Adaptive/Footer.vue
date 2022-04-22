@@ -22,7 +22,7 @@
         />
       </svg>
     </NuxtLink>
-    <NuxtLink to="#" class="footer__button">
+    <NuxtLink to="/favourites" class="footer__button">
       <svg
         width="20"
         height="18"

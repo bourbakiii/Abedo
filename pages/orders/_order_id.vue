@@ -7,7 +7,6 @@
       <div class="order-page__content__least">
         <p class="order-page__content__least__pre">Итого:</p>
         <p class="order-page__content__least__price" contenteditable>1 330 ₽</p>
-        
       </div>
        <button class="order-page__content__back">
           Вернуться к списку товаров
