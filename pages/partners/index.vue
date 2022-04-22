@@ -138,7 +138,6 @@ export default {
 .partners-page {
   align-items: center;
   justify-content: flex-start;
-  padding-bottom: 100px;
   &__top {
     display: flex;
     align-items: center;
@@ -184,11 +183,13 @@ export default {
         transition: 0.05s;
         transform: scale(0.96);
       }
-      &_adaptive{
+      &_adaptive {
         background-color: transparent;
-        border:none;
-        outline:none;
-        display: flex;align-items: center;justify-content: center;
+        border: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
@@ -207,6 +208,10 @@ export default {
       margin-right: 30px;
       width: 295px;
       max-width: 295px;
+      @media screen and (max-width: $notebook) {
+        margin-right: 10px;
+        width: 280px;
+      }
       @media screen and (max-width: $tablet) {
         width: 100%;
         max-width: 100%;
@@ -214,7 +219,6 @@ export default {
         margin-bottom: 30px;
       }
     }
-
     &__content {
       display: flex;
       flex-direction: column;
@@ -229,10 +233,13 @@ export default {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 30px;
+        @media screen and (max-width: $maxwidth) {
+          grid-gap: 15px;
+        }
         @media screen and (max-width: $notebook) {
           grid-template-columns: repeat(2, 1fr);
         }
-        @media screen {
+        @media screen and (max-width: $tablet) {
           grid-template-columns: repeat(1, 1fr);
           grid-gap: 15px;
           width: 100%;

@@ -43,7 +43,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .partner-page {
-  padding-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -234,7 +234,6 @@ export default {
 
 <style lang="scss" scoped>
 .product-page {
-  padding-bottom: 20px;
   &__over {
     display: flex;
     align-items: flex-start;

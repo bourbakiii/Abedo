@@ -276,7 +276,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .profile-page {
-  padding-bottom: 100px;
   &-wrapper {
     justify-content: flex-start;
     background-color: $light_grey;

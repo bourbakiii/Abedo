@@ -21,7 +21,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .stocks-page {
-  padding-bottom: 100px;
   &__content {
     &__breadcrumbs {
       margin-top: 20px;

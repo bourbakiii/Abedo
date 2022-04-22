@@ -41,7 +41,6 @@ export default {
 <style lang="scss" scoped>
 .search-page {
   display: flex;align-items: center;justify-content: flex-start;flex-direction:column;
-  padding-bottom: 100px;
   &__content {
     &__breadcrumbs {
       margin-top: 25px;

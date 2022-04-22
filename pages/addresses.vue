@@ -84,8 +84,6 @@
 </template>
 <style lang="scss" scoped>
 .addresses-page {
-  padding-bottom: 100px;
-
   &__content {
     flex-grow: 1;
     &__breadcrumbs {
