@@ -1,7 +1,7 @@
 <template>
   <div class="search-input-wrapper">
     <div class="search-input__content">
-    <h1 class="search-input__content__title title-small">Поиск заведения</h1>
+    <h1 class="search-input__content__title title-small adaptive">Поиск заведения</h1>
       <form @submit.prevent="search_request" class="search-input">
         <button class="search-input-button">
           <svg
@@ -86,6 +86,7 @@ export default {
 
 <style lang="scss" scoped>
 .search-input {
+  border: 1px solid $dark_grey;
   &__content {
     width: 100%;
     max-width: $maxwidth;

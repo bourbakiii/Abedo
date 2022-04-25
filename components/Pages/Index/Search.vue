@@ -177,7 +177,6 @@
             <ButtonStandart
               height="32"
               padding="30"
-              :uppercase="false"
               @action="watchAll"
               class="search__input__dropdown-content__watch-all-button"
             >Cмотреть все</ButtonStandart>
@@ -423,6 +422,8 @@ export default {
       }
       &__watch-all-button {
         margin-top: 15px;
+        background-color: $white;
+        text-transform: none;
       }
     }
     &-button {

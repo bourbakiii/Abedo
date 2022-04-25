@@ -31,6 +31,7 @@
 
 <style lang="scss" scoped>
 .index-page {
+  padding-bottom: 0px !important;
   &__content {
     &__search {
       width: 100vw;
@@ -39,6 +40,9 @@
     
     &__stocks-slider, &__new-shops{
       margin-bottom: 70px;
+    }
+    &__about{
+      width:100vw;
     }
     @media screen and (max-width: $tablet) {
     &__adaptive-categories{

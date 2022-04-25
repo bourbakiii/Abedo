@@ -10,11 +10,12 @@
 export default {};
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .about {
   &-wrapper {
     background-color: $blue_grey;
     padding: 70px 10px !important;
+    width: 100%;
   }
   width: 100%;
   max-width: $maxwidth;

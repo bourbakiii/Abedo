@@ -2,11 +2,11 @@
   <div class="page search-page wrapper">
     <div class="search-page__content content">
       <Breadcrumbs class="search-page__content__breadcrumbs adaptive-non" />
-      <PagesSearchInput class="search-page__content__search__input" />
+      <PagesSearchInput class="search-page__content__search-input" />
       <PagesSearchByCategories
         v-if="true"
         :categories="categories"
-        class="search-page__content__by-categories"
+        class="search-page__content__by-categories adaptive"
       />
       <PagesSearchFoundedShops
         v-if="true"
@@ -48,14 +48,9 @@ export default {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  &__content {
-
-    &__search__input {
-      margin: 50px 0px;
-    }
-    &__search__founded__shops,
-    &__search__founded__products {
-      margin-bottom: 70px;
+  &__content{
+    &__search-input{
+      margin-bottom: 50px;
     }
   }
 }
