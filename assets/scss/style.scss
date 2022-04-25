@@ -79,10 +79,12 @@ button {
 .page {
   width: 100%;
   flex-grow: 1;
-  padding-bottom: 100px !important;
   @media screen and (max-width: $tablet) {
+    padding-top: 30px !important;
     padding-bottom: 50px !important;
   }
+  padding-bottom: 100px !important;
+
 }
 .wrapper {
   width: 100%;

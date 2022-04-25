@@ -32,6 +32,9 @@
 <style lang="scss" scoped>
 .index-page {
   padding-bottom: 0px !important;
+  @media screen and (max-width: $tablet) {
+    padding-bottom: 50px !important;
+  }
   &__content {
     &__search {
       width: 100vw;

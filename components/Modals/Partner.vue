@@ -308,6 +308,7 @@
     padding: 45px;
   }
   @media screen and (max-width: $tablet) {
+    height:100%;
       padding: 55px 24px 40px 24px;
     }
   &__title {

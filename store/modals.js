@@ -1,10 +1,10 @@
 export const state = () => ({
-  product: {
-    show: false,
-    product: null,
-  },
+  // product: {
+  //   show: false,
+  //   product: null,
+  // },
   rate: {
-    show: true
+    show: false
   },
   partner: {
     show: false,

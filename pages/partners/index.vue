@@ -223,7 +223,6 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 40px;
     margin-bottom: 70px;
     @media screen and (max-width: $tablet) {
       margin-top: 0px;
@@ -303,8 +302,12 @@ export default {
           margin-right: 10px;
         }
       }
+      @media screen and (max-width: $tablet) {
+        margin: 30px 0px;
+      }
     }
   }
+
   &__partners {
     display: flex;
     align-items: flex-start;
