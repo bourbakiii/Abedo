@@ -8,7 +8,7 @@
       >
         <swiper-slide
           class="subsections__slide"
-          v-for="(stock, index) in 15"
+          v-for="(stock, index) in 7"
           :key="index"
         >
           <StockItem class="subsections__slide__item" />
@@ -61,7 +61,6 @@
         </svg>
       </button>
     </div>
-
     <div
       class="subsections__pagination swiper-pagination"
       slot="pagination"
@@ -82,7 +81,14 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: "auto",
+        slidesPerView: 1,
+        spaceBetween: 30,
+        breakpoints: {
+          550: {
+            slidesPerView: "auto",
+          spaceBetween: 0
+          },
+        },
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
@@ -131,12 +137,17 @@ export default {
       margin-right: 30px;
       width: 335px;
     }
+    @media screen and (max-width: $phone) {
+      margin-right: 0px;
+      width: 100%;
+    }
     &:last-of-type {
       margin-right: 0px;
     }
     &__item {
       width: 100%;
       height: auto;
+      max-width: 100%;
     }
   }
   &__pagination {
@@ -197,9 +208,6 @@ export default {
   }
   &-active {
     background-color: $orange;
-    @media screen and (max-width: $phone) {
-      width: $phone;
-    }
     @media screen and (max-width: $tablet) {
       background-color: $black;
     }

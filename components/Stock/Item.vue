@@ -30,17 +30,18 @@
     position: relative;
     width: 100%;
     max-width: 400px;
-    background-color: red;
   }
   position: relative;
   padding-bottom: calc(100% * (1 / 2));
-  @media screen and (max-width: $tablet) {
-    height: 134px;
+  @media screen and (max-width: $tablet){
+     height: 134px;
     width: 335px;
     padding-bottom: 0px;
-    // padding-bottom: calc(100% * (134 / 335));
   }
- 
+ @media screen and (max-width: $tablet){
+   width:100%;
+   height: 134px;
+ }
   &__content {
     position: absolute;
     top: 0px;
@@ -48,6 +49,8 @@
     right: 0px;
     bottom: 0px;
     padding: 20px;
+    width:100%;
+    height:100%;
     background-color: rgba($orange, 0.9);
     display: flex;
     align-items: flex-start;
