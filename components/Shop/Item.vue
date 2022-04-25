@@ -126,10 +126,6 @@
   </NuxtLink>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style lang="scss" scoped>
 .item {
   position: relative;

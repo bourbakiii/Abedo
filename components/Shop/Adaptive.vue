@@ -145,6 +145,31 @@
   height: auto;
   background-color: $white;
   text-decoration: none;
+  transition: $transition;
+  &:hover{
+      background-color: $darkblue;
+  }
+  &:hover &{
+    
+    &__favourite{
+      border-color: $white;
+      svg * {
+        fill: white;
+      }
+    }
+    &__info{
+      &__name{
+        color:$white;
+      }
+      &__category{
+        color: $white;
+      }
+    }
+    &__icon * {
+        fill: white;
+      }
+   
+  }
   &:last-of-type {
     margin-bottom: 0px;
   }
