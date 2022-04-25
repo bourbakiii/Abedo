@@ -1,5 +1,5 @@
 <template>
-  <div class="subsections__wrapper non-adaptive-wrapper">
+  <div class="subsections__wrapper">
     <div class="subsections__content">
       <swiper
         :auto-destroy="false"
@@ -86,7 +86,7 @@ export default {
         breakpoints: {
           550: {
             slidesPerView: "auto",
-          spaceBetween: 0
+            spaceBetween: 0,
           },
         },
         pagination: {
@@ -111,7 +111,7 @@ export default {
     position: relative;
     max-width: 100%;
     width: 100%;
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 
     @media screen and (max-width: calc($maxwidth + 60px)) {
       width: calc(100% - 60px);
@@ -149,9 +149,9 @@ export default {
     &__item {
       width: 100%;
       height: auto;
-       @media screen and (max-width: $tablet) {
-      max-width: 100%;
-       }
+      @media screen and (max-width: $tablet) {
+        max-width: 100%;
+      }
     }
   }
   &__pagination {
@@ -194,26 +194,28 @@ export default {
 }
 </style>
 <style lang="scss">
-.swiper-pagination-bullet {
-  background-color: $darkblue;
-  opacity: 1;
-  width: 10px;
-  height: 10px;
-  margin-right: 9px;
-  @media screen and (max-width: $tablet) {
-    width: 8px;
-    height: 8px;
-    border: 1px solid $black;
-    background-color: transparent;
-    margin-right: 10px;
-  }
-  &:last-of-type {
-    margin-right: 0px;
-  }
-  &-active {
-    background-color: $orange;
+.swiper-pagination {
+  &-bullet {
+    background-color: $darkblue;
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+    margin-right: 9px;
     @media screen and (max-width: $tablet) {
-      background-color: $black;
+      width: 8px;
+      height: 8px;
+      border: 1px solid $black;
+      background-color: transparent;
+      margin-right: 10px;
+    }
+    &:last-of-type {
+      margin-right: 0px;
+    }
+    &-active {
+      background-color: $orange;
+      @media screen and (max-width: $tablet) {
+        background-color: $black;
+      }
     }
   }
 }

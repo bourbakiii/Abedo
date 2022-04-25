@@ -1,5 +1,5 @@
 <template>
-  <div class="adaptive-categories wrapper non-adaptive-wrapper">
+  <div class="adaptive-categories wrapper adaptive-non-wrapper">
     <h1 class="adaptive-categories__title title-small">Категории</h1>
     <div class="adaptive-categories__content">
       <CategoryAdaptive
