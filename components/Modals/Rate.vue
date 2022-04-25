@@ -394,10 +394,10 @@ export default {
               justify-content: center;
               margin-right: 10px;
               &__icon {
-                transition: 0.3s;
+                transition: $transition;
                 transform: scale(0);
                 * {
-                  transition: 0.3s;
+                  transition: $transition;
                   fill: transparent;
                 }
               }

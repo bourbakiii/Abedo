@@ -267,7 +267,7 @@ export default {
   box-sizing: border-box;
   padding: 5px 10px;
   z-index: $z_navigation;
-  transition: height 0.3s;
+  transition: height $transition;
   .delete-note {
     @media screen and (max-width: $notebook) {
       display: none;
@@ -287,7 +287,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     > * {
-      transition: transform 0.3s !important;
+      transition: transform $transition !important;
     }
     &__logo {
       display: flex;
@@ -388,7 +388,7 @@ export default {
               align-items: center;
               justify-content: flex-start;
               flex-direction: row;
-              transition: 0.3s;
+              transition: $transition;
               &:active {
                 transform: scale(0.98);
               }
@@ -419,9 +419,9 @@ export default {
         justify-content: center;
         border-radius: 90px;
         border: 1px solid $extra_dark_grey;
-        transition: 0.3s;
+        transition: $transition;
         * {
-          transition: 0.3s;
+          transition: $transition;
         }
         &:hover {
           border-color: $darkblue;
@@ -484,7 +484,7 @@ export default {
         }
       }
       &__text {
-        transition: 0.3s;
+        transition: $transition;
         font-family: "Montserrat";
         font-style: normal;
         font-weight: 400;

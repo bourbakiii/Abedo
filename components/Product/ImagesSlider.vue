@@ -47,6 +47,7 @@ export default {
     border: 1px solid black;
   }
   &-pagination {
+    width:100%;
     position: absolute;
     bottom: -20px;
     left: 50%;

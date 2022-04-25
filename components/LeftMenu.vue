@@ -359,7 +359,7 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   padding: 15px 20px;
-  transition: all 0.3s;
+  transition: all $transition;
   &__logo {
     display: flex;
     align-items: center;

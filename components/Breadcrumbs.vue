@@ -21,7 +21,7 @@
     align-items: center;
     color: $extra_dark_grey;
     position: relative;
-    transition: 0.3s;
+    transition: $transition;
     cursor: pointer;
 
     &:last-of-type {

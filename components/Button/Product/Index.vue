@@ -65,7 +65,18 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.3s;
+  transition: $transition;
   background-color: $white;
+  svg *{
+    transition: $transition;
+  }
+  &:hover, &:active{
+    background-color: $darkblue;
+    border: 1px solid $darkblue;
+    svg * {
+      fill: $white;
+      stroke: $white;
+    }
+  }
 }
 </style>

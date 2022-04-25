@@ -26,7 +26,7 @@
     background-size: cover;
     position: relative;
     overflow: hidden;
-    transition: 0.3s;
+    transition: $transition;
     position: relative;
     width: 100%;
     max-width: 400px;

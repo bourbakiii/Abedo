@@ -240,7 +240,7 @@ export default {};
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: 0.3s;
+        transition: $transition;
 
         &:hover {
           border-color: $white;

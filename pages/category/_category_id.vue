@@ -151,7 +151,7 @@ line-height: 20px;
       width: 120px;
       background-color: $white;
       border-radius: 5px;
-      transition: 0.3s;
+      transition: $transition;
       border: none;
       outline: none;
       display: flex;

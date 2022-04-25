@@ -105,7 +105,7 @@ export default {};
       width: 120px;
       background-color: $light_grey;
       border-radius: 5px;
-      transition: 0.3s;
+      transition: $transition;
       border: none;
       outline: none;
       display: flex;

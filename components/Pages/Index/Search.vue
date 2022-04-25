@@ -433,7 +433,7 @@ export default {
       &-close {
         margin-left: 0px 8px !important;
       }
-      transition: 0.3s;
+      transition: $transition;
       
     }
     &-input {

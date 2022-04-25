@@ -60,6 +60,18 @@ export default {
   width: 18px;
   border-radius: 90px;
   border: 1px solid $darkblue;
+  transition: $transition;
+  cursor: pointer;
+  svg * {
+  transition: $transition;
+
+  }
+  &:hover, &:active{
+    background-color: $darkblue;
+    svg * {
+      stroke: $white;
+    }
+  }
   &__wrapper{
     cursor: pointer;
   }

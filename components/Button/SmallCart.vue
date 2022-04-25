@@ -40,5 +40,9 @@
         border: none;
         outline: none;
         border-radius: 7px;
+        transition: $transition;
+        &:hover, &:active{
+          background-color: $green;
+        }
       }
 </style>

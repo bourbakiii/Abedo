@@ -28,3 +28,13 @@
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.index-page {
+  &__content{
+  &__search {
+    width:100vw;
+  }
+  }
+}
+</style>

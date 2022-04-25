@@ -15,9 +15,9 @@
   flex-direction: row;
   text-decoration: none;
   border-radius: 50px;
-  transition: 0.3s;
+  transition: $transition;
   * {
-    transition: 0.3s;
+    transition: $transition;
   }
   border: 1px solid $orange;
   &:hover {

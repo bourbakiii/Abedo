@@ -47,7 +47,7 @@
   }
   &-leave-active,
   & .content {
-    transition: all 0.3s;
+    transition: all $transition;
   }
 }
 
@@ -58,7 +58,7 @@
   }
   &-enter-active,
   &-leave-active {
-    transition: all 0.3s !important;
+    transition: all $transition !important;
   }
 }
 
@@ -78,6 +78,6 @@
   }
   &-enter-active,
   &-leave-active {
-    transition: all 0.3s;
+    transition: all $transition;
   }
 }

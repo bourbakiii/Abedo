@@ -47,7 +47,7 @@ export default {
   color: $darkblue;
   padding: 0px 85px;
   background-color: $white;
-  transition: 0.3s;
+  transition: $transition;
   font-family: "SF Pro Display";
   font-style: normal;
   font-weight: 400;

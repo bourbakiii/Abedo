@@ -60,9 +60,9 @@
       outline: none;
       border-bottom: 1px solid $dark_grey;
       *{
-          transition: 0.3s;
+          transition: $transition;
       }
-      transition: 0.3s;
+      transition: $transition;
       &:hover & {
         &__icon *,
         &__image * {

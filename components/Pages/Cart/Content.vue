@@ -319,7 +319,7 @@
         background-color: transparent;
         border: none;
         outline: none;
-        transition: 0.3s;
+        transition: $transition;
         &:active {
           transition: 0.05s;
           transform: scale(0.8);

@@ -100,7 +100,7 @@ export default {
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    transition: 0.3s;
+    transition: $transition;
     &__pre {
       margin-right: 1ex;
     }

@@ -250,9 +250,9 @@ export default {};
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: 0.3s;
+          transition: $transition;
           * {
-            transition: 0.3s;
+            transition: $transition;
             fill: $white;
           }
           &:hover {

@@ -246,6 +246,7 @@ export default {
 
 <style lang="scss" scoped>
 .product-page {
+  justify-content: flex-start;
   &__over {
     position: relative;
     display: flex;

@@ -38,7 +38,7 @@
     width: 25%;
     height: 100%;
     background-color: $darkblue;
-    transition: 0.3s;
+    transition: $transition;
     
   }
   &__name {
