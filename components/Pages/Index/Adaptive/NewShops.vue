@@ -1,5 +1,5 @@
 <template>
-  <div class="new-shops catalog-wrapper wrapper">
+  <div class="new-shops catalog-wrapper wrapper non-adaptive-wrapper">
     <div class="catalog">
       <div class="catalog__top">
         <h1 class="catalog__top__title title-small">Новые магазины</h1>

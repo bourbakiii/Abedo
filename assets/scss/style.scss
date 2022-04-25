@@ -90,6 +90,11 @@ button {
   @media screen and (max-width: $tablet) {
     padding: 0px 20px;
   }
+  &.adaptive-non-wrapper{
+    @media screen and (max-width: $tablet) {
+      padding: 0px;
+    }
+  }
 }
 .content {
   width: 100%;

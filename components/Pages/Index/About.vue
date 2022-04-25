@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper about-wrapper">
+  <div class="non-adaptive-wrapper wrapper about-wrapper">
     <div class="about">
       <slot />
     </div>

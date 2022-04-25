@@ -1,5 +1,5 @@
 <template>
-  <div class="search-wrapper index-page-search wrapper">
+  <div class="search-wrapper index-page-search wrapper non-adaptive-wrapper">
     <div class="search">
       <h1 class="title title-big lightblack">Быстрая доставка еды</h1>
       <form @submit.prevent="search" class="search__input">

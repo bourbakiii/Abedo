@@ -1,5 +1,5 @@
 <template>
-  <div class="subsections__wrapper">
+  <div class="subsections__wrapper non-adaptive-wrapper">
     <div class="subsections__content">
       <swiper
         :auto-destroy="false"
@@ -111,6 +111,8 @@ export default {
     position: relative;
     max-width: 100%;
     width: 100%;
+  margin-bottom: 30px;
+
     @media screen and (max-width: calc($maxwidth + 60px)) {
       width: calc(100% - 60px);
       max-width: calc(100% - 60px);
@@ -147,7 +149,9 @@ export default {
     &__item {
       width: 100%;
       height: auto;
+       @media screen and (max-width: $tablet) {
       max-width: 100%;
+       }
     }
   }
   &__pagination {
