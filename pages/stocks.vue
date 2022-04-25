@@ -26,13 +26,14 @@ export default {
     &__title {
       margin-bottom: 70px;
       align-self: flex-start;
-      @media screen and (max-width: $tablet_middle) {
+      @media screen and (max-width: $tablet) {
         margin-bottom: 40px;
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 700;
         font-size: 20px;
         line-height: 20px;
+        margin-top:20px;
       }
     }
     &__content {
@@ -42,7 +43,11 @@ export default {
       grid-gap: 30px;
       @media screen and (max-width: $notebook) {
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 20px;
+        grid-gap: 30px;
+      }
+      @media screen and (max-width: $tablet) {
+        grid-gap: 15px;
+
       }
       @media screen and (max-width: $tablet_middle) {
         grid-template-columns: repeat(1, 1fr);
@@ -50,6 +55,10 @@ export default {
       &__item {
         width: 100%;
         overflow: hidden;
+        @media screen and (max-width: $notebook) {
+          width:100%;
+          max-width: 100%;
+        }
       }
     }
   }
