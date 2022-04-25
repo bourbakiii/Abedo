@@ -36,7 +36,7 @@
         />
       </svg>
     </NuxtLink>
-    <NuxtLink to="/cart" class="footer__button">
+    <NuxtLink to="/cart" class="footer__button footer__button_cart">
       <svg
         width="20"
         height="20"
@@ -49,6 +49,7 @@
           fill="#212121"
         />
       </svg>
+      <div class="footer__button_cart__count" contenteditable>12</div>
     </NuxtLink>
     <NuxtLink to="/search" class="footer__button">
       <svg
@@ -64,7 +65,7 @@
         />
       </svg>
     </NuxtLink>
-    <button @click.prevent='show_left_menu=true' class="footer__button">
+    <button @click.prevent="show_left_menu = true" class="footer__button">
       <svg
         width="24"
         height="24"
@@ -91,18 +92,22 @@
       </svg>
     </button>
     <transition name="left-menu">
-    <LeftMenu v-if='show_left_menu' @close='show_left_menu=false;' class="footer__left-menu"/>
+      <LeftMenu
+        v-if="show_left_menu"
+        @close="show_left_menu = false"
+        class="footer__left-menu"
+      />
     </transition>
   </div>
 </template>
 <script>
 export default {
-  data(){
-    return{
-      show_left_menu:false
-    }
-  }
-}
+  data() {
+    return {
+      show_left_menu: false,
+    };
+  },
+};
 </script>
 <style lang="scss" scoped>
 .footer {
@@ -116,15 +121,58 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0px 34px;
+
   &__button {
     background-color: transparent;
     outline: none;
     border: none;
+    &.nuxt-link-active {
+      svg * {
+        fill: $darkblue;
+      }
+    }
+    svg * {
+      transition: $transition;
+    }
+    &:active,
+    &:hover {
+      svg * {
+        fill: $darkblue;
+      }
+    }
+
+    &_cart {
+      position: relative;
+      &__count {
+        position: absolute;
+        min-width: 20px;
+        width: auto;
+        height: 20px;
+        background-color: $red;
+        color: $white;
+        border-radius: 90px;
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 13px;
+        padding: 0px 4px;
+        top: 0px;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        white-space: nowrap;
+        left: 100%;
+        transform: translate(-50%, -50%);
+      }
+    }
   }
-  &__left-menu{
+  &__left-menu {
     position: fixed;
-    top:0px;
-    left:0px;
+    top: 0px;
+    left: 0px;
   }
 }
 </style>
