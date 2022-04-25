@@ -11,7 +11,6 @@
 
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "@/assets/scss/swiper/product-images-slider.scss";
 
 export default {
   name: "swiper-example-pagination",

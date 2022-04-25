@@ -1,8 +1,8 @@
 <template>
     <div class="page test-page wrapper">
         <div class="test-page__content content">
-        <!-- <PagesIndexStocksSlider /> -->
-        <StockItem/>
+        <PagesIndexStocksSlider class="test-page__content__slider"/>
+        <!-- <StockItem class="test-page__content__stock"/> -->
         </div>
     </div>
 </template>
