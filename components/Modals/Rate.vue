@@ -226,9 +226,21 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   position: relative;
+  @media screen and (max-width: $tablet) {
+    padding: 55px 24px 24px;
+    height:100%;
+  }
   &__title {
     align-self: flex-start;
     margin-bottom: 50px;
+    @media screen and (max-width: $tablet){
+      font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 20px;
+margin-bottom: 30px;
+    }
   }
   &__close {
     cursor: pointer;
@@ -238,6 +250,10 @@ export default {
     position: absolute;
     right: 30px;
     top: 30px;
+     @media screen and (max-width: $tablet){
+       right:24px;
+       top:24px;
+     }
   }
   &__content {
     width: 100%;
@@ -251,6 +267,9 @@ export default {
       align-items: center;
       justify-content: flex-start;
       flex-direction: row;
+       @media screen and (max-width: $tablet) {
+      width:100%;
+       }
       &__button {
         width: 287px;
         height: 60px;
@@ -264,7 +283,12 @@ export default {
         line-height: 19px;
         color: $extra_dark_grey;
         border-radius: 20px 20px 0px 0px;
-
+        @media screen and (max-width: $tablet) {
+          width:50%;
+          height:50px;
+          font-size: 14px;
+        line-height: 17px;
+        }
         &:last-of-type {
           margin-right: 0px;
         }
@@ -282,6 +306,9 @@ export default {
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      @media screen and (max-width:$tablet) {
+        margin-top:30px;
+      }
       &__tab {
         width: 100%;
         max-width: 100%;
@@ -318,6 +345,13 @@ export default {
         }
         &__title {
           margin: 30px 0px;
+          @media screen and (max-width: $tablet) {
+            font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 20px;
+          }
         }
         &__content {
           display: grid;
@@ -325,6 +359,12 @@ export default {
           grid-gap: 30px;
           width: 100%;
           max-width: 100%;
+          @media screen and (max-width: $notebook) {
+             grid-gap: 10px;
+          }
+          @media screen and (max-width: $tablet_middle) {
+             grid-template-columns: repeat(1, 1fr);
+          }
           &__input-block {
             max-width: 100%;
             display: flex;
@@ -352,6 +392,9 @@ export default {
               font-size: 14px;
               line-height: 20px;
               outline: none;
+                @media screen and (max-width: $notebook) {
+                  padding: 0px 15px;
+                }
               &::placeholder {
                 color: $extra_dark_grey;
               }
@@ -363,6 +406,12 @@ export default {
               min-height: 160px;
               border-radius: 20px;
               padding: 20px 30px;
+              @media screen and (max-width: $notebook) {
+                  padding: 15px;
+                }
+                 @media screen and (max-width: $tablet_middle) {
+                   grid-column-end: 2;
+                 }
             }
           }
         }
@@ -373,10 +422,18 @@ export default {
           justify-self: flex-start;
           flex-direction: row;
           flex-wrap: wrap;
+          @media screen and (max-width: $tablet) {
+            flex-direction: column;
+            align-items: flex-start;justify-content: flex-start;flex-direction:column;
+          }
           &__button {
             padding: 0px 30px;
             height: 40px !important;
             margin-right: 30px;
+            @media screen and (max-width: $tablet) {
+              margin-right:0px;
+              margin-bottom: 10px;
+            }
           }
           &__politics {
             display: flex;

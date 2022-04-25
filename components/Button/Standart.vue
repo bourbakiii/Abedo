@@ -5,7 +5,7 @@
       parseInt(height) +
       'px; padding: 0px ' +
       parseInt(padding) +
-      'px; text-transform: '"
+      'px;'"
     @click.prevent="$emit('action')"
     class="button button-standart"
   >
@@ -50,8 +50,8 @@ export default {
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  text-transform: uppercase;
   display: flex;
+  background-color: transparent;
   align-items: center;
   justify-content: center;flex-direction: row;
   &:hover {
