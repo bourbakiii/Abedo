@@ -1,7 +1,7 @@
 <template>
   <div class="partner-stocks">
-    <StockItem class="partner-stocks__item" />
-    <StockItem class="partner-stocks__item" />
+    <Stock class="partner-stocks__item" />
+    <Stock class="partner-stocks__item" />
   </div>
 </template>
 

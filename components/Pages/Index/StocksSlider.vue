@@ -11,7 +11,7 @@
           v-for="(stock, index) in 7"
           :key="index"
         >
-          <StockItem class="subsections__slide__item" />
+          <Stock class="subsections__slide__item" />
         </swiper-slide>
       </swiper>
       <button

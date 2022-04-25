@@ -11,6 +11,8 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
+  margin-top: 20px;
+  margin-bottom: 40px;
   &__item {
     font-family: "Montserrat";
     font-style: normal;

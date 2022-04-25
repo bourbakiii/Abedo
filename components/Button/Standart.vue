@@ -5,9 +5,7 @@
       parseInt(height) +
       'px; padding: 0px ' +
       parseInt(padding) +
-      'px; text-transform: ' +
-      (uppercase ? 'uppercase;' : 'none;')
-    "
+      'px; text-transform: '"
     @click.prevent="$emit('action')"
     class="button button-standart"
   >
@@ -46,7 +44,6 @@ export default {
   border: 1px solid $darkblue;
   color: $darkblue;
   padding: 0px 85px;
-  background-color: $white;
   transition: $transition;
   font-family: "SF Pro Display";
   font-style: normal;

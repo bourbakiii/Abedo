@@ -31,10 +31,26 @@
 
 <style lang="scss" scoped>
 .index-page {
-  &__content{
-  &__search {
-    width:100vw;
+  &__content {
+    &__search {
+      width: 100vw;
+      margin-bottom: 70px;
+    }
+    
+    &__stocks-slider, &__new-shops{
+      margin-bottom: 70px;
+    }
+    @media screen and (max-width: $tablet) {
+    &__adaptive-categories{
+      margin:30px 0px;
+    }  
+     &__stocks-slider{
+       margin-bottom: 60px;
+     }
+    }
   }
+  @media screen and (max-width: $tablet) {
+    padding-bottom: 30px;
   }
 }
 </style>

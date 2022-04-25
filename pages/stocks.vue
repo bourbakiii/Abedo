@@ -4,7 +4,7 @@
       <Breadcrumbs class="stocks-page__content__breadcrumbs adaptive-non" />
       <h1 class="stocks-page__content__title title-normal">Список партнеров</h1>
       <div class="stocks-page__content__content">
-        <StockItem
+        <Stock
           class="stocks-page__content__content__item"
           v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9]"
           :key="item"
