@@ -24,16 +24,8 @@
                   class="product-page__over__content__main__images__slider__swiper"
                   :options="swiperOption"
                 >
-                  <swiper-slide>Slide 1</swiper-slide>
-                  <swiper-slide>Slide 2</swiper-slide>
-                  <swiper-slide>Slide 3</swiper-slide>
-                  <swiper-slide>Slide 4</swiper-slide>
-                  <swiper-slide>Slide 5</swiper-slide>
-                  <swiper-slide>Slide 6</swiper-slide>
-                  <swiper-slide>Slide 7</swiper-slide>
-                  <swiper-slide>Slide 8</swiper-slide>
-                  <swiper-slide>Slide 9</swiper-slide>
-                  <swiper-slide>Slide 10</swiper-slide>
+                  <swiper-slide v-for='(slide,index) in index' :key='index'>Slide {{index}}</swiper-slide>
+                  
                 </swiper>
               </div>
             </div>
@@ -141,7 +133,10 @@
                     </p>
                     <span
                       class="product-page__over__content__main__additional__information__options__content__item__checkbox"
-                    ></span>
+                    >
+                    
+                    
+                    </span>
                     <p
                       class="product-page__over__content__main__additional__information__options__content__item__price"
                       contenteditable

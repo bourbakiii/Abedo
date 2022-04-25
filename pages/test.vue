@@ -1,17 +1,23 @@
 <template>
-    <div class="page test-page wrapper">
-        <div class="test-page__content content">
-        <PagesIndexStocksSlider class="test-page__content__slider"/>
-        <!-- <StockItem class="test-page__content__stock"/> -->
-        </div>
+  <div class="page test-page wrapper">
+    <div class="test-page__content content">
+      {{ payment_type }}
+      <Radiobutton id="some_id" value="baz" v-model="payment_type" />
+      <Radiobutton id="1" value="12" v-model="payment_type" />
     </div>
+  </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      ya: [],
+      payment_type: "",
+    };
+  },
+};
+</script>
 <style lang="scss" scoped>
-.test-page{
-    &__content{
-    justify-content: center;align-items: center;
-    background-color: rgba(0,0,0,.1);
-    height: 100%; flex-grow: 1;
-    }
+.test-page {
 }
 </style>

@@ -115,7 +115,7 @@
     <div class="order__payment">
       <h3 class="order__payment__title title-extra-normal">Оплата</h3>
       <label class="order__payment__item">
-        <RadiobuttonStandart
+        <Radiobutton
           class="order__payment__item__radio"
           name="payment_type"
           id="payment_type-0"
@@ -126,7 +126,7 @@
         <p class="order__payment__item__name">Наличными при получении</p>
       </label>
       <label class="order__payment__item">
-        <RadiobuttonStandart
+        <Radiobutton
           class="order__payment__item__radio"
           name="payment_type"
           id="payment_type-1"

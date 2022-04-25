@@ -1,0 +1,97 @@
+<template>
+  <div class="checkbox_standart__wrapper">
+    <input
+      class="checkbox_standart__input"
+      type="checkbox"
+      :id="id"
+      :checked="isChecked"
+      :value="value"
+      @change="updateInput"
+    />
+    <label class="checkbox_standart" :for="id">
+      <svg
+        class="checkbox_standart__icon"
+        width="10"
+        height="8"
+        viewBox="0 0 10 8"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M1 4L4 7L9 1" stroke="#5C6784" stroke-width="1.2" />
+      </svg>
+    </label>
+  </div>
+</template>
+<script>
+export default {
+  model: {
+    prop: "modelValue",
+    event: "change",
+  },
+  props: {
+    id: { required: true },
+    value: { type: String },
+    modelValue: { default: "" },
+    trueValue: { default: true },
+    falseValue: { default: false },
+  },
+  computed: {
+    isChecked() {
+      if (this.modelValue instanceof Array) {
+        return this.modelValue.includes(this.value);
+      }
+      return this.modelValue === this.trueValue;
+    },
+  },
+  methods: {
+    updateInput(event) {
+      let isChecked = event.target.checked;
+      if (this.modelValue instanceof Array) {
+        let newValue = [...this.modelValue];
+        if (isChecked) {
+          newValue.push(this.value);
+        } else {
+          newValue.splice(newValue.indexOf(this.value), 1);
+        }
+        this.$emit("change", newValue);
+      } else {
+        this.$emit("change", isChecked ? this.trueValue : this.falseValue);
+      }
+    },
+  },
+};
+</script>
+<style lang="scss" scoped>
+.checkbox_standart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  border-radius: 90px;
+  border: 1px solid $darkblue;
+  transition: $transition;
+  cursor: pointer;
+  svg * {
+    transition: $transition;
+  }
+  &:active {
+    background-color: $darkblue;
+    svg * {
+      stroke: $white;
+    }
+  }
+  &__wrapper {
+    cursor: pointer;
+  }
+  &__input:checked ~ label {
+    background-color: $darkblue;
+    * {
+      stroke: $white;
+    }
+  }
+  &__input {
+    display: none;
+  }
+}
+</style>
