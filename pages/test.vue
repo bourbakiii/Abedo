@@ -1,9 +1,8 @@
 <template>
   <div class="page test-page wrapper">
     <div class="test-page__content content">
-      {{ payment_type }}
-      <Radiobutton id="some_id" value="baz" v-model="payment_type" />
-      <Radiobutton id="1" value="12" v-model="payment_type" />
+      {{ ya }}
+      <Checkbox id="some_id" value="baz" v-model="ya" />
     </div>
   </div>
 </template>
@@ -17,7 +16,4 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.test-page {
-}
-</style>
+

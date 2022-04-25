@@ -1,27 +1,25 @@
 <template>
-  <div class="checkbox_standart__wrapper">
+  <label class="checkbox">
     <input
-      class="checkbox_standart__input"
+      class="checkbox__input"
       type="checkbox"
-      :id="id"
       :checked="isChecked"
       :value="value"
       @change="updateInput"
     />
-    <label class="checkbox_standart" :for="id">
-      <svg
-        class="checkbox_standart__icon"
-        width="10"
-        height="8"
-        viewBox="0 0 10 8"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M1 4L4 7L9 1" stroke="#5C6784" stroke-width="1.2" />
-      </svg>
-    </label>
-  </div>
+    <svg
+      class="checkbox__icon"
+      width="10"
+      height="8"
+      viewBox="0 0 10 8"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M1 4L4 7L9 1" stroke="#5C6784" stroke-width="1.2" />
+    </svg>
+  </label>
 </template>
+
 <script>
 export default {
   model: {
@@ -29,7 +27,9 @@ export default {
     event: "change",
   },
   props: {
-    id: { required: true },
+    id: {
+      required: true,
+    },
     value: { type: String },
     modelValue: { default: "" },
     trueValue: { default: true },
@@ -40,6 +40,7 @@ export default {
       if (this.modelValue instanceof Array) {
         return this.modelValue.includes(this.value);
       }
+      // Note that `true-value` and `false-value` are camelCase in the JS
       return this.modelValue === this.trueValue;
     },
   },
@@ -61,8 +62,9 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
-.checkbox_standart {
+.checkbox {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,4 +96,6 @@ export default {
     display: none;
   }
 }
+</style>
+
 </style>

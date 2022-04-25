@@ -24,8 +24,9 @@
                   class="product-page__over__content__main__images__slider__swiper"
                   :options="swiperOption"
                 >
-                  <swiper-slide v-for='(slide,index) in index' :key='index'>Slide {{index}}</swiper-slide>
-                  
+                  <swiper-slide v-for="(slide, index) in 12" :key="index"
+                    >Slide {{ index }}</swiper-slide
+                  >
                 </swiper>
               </div>
             </div>
@@ -131,12 +132,7 @@
                     >
                       Моцарелла классического итальянского производства
                     </p>
-                    <span
-                      class="product-page__over__content__main__additional__information__options__content__item__checkbox"
-                    >
-                    
-                    
-                    </span>
+                    <Checkbox id='some_id' value='1' v-model='val' class="product-page__over__content__main__additional__information__options__content__item__checkbox"/>
                     <p
                       class="product-page__over__content__main__additional__information__options__content__item__price"
                       contenteditable
@@ -219,12 +215,14 @@
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+import Checkbox from '../../components/Checkbox.vue';
 export default {
   name: "swiper-example-mousewheel-control",
   title: "Mousewheel control",
   components: {
     Swiper,
     SwiperSlide,
+    Checkbox,
   },
   data() {
     return {
@@ -234,6 +232,7 @@ export default {
         spaceBetween: 8,
         mousewheel: true,
       },
+      val: [],
     };
   },
 };
@@ -334,6 +333,9 @@ export default {
           &__description {
             width: 55%;
             margin-right: 60px;
+            @media screen and (max-width: $notebook) {
+              margin-right: 40px;
+            }
             @media screen and (max-width: $tablet) {
               width: 100%;
               margin-right: 0px;
@@ -478,6 +480,7 @@ export default {
                   align-items: center;
                   justify-content: space-between;
                   flex-direction: row;
+                  
                   @media screen and (max-width: $tablet) {
                     min-height: 53px;
                     padding: 8px 0px;
@@ -492,6 +495,10 @@ export default {
                     margin-right: 40px;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    @media screen and (max-width:$notebook) {
+                  width:180px;  
+                  margin-right: 20px;
+                  }
                     @media screen and (max-width: $tablet) {
                       width: 100%;
                       margin-right: 10px;
@@ -500,7 +507,6 @@ export default {
                   &__checkbox {
                     width: 26px;
                     height: 26px;
-                    background-color: yellowgreen;
                     border-radius: 90px;
                     margin-right: auto;
                     flex-shrink: 0;
