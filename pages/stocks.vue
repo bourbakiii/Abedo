@@ -22,10 +22,7 @@ export default {
 <style lang="scss" scoped>
 .stocks-page {
   &__content {
-    &__breadcrumbs {
-      margin-top: 20px;
-      margin-bottom: 38px;
-    }
+
     &__title {
       margin-bottom: 70px;
       align-self: flex-start;

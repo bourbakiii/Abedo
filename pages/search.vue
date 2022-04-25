@@ -49,9 +49,7 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   &__content {
-    &__breadcrumbs {
-      margin-top: 25px;
-    }
+
     &__search__input {
       margin: 50px 0px;
     }

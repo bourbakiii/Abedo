@@ -71,7 +71,7 @@
           </svg>
           Мои данные</NuxtLink
         >
-        <NuxtLink to="/adresses" class="left-menu__links__link">
+        <NuxtLink to="/addresses" class="left-menu__links__link">
           <svg
             class="left-menu__links__link__icon"
             width="20"

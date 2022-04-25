@@ -44,10 +44,7 @@
     flex-direction: column;
     flex-grow: 1;
 
-    &__breadcrumbs {
-      margin-top: 20px;
-      margin-bottom: 38px;
-    }
+
     &__title {
       margin-bottom: 70px;
       align-self: flex-start;

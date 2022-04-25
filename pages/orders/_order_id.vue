@@ -25,10 +25,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    &__breadcrumbs {
-      margin-top: 20px;
-      margin-bottom: 40px;
-    }
+
     &__information{
         margin-bottom: 70px;
     }

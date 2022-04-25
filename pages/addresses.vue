@@ -86,10 +86,7 @@
 .addresses-page {
   &__content {
     flex-grow: 1;
-    &__breadcrumbs {
-      margin-top: 20px;
-      margin-bottom: 40px;
-    }
+  
     &__addresses {
       display: flex;
       justify-content: flex-start;

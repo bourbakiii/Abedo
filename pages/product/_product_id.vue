@@ -1,9 +1,7 @@
 <template>
   <div class="page product-page wrapper">
     <div class="product-page__over">
-      <Breadcrumbs
-        class="product-page__over__breadcrumbs adaptive-non"
-      />
+      <Breadcrumbs class="product-page__over__breadcrumbs adaptive-non" />
       <div class="product-page__over__content content">
         <div class="product-page__over__content__main">
           <div
@@ -18,7 +16,9 @@
             Сырное ассорти
           </h1>
           <div class="product-page__over__content__main__images adaptive-non">
-            <div class="product-page__over__content__main__images__slider__wrapper">
+            <div
+              class="product-page__over__content__main__images__slider__wrapper"
+            >
               <div class="product-page__over__content__main__images__slider">
                 <swiper
                   class="product-page__over__content__main__images__slider__swiper"
@@ -44,7 +44,9 @@
           </div>
 
           <div class="product-page__over__content__main__additional">
-            <div class="product-page__over__content__main__additional__description">
+            <div
+              class="product-page__over__content__main__additional__description"
+            >
               <p
                 class="product-page__over__content__main__additional__description__pre"
               >
@@ -61,7 +63,9 @@
                 плесенью).
               </p>
             </div>
-            <div class="product-page__over__content__main__additional__information">
+            <div
+              class="product-page__over__content__main__additional__information"
+            >
               <div
                 class="product-page__over__content__main__additional__information__min-count"
               >
@@ -167,16 +171,24 @@
               </ButtonStandart>
             </div>
           </div>
-          <div class="product-page__over__content__main__adaptive-actions adaptive">
-            <p class="product-page__over__content__main__adaptive-actions__price" contenteditable>
-              2 330 ₽
-            </p>
+          <div
+            class="product-page__over__content__main__adaptive-actions adaptive"
+          >
             <p
-              class="product-page__over__content__main__adaptive-actions__price_full" contenteditable
+              class="product-page__over__content__main__adaptive-actions__price"
+              contenteditable
             >
               2 330 ₽
             </p>
-            <div class="product-page__over__content__main__adaptive-actions__actions">
+            <p
+              class="product-page__over__content__main__adaptive-actions__price_full"
+              contenteditable
+            >
+              2 330 ₽
+            </p>
+            <div
+              class="product-page__over__content__main__adaptive-actions__actions"
+            >
               <ButtonProduct
                 class="product-page__over__content__main__adaptive-actions__actions__button_minus product-page__over__content__main__adaptive-actions__actions__button"
                 size="30"
@@ -202,7 +214,9 @@
             Вернуться к списку товаров
           </button>
         </div>
-        <SidebarCart class="product-page__over__content__sidebar adaptive-non" />
+        <SidebarCart
+          class="product-page__over__content__sidebar adaptive-non"
+        />
       </div>
     </div>
   </div>
@@ -238,11 +252,8 @@ export default {
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    max-width:100%;
-    &__breadcrumbs {
-          margin-top: 20px;
-          margin-bottom: 40px;
-        }
+    max-width: 100%;
+
     &__content {
       display: flex;
       align-items: flex-start;
@@ -256,7 +267,7 @@ export default {
           margin-right: 0px;
         }
         @media screen and (max-width: $sidebar_dn) {
-          width:100%;
+          width: 100%;
         }
         &__name {
           width: 100%;

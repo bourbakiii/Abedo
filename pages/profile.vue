@@ -281,10 +281,7 @@ export default {
     background-color: $light_grey;
   }
   align-items: flex-start;
-  &__breadcrumbs {
-    margin-top: 24px;
-    margin-bottom: 40px;
-  }
+
   &__title {
     margin-bottom: 70px;
     @media screen and (max-width: $tablet) {

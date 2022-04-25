@@ -52,10 +52,7 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
         max-width:100%;
-    &__breadcrumbs {
-      margin-top: 20px;
-      margin-bottom: 40px;
-    }
+
     &__content {
       display: flex;
       align-items: flex-start;

@@ -112,10 +112,7 @@ export default {};
 .orders-page {
   &__content {
     flex-grow: 1;
-    &__breadcrumbs {
-      margin-top: 20px;
-      margin-bottom: 40px;
-    }
+
     &__orders {
       width: 100%;
       &__title {

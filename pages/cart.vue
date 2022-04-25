@@ -38,10 +38,7 @@
 .cart-page {
   align-items: center;
   justify-content: flex-start;
-  &__breadcrumbs {
-    margin-top: 17px;
-    margin-bottom: 40px;
-  }
+
 
   &__content {
     width: 100%;

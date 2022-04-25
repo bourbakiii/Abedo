@@ -1,10 +1,17 @@
 <template>
-    <div class="page wrapper">
-        <ProductImagesSlider class='images-slider'/>
+    <div class="page test-page wrapper">
+        <div class="test-page__content content">
+        <!-- <PagesIndexStocksSlider /> -->
+        <StockItem/>
+        </div>
     </div>
 </template>
 <style lang="scss" scoped>
-.images-slider{
-    background-color: red;
+.test-page{
+    &__content{
+    justify-content: center;align-items: center;
+    background-color: rgba(0,0,0,.1);
+    height: 100%; flex-grow: 1;
+    }
 }
 </style>

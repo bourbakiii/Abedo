@@ -29,26 +29,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.index-page {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  &__adaptive-categories {
-    margin: 30px 0px;
-  }
-  &__adaptive-new-shops {
-    margin-top: 30px;
-  }
-}
-.search-wrapper {
-  margin-bottom: 73px;
-}
-.new-shops {
-  margin-bottom: 70px;
-}
-.stocks-slider {
-  margin-bottom: 63px;
-}
+
 </style>
 

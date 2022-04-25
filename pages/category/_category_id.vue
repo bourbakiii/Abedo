@@ -126,10 +126,7 @@
     justify-content: flex-start;
     flex-direction: column;
     flex-grow: 1;
-    &__breadcrumbs {
-      margin-top: 20px;
-      margin-bottom: 38px;
-    }
+
     &__top {
       width: 100%;
       display: flex;
