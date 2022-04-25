@@ -8,13 +8,13 @@
         :categories="categories"
         class="search-page__content__by-categories adaptive"
       />
-      <PagesSearchFoundedShops
+      <PagesSearchFoundedPartners
         v-if="true"
-        class="search-page__content__search__founded__shops"
+        class="search-page__content__search__founded-partners"
       />
       <PagesSearchFoundedProducts
         v-if="true"
-        class="search-page__content__search__founded__products"
+        class="search-page__content__search__founded-products"
       />
     </div>
   </div>
@@ -48,11 +48,28 @@ export default {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  &__content{
-    &__search-input{
+  &__content {
+    &__search-input {
       margin-bottom: 50px;
+    }
+    &__search {
+      &__founded-partners {
+        margin-bottom: 70px;
+      }
+    }
+
+    @media screen and (max-width: $tablet) {
+     &__search-input {
+      margin-bottom: 30px;
+    }
+    &__by-categories{
+      margin-bottom: 30px;
+    }
+    &__search {
+    &__founded-partners{
+      margin-bottom: 30px;
+    }}
     }
   }
 }
 </style>
-
