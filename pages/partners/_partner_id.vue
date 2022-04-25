@@ -76,7 +76,7 @@ export default {
         width: 294px;
         flex-shrink: 0;
         position: sticky;
-         top: 125px;
+        top: 125px;
         margin-left: 30px;
         @media screen and (max-width: $notebook) {
           margin-left: 10px;

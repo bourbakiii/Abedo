@@ -3,13 +3,17 @@
     <div class="search-page__content content">
       <Breadcrumbs class="search-page__content__breadcrumbs adaptive-non" />
       <PagesSearchInput class="search-page__content__search__input" />
-      <PagesSearchByCategories v-if='true' :categories="categories" class="search-page__content__by-categories"/>
+      <PagesSearchByCategories
+        v-if="true"
+        :categories="categories"
+        class="search-page__content__by-categories"
+      />
       <PagesSearchFoundedShops
-      v-if='true'
+        v-if="true"
         class="search-page__content__search__founded__shops"
       />
       <PagesSearchFoundedProducts
-      v-if='true'
+        v-if="true"
         class="search-page__content__search__founded__products"
       />
     </div>
@@ -18,8 +22,8 @@
 
 <script>
 export default {
-  data(){
-    return{
+  data() {
+    return {
       categories: [
         { id: 1, name: "Lorem ipsum dolor mi met megretto consis" },
         { id: 2, name: "Lorem ipsum dolor mi met megretto consis" },
@@ -34,13 +38,16 @@ export default {
         { id: 11, name: "Lorem ipsum dolor mi met megretto consis" },
         { id: 12, name: "Lorem ipsum dolor mi met megretto consis" },
       ],
-    }
-  }
+    };
+  },
 };
 </script>
 <style lang="scss" scoped>
 .search-page {
-  display: flex;align-items: center;justify-content: flex-start;flex-direction:column;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
   &__content {
     &__breadcrumbs {
       margin-top: 25px;

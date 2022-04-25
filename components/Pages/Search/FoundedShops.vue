@@ -3,7 +3,15 @@
     <h1 class="founded-shops__title title-normal">Найденные заведения</h1>
     <div class="founded-shops__content content">
       <ShopItem
-        class="founded-shops__content__item"
+        class="founded-shops__content__item adaptive-non"
+        v-for="(item, index) in 4"
+        :key="index"
+      />
+      <ShopAdaptive
+        class="
+          founded-shops__content__item founded-shops__content__item_adaptive
+          adaptive
+        "
         v-for="(item, index) in 4"
         :key="index"
       />
@@ -27,6 +35,14 @@ export default {
   flex-direction: column;
   &__title {
     margin-bottom: 40px;
+    @media screen and (max-width: $tablet) {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 20px;
+      margin-bottom: 30px;
+    }
   }
   &__content {
     width: 100%;
@@ -35,15 +51,14 @@ export default {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
     @media screen and (max-width: $notebook) {
-      grid-gap: 15px;
+    grid-template-columns: repeat(3, 1fr);
+      grid-gap: 30px;
     }
     @media screen and (max-width: $tablet) {
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 10px;
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap: 15px;
     }
-    @media screen and (max-width: $phone) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    
     &__item {
       width: auto;
       overflow: hidden;

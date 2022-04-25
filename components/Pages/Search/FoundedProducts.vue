@@ -9,7 +9,7 @@
             src="@/assets/images/limonchello.png"
             class="founded-products__content__item__shop__image"
           />
-          <p class="founded-products__content__item__shop__name">
+          <p class="founded-products__content__item__shop__name" contenteditable>
             Кафе “Лимончелло”
           </p>
           <div class="founded-products__content__item__shop__rating">
@@ -62,6 +62,14 @@ export default {
   flex-direction: column;
   &__title {
     margin-bottom: 40px;
+    @media screen and (max-width: $tablet) {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 20px;
+      margin-bottom: 30px;
+    }
   }
   &__content {
     border: 1px solid $dark_grey;
@@ -88,12 +96,27 @@ export default {
         padding-bottom: 17px;
         border-bottom: 1px solid $blue_grey;
         padding: 0px 30px 17px;
+         overflow: hidden;
+         max-width:100%;
+        @media screen and (max-width:$notebook) {
+           padding: 0px 20px 15px;
+        }
+        @media screen and (max-width: $tablet) {
+           flex-wrap: wrap;
+           padding: 0px 15px 10px;
+         }
         &__image {
           height: 60px;
           width: auto;
           flex-shrink: 0;
           object-fit: contain;
           margin-right: 40px;
+             @media screen and (max-width:$tablet) {
+               width:20%;
+               height: auto;
+              margin-right: 15px;
+
+             }
         }
         &__name {
           width: max-content;
@@ -103,9 +126,13 @@ export default {
           font-weight: 600;
           font-size: 24px;
           line-height: 29px;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
+          height:auto;
+           @media screen and (max-width:$tablet) {
+   width: calc(80% - 15px);
+          font-size: 20px;
+          line-height: 24px;
+          
+         }
         }
         &__rating {
           display: flex;
@@ -113,6 +140,10 @@ export default {
           justify-content: center;
           margin-left: 40px;
           flex-shrink: 0;
+          @media screen and (max-width: $tablet) {
+            margin-top: 15px;
+            margin-left:auto;
+          }
           &__icon {
             margin-right: 5px;
           }
@@ -140,23 +171,17 @@ export default {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         grid-gap: 20px;
-        background-color: lightcoral;
         @media screen and (max-width: $notebook) {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           grid-gap: 15px;
+          padding: 20px 20px 0px;
         }
         @media screen and (max-width: $tablet) {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          grid-gap: 10px;
+          grid-template-columns: repeat(3, 1fr);
         }
         @media screen and (max-width: $phone) {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          grid-gap: 10px;
+          grid-template-columns: repeat(2, 1fr);
         }
-
         &__item {
           width: 100%;
           overflow: hidden;
