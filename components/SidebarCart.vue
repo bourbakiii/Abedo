@@ -110,7 +110,7 @@
       </p>
     </div>
     <div class="sidebar-cart__button">
-      <ButtonStandart
+      <ButtonStandart @action='()=>$router.push("/cart")'
         class="sidebar-cart__button__button"
       >Оформить заказ</ButtonStandart>
     </div>

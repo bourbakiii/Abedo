@@ -1,5 +1,5 @@
 <template>
-  <div class="stock__wrapper">
+  <button @click.prevent="()=>$router.push('/partners/1')" class="stock__wrapper">
     <div class="stock">
       <div class="stock__content">
         <div class="stock__content__hood" :class="{ befored: true }">
@@ -15,7 +15,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </button>
 </template>
 <style lang="scss" scoped>
 .stock {
@@ -30,7 +30,10 @@
     position: relative;
     width: 100%;
     max-width: 400px;
+    outline: none;
+  border: none;
   }
+  
   position: relative;
   padding-bottom: calc(100% * (1 / 2));
   @media screen and (max-width: $tablet){

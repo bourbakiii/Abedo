@@ -2,7 +2,7 @@
   <div class="sidebar">
     <h2 class="sidebar__title title-small">Категории</h2>
     <div class="sidebar__content">
-      <button v-for='item in [1,2,3,4,5,6,7,8]' :key='item' class="sidebar__content__item">
+      <button @click='()=>$router.push("/category/1")' v-for='item in [1,2,3,4,5,6,7,8]' :key='item' class="sidebar__content__item">
         <img
           src="@/assets/images/category-item-image-placeholder.png"
           class="sidebar__content__item__image"
