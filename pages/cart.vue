@@ -38,8 +38,6 @@
 .cart-page {
   align-items: center;
   justify-content: flex-start;
-
-
   &__content {
     width: 100%;
     display: flex;
