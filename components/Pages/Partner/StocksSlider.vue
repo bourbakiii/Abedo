@@ -1,5 +1,7 @@
 <template>
   <div class="stocks__wrapper">
+    <h2 class="stocks__title adaptive">Акции</h2>
+    <div class="stocks__content">
       <swiper
         :auto-destroy="false"
         class="stocks slider"
@@ -59,10 +61,8 @@
           />
         </svg>
       </button>
-    <div
-      class="stocks__pagination swiper-pagination"
-      slot="pagination"
-    ></div>
+    </div>
+    <div class="stocks__pagination swiper-pagination" slot="pagination"></div>
   </div>
 </template>
 
@@ -105,6 +105,14 @@ export default {
 .stocks {
   width: 100%;
   height: max-content;
+  &__title{
+    font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 20px;
+margin-bottom: 20px;
+  }
   &__wrapper {
     position: relative;
     max-width: 100%;

@@ -65,9 +65,16 @@ export default {
 
         &__shop-block {
           margin-bottom: 70px;
+          @media screen and (max-width: $tablet)
+          {
+            margin-bottom: 30px;
+          }
         }
         &__stocks {
           margin-bottom: 60px;
+          &_adaptive{
+            margin-bottom: 60px;
+          }
         }
       }
       &__sidebar {
