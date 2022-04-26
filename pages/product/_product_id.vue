@@ -132,7 +132,12 @@
                     >
                       Моцарелла классического итальянского производства
                     </p>
-                    <Checkbox id='some_id' value='1' v-model='val' class="product-page__over__content__main__additional__information__options__content__item__checkbox"/>
+                    <Checkbox
+                      id="some_id"
+                      value="1"
+                      v-model="val"
+                      class="product-page__over__content__main__additional__information__options__content__item__checkbox"
+                    />
                     <p
                       class="product-page__over__content__main__additional__information__options__content__item__price"
                       contenteditable
@@ -215,7 +220,7 @@
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
-import Checkbox from '../../components/Checkbox.vue';
+import Checkbox from "../../components/Checkbox.vue";
 export default {
   name: "swiper-example-mousewheel-control",
   title: "Mousewheel control",
@@ -241,6 +246,7 @@ export default {
 <style lang="scss" scoped>
 .product-page {
   justify-content: flex-start;
+  padding-bottom: 30px !important;
   &__over {
     position: relative;
     display: flex;
@@ -287,6 +293,7 @@ export default {
           justify-content: space-between;
           &__adaptive__slider {
             margin-bottom: 40px;
+            
           }
           &__slider {
             overflow: hidden;
@@ -392,6 +399,9 @@ export default {
               max-width: 100%;
               border-top: 1px solid $dark_grey;
               border-bottom: 1px solid $dark_grey;
+              @media screen and (max-width: $tablet) {
+                margin-bottom:20px;
+              }
               &__icon {
                 margin-right: 20px;
               }
@@ -480,7 +490,6 @@ export default {
                   align-items: center;
                   justify-content: space-between;
                   flex-direction: row;
-                  
                   @media screen and (max-width: $tablet) {
                     min-height: 53px;
                     padding: 8px 0px;
@@ -495,10 +504,10 @@ export default {
                     margin-right: 40px;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    @media screen and (max-width:$notebook) {
-                  width:180px;  
-                  margin-right: 20px;
-                  }
+                    @media screen and (max-width: $notebook) {
+                      width: 180px;
+                      margin-right: 20px;
+                    }
                     @media screen and (max-width: $tablet) {
                       width: 100%;
                       margin-right: 10px;
