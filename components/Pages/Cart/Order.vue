@@ -103,12 +103,14 @@
           <p class="order__delivery__prices__item__price">120 ₽</p>
         </div>
         <div class="order__delivery__prices__item">
+
           <div class="order__delivery__prices__item__name-block">
+            <Checkbox id='door_delivery'  class="order__delivery__prices__item__checkbox" value='true' v-model='door_delivery' />
             <p class="order__delivery__prices__item__name">
               Стоимость доставки
             </p>
           </div>
-          <p class="order__delivery__prices__item__price">120 ₽</p>
+          <p class="order__delivery__prices__item__price">+ 20 ₽</p>
         </div>
       </div>
     </div>
@@ -175,6 +177,7 @@ export default {
       intercom: null,
       additional: null,
       payment_type: "0",
+      door_delivery: false
     };
   },
 };
@@ -306,6 +309,9 @@ export default {
         &:last-of-type {
           border-bottom: 1px solid $extra_dark_grey;
         }
+        &__checkbox{
+          margin-right: 13px;
+        }
         &__name-block {
           display: flex;
           align-items: center;
@@ -338,6 +344,10 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
     padding-bottom: 30px;
+    border-bottom: 1px solid $dark_grey;
+      @media screen and (max-width: $tablet) {
+        border-bottom: none;
+      }
     &__title {
       margin-bottom: 30px;
       @media screen and (max-width: $tablet) {
@@ -388,6 +398,10 @@ export default {
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
+    padding-top: 30px;
+    @media screen and (max-width: $tablet) {
+      padding-top: 0px;
+    }
     &__pre {
       font-family: "SF Pro Display";
       font-style: normal;
@@ -440,6 +454,7 @@ export default {
       width: 100%;
       max-width: 228px;
       height: 40px;
+
       &__icon {
         display: none;
       }

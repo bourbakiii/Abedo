@@ -6,8 +6,10 @@
       <button @click.prevent class="cart__hood__button">Очистить</button>
     </div>
     <div class="cart__hood cart__hood__adaptive adaptive">
-      <p class="cart__hood__name">Корзина</p>
-      <button @click.prevent class="cart__hood__button">Очистить</button>
+      <p class="cart__hood__adaptive__name">Корзина</p>
+      <button @click.prevent class="cart__hood__adaptive__button">
+        Очистить
+      </button>
     </div>
     <div class="cart__products adaptive-non">
       <div
@@ -176,9 +178,24 @@
       &__name {
         font-family: "SF Pro Display";
         font-style: normal;
-        font-weight: 700;
+        font-weight: 900;
         font-size: 20px;
         line-height: 24px;
+      }
+      &__button {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17px;
+        color: $red;
+        background-color: transparent;
+        outline: none;
+        border: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 
@@ -320,7 +337,6 @@
         border: none;
         outline: none;
         transition: $transition;
-       
       }
     }
     &__adaptive {
@@ -435,7 +451,7 @@
       width: 100%;
       max-width: 336px;
       justify-content: space-between;
-      margin-top: 30px;
+      margin-top: 0px;
     }
     &__text {
       font-family: "SF Pro Display";
