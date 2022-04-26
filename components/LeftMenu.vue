@@ -15,7 +15,6 @@
         @action="() => $router.push('/profile')"
         class="left-menu__button"
         ><svg
-          @click="$router.push('/profile')"
           class="left-menu__button__icon"
           width="24"
           height="24"

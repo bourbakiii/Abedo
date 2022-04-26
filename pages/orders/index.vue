@@ -270,6 +270,8 @@ export default {};
               align-self: center;
             }
             &__button {
+              width: 104px;
+              height: 40px;
               &_open {
                 margin-right: 20px;
                 @media screen and (max-width: $notebook) {

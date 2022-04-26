@@ -57,10 +57,7 @@
           <div class="profile-page__form__content__input-block">
             <p class="profile-page__form__content__input-block__name">Пол</p>
             <div
-              class="
-                profile-page__form__content__input-block__input
-                profile-page__form__content__input-block__input_dropdown
-              "
+              class="profile-page__form__content__input-block__input profile-page__form__content__input-block__input_dropdown"
               @click.self="
                 () => {
                   if (show_sex) disableSex();
@@ -85,9 +82,7 @@
                     else enableSex();
                   }
                 "
-                class="
-                  profile-page__form__content__input-block__input_dropdown__selected
-                "
+                class="profile-page__form__content__input-block__input_dropdown__selected"
                 :class="{ placeholdered: !sex }"
               >
                 {{ sex ? sex : "Выберите пол" }}
@@ -97,22 +92,18 @@
                   @mouseenter="enableSex"
                   v-if="show_sex"
                   @mouseleave="sex_index = -1"
-                  class="
-                    profile-page__form__content__input-block__input_dropdown__content
-                  "
+                  class="profile-page__form__content__input-block__input_dropdown__content"
                 >
-                 <button
-                 v-for='(sexItem,index) in sexes' :key='index'
+                  <button
+                    v-for="(sexItem, index) in sexes"
+                    :key="index"
                     @mouseenter="sex_index = index"
                     @click.prevent="selectSex(sexItem.value)"
                     :class="{ indexed: sex_index == index }"
-                    class="
-                      profile-page__form__content__input-block__input_dropdown__content__button
-                    "
+                    class="profile-page__form__content__input-block__input_dropdown__content__button"
                   >
-                    {{sexItem.value}}
+                    {{ sexItem.value }}
                   </button>
-                  
                 </div>
               </transition>
             </div>
@@ -160,28 +151,19 @@
           </label>
         </div>
         <div class="profile-page__form__buttons">
-          <ButtonStandart
-            class="profile-page__form__buttons__edit"
-          >
+          <ButtonStandart class="profile-page__form__buttons__button profile-page__form__buttons__button_edit filled">
             Изменить
           </ButtonStandart>
-          <ButtonStandart
-            class="profile-page__form__buttons__Save"
-            
-          >Сохранить
+          <ButtonStandart class="profile-page__form__buttons__button profile-page__form__buttons__button_save filled"
+            >Сохранить
           </ButtonStandart>
-          <ButtonStandart
-            class="profile-page__form__buttons__Save"
-          >
-          Отмена
+          <ButtonStandart class="profile-page__form__buttons__button profile-page__form__buttons__button_decline">
+            Отмена
           </ButtonStandart>
         </div>
         <div class="profile-page__form__messages">
           <div
-            class="
-              profile-page__form__messages__item_success
-              profile-page__form__messages__item
-            "
+            class="profile-page__form__messages__item_success profile-page__form__messages__item"
           >
             <div class="profile-page__form__messages__item__icon-block">
               <svg
@@ -203,10 +185,7 @@
             </p>
           </div>
           <div
-            class="
-              profile-page__form__messages__item_error
-              profile-page__form__messages__item
-            "
+            class="profile-page__form__messages__item_error profile-page__form__messages__item"
           >
             <p class="profile-page__form__messages__item__text">
               Введенные пароли не совпадают
@@ -263,9 +242,9 @@ export default {
           break;
         }
         case "Enter": {
-          if(this.sex_index>=0){
-             this.sex = this.sexes[this.sex_index].value;
-             this.disableSex();
+          if (this.sex_index >= 0) {
+            this.sex = this.sexes[this.sex_index].value;
+            this.disableSex();
           }
           break;
         }
@@ -285,13 +264,13 @@ export default {
   &__title {
     margin-bottom: 70px;
     @media screen and (max-width: $tablet) {
-          font-family: 'SF Pro Display';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 24px;
-margin-bottom:30px;
-        }
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 30px;
+    }
   }
   &__form {
     width: 100%;
@@ -309,13 +288,13 @@ margin-bottom:30px;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 30px 76px;
-          @media screen and (max-width: $tablet) {
-            grid-gap: 30px;
-          }
-          @media screen and (max-width: $tablet) {
-            grid-template-columns: repeat(1, 1fr);
-             grid-gap: 15px;
-          }
+      @media screen and (max-width: $tablet) {
+        grid-gap: 30px;
+      }
+      @media screen and (max-width: $tablet) {
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 15px;
+      }
       &__input-block {
         &__name {
           font-family: "SF Pro Display";
@@ -390,6 +369,9 @@ margin-bottom:30px;
     }
     &__buttons {
       margin-top: 60px;
+      &__button{
+        width: 170px;
+      }
     }
     &__messages {
       display: flex;

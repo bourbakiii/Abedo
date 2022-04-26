@@ -32,15 +32,15 @@
       </div>
     </div>
     <div class="product-item__buttons">
+      <ButtonSmallCart class="product-item__buttons__button_add_small adaptive" />
       <ButtonStandart
-        v-if="false"
+        v-if="true"
         class="product-item__buttons__button_add adaptive-non"
       >
         В корзину
       </ButtonStandart>
-      <ButtonSmallCart class="product-item__buttons__button_add_small adaptive" />
       <div
-       
+       v-else
         class="product-item__buttons__button_creases adaptive-non"
       >
         <ButtonProduct size="40" icon="minus" />

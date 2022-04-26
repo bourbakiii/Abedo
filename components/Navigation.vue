@@ -309,10 +309,18 @@ export default {
       font-weight: 500;
       font-size: 16px;
       line-height: 20px;
+      width: 181px;
+      height: 50px;
+      padding: 5px 0px;
       &__icon {
         margin-right: 10px;
       }
-      @media screen and (max-width: $notebook) {
+      &:hover{
+        svg * {
+          fill: inherit;
+        }
+      }
+      @media screen and (max-width: $notebook + 20px) {
         &__icon {
           display: none;
         }

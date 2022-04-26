@@ -160,7 +160,7 @@
             </div>
             <ButtonStandart
               @action="watchAll"
-              class="search__input__dropdown-content__watch-all-button"
+              class="search__input__dropdown-content__watch-all-button filled"
               >Cмотреть все</ButtonStandart
             >
           </div>
@@ -404,6 +404,8 @@ export default {
         }
       }
       &__watch-all-button {
+        width: 145px;
+        height: 32px;
         margin-top: 15px;
         background-color: $white;
         text-transform: none;

@@ -79,7 +79,7 @@
       <div class="catalog__content">
         <ShopItem class="catalog__content__item" v-for='(item,index) in 12' :key='index' />
       </div>
-      <ButtonStandart @action='$router.push("/partners")' class='catalog__button' >Все магазины</ButtonStandart>
+      <ButtonStandart @action='$router.push("/partners")' class='catalog__button'>Все магазины</ButtonStandart>
     </div>
   </div>
 </template>

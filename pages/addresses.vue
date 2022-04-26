@@ -56,7 +56,7 @@
                 />
               </div>
               <ButtonStandart
-                class="addresses-page__content__addresses__content__item__data__button"
+                class="addresses-page__content__addresses__content__item__data__button filled"
                 >Изменить</ButtonStandart
               >
             </div>
@@ -230,6 +230,9 @@
               }
             }
             &__button {
+              background-color: red;
+              padding: 0px;
+              width: 102px;
               @media screen and (max-width: $maxwidth) {
                 margin-left: 10px;
               }
@@ -240,7 +243,7 @@
                 margin-left: 15px;
               }
               margin-left: 75px;
-              width: 102px;
+              
               flex-shrink: 0;
             }
           }

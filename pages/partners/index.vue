@@ -274,6 +274,7 @@ export default {
       justify-content: space-between;
       flex-direction: row;
       &__button {
+        
         height: 35px !important;
         background-color: transparent;
         padding: 0px 14px !important;
@@ -365,13 +366,15 @@ export default {
         }
       }
       &__button {
+        width: 306px;
+height: 50px;
         margin-top: 60px;
         background-color: $light_grey;
         text-transform: uppercase !important;
         @media screen and (max-width: $tablet) {
           margin-top: 30px;
           width: 228px;
-          height: 40px !important;
+          height: 40px;
           text-transform: none !important;
         }
       }

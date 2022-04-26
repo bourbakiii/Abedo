@@ -204,9 +204,10 @@ export default {
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
-    
     &__button {
       margin-right: 30px;
+     height: 45px;
+     width: 157px;
      
       @media screen and (max-width:$tablet) {
         margin-right: 20px;
@@ -449,12 +450,16 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    height: 50px;
+    width: 228px;
+    padding: 0px 5px;
     @media screen and (max-width: $tablet) {
       align-self: flex-start;
       width: 100%;
       max-width: 228px;
       height: 40px;
-
+      background-color: $darkblue;
+      color:$white;
       &__icon {
         display: none;
       }

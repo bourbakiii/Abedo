@@ -4,7 +4,7 @@
     <p class="error-layout__text">Запрашиваемая страница не найдена</p>
     <ButtonStandart
       @action="() => $router.push('/')"
-      class="error-layout__button"
+      class="error-layout__button filled"
       >На главную</ButtonStandart
     >
   </div>

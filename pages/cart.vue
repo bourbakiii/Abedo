@@ -2,7 +2,7 @@
   <div class="page cart-page wrapper">
     <div class="cart-page__content-wrapper content">
       <Breadcrumbs class="cart-page__breadcrumbs adaptive-non" />
-      <div v-if="false" class="cart-page__content_empty">
+      <div v-if="true" class="cart-page__content_empty">
         <h1 class="cart-page__content_empty__title title-normal">Корзина</h1>
         <svg
           class="cart-page__content_empty__icon"
@@ -20,7 +20,7 @@
         <p class="cart-page__content_empty__text">
           Вы пока ничего не добавили в корзину
         </p>
-        <ButtonStandart @action="()=>$router.push('/partners')" class="cart-page__content_empty__button"
+        <ButtonStandart @action="()=>$router.push('/partners')" class="cart-page__content_empty__button filled"
           >За покупками</ButtonStandart
         >
       </div>

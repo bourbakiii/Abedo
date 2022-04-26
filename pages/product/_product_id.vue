@@ -546,6 +546,9 @@ export default {
             &__button {
               width: 228px;
               &__icon {
+                *{
+                  fill: $darkblue;
+                }
                 margin-right: 10px;
               }
             }

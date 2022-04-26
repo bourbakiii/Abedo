@@ -15,18 +15,22 @@
   text-overflow: ellipsis;
   border: 1px solid $darkblue;
   color: $darkblue;
-  padding: 0px 85px;
+  height: 50px;
   transition: $transition;
   font-family: "SF Pro Display";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+  padding: 0px 4px;
   display: flex;
   background-color: transparent;
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  *{
+    transition: $transition;
+  }
   &:hover {
     color: $white;
     background-color: $darkblue;
@@ -42,12 +46,13 @@
     }
   }
   &.filled {
-    
-      background-color: $darkblue;
-      border-color: $darkblue;
-      &.green{
+    background-color: $darkblue;
+    border-color: $darkblue;
+    color: $white;
+    &.green {
       background-color: $green;
       border-color: $green;
+      color: $white;
     }
   }
 }
