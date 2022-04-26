@@ -1,7 +1,7 @@
 <template>
   <NuxtLink to="/category/1" class="category category-item">
     <img v-if="category.image" :src="category.image" class="category-image" />
-    <!-- <img src="@/assets/images/category-item-image-placeholder.png" class="category-image" /> -->
+    <img src="@/assets/images/category-item-image-placeholder.png" class="category-image" />
     <p class="category-name">{{ category.name }}</p>
   </NuxtLink>
 </template>
@@ -49,6 +49,9 @@
     font-size: 14px;
     line-height: 17px;
     text-transform: uppercase;
+  }
+  @media screen and (max-width: $notebook) {
+    padding: 0px 30px;
   }
 }
 </style>

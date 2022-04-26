@@ -122,51 +122,35 @@
               <div class="search__input__dropdown-content__products-product">
                 <img
                   src="@/assets/images/shop-placeholder.png"
-                  class="
-                    search__input__dropdown-content__products-product-image
-                  "
+                  class="search__input__dropdown-content__products-product-image"
                 />
                 <div
-                  class="
-                    search__input__dropdown-content__products-product-content
-                  "
+                  class="search__input__dropdown-content__products-product-content"
                 >
                   <div
-                    class="
-                      search__input__dropdown-content__products-product-content-top
-                    "
+                    class="search__input__dropdown-content__products-product-content-top"
                   >
                     <p
-                      class="
-                        search__input__dropdown-content__products-product-content-top-name
-                      "
+                      class="search__input__dropdown-content__products-product-content-top-name"
                     >
                       Салат с лососем и помидорами
                     </p>
                     <p
-                      class="
-                        search__input__dropdown-content__products-product-content-top-shop
-                      "
+                      class="search__input__dropdown-content__products-product-content-top-shop"
                     >
                       / Ресторан “Тангос”
                     </p>
                   </div>
                   <div
-                    class="
-                      search__input__dropdown-content__products-product-content-bottom
-                    "
+                    class="search__input__dropdown-content__products-product-content-bottom"
                   >
                     <p
-                      class="
-                        search__input__dropdown-content__products-product-content-bottom-price
-                      "
+                      class="search__input__dropdown-content__products-product-content-bottom-price"
                     >
                       450руб.
                     </p>
                     <p
-                      class="
-                        search__input__dropdown-content__products-product-content-bottom-weight
-                      "
+                      class="search__input__dropdown-content__products-product-content-bottom-weight"
                     >
                       320г.
                     </p>
@@ -179,7 +163,8 @@
               padding="30"
               @action="watchAll"
               class="search__input__dropdown-content__watch-all-button"
-            >Cмотреть все</ButtonStandart>
+              >Cмотреть все</ButtonStandart
+            >
           </div>
         </transition>
       </form>
@@ -220,12 +205,12 @@ export default {
     search() {
       this.showResult();
     },
-    showResult(){
+    showResult() {
       this.show_result = true;
       this.dropdownClick();
     },
-    dropdownClick(){
-       const dropdownClick = (event) => {
+    dropdownClick() {
+      const dropdownClick = (event) => {
         const dropdown_content = document.querySelector(
           ".search__input__dropdown-content"
         );
@@ -246,7 +231,7 @@ export default {
       document.addEventListener("click", dropdownClick);
     },
     watchAll() {
-      this.$router.push('/search')
+      this.$router.push("/search");
       console.log("watch all button");
     },
   },
@@ -259,9 +244,9 @@ export default {
   height: 100%;
   flex-grow: 1;
   max-width: $maxwidth;
-  &-wrapper{
-  background-color: $dark_grey;
-  padding: 70px 10px !important;
+  &-wrapper {
+    background-color: $dark_grey;
+    padding: 70px 10px !important;
   }
   .title {
     margin-bottom: 40px;
@@ -435,7 +420,6 @@ export default {
         margin-left: 0px 8px !important;
       }
       transition: $transition;
-      
     }
     &-input {
       height: 100%;
@@ -467,19 +451,18 @@ export default {
     max-width: 100%;
     margin-top: 40px;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
     box-sizing: border-box;
-  @media screen and (max-width:$notebook){
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 15px;
-  }
+    @media screen and (max-width: $notebook) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+    }
 
-
-   .category{
-     overflow: hidden;
-     width: 100%;
-   }
+    .category {
+      overflow: hidden;
+      width: 100%;
+    }
   }
 }
 </style>

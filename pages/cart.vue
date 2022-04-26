@@ -2,7 +2,7 @@
   <div class="page cart-page wrapper">
     <div class="cart-page__content-wrapper content">
       <Breadcrumbs class="cart-page__breadcrumbs adaptive-non" />
-      <div v-if="false" class="cart-page__content_empty">
+      <div v-if="true" class="cart-page__content_empty">
         <h1 class="cart-page__content_empty__title title-normal">Корзина</h1>
         <svg
           class="cart-page__content_empty__icon"
@@ -56,8 +56,6 @@
     &__cart {
       margin-bottom: 70px;
     }
-    &__order {
-    }
     /////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
@@ -98,8 +96,12 @@
         }
       }
       &__button {
-        width: 228px;
+        width: 219px;
+        @media screen and (max-width: $tablet) {
+          width: 228px;
         height: 40px !important;
+        }
+        
       }
     }
   }
