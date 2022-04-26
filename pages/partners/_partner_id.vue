@@ -7,8 +7,12 @@
           <PagesPartnerShopBlock
             class="partner-page__over__content__main__shop-block"
           />
-          <PagesPartnerStocks class="partner-page__over__content__main__stocks adaptive-non"/>
-          <PagesPartnerStocksSlider class="partner-page__over__content__main__stocks_adaptive adaptive"/>
+          <PagesPartnerStocks
+            class="partner-page__over__content__main__stocks adaptive-non"
+          />
+          <PagesPartnerStocksSlider
+            class="partner-page__over__content__main__stocks_adaptive adaptive"
+          />
           <PagesPartnerCatalog
             class="partner-page__over__content__main__catalog"
           />
@@ -47,12 +51,15 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: $tablet) {
+    padding-top: 0px !important;
+  }
   &__over {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-        max-width:100%;
+    max-width: 100%;
 
     &__content {
       display: flex;
@@ -61,18 +68,20 @@ export default {
       flex-direction: row;
       &__main {
         padding-bottom: 100px;
+         @media screen and (max-width: $tablet) {
+          width: 100%;
+          padding-bottom: 0px;
+        }
         overflow: hidden;
-
         &__shop-block {
           margin-bottom: 70px;
-          @media screen and (max-width: $tablet)
-          {
+          @media screen and (max-width: $tablet) {
             margin-bottom: 30px;
           }
         }
         &__stocks {
           margin-bottom: 60px;
-          &_adaptive{
+          &_adaptive {
             margin-bottom: 60px;
           }
         }

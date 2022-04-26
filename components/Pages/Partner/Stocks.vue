@@ -8,12 +8,18 @@
 <style lang="scss" scoped>
 .partner-stocks {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
   &__item {
-    width: auto;
+    width: 100%;
+    max-width:100%;
+    overflow: hidden;
   }
   @media screen and (max-width: $notebook) {
+      grid-gap: 20px;
+  }
+  @media screen and (max-width: $sidebar_dn) {
+  grid-template-columns: repeat(2, 1fr);
       grid-gap: 20px;
   }
 }
