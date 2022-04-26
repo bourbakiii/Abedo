@@ -247,6 +247,9 @@ export default {
 .product-page {
   justify-content: flex-start;
   padding-bottom: 30px !important;
+  @media screen and (max-width: $tablet) {
+    padding-bottom: 50px;
+  }
   &__over {
     position: relative;
     display: flex;
@@ -266,6 +269,7 @@ export default {
         @media screen and (max-width: $tablet) {
           width: 100%;
           margin-right: 0px;
+          padding-bottom: 0px;
         }
         @media screen and (max-width: $sidebar_dn) {
           width: 100%;

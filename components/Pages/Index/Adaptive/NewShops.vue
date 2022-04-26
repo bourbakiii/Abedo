@@ -90,6 +90,7 @@
   }
   &__button {
       width:228px;
+      height:40px !important;
     margin-top: 30px;
     align-self: center;
     justify-content: center;
