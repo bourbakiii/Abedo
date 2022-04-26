@@ -7,7 +7,8 @@
           <PagesPartnerShopBlock
             class="partner-page__over__content__main__shop-block"
           />
-          <!-- <PagesPartnerStocks class="partner-page__over__content__main__stocks" /> -->
+          <PagesPartnerStocks class="partner-page__over__content__main__stocks adaptive-non"/>
+          <PagesPartnerStocksSlider class="partner-page__over__content__main__stocks_adaptive adaptive"/>
           <PagesPartnerCatalog
             class="partner-page__over__content__main__catalog"
           />

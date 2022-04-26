@@ -1,8 +1,7 @@
 <template>
   <div class="page test-page wrapper">
     <div class="test-page__content content">
-      {{ ya }}
-      <Checkbox id="some_id" value="baz" v-model="ya" />
+      <PagesPartnerStocksSlider class='adaptive'/>
     </div>
   </div>
 </template>

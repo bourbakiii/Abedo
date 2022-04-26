@@ -224,10 +224,7 @@ export default {
     justify-content: space-between;
     width: 100%;
     margin-bottom: 70px;
-    @media screen and (max-width: $tablet) {
-      margin-top: 0px;
-      margin-bottom: 20px;
-    }
+    
     &__title {
       @media screen and (max-width: $tablet) {
         font-family: "SF Pro Display";
@@ -303,8 +300,9 @@ export default {
         }
       }
       @media screen and (max-width: $tablet) {
-        margin: 30px 0px;
-      }
+      margin-top: 0px;
+      margin-bottom: 20px;
+    }
     }
   }
 
