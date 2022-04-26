@@ -29,7 +29,7 @@
         </button>
       </div>
       <div class="catalog__content">
-        <ShopAdaptive class="catalog__content__item" v-for='(item,index) in 12' :key='index' />
+        <PartnerAdaptive class="catalog__content__item" v-for='(item,index) in 12' :key='index' />
       </div>
       <ButtonStandart
         class="catalog__button"

@@ -2,12 +2,12 @@
   <div class="founded-shops">
     <h1 class="founded-shops__title title-normal">Найденные заведения</h1>
     <div class="founded-shops__content content">
-      <ShopItem
+      <PartnerItem
         class="founded-shops__content__item adaptive-non"
         v-for="(item, index) in 4"
         :key="index"
       />
-      <ShopAdaptive
+      <PartnerAdaptive
         class="
           founded-shops__content__item founded-shops__content__item_adaptive
           adaptive

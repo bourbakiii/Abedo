@@ -1,6 +1,7 @@
 <template>
   <div class="page partners-page wrapper">
     <div class="partners-page__content content">
+      {{partners.length}}
       <Breadcrumbs class="partners-page__breadcrumbs adaptive-non" />
       <div class="partners-page__top adaptive-non">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
@@ -187,16 +188,20 @@
         />
         <div class="partners-page__partners__content">
           <div class="partners-page__partners__content__cards">
-            <ShopItem
+            <client-only>
+            <PartnerItem
               class="partners-page__partners__content__cards__item adaptive-non"
-              v-for="item in 12"
-              :key="item"
+              v-for="item of partners"
+              :key="item.id"
+              :partner="item"
             />
-            <ShopAdaptive
+            <PartnerAdaptive
               class="partners-page__partners__content__cards__item_adaptive adaptive"
-              v-for="item in 12"
-              :key="item"
+              v-for="item of 12"
+              :key='item+"adapti"'
             />
+            </client-only>
+
           </div>
           <ButtonStandart
             class="partners-page__partners__content__button"
@@ -209,8 +214,25 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "PartnersPage",
+  async asyncData({}){
+    let loading = true;
+    let partners = [];
+    await axios.get("https://abedo.ru/api/shops").then(({data:{shops:{data}}})=>{
+      partners = data;
+    }).finally(()=>{
+      loading = false;
+    });
+    return {partners, loading};
+  },
+  data(){
+    return{
+      loading: true,
+      partners:[]
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -342,6 +364,7 @@ export default {
         flex-grow: 1;
         flex-shrink: 0;
         max-width: 100%;
+        width:100%;
         height: 100%;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
