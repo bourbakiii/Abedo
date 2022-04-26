@@ -51,6 +51,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+   padding-bottom: 30px !important;
   @media screen and (max-width: $tablet) {
     padding-top: 0px !important;
   }
@@ -68,7 +69,7 @@ export default {
       flex-direction: row;
       &__main {
         padding-bottom: 100px;
-         @media screen and (max-width: $tablet) {
+         @media screen and (max-width: $sidebar_dn) {
           width: 100%;
           padding-bottom: 0px;
         }
