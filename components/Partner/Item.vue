@@ -1,6 +1,6 @@
 
 <template>
-  <NuxtLink to="/partners/1" class="shop-item item">
+  <NuxtLink :to="`/partners/${partner.id}`" class="shop-item item">
     <div
       :style="`background: ${
         partner.image

@@ -220,15 +220,26 @@ export default {
   async asyncData({}){
     let loading = true;
     let partners = [];
-    await axios.get("https://abedo.ru/api/shops").then(({data:{shops:{data}}})=>{
-      partners = data;
+    let page = 1;
+    let limit = 1;
+    let last_page = null;
+    await axios.get("https://abedo.ru/api/shops", {page, limit}).then(({data})=>{
+      partners = data.shops.data;
+      last_page = data.last_page;
     }).finally(()=>{
       loading = false;
     });
-    return {partners, loading};
+    return {partners, loading, page, limit, last_page};
+  },
+  fetchOnServer: false,
+  async fetch(){
+
   },
   data(){
     return{
+      last_page:null,
+      page: null,
+      limit: null,
       loading: true,
       partners:[]
     }
