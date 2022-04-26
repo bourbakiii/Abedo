@@ -7,7 +7,11 @@
           Список заказов
         </h1>
         <div class="orders-page__content__orders__content">
-          <div class="orders-page__content__orders__content__item" v-for='(item,index) in 2' :key='index'>
+          <div
+            class="orders-page__content__orders__content__item"
+            v-for="(item, index) in 2"
+            :key="index"
+          >
             <div class="orders-page__content__orders__content__item__data">
               <div
                 class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_partner"
@@ -88,7 +92,7 @@
             </div>
             <div class="orders-page__content__orders__content__item__buttons">
               <ButtonStandart
-               @action="()=>$router.push('/orders/1')" 
+                @action="() => $router.push('/orders/1')"
                 class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_open"
                 >Открыть</ButtonStandart
               >
@@ -118,12 +122,12 @@ export default {};
       &__title {
         margin-bottom: 70px;
         @media screen and (max-width: $tablet) {
-          font-family: 'SF Pro Display';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 24px;
-margin-bottom:30px;
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+          margin-bottom: 30px;
         }
       }
       &__content {
@@ -147,7 +151,7 @@ margin-bottom:30px;
           justify-content: space-between;
           flex-direction: row;
           border-bottom: 1px solid $dark_grey;
-          &:last-of-type{
+          &:last-of-type {
             border-bottom: 0px;
           }
           @media screen and (max-width: $sidebar_dn) {
