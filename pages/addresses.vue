@@ -1,7 +1,7 @@
 <template>
   <div class="page addresses-page wrapper">
     <div class="addresses-page__content content">
-      <Breadcrumbs class="addresses-page__content__breadcrumbs" />
+      <Breadcrumbs class="addresses-page__content__breadcrumbs adaptive-non" />
       <div class="addresses-page__content__addresses">
         <h1 class="addresses-page__content__addresses__title title-normal">
           Адреса доставки
@@ -86,7 +86,6 @@
 .addresses-page {
   &__content {
     flex-grow: 1;
-  
     &__addresses {
       display: flex;
       justify-content: flex-start;
@@ -98,6 +97,14 @@
       &__title {
         align-self: flex-start;
         margin-bottom: 70px;
+        @media screen and (max-width: $tablet) {
+          margin-bottom: 20px;
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+        }
       }
       &__content {
         width: 100%;
@@ -122,9 +129,9 @@
           justify-content: flex-start;
           flex-direction: column;
           margin-bottom: 30px;
-           @media screen and (max-width: $tablet_middle) {
-             padding: 20px;
-           }
+          @media screen and (max-width: $tablet_middle) {
+            padding: 20px;
+          }
           &:last-of-type {
             margin-bottom: 0px;
           }
@@ -136,6 +143,12 @@
             line-height: 26px;
             width: 100%;
             margin-bottom: 28px;
+            @media screen and (max-width: $tablet)
+            {
+              font-size: 20px;
+            line-height: 22px;
+            margin-bottom: 20px;
+            }
           }
           &__data {
             width: 100%;
@@ -176,14 +189,17 @@
                 }
                 @media screen and (max-width: $tablet_middle) {
                   width: calc(50% - 7.5px) !important;
-                   &:nth-of-type(1), &:nth-of-type(2){
-                     margin-bottom: 15px;
-                   }
-                  &:nth-of-type(1), &:nth-of-type(3){
+                  &:nth-of-type(1),
+                  &:nth-of-type(2) {
+                    margin-bottom: 15px;
+                  }
+                  &:nth-of-type(1),
+                  &:nth-of-type(3) {
                     margin-right: 15px;
                   }
-                  &:nth-of-type(2), &:nth-of-type(4){
-                    margin-right:0px;
+                  &:nth-of-type(2),
+                  &:nth-of-type(4) {
+                    margin-right: 0px;
                   }
                 }
                 &:last-of-type {
@@ -220,9 +236,9 @@
               @media screen and (max-width: $notebook) {
                 order: -1;
               }
-               @media screen and (max-width: $tablet_middle) {
-                 margin-left: 15px;
-               }
+              @media screen and (max-width: $tablet_middle) {
+                margin-left: 15px;
+              }
               margin-left: 75px;
               width: 102px;
               flex-shrink: 0;
