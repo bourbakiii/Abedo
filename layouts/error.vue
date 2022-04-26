@@ -11,7 +11,7 @@
 </template>
 <style lang="scss" scoped>
 .error-layout {
-  justify-content: center;
+  justify-content: center !important;
   &__title {
     font-family: "Montserrat";
     font-style: normal;
@@ -19,8 +19,8 @@
     font-size: 32px;
     line-height: 39px;
     @media screen and (max-width: $tablet) {
-        font-size: 20px;
-line-height: 24px;
+      font-size: 20px;
+      line-height: 24px;
     }
   }
   &__text {
@@ -32,16 +32,16 @@ line-height: 24px;
     margin-top: 50px;
     margin-bottom: 58px;
     @media screen and (max-width: $tablet) {
-        font-size: 16px;
-    line-height: 19px;
+      font-size: 16px;
+      line-height: 19px;
     }
   }
   &__button {
     width: 218px;
     @media screen and (max-width: $tablet) {
-        width:200px;
+      width: 200px;
+      height: 40px !important;
     }
-
   }
 }
 </style>

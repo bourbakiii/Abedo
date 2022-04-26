@@ -11,7 +11,6 @@
           class="left-menu__logo__text"
         />
       </NuxtLink>
-
       <ButtonStandart
         @action="() => $router.push('/profile')"
         class="left-menu__button"
