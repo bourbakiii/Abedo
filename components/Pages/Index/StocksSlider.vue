@@ -105,6 +105,7 @@ export default {
 
 <style lang="scss" scoped>
 .subsections {
+      display: flex !important;
   width: 100%;
   height: max-content;
   &__wrapper {
@@ -112,7 +113,6 @@ export default {
     max-width: 100%;
     width: 100%;
     margin-bottom: 30px;
-
     @media screen and (max-width: calc($maxwidth + 60px)) {
       width: calc(100% - 60px);
       max-width: calc(100% - 60px);
@@ -136,7 +136,7 @@ export default {
       width: 370px;
     }
     @media screen and (max-width: $tablet) {
-      margin-right: 30px;
+      margin-right: 0px;
       width: 335px;
     }
     @media screen and (max-width: $phone) {

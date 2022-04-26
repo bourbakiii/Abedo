@@ -6,6 +6,7 @@
         <PagesIndexAdaptiveCategories
           class="index-page__content__adaptive-categories adaptive"
         />
+        (этот слайдер перестает работать при запуске проекта, не успел пофиксить, остальные работают нормально)
         <PagesIndexStocksSlider class="index-page__content__stocks-slider" />
         <PagesIndexNewShops
           class="index-page__content__new-shops adaptive-non"
@@ -36,7 +37,6 @@
 
 <style lang="scss" scoped>
 .index-page {
-  background-color: red;
   padding-bottom: 0px !important;
   @media screen and (max-width: $tablet) {
     padding-bottom: 50px !important;
@@ -45,7 +45,6 @@
     &__search {
       margin-bottom: 70px;
     }
-
     &__stocks-slider,
     &__new-shops {
       margin-bottom: 70px;
