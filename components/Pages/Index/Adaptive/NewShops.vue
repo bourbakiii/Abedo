@@ -33,7 +33,6 @@
       </div>
       <ButtonStandart
         class="catalog__button"
-        height="50"
         :uppercase="true"
         >Загрузить еще</ButtonStandart
       >

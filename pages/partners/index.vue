@@ -200,7 +200,6 @@
           </div>
           <ButtonStandart
             class="partners-page__partners__content__button"
-            padding="85px"
             >Загрузить еще</ButtonStandart
           >
         </div>

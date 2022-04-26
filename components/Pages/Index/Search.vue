@@ -159,8 +159,6 @@
               </div>
             </div>
             <ButtonStandart
-              height="32"
-              padding="30"
               @action="watchAll"
               class="search__input__dropdown-content__watch-all-button"
               >Cмотреть все</ButtonStandart

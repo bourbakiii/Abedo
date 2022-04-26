@@ -1,36 +1,8 @@
 <template>
-  <button
-    :style="
-      'height: ' +
-      parseInt(height) +
-      'px; padding: 0px ' +
-      parseInt(padding) +
-      'px;'"
-    @click.prevent="$emit('action')"
-    class="button button-standart"
-  >
+  <button @click.prevent="$emit('action')" class="button button-standart">
     <slot />
   </button>
 </template>
-
-<script>
-export default {
-  props: {
-    height: {
-      required: false,
-      default: "50px",
-    },
-    padding: {
-      required: false,
-      default: "30px",
-    },
-    uppercase: {
-      required: false,
-      default: false,
-    },
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 .button {
@@ -53,18 +25,30 @@ export default {
   display: flex;
   background-color: transparent;
   align-items: center;
-  justify-content: center;flex-direction: row;
+  justify-content: center;
+  flex-direction: row;
   &:hover {
     color: $white;
     background-color: $darkblue;
     border-color: $darkblue;
-    svg *{
+    svg * {
       fill: $white;
     }
   }
-  &.green:hover {
-    background-color: $green;
-    border-color: $green;
+  &.green {
+    &:hover {
+      background-color: $green;
+      border-color: $green;
+    }
+  }
+  &.filled {
+    
+      background-color: $darkblue;
+      border-color: $darkblue;
+      &.green{
+      background-color: $green;
+      border-color: $green;
+    }
   }
 }
 </style>
