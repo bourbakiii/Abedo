@@ -124,7 +124,6 @@
   background-color: $white;
   border-radius: 20px;
   border: 1px solid $dark_grey;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
