@@ -395,7 +395,6 @@ export default {
                 max-width: 100%;
                 width: 100%;
                 height: max-content;
-                background-color: red;
                 &__image {
                   object-fit: contain;
                   width: 100%;
