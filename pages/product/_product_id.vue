@@ -20,14 +20,61 @@
               class="product-page__over__content__main__images__slider__wrapper"
             >
               <div class="product-page__over__content__main__images__slider">
+                <button
+                  class="product-page__over__content__main__images__slider__button product-page__over__content__main__images__slider__button__prev"
+                >
+                  <svg
+                    class="product-page__over__content__main__images__slider__button__icon"
+                    width="20"
+                    height="12"
+                    viewBox="0 0 20 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2.35836 12L10 4.5799L17.6416 12L20 9.71009L10 -8.74228e-07L2.0019e-07 9.71009L2.35836 12Z"
+                      fill="#5C6784"
+                    />
+                  </svg>
+                </button>
+
                 <swiper
                   class="product-page__over__content__main__images__slider__swiper"
                   :options="swiperOption"
                 >
-                  <swiper-slide v-for="(slide, index) in 12" :key="index"
-                    >Slide {{ index }}</swiper-slide
-                  >
+                  <swiper-slide
+                    class="product-page__over__content__main__images__slider__swiper__slide"
+                    v-for="(slide, index) in 12"
+                    :key="index"
+                    ><img
+                      src="@/assets/images/product-placeholder.png"
+                      class="product-page__over__content__main__images__slider__swiper__slide__image"
+                  /></swiper-slide>
                 </swiper>
+                <button
+                  class="product-page__over__content__main__images__slider__button product-page__over__content__main__images__slider__button__next"
+                >
+                  <svg
+                    class="product-page__over__content__main__images__slider__button__icon"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_2221_7034)">
+                      <path
+                        d="M17.6416 4L10 11.4201L2.35836 4L-1.27402e-07 6.28991L10 16L20 6.28991L17.6416 4Z"
+                        fill="#5C6784"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_2221_7034">
+                        <rect width="20" height="20" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </button>
               </div>
             </div>
             <img
@@ -232,10 +279,17 @@ export default {
     return {
       swiperOption: {
         direction: "vertical",
-        slidesPerView: 3,
+        slidesPerView: "auto",
         spaceBetween: 8,
         mousewheel: true,
+        navigation: {
+        nextEl:
+          ".product-page__over__content__main__images__slider__button__next",
+        prevEl:
+          ".product-page__over__content__main__images__slider__button__prev",
       },
+      },
+      
       val: [],
     };
   },
@@ -294,13 +348,36 @@ export default {
           justify-content: space-between;
           &__adaptive__slider {
             margin-bottom: 40px;
-            
           }
           &__slider {
             overflow: hidden;
             width: 100%;
             height: 100%;
+            &__button {
+              width: 50px;
+              height: 50px;
+              border-radius: 90px;
+              background-color: $dark_grey;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: none;
+              position: absolute;
+              left: 50%;
+              &.swiper-button-disabled{
+                opacity: 0.5;
+              }
+              &__prev {
+                top: 0px;
+                transform: translate(-50%, -50%);
+              }
+              &__next {
+                bottom: 0px;
+                transform: translate(-50%, 50%);
+              }
+            }
             &__wrapper {
+              position: relative;
               width: 126px;
               height: 100%;
               border-radius: 20px;
@@ -311,13 +388,18 @@ export default {
               padding: 50px 5px;
             }
             &__swiper {
-              height: 100%;
               width: 100%;
-              .swiper-wrapper {
-                height: 100%;
-                max-height: 100%;
-                .swiper-slide {
+              height: 100%;
+              overflow: hidden;
+              &__slide {
+                max-width: 100%;
+                width: 100%;
+                height: max-content;
+                background-color: red;
+                &__image {
+                  object-fit: contain;
                   width: 100%;
+                  max-width: 100%;
                   height: auto;
                 }
               }
@@ -401,7 +483,7 @@ export default {
               border-top: 1px solid $dark_grey;
               border-bottom: 1px solid $dark_grey;
               @media screen and (max-width: $tablet) {
-                margin-bottom:20px;
+                margin-bottom: 20px;
               }
               &__icon {
                 margin-right: 20px;
@@ -545,7 +627,7 @@ export default {
             &__button {
               width: 228px;
               &__icon {
-                *{
+                * {
                   fill: $darkblue;
                 }
                 margin-right: 10px;
