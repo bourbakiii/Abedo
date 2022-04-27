@@ -2,7 +2,7 @@
   <div class="page categories-page wrapper">
     <div class="categories-page__content content">
       <Breadcrumbs class="categories-page__content__breadcrumbs adaptive-non" />
-      <div class="categories-page__content__top" :class='{"small-margin": show_filters}'>
+      <div class="categories-page__content__top">
         <h1 class="categories-page__content__top__title title-normal">
           Заведения
         </h1>
@@ -116,7 +116,7 @@
           class="categories-page__content__filters"
         />
       </transition>
-      <div class="categories-page__content__shops">
+      <div  :class='{"small-margin": show_filters}' class="categories-page__content__shops">
         <ShopItem
           v-for="(item, index) in 12"
           :key="index"
@@ -152,14 +152,10 @@ export default {
       align-items: center;
       justify-content: space-between;
       flex-direction: row;
-      margin-bottom: 70px;
+      margin-bottom: 10px;
       transition: $transition;
-      &.small-margin{
-        margin-bottom: 20px;
-      }
-      @media screen and (max-width: $tablet) {
-        margin-bottom: 20px;
-      }
+      margin-bottom: 20px;
+      
       &__title {
         @media screen and (max-width: $tablet) {
           font-family: "SF Pro Display";
@@ -167,7 +163,7 @@ export default {
           font-weight: 700;
           font-size: 20px;
           line-height: 20px;
-        }
+        } 
       }
       &__filter-button {
         height: 30px;
@@ -214,8 +210,12 @@ export default {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       grid-gap: 30px;
+      margin-top: 70px;
       width: 100%;
       max-width: 100%;
+      @media screen and (max-width: $tablet) {
+       margin-top: 20px;
+      }
       @media screen and (max-width: $notebook) {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 15px;
