@@ -2,11 +2,14 @@
   <div class="page categories-page wrapper">
     <div class="categories-page__content content">
       <Breadcrumbs class="categories-page__content__breadcrumbs adaptive-non" />
-      <div class="categories-page__content__top">
+      <div class="categories-page__content__top" :class='{"small-margin": show_filters}'>
         <h1 class="categories-page__content__top__title title-normal">
           Заведения
         </h1>
-        <button class="categories-page__content__top__filter-button adaptive-non">
+        <button
+          @click="show_filters = !show_filters"
+          class="categories-page__content__top__filter-button adaptive-non"
+        >
           <svg
             class="categories-page__content__top__filter-button-icon"
             width="24"
@@ -76,9 +79,14 @@
               stroke-linecap="round"
             />
           </svg>
-          <p class="categories-page__content__top__filter-button-text">Фильтр</p>
+          <p class="categories-page__content__top__filter-button-text">
+            Фильтр
+          </p>
         </button>
-        <button class="categories-page__content__top__filter-button_adaptive adaptive">
+        <button
+          @click="show_filters = !show_filters"
+          class="categories-page__content__top__filter-button_adaptive adaptive"
+        >
           <svg
             class="categories-page__content__top__filter-button__icon categories-page__content__top__filter-button_adaptive__icon"
             width="20"
@@ -102,6 +110,12 @@
           </svg>
         </button>
       </div>
+      <transition name="filter">
+        <Filters
+          v-if="show_filters"
+          class="categories-page__content__filters"
+        />
+      </transition>
       <div class="categories-page__content__shops">
         <ShopItem
           v-for="(item, index) in 12"
@@ -117,7 +131,13 @@
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return { show_filters: false };
+  },
+};
+</script>
 <style lang="scss" scoped>
 .categories-page {
   &__content {
@@ -126,7 +146,6 @@
     justify-content: flex-start;
     flex-direction: column;
     flex-grow: 1;
-
     &__top {
       width: 100%;
       display: flex;
@@ -134,71 +153,81 @@
       justify-content: space-between;
       flex-direction: row;
       margin-bottom: 70px;
+      transition: $transition;
+      &.small-margin{
+        margin-bottom: 20px;
+      }
       @media screen and (max-width: $tablet) {
-          margin-bottom: 20px;
+        margin-bottom: 20px;
       }
       &__title {
-        @media screen and (max-width: $tablet){
-            font-family: 'SF Pro Display';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 20px;
+        @media screen and (max-width: $tablet) {
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 20px;
         }
       }
       &__filter-button {
-      height: 30px;
-      width: 120px;
-      background-color: $white;
-      border-radius: 5px;
-      transition: $transition;
-      border: none;
-      outline: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0px 15px;
-      &-text {
-        font-family: "SF Pro Display";
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 19px;
-        display: flex;
-        align-items: center;
-      }
-      &:active {
-        transition: 0.05s;
-        transform: scale(0.96);
-      }
-      &_adaptive {
-        background-color: transparent;
+        height: 30px;
+        width: 120px;
+        background-color: $white;
+        border-radius: 5px;
+        transition: $transition;
         border: none;
         outline: none;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
+        padding: 0px 15px;
+        &-text {
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 19px;
+          display: flex;
+          align-items: center;
+        }
+        &:active {
+          transition: 0.05s;
+          transform: scale(0.96);
+        }
+        &_adaptive {
+          background-color: transparent;
+          border: none;
+          outline: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
+    &__filters {
+      margin-bottom: 30px;
+      @media screen and (max-width: $tablet) {
+        margin-bottom: 20px;
+      }
     }
     &__shops {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          grid-gap: 30px;
-          width: 100%;
-          max-width: 100%;
-          @media screen and (max-width: $notebook) {
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 15px;
-          }
-          @media screen and (max-width: $tablet) {
-            grid-template-columns: repeat(1, 1fr);
-          }
-          &__item {
-            width: 100%;
-            overflow: hidden;
-          }
-        }
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 30px;
+      width: 100%;
+      max-width: 100%;
+      @media screen and (max-width: $notebook) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 15px;
+      }
+      @media screen and (max-width: $tablet) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+      &__item {
+        width: 100%;
+        overflow: hidden;
+      }
+    }
   }
 }
 </style>

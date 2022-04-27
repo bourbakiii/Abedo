@@ -181,6 +181,9 @@
           </p>
         </button>
       </div>
+       <transition name="filter">
+        <Filters v-if="show_filters" class="partners-page__filters" />
+      </transition>
       <div class="partners-page__partners">
         <CategorySidebar
           class="partners-page__partners__sidebar adaptive-non"
@@ -210,7 +213,9 @@
 
 <script>
 export default {
-  name: "PartnersPage",
+  data() {
+    return { show_filters: false };
+  },
 };
 </script>
 <style lang="scss" scoped>
