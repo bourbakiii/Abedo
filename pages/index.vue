@@ -7,9 +7,7 @@
           class="index-page__content__adaptive-categories adaptive"
         />
         <PagesIndexStocksSlider class="index-page__content__stocks-slider" />
-        <PagesIndexNewShops
-          class="index-page__content__new-shops"
-        />
+        <PagesIndexNewShops class="index-page__content__new-shops" />
         <PagesIndexAbout class="index-page__content__about adaptive-non">
           Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру
           сгенерировать несколько абзацев более менее осмысленного текста рыбы
@@ -45,10 +43,10 @@
     &__new-shops {
       margin-bottom: 70px;
     }
-    &__new-shops{
-    @media screen and (max-width: $tablet){
-      margin-bottom:0px;
-    }
+    &__new-shops {
+      @media screen and (max-width: $tablet) {
+        margin-bottom: 0px;
+      }
     }
     &__about {
       width: 100vw;

@@ -187,12 +187,7 @@ export default {
       }
     }
   }
-  &__filters{
-    margin-bottom: 30px;
-    @media screen and (max-width: $tablet) {
-    margin-bottom: 20px;
-    }
-  }
+
   &__content {
     width: 100%;
     display: grid;
