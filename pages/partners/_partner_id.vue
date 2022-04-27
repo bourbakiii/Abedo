@@ -82,7 +82,7 @@ export default {
         &__stocks {
           margin-bottom: 60px;
           &_adaptive {
-            margin-bottom: 60px;
+            margin-bottom: 70px;
           }
         }
       }
