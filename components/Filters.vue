@@ -92,6 +92,7 @@ export default {
     border-radius: 20px;
     height:70px;
     background-color: $dark_grey;
+    
     @media screen and (max-width: $sidebar_dn) {
         flex-wrap: wrap;
         height: 130px;
@@ -113,6 +114,10 @@ export default {
       line-height: 19px;
       border: none;
       outline: none;
+      @media screen and (max-width: $tablet) {
+        font-size: 15px;
+      line-height: 17px;
+    }
       &::placeholder {
         color: $extra_dark_grey;
       }
@@ -162,6 +167,10 @@ export default {
         font-weight: 400;
         font-size: 16px;
         line-height: 20px;
+        @media screen and (max-width: $tablet) {
+        font-size: 15px;
+      line-height: 17px;
+    }
       }
     }
   }
