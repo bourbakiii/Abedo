@@ -31,7 +31,7 @@
 <style lang="scss" scoped>
 .button-small-cart {
         width: 34px;
-        height: 30px;
+        height: 34px;
         background-color: $darkblue;
         display: flex;
         align-items: center;

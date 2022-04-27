@@ -1,55 +1,44 @@
 <template>
-  <NuxtLink
-  to='/product/1'
-    class="product product-item product_in-cart"
-  >
+  <NuxtLink to="/product/1" class="product product-item product_in-cart">
     <div class="product-item__discount">-10%</div>
     <img
-     
       src="@/assets/images/product-item-placeholder.png"
       class="product-item__image"
     />
     <div class="product-item__info">
-      <p class="product-item__info__name">
-        Сырное ассорasdasd
-      </p>
-      <div  class="product-item__info__prices adaptive-non">
+      <p class="product-item__info__name">Сырное ассорasdasd</p>
+      <div class="product-item__info__prices adaptive-non">
         <p class="product-item__info__prices__price">3 500 ₽</p>
         <p class="product-item__info__prices__weight">/ 150 г</p>
         <p class="product-item__info__prices__price_full">4000 ₽</p>
       </div>
-      <div class="product-item__info__weight adaptive" contenteditable>450 г</div>
-      <div
-        
-        class="product-item__info__prices__mobile adaptive"
-      >
+      <div class="product-item__info__weight adaptive" contenteditable>
+        450 г
+      </div>
+      <div class="product-item__info__prices__mobile adaptive">
         <p class="product-item__info__prices__mobile__price" contenteditable>
           10 345 ₽
         </p>
-        <p class="product-item__info__prices__mobile__price_full" contenteditable>
+        <p
+          class="product-item__info__prices__mobile__price_full"
+          contenteditable
+        >
           10 345 ₽
         </p>
       </div>
     </div>
     <div class="product-item__buttons">
-      <ButtonSmallCart class="product-item__buttons__button_add_small adaptive" />
-      <ButtonStandart
-        v-if="true"
-        class="product-item__buttons__button_add adaptive-non"
-      >
-        В корзину
-      </ButtonStandart>
-      <div
-       v-else
-        class="product-item__buttons__button_creases adaptive-non"
-      >
+      <div v-if="false" class="product-item__buttons__add">
+        <ButtonSmallCart
+          class="product-item__buttons__button_add_small adaptive"
+        />
+        <ButtonStandart class="product-item__buttons__button_add adaptive-non">
+          В корзину
+        </ButtonStandart>
+      </div>
+      <div v-else class="product-item__buttons__button_creases">
         <ButtonProduct size="40" icon="minus" />
-        <p
-         
-          class="product-item__buttons__button_creases__count"
-        >
-          10
-        </p>
+        <p class="product-item__buttons__button_creases__count">10</p>
         <ButtonProduct size="40" icon="plus" />
       </div>
     </div>
@@ -185,8 +174,8 @@ export default {
         flex-direction: row;
         flex-wrap: wrap;
         margin-top: 7px;
-        max-width:100%;
-        width:100%;
+        max-width: 100%;
+        width: 100%;
         &__price {
           font-family: "SF Pro Display";
           font-style: normal;
@@ -221,7 +210,7 @@ export default {
           line-height: 17px;
           text-decoration-line: line-through;
           color: $extra_dark_grey;
-          margin-left: min(10px,100%);
+          margin-left: min(10px, 100%);
         }
       }
       &__weight {
@@ -272,6 +261,12 @@ export default {
         line-height: 19px;
         text-align: center;
         margin: 0px 10px;
+        @media screen and (max-width: $tablet) {
+          font-size: 16px;
+          line-height: 19px;
+          width: 34px;
+          margin: 0px 4px;
+        }
       }
     }
   }

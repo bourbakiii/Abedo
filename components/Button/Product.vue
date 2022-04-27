@@ -67,6 +67,10 @@ export default {
   justify-content: center;
   transition: $transition;
   background-color: $white;
+  @media screen and (max-width: $tablet) {
+      width: 34px !important;
+      height: 34px !important;
+  }
   svg *{
     transition: $transition;
   }

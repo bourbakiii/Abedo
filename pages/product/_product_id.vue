@@ -254,6 +254,19 @@
             />
           </div>
           <button class="product-page__over__content__main__back adaptive-non">
+            <svg
+              class="product-page__over__content__main__back__icon"
+              width="12"
+              height="18"
+              viewBox="0 0 12 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.3999 15.8775L4.72181 9L11.3999 2.12252L9.33898 -9.00857e-08L0.599901 9L9.33898 18L11.3999 15.8775Z"
+                fill="#5C6784"
+              />
+            </svg>
             Вернуться к списку товаров
           </button>
         </div>
@@ -283,13 +296,13 @@ export default {
         spaceBetween: 8,
         mousewheel: true,
         navigation: {
-        nextEl:
-          ".product-page__over__content__main__images__slider__button__next",
-        prevEl:
-          ".product-page__over__content__main__images__slider__button__prev",
+          nextEl:
+            ".product-page__over__content__main__images__slider__button__next",
+          prevEl:
+            ".product-page__over__content__main__images__slider__button__prev",
+        },
       },
-      },
-      
+
       val: [],
     };
   },
@@ -364,7 +377,7 @@ export default {
               border: none;
               position: absolute;
               left: 50%;
-              &.swiper-button-disabled{
+              &.swiper-button-disabled {
                 opacity: 0.5;
               }
               &__prev {
@@ -695,10 +708,14 @@ export default {
           line-height: 19px;
           color: $darkblue;
           background-color: transparent;
-          outline: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           border: none;
-          &:hover {
-            text-decoration: underline;
+          outline: none;
+          text-decoration: underline;
+          &__icon {
+            margin-right: 10px;
           }
         }
       }
