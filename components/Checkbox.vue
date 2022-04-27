@@ -43,8 +43,6 @@ export default {
         return this.modelValue.includes(this.value);
       }
       // Note that `true-value` and `false-value` are camelCase in the JS
-      console.log("The value is ");
-      console.log(this.modelValue === this.trueValue);
       return this.modelValue === this.trueValue;
     },
   },
