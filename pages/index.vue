@@ -1,5 +1,6 @@
 <template>
   <div class="page index-page__all-wrapper">
+    123
     <PagesIndexSearch class="index-page__content__search adaptive-non" />
     <div class="index-page__wrapper wrapper">
       <div class="index-page__content content">
