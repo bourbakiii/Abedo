@@ -75,7 +75,7 @@ export default {
     font-family: "SF Pro Display";
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 17px;
     width: 100%;
     text-overflow: ellipsis;
@@ -98,7 +98,7 @@ export default {
     font-family: "SF Pro Display";
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 20px;
     transition: $transition;
     &__pre {
@@ -112,7 +112,7 @@ export default {
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 20px;
       &::placeholder {
         color: $extra_dark_grey;

@@ -157,7 +157,7 @@
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 17px;
           color: $extra_dark_grey;
           width: 100%;
@@ -169,7 +169,7 @@
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 20px;
         }
         &__min-count {
@@ -177,7 +177,7 @@
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 17px;
           display: flex;
           align-items: center;
@@ -264,7 +264,7 @@
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 700;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 20px;
           margin-right: 15px;
         }
@@ -305,7 +305,7 @@
             font-family: "SF Pro Display";
             font-style: normal;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 20px;
             margin-right: 15px;
           }

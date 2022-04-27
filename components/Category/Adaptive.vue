@@ -46,7 +46,7 @@
     font-family: "SF Pro Display";
     font-style: normal;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 17px;
     color: $white;
     width: 100%;

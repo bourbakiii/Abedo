@@ -176,13 +176,13 @@
     width: 100%;
     max-width: 100%;
     height: auto;
-    margin-left: 14px;
+    margin-left: 15px;
 
     &__name {
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 17px;
       width: 100%;
       max-width: 100%;
@@ -194,7 +194,7 @@
       font-style: normal;
       font-weight: 400;
       font-size: 12px;
-      line-height: 14px;
+      line-height: 15px;
       color: $darkblue;
       width: 100%;
       max-width: 100%;
@@ -223,7 +223,7 @@
     }
   }
   &__icons {
-    margin-left: 14px;
+    margin-left: 15px;
     display: flex;
     align-items: center;
     justify-content: center;

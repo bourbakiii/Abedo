@@ -70,7 +70,7 @@
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
         line-height: 17px;
       }
     }

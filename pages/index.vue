@@ -6,7 +6,6 @@
         <PagesIndexAdaptiveCategories
           class="index-page__content__adaptive-categories adaptive"
         />
-        (этот слайдер перестает работать при запуске проекта, не успел пофиксить, остальные работают нормально)
         <PagesIndexStocksSlider class="index-page__content__stocks-slider" />
         <PagesIndexNewShops
           class="index-page__content__new-shops adaptive-non"

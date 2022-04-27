@@ -194,7 +194,7 @@
         border-radius: 10px;
         background-color: $white;
         margin-bottom: 15px;
-        padding: 14px;
+        padding: 15px;
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -204,9 +204,9 @@
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 17px;
-          margin-bottom: 14px;
+          margin-bottom: 15px;
           text-align: left;
           width: 100%;
         }
@@ -243,7 +243,7 @@
               font-family: "SF Pro Display";
               font-style: normal;
               font-weight: 500;
-              font-size: 14px;
+              font-size: 15px;
               line-height: 16px;
             }
           }
@@ -256,7 +256,7 @@
               font-family: "SF Pro Display";
               font-style: normal;
               font-weight: 500;
-              font-size: 14px;
+              font-size: 15px;
               line-height: 16px;
               &_full {
                 font-size: 13px;

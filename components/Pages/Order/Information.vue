@@ -160,7 +160,7 @@
           min-width: 188px;
           white-space: nowrap;
           @media screen and (max-width: $tablet) {
-            font-size: 14px;
+            font-size: 15px;
             line-height: 17px;
             margin-right: 15px;
             width: 30%;
@@ -178,7 +178,7 @@
           line-height: 20px;
           min-width: 404px;
           @media screen and (max-width: $tablet) {
-            font-size: 14px;
+            font-size: 15px;
             line-height: 17px;
             margin-right: 15px;
             width: 70%;

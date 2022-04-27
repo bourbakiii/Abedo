@@ -219,7 +219,6 @@
 </template>
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
 import Checkbox from "../../components/Checkbox.vue";
 export default {
   name: "swiper-example-mousewheel-control",
@@ -361,7 +360,7 @@ export default {
                 font-family: "SF Pro Display";
                 font-style: normal;
                 font-weight: 400;
-                font-size: 14px;
+                font-size: 15px;
                 line-height: 17px;
                 margin-bottom: 10px;
               }
@@ -376,7 +375,7 @@ export default {
                 font-family: "SF Pro Display";
                 font-style: normal;
                 font-weight: 400;
-                font-size: 14px;
+                font-size: 15px;
                 line-height: 20px;
               }
             }
@@ -416,7 +415,7 @@ export default {
                 color: $red;
                 @media screen and (max-width: $tablet) {
                   font-weight: 400;
-                  font-size: 14px;
+                  font-size: 15px;
                   line-height: 17px;
                 }
               }

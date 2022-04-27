@@ -277,7 +277,7 @@ export default {
         
         height: 35px !important;
         background-color: transparent;
-        padding: 0px 14px !important;
+        padding: 0px 15px !important;
         &__icon {
           margin-right: 10px;
         }
@@ -293,7 +293,7 @@ export default {
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
         line-height: 17px;
         &__icon {
           margin-right: 10px;

@@ -101,8 +101,8 @@ export default {
     line-height: 15px;
     color: $white;
     @media screen and (max-width: $tablet) {
-      top: 14px;
-      left: 14px;
+      top: 15px;
+      left: 15px;
       min-width: 36px;
       height: 36px;
       font-family: "SF Pro Display";
@@ -129,7 +129,7 @@ export default {
     flex-direction: column;
     padding: 0px 20px;
     @media screen and (max-width: $tablet) {
-      padding: 0px 14px;
+      padding: 0px 15px;
     }
     width: 100%;
     flex-grow: 1;
@@ -177,7 +177,7 @@ export default {
       justify-content: flex-start;
       flex-direction: row;
       flex-wrap: wrap;
-      margin-top: 14px;
+      margin-top: 15px;
       &__mobile {
         display: flex;
         align-items: center;
@@ -191,7 +191,7 @@ export default {
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 500;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 16px;
           white-space: nowrap;
           &_full {
@@ -217,7 +217,7 @@ export default {
           font-family: "Montserrat";
           font-style: normal;
           font-weight: 500;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 17px;
           text-decoration-line: line-through;
           color: $extra_dark_grey;
@@ -229,7 +229,7 @@ export default {
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
         line-height: 17px;
         color: $darkblue;
       }
@@ -245,7 +245,7 @@ export default {
     width: 100%;
     padding: 0px 20px;
     @media screen and (max-width: $tablet) {
-      padding: 0px 14px;
+      padding: 0px 15px;
       justify-content: flex-start;
       margin-top: 10px;
       margin-bottom: 17px;

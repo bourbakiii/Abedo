@@ -293,7 +293,7 @@ export default {
             font-family: "SF Pro Display";
             font-style: normal;
             font-weight: 400;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 17px;
             width: 100%;
             overflow: hidden;
@@ -344,7 +344,7 @@ export default {
                 font-family: "SF Pro Display";
                 font-style: normal;
                 font-weight: 500;
-                font-size: 14px;
+                font-size: 15px;
                 line-height: 17px;
                 margin-right: 5px;
                 white-space: nowrap;
@@ -357,7 +357,7 @@ export default {
                 font-family: "SF Pro Display";
                 font-style: normal;
                 font-weight: 500;
-                font-size: 14px;
+                font-size: 15px;
                 line-height: 17px;
                 color: $darkblue;
                 white-space: nowrap;
@@ -378,7 +378,7 @@ export default {
                 font-style: normal;
                 font-weight: 400;
                 font-size: 12px;
-                line-height: 14px;
+                line-height: 15px;
                 margin-right: 5px;
                 white-space: nowrap;
                 max-width: 60%;
@@ -391,7 +391,7 @@ export default {
                 font-style: normal;
                 font-weight: 400;
                 font-size: 12px;
-                line-height: 14px;
+                line-height: 15px;
                 color: $darkblue;
                 white-space: nowrap;
                 max-width: 40%;

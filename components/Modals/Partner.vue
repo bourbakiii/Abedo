@@ -368,13 +368,13 @@
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
         line-height: 22px;
         @media screen and (max-width: $tablet) {
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 17px;
         }
       }
@@ -402,7 +402,7 @@
           font-family: "Montserrat";
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 17px;
           color: $extra_dark_grey;
           display: flex;
@@ -413,7 +413,7 @@
             font-family: "SF Pro Display";
             font-style: normal;
             font-weight: 400;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 17px;
           }
           &__icon {
@@ -424,14 +424,14 @@
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 20px;
           width: 100%;
           @media screen and (max-width: $tablet) {
             font-family: "SF Pro Display";
             font-style: normal;
             font-weight: 400;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 20px;
           }
           &__subcontent {
@@ -446,7 +446,7 @@
               justify-content: flex-start;
               flex-direction: row;
               width: 100%;
-              margin-bottom: 14px;
+              margin-bottom: 15px;
               &:last-of-type {
                 margin-bottom: 0px;
               }
@@ -454,7 +454,7 @@
                 font-family: "Montserrat";
                 font-style: normal;
                 font-weight: 400;
-                font-size: 14px;
+                font-size: 15px;
                 line-height: 20px;
                 color: $extra_dark_grey;
                 width: 115px;
@@ -464,7 +464,7 @@
                 font-family: "Montserrat";
                 font-style: normal;
                 font-weight: 400;
-                font-size: 14px;
+                font-size: 15px;
                 line-height: 20px;
               }
             }
