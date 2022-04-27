@@ -6,8 +6,7 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      // , minimum-scale=1, user-scalable=no
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no ' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
