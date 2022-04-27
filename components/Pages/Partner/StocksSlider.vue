@@ -166,6 +166,7 @@ margin-bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
+    z-index: 1;
   }
   &__button {
     transform: translateY(-25%);
