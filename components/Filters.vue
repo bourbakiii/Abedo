@@ -78,7 +78,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
 .filters {
     width: 100%;
     display: flex;

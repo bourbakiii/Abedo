@@ -136,8 +136,8 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
+
 .catalog {
   display: flex;
   align-items: center;
