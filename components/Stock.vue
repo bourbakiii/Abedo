@@ -136,6 +136,7 @@
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      text-align: left;
       @media screen and (max-width: $tablet) {
         font-family: "SF Pro Display";
         font-style: normal;
