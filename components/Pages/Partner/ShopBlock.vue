@@ -311,7 +311,7 @@ export default {};
             font-family: "Montserrat";
             font-style: normal;
             font-weight: 400;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 17px;
             display: flex;
             align-items: center;
@@ -321,7 +321,7 @@ export default {};
             font-family: "Montserrat";
             font-style: normal;
             font-weight: 400;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 20px;
             margin-left: 10px;
           }
@@ -386,7 +386,7 @@ export default {};
     font-family: "SF Pro Display";
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 20px;
     color:$darkblue;
   }
@@ -459,7 +459,7 @@ export default {};
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
         line-height: 20px;
       }
     }

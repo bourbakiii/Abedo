@@ -375,7 +375,7 @@ export default {
     justify-content: center;
     flex-direction: row;
     height: 35px !important;
-    padding: 0px 14px !important;
+    padding: 0px 15px !important;
     margin-top:30px;
     &__icon {
       margin-right: 10px;
@@ -404,7 +404,7 @@ export default {
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 17px;
       text-decoration: none;
       margin-bottom: 23px;
@@ -414,7 +414,7 @@ export default {
         margin-bottom: 0px;
       }
       &__icon {
-        margin-right: 14px;
+        margin-right: 15px;
       }
     }
   }

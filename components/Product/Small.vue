@@ -40,7 +40,7 @@ $product_inner_padding: 9px;
     font-family: "SF Pro Display";
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 17px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -52,12 +52,12 @@ $product_inner_padding: 9px;
     align-items: baseline;
     justify-content: flex-start;
     padding: 0px $product_inner_padding;
-    margin-bottom: 14px;
+    margin-bottom: 15px;
     &__price {
       font-family: "Montserrat";
       font-style: normal;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 17px;
     
     }
@@ -65,7 +65,7 @@ $product_inner_padding: 9px;
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 17px;
       display: flex;
       align-items: center;

@@ -10,6 +10,10 @@
         v-if="$store.state.modals.rate.show"
         class="modals-wrapper__content modal-content"
       />
+      <ModalsLogin
+        v-if="$store.state.modals.login.show"
+        class="modals-wrapper__content modal-content"
+      />
       <!-- <ModalsProduct
         v-else-if="$store.state.modals.product.show"
         class="modals-wrapper__content modal-content"
@@ -32,6 +36,15 @@ export default {
       return false;
     },
   },
+  watch:{
+    "$route.path":{
+      handler(){
+        console.log("123")
+        this.$store.commit('modals/close');
+      },
+      deep:true
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

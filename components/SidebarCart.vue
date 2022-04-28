@@ -162,7 +162,7 @@
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
         line-height: 20px;
         color: $red;
         &:hover {
@@ -186,7 +186,7 @@
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 500;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 20px;
           color: $darkblue;
         }
@@ -250,7 +250,7 @@
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 20px;
           flex-grow: 1;
           margin-right: 18px;
@@ -293,7 +293,7 @@
               font-family: "Montserrat";
               font-style: normal;
               font-weight: 400;
-              font-size: 14px;
+              font-size: 15px;
               line-height: 19px;
               text-decoration: line-through;
               color: $extra_dark_grey;
@@ -316,7 +316,7 @@
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 17px;
       flex-grow: 1;
       margin-right: 5px;
@@ -325,7 +325,7 @@
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 17px;
       flex-grow: 1;
       text-align: right;
@@ -337,7 +337,7 @@
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 700;
-        font-size: 14px;
+        font-size: 15px;
         line-height: 20px;
       }
       &__value {

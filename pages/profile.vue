@@ -300,7 +300,7 @@ export default {
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 17px;
           margin-bottom: 10px;
         }
@@ -316,7 +316,7 @@ export default {
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 20px;
           &::placeholder {
             color: $extra_dark_grey;

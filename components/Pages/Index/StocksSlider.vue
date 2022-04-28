@@ -1,24 +1,24 @@
 <template>
-  <div class="subsections__wrapper">
-    <div class="subsections__content">
+  <div class="stocks__wrapper">
+    <div class="stocks__content">
       <swiper
         :auto-destroy="false"
-        class="subsections slider"
+        class="stocks slider"
         :options="swiperOption"
       >
         <swiper-slide
-          class="subsections__slide"
+          class="stocks__slide"
           v-for="(stock, index) in 7"
           :key="index"
         >
-          <Stock class="subsections__slide__item" />
+          <Stock class="stocks__slide__item" />
         </swiper-slide>
       </swiper>
       <button
-        class="subsections__button subsections__button_prev swiper-button swiper-button-prev"
+        class="stocks__button stocks__button_prev swiper-button swiper-button-prev"
       >
         <svg
-          class="subsections__button__icon"
+          class="stocks__button__icon"
           width="20"
           height="20"
           viewBox="0 0 20 20"
@@ -44,10 +44,10 @@
         </svg>
       </button>
       <button
-        class="subsections__button subsections__button_next swiper-button swiper-button-next"
+        class="stocks__button stocks__button_next swiper-button swiper-button-next"
       >
         <svg
-          class="subsections__button__icon"
+          class="stocks__button__icon"
           width="12"
           height="20"
           viewBox="0 0 12 20"
@@ -62,7 +62,7 @@
       </button>
     </div>
     <div
-      class="subsections__pagination swiper-pagination"
+      class="stocks__pagination swiper-pagination"
       slot="pagination"
     ></div>
   </div>
@@ -104,7 +104,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.subsections {
+.stocks {
       display: flex !important;
   width: 100%;
   height: max-content;
@@ -112,7 +112,6 @@ export default {
     position: relative;
     max-width: 100%;
     width: 100%;
-    margin-bottom: 30px;
     @media screen and (max-width: calc($maxwidth + 60px)) {
       width: calc(100% - 60px);
       max-width: calc(100% - 60px);
@@ -136,7 +135,7 @@ export default {
       width: 370px;
     }
     @media screen and (max-width: $tablet) {
-      margin-right: 0px;
+      margin-right: 30px;
       width: 335px;
     }
     @media screen and (max-width: $phone) {
@@ -160,6 +159,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
+    z-index: 1;
   }
   &__button {
     transform: translateY(-25%);

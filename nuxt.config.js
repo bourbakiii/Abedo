@@ -6,7 +6,7 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no ' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
@@ -20,6 +20,7 @@ export default {
     '@/assets/scss/transitions.scss',
     '@/assets/scss/fonts.scss',
     '@/assets/scss/titles.scss',
+    "swiper/css/swiper.css"
   ],
   plugins: [
     '@plugins/v-mask.js',

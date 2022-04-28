@@ -282,7 +282,7 @@ export default {
             font-family: "SF Pro Display";
             font-style: normal;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 17px;
             display: flex;
             align-items: center;
@@ -396,7 +396,7 @@ export default {
     font-family: "SF Pro Display";
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 17px;
     white-space: nowrap;
     text-overflow: ellipsis;

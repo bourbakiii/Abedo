@@ -105,20 +105,18 @@ export default {
 .stocks {
   width: 100%;
   height: max-content;
-  &__title{
-    font-family: 'SF Pro Display';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 20px;
-margin-bottom: 20px;
+  &__title {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 20px;
   }
   &__wrapper {
     position: relative;
     max-width: 100%;
     width: 100%;
-    margin-bottom: 30px;
-
     @media screen and (max-width: calc($maxwidth + 60px)) {
       width: calc(100% - 60px);
       max-width: calc(100% - 60px);
@@ -166,6 +164,7 @@ margin-bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
+    z-index: 1;
   }
   &__button {
     transform: translateY(-25%);

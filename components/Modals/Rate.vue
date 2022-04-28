@@ -4,7 +4,7 @@
       Оцените ресторан и доставку
     </h3>
     <button
-      @click.prevent="$store.commit('modals/close', { modal_name: 'rate' })"
+      @click.prevent="$store.commit('modals/close')"
       class="product-modal__close"
     >
       <svg
@@ -286,7 +286,7 @@ margin-bottom: 30px;
         @media screen and (max-width: $tablet) {
           width:50%;
           height:50px;
-          font-size: 14px;
+          font-size: 15px;
         line-height: 17px;
         }
         &:last-of-type {
@@ -375,7 +375,7 @@ line-height: 20px;
               font-family: "SF Pro Display";
               font-style: normal;
               font-weight: 400;
-              font-size: 14px;
+              font-size: 15px;
               line-height: 17px;
               margin-bottom: 10px;
             }
@@ -389,7 +389,7 @@ line-height: 20px;
               font-family: "SF Pro Display";
               font-style: normal;
               font-weight: 400;
-              font-size: 14px;
+              font-size: 15px;
               line-height: 20px;
               outline: none;
                 @media screen and (max-width: $notebook) {
@@ -472,7 +472,7 @@ line-height: 20px;
               font-family: "Montserrat";
               font-style: normal;
               font-weight: 400;
-              font-size: 14px;
+              font-size: 15px;
               line-height: 17px;
               &__underline {
                 cursor: pointer;

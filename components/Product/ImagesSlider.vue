@@ -1,5 +1,6 @@
 <template>
   <div class="swiper-wrapper">
+    
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="item in 12" :key="item"
         >Slide {{ item }}</swiper-slide

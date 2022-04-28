@@ -8,8 +8,11 @@
         <p class="order-page__content__least__pre">Итого:</p>
         <p class="order-page__content__least__price" contenteditable>1 330 ₽</p>
       </div>
-       <button class="order-page__content__back adaptive-non">
-          Вернуться к списку товаров
+       <button @click="$router.push('/orders')" class="order-page__content__back adaptive-non">
+         <svg class="order-page__content__back__icon" width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.3999 15.8775L4.72181 9L11.3999 2.12252L9.33898 -9.00857e-08L0.599901 9L9.33898 18L11.3999 15.8775Z" fill="#5C6784"/>
+</svg>
+          Вернуться к списку заказов
         </button>
     </div>
   </div>
@@ -82,10 +85,14 @@
         line-height: 19px;
         color: $darkblue;
         background-color: transparent;
-        outline: none;
-        border: none;
-        &:hover {
+        display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          outline: none;
           text-decoration: underline;
+        &__icon{
+          margin-right:10px;
         }
       }
   }

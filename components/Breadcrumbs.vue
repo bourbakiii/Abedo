@@ -17,7 +17,7 @@
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 17px;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@
       font-family: "Montserrat";
       font-style: normal;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 17px;
       display: flex;
       align-items: center;
@@ -48,7 +48,7 @@
       font-family: "Montserrat";
       font-style: normal;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 17px;
       color: $extra_dark_grey;
     }

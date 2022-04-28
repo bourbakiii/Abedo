@@ -129,8 +129,8 @@ export default {
     transition: $transition;
     @media screen and (max-width: $tablet) {
       svg{
-      width: 14px;
-      height: 14px;
+      width: 15px;
+      height: 15px;
       }
     }    
   }
@@ -139,7 +139,7 @@ export default {
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 17px;
     }
     height: 100%;

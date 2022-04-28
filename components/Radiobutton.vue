@@ -1,6 +1,6 @@
 <template>
 
-<label  class="radiobutton" :for="id">
+<label :class='{"checked": isChecked}' class="radiobutton" :for="id">
       <svg
         class="radiobutton__icon"
         width="10"
@@ -62,7 +62,7 @@ export default {
   &__wrapper {
     cursor: pointer;
   }
-  &__input:checked ~ label {
+  &.checked {
     background-color: $darkblue;
     * {
       stroke: $white;

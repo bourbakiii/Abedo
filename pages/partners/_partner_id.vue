@@ -26,7 +26,6 @@
 </template>
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
 export default {
   name: "swiper-example-mousewheel-control",
   title: "Mousewheel control",
@@ -83,7 +82,7 @@ export default {
         &__stocks {
           margin-bottom: 60px;
           &_adaptive {
-            margin-bottom: 60px;
+            margin-bottom: 70px;
           }
         }
       }
