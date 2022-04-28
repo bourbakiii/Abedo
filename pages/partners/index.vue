@@ -1,12 +1,15 @@
 <template>
   <div class="page partners-page wrapper">
     <div class="partners-page__content content">
-      {{partners.length}}
+      {{ partners.length }}
       <Breadcrumbs class="partners-page__breadcrumbs adaptive-non" />
       <div class="partners-page__top adaptive-non">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
-       
-        <button @click="show_filters=!show_filters" class="partners-page__top__filter-button adaptive-non">
+
+        <button
+          @click="show_filters = !show_filters"
+          class="partners-page__top__filter-button adaptive-non"
+        >
           <svg
             class="partners-page__top__filter-button-icon"
             width="24"
@@ -78,7 +81,6 @@
           </svg>
           <p class="partners-page__top__filter-button-text">Фильтр</p>
         </button>
-        
       </div>
       <div class="partners-page__top_adaptive adaptive">
         <ButtonStandart class="partners-page__top_adaptive__button">
@@ -133,7 +135,10 @@
           </svg>
           Категории</ButtonStandart
         >
-        <button @click="show_filters=!show_filters" class="partners-page__top_adaptive__filters-button">
+        <button
+          @click="show_filters = !show_filters"
+          class="partners-page__top_adaptive__filters-button"
+        >
           <svg
             class="partners-page__top_adaptive__filters-button__icon"
             width="20"
@@ -161,7 +166,7 @@
           </p>
         </button>
       </div>
-       <transition name="filter">
+      <transition name="filter">
         <Filters v-if="show_filters" class="partners-page__filters" />
       </transition>
       <div class="partners-page__partners">
@@ -170,23 +175,14 @@
         />
         <div class="partners-page__partners__content">
           <div class="partners-page__partners__content__cards">
-            <client-only>
-            <PartnerItem
-              class="partners-page__partners__content__cards__item adaptive-non"
-              v-for="item of partners"
-              :key="item.id"
-              :partner="item"
-            />
-            <PartnerAdaptive
-              class="partners-page__partners__content__cards__item_adaptive adaptive"
-              v-for="item of 12"
-              :key='item+"adapti"'
-            />
-            </client-only>
-
+              <PartnerItem
+                class="partners-page__partners__content__cards__item"
+                v-for="item of partners"
+                :key="item.id"
+                :partner="item"
+              />
           </div>
-          <ButtonStandart
-            class="partners-page__partners__content__button"
+          <ButtonStandart v-if="params.page <= params.last_page" @action="$fetch" class="partners-page__partners__content__button"
             >Загрузить еще</ButtonStandart
           >
         </div>
@@ -196,11 +192,31 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
-    return { show_filters: false, partners:[] };
-    
+    return {
+      show_filters: false,
+      partners: [],
+      params: {
+        page: 1,
+        last_page: null,
+        limit: 1,
+      },
+      loading: true,
+    };
+  },
+  fetchOnServer: false,
+  async fetch() {
+    this.loading = true;
+    await this.$axios
+      .$get(`${this.$axios.defaults.baseURL}/api/shops`, { params:this.params })
+      .then(({ shops }) => {
+        this.partners = this.partners.concat(shops.data);
+        console.log(this);
+        this.params.page++;
+        this.params.last_page = shops.last_page;
+      })
+      .finally(() => this.loading = false);
   },
 };
 </script>
@@ -213,7 +229,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-      margin-bottom: 20px;
+    margin-bottom: 20px;
     &__title {
       @media screen and (max-width: $tablet) {
         font-family: "SF Pro Display";
@@ -264,10 +280,17 @@ export default {
       justify-content: space-between;
       flex-direction: row;
       &__button {
-        
         height: 35px !important;
         background-color: transparent;
         padding: 0px 15px !important;
+        svg *{
+        fill: transparent !important;
+        }
+        &:hover{
+          svg * {
+            stroke: $white;
+          }
+        }
         &__icon {
           margin-right: 10px;
         }
@@ -290,9 +313,9 @@ export default {
         }
       }
       @media screen and (max-width: $tablet) {
-      margin-top: 0px;
-      margin-bottom: 20px;
-    }
+        margin-top: 0px;
+        margin-bottom: 20px;
+      }
     }
   }
 
@@ -334,7 +357,7 @@ export default {
         flex-grow: 1;
         flex-shrink: 0;
         max-width: 100%;
-        width:100%;
+        width: 100%;
         height: 100%;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -360,7 +383,7 @@ export default {
       }
       &__button {
         width: 306px;
-height: 50px;
+        height: 50px;
         margin-top: 60px;
         background-color: $light_grey;
         text-transform: uppercase !important;

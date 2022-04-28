@@ -16,13 +16,16 @@
       </svg>
     </button>
     <div class="shop-adaptive__info">
-      <p class="shop-adaptive__info__name" contenteditable>Кафе Лимончелло</p>
+      <p class="shop-adaptive__info__name" contenteditable>
+        {{ partner.name }}
+      </p>
       <p class="shop-adaptive__info__category" contenteditable>
-        Детская одежда
+        {{ cuisines }}
       </p>
     </div>
     <div class="shop-adaptive__icons">
       <span
+        v-if="partner.order_gifts.length"
         class="shop-adaptive__icons__icon__wrapper shop-adaptive__icons__icon__gift"
       >
         <svg
@@ -39,7 +42,7 @@
         </svg>
       </span>
       <span
-
+        v-if="partner.discounts.length"
         class="shop-adaptive__icons__icon__wrapper shop-adaptive__icons__icon__discount"
       >
         <svg
@@ -56,7 +59,7 @@
         </svg>
       </span>
       <span
-
+        v-if="partner.delivery"
         class="shop-adaptive__icons__icon__wrapper shop-adaptive__icons__icon__delivery"
       >
         <svg
@@ -172,7 +175,7 @@ export default {
               is_work_now: 1,
             },
           ],
-          order_gifts: [1,2],
+          order_gifts: [1, 2],
           cuisines: [
             {
               id: 1,
@@ -337,13 +340,13 @@ export default {
         align-items: center;
         justify-content: center;
         flex-direction: row;
-        &:nth-last-child(2){
+        &:nth-last-child(2) {
           transform: translate(33%);
           z-index: 2;
         }
-         &:nth-last-child(3){
+        &:nth-last-child(3) {
           transform: translate(66%);
-z-index: 3;
+          z-index: 3;
         }
       }
     }
