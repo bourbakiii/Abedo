@@ -91,7 +91,6 @@ export default {
     border-radius: 20px;
     height:70px;
     background-color: $dark_grey;
-    
     @media screen and (max-width: $sidebar_dn) {
         flex-wrap: wrap;
         height: 130px;

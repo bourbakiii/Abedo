@@ -205,7 +205,7 @@ export default {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       grid-gap: 30px;
-      margin-top: 70px;
+      margin-top: 50px;
       width: 100%;
       max-width: 100%;
       @media screen and (max-width: $tablet) {

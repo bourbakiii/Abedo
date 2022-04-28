@@ -151,10 +151,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 35px;
-    @media screen and (max-width: $tablet) {
       margin-bottom: 20px;
-    }
     &__title {
       @media screen and (max-width: $tablet) {
         font-family: "SF Pro Display";
@@ -194,10 +191,13 @@ export default {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
     overflow: hidden;
+    margin-top: 50px;
+
     @media screen and (max-width: $notebook) {
       grid-template-columns: repeat(3, 1fr);
     }
     @media screen and (max-width: $tablet) {
+      margin-top: 20px;
       grid-gap: 15px;
       grid-template-columns: repeat(1, 1fr);
     }
