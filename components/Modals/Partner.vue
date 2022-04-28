@@ -4,7 +4,7 @@
       Кафе “Лимончелло”
     </h3>
     <button
-      @click.prevent="$store.commit('modals/close', { modal_name: 'product' })"
+      @click.prevent="$store.commit('modals/close')"
       class="partner-modal__close"
     >
       <svg

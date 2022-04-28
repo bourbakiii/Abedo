@@ -2,7 +2,7 @@
   <div class="product-modal modal">
     <h3 class="product-modal__title title-normal">Сырное ассорти</h3>
     <button
-      @click.prevent="$store.commit('modals/close', { modal_name: 'product' })"
+      @click.prevent="$store.commit('modals/close')"
       class="product-modal__close"
     >
       <svg

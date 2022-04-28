@@ -6,9 +6,12 @@ export const state = () => ({
   rate: {
     show: false
   },
+  login: {
+    show: false
+  },
   partner: {
     show: false,
-    shop: null
+    partner: null
   },
   authorisation: {
     show: false,
@@ -37,21 +40,9 @@ export const mutations = {
     console.log("Это работает вообще или нет?");
     for (let modal_key in state) state[modal_key].show = false;
     document.lastChild.classList.remove("html_overflow");
+    // state.product.product = null;
+    state.partner.partner = null;
     if (!props.modal_name) return;
-    switch (props.modal_name) {
-      case "product": {
-        state.product.product = null;
-        break;
-      }
-      case "product": {
-        state.partner.partner = null;
-        break;
-      }
-      case "authorisation": {
-        // state.login
-        break;
-      }
-    }
   },
 };
 export const actions = {
