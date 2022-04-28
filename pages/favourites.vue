@@ -7,7 +7,7 @@
       </h1>
       <div class="favourites-page__content__inner">
         <div class="favourites-page__content__inner__content">
-          <ShopItem
+          <PartnerItem
             v-for="(item, index) in 8"
             :key="index"
             class="favourites-page__content__inner__content__item adaptive-non"

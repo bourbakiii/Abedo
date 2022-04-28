@@ -59,6 +59,7 @@
       />
       <div class="registration-page__content_code__confirmation">
         <Checkbox
+        id="code__confirmation"
           v-model="confirmation"
           class="registration-page__content_code__confirmation__checkbox"
         />

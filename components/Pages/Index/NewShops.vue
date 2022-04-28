@@ -104,7 +104,7 @@
         <Filters v-if="show_filters" class="catalog__filters" />
       </transition>
       <div class="catalog__content">
-        <ShopItem
+        <PartnerItem
           class="catalog__content__item adaptive-non"
           v-for="(item, index) in 12"
           :key="index"

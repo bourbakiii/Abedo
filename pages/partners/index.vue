@@ -199,7 +199,8 @@
 import axios from "axios";
 export default {
   data() {
-    return { show_filters: false };
+    return { show_filters: false, partners:[] };
+    
   },
 };
 </script>
