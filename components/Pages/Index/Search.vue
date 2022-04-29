@@ -183,21 +183,15 @@ export default {
     return {
       show_result: false,
       query: "",
-      categories: [
-        { id: 1, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 2, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 3, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 4, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 5, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 6, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 7, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 8, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 9, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 10, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 11, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 12, name: "Lorem ipsum dolor mi met megretto consis" },
-      ],
+      categories: [],
     };
+  },
+  async fetch() {
+    await this.$axios
+      .$get(`${this.$axios.defaults.baseURL}/api/cuisines/get`)
+      .then(({cuisines: {data}}) => {
+        this.categories = data;
+      });
   },
   methods: {
     search() {

@@ -69,7 +69,6 @@ export default {
   fetch() {
     if (this.$route.query.query) this.search_request(this.$route.query.query);
   },
-  fetchOnServer: false,
   methods: {
     search_request(query) {
       console.log("query for the fetch");

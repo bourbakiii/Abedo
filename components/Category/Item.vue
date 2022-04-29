@@ -1,7 +1,6 @@
 <template>
   <NuxtLink to="/category/1" class="category category-item">
-    <img v-if="category.image" :src="category.image" class="category-image" />
-    <img src="@/assets/images/category-item-image-placeholder.png" class="category-image" />
+    <img v-if="category.image" :src="`${$axios.defaults.baseURL}${category.image.small}`" class="category-image" />
     <p class="category-name">{{ category.name }}</p>
   </NuxtLink>
 </template>
@@ -11,7 +10,7 @@
   padding: 0px 50px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
   text-decoration: none;
   border-radius: 50px;

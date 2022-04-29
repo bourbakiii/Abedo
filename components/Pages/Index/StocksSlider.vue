@@ -1,5 +1,5 @@
 <template>
-  <div class="stocks__wrapper">
+  <div class="stocks__wrapper" v-if='stocks.length'>
     <div class="stocks__content">
       <swiper
         :auto-destroy="false"
@@ -8,10 +8,10 @@
       >
         <swiper-slide
           class="stocks__slide"
-          v-for="(stock, index) in 7"
-          :key="index"
+          v-for="stock in stocks"
+          :key="stock.id"
         >
-          <Stock class="stocks__slide__item" />
+          <Stock :stock="stock" class="stocks__slide__item" />
         </swiper-slide>
       </swiper>
       <button
@@ -61,10 +61,7 @@
         </svg>
       </button>
     </div>
-    <div
-      class="stocks__pagination swiper-pagination"
-      slot="pagination"
-    ></div>
+    <div class="stocks__pagination swiper-pagination" slot="pagination"></div>
   </div>
 </template>
 
@@ -78,8 +75,17 @@ export default {
     Swiper,
     SwiperSlide,
   },
+  async fetch() {
+    await this.$axios
+      .$get(`${this.$axios.defaults.baseURL}/api/shares`)
+      .then(({shares:{data}}) => {
+        this.stocks=data;
+      });
+    
+  },
   data() {
     return {
+      stocks: [],
       swiperOption: {
         slidesPerView: 1,
         spaceBetween: 30,
@@ -105,7 +111,7 @@ export default {
 
 <style lang="scss" scoped>
 .stocks {
-      display: flex !important;
+  display: flex !important;
   width: 100%;
   height: max-content;
   &__wrapper {

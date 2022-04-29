@@ -1,6 +1,5 @@
 <template>
-  <client-only>
-    <transition :name="width > 768 ? 'partner-desktop' : 'partner-adaptive'">
+    <transition name="partner-desktop">
       <PartnerDesktop
         :partner="partner"
         v-if="width > 768"
@@ -8,7 +7,6 @@
       />
       <PartnerAdaptive :partner="partner" v-else class="partner-item"/>
     </transition>
-  </client-only>
 </template>
 <script>
 export default {
@@ -101,7 +99,7 @@ export default {
   data() {
     return { width: window.innerWidth };
   },
-  created() {
+  mounted() {
     window.addEventListener("resize", this.onResize);
   },
   destroyed() {

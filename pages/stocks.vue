@@ -6,8 +6,9 @@
       <div class="stocks-page__content__content">
         <Stock
           class="stocks-page__content__content__item"
-          v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9]"
-          :key="item"
+          v-for="stock in stocks"
+          :key="stock.id"
+          :stock="stock"
         />
       </div>
     </div>
@@ -17,6 +18,18 @@
 <script>
 export default {
   name: "StocksPage",
+    async fetch() {
+    await this.$axios
+      .$get(`${this.$axios.defaults.baseURL}/api/shares`)
+      .then(({shares:{data}}) => {
+        this.stocks=data;
+      });
+    },
+    data(){
+      return{
+        stocks:[]
+      }
+    }
 };
 </script>
 <style lang="scss" scoped>

@@ -174,12 +174,14 @@
         />
         <div class="partners-page__partners__content">
           <div class="partners-page__partners__content__cards">
+            <client-only>
               <PartnerItem
                 class="partners-page__partners__content__cards__item"
                 v-for="item of partners"
                 :key="item.id"
                 :partner="item"
               />
+            </client-only>
           </div>
           <ButtonStandart v-if="params.page <= params.last_page" @action="$fetch" class="partners-page__partners__content__button"
             >Загрузить еще</ButtonStandart
@@ -204,7 +206,6 @@ export default {
       loading: true,
     };
   },
-  fetchOnServer: false,
   async fetch() {
     this.loading = true;
     await this.$axios

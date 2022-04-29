@@ -51,9 +51,6 @@ export default {
           )
           .then(({shares : {data}}) => {
             stocks=data;
-          })
-          .finally(() => {
-            console.log("stocks axios ended");
           });
       })
       .catch(() => {

@@ -24,12 +24,14 @@
           {{ chapter.name }}
         </h3>
         <div class="catalog__products__chapter__content">
+         
           <ProductItem
             class="catalog__products__chapter__content__item"
             v-for="product in chapter.products"
             :key="product.id"
             :product="product"
           />
+
         </div>
       </div>
     </div>
@@ -42,7 +44,6 @@ export default {
       required: true,
     },
   },
-  fetchOnServer: false,
   async fetch() {
     console.log("live there");
     await this.$axios
