@@ -8,15 +8,16 @@
         {{ pre }}
       </span>
       <input
+        @input="$emit('input', $event.target.value)"
         v-mask="mask"
         v-model="value"
-        @input="$emit('input', { name: name, value: value })"
         :id="id"
         class="input-block__input__input"
         :type="type.toLowerCase()"
         :name="name"
         :placeholder="placeholder"
-        :required='required'
+        :required="required"
+        :autocomplete="autocomplete?'on':'off'"
       />
     </div>
   </label>
@@ -57,10 +58,15 @@ export default {
       required: false,
       default: "",
     },
-    required:{
+    required: {
       required: false,
-      default: true
-    }
+      default: true,
+    },
+    autocomplete: {
+      required: false,
+      default: true,
+    },
+    modelValue: { default: "" },
   },
 };
 </script>
@@ -97,7 +103,7 @@ export default {
     flex-direction: row;
     border: 1px solid $extra_dark_grey;
     border-radius: 90px;
-  background-color: $white;
+    background-color: $white;
 
     overflow: hidden;
     font-family: "SF Pro Display";

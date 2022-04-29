@@ -103,3 +103,23 @@
     transition: $transition;
   }
 }
+
+.message {
+  &-enter, &-leave-to {
+    height:0px !important;
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  &-enter-active,
+  &-leave-active {
+    transition: all $transition;
+  }
+}
+.partner-desktop{
+  &-enter,&-leave-top{
+    opacity: 0;
+  }
+  &-enter-active, &-leave-active{
+    transition: $transition;
+  }
+}
