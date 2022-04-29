@@ -4,16 +4,20 @@
       <Breadcrumbs class="partner-page__over__breadcrumbs adaptive-non" />
       <div class="partner-page__over__content content">
         <div class="partner-page__over__content__main">
-          <PagesPartnerShopBlock :partner='partner'
+          <PagesPartnerShopBlock
+            :partner="partner"
             class="partner-page__over__content__main__shop-block"
           />
           <PagesPartnerStocks
+          :stocks='stocks'
             class="partner-page__over__content__main__stocks adaptive-non"
           />
           <PagesPartnerStocksSlider
+          :stocks='stocks'
             class="partner-page__over__content__main__stocks_adaptive adaptive"
           />
-          <PagesPartnerCatalog :partner='partner'
+          <PagesPartnerCatalog
+            :partner="partner"
             class="partner-page__over__content__main__catalog"
           />
         </div>
@@ -35,11 +39,22 @@ export default {
   },
   async asyncData({ $axios, route, error }) {
     let partner = {},
-      loading = true;
+      loading = true,
+      stocks = [];
     await $axios
       .$get(`${$axios.defaults.baseURL}/api/shop/${route.params.partner_id}`)
-      .then(({ shop }) => {
+      .then(async ({ shop }) => {
         partner = shop;
+        await $axios
+          .$get(
+            `${$axios.defaults.baseURL}/api/shares/shop/${route.params.partner_id}`
+          )
+          .then(({shares : {data}}) => {
+            stocks=data;
+          })
+          .finally(() => {
+            console.log("stocks axios ended");
+          });
       })
       .catch(() => {
         error({ statusCode: 404, message: "Ошибка при получении партнера" });
@@ -47,7 +62,7 @@ export default {
       .finally(() => {
         loading = false;
       });
-    return { loading, partner };
+    return { loading, partner,stocks };
   },
   data() {
     return {
@@ -73,20 +88,20 @@ export default {
   }
   &__over {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: flex-start;
     flex-direction: column;
     max-width: $maxwidth;
-    width:100%;
+    width: 100%;
     &__content {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       flex-direction: row;
-      width:100%;
+      width: 100%;
       &__main {
         padding-bottom: 100px;
-        width:100%;
+        width: 100%;
         @media screen and (max-width: $sidebar_dn) {
           width: 100%;
           padding-bottom: 0px;

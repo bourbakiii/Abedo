@@ -9,10 +9,11 @@
       >
         <swiper-slide
           class="stocks__slide"
-          v-for="(stock, index) in 7"
-          :key="index"
+      v-for="stock in stocks"
+      :key="stock.id"
         >
-          <Stock class="stocks__slide__item" />
+          <Stock           :stock="stock"
+ class="stocks__slide__item" />
         </swiper-slide>
       </swiper>
       <button
@@ -69,6 +70,12 @@
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 export default {
+  props: {
+    stocks: {
+      required: true,
+      default: []
+    },
+  },
   name: "swiper-example-carousel-mode",
   title: "Auto slides per view / Carousel mode",
   name: "slider",
