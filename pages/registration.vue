@@ -59,7 +59,7 @@
       />
       <div class="registration-page__content_code__confirmation">
         <Checkbox
-        id="code__confirmation"
+          id="code__confirmation"
           v-model="confirmation"
           class="registration-page__content_code__confirmation__checkbox"
         />
@@ -67,8 +67,7 @@
           Принимаю условия использования и политику конфиденциальности
         </p>
       </div>
-      <ButtonStandart
-        class="registration-page__content_code__button"
+      <ButtonStandart class="registration-page__content_code__button"
         >Отправить</ButtonStandart
       >
     </div>
@@ -85,9 +84,25 @@ export default {
 </script>
 <style lang="scss" scoped>
 .registration-page {
-  padding: 100px 80px 0px;
+  padding: 100px 10px 0px;
+  @media screen and (max-width: $notebook) {
+    padding: 50px 10px 0px;
+  }
+  @media screen and (max-width: $tablet) {
+    padding: 30px 10px 0px;
+  }
   &__title {
     margin-bottom: 70px;
+    @media screen and (max-width: $notebook) {
+      margin-bottom: 50px;
+      font-size: 25px;
+    }
+    @media screen and (max-width: $tablet) {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 20px;
+    }
   }
   &__content {
     border-radius: 20px;
@@ -100,10 +115,17 @@ export default {
     }
     &__text {
       margin: 20px 0px;
+      font-size: 16px;
+      @media screen and (max-width: $tablet) {
+        font-size: 15px;
+      }
     }
     &__button {
       width: 100%;
       max-width: 200px;
+      @media screen and (max-width:$tablet){
+        height: 40px;
+      }
     }
     &_code {
       border-radius: 20px;
@@ -111,8 +133,12 @@ export default {
       padding: 20px;
       width: 100%;
       max-width: 450px;
-       &__text {
+      &__text {
       margin: 20px 0px;
+      font-size: 16px;
+      @media screen and (max-width: $tablet) {
+        font-size: 15px;
+      }
     }
       &__confirmation {
         display: flex;
@@ -126,12 +152,20 @@ export default {
           width: 25px;
           height: 25px;
         }
-        
+        &__text{
+          font-size: 16px;
+      @media screen and (max-width: $tablet) {
+        font-size: 15px;
       }
-       &__button {
-      width: 100%;
-      max-width: 200px;
-    }
+        }
+      }
+      &__button {
+        width: 100%;
+        max-width: 200px;
+        @media screen and (max-width:$tablet){
+          height: 40px;
+        }
+      }
     }
   }
 }
