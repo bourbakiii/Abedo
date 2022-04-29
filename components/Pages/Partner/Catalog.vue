@@ -13,7 +13,7 @@
         :active="true"
       />
     </div>
-    <ChapterSlider class="catalog__chapters__slider adaptive" />
+    <ChapterSlider :chapters="chapters" class="catalog__chapters__slider adaptive" />
     <div class="catalog__products">
       <div
         class="catalog__products__chapter"
@@ -26,8 +26,9 @@
         <div class="catalog__products__chapter__content">
           <ProductItem
             class="catalog__products__chapter__content__item"
-            v-for="item in 16"
-            :key="item"
+            v-for="product in chapter.products"
+            :key="product.id"
+            :product="product"
           />
         </div>
       </div>
@@ -43,7 +44,6 @@ export default {
   },
   fetchOnServer: false,
   async fetch() {
-    // http://127.0.0.1:8000/api/shops/1/menu
     console.log("live there");
     await this.$axios
       .get(`/api/shops/${this.$route.params.partner_id}/menu`)
@@ -68,7 +68,6 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   width: 100%;
-
   &__title {
     align-self: flex-start;
     margin-bottom: 30px;
@@ -105,36 +104,36 @@ export default {
       justify-content: flex-start;
       flex-direction: column;
       margin-bottom: 30px;
-      &:last-of-type{
+      &:last-of-type {
         margin-bottom: 0px;
       }
-      &__title{
-        margin-bottom : 30px;
+      &__title {
+        margin-bottom: 30px;
       }
       &__content {
         width: 100%;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 30px;
-       @media screen and (max-width: $notebook) {
-      grid-gap: 10px;
-    }
-    @media screen and (max-width: $tablet) {
-      grid-gap: 20px;
-      width:100%;
-    }
-    @media screen and (max-width: $phone) {
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap:15px;
-    }
-    &__item {
-      width: auto;
-      overflow: hidden;
-    @media screen and (max-width: $tablet) {
-      width:100%;
-      overflow: hidden;
-    }
-    }
+        @media screen and (max-width: $notebook) {
+          grid-gap: 10px;
+        }
+        @media screen and (max-width: $tablet) {
+          grid-gap: 20px;
+          width: 100%;
+        }
+        @media screen and (max-width: $phone) {
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 15px;
+        }
+        &__item {
+          width: auto;
+          overflow: hidden;
+          @media screen and (max-width: $tablet) {
+            width: 100%;
+            overflow: hidden;
+          }
+        }
       }
     }
   }
