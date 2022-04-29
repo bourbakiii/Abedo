@@ -1,7 +1,7 @@
 <template>
     <form
 
-        @action.prevent="filter"
+        @submit.prevent="filter"
         class="filters"
       >
         <div class="filters__input__wrapper">

@@ -1,7 +1,7 @@
 <template>
   <div class="page registration-page">
     <h1 class="registration-page__title title-normal">Регистрация</h1>
-    <div class="registration-page__content">
+    <form @submit.prevent='registration' class="registration-page__content">
       <InputBlock
         @input="() => {}"
         pre="+7"
@@ -23,6 +23,7 @@
         type="password"
         text="Пароль"
         error="true"
+        :required="true"
       />
       <InputBlock
         @input="() => {}"
@@ -38,10 +39,8 @@
         Сейчас мы вам позвоним. Пожалуйста, введите последние 4 цифры входящего
         номера.
       </p>
-      <ButtonStandart class="registration-page__content__button"
-        >Подтвердить телефон</ButtonStandart
-      >
-    </div>
+      <ButtonStandart  @click.prevent='registration' class="registration-page__content__button">Подтвердить телефон</ButtonStandart>
+    </form>
     <div class="registration-page__content_code">
       <h4 class="title title-extra-normal">Подтверждение</h4>
       <p class="registration-page__content_code__text">
@@ -80,6 +79,11 @@ export default {
       confirmation: false,
     };
   },
+  methods:{
+    registration(){
+      console.log("registration");
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

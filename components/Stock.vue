@@ -1,5 +1,5 @@
 <template>
-  <button @click.prevent="()=>$router.push('/partners/1')" class="stock__wrapper" 
+  <button @click.prevent="()=>$router.push(`/partners/${stock.shop.id}`)" class="stock__wrapper" 
     :style="`background: ${
         stock.image
           ? `url(${$axios.defaults.baseURL}${stock.image.desktop})`

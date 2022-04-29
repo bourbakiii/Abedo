@@ -12,7 +12,7 @@
         />
       </NuxtLink>
       <ButtonStandart
-        @action="() => $router.push('/profile')"
+        @click="() => $router.push('/profile')"
         class="left-menu__button"
         ><svg
           class="left-menu__button__icon"

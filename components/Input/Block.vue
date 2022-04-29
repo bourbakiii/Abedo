@@ -16,6 +16,7 @@
         :type="type.toLowerCase()"
         :name="name"
         :placeholder="placeholder"
+        :required='required'
       />
     </div>
   </label>
@@ -55,6 +56,10 @@ export default {
     mask: {
       required: false,
       default: "",
+    },
+    required:{
+      required: false,
+      default: true
     }
   },
 };

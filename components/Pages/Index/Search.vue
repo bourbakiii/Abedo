@@ -159,7 +159,7 @@
               </div>
             </div>
             <ButtonStandart
-              @action="watchAll"
+              @click="watchAll"
               class="search__input__dropdown-content__watch-all-button filled"
               >Cмотреть все</ButtonStandart
             >
