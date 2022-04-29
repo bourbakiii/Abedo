@@ -134,7 +134,7 @@
               </client-only>
             </div>
             <ButtonStandart
-@click="$router.push('/partners')"
+@click.native="$router.push('/partners')"
               class="index-page__content__new-shops__button"
               >Все магазины</ButtonStandart
             >

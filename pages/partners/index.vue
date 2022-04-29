@@ -183,7 +183,7 @@
               />
             </client-only>
           </div>
-          <ButtonStandart v-if="params.page <= params.last_page" @click="$fetch" class="partners-page__partners__content__button"
+          <ButtonStandart v-if="params.page <= params.last_page" @click.native="$fetch" class="partners-page__partners__content__button"
             >Загрузить еще</ButtonStandart
           >
         </div>

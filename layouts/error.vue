@@ -3,7 +3,7 @@
     <h1 class="error-layout__title">Страница не найдена</h1>
     <p class="error-layout__text">Запрашиваемая страница не найдена</p>
     <ButtonStandart
-      @click="() => $router.push('/')"
+      @click.native="() => $router.push('/')"
       class="error-layout__button filled"
       >На главную</ButtonStandart
     >

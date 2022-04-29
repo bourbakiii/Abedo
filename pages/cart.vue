@@ -20,7 +20,7 @@
         <p class="cart-page__content_empty__text">
           Вы пока ничего не добавили в корзину
         </p>
-        <ButtonStandart @click="()=>$router.push('/partners')" class="cart-page__content_empty__button filled"
+        <ButtonStandart @click.native="()=>$router.push('/partners')" class="cart-page__content_empty__button filled"
           >За покупками</ButtonStandart
         >
       </div>

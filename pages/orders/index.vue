@@ -92,7 +92,7 @@
             </div>
             <div class="orders-page__content__orders__content__item__buttons">
               <ButtonStandart
-                @click="() => $router.push('/orders/1')"
+                @click.native="() => $router.push('/orders/1')"
                 class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_open"
                 >Открыть</ButtonStandart
               >

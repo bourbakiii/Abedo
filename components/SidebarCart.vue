@@ -110,7 +110,7 @@
       </p>
     </div>
     <div class="sidebar-cart__button">
-      <ButtonStandart @click='()=>$router.push("/cart")'
+      <ButtonStandart @click.native='()=>$router.push("/cart")'
         class="sidebar-cart__button__button"
       >Оформить заказ</ButtonStandart>
     </div>

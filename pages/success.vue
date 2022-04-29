@@ -16,7 +16,7 @@
         “История заказов”
       </p>
       <ButtonStandart
-        @click="() => $router.push('/partners')"
+        @click.native="() => $router.push('/partners')"
         class="success-page__content__button filled"
         >История заказов</ButtonStandart
       >

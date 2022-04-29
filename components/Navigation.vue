@@ -12,7 +12,7 @@
         />
       </NuxtLink>
       <ButtonStandart
-        @click="() => $router.push('/partners')"
+        @click.native="() => $router.push('/partners')"
         class="navigation__button"
         ><svg
           class="navigation__button__icon"
