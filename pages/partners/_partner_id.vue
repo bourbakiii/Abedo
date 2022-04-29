@@ -13,7 +13,7 @@
           <PagesPartnerStocksSlider
             class="partner-page__over__content__main__stocks_adaptive adaptive"
           />
-          <PagesPartnerCatalog
+          <PagesPartnerCatalog :partner='partner'
             class="partner-page__over__content__main__catalog"
           />
         </div>

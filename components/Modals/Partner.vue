@@ -1,7 +1,7 @@
 <template>
   <div class="partner-modal modal">
     <h3 class="partner-modal__title title-normal" contenteditable>
-      Кафе “Лимончелло”
+      {{partner.name}}
     </h3>
     <button
       @click.prevent="$store.commit('modals/close')"
@@ -23,22 +23,20 @@
     </button>
     <div class="partner-modal__content">
       <img
-        src="@/assets/images/partner-modal-image.png"
+        v-if='partner.image.length'
+        :src="`${$axios.defaults.baseURL}${partner.image[0].modal}`"
         class="partner-modal__content__image"
       />
-      <div class="partner-modal__content__description">
+      <div v-if="partner.description" class="partner-modal__content__description">
         <p class="partner-modal__content__description__pre">
-          Описание ресторана “Лимончелло”
+          Описание ресторана “{{partner.name}}”
         </p>
         <p class="partner-modal__content__description__text" contenteditable>
-          Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру
-          сгенерировать несколько абзацев более менее осмысленного текста рыбы
-          на русском языке, а начинающему оратору отточить навык публичных
-          выступлений в домашних условиях.
+          {{partner.description}}
         </p>
       </div>
       <div class="partner-modal__content__information">
-        <div class="partner-modal__content__information__item">
+        <div v-if="worktime" class="partner-modal__content__information__item">
           <div class="partner-modal__content__information__item__hood">
             <svg
               class="partner-modal__content__information__item__hood__icon"
@@ -87,10 +85,10 @@
             class="partner-modal__content__information__item__content"
             contenteditable
           >
-            Пн-Пт, 10:00-23:00; Сб-Вс, 12:00-22:00, без перерыва
+           {{worktime}}
           </p>
         </div>
-        <div class="partner-modal__content__information__item">
+        <div v-if='partner.requisites.address' class="partner-modal__content__information__item">
           <div class="partner-modal__content__information__item__hood">
             <svg
               class="partner-modal__content__information__item__hood__icon"
@@ -139,11 +137,11 @@
             class="partner-modal__content__information__item__content"
             contenteditable
           >
-            Владикавказ, ул. Ленина 123
+            {{partner.requisites.address}}
           </p>
         </div>
-        <div class="partner-modal__content__information__item">
-          <div class="partner-modal__content__information__item__hood">
+        <div v-if="partner.contact_phone" class="partner-modal__content__information__item">
+          <div v-class="partner-modal__content__information__item__hood">
             <svg
               class="partner-modal__content__information__item__hood__icon"
               width="15"
@@ -173,16 +171,16 @@
                 </clipPath>
               </defs>
             </svg>
-            +790 000 000 00
+            Телефон
           </div>
           <p
             class="partner-modal__content__information__item__content"
             contenteditable
           >
-            +790 000 000 00
+            +7{{partner.contact_phone}}
           </p>
         </div>
-        <div class="partner-modal__content__information__item">
+        <div  v-if="partner.requisites.length" class="partner-modal__content__information__item">
           <div class="partner-modal__content__information__item__hood">
             <svg
               class="partner-modal__content__information__item__hood__icon"
@@ -228,9 +226,11 @@
             Реквизиты:
           </div>
           <div
+         
             class="partner-modal__content__information__item__content__subcontent"
           >
             <div
+             v-if="partner.requisites.name"
               class="partner-modal__content__information__item__content__subcontent__item"
             >
               <p
@@ -242,10 +242,11 @@
                 class="partner-modal__content__information__item__content__subcontent__item__value"
                 contenteditable
               >
-                ООО “Лимончелло”
+               {{partner.requisites.name}}
               </p>
             </div>
             <div
+            v-if="partner.requisites.inn"
               class="partner-modal__content__information__item__content__subcontent__item"
             >
               <p
@@ -257,10 +258,11 @@
                 class="partner-modal__content__information__item__content__subcontent__item__value"
                 contenteditable
               >
-                07788956
+                {{partner.requisites.inn}}
               </p>
             </div>
             <div
+            v-if="partner.requisites.ogrn"
               class="partner-modal__content__information__item__content__subcontent__item"
             >
               <p
@@ -272,10 +274,11 @@
                 class="partner-modal__content__information__item__content__subcontent__item__value"
                 contenteditable
               >
-                08669934
+                {{partner.requisites.ogrn}}
               </p>
             </div>
             <div
+            v-if="partner.requisites.address"
               class="partner-modal__content__information__item__content__subcontent__item"
             >
               <p
@@ -287,8 +290,7 @@
                 class="partner-modal__content__information__item__content__subcontent__item__value"
                 contenteditable
               >
-                Владикавказ, ул. Ленина 123,<br />
-                подъезд 1, ваб. 13
+                {{partner.requisites.address}}
               </p>
             </div>
           </div>
@@ -297,6 +299,28 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  computed:{
+    partner(){
+      return this.$store.state.modals.partner.partner;
+    },
+    worktime(){
+      let result = "";
+      let days ={ 
+        1:"Пн",
+        2:"Вт",
+        3:"Ср",
+        4:"Чт",
+        5:"Пн",
+        6:"Сб",
+        7:"Вс"
+      }
+      return "Нужно будет спарсить";
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 .partner-modal {
   background-color: $white;
@@ -317,7 +341,6 @@
        font-size: 25px;
      }
     @media screen and (max-width: $tablet) {
-      
       font-weight: 700;
       font-size: 20px;
       line-height: 20px;
@@ -363,6 +386,7 @@
       justify-content: flex-start;
       flex-direction: column;
       margin-bottom: 30px;
+      width:100%; text-align: left;
       &__pre,
       &__text {
         font-family: "SF Pro Display";
@@ -457,7 +481,7 @@
                 font-size: 15px;
                 line-height: 20px;
                 color: $extra_dark_grey;
-                width: 115px;
+                width: 125px;
                 margin-right: 10px;
               }
               &__value {

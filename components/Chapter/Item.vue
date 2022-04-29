@@ -29,7 +29,8 @@ export default {
   white-space: nowrap;
   height: 45px;
   padding: 0px 25px;
-  &.active{
+    transition:  $transition;
+  &:hover, &.active{
       background-color: $darkblue;
       color:$white;
   }

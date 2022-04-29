@@ -1,15 +1,14 @@
 <template>
   <div class="catalog partner-catalog">
     <h2 class="catalog__title title-extra-normal adaptive-non">
-      Разделы каталога “Лимончелло”
+      Разделы каталога “{{partner.name}}”
     </h2>
     <div class="catalog__chapters adaptive-non">
       <ChapterItem
         class="catalog__chapters__item"
-        text="Салаты"
-        v-for="(item, index) in 12"
+        v-for="(chapter, index) in chapters"
         :key="index"
-        :active="true"
+        :text="chapter.name"
       />
     </div>
     <ChapterSlider class="catalog__chapters__slider adaptive" />
@@ -22,6 +21,31 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props:{
+    partner:{
+      required: true
+    }
+  },
+  fetchOnServer: false,
+  async fetch(){
+    // http://127.0.0.1:8000/api/shops/1/menu
+    console.log("live there");
+    await this.$axios.get(`/api/shops/${this.$route.params.partner_id}/menu`).then(({data: {sections}})=>{
+      this.chapters = sections;
+    }).finally(()=>{
+      console.log("AJAX ENDED");
+    })
+  },
+  data(){
+    return{
+      chapters:[]
+    }
+  }
+  
+}
+</script>
 <style lang="scss" scoped>
 .catalog {
   display: flex;
