@@ -37,7 +37,6 @@ export const mutations = {
     }
   },
   close(state, props={modal_name:null}) {
-    console.log("Это работает вообще или нет?");
     for (let modal_key in state) state[modal_key].show = false;
     document.lastChild.classList.remove("html_overflow");
     // state.product.product = null;

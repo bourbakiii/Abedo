@@ -2,16 +2,19 @@
   <div class="shop-block">
     <div class="shop-block__content adaptive-non">
       <img
-        v-if="true"
-        src="@/assets/images/limonchello.png"
+        v-if="partner.logo.original"
+        :src="`${$axios.defaults.baseURL}${partner.logo.original}`"
         class="shop-block__content__image"
       />
       <div class="shop-block__content__info">
         <div class="shop-block__content__info__top">
           <span class="shop-block__content__info__top__name" contenteditable>
-            Кафе “Лимончелло”
+            {{ partner.name }}
           </span>
-          <span class="shop-block__content__info__top__rating">
+          <span
+            v-if="partner.rate"
+            class="shop-block__content__info__top__rating"
+          >
             <svg
               class="shop-block__content__info__top__rating__icon"
               width="17"
@@ -26,13 +29,22 @@
               />
             </svg>
             <p class="shop-block__content__info__top__rating__text">Рейтинг:</p>
-            <p class="shop-block__content__info__top__rating__value">4,7</p>
+            <p class="shop-block__content__info__top__rating__value">
+              {{ partner.rate }}
+            </p>
           </span>
         </div>
-        <p class="shop-block__content__info__address" contenteditable>
-          Европейская, Кавказская, Японская кухня, Детское меню, Фаст-Фуд
+        <p
+          v-if="cuisines"
+          class="shop-block__content__info__cuisines"
+          contenteditable
+        >
+          {{ cuisines }}
         </p>
-        <div class="shop-block__content__info__phone">
+        <div
+          v-if="partner.contact_phone"
+          class="shop-block__content__info__phone"
+        >
           <svg
             class="shop-block__content__info__phone__icon"
             width="15"
@@ -55,14 +67,20 @@
             />
           </svg>
 
-          <p class="shop-block__content__info__phone__text">+790 000 000 00</p>
+          <p class="shop-block__content__info__phone__text">
+            +7{{ partner.contact_phone }}
+          </p>
         </div>
-        <button @click.prevent="()=>$store.commit('modals/open', {
+        <button
+          @click.prevent="
+            () =>
+              $store.commit('modals/open', {
                 modal_name: 'partner',
-                partner: {
-                    name: 'Забыл передать партнера'
-                }
-            })" class="shop-block__content__info__button">
+                partner,
+              })
+          "
+          class="shop-block__content__info__button"
+        >
           <p class="shop-block__content__info__button__text">Подробнее</p>
           <svg
             class="shop-block__content__info__button__icon"
@@ -80,7 +98,10 @@
         </button>
       </div>
     </div>
-    <div class="shop-block__phone shop-block__additional adaptive">
+    <div
+      v-if="partner.contact_phone"
+      class="shop-block__phone shop-block__additional adaptive"
+    >
       <span class="shop-block__additional__icon__wrapper">
         <svg
           class="shop-block__additional__icon"
@@ -111,10 +132,13 @@
           </defs>
         </svg>
       </span>
-      <p class="shop-block__additional__text shop-block__phone__text" contenteditable>
-        +790 000 000 00
+      <p
+        class="shop-block__additional__text shop-block__phone__text"
+        contenteditable
+      >
+        +7{{ partner.contact_phone }}
       </p>
-      <div class="shop-block__additional__rating">
+      <div v-if="partner.rate" class="shop-block__additional__rating">
         <svg
           class="shop-block__additional__rating__icon"
           width="15"
@@ -128,10 +152,13 @@
             fill="#F95738"
           />
         </svg>
-        <p class="shop-block__additional__rating__value">4,7</p>
+        <p class="shop-block__additional__rating__value">{{ partner.rate }}</p>
       </div>
     </div>
-    <div class="shop-block__delivery shop-block__additional">
+    <div
+      v-if="partner.free_order_price"
+      class="shop-block__delivery shop-block__additional"
+    >
       <span class="shop-block__additional__icon__wrapper">
         <svg
           class="shop-block__additional__icon"
@@ -191,12 +218,14 @@
           </defs>
         </svg>
       </span>
-
       <p class="shop-block__additional__text" contenteditable>
-        Бесплатная доставка при заказе от 1000₽
+        Бесплатная доставка при заказе от {{ partner.free_order_price }}₽
       </p>
     </div>
-    <div class="shop-block__gift shop-block__additional">
+    <div
+      v-if="partner.order_gifts.length"
+      class="shop-block__gift shop-block__additional"
+    >
       <span class="shop-block__additional__icon__wrapper">
         <svg
           class="shop-block__additional__icon"
@@ -213,14 +242,26 @@
         </svg>
       </span>
       <p class="shop-block__additional__text" contenteditable>
-        Бесплатная доставка при заказе от 1000₽
+        Подарок “{{ partner.order_gifts[0].product.name }}” при заказе от
+        {{ partner.order_gifts[0].order_price }}₽
       </p>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    partner: {
+      required: true,
+    },
+  },
+  computed: {
+    cuisines() {
+      return this.partner.cuisines.map((cuisine) => cuisine.name).join(", ");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -255,9 +296,8 @@ export default {};
       flex-shrink: 0;
       @media screen and (max-width: $notebook) {
         width: 218px;
-      height: 125px;
+        height: 125px;
       }
-
     }
     &__info {
       height: 100%;
@@ -269,7 +309,7 @@ export default {};
       width: 100%;
       height: 100%;
       overflow: hidden;
-      
+
       &__top {
         display: flex;
         align-items: baseline;
@@ -281,8 +321,8 @@ export default {};
         overflow: hidden;
         margin-bottom: 20px;
         @media screen and (max-width: $notebook) {
-        flex-direction:column;
-      }
+          flex-direction: column;
+        }
         &__name {
           font-family: "Montserrat";
           font-style: normal;
@@ -294,9 +334,9 @@ export default {};
           word-wrap: break-word;
           width: 100%;
           max-width: 100%;
-        @media screen and (max-width: $notebook) {
-          margin-right:0px;
-        }
+          @media screen and (max-width: $notebook) {
+            margin-right: 0px;
+          }
         }
         &__rating {
           display: flex;
@@ -327,7 +367,7 @@ export default {};
           }
         }
       }
-      &__address {
+      &__cuisines {
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 400;
@@ -388,7 +428,7 @@ export default {};
     font-weight: 500;
     font-size: 15px;
     line-height: 20px;
-    color:$darkblue;
+    color: $darkblue;
   }
   &__additional {
     display: flex;
@@ -409,8 +449,8 @@ export default {};
     @media screen and (max-width: $tablet) {
       min-height: 90px;
       padding: 8px 0px;
-        border-top: none;
-        border-bottom: 1px solid $dark_grey;
+      border-top: none;
+      border-bottom: 1px solid $dark_grey;
     }
     &__icon {
       &__wrapper {
@@ -424,7 +464,7 @@ export default {};
         @media screen and (max-width: $tablet) {
           border: 1px solid $dark_grey;
           height: 40px;
-        width: 40px;
+          width: 40px;
         }
         margin-right: 20px;
         flex-shrink: 0;

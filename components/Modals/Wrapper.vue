@@ -39,8 +39,7 @@ export default {
   watch:{
     "$route.path":{
       handler(){
-        console.log("123")
-        this.$store.commit('modals/close');
+        if(this.wrapper_show) this.$store.commit('modals/close');
       },
       deep:true
     }

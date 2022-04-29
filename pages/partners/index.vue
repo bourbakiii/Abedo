@@ -1,7 +1,6 @@
 <template>
   <div class="page partners-page wrapper">
     <div class="partners-page__content content">
-      {{ partners.length }}
       <Breadcrumbs class="partners-page__breadcrumbs adaptive-non" />
       <div class="partners-page__top adaptive-non">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
@@ -200,7 +199,7 @@ export default {
       params: {
         page: 1,
         last_page: null,
-        limit: 1,
+        limit: 10,
       },
       loading: true,
     };

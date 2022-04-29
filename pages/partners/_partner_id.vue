@@ -4,7 +4,7 @@
       <Breadcrumbs class="partner-page__over__breadcrumbs adaptive-non" />
       <div class="partner-page__over__content content">
         <div class="partner-page__over__content__main">
-          <PagesPartnerShopBlock
+          <PagesPartnerShopBlock :partner='partner'
             class="partner-page__over__content__main__shop-block"
           />
           <PagesPartnerStocks
@@ -33,6 +33,22 @@ export default {
     Swiper,
     SwiperSlide,
   },
+  async asyncData({ $axios, route, error }) {
+    let partner = {},
+      loading = true;
+    await $axios
+      .$get(`${$axios.defaults.baseURL}/api/shop/${route.params.partner_id}`)
+      .then(({ shop }) => {
+        partner = shop;
+      })
+      .catch(() => {
+        error({ statusCode: 404, message: "Ошибка при получении партнера" });
+      })
+      .finally(() => {
+        loading = false;
+      });
+    return { loading, partner };
+  },
   data() {
     return {
       swiperOption: {
@@ -41,6 +57,7 @@ export default {
         spaceBetween: 8,
         mousewheel: true,
       },
+      partner: {},
     };
   },
 };
@@ -50,7 +67,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-   padding-bottom: 30px !important;
+  padding-bottom: 30px !important;
   @media screen and (max-width: $tablet) {
     padding-top: 0px !important;
   }
@@ -68,7 +85,7 @@ export default {
       flex-direction: row;
       &__main {
         padding-bottom: 100px;
-         @media screen and (max-width: $sidebar_dn) {
+        @media screen and (max-width: $sidebar_dn) {
           width: 100%;
           padding-bottom: 0px;
         }

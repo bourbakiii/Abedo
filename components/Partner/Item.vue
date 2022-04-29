@@ -1,13 +1,18 @@
 <template>
   <client-only>
-    <PartnerDesktop  :partner="partner" v-if="width > 768" class="partner-item" />
-    <PartnerAdaptive :partner="partner" v-else class="partner-item" />
+    <transition :name="width > 768 ? 'partner-desktop' : 'partner-adaptive'">
+      <PartnerDesktop
+        :partner="partner"
+        v-if="width > 768"
+        class="partner-item"
+      />
+      <PartnerAdaptive :partner="partner" v-else class="partner-item"/>
+    </transition>
   </client-only>
 </template>
 <script>
-
 export default {
-    props: {
+  props: {
     partner: {
       required: true,
       type: Object,
@@ -50,7 +55,7 @@ export default {
               is_work_now: 1,
             },
           ],
-          order_gifts: [1,2],
+          order_gifts: [1, 2],
           cuisines: [
             {
               id: 1,
@@ -110,3 +115,18 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.filter {
+  &-enter, &-leave-to {
+    height:0px !important;
+    opacity: 0;
+    margin-bottom: 0px;
+    padding-top:0px !important;
+    padding-bottom: 0px !important;
+  }
+  &-enter-active,
+  &-leave-active {
+    transition: all $transition;
+  }
+}
+</style>
