@@ -1,17 +1,25 @@
 <template>
-  <button :class="{'active': active}" class="chapter-item">
-      {{text}}
+  <button @click.prevent='act' class="chapter-item">
+      {{chapter.name}}
       </button>
 </template>
 <script>
 export default {
     props:{
-        text:{
+        chapter:{
             required: true
         },
-        active:{
-            required: false,
-            default: false
+        action:{
+            required:false,
+        }
+    },
+    methods:{
+        act(){
+            if(this.action) this.action();
+            else {
+            const element = document.getElementById(`chapter-${this.chapter.id}`);
+              element.scrollIntoView({block: "center", behavior: "smooth"});
+            }
         }
     }
 }

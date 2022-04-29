@@ -6,17 +6,17 @@
     <div class="catalog__chapters adaptive-non">
       <ChapterItem
         class="catalog__chapters__item"
-        :text="chapter.name"
         v-for="chapter in chapters"
         :key="chapter.id"
         :chapter="chapter"
-        :active="true"
+        @action="()=>console.log('123')"
       />
     </div>
     <ChapterSlider :chapters="chapters" class="catalog__chapters__slider adaptive" />
     <div class="catalog__products">
       <div
         class="catalog__products__chapter"
+        :id="`chapter-${chapter.id}`"
         v-for="chapter in chapters"
         :key="chapter.id"
       >
@@ -80,6 +80,9 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 50px;
+    position: sticky !important;
+    position: -webkit-sticky !important;
+    top: 70;
     &__slider {
       overflow: hidden;
       margin-bottom: 30px;

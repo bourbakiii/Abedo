@@ -6,7 +6,7 @@
     :options="swiperOption"
   >
     <swiper-slide v-for="chapter in chapters" :key="chapter.id">
-      <ChapterItem :text="chapter.name" />
+      <ChapterItem :chapter="chapter" />
     </swiper-slide>
   </swiper>
 </template>
