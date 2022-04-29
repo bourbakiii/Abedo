@@ -73,18 +73,20 @@ export default {
   }
   &__over {
     display: flex;
-    align-items: flex-start;
+    align-items:center;
     justify-content: flex-start;
     flex-direction: column;
-    max-width: 100%;
-
+    max-width: $maxwidth;
+    width:100%;
     &__content {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       flex-direction: row;
+      width:100%;
       &__main {
         padding-bottom: 100px;
+        width:100%;
         @media screen and (max-width: $sidebar_dn) {
           width: 100%;
           padding-bottom: 0px;
