@@ -12,7 +12,7 @@
             :key="index"
             class="favourites-page__content__inner__content__item adaptive-non"
           />
-          <ShopAdaptive
+          <PartnerAdaptive
             v-for="(item, index) in 8"
             :key="index"
             class="favourites-page__content__inner__content__item favourites-page__content__inner__content__item_adaptive adaptive"

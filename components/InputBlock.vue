@@ -18,6 +18,7 @@
         :placeholder="placeholder"
         :required="required"
         :autocomplete="autocomplete?'on':'off'"
+        :minlength="minlength"
       />
     </div>
   </label>
@@ -65,6 +66,10 @@ export default {
     autocomplete: {
       required: false,
       default: true,
+    },
+    minlength: {
+      required: false,
+      default: '',
     },
     modelValue: { default: "" },
   },

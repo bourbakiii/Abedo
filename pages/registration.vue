@@ -1,16 +1,16 @@
 <template>
   <div class="page registration-page">
     <h1 class="registration-page__title title-normal">Регистрация</h1>
-    {{ form.phone }}
-    {{ form.password }}
-    {{ form.password_repeat }}
-    <form @submit.prevent="registrate" class="registration-page__content">
+    <form v-if='!remember_phone' @submit.prevent="registrate" class="registration-page__content">
       <InputBlock
         v-model="form.phone"
         pre="+7"
         mask="(###) ###-##-##"
         placeholder="000 000 000 00"
-        class="registration-page__content__input-block registration-page__content__phone"
+        class="
+          registration-page__content__input-block
+          registration-page__content__phone
+        "
         name="phone"
         id="phone"
         type="text"
@@ -22,45 +22,64 @@
       <InputBlock
         v-model="form.password"
         placeholder="Введите пароль"
-        class="registration-page__content__input-block registration-page__content__password"
+        class="
+          registration-page__content__input-block
+          registration-page__content__password
+        "
         name="registration_password"
         id="registration_password"
         type="password"
         text="Пароль"
         error="true"
+        minlength="8"
         :required="true"
       />
       <InputBlock
-        v-model="form.password_repeat"
+        v-model="form.password_confirmation"
         placeholder="Введите пароль"
-        class="registration-page__content__input-block registration-page__content__password_repeat"
-        name="registration_password_repeat"
-        id="registration_password_repeat"
+        class="
+          registration-page__content__input-block
+          registration-page__content__password_confirmation
+        "
+        name="registration_password_confirmation"
+        id="registration_password_confirmation"
         type="password"
         text="Повтор пароля"
         error="true"
         :required="true"
+        minlength="8"
       />
       <p class="registration-page__content__text">
         Сейчас мы вам позвоним. Пожалуйста, введите последние 4 цифры входящего
         номера.
       </p>
-      <ButtonStandart
-        class="registration-page__content__button"
+      <ButtonStandart class="registration-page__content__button"
         >Подтвердить телефон</ButtonStandart
       >
-      <div class="registration-page__content__errors">
-
-<button @click.prevent='show_message=!show_message'>switch</button>
-      <transition-group name='message' appear >
-         <Message v-if='show_message' 
-         class="registration-page__content__errors__item_error registration-page__content__errors__item"
-    :key="1"
-         >твою мать</Message>
+      <!-- <client-only> -->
+      <transition-group
+        tag="div"
+        class="registration-page__content__errors"
+        name="message"
+        appear
+        mode="out-in"
+        :class="{
+          'registration-page__content__errors_margined': errors.length,
+        }"
+      >
+        <Message
+          v-for="error in errors"
+          :key="error"
+          class="
+            registration-page__content__errors__item_error
+            registration-page__content__errors__item
+          "
+          >{{ error }}</Message
+        >
       </transition-group>
-      </div>
+      <!-- </client-only> -->
     </form>
-    <div class="registration-page__content_code">
+    <form v-else @submit.prevent="sendCode" class="registration-page__content_code">
       <h4 class="title title-extra-normal">Подтверждение</h4>
       <p class="registration-page__content_code__text">
         Пожалуйста, введите последние 4 цифры входящего номера.
@@ -68,7 +87,10 @@
       <InputBlock
         @input="() => {}"
         placeholder="Введите код"
-        class="registration-page__content_code__input-block registration-page__content_code__phone"
+        class="
+          registration-page__content_code__input-block
+          registration-page__content_code__phone
+        "
         name="сode"
         id="code"
         type="number"
@@ -88,7 +110,7 @@
       <ButtonStandart class="registration-page__content_code__button"
         >Отправить</ButtonStandart
       >
-    </div>
+    </form>
   </div>
 </template>
 <script>
@@ -97,19 +119,56 @@ export default {
     return {
       form: {
         phone: "",
-        password:"",
-        password_repeat:""
+        password: "",
+        password_confirmation: "",
       },
-      show_message:false,
-      errors:{
-
-      },
+      show_message: false,
+      errors: [],
+      errorsTimer: null,
       confirmation: false,
     };
   },
   methods: {
     registrate() {
-      this.$axios.post(`${this.$axios.defaults.baseURL}/api/register`, this.form);
+      if (this.form.password != this.form.password_confirmation) {
+        document
+          .querySelector(".registration-page__content__errors")
+          .scrollIntoView({ block: "nearest", behavior: "smooth" });
+        return (this.errors = ["Пароли не совпадают"]);
+      }
+      this.$axios
+        .post(`${this.$axios.defaults.baseURL}/api/register`, this.form)
+        .then((response) => {
+          this.$store.commit("temporary/action", (state) => {
+            state.registration_phone = response.data.user.phone;
+          });
+        })
+        .catch(({ response }) => {
+          if ((response.status = 422)) {
+            console.log(response.data.errors);
+            this.errors = Object.values(response.data.errors)
+              .map((el) => el.flat())
+              .flat();
+          }
+        });
+    },
+    sendCode() {
+      console.log("Send code function");
+    },
+  },
+  computed:{
+    remember_phone(){
+      return this.$store.state.temporary.registration_phone;
+    }
+  },
+  watch: {
+    errors() {
+      clearTimeout(this.errorsTimer);
+      this.errorsTimer = setTimeout(() => {
+        clearTimeout(this.errorsTimer);
+        this.errorsTimer = null;
+        this.errors = [];
+      }, 6000);
     },
   },
 };
@@ -165,7 +224,14 @@ export default {
       justify-content: flex-start;
       flex-direction: column;
       width: 100%;
-      
+      transition: 0.3s;
+      &_margined {
+        margin-top: 15px;
+      }
+      transition: calc($transition * 2);
+      .empty {
+        margin-top: 0px;
+      }
     }
     &_code {
       border-radius: 20px;

@@ -57,7 +57,10 @@
           <div class="profile-page__form__content__input-block">
             <p class="profile-page__form__content__input-block__name">Пол</p>
             <div
-              class="profile-page__form__content__input-block__input profile-page__form__content__input-block__input_dropdown"
+              class="
+                profile-page__form__content__input-block__input
+                profile-page__form__content__input-block__input_dropdown
+              "
               @click.self="
                 () => {
                   if (show_sex) disableSex();
@@ -82,7 +85,9 @@
                     else enableSex();
                   }
                 "
-                class="profile-page__form__content__input-block__input_dropdown__selected"
+                class="
+                  profile-page__form__content__input-block__input_dropdown__selected
+                "
                 :class="{ placeholdered: !sex }"
               >
                 {{ sex ? sex : "Выберите пол" }}
@@ -92,7 +97,9 @@
                   @mouseenter="enableSex"
                   v-if="show_sex"
                   @mouseleave="sex_index = -1"
-                  class="profile-page__form__content__input-block__input_dropdown__content"
+                  class="
+                    profile-page__form__content__input-block__input_dropdown__content
+                  "
                 >
                   <button
                     v-for="(sexItem, index) in sexes"
@@ -100,7 +107,9 @@
                     @mouseenter="sex_index = index"
                     @click.prevent="selectSex(sexItem.value)"
                     :class="{ indexed: sex_index == index }"
-                    class="profile-page__form__content__input-block__input_dropdown__content__button"
+                    class="
+                      profile-page__form__content__input-block__input_dropdown__content__button
+                    "
                   >
                     {{ sexItem.value }}
                   </button>
@@ -151,41 +160,38 @@
           </label>
         </div>
         <div class="profile-page__form__buttons">
-          <ButtonStandart class="profile-page__form__buttons__button profile-page__form__buttons__button_edit filled">
+          <ButtonStandart
+            class="
+              profile-page__form__buttons__button
+              profile-page__form__buttons__button_edit
+              filled
+            "
+          >
             Изменить
           </ButtonStandart>
-          <ButtonStandart class="profile-page__form__buttons__button profile-page__form__buttons__button_save filled"
+          <ButtonStandart
+            class="
+              profile-page__form__buttons__button
+              profile-page__form__buttons__button_save
+              filled
+            "
             >Сохранить
           </ButtonStandart>
-          <ButtonStandart class="profile-page__form__buttons__button profile-page__form__buttons__button_decline">
+          <ButtonStandart
+            class="
+              profile-page__form__buttons__button
+              profile-page__form__buttons__button_decline
+            "
+          >
             Отмена
           </ButtonStandart>
         </div>
         <div class="profile-page__form__messages">
           <div
-            class="profile-page__form__messages__item_success profile-page__form__messages__item"
-          >
-            <div class="profile-page__form__messages__item__icon-block">
-              <svg
-                class="profile-page__form__messages__item__icon-block__icon"
-                width="10"
-                height="7"
-                viewBox="0 0 10 7"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M9.84 0.62371L9.51244 0.296149C9.40951 0.193141 9.27228 0.136475 9.12577 0.136475C8.97927 0.136475 8.84195 0.193141 8.73902 0.296149L4.13634 4.89875L1.26065 2.02298C1.15772 1.92013 1.02041 1.86339 0.873902 1.86339C0.72748 1.86339 0.590244 1.92013 0.487236 2.02298L0.159593 2.35046C0.0565854 2.45363 0 2.59103 0 2.73737C0 2.88379 0.0565854 3.02111 0.159593 3.12412L3.40642 6.37079C3.41073 6.37688 3.41528 6.38257 3.42057 6.38778L3.74821 6.70997C3.85114 6.81257 3.98846 6.86387 4.1361 6.86387H4.1378C4.28439 6.86387 4.42171 6.81257 4.52447 6.70997L4.85219 6.38493C4.85748 6.37973 4.86195 6.37542 4.86463 6.37103L9.83992 1.39623C10.0533 1.1833 10.0533 0.836881 9.84 0.62371Z"
-                  fill="#0EA976"
-                />
-              </svg>
-            </div>
-            <p class="profile-page__form__messages__item__text">
-              Ваши данные успешно обновлены
-            </p>
-          </div>
-          <div
-            class="profile-page__form__messages__item_error profile-page__form__messages__item"
+            class="
+              profile-page__form__messages__item_error
+              profile-page__form__messages__item
+            "
           >
             <p class="profile-page__form__messages__item__text">
               Введенные пароли не совпадают
@@ -369,7 +375,7 @@ export default {
     }
     &__buttons {
       margin-top: 60px;
-      &__button{
+      &__button {
         width: 170px;
       }
     }
