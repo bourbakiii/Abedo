@@ -236,14 +236,12 @@ export default {
     },
     watch_sex(event) {
       event.preventDefault();
-      console.log(event.key);
       switch (event.key) {
         case "ArrowDown": {
           this.sex_index = Math.min(this.sex_index + 1, 1);
           break;
         }
         case "ArrowUp": {
-          console.log("rrr");
           this.sex_index = Math.max(0, this.sex_index - 1);
           break;
         }

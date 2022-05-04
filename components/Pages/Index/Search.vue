@@ -224,7 +224,6 @@ export default {
     },
     watchAll() {
       this.$router.push("/search");
-      console.log("watch all button");
     },
   },
 };

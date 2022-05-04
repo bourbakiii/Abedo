@@ -1,6 +1,7 @@
 <template>
-  <NuxtLink :to="`/partners/${partner.id}`" class="shop-item item">
+  <div @click.self="$router.push(`/partners/${partner.id}`)" class="shop-item item">
     <div
+    @click.self="$router.push(`/partners/${partner.id}`)"
       :style="`background: ${
         partner.image
           ? 'url(' + $axios.defaults.baseURL + partner.image[0].desktop + ')'
@@ -8,8 +9,8 @@
       };`"
       class="item__block"
     >
-      <div class="item__block__content">
-        <div class="item__block__content__icons">
+      <div @click.self="$router.push(`/partners/${partner.id}`)" class="item__block__content">
+        <div @click="$router.push(`/partners/${partner.id}`)" class="item__block__content__icons">
           <span
             v-if="partner.order_gifts.length"
             class="item__block__content__icons-icon item__block__content__icons-icon-gift"
@@ -33,7 +34,7 @@
             >-5%</span
           >
         </div>
-        <div v-if="partner.delivery" class="item__block__content__delivery">
+        <div @click="$router.push(`/partners/${partner.id}`)" v-if="partner.delivery" class="item__block__content__delivery">
           <span
             class="item__block__content__delivery-icon item__block__content__delivery-icon-gift"
             :full="`Бесплатно от ${partner.free_order_price} руб.`"
@@ -98,6 +99,7 @@
         </div>
         <div class="item__block__content__logo">
           <img
+           @click="$router.push(`/partners/${partner.id}`)"
             :src="`${$axios.defaults.baseURL}${partner.logo.desktop}`"
             v-if="partner.logo"
             class="item__block__content__logo-image"
@@ -120,26 +122,18 @@
         </div>
       </div>
     </div>
-    <p class="item__name">
+    <p @click="$router.push(`/partners/${partner.id}`)" class="item__name">
       {{ partner.name }}
     </p>
-    <p v-if="cuisines" class="item__cuisines">
+    <p @click="$router.push(`/partners/${partner.id}`)" v-if="cuisines" class="item__cuisines">
       {{ cuisines }}
     </p>
-  </NuxtLink>
+  </div>
 </template>
 <script>
+import partnerMixin from "@/mixins/partner.js";
 export default {
-  props: {
-    partner: {
-      required: true,
-    },
-  },
-  computed: {
-    cuisines() {
-      return this.partner.cuisines.map((cuisine) => cuisine.name).join("/");
-    },
-  },
+  mixins: [partnerMixin]
 };
 </script>
 <style lang="scss" scoped>
@@ -147,6 +141,7 @@ export default {
   position: relative;
   width: 295px;
   text-decoration: none;
+  cursor: pointer;
   &__block {
     width: 100%;
     height: 230px;
@@ -265,6 +260,7 @@ export default {
           align-items: center;
           justify-content: center;
           transition: $transition;
+          z-index: 10;
           * {
             transition: $transition;
             fill: $white;

@@ -8,21 +8,25 @@
       <div class="favourites-page__content__inner">
         <div class="favourites-page__content__inner__content">
           <PartnerItem
-            v-for="(item, index) in 8"
-            :key="index"
+            v-for="partner in partners"
+            :key="partner.id"
+            :partner="partner"
             class="favourites-page__content__inner__content__item adaptive-non"
-          />
-          <PartnerAdaptive
-            v-for="(item, index) in 8"
-            :key="index"
-            class="favourites-page__content__inner__content__item favourites-page__content__inner__content__item_adaptive adaptive"
           />
         </div>
       </div>
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  computed:{
+    partners(){
+      return this.$store.state.account.favourites;
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 .favourites-page {
   &__content {

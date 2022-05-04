@@ -138,8 +138,7 @@ export default {
           });
         })
         .catch(({ response }) => {
-          if ((response.status = 422)) {
-            console.log(response.data.errors);
+          if ((response.status == 422)) {
             this.errors = Object.values(response.data.errors)
               .map((el) => el.flat())
               .flat();

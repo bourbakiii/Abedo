@@ -212,7 +212,6 @@ export default {
       .$get(`${this.$axios.defaults.baseURL}/api/shops`, { params:this.params })
       .then(({ shops }) => {
         this.partners = this.partners.concat(shops.data);
-        console.log(this);
         this.params.page++;
         this.params.last_page = shops.last_page;
       })

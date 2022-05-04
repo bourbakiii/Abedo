@@ -9,7 +9,6 @@
         v-for="chapter in chapters"
         :key="chapter.id"
         :chapter="chapter"
-        @action="()=>console.log('123')"
       />
     </div>
     <ChapterSlider :chapters="chapters" class="catalog__chapters__slider adaptive" />
@@ -45,14 +44,10 @@ export default {
     },
   },
   async fetch() {
-    console.log("live there");
     await this.$axios
       .get(`/api/shops/${this.$route.params.partner_id}/menu`)
       .then(({ data: { sections } }) => {
         this.chapters = sections;
-      })
-      .finally(() => {
-        console.log("AJAX ENDED");
       });
   },
   data() {

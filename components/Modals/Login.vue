@@ -95,10 +95,9 @@ export default {
           await this.$store.dispatch("account/get").then(()=>{
             this.$store.commit("modals/close");
           });
-      }).catch(({response})=>{
-        if ((response.status = 422)) {
-            console.log(response.data.errors);
-            this.errors = Object.values(response.data.errors)
+      }).catch((error)=>{
+        if (error?.response.status == 422) {
+            this.errors = Object.values(error.response.data.errors)
               .map((el) => el.flat())
               .flat();
           }

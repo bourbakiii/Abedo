@@ -1,51 +1,64 @@
 export const state = () => ({
     token: null,
-    user:{}
+    user: {},
+    favourites: []
 });
 export const mutations = {
     action(state, action) {
         action(state);
         localStorage.setItem('account', JSON.stringify(state));
     },
-    clear(state){
+    clear(state) {
         state.token = null,
-        state.user= {};
+            state.user = {},
+            state.favourites = [];
         localStorage.setItem('account', JSON.stringify(state));
     },
-    local_set(state){
-        console.log("Local set");
+    local_set(state) {
         const local_data = JSON.parse(localStorage.getItem('account'));
-        console.log(state);
-        if(local_data)
-        for(const key in state)
-        {
-            console.log(key);
-        state[key] = local_data[key]??null
-        }
+        if (local_data) for (const key in state) state[key] = local_data[key] ?? null
+            
     }
 };
 
 export const actions = {
-    get(state) {
-        this.$axios.get(`/api/user`, {
-            headers:{
-                "Authorization": "Bearer "+state.state.token
+    async get(state) {
+        await this.$axios.get(`/api/user`, {
+            headers: {
+                "Authorization": "Bearer " + state.state.token
             }
-        }).then(({data: {user}})=>{
-            state.commit("action", (state)=>{
+        }).then(async ({ data: { user } }) => {
+            await state.commit("action", (state) => {
                 state.user = user;
             })
-        }).catch(()=>{
+            await state.dispatch("favourites");
+        }).catch((error)=>{
+            console.log(error.response);
+            if(error?.response.status == 401)
             state.dispatch("logout");
         })
     },
-    logout(state)
-    {
+    async favourites(state) {
+        await this.$axios.get(`/api/shops/favourites`, {
+            headers: {
+                "Authorization": "Bearer " + state.state.token
+            }
+        }).then(({ data: {shops:{data}} }) => {
+            
+            state.commit("action", (state) => {
+
+                state.favourites = data;
+            })
+        }).catch((error)=>{
+            console.log(error.response);
+        })
+    },
+    async logout(state) {
         const token = state.state.token;
         state.commit("clear");
-        this.$axios.get(`/api/logout`, {
-            headers:{
-                "Authorization": "Bearer "+ token
+        await this.$axios.get(`/api/logout`, {
+            headers: {
+                "Authorization": "Bearer " + token
             }
         });
     }
