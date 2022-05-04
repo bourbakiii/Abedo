@@ -47,7 +47,6 @@
       <NuxtLink to="/forget" class="login-modal__labels__forget"
         >Забыли пароль?</NuxtLink
       >
-      <button @mousedown.prevent='$store.dispatch("account/logout")'>1</button>
       <NuxtLink to="/registration" class="login-modal__labels__registration"
         >Регистрация</NuxtLink
       >

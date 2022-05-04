@@ -70,7 +70,7 @@
           class="navigation__links-link navigation__links-link__dropdown"
           @mouseenter.prevent="show_dropdown = true"
           @mouseleave.prevent="show_dropdown = false"
-          @mousedown.prevent="show_dropdown = true"
+          @mousedown.prevent="dropdownClick"
         >
           <svg
             class="navigation__links-link-svg"
@@ -93,7 +93,7 @@
           <p class="navigation__links-link__text">Кабинет</p>
           <transition name="opacity">
             <div
-              v-if="show_dropdown"
+              v-if="show_dropdown && token"
               class="navigation__links-link__dropdown-content"
             >
               <NuxtLink
@@ -114,12 +114,12 @@
               >
                 История заказов
               </NuxtLink>
-              <NuxtLink
-                to="#"
+              <button
+              @click.prevent="$store.dispatch('account/logout')"
                 class="navigation__links-link__dropdown-content-link"
               >
                 Выход
-              </NuxtLink>
+              </button>
             </div>
           </transition>
         </button>
@@ -245,6 +245,17 @@ export default {
     return {
       show_dropdown: false,
     };
+  },
+  methods:{
+    dropdownClick(){
+      if(this.token) this.show_dropdown = !this.show_dropdown;
+      else this.$store.commit("modals/open", {modal_name:"login"});
+    }
+  },
+  computed:{
+    token(){
+      return this.$store.state.account.token;
+    }
   },
   watch: {
     "$route.path": {
@@ -386,6 +397,7 @@ export default {
             padding-top: 7px;
             padding-bottom: 17px;
             &-link {
+
               width: 100%;
               box-sizing: border-box;
               text-decoration: none;
@@ -397,10 +409,12 @@ export default {
               justify-content: flex-start;
               flex-direction: row;
               transition: $transition;
+              background-color: $white;
+                      outline:none;
               &:active {
                 transform: scale(0.98);
               }
-              &:last-of-type {
+              &:last-child {
                 border: none;
               }
             }

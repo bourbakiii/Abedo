@@ -7,7 +7,7 @@ export const state = () => ({
     show: false
   },
   login: {
-    show: true
+    show: false
   },
   partner: {
     show: false,
