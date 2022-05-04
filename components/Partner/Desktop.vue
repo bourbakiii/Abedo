@@ -1,7 +1,10 @@
 <template>
-  <div @click.self="$router.push(`/partners/${partner.id}`)" class="shop-item item">
-    <div
+  <div
     @click.self="$router.push(`/partners/${partner.id}`)"
+    class="shop-item item"
+  >
+    <div
+      @click.self="$router.push(`/partners/${partner.id}`)"
       :style="`background: ${
         partner.image
           ? 'url(' + $axios.defaults.baseURL + partner.image[0].desktop + ')'
@@ -9,8 +12,14 @@
       };`"
       class="item__block"
     >
-      <div @click.self="$router.push(`/partners/${partner.id}`)" class="item__block__content">
-        <div @click="$router.push(`/partners/${partner.id}`)" class="item__block__content__icons">
+      <div
+        @click.self="$router.push(`/partners/${partner.id}`)"
+        class="item__block__content"
+      >
+        <div
+          @click="$router.push(`/partners/${partner.id}`)"
+          class="item__block__content__icons"
+        >
           <span
             v-if="partner.order_gifts.length"
             class="item__block__content__icons-icon item__block__content__icons-icon-gift"
@@ -34,7 +43,11 @@
             >-5%</span
           >
         </div>
-        <div @click="$router.push(`/partners/${partner.id}`)" v-if="partner.delivery" class="item__block__content__delivery">
+        <div
+          @click="$router.push(`/partners/${partner.id}`)"
+          v-if="partner.delivery"
+          class="item__block__content__delivery"
+        >
           <span
             class="item__block__content__delivery-icon item__block__content__delivery-icon-gift"
             :full="`Бесплатно от ${partner.free_order_price} руб.`"
@@ -99,12 +112,16 @@
         </div>
         <div class="item__block__content__logo">
           <img
-           @click="$router.push(`/partners/${partner.id}`)"
+            @click="$router.push(`/partners/${partner.id}`)"
             :src="`${$axios.defaults.baseURL}${partner.logo.desktop}`"
             v-if="partner.logo"
             class="item__block__content__logo-image"
           />
-          <button class="item__block__content__logo-favourite-button filled">
+          <button
+            @click="like"
+            class="item__block__content__logo-favourite-button"
+            :class="{ filled: is_favourite }"
+          >
             <svg
               class="item__block__content__logo-favourite-button-icon"
               width="20"
@@ -125,7 +142,11 @@
     <p @click="$router.push(`/partners/${partner.id}`)" class="item__name">
       {{ partner.name }}
     </p>
-    <p @click="$router.push(`/partners/${partner.id}`)" v-if="cuisines" class="item__cuisines">
+    <p
+      @click="$router.push(`/partners/${partner.id}`)"
+      v-if="cuisines"
+      class="item__cuisines"
+    >
       {{ cuisines }}
     </p>
   </div>
@@ -133,7 +154,7 @@
 <script>
 import partnerMixin from "@/mixins/partner.js";
 export default {
-  mixins: [partnerMixin]
+  mixins: [partnerMixin],
 };
 </script>
 <style lang="scss" scoped>
@@ -259,16 +280,17 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: $transition;
+          transition: all $transition;
           z-index: 10;
-          * {
+          svg * {
             transition: $transition;
             fill: $white;
           }
           &:hover {
             border-color: $red;
-            * {
-              fill: $red;
+            background-color: $red;
+            svg * {
+              fill: $white;
             }
           }
           &.filled {

@@ -17,7 +17,7 @@ export const mutations = {
     local_set(state) {
         const local_data = JSON.parse(localStorage.getItem('account'));
         if (local_data) for (const key in state) state[key] = local_data[key] ?? null
-            
+
     }
 };
 
@@ -32,10 +32,10 @@ export const actions = {
                 state.user = user;
             })
             await state.dispatch("favourites");
-        }).catch((error)=>{
+        }).catch((error) => {
             console.log(error.response);
-            if(error?.response.status == 401)
-            state.dispatch("logout");
+            if (error?.response.status == 401)
+                state.dispatch("logout");
         })
     },
     async favourites(state) {
@@ -43,13 +43,11 @@ export const actions = {
             headers: {
                 "Authorization": "Bearer " + state.state.token
             }
-        }).then(({ data: {shops:{data}} }) => {
-            
+        }).then(({ data: { shops: { data } } }) => {
             state.commit("action", (state) => {
-
                 state.favourites = data;
             })
-        }).catch((error)=>{
+        }).catch((error) => {
             console.log(error.response);
         })
     },

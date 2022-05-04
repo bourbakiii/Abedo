@@ -1,5 +1,5 @@
 <template>
-    <transition name="partner-desktop">
+    <transition appear name="partner-desktop">
       <PartnerDesktop
         :partner="partner"
         v-if="width > 768"
