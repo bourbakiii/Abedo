@@ -63,7 +63,7 @@
             stroke-linejoin="round"
           />
         </svg>
-        Магазины</ButtonStandart
+        Заведения</ButtonStandart
       >
       <div class="navigation__links">
         <button
@@ -154,7 +154,7 @@
           </svg>
 
           <p class="navigation__links-link__text">
-            Акции <span class="delete-note">магазинов</span>
+            Акции <span class="delete-note">заведений</span>
           </p>
         </NuxtLink>
       </div>

@@ -7,12 +7,14 @@
       </h1>
       <div class="favourites-page__content__inner">
         <div class="favourites-page__content__inner__content">
+          <client-only>
           <PartnerItem
             v-for="partner in partners"
             :key="partner.id"
             :partner="partner"
             class="favourites-page__content__inner__content__item adaptive-non"
           />
+          </client-only>
         </div>
       </div>
     </div>

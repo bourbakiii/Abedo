@@ -117,16 +117,13 @@
         />
       </transition>
       <div  :class='{"small-margin": show_filters}' class="categories-page__content__shops">
+        <client-only>
         <PartnerItem
           v-for="(item, index) in 12"
           :key="index"
           class="categories-page__content__shops__item adaptive-non"
         />
-        <PartnerAdaptive
-          v-for="(item, index) in 12"
-          :key="index"
-          class="categories-page__content__shops__item adaptive"
-        />
+        </client-only>
       </div>
     </div>
   </div>

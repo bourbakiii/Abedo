@@ -30,17 +30,18 @@
           </svg>
         </button>
         <input
-          placeholder="Найти магазин товар или услугу "
+          placeholder="Найти заведение товар или услугу "
           type="text"
           minlength="3"
           required
           class="search__input-input"
           v-model="query"
+          @input="timerHandler"
         />
         <transition name="opacity">
           <button
-            v-if="query.length"
-            @click.prevent="query = ''"
+            v-if="query"
+            @click.prevent="query = null"
             class="search__input-button search__input-button-close"
           >
             <svg
@@ -64,64 +65,39 @@
             @mouseenter="showResult"
             v-if="show_result == true"
           >
-            <div class="search__input__dropdown-content__shops">
+            <div
+              class="search__input__dropdown-content__shops"
+              v-if="founded.partners.length"
+            >
               <NuxtLink
-                to="#"
+                v-for="partner in founded.partners"
+                :key="`founded-partner-${partner.id}`"
+                :to="`/partners/${partner.id}`"
                 class="search__input__dropdown-content__shops-shop"
               >
                 <img
-                  src="@/assets/images/limonchello.png"
+                  v-if="partner.image.length"
+                  :src="`${$axios.defaults.baseURL}${partner.image[0].desktop}`"
                   class="search__input__dropdown-content__shops-shop-image"
                 />
                 <p class="search__input__dropdown-content__shops-shop-name">
-                  Ресторан “Тангос”
-                </p>
-              </NuxtLink>
-              <NuxtLink
-                to="#"
-                class="search__input__dropdown-content__shops-shop"
-              >
-                <p class="search__input__dropdown-content__shops-shop-name">
-                  Ресторан “Тангос”
-                </p>
-              </NuxtLink>
-              <NuxtLink
-                to="#"
-                class="search__input__dropdown-content__shops-shop"
-              >
-                <img
-                  src="@/assets/images/limonchello.png"
-                  class="search__input__dropdown-content__shops-shop-image"
-                />
-                <p class="search__input__dropdown-content__shops-shop-name">
-                  Ресторан “Тангос”
-                </p>
-              </NuxtLink>
-              <NuxtLink
-                to="#"
-                class="search__input__dropdown-content__shops-shop"
-              >
-                <p class="search__input__dropdown-content__shops-shop-name">
-                  Ресторан “Тангос”
-                </p>
-              </NuxtLink>
-              <NuxtLink
-                to="#"
-                class="search__input__dropdown-content__shops-shop"
-              >
-                <img
-                  src="@/assets/images/limonchello.png"
-                  class="search__input__dropdown-content__shops-shop-image"
-                />
-                <p class="search__input__dropdown-content__shops-shop-name">
-                  Ресторан “Тангос”
+                  {{ partner.name }}
                 </p>
               </NuxtLink>
             </div>
-            <div class="search__input__dropdown-content__products">
-              <div class="search__input__dropdown-content__products-product">
+            <div
+              class="search__input__dropdown-content__products"
+              v-if="founded.products.length"
+            >
+              <NuxtLink
+                v-for="product in founded.products"
+                :key="`founded-product-${product.id}`"
+                :to="`/product/${product.id}`"
+                class="search__input__dropdown-content__products-product"
+              >
                 <img
-                  src="@/assets/images/shop-placeholder.png"
+                  v-if="product.image"
+                  :src="`${$axios.defaults.baseURL}${product.image.mobile}`"
                   class="search__input__dropdown-content__products-product-image"
                 />
                 <div
@@ -133,12 +109,12 @@
                     <p
                       class="search__input__dropdown-content__products-product-content-top-name"
                     >
-                      Салат с лососем и помидорами
+                      {{ product.name }}
                     </p>
                     <p
                       class="search__input__dropdown-content__products-product-content-top-shop"
                     >
-                      / Ресторан “Тангос”
+                      / {{ product.section.shop.name }}
                     </p>
                   </div>
                   <div
@@ -147,16 +123,16 @@
                     <p
                       class="search__input__dropdown-content__products-product-content-bottom-price"
                     >
-                      450руб.
+                      {{ product.price }}руб.
                     </p>
                     <p
                       class="search__input__dropdown-content__products-product-content-bottom-weight"
                     >
-                      320г.
+                      {{ product.weight }}{{ product.weight_unit.short_name }}
                     </p>
                   </div>
                 </div>
-              </div>
+              </NuxtLink>
             </div>
             <ButtonStandart
               @click.native="watchAll"
@@ -166,6 +142,7 @@
           </div>
         </transition>
       </form>
+
       <div class="search__categories" v-if="categories.length">
         <CategoryItem
           v-for="category in categories"
@@ -182,20 +159,45 @@ export default {
   data() {
     return {
       show_result: false,
-      query: "",
+      query: null,
       categories: [],
+      timer: null,
+      founded: {
+        partners: [],
+        products: [],
+      },
     };
   },
   async fetch() {
     await this.$axios
       .$get(`${this.$axios.defaults.baseURL}/api/cuisines/get`)
-      .then(({cuisines: {data}}) => {
+      .then(({ cuisines: { data } }) => {
         this.categories = data;
       });
   },
   methods: {
     search() {
+      console.log(
+        "Потеряли себя нема нам не надо мана команда магов вабанк и зоиби там битом игриво так по кабакам"
+      );
       this.showResult();
+      this.$axios
+        .get("/api/search", {
+          params: {
+            keyword: "прод лимон",
+          },
+        })
+        .then(({ data: { result } }) => {
+          console.log(result);
+          this.founded = {
+            partners: result.shops.data,
+            products: result.products.data,
+          };
+        });
+    },
+    timerHandler() {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(this.search, 400);
     },
     showResult() {
       this.show_result = true;
@@ -310,6 +312,7 @@ export default {
           min-height: 75px;
           padding: 10px 0px;
           border-bottom: 1px solid $dark_grey;
+          text-decoration: none;
           &-image {
             width: 50px;
             height: 40px;

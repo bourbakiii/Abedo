@@ -15,7 +15,7 @@
               <h2
                 class="index-page__content__new-shops__top__title title-normal"
               >
-                Новые магазины
+                Новые заведения
               </h2>
               <button
                 @click="show_filters = !show_filters"
@@ -134,30 +134,28 @@
               </client-only>
             </div>
             <ButtonStandart
-@click.native="$router.push('/partners')"
+              @click.native="$router.push('/partners')"
               class="index-page__content__new-shops__button"
-              >Все магазины</ButtonStandart
+              >Все заведения</ButtonStandart
             >
           </div>
         </div>
-        
       </div>
       <PagesIndexAbout class="index-page__content__about adaptive-non">
-          Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру
-          сгенерировать несколько абзацев более менее осмысленного текста рыбы
-          на русском языке, а начинающему оратору отточить навык публичных
-          выступлений в домашних условиях. При создании генератора мы
-          использовали небезизвестный универсальный код речей. Текст
-          генерируется абзацами случайным образом от двух до десяти предложений
-          в абзаце, что позволяет сделать текст более привлекательным и живым
-          для визуально-слухового восприятия.
-          <br />
-          По своей сути рыбатекст является альтернативой традиционному lorem
-          ipsum, который вызывает у некторых людей недоумение при попытках
-          прочитать рыбу текст. В отличии от lorem ipsum, текст рыба на русском
-          языке наполнит любой макет непонятным смыслом и придаст неповторимый
-          колорит советских времен.
-        </PagesIndexAbout>
+        Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать
+        несколько абзацев более менее осмысленного текста рыбы на русском языке,
+        а начинающему оратору отточить навык публичных выступлений в домашних
+        условиях. При создании генератора мы использовали небезизвестный
+        универсальный код речей. Текст генерируется абзацами случайным образом
+        от двух до десяти предложений в абзаце, что позволяет сделать текст
+        более привлекательным и живым для визуально-слухового восприятия.
+        <br />
+        По своей сути рыбатекст является альтернативой традиционному lorem
+        ipsum, который вызывает у некторых людей недоумение при попытках
+        прочитать рыбу текст. В отличии от lorem ipsum, текст рыба на русском
+        языке наполнит любой макет непонятным смыслом и придаст неповторимый
+        колорит советских времен.
+      </PagesIndexAbout>
     </div>
   </div>
 </template>
@@ -191,89 +189,88 @@ export default {
       @media screen and (max-width: $tablet) {
         margin-bottom: 0px;
       }
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      width: 100%;
+      max-width: $maxwidth;
+      &__top {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-        flex-direction: column;
+        justify-content: space-between;
         width: 100%;
-        max-width: $maxwidth;
-        &__top {
+        margin-bottom: 20px;
+        &__title {
+          @media screen and (max-width: $tablet) {
+            font-family: "SF Pro Display";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 20px;
+          }
+        }
+        &__filter-button {
+          height: 30px;
+          width: 120px;
+          background-color: $light_grey;
+          border-radius: 5px;
+          transition: $transition;
+          border: none;
+          outline: none;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 100%;
-          margin-bottom: 20px;
-          &__title {
-            @media screen and (max-width: $tablet) {
-              font-family: "SF Pro Display";
-              font-style: normal;
-              font-weight: 700;
-              font-size: 20px;
-              line-height: 20px;
-            }
-          }
-          &__filter-button {
-            height: 30px;
-            width: 120px;
-            background-color: $light_grey;
-            border-radius: 5px;
-            transition: $transition;
-            border: none;
-            outline: none;
+          padding: 0px 15px;
+          &-text {
+            font-family: "SF Pro Display";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 19px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0px 15px;
-            &-text {
-              font-family: "SF Pro Display";
-              font-style: normal;
-              font-weight: 600;
-              font-size: 16px;
-              line-height: 19px;
-              display: flex;
-              align-items: center;
-            }
           }
         }
-        &__content {
-          width: 100%;
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          grid-gap: 30px;
+      }
+      &__content {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 30px;
+        overflow: hidden;
+        margin-top: 50px;
+        @media screen and (max-width: $notebook) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        @media screen and (max-width: $tablet) {
+          margin-top: 20px;
+          grid-gap: 15px;
+          grid-template-columns: repeat(1, 1fr);
+        }
+        &__item {
           overflow: hidden;
-          margin-top: 50px;
-          @media screen and (max-width: $notebook) {
-            grid-template-columns: repeat(3, 1fr);
-          }
-          @media screen and (max-width: $tablet) {
-            margin-top: 20px;
-            grid-gap: 15px;
-            grid-template-columns: repeat(1, 1fr);
-          }
-          &__item {
-            overflow: hidden;
-            width: 100%;
-          }
+          width: 100%;
         }
-        &__button {
-          margin-top: 70px;
-          align-self: center;
-          justify-content: center;
-          text-transform: uppercase;
-          width: 306px;
-          @media screen and (max-width: $tablet) {
-            margin-top: 30px;
-            width: 228px;
-            height: 40px;
-            background-color: $darkblue;
-            border: 1px solid $darkblue;
-            color: $white;
-            text-transform: none;
-          }
+      }
+      &__button {
+        margin-top: 70px;
+        align-self: center;
+        justify-content: center;
+        text-transform: uppercase;
+        width: 306px;
+        @media screen and (max-width: $tablet) {
+          margin-top: 30px;
+          width: 228px;
+          height: 40px;
+          background-color: $darkblue;
+          border: 1px solid $darkblue;
+          color: $white;
+          text-transform: none;
         }
-      
+      }
     }
-    
+
     @media screen and (max-width: $tablet) {
       &__adaptive-categories {
         margin: 0px 0px 30px;

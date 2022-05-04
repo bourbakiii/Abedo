@@ -24,7 +24,7 @@
       </div>
       <div class="sidebar-cart__hood__shop-block">
         <div class="sidebar-cart__hood__shop-block__name-block">
-          <p class="sidebar-cart__hood__shop-block__name-block__pre">Магазин</p>
+          <p class="sidebar-cart__hood__shop-block__name-block__pre">Заведение</p>
           <p class="sidebar-cart__hood__shop-block__name-block__name">
             Кафе “Лимончелло”
           </p>

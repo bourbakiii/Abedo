@@ -30,7 +30,7 @@
           </svg>
         </button>
         <input
-          placeholder="Найти магазин товар или услугу "
+          placeholder="Найти заведение товар или услугу "
           type="text"
           minlength="3"
           required
