@@ -1,120 +1,113 @@
 <template>
-  <div class="page registration-page">
-    <h1 class="registration-page__title title-normal">Регистрация</h1>
-    <form v-if='!remember_phone' @submit.prevent="registrate" class="registration-page__content">
-      <InputBlock
-        v-model="form.phone"
-        pre="+7"
-        mask="(###) ###-##-##"
-        placeholder="000 000 000 00"
-        class="
-          registration-page__content__input-block
-          registration-page__content__phone
-        "
-        name="phone"
-        id="phone"
-        type="text"
-        text="Телефон"
-        error="true"
-        :required="true"
-        :autocomplete="false"
-      />
-      <InputBlock
-        v-model="form.password"
-        placeholder="Введите пароль"
-        class="
-          registration-page__content__input-block
-          registration-page__content__password
-        "
-        name="registration_password"
-        id="registration_password"
-        type="password"
-        text="Пароль"
-        error="true"
-        minlength="8"
-        :required="true"
-      />
-      <InputBlock
-        v-model="form.password_confirmation"
-        placeholder="Введите пароль"
-        class="
-          registration-page__content__input-block
-          registration-page__content__password_confirmation
-        "
-        name="registration_password_confirmation"
-        id="registration_password_confirmation"
-        type="password"
-        text="Повтор пароля"
-        error="true"
-        :required="true"
-        minlength="8"
-      />
-      <p class="registration-page__content__text">
-        Сейчас мы вам позвоним. Пожалуйста, введите последние 4 цифры входящего
-        номера.
-      </p>
-      <ButtonStandart class="registration-page__content__button"
-        >Подтвердить телефон</ButtonStandart
+  <div class="page registration-page wrapper">
+    <div class="registration-page__over content">
+      <h1 class="registration-page__title title-normal">Регистрация</h1>
+      <form
+        v-if="!remember_phone"
+        @submit.prevent="registrate"
+        class="registration-page__content"
       >
-      <!-- <client-only> -->
-      <transition-group
-        tag="div"
-        class="registration-page__content__errors"
-        name="message"
-        appear
-        mode="out-in"
-        :class="{
-          'registration-page__content__errors_margined': errors.length,
-        }"
-      >
-        <Message
-          v-for="error in errors"
-          :key="error"
-          class="
-            registration-page__content__errors__item_error
-            registration-page__content__errors__item
-          "
-          >{{ error }}</Message
-        >
-      </transition-group>
-      <!-- </client-only> -->
-    </form>
-    <form v-else @submit.prevent="sendCode" class="registration-page__content_code">
-      <h4 class="title title-extra-normal">Подтверждение</h4>
-      <p class="registration-page__content_code__text">
-        Пожалуйста, введите последние 4 цифры входящего номера.
-      </p>
-      <InputBlock
-        @input="() => {}"
-        placeholder="Введите код"
-        class="
-          registration-page__content_code__input-block
-          registration-page__content_code__phone
-        "
-        name="сode"
-        id="code"
-        type="number"
-        text="Код подтверждения"
-        error="true"
-      />
-      <div class="registration-page__content_code__confirmation">
-        <Checkbox
-          id="code__confirmation"
-          v-model="confirmation"
-          class="registration-page__content_code__confirmation__checkbox"
+        <InputBlock
+          v-model="form.phone"
+          pre="+7"
+          mask="(###) ###-##-##"
+          placeholder="000 000 000 00"
+          class="registration-page__content__input-block registration-page__content__phone"
+          name="phone"
+          id="login_phone"
+          type="text"
+          text="Телефон"
+          :required="true"
+          :autocomplete="false"
         />
-        <p class="registration-page__content_code__confirmation__text">
-          Принимаю условия использования и политику конфиденциальности
+        <InputBlock
+          v-model="form.password"
+          placeholder="Введите пароль"
+          class="registration-page__content__input-block registration-page__content__password"
+          name="registration_password"
+          id="registration_password"
+          type="password"
+          text="Пароль"
+          minlength="8"
+          :required="true"
+        />
+        <InputBlock
+          v-model="form.password_confirmation"
+          placeholder="Введите пароль"
+          class="registration-page__content__input-block registration-page__content__password_confirmation"
+          name="registration_password_confirmation"
+          id="registration_password_confirmation"
+          type="password"
+          text="Повтор пароля"
+          :required="true"
+          minlength="8"
+        />
+        <p class="registration-page__content__text">
+          Сейчас мы вам позвоним. Пожалуйста, введите последние 4 цифры
+          входящего номера.
         </p>
-      </div>
-      <ButtonStandart class="registration-page__content_code__button"
-        >Отправить</ButtonStandart
+        <ButtonStandart class="registration-page__content__button"
+          >Подтвердить телефон</ButtonStandart
+        >
+        <!-- <client-only> -->
+        <transition-group
+          tag="div"
+          class="registration-page__content__errors"
+          name="message"
+          appear
+          mode="out-in"
+          :class="{
+            'registration-page__content__errors_margined': errors.length,
+          }"
+        >
+          <Message
+            v-for="error in errors"
+            :key="error"
+            class="registration-page__content__errors__item_error registration-page__content__errors__item"
+            >{{ error }}</Message
+          >
+        </transition-group>
+        <!-- </client-only> -->
+      </form>
+      <form
+        v-else
+        @submit.prevent="sendCode"
+        class="registration-page__content_code"
       >
-    </form>
+        <h4 class="title title-extra-normal">Подтверждение</h4>
+        <p class="registration-page__content_code__text">
+          Пожалуйста, введите последние 4 цифры входящего номера.
+        </p>
+        <InputBlock
+          @input="() => {}"
+          placeholder="Введите код"
+          class="registration-page__content_code__input-block registration-page__content_code__phone"
+          name="сode"
+          id="code"
+          type="number"
+          text="Код подтверждения"
+        />
+        <div class="registration-page__content_code__confirmation">
+          <Checkbox
+            id="code__confirmation"
+            v-model="confirmation"
+            class="registration-page__content_code__confirmation__checkbox"
+          />
+          <p class="registration-page__content_code__confirmation__text">
+            Принимаю условия использования и политику конфиденциальности
+          </p>
+        </div>
+        <ButtonStandart class="registration-page__content_code__button"
+          >Отправить</ButtonStandart
+        >
+      </form>
+    </div>
   </div>
 </template>
 <script>
+import errorsMessagesMixin from "@/mixins/errors-messages.js";
 export default {
+  mixins:[errorsMessagesMixin],
   data() {
     return {
       form: {
@@ -122,9 +115,6 @@ export default {
         password: "",
         password_confirmation: "",
       },
-      show_message: false,
-      errors: [],
-      errorsTimer: null,
       confirmation: false,
     };
   },
@@ -137,7 +127,11 @@ export default {
         return (this.errors = ["Пароли не совпадают"]);
       }
       this.$axios
-        .post(`${this.$axios.defaults.baseURL}/api/register`, this.form)
+        .post(`${this.$axios.defaults.baseURL}/api/register`, {
+        phone: parseInt(this.form.phone.replace(/\D+/g,"")),
+          password: this.form.password,
+          password_confirmation: this.form.password_confirmation
+        })
         .then((response) => {
           this.$store.commit("temporary/action", (state) => {
             state.registration_phone = response.data.user.phone;
@@ -156,31 +150,28 @@ export default {
       console.log("Send code function");
     },
   },
-  computed:{
-    remember_phone(){
+  computed: {
+    remember_phone() {
       return this.$store.state.temporary.registration_phone;
-    }
-  },
-  watch: {
-    errors() {
-      clearTimeout(this.errorsTimer);
-      this.errorsTimer = setTimeout(() => {
-        clearTimeout(this.errorsTimer);
-        this.errorsTimer = null;
-        this.errors = [];
-      }, 6000);
     },
   },
 };
 </script>
 <style lang="scss" scoped>
 .registration-page {
-  padding: 100px 10px 0px;
   @media screen and (max-width: $notebook) {
-    padding: 50px 10px 0px;
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
   @media screen and (max-width: $tablet) {
-    padding: 30px 10px 0px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  padding-top: 100px;
+  padding-bottom: 100px;
+  &__over {
+    align-items: flex-start;
+    justify-content: flex-start;
   }
   &__title {
     margin-bottom: 70px;

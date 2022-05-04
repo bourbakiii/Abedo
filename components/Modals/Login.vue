@@ -1,7 +1,7 @@
 <template>
-  <form class="login-modal modal">
-      <button
-      @click.prevent="$store.commit('modals/close')"
+  <form @submit.prevent="login" class="login-modal modal">
+    <button
+      @mousedown.prevent="$store.commit('modals/close')"
       class="login-modal__close"
     >
       <svg
@@ -20,34 +20,94 @@
     </button>
     <h2 class="title-normal login-modal__title">Вход</h2>
     <InputBlock
-      @input="()=>{}"
+      v-model="form.phone"
       pre="+7"
       mask="(###) ###-##-##"
       placeholder="000 000 000 00"
       class="login-modal__phone"
       name="phone"
-      id="phone"
+      id="login_phone"
       type="text"
       text="Телефон"
-      error="true"
+      :required="true"
+      :autocomplete="true"
     />
     <InputBlock
-      @input="()=>{}"
+      v-model="form.password"
       placeholder="Введите пароль"
       class="login-modal__password"
       name="password"
-      id="password"
+      id="login_password"
       type="password"
       text="Пароль"
-      error="true"
+      minlength="8"
+      :required="true"
     />
     <div class="login-modal__labels">
-        <NuxtLink to='/forget' class="login-modal__labels__forget">Забыли пароль?</NuxtLink>
-        <NuxtLink to='/registration' class="login-modal__labels__registration">Регистрация</NuxtLink>
+      <NuxtLink to="/forget" class="login-modal__labels__forget"
+        >Забыли пароль?</NuxtLink
+      >
+      <button @mousedown.prevent='$store.dispatch("account/logout")'>1</button>
+      <NuxtLink to="/registration" class="login-modal__labels__registration"
+        >Регистрация</NuxtLink
+      >
     </div>
     <ButtonStandart class="login-modal__button">Войти</ButtonStandart>
+    <transition-group
+      tag="div"
+      class="login-modal__errors"
+      name="message"
+      appear
+      mode="out-in"
+      :class="{
+        'login-modal__errors_margined': errors.length,
+      }"
+    >
+      <Message
+        v-for="error in errors"
+        :key="error"
+        class="login-modal__errors__item_error login-modal__errors__item"
+        >{{ error }}</Message
+      >
+    </transition-group>
   </form>
 </template>
+<script>
+import errorsMessagesMixin from "@/mixins/errors-messages.js";
+export default {
+  mixins: [errorsMessagesMixin],
+  data() {
+    return {
+      form: {
+        phone: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async login() {
+      this.$axios.post(`${this.$axios.defaults.baseURL}/api/login`, {
+        phone: parseInt(this.form.phone.replace(/\D+/g,"")),
+          password: this.form.password
+      }).then(async ({data:{token}})=>{
+          this.$store.commit("account/action", (state) => {
+            state.token = token;
+          });
+          await this.$store.dispatch("account/get").then(()=>{
+            this.$store.commit("modals/close");
+          });
+      }).catch(({response})=>{
+        if ((response.status = 422)) {
+            console.log(response.data.errors);
+            this.errors = Object.values(response.data.errors)
+              .map((el) => el.flat())
+              .flat();
+          }
+      });
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 .login-modal {
   background-color: $white;
@@ -59,14 +119,14 @@
   max-width: 400px;
   min-width: 320px;
   position: relative;
-  @media screen and (max-width: $tablet){
-      max-width:100%;
-      height:100%;
+  @media screen and (max-width: $tablet) {
+    max-width: 100%;
+    height: 100%;
   }
   &__title {
     margin-bottom: 30px;
   }
-  &__close{
+  &__close {
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -74,21 +134,40 @@
     position: absolute;
     right: 30px;
     top: 30px;
-     @media screen and (max-width: $tablet){
-       right:24px;
-       top:24px;
+    @media screen and (max-width: $tablet) {
+      right: 24px;
+      top: 24px;
+    }
   }
+  &__phone {
+    margin-bottom: 20px;
   }
-  &__phone{
-      margin-bottom: 20px;
+  &__labels {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
   }
-  &__labels{
-      width:100%; margin-top: 20px;
-      display: flex;align-items: center;justify-content: space-between;flex-direction: row;
+  &__button {
+    width: 100%;
+    margin-top: 20px;
   }
-  &__button{
-      width:100%;
-      margin-top:20px;
-  }
+  &__errors {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      width: 100%;
+      transition: 0.3s;
+      &_margined {
+        margin-top: 15px;
+      }
+      transition: calc($transition * 2);
+      .empty {
+        margin-top: 0px;
+      }
+    }
 }
 </style>

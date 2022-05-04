@@ -44,7 +44,7 @@ export default {
     ]
   },
   axios: {
-    baseUrl: "https://abedo.ru"
+    baseUrl: "http://127.0.0.1:8000",
   },
   pageTransition: {
     name: 'page',
