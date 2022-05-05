@@ -2,18 +2,20 @@
   <div class="page search-page wrapper">
     <div class="search-page__content content">
       <Breadcrumbs class="search-page__content__breadcrumbs adaptive-non" />
-      <PagesSearchInput class="search-page__content__search-input" />
+      <PagesSearchInput @search='setFounded' class="search-page__content__search-input" />
       <PagesSearchByCategories
         v-if="true"
         :categories="categories"
         class="search-page__content__by-categories adaptive"
       />
       <PagesSearchFoundedPartners
-        v-if="true"
+      :partners='founded.partners'
+        v-if="founded.partners.length"
         class="search-page__content__search__founded-partners"
       />
       <PagesSearchFoundedProducts
-        v-if="true"
+       :products='founded.products'
+        v-if="founded.products.length"
         class="search-page__content__search__founded-products"
       />
     </div>
@@ -24,22 +26,32 @@
 export default {
   data() {
     return {
+      founded:{
+        partners:[],
+        products:[]
+      },
       categories: [
-        { id: 1, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 2, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 3, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 4, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 5, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 6, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 7, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 8, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 9, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 10, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 11, name: "Lorem ipsum dolor mi met megretto consis" },
-        { id: 12, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 1, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 2, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 3, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 4, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 5, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 6, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 7, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 8, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 9, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 10, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 11, name: "Lorem ipsum dolor mi met megretto consis" },
+        // { id: 12, name: "Lorem ipsum dolor mi met megretto consis" },
       ],
+      
     };
   },
+  methods:{
+    setFounded(data){
+      this.founded = data;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

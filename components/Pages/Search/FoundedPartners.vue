@@ -5,8 +5,9 @@
       <client-only>
       <PartnerItem
         class="founded-shops__content__item adaptive-non"
-        v-for="(item, index) in 4"
-        :key="index"
+        v-for="partner in partners"
+        :key="partner.id"
+        :partner='partner'
       />
       </client-only>
     </div>
@@ -16,6 +17,12 @@
 <script>
 export default {
   name: "FoundedShops",
+  props:{
+    partners: {
+      required: true,
+      default: []
+    }
+  }
 };
 </script>
 

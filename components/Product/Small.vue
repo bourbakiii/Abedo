@@ -1,23 +1,29 @@
 <template>
-  <NuxtLink to='/product/1' class="product product-small">
+  <NuxtLink :to="`/product/${product.id}`" class="product product-small">
     <img
-      src="@/assets/images/product-placeholder.png"
+    v-if="product.image"
+      :src="`${$axios.defaults.baseURL}${product.image.original}`"
       class="product-small__image"
     />
-    <p class="product-small__name">
-      Сырное ассорти
+    <p class="product-small__name" contenteditable="">
+      {{product.name}}
     </p>
     <div class="product-small__info">
-      <p class="product-small__info__price">350 ₽</p>
-      <p class="product-small__info__weight">/ 150 г</p>
-      <div class="product-small__info__full-price">450 ₽</div>
+      <p class="product-small__info__price" contenteditable>350 ₽</p>
+      <p class="product-small__info__weight" contenteditable>/ 150 г</p>
+      <div class="product-small__info__full-price" contenteditable>450 ₽</div>
     </div>
   </NuxtLink>
 </template>
 <script>
 import productsMixin from '@/mixins/products-mixin.js'
 export default {
-  mixins: [productsMixin]
+  mixins: [productsMixin],
+  props:{
+    product:{
+      required: true
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

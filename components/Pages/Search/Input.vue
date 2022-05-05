@@ -1,8 +1,10 @@
 <template>
   <div class="search-input-wrapper">
     <div class="search-input__content">
-    <h1 class="search-input__content__title title-small adaptive">Поиск заведения</h1>
-      <form @submit.prevent="search_request" class="search-input">
+      <h1 class="search-input__content__title title-small adaptive">
+        Поиск заведения
+      </h1>
+      <form @submit.prevent="timerHandler" class="search-input">
         <button class="search-input-button">
           <svg
             class="search-input-button-icon"
@@ -35,12 +37,13 @@
           minlength="3"
           required
           class="search-input-input"
-          v-model="query"
+          v-model="keyword"
+          @change="timerHandler"
         />
         <transition name="opacity">
           <button
-            v-if="query.length"
-            @click.prevent="query = ''"
+            v-if="keyword.length"
+            @click.prevent="keyword = ''"
             class="search-input-button search-input-button-close"
           >
             <svg
@@ -66,19 +69,51 @@
 <script>
 export default {
   name: "SearchPageSearch",
-  fetch() {
-    if (this.$route.query.query) this.search_request(this.$route.query.query);
-  },
-  methods: {
-    search_request(query) {
-      console.log("query for the fetch");
-      console.log("the query is:" + query);
-    },
-  },
   data() {
     return {
-      query: this.$route.query.query ?? "",
+      keyword: this.$route.query.keyword ?? "",
+      founded: {
+        partners: [],
+        products: [],
+      },
     };
+  },
+  fetchOnServer: false,
+  fetch() {
+    this.show_result = false;
+    if (this.keyword.length >= 3)
+      this.$axios
+        .get("/api/search", {
+          params: {
+            keyword: this.keyword ?? "",
+          },
+        })
+        .then(({ data: { result } }) => {
+          console.log("сука");
+          console.log(result);
+          this.founded = {
+            partners: result.shops.data,
+            products: result.products.data,
+          };
+        })
+        .catch((error) => console.log(error.response))
+        .finally(() => {
+          console.log("Its ended");
+        });
+  },
+  methods: {
+    timerHandler() {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.timer = null;
+        this.$fetch();
+      }, 400);
+    },
+  },
+  watch: {
+    founded(value) {
+      this.$emit("search", value);
+    },
   },
 };
 </script>
@@ -93,12 +128,12 @@ export default {
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    &__title{
+    &__title {
       margin-bottom: 20px;
     }
   }
-  &-wrapper{
-    width:100%;
+  &-wrapper {
+    width: 100%;
   }
   width: 650px;
   height: 60px;
@@ -106,7 +141,7 @@ export default {
     height: 50px;
   }
   @media screen and (max-width: $tablet) {
-    width:100%;
+    width: 100%;
     height: 40px;
   }
   background-color: $white;
@@ -127,11 +162,11 @@ export default {
     }
     transition: $transition;
     @media screen and (max-width: $tablet) {
-      svg{
-      width: 15px;
-      height: 15px;
+      svg {
+        width: 15px;
+        height: 15px;
       }
-    }    
+    }
   }
   &-input {
     @media screen and (max-width: $tablet) {

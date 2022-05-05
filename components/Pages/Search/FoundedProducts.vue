@@ -9,7 +9,10 @@
             src="@/assets/images/limonchello.png"
             class="founded-products__content__item__shop__image"
           />
-          <p class="founded-products__content__item__shop__name" contenteditable>
+          <p
+            class="founded-products__content__item__shop__name"
+            contenteditable
+          >
             Кафе “Лимончелло”
           </p>
           <div class="founded-products__content__item__shop__rating">
@@ -36,8 +39,9 @@
         </div>
         <div class="founded-products__content__item__products">
           <ProductSmall
-            v-for="(item, index) in 6"
-            :key="index"
+            v-for="product in products"
+            :key="product.id"
+            :product="product"
             class="founded-products__content__item__products__item"
           />
         </div>
@@ -49,6 +53,12 @@
 <script>
 export default {
   name: "FoundedShops",
+  props: {
+    products: [],
+  },
+  created() {
+    console.log(this.products);
+  },
 };
 </script>
 
@@ -96,27 +106,27 @@ export default {
         padding-bottom: 17px;
         border-bottom: 1px solid $blue_grey;
         padding: 0px 30px 17px;
-         overflow: hidden;
-         max-width:100%;
-        @media screen and (max-width:$notebook) {
-           padding: 0px 20px 15px;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: $red;
+        @media screen and (max-width: $notebook) {
+          padding: 0px 20px 15px;
         }
         @media screen and (max-width: $tablet) {
-           flex-wrap: wrap;
-           padding: 0px 15px 10px;
-         }
+          flex-wrap: wrap;
+          padding: 0px 15px 10px;
+        }
         &__image {
           height: 60px;
           width: auto;
           flex-shrink: 0;
           object-fit: contain;
           margin-right: 40px;
-             @media screen and (max-width:$tablet) {
-               width:20%;
-               height: auto;
-              margin-right: 15px;
-
-             }
+          @media screen and (max-width: $tablet) {
+            width: 20%;
+            height: auto;
+            margin-right: 15px;
+          }
         }
         &__name {
           width: max-content;
@@ -126,13 +136,12 @@ export default {
           font-weight: 600;
           font-size: 24px;
           line-height: 29px;
-          height:auto;
-           @media screen and (max-width:$tablet) {
-   width: calc(80% - 15px);
-          font-size: 20px;
-          line-height: 24px;
-          
-         }
+          height: auto;
+          @media screen and (max-width: $tablet) {
+            width: calc(80% - 15px);
+            font-size: 20px;
+            line-height: 24px;
+          }
         }
         &__rating {
           display: flex;
@@ -142,7 +151,7 @@ export default {
           flex-shrink: 0;
           @media screen and (max-width: $tablet) {
             margin-top: 15px;
-            margin-left:auto;
+            margin-left: auto;
           }
           &__icon {
             margin-right: 5px;

@@ -6,6 +6,9 @@ export default {
   },
   methods: {
     like() {
+
+if(!this.token) return this.$store.commit("modals/open",{modal_name:"login"}) 
+
       const add_if_true = (value) => {
         if (value)
           this.$store.commit('account/action', (state) => state.favourites.splice(state.favourites.map(partner => +partner.id).indexOf(+this.partner.id), 1));

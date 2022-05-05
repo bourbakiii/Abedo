@@ -231,7 +231,8 @@ export default {
       document.addEventListener("click", dropdownClick);
     },
     watchAll() {
-      this.$router.push({ path: "/search", query: { keyword: this.keyword } });
+      this.$store.commit('temporary/action',(state)=>{console.log("Потеряли себя нема нам не надо мана")});
+      this.$router.push("/search");
     },
   }
 };
