@@ -63,7 +63,7 @@
           <div
             class="search__input__dropdown-content push-hover-active"
             @mouseenter="showResult"
-            v-if="show_result == true"
+            v-if="show_result == true &&  (founded.partners.length || founded.products.length)"
           >
             <div
               class="search__input__dropdown-content__shops"
@@ -140,6 +140,11 @@
               >Cмотреть все</ButtonStandart
             >
           </div>
+          <div
+            v-else-if="show_result == true"
+           @mouseenter="showResult" class="search__input__dropdown-content push-hover-active">
+            Ничего не найдено
+          </div>
         </transition>
       </form>
 
@@ -177,23 +182,24 @@ export default {
   },
   methods: {
     search() {
-      console.log(
-        "Потеряли себя нема нам не надо мана команда магов вабанк и зоиби там битом игриво так по кабакам"
-      );
-      this.showResult();
+      this.show_result = false;
+      if(this.query.length>=3)
+      {
       this.$axios
         .get("/api/search", {
           params: {
-            keyword: "прод лимон",
+            keyword: this.query??"",
           },
         })
         .then(({ data: { result } }) => {
-          console.log(result);
+      this.showResult();
+
           this.founded = {
             partners: result.shops.data,
             products: result.products.data,
           };
         });
+      }
     },
     timerHandler() {
       clearTimeout(this.timer);
@@ -204,6 +210,7 @@ export default {
       this.dropdownClick();
     },
     dropdownClick() {
+      // ВРОДЕ можно сделать через watch show_result
       const dropdownClick = (event) => {
         const dropdown_content = document.querySelector(
           ".search__input__dropdown-content"
