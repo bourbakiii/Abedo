@@ -144,15 +144,12 @@ export default {
       partners: [],
     };
   },
-  fetchOnServer:false,
   async fetch() {
     await this.$axios
       .get("/api/shops", {
         params: this.params,
         paramsSerializer: (params) => {
-          console.log('the params are');
-          console.log(params);
-          return qs.stringify(params);
+          return qs.stringify({params});
         },
       })
       .then(
