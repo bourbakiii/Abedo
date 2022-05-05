@@ -1,14 +1,14 @@
 <template>
-  <div class="product-modal modal">
-    <h3 class="product-modal__title title-normal">
+  <div class="rate-modal modal">
+    <h3 class="rate-modal__title title-normal">
       Оцените ресторан и доставку
     </h3>
     <button
       @click.prevent="$store.commit('modals/close')"
-      class="product-modal__close"
+      class="rate-modal__close"
     >
       <svg
-        class="product-modal__close__icon"
+        class="rate-modal__close__icon"
         width="20"
         height="20"
         viewBox="0 0 20 20"
@@ -21,28 +21,28 @@
         />
       </svg>
     </button>
-    <div class="product-modal__content">
-      <div class="product-modal__content__buttons">
-        <div class="product-modal__content__buttons">
-          <button class="product-modal__content__buttons__button active">
+    <div class="rate-modal__content">
+      <div class="rate-modal__content__buttons">
+        <div class="rate-modal__content__buttons">
+          <button class="rate-modal__content__buttons__button active">
             Оцените ресторан
           </button>
-          <!-- <button class="product-modal__content__buttons__button">
+          <!-- <button class="rate-modal__content__buttons__button">
             Оцените доставку
           </button> -->
         </div>
       </div>
 
-      <div class="product-modal__content__tabs">
-        <form class="product-modal__content__tabs__tab">
+      <div class="rate-modal__content__tabs">
+        <form class="rate-modal__content__tabs__tab">
           <div
             @mouseleave="fillStars(0)"
-            class="product-modal__content__tabs__tab__stars"
+            class="rate-modal__content__tabs__tab__stars"
           >
             <svg
               v-for="item in [1, 2, 3, 4, 5]"
               :key="item"
-              class="product-modal__content__tabs__tab__stars__star"
+              class="rate-modal__content__tabs__tab__stars__star"
               @mouseenter="fillStars(item)"
               width="20"
               height="19"
@@ -55,23 +55,23 @@
                 fill="#EE964B"
               />
             </svg>
-            <p class="product-modal__content__tabs__tab__stars__value">
+            <p class="rate-modal__content__tabs__tab__stars__value">
               1 из 5
             </p>
           </div>
           <h4
-            class="product-modal__content__tabs__tab__title title-extra-normal"
+            class="rate-modal__content__tabs__tab__title title-extra-normal"
           >
             Оставьте отзыв о ресторане
           </h4>
-          <div class="product-modal__content__tabs__tab__content">
+          <div class="rate-modal__content__tabs__tab__content">
             <label
               for="name"
-              class="product-modal__content__tabs__tab__content__input-block"
+              class="rate-modal__content__tabs__tab__content__input-block"
             >
               <span
                 class="
-                  product-modal__content__tabs__tab__content__input-block__name
+                  rate-modal__content__tabs__tab__content__input-block__name
                 "
                 >Ваше имя</span
               >
@@ -82,17 +82,17 @@
                 id="name"
                 placeholder="Введите ваше имя"
                 class="
-                  product-modal__content__tabs__tab__content__input-block__input
+                  rate-modal__content__tabs__tab__content__input-block__input
                 "
               />
             </label>
             <label
               for="phone"
-              class="product-modal__content__tabs__tab__content__input-block"
+              class="rate-modal__content__tabs__tab__content__input-block"
             >
               <span
                 class="
-                  product-modal__content__tabs__tab__content__input-block__name
+                  rate-modal__content__tabs__tab__content__input-block__name
                 "
                 >Телефон</span
               >
@@ -103,17 +103,17 @@
                 placeholder="Введите ваше телефон"
                 id="phone"
                 class="
-                  product-modal__content__tabs__tab__content__input-block__input
+                  rate-modal__content__tabs__tab__content__input-block__input
                 "
               />
             </label>
             <label
               for="email"
-              class="product-modal__content__tabs__tab__content__input-block"
+              class="rate-modal__content__tabs__tab__content__input-block"
             >
               <span
                 class="
-                  product-modal__content__tabs__tab__content__input-block__name
+                  rate-modal__content__tabs__tab__content__input-block__name
                 "
                 >Почта</span
               >
@@ -124,7 +124,7 @@
                 placeholder="example@mail.ru"
                 id="email"
                 class="
-                  product-modal__content__tabs__tab__content__input-block__input
+                  rate-modal__content__tabs__tab__content__input-block__input
                 "
               />
             </label>
@@ -134,34 +134,34 @@
               id="name"
               placeholder="Текст отзыва"
               class="
-                product-modal__content__tabs__tab__content__input-block__input
-                product-modal__content__tabs__tab__content__input-block__textarea
+                rate-modal__content__tabs__tab__content__input-block__input
+                rate-modal__content__tabs__tab__content__input-block__textarea
               "
             />
           </div>
-          <div class="product-modal__content__tabs__tab__buttons">
+          <div class="rate-modal__content__tabs__tab__buttons">
             <ButtonStandart
-              class="product-modal__content__tabs__tab__buttons__button"
+              class="rate-modal__content__tabs__tab__buttons__button"
             >
               Отправить
             </ButtonStandart>
-            <div class="product-modal__content__tabs__tab__buttons__politics">
+            <div class="rate-modal__content__tabs__tab__buttons__politics">
               <label
                 for="politics"
                 class="
-                  product-modal__content__tabs__tab__buttons__politics__input
+                  rate-modal__content__tabs__tab__buttons__politics__input
                 "
               >
                 <input
                   type="checkbox"
                   id="politics"
                   class="
-                    product-modal__content__tabs__tab__buttons__politics__input__input
+                    rate-modal__content__tabs__tab__buttons__politics__input__input
                   "
                 />
                 <svg
                   class="
-                    product-modal__content__tabs__tab__buttons__politics__input__icon
+                    rate-modal__content__tabs__tab__buttons__politics__input__icon
                     icon
                   "
                   width="12"
@@ -178,13 +178,13 @@
               </label>
               <p
                 class="
-                  product-modal__content__tabs__tab__buttons__politics__text
+                  rate-modal__content__tabs__tab__buttons__politics__text
                 "
               >
                 При нажатии на кнопку, даю согласие на обработку <br />
                 <span
                   class="
-                    product-modal__content__tabs__tab__buttons__politics__text__underline
+                    rate-modal__content__tabs__tab__buttons__politics__text__underline
                   "
                 >
                   персональных данных</span
@@ -203,7 +203,7 @@ export default {
     fillStars(count) {
       const all_stars = Array.prototype.slice.call(
         document.querySelectorAll(
-          ".product-modal__content__tabs__tab__stars__star"
+          ".rate-modal__content__tabs__tab__stars__star"
         )
       );
       const stars = all_stars.slice(0, count);
@@ -216,7 +216,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.product-modal {
+.rate-modal {
   background-color: $white;
   width: 100%;
   max-width: 1028px;

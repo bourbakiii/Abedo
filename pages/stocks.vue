@@ -34,6 +34,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .stocks-page {
+  justify-content: flex-start;
   &__content {
 
     &__title {

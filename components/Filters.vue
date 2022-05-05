@@ -1,6 +1,5 @@
 <template>
     <form
-
         @submit.prevent="filter"
         class="filters"
       >

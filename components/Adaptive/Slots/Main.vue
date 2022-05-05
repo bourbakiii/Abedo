@@ -11,7 +11,7 @@
       />
     </NuxtLink>
     <svg
-    @click='$router.push("/profile")'
+    @click='profileRedirect'
       class="navigation-slot-main__icon"
       width="26"
       height="26"
@@ -31,6 +31,20 @@
     </svg>
   </div>
 </template>
+<script>
+export default {
+  methods:{
+    profileRedirect(){
+      if(this.token)this.$router.push("/profile"); else this.$store.commit("modals/open",{modal_name:"login"})
+    }
+  },
+  computed:{
+    token(){
+      return this.$store.state.account.token;
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 .navigation-slot-main {
   width: 100%;

@@ -5,7 +5,7 @@
       class="login-modal__close"
     >
       <svg
-        class="product-modal__close__icon"
+        class="login-modal__close__icon"
         width="20"
         height="20"
         viewBox="0 0 20 20"
