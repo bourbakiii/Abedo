@@ -92,16 +92,10 @@ export default {
           },
         })
         .then(({ data: { result } }) => {
-          console.log("сука");
-          console.log(result);
           this.founded = {
             partners: result.shops.data,
             products: result.products.data,
           };
-        })
-        .catch((error) => console.log(error.response))
-        .finally(() => {
-          console.log("Its ended");
         });
   },
   methods: {

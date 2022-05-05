@@ -137,6 +137,15 @@
 import partnerFiltersMixin from "@/mixins/partner-filters.js";
 export default {
   mixins: [partnerFiltersMixin],
+  data(){
+    return{
+
+      addititonal_qs_filters:{
+        cuisine: this.$route.params.category_id
+      }
+
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

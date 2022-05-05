@@ -206,7 +206,6 @@ export default {
       }
     },
     timerHandler() {
-      console.log(123);
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         this.timer = null;

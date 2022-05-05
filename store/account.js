@@ -47,9 +47,7 @@ export const actions = {
             state.commit("action", (state) => {
                 state.favourites = data;
             })
-        }).catch((error) => {
-            console.log(error.response);
-        })
+        });
     },
     async logout(state) {
         const token = state.state.token;

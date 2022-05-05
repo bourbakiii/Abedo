@@ -171,12 +171,7 @@ export default {
       .then(({ cuisines: { data } }) => {
         this.categories = data;
       });
-  },
-  methods: {
-    filter() {
-      console.log("Filter event");
-    },
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>

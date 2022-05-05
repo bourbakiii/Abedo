@@ -56,9 +56,6 @@ export default {
   props: {
     products: [],
   },
-  created() {
-    console.log(this.products);
-  },
 };
 </script>
 
