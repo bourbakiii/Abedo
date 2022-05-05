@@ -1,14 +1,14 @@
 <template>
-  <div class="sidebar">
+  <div v-if='categories.length' class="sidebar">
     <h2 class="sidebar__title title-small">Категории</h2>
     <div class="sidebar__content">
-      <button @click='()=>$router.push("/category/1")' v-for='item in [1,2,3,4,5,6,7,8]' :key='item' class="sidebar__content__item">
+      <button @click='()=>$router.push(`/category/${category.id}`)' v-for='category in categories' :key='category' class="sidebar__content__item">
         <img
           src="@/assets/images/category-item-image-placeholder.png"
           class="sidebar__content__item__image"
         />
         <p class="sidebar__content__item__name">
-          Красота и здоровье
+          {{category.name}}
         </p>
         <svg
           class="sidebar__content__item__icon"
@@ -27,7 +27,20 @@
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  data(){
+    return{
+      categories: []
+    }
+  },
+  fetch(){
+    this.$axios.get("/api/cuisines/get").then(({data: {cuisines: {data}}})=>{
+      this.categories = data;
+    })
+  }
+}
+</script>
 <style lang="scss" scoped>
 .sidebar {
   background-color: $white;

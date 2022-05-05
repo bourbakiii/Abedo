@@ -188,7 +188,7 @@
             </client-only>
           </div>
           <ButtonStandart
-            v-if="params.page <= params.last_page"
+            v-if="params.page <= params.last_page && !this.loading"
             @click.native="$fetch"
             class="partners-page__partners__content__button"
             >Загрузить еще</ButtonStandart
@@ -206,6 +206,7 @@ export default {
     return {
       show_filters: false,
       partners: [],
+      loading: false,
       params: {
         page: 1,
         last_page: null,
@@ -220,6 +221,7 @@ export default {
     };
   },
   async fetch() {
+    this.loading=true;
     ////// Тут чтобы нормально парамсы вставить
     let filters = {};
     for (let key in this.filters)
@@ -241,7 +243,7 @@ export default {
         this.partners = this.partners.concat(shops.data);
         this.params.page++;
         this.params.last_page = shops.last_page;
-      });
+      }).finally(()=>this.loading=false);
   },
   methods: {
     setFilters(filters) {
