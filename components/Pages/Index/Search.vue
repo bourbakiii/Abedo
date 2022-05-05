@@ -2,7 +2,7 @@
   <div class="search-wrapper index-page-search wrapper adaptive-non-wrapper">
     <div class="search">
       <h1 class="title title-big lightblack">Быстрая доставка еды</h1>
-      <form @submit.prevent="search" class="search__input">
+      <form @submit.prevent="timerHandler" class="search__input">
         <button class="search__input-button push-hover-active">
           <svg
             class="search__input-button-icon"
@@ -36,7 +36,7 @@
           required
           class="search__input-input"
           v-model="query"
-          @input="timerHandler"
+          @change="timerHandler"
         />
         <transition name="opacity">
           <button
@@ -203,14 +203,13 @@ export default {
     },
     timerHandler() {
       clearTimeout(this.timer);
-      this.timer = setTimeout(this.search, 400);
+      this.timer = setTimeout(()=>{this.timer = null; this.search();}, 400);
     },
     showResult() {
       this.show_result = true;
       this.dropdownClick();
     },
     dropdownClick() {
-      // ВРОДЕ можно сделать через watch show_result
       const dropdownClick = (event) => {
         const dropdown_content = document.querySelector(
           ".search__input__dropdown-content"
@@ -235,6 +234,11 @@ export default {
       this.$router.push("/search");
     },
   },
+  watch:{
+    show_result(value){
+      console.log("123");
+    }
+  }
 };
 </script>
 
