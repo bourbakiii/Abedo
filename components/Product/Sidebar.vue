@@ -29,19 +29,21 @@
           class="product-sidebar__actions__buttons__button"
           size="26"
           icon="minus"
+          @click='decrease'
         />
         <p class="product-sidebar__actions__buttons__count">
-          {{ product.count }}
+          {{ count }}
         </p>
         <ButtonProduct
           class="product-sidebar__actions__buttons__button"
           size="26"
           icon="plus"
+          @click='crease'
         />
       </div>
       <div class="product-sidebar__actions__prices">
-        <p class="product-sidebar__actions__prices__price_full">400 ₽</p>
-        <p class="product-sidebar__actions__prices__price">350 ₽</p>
+        <p class="product-sidebar__actions__prices__price_full">{{product.price}}₽</p>
+        <p class="product-sidebar__actions__prices__price">{{product.price}}₽</p>
       </div>
     </div>
   </div>
