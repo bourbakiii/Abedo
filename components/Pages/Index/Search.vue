@@ -36,7 +36,7 @@
           required
           class="search__input-input"
           v-model="keyword"
-          @change="timerHandler"
+          @input="timerHandler"
         />
         <transition name="opacity">
           <button
@@ -202,6 +202,7 @@ export default {
       }
     },
     timerHandler() {
+      console.log(123);
       clearTimeout(this.timer);
       this.timer = setTimeout(()=>{this.timer = null; this.search();}, 400);
     },
@@ -231,7 +232,7 @@ export default {
       document.addEventListener("click", dropdownClick);
     },
     watchAll() {
-      this.$store.commit('temporary/action',(state)=>{console.log("Потеряли себя нема нам не надо мана")});
+      this.$store.commit('temporary/action',(state)=>{state.search_keyword=this.keyword});
       this.$router.push("/search");
     },
   }

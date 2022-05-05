@@ -71,7 +71,7 @@ export default {
   name: "SearchPageSearch",
   data() {
     return {
-      keyword: this.$route.query.keyword ?? "",
+      keyword: this.$store.state.temporary.search_keyword ?? "",
       founded: {
         partners: [],
         products: [],
@@ -79,6 +79,11 @@ export default {
     };
   },
   fetchOnServer: false,
+  created(){
+    this.$store.commit("temporary/action", (state)=>{
+      state.search_keyword = null;
+    })
+  },
   fetch() {
     this.show_result = false;
     if (this.keyword.length >= 3)
