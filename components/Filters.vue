@@ -33,7 +33,6 @@
         name="query"
         placeholder="Фильтр по названию"
         required
-        minlength="3"
         v-model="filters.keywords"
       />
     </div>

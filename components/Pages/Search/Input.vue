@@ -34,7 +34,6 @@
         <input
           placeholder="Найти заведение товар или услугу "
           type="text"
-          minlength="3"
           required
           class="search-input-input"
           v-model="keyword"

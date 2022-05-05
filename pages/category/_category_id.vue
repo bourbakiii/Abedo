@@ -112,6 +112,7 @@
       </div>
       <transition name="filter">
         <Filters
+          @send="setFilters"
           v-if="show_filters"
           class="categories-page__content__filters"
         />
@@ -133,35 +134,9 @@
   </div>
 </template>
 <script>
-import qs from "qs";
+import partnerFiltersMixin from "@/mixins/partner-filters.js";
 export default {
-  data() {
-    return {
-      show_filters: false,
-      params: {
-        cuisine: this.$route.params.category_id,
-      },
-      partners: [],
-    };
-  },
-  async fetch() {
-    await this.$axios
-      .get("/api/shops", {
-        params: this.params,
-        paramsSerializer: (params) => {
-          return qs.stringify({params});
-        },
-      })
-      .then(
-        ({
-          data: {
-            shops: { data },
-          },
-        }) => {
-          this.partners = data;
-        }
-      );
-  },
+  mixins: [partnerFiltersMixin],
 };
 </script>
 <style lang="scss" scoped>
