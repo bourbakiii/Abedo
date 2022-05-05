@@ -35,13 +35,13 @@
           minlength="3"
           required
           class="search__input-input"
-          v-model="query"
+          v-model="keyword"
           @change="timerHandler"
         />
         <transition name="opacity">
           <button
-            v-if="query"
-            @click.prevent="query = null"
+            v-if="keyword"
+            @click.prevent="keyword = null"
             class="search__input-button search__input-button-close"
           >
             <svg
@@ -164,7 +164,7 @@ export default {
   data() {
     return {
       show_result: false,
-      query: null,
+      keyword: null,
       categories: [],
       timer: null,
       founded: {
@@ -183,12 +183,12 @@ export default {
   methods: {
     search() {
       this.show_result = false;
-      if(this.query.length>=3)
+      if(this.keyword.length>=3)
       {
       this.$axios
         .get("/api/search", {
           params: {
-            keyword: this.query??"",
+            keyword: this.keyword??"",
           },
         })
         .then(({ data: { result } }) => {
@@ -231,13 +231,8 @@ export default {
       document.addEventListener("click", dropdownClick);
     },
     watchAll() {
-      this.$router.push("/search");
+      this.$router.push({ path: "/search", query: { keyword: this.keyword } });
     },
-  },
-  watch:{
-    show_result(value){
-      console.log("123");
-    }
   }
 };
 </script>
