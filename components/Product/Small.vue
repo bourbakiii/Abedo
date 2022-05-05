@@ -16,14 +16,9 @@
   </NuxtLink>
 </template>
 <script>
-import productsMixin from '@/mixins/products-mixin.js'
+import productsMixin from '@/mixins/product.js'
 export default {
   mixins: [productsMixin],
-  props:{
-    product:{
-      required: true
-    }
-  }
 }
 </script>
 <style lang="scss" scoped>

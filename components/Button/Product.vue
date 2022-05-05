@@ -1,6 +1,6 @@
 <template>
   <button
-  @click.prevent='$emit("action")'
+    @click='$emit("click")'
     :style="{ width: parseInt(size) + 'px', height: parseInt(size) + 'px' }"
     class="button button-product"
   >
