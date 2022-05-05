@@ -166,7 +166,11 @@
         </button>
       </div>
       <transition name="filter">
-        <Filters v-if="show_filters" class="partners-page__filters" />
+        <Filters
+          @send="setFilters"
+          v-if="show_filters"
+          class="partners-page__filters"
+        />
       </transition>
       <div class="partners-page__partners">
         <CategorySidebar
@@ -183,7 +187,10 @@
               />
             </client-only>
           </div>
-          <ButtonStandart v-if="params.page <= params.last_page" @click.native="$fetch" class="partners-page__partners__content__button"
+          <ButtonStandart
+            v-if="params.page <= params.last_page"
+            @click.native="$fetch"
+            class="partners-page__partners__content__button"
             >Загрузить еще</ButtonStandart
           >
         </div>
@@ -193,6 +200,7 @@
 </template>
 
 <script>
+import qs from "qs";
 export default {
   data() {
     return {
@@ -203,19 +211,46 @@ export default {
         last_page: null,
         limit: 10,
       },
-      loading: true,
+      filters: {
+        keywords: null,
+        has_delivery: false,
+        has_gift: false,
+        has_discount: false,
+      },
     };
   },
   async fetch() {
-    this.loading = true;
+    ////// Тут чтобы нормально парамсы вставить
+    let filters = {};
+    for (let key in this.filters)
+      if (!!this.filters[key])
+        if (key != "keywords") filters[key] = +this.filters[key];
+        else filters[key] = this.filters[key];
+    ////////////////////////////////////////////
     await this.$axios
-      .$get(`${this.$axios.defaults.baseURL}/api/shops`, { params:this.params })
+      .$get(`${this.$axios.defaults.baseURL}/api/shops`, {
+        params: qs.stringify({
+          ...this.params,
+          params: filters,
+        }),
+        paramsSerializer: (params) => {
+          return params;
+        },
+      })
       .then(({ shops }) => {
         this.partners = this.partners.concat(shops.data);
         this.params.page++;
         this.params.last_page = shops.last_page;
-      })
-      .finally(() => this.loading = false);
+      });
+  },
+  methods: {
+    setFilters(filters) {
+      this.filters = filters;
+      this.params.page = 1;
+      this.partners = [];
+      this.last_page = 1;
+      this.$fetch();
+    },
   },
 };
 </script>
@@ -282,10 +317,10 @@ export default {
         height: 35px !important;
         background-color: transparent;
         padding: 0px 15px !important;
-        svg *{
-        fill: transparent !important;
+        svg * {
+          fill: transparent !important;
         }
-        &:hover{
+        &:hover {
           svg * {
             stroke: $white;
           }
