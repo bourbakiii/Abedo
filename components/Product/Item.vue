@@ -42,7 +42,7 @@
       </div>
       <div @click.self='go_by_link' v-else class="product-item__buttons__button_creases">
         <ButtonProduct @click='decrease' size="40" icon="minus" />
-        <p @click.self='go_by_link' class="product-item__buttons__button_creases__count">{{product.count}}</p>
+        <p @click.self='go_by_link' class="product-item__buttons__button_creases__count">{{count}}</p>
         <ButtonProduct @click='crease' size="40" icon="plus" />
       </div>
     </div>

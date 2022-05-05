@@ -95,15 +95,12 @@ export default {
     methods: {
         add_to_cart() {
             this.$store.dispatch('cart/add_to_cart', this.product);
-            console.log("Add to cart function");
         },
         crease() {
             this.$store.dispatch('cart/crease', this.product);
-            console.log("crease function");
         },
         decrease() {
             this.$store.dispatch('cart/decrease', this.product);
-            console.log("decrease function");
         }
     },
     computed: {
@@ -115,7 +112,7 @@ export default {
         },
         count(){
             if(!this.in_cart) return -1;
-            return this.product.count;
+            return this.cart_products.find(product=>+product.id == +this.product.id).count;
         }
     }
 }
