@@ -202,10 +202,11 @@
         </NuxtLink>
       </div>
       <NuxtLink to="/cart" class="navigation__cart-block">
+      
         <span
           class="navigation__cart-block-icon"
-          :class="{ indicator: true }"
-          indicator-count="0"
+          :class="{ indicator: cart_products.length }"
+          :indicator-count="cart_products.length"
         >
           <svg
             class="navigation__cart-block-icon-svg"
@@ -255,6 +256,9 @@ export default {
   computed:{
     token(){
       return this.$store.state.account.token;
+    },
+    cart_products(){
+      return this.$store.state.cart.products;
     }
   },
   watch: {

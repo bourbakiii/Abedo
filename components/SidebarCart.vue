@@ -36,62 +36,11 @@
       </div>
     </div>
     <div class="sidebar-cart__products">
-      <div
-        v-for="item in [1, 2]"
-        :key="item"
-        class="sidebar-cart__products__item"
-      >
-        <button class="sidebar-cart__products__item__close">
-          <svg
-            class="sidebar-cart__products__item__close__icon"
-            width="15"
-            height="15"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.89533 10.0005L0.229061 1.33421C-0.0760555 1.02909 -0.0760555 0.534404 0.229061 0.229326C0.534178 -0.0757519 1.02886 -0.075791 1.33394 0.229326L10.0003 8.89565L18.6665 0.229326C18.9716 -0.075791 19.4663 -0.075791 19.7714 0.229326C20.0765 0.534443 20.0765 1.02913 19.7714 1.33421L11.1051 10.0005L19.7714 18.6668C20.0765 18.9719 20.0765 19.4666 19.7714 19.7717C19.6189 19.9242 19.4189 20.0005 19.2189 20.0005C19.019 20.0005 18.8191 19.9242 18.6665 19.7717L10.0003 11.1054L1.33398 19.7717C1.18144 19.9242 0.981482 20.0005 0.781521 20.0005C0.58156 20.0005 0.381639 19.9242 0.229061 19.7717C-0.0760555 19.4666 -0.0760555 18.9719 0.229061 18.6668L8.89533 10.0005Z"
-              fill="#A6A8A8"
-            />
-          </svg>
-        </button>
-        <div class="sidebar-cart__products__item__info">
-          <img
-            v-if="true"
-            src="@/assets/images/sidebar-cart-product-placeholder.png"
-            class="sidebar-cart__products__item__info__image"
-          />
-          <p class="sidebar-cart__products__item__info__name">Сырное ассорти</p>
-        </div>
-        <div class="sidebar-cart__products__item__actions">
-          <div class="sidebar-cart__products__item__actions__buttons">
-            <ButtonProduct
-              class="sidebar-cart__products__item__actions__buttons__button"
-              size="26"
-              icon="minus"
-            />
-            <p class="sidebar-cart__products__item__actions__buttons__count">
-              1000
-            </p>
-            <ButtonProduct
-              class="sidebar-cart__products__item__actions__buttons__button"
-              size="26"
-              icon="plus"
-            />
-          </div>
-          <div class="sidebar-cart__products__item__actions__prices">
-            <p
-              class="sidebar-cart__products__item__actions__prices__price_full"
-            >
-              400 ₽
-            </p>
-            <p class="sidebar-cart__products__item__actions__prices__price">
-              350 ₽
-            </p>
-          </div>
-        </div>
-      </div>
+      <ProductSidebar v-for="product in cart_products"
+        :key="product.id"
+        :product="product"
+        />
+      
     </div>
     <div class="sidebar-cart__row sidebar-cart__row_delivery">
       <p class="sidebar-cart__row__name sidebar-cart__row_delivery__name">
@@ -116,7 +65,15 @@
     </div>
   </div>
 </template>
-
+<script>
+export default {
+    computed:{
+        cart_products(){
+            return this.$store.state.cart.products;
+        }
+    }
+}
+</script>
 <style lang="scss" scoped>
 .sidebar-cart {
   padding: 52px 0px 30px;
@@ -210,98 +167,7 @@
   &__products {
     width: 100%;
     padding: 0px 20px;
-    &__item {
-      width: 100%;
-      padding: 20px 0px;
-      min-height: 110px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      flex-direction: column;
-      border-bottom: 1px dashed $dark_grey;
-      position: relative;
-      &:last-of-type {
-        border-bottom: none;
-      }
-      &__close {
-        top: 20px;
-        right: 0px;
-        position: absolute;
-        background: transparent;
-        outline: none;
-        border: none;
-        width: 15px;
-        height: 15px;
-        
-      }
-      &__info {
-        width: 100%;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-direction: row;
-        &__image {
-          width: 50px;
-          height: auto;
-          margin-right: 10px;
-          flex-shrink: 0;
-        }
-        &__name {
-          font-family: "SF Pro Display";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 15px;
-          line-height: 20px;
-          flex-grow: 1;
-          margin-right: 18px;
-        }
-      }
-      &__actions {
-        margin-top: 10px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        &__buttons {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          flex-direction: row;
-          &__count {
-            margin: 0px 10px;
-            font-family: "SF Pro Display";
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 19px;
-            max-width: 40px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-        }
-        &__prices {
-          &__price {
-            font-family: "Montserrat";
-            font-style: normal;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 20px;
-            display: flex;
-            align-items: center;
-            &_full {
-              font-family: "Montserrat";
-              font-style: normal;
-              font-weight: 400;
-              font-size: 15px;
-              line-height: 19px;
-              text-decoration: line-through;
-              color: $extra_dark_grey;
-            }
-          }
-        }
-      }
-    }
+    
   }
   &__row {
     width: 100%;

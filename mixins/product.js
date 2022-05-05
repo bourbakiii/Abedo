@@ -112,7 +112,8 @@ export default {
         },
         count(){
             if(!this.in_cart) return -1;
-            return this.cart_products.find(product=>+product.id == +this.product.id).count;
+            this.product.count = this.cart_products.find(product=>+product.id == +this.product.id).count;
+            return this.product.count;
         }
     }
 }

@@ -49,7 +49,7 @@
           fill="#212121"
         />
       </svg>
-      <div class="footer__button_cart__count" contenteditable>12</div>
+      <div class="footer__button_cart__count" contenteditable>{{cart_products.length}}</div>
     </NuxtLink>
     <NuxtLink to="/search" class="footer__button">
       <svg
@@ -107,6 +107,11 @@ export default {
       show_left_menu: false,
     };
   },
+  computed:{
+    cart_products(){
+      return this.$store.state.cart.products;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
