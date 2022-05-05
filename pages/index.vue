@@ -1,9 +1,10 @@
 <template>
   <div class="page index-page">
-    <PagesIndexSearch class="index-page__content__search adaptive-non" />
+    <PagesIndexSearch :categories='categories' class="index-page__content__search adaptive-non" />
     <div class="index-page__wrapper wrapper">
       <div class="index-page__content content">
         <PagesIndexAdaptiveCategories
+        :categories='categories'
           class="index-page__content__adaptive-categories adaptive"
         />
         <PagesIndexStocksSlider class="index-page__content__stocks-slider" />
@@ -162,7 +163,14 @@
 <script>
 export default {
   data() {
-    return { show_filters: false };
+    return { show_filters: false, categories: [] };
+  },
+  async fetch() {
+    await this.$axios
+      .$get(`${this.$axios.defaults.baseURL}/api/cuisines/get`)
+      .then(({ cuisines: { data } }) => {
+        this.categories = data;
+      });
   },
   methods: {
     filter() {

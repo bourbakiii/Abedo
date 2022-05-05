@@ -63,7 +63,10 @@
           <div
             class="search__input__dropdown-content push-hover-active"
             @mouseenter="showResult"
-            v-if="show_result == true &&  (founded.partners.length || founded.products.length)"
+            v-if="
+              show_result == true &&
+              (founded.partners.length || founded.products.length)
+            "
           >
             <div
               class="search__input__dropdown-content__shops"
@@ -142,7 +145,9 @@
           </div>
           <div
             v-else-if="show_result == true"
-           @mouseenter="showResult" class="search__input__dropdown-content push-hover-active">
+            @mouseenter="showResult"
+            class="search__input__dropdown-content push-hover-active"
+          >
             Ничего не найдено
           </div>
         </transition>
@@ -161,11 +166,18 @@
 
 <script>
 export default {
+  props: {
+    categories: {
+      required: false,
+      default() {
+        return []
+      },
+    },
+  },
   data() {
     return {
       show_result: false,
       keyword: null,
-      categories: [],
       timer: null,
       founded: {
         partners: [],
@@ -173,38 +185,34 @@ export default {
       },
     };
   },
-  async fetch() {
-    await this.$axios
-      .$get(`${this.$axios.defaults.baseURL}/api/cuisines/get`)
-      .then(({ cuisines: { data } }) => {
-        this.categories = data;
-      });
-  },
+  async fetch() {},
   methods: {
     search() {
       this.show_result = false;
-      if(this.keyword.length>=3)
-      {
-      this.$axios
-        .get("/api/search", {
-          params: {
-            keyword: this.keyword??"",
-          },
-        })
-        .then(({ data: { result } }) => {
-      this.showResult();
+      if (this.keyword.length >= 3) {
+        this.$axios
+          .get("/api/search", {
+            params: {
+              keyword: this.keyword ?? "",
+            },
+          })
+          .then(({ data: { result } }) => {
+            this.showResult();
 
-          this.founded = {
-            partners: result.shops.data,
-            products: result.products.data,
-          };
-        });
+            this.founded = {
+              partners: result.shops.data,
+              products: result.products.data,
+            };
+          });
       }
     },
     timerHandler() {
       console.log(123);
       clearTimeout(this.timer);
-      this.timer = setTimeout(()=>{this.timer = null; this.search();}, 400);
+      this.timer = setTimeout(() => {
+        this.timer = null;
+        this.search();
+      }, 400);
     },
     showResult() {
       this.show_result = true;
@@ -232,10 +240,12 @@ export default {
       document.addEventListener("click", dropdownClick);
     },
     watchAll() {
-      this.$store.commit('temporary/action',(state)=>{state.search_keyword=this.keyword});
+      this.$store.commit("temporary/action", (state) => {
+        state.search_keyword = this.keyword;
+      });
       this.$router.push("/search");
     },
-  }
+  },
 };
 </script>
 

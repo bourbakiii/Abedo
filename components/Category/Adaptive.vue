@@ -1,13 +1,26 @@
 <template>
-    <!-- :style="{ backgroundImage: 'url(image + ')' }" -->
   <NuxtLink
-  to='/category/1'
+  :style="`background-image: ${
+        category.image
+          ? `linear-gradient(360deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 100%), url(${$axios.defaults.baseURL}${category.image.mobile})`
+          : ''
+      };`"
+  :to="`/category/${category.id}`"
     class="category category-adaptive"
   >
     <div class="category-adaptive__overlay"></div>
-    <p class="category-adaptive__name" contenteditable>Европейская кухня</p>
+    <p class="category-adaptive__name" contenteditable>{{category.name}}</p>
   </NuxtLink>
 </template>
+<script>
+export default {
+  props:{
+    category:{
+      required: true
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 .category-adaptive {
   width: 100%;
@@ -23,6 +36,8 @@
   position: relative;
   overflow: hidden;
   text-decoration: none;
+  background-size: cover;
+  background-repeat: no-repeat;
   &:focus &, &:active &, &:hover &{
       &__overlay{
         width:100%;
@@ -30,6 +45,7 @@
       }
     }
   &__overlay {
+    opacity:0.95;
     position: absolute;
     z-index: 1;
     top: 50%;

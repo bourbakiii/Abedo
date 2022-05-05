@@ -1,15 +1,28 @@
 <template>
   <div class="adaptive-categories wrapper adaptive-non-wrapper">
     <h1 class="adaptive-categories__title title-small">Категории</h1>
-    <div class="adaptive-categories__content">
+      <transition-group tag='div' class="adaptive-categories__content" appear name="item-transition">
       <CategoryAdaptive
-        v-for="item in 12"
-        :key="item"
+        v-for="category in categories"
+        :category="category"
+        :key="category.id"
         class="adaptive-categories__item"
       />
+      </transition-group>
     </div>
-  </div>
 </template>
+<script>
+export default {
+  props: {
+    categories: {
+      required: true,
+      default() {
+        return [];
+      },
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 .adaptive-categories {
   width: 100%;
