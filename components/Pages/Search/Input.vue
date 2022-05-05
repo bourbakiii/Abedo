@@ -78,16 +78,15 @@ export default {
       },
     };
   },
-  fetchOnServer: false,
   created(){
     this.$store.commit("temporary/action", (state)=>{
       state.search_keyword = null;
     })
   },
-  fetch() {
+  async fetch() {
     this.show_result = false;
     if (this.keyword.length >= 3)
-      this.$axios
+      await this.$axios
         .get("/api/search", {
           params: {
             keyword: this.keyword ?? "",

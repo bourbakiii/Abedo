@@ -116,22 +116,54 @@
           class="categories-page__content__filters"
         />
       </transition>
-      <div  :class='{"small-margin": show_filters}' class="categories-page__content__shops">
+      <div
+        :class="{ 'small-margin': show_filters }"
+        class="categories-page__content__shops"
+      >
         <client-only>
-        <PartnerItem
-          v-for="(item, index) in 12"
-          :key="index"
-          class="categories-page__content__shops__item adaptive-non"
-        />
+          <PartnerItem
+            v-for="partner in partners"
+            :key="partner.id"
+            :partner="partner"
+            class="categories-page__content__shops__item"
+          />
         </client-only>
       </div>
     </div>
   </div>
 </template>
 <script>
+import qs from "qs";
 export default {
   data() {
-    return { show_filters: false };
+    return {
+      show_filters: false,
+      params: {
+        cuisine: this.$route.params.category_id,
+      },
+      partners: [],
+    };
+  },
+  fetchOnServer:false,
+  async fetch() {
+    await this.$axios
+      .get("/api/shops", {
+        params: this.params,
+        paramsSerializer: (params) => {
+          console.log('the params are');
+          console.log(params);
+          return qs.stringify(params);
+        },
+      })
+      .then(
+        ({
+          data: {
+            shops: { data },
+          },
+        }) => {
+          this.partners = data;
+        }
+      );
   },
 };
 </script>
@@ -152,7 +184,7 @@ export default {
       margin-bottom: 10px;
       transition: $transition;
       margin-bottom: 20px;
-      
+
       &__title {
         @media screen and (max-width: $tablet) {
           font-family: "SF Pro Display";
@@ -160,7 +192,7 @@ export default {
           font-weight: 700;
           font-size: 20px;
           line-height: 20px;
-        } 
+        }
       }
       &__filter-button {
         height: 30px;
@@ -206,7 +238,7 @@ export default {
       width: 100%;
       max-width: 100%;
       @media screen and (max-width: $tablet) {
-       margin-top: 20px;
+        margin-top: 20px;
       }
       @media screen and (max-width: $notebook) {
         grid-template-columns: repeat(3, 1fr);
