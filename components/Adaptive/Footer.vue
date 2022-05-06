@@ -49,7 +49,11 @@
           fill="#212121"
         />
       </svg>
-      <div class="footer__button_cart__count" contenteditable>{{cart_products.length}}</div>
+      <client-only>
+        <transition name='indicator' appear>
+      <div class="footer__button_cart__count" v-if='cart_products.length' contenteditable>{{cart_products.length}}</div>
+        </transition>
+      </client-only>
     </NuxtLink>
     <NuxtLink to="/search" class="footer__button">
       <svg

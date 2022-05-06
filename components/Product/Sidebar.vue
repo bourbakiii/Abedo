@@ -17,8 +17,8 @@
     </button>
     <div class="product-sidebar__info">
       <img
-        v-if="true"
-        src="@/assets/images/sidebar-cart-product-placeholder.png"
+        v-if="product.image"
+        :src="`${$axios.defaults.baseURL}${product.image.cart_mini}`"
         class="product-sidebar__info__image"
       />
       <p class="product-sidebar__info__name">{{ product.name }}</p>
@@ -110,6 +110,7 @@ export default {
       height: auto;
       margin-right: 10px;
       flex-shrink: 0;
+      border-radius: 5px;
     }
     &__name {
       font-family: "SF Pro Display";

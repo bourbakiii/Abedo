@@ -74,15 +74,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.sidebar-product{
-  &-enter,&-leave-to{
-    opacity: 0;
-  }
-  &-enter-active,
-  &-leave-active {
-    transition: $transition;
-  }
-}
+
 .sidebar-cart {
   padding: 52px 0px 30px;
   width: 294px;

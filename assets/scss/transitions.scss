@@ -171,3 +171,12 @@
     transition: $transition;
   }
 }
+.sidebar-product{
+  &-enter,&-leave-to{
+    opacity: 0;
+  }
+  &-enter-active,
+  &-leave-active {
+    transition: $transition;
+  }
+}

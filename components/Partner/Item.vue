@@ -113,18 +113,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.filter {
-  &-enter, &-leave-to {
-    height:0px !important;
-    opacity: 0;
-    margin-bottom: 0px;
-    padding-top:0px !important;
-    padding-bottom: 0px !important;
-  }
-  &-enter-active,
-  &-leave-active {
-    transition: all $transition;
-  }
-}
-</style>
