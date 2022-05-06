@@ -2,18 +2,18 @@
   <div class="product-cart product">
     <div class="product-cart__image-block">
       <img
-        v-if="true"
-        src="@/assets/images/product-placeholder.png"
+        v-if="product.image"
+        :src="`${$axios.defaults.baseURL}${product.image.original}`"
         class="product-cart__image-block__image"
       />
       <p class="product-cart__image-block__text" contenteditable>
-        Сырное ассорти
+        {{ product.name }}
       </p>
     </div>
 
-    <p class="product-cart__price" contenteditable>{{product.price}}₽</p>
+    <p class="product-cart__price" contenteditable>{{ product.price }}₽</p>
     <p class="product-cart__price product-cart__price_full" contenteditable>
-      {{product_total_price}}₽
+      {{ product_total_price }}₽
     </p>
     <div class="product-cart__buttons">
       <ButtonProduct
@@ -22,7 +22,7 @@
         icon="minus"
         @click="decrease"
       />
-      <p class="product-cart__buttons__count" contenteditable>{{count}}</p>
+      <p class="product-cart__buttons__count" contenteditable>{{ count }}</p>
       <ButtonProduct
         class="product-cart__buttons__button"
         size="40"
@@ -30,7 +30,7 @@
         @click="crease"
       />
     </div>
-    <button @click='remove' class="product-cart__close">
+    <button @click="remove" class="product-cart__close">
       <svg
         class="product-cart__close__icon"
         width="20"
@@ -51,99 +51,99 @@
 import productsMixin from "@/mixins/product.js";
 export default {
   mixins: [productsMixin],
-    props:{
-        product:{
-            required:true
-        }
-    }
-}
+  props: {
+    product: {
+      required: true,
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .product-cart {
-      width: 100%;
-      min-height: 103px;
-      padding: 10px 0px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-direction: row;
-      border-bottom: 1px dashed $extra_dark_grey;
-      @media screen and (max-width: $tablet) {
-      }
-      &__image-block {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-direction: row;
-        width: 40%;
-        max-width: 40%;
-        overflow: hidden;
-        &__image {
-          border-radius: 10px;
-          width: 100px;
-          height: auto;
-          object-fit: contain;
-          margin-right: 30px;
-          @media screen and (max-width: $notebook) {
-            margin-right: 10px;
-          }
-        }
-        &__text {
-          font-family: "SF Pro Display";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 20px;
-          justify-content: flex-start;
-          align-items: flex-start;
-        }
-      }
-      &__buttons {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        &__button {
-          @media screen and (max-width: $notebook) {
-            width: 35px !important;
-            height: 35px !important;
-          }
-        }
-        &__count {
-          width: 60px;
-          max-width: 60px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          font-family: "SF Pro Display";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 19px;
-          text-align: center;
-          margin: 0px 10px;
-          @media screen and (max-width: $notebook) {
-            max-width: 40px;
-            width: 50px;
-            margin: 0px 5px;
-          }
-        }
-      }
-      &__price {
-        font-family: "Montserrat";
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 24px;
-        width: 10%;
-        @media screen and (max-width: $notebook) {
-          font-size: 16px;
-          line-height: 19px;
-        }
-      }
-      &__close {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        transition: $transition;
+  width: 100%;
+  min-height: 103px;
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  border-bottom: 1px dashed $extra_dark_grey;
+  @media screen and (max-width: $tablet) {
+  }
+  &__image-block {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 40%;
+    max-width: 40%;
+    overflow: hidden;
+    &__image {
+      border-radius: 10px;
+      width: 100px;
+      height: auto;
+      object-fit: contain;
+      margin-right: 30px;
+      @media screen and (max-width: $notebook) {
+        margin-right: 10px;
       }
     }
+    &__text {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+  }
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__button {
+      @media screen and (max-width: $notebook) {
+        width: 35px !important;
+        height: 35px !important;
+      }
+    }
+    &__count {
+      width: 60px;
+      max-width: 60px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      text-align: center;
+      margin: 0px 10px;
+      @media screen and (max-width: $notebook) {
+        max-width: 40px;
+        width: 50px;
+        margin: 0px 5px;
+      }
+    }
+  }
+  &__price {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    width: 10%;
+    @media screen and (max-width: $notebook) {
+      font-size: 16px;
+      line-height: 19px;
+    }
+  }
+  &__close {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    transition: $transition;
+  }
+}
 </style>

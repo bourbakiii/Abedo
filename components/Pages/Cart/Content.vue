@@ -3,20 +3,19 @@
     <div class="cart__hood adaptive-non">
       <img src="@/assets/images/limonchello.png" class="cart__hood__image" />
       <p class="cart__hood__name">Кафе “Лимончелло”</p>
-      <button @click.prevent class="cart__hood__button">Очистить</button>
+      <button @click='$store.commit("cart/clear")' class="cart__hood__button">Очистить</button>
     </div>
     <div class="cart__hood cart__hood__adaptive adaptive">
       <p class="cart__hood__adaptive__name">Корзина</p>
-      <button @click.prevent class="cart__hood__adaptive__button">
+      <button @click='$store.commit("cart/clear")' class="cart__hood__adaptive__button">
         Очистить
       </button>
     </div>
-    <div class="cart__products adaptive-non">
+    <transition-group tag='div' name='cart-product' appear class="cart__products adaptive-non">
       <ProductCart v-for="product in cart_products"
         :key="product.id"
         :product="product" />
-      
-    </div>
+    </transition-group>
      <div class="cart__products__adaptive adaptive">
       <div
         v-for="product in cart_products"
@@ -104,6 +103,22 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.cart-product{
+  
+  &-enter,
+  &-leave-to {
+    height: 0px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    padding: 0px !important;
+    min-height: 0px !important;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition: all $transition;
+  }
+}
 .cart {
   padding: 30px;
   border-radius: 20px;

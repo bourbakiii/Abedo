@@ -2,7 +2,8 @@
   <div class="page cart-page wrapper">
     <div class="cart-page__content-wrapper content">
       <Breadcrumbs class="cart-page__breadcrumbs adaptive-non" />
-      <div v-if="!cart_products.length" class="cart-page__content_empty">
+       <transition-group name="cart-screens" mode="out-in" class="cart-page__contents">
+      <div v-if="!cart_products.length" key='cart-content-1' class="cart-page__content_empty">
         <h1 class="cart-page__content_empty__title title-normal">Корзина</h1>
         <svg
           class="cart-page__content_empty__icon"
@@ -24,13 +25,14 @@
           >За покупками</ButtonStandart
         >
       </div>
-      <div v-else class="cart-page__content">
+      <div v-else key='cart-content-2' class="cart-page__content">
         <h1 class="cart-page__content_empty__title title-normal adaptive-non">
           Оформления заказа
         </h1>
         <PagesCartContent class="cart-page__content__cart" />
         <PagesCartOrder class="cart-page__content__order" />
       </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -44,9 +46,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
 .cart-page {
   align-items: center;
   justify-content: flex-start;
+  &__contents{
+    width:100%;
+  }
   &__content {
     width: 100%;
     display: flex;
@@ -54,6 +60,7 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
     &-wrapper {
+      position: relative;
       @media screen and (max-width: $tablet) {
         height: 100%;
         flex-grow: 1;
