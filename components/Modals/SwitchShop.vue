@@ -39,8 +39,11 @@ export default {};
   padding: 50px 40px;
   width: 100%;
   max-width: 500px;
-  align-self: center !important;
-  justify-self: center !important;
+  @media screen and (max-width: $tablet) {
+    margin-top:10vh;
+    padding: 24px;
+  }
+
   &__close {
     cursor: pointer;
     background-color: transparent;
@@ -56,6 +59,18 @@ export default {};
   }
   &__title{
       margin-bottom: 30px;
+      @media screen and (max-width: $tablet) {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 20px;
+    }
+  }
+  &__text{
+    @media screen and (max-width: $tablet) {
+      font-size:15px;
+    }
   }
   &__buttons{
       width:100%; margin-top: 30px;
@@ -82,6 +97,10 @@ export default {};
 
 
           &:first-child{
+            @media screen and (max-width: $phone) {
+              margin-right:20px;
+              
+            }
               margin-right:40px;
           }
       }
