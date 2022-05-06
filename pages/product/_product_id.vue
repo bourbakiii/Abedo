@@ -110,7 +110,7 @@
                 class="product-page__over__content__main__additional__information__min-count"
               >
                 <svg
-                  class="product-page__over__content__main__additional__information__min-count__icon"
+                  class="product-page__over__content__main__additional__information__min-count__icon adaptive"
                   width="20"
                   height="20"
                   viewBox="0 0 20 20"

@@ -252,8 +252,9 @@ export default {
           grid-template-columns: repeat(1, 1fr);
         }
         &__item {
-          overflow: hidden;
-          width: 100%;
+          overflow: hidden !important;
+          width: 100% !important;
+
         }
       }
       &__button {
