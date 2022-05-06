@@ -2,7 +2,7 @@
   <div v-if='categories.length' class="sidebar">
     <h2 class="sidebar__title title-small">Категории</h2>
     <div class="sidebar__content">
-      <button @click='()=>$router.push(`/category/${category.id}`)' v-for='category in categories' :key='category' class="sidebar__content__item">
+      <button @click='()=>$router.push(`/category/${category.id}`)' v-for='category in categories' :key='category.id' class="sidebar__content__item">
         <img
           src="@/assets/images/category-item-image-placeholder.png"
           class="sidebar__content__item__image"

@@ -19,6 +19,7 @@
 
 </template>
 
+
 <script>
 export default {
   model: {
@@ -28,7 +29,7 @@ export default {
   props: {
     "id": {required:true},
     "modelValue": { default: "" },
-    "value": { type: String, default: undefined }
+    "value": {  default: true }
   },
   computed: {
     isChecked() {

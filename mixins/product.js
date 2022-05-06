@@ -117,6 +117,12 @@ export default {
             if(!this.in_cart) return -1;
             this.product.count = this.cart_products.find(product=>+product.id == +this.product.id).count;
             return this.product.count;
+        },
+        price(){
+            return this.product.price;
+        },
+        product_total_price(){
+            return this.count * this.product.price;
         }
     }
 }

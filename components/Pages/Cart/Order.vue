@@ -124,22 +124,18 @@
       <label for='payment_type-0' class="order__payment__item">
         <Radiobutton
           class="order__payment__item__radio"
-          name="payment_type"
-          id="payment_type-0"
-          :value="0"
-          :trueValue="0"
-          v-model="payment_type"
+        id="payment_type"
+        :value="0"
+        v-model="payment_type"
         />
         <p class="order__payment__item__name">Наличными при получении</p>
       </label>
       <label for='payment_type-1' class="order__payment__item">
         <Radiobutton
-          class="order__payment__item__radio"
-          name="payment_type"
-          id="payment_type-1"
-          :value="1"
-          :trueValue="1"
-          v-model="payment_type"
+               class="order__payment__item__radio"
+        id="payment_type"
+        :value="1"
+        v-model="payment_type"
         />
         <p class="order__payment__item__name">Перевод на банковсвкую карту</p>
       </label>
