@@ -9,11 +9,11 @@
             class="partner-page__over__content__main__shop-block"
           />
           <PagesPartnerStocks
-          :stocks='stocks'
+            :stocks="stocks"
             class="partner-page__over__content__main__stocks adaptive-non"
           />
           <PagesPartnerStocksSlider
-          :stocks='stocks'
+            :stocks="stocks"
             class="partner-page__over__content__main__stocks_adaptive adaptive"
           />
           <PagesPartnerCatalog
@@ -49,8 +49,8 @@ export default {
           .$get(
             `${$axios.defaults.baseURL}/api/shares/shop/${route.params.partner_id}`
           )
-          .then(({shares : {data}}) => {
-            stocks=data;
+          .then(({ shares: { data } }) => {
+            stocks = data;
           });
       })
       .catch(() => {
@@ -59,7 +59,7 @@ export default {
       .finally(() => {
         loading = false;
       });
-    return { loading, partner,stocks };
+    return { loading, partner, stocks };
   },
   data() {
     return {
@@ -72,9 +72,28 @@ export default {
       partner: {},
     };
   },
+  computed: {
+    cart_products() {
+      return this.$store.state.cart.products;
+    },
+    cart_partner() {
+      return this.$store.state.cart.partner;
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
+.sidebar-cart {
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition: $transition;
+  }
+}
 .partner-page {
   display: flex;
   align-items: center;

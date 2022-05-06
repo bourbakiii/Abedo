@@ -21,7 +21,7 @@ export const mutations = {
         Vue.set(state, "products", []);
         localStorage.setItem(local_storage_name, JSON.stringify(state));
     },
-    set_shop(state, partner) {
+    set_partner(state, partner) {
         Vue.set(state, 'partner', partner);
         localStorage.setItem(local_storage_name, JSON.stringify(state));
     },
@@ -30,6 +30,7 @@ export const mutations = {
         if (local_data != null) {
             console.log(local_data);
             state.products = local_data.products;
+            state.partner = local_data.partner;
             console.log(state.products);
             // for (const key in local_data) state[key] = local_data[key];
         }
@@ -44,7 +45,7 @@ export const actions = {
         product.count = product.min_count;
         Vue.set(product, "count", product.min_count);
         if (+state.state?.partner?.id == +partner.id) {
-            state.commit('set_shop', partner);
+            state.commit('set_partner', partner);
             state.commit('set', { index: state.state.products.length, product });
         }
         else {
@@ -69,6 +70,15 @@ export const actions = {
         this.commit("modals/close");
         state.commit('clear');
         state.commit("set", {index: state.commit('set', { index: state.state.products.length, product }), product: product});
-        state.commit("set_shop", partner);
+        state.commit("set_partner", partner);
+    }
+};
+
+
+export const getters = {
+    total_price(state){
+        return state.products.map(product=>+product.price * +product.count).reduce(function(accumulator, currentValue) {
+          return accumulator + currentValue;
+        });
     }
 };

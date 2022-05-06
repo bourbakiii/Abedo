@@ -153,6 +153,8 @@ export default {
         font-weight: 500;
         font-size: 12px;
         line-height: 17px;
+         -webkit-line-clamp: 2;
+      line-clamp: 2;
       }
     }
     &__weight {

@@ -67,8 +67,9 @@ export default {
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+  &:not(&:last-child)
+  {
   border-bottom: 1px dashed $extra_dark_grey;
-  @media screen and (max-width: $tablet) {
   }
   &__image-block {
     display: flex;
