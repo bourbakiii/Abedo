@@ -9,6 +9,11 @@ export const state = () => ({
   login: {
     show: false
   },
+  switch_shop: {
+    show: false,
+    product: null,
+    partner: null,
+  },
   partner: {
     show: false,
     partner: null
@@ -34,6 +39,11 @@ export const mutations = {
         state.partner.partner = props.partner;
         break;
       }
+      case "switch_shop": {
+        state.switch_shop.partner = props.partner;
+        state.switch_shop.product = props.product;
+        break;
+      }
     }
   },
   close(state, props={modal_name:null}) {
@@ -41,6 +51,8 @@ export const mutations = {
     document.lastChild.classList.remove("html_overflow");
     // state.product.product = null;
     state.partner.partner = null;
+    state.switch_shop.partner = null;
+    state.switch_shop.product = null;
     if (!props.modal_name) return;
   },
 };

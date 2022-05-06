@@ -91,10 +91,14 @@ export default {
                 };
             },
         },
+        partner:{
+            required: false
+        }
     },
     methods: {
-        add_to_cart() {
-            this.$store.dispatch('cart/add_to_cart', this.product);
+        add_to_cart(partner) {
+            if (!this.$route.params.partner_id) alert("Не передан партнер");
+            this.$store.dispatch('cart/add_to_cart', { product: this.product, partner });
         },
         crease() {
             this.$store.dispatch('cart/crease', this.product);
@@ -102,7 +106,7 @@ export default {
         decrease() {
             this.$store.dispatch('cart/decrease', this.product);
         },
-        remove(){
+        remove() {
             this.$store.dispatch('cart/remove', this.product);
         }
     },
@@ -113,15 +117,15 @@ export default {
         in_cart() {
             return this.cart_products.map(product => +product.id).includes(+this.product.id);
         },
-        count(){
-            if(!this.in_cart) return -1;
-            this.product.count = this.cart_products.find(product=>+product.id == +this.product.id).count;
+        count() {
+            if (!this.in_cart) return -1;
+            this.product.count = this.cart_products.find(product => +product.id == +this.product.id).count;
             return this.product.count;
         },
-        price(){
+        price() {
             return this.product.price;
         },
-        product_total_price(){
+        product_total_price() {
             return this.count * this.product.price;
         }
     }

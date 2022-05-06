@@ -10,6 +10,10 @@
         v-if="$store.state.modals.rate.show"
         class="modals-wrapper__content modal-content"
       />
+      <ModalsSwitchShop
+        v-if="$store.state.modals.switch_shop.show"
+        class="modals-wrapper__content modal-content"
+      />
       <ModalsLogin
         v-if="$store.state.modals.login.show"
         class="modals-wrapper__content modal-content"

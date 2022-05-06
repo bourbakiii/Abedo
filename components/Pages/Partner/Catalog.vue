@@ -29,6 +29,7 @@
             v-for="product in chapter.products"
             :key="product.id"
             :product="product"
+            :partner="partner"
           />
 
         </div>

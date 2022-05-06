@@ -33,10 +33,10 @@
     <div @click.self='go_by_link' class="product-item__buttons">
       <div @click.self='go_by_link' v-if="!in_cart" class="product-item__buttons__add">
         <ButtonSmallCart
-        @click="add_to_cart"
+        @click="add_to_cart(partner)"
           class="product-item__buttons__button_add_small adaptive"
         />
-        <ButtonStandart @click="add_to_cart" class="product-item__buttons__button_add adaptive-non">
+        <ButtonStandart @click="add_to_cart(partner)" class="product-item__buttons__button_add adaptive-non">
           В корзину
         </ButtonStandart>
       </div>

@@ -63,7 +63,6 @@ export default {
     };
   },
   mounted() {
-    console.log(parseInt(this.$el.scrollHeight));
     this.$el.style.height =
       Math.max(parseInt(this.$el.scrollHeight) + 40, this.minHeight) + "px";
     this.$el.style.padding = "20px 0px";
