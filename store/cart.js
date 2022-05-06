@@ -44,15 +44,13 @@ export const actions = {
     add_to_cart(state, { product, partner }) {
         product.count = product.min_count;
         Vue.set(product, "count", product.min_count);
-        if (+state.state?.partner?.id == +partner.id) {
+        if (!+state.state?.partner?.id) state.dispatch("change_shop", { product, partner })
+        else if (+state.state?.partner?.id == +partner.id) {
             state.commit('set_partner', partner);
             state.commit('set', { index: state.state.products.length, product });
         }
-        else {
-            this.commit('modals/open', { modal_name: 'switch_shop', product: product, partner: partner });
-            console.log("da dis");
-            console.log(this);
-        }
+        else this.commit('modals/open', { modal_name: 'switch_shop', product: product, partner: partner });
+
     },
     crease(state, product) {
         state.commit("action", () => product.count++);
@@ -69,16 +67,16 @@ export const actions = {
     change_shop(state, { product, partner }) {
         this.commit("modals/close");
         state.commit('clear');
-        state.commit("set", {index: state.commit('set', { index: state.state.products.length, product }), product: product});
+        state.commit("set", { index: state.commit('set', { index: state.state.products.length, product }), product: product });
         state.commit("set_partner", partner);
     }
 };
 
 
 export const getters = {
-    total_price(state){
-        return state.products.map(product=>+product.price * +product.count).reduce(function(accumulator, currentValue) {
-          return accumulator + currentValue;
+    total_price(state) {
+        return state.products.map(product => +product.price * +product.count).reduce(function (accumulator, currentValue) {
+            return accumulator + currentValue;
         });
     }
 };
