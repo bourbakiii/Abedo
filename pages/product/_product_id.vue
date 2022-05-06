@@ -288,6 +288,29 @@ export default {
     SwiperSlide,
     Checkbox,
   },
+  async asyncData({ $axios, route, error }) {
+    // let product = {},
+    //   loading = true;
+    // await $axios
+    //   .$get(`${$axios.defaults.baseURL}/api/shop/${route.params.partner_id}`)
+    //   .then(async ({ shop }) => {
+    //     partner = shop;
+    //     await $axios
+    //       .$get(
+    //         `${$axios.defaults.baseURL}/api/shares/shop/${route.params.partner_id}`
+    //       )
+    //       .then(({shares : {data}}) => {
+    //         stocks=data;
+    //       });
+    //   })
+    //   .catch(() => {
+    //     error({ statusCode: 404, message: "Ошибка при получении партнера" });
+    //   })
+    //   .finally(() => {
+    //     loading = false;
+    //   });
+    // return { loading, partner,stocks };
+  },
   data() {
     return {
       swiperOption: {
@@ -503,15 +526,10 @@ export default {
               &__text {
                 font-family: "SF Pro Display";
                 font-style: normal;
-                font-weight: 600;
-                font-size: 17px;
-                line-height: 19px;
+                font-weight: 400;
+                font-size: 15px;
+                line-height: 18px;
                 color: $red;
-                @media screen and (max-width: $tablet) {
-                  font-weight: 400;
-                  font-size: 15px;
-                  line-height: 17px;
-                }
               }
             }
 

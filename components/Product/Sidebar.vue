@@ -1,6 +1,6 @@
 <template>
   <div class="product-sidebar product">
-    <button class="product-sidebar__close">
+    <button @click='remove' class="product-sidebar__close">
       <svg
         class="product-sidebar__close__icon"
         width="15"

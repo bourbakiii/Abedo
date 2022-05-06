@@ -101,6 +101,9 @@ export default {
         },
         decrease() {
             this.$store.dispatch('cart/decrease', this.product);
+        },
+        remove(){
+            this.$store.dispatch('cart/remove', this.product);
         }
     },
     computed: {

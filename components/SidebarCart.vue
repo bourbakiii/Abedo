@@ -20,7 +20,7 @@
         <h3 class="sidebar-cart__hood__title-row__title title-extra-small">
           Корзина:
         </h3>
-        <button class="sidebar-cart__hood__title-row__button">Очистить</button>
+        <button @click='$store.commit("cart/clear")' class="sidebar-cart__hood__title-row__button">Очистить</button>
       </div>
       <div class="sidebar-cart__hood__shop-block">
         <div class="sidebar-cart__hood__shop-block__name-block">

@@ -205,9 +205,12 @@
       
         <span
           class="navigation__cart-block-icon"
-          :class="{ indicator: cart_products.length }"
-          :indicator-count="cart_products.length"
         >
+        <transition name="indicator" appear>
+          <div v-if='cart_products.length' class="navigation__cart-block-icon__indicator">
+            {{cart_products.length}}
+          </div>
+        </transition>
           <svg
             class="navigation__cart-block-icon-svg"
             width="20"
@@ -482,10 +485,10 @@ export default {
         border-radius: 90px;
         border: 1px solid $darkblue;
         margin-right: 15px;
-        &.indicator:after {
+        &__indicator {
           height: 24px;
-          min-width: 20px;
-          padding: 0px 2px;
+          min-width: 24px;
+          padding: 0px 5px;
           width: auto;
           position: absolute;
           top: 5px;
@@ -498,7 +501,7 @@ export default {
           justify-content: center;
           color: $white;
           z-index: 2;
-
+          overflow: hidden;
           font-family: "Montserrat";
           font-style: normal;
           font-weight: 700;
@@ -506,7 +509,6 @@ export default {
           line-height: 13px;
           display: flex;
           align-items: center;
-          content: attr(indicator-count);
         }
       }
       &__text {
