@@ -1,8 +1,11 @@
 <template>
   <div class="layout default-layout">
     <AdaptiveNavigation class='adaptive'/>
+   
     <Navigation class='adaptive-non' />
+
     <nuxt />
+
     <ModalsWrapper />
     <Footer class='adaptive-non' />
     <AdaptiveFooter class='adaptive'/>

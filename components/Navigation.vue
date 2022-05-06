@@ -201,16 +201,24 @@
           </svg>
         </NuxtLink>
       </div>
+
       <NuxtLink to="/cart" class="navigation__cart-block">
+   
       
         <span
           class="navigation__cart-block-icon"
-        >
+        > 
         <transition name="indicator" appear>
+        <client-only>
+
+
           <div v-if='cart_products.length' class="navigation__cart-block-icon__indicator">
             {{cart_products.length}}
           </div>
+    </client-only>
+
         </transition>
+
           <svg
             class="navigation__cart-block-icon-svg"
             width="20"
@@ -224,10 +232,14 @@
               fill="#5C6784"
             />
           </svg>
+
         </span>
+        
         <p class="navigation__cart-block__text delete-note">Корзина</p>
       </NuxtLink>
+
     </div>
+
   </div>
 </template>
 

@@ -22,9 +22,13 @@ export const mutations = {
     },
     local_set(state) {
         const local_data = JSON.parse(localStorage.getItem(local_storage_name));
-        for (const key in local_data) {
-            Vue.set(state, key, local_data[key]);
+        if(local_data!=null){
+            console.log(local_data);
+            state.products = local_data.products;
+            console.log(state.products);
+            // for (const key in local_data) state[key] = local_data[key];
         }
+        
     }
 };
 export const actions = {

@@ -35,13 +35,12 @@
         />
       </div>
     </div>
-    <div class="sidebar-cart__products">
+      <transition-group tag="div" class="sidebar-cart__products" name='sidebar-product' appear>
       <ProductSidebar v-for="product in cart_products"
         :key="product.id"
         :product="product"
         />
-      
-    </div>
+      </transition-group>
     <div class="sidebar-cart__row sidebar-cart__row_delivery">
       <p class="sidebar-cart__row__name sidebar-cart__row_delivery__name">
         Доставка
@@ -75,6 +74,15 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.sidebar-product{
+  &-enter,&-leave-to{
+    opacity: 0;
+  }
+  &-enter-active,
+  &-leave-active {
+    transition: $transition;
+  }
+}
 .sidebar-cart {
   padding: 52px 0px 30px;
   width: 294px;

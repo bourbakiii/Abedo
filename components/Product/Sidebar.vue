@@ -1,6 +1,6 @@
 <template>
   <div class="product-sidebar product">
-    <button @click='remove' class="product-sidebar__close">
+    <button @click="remove" class="product-sidebar__close">
       <svg
         class="product-sidebar__close__icon"
         width="15"
@@ -29,7 +29,7 @@
           class="product-sidebar__actions__buttons__button"
           size="26"
           icon="minus"
-          @click='decrease'
+          @click="decrease"
         />
         <p class="product-sidebar__actions__buttons__count">
           {{ count }}
@@ -38,12 +38,16 @@
           class="product-sidebar__actions__buttons__button"
           size="26"
           icon="plus"
-          @click='crease'
+          @click="crease"
         />
       </div>
       <div class="product-sidebar__actions__prices">
-        <p class="product-sidebar__actions__prices__price_full">{{product.price}}₽</p>
-        <p class="product-sidebar__actions__prices__price">{{product.price}}₽</p>
+        <p class="product-sidebar__actions__prices__price_full">
+          {{ product.price }}₽
+        </p>
+        <p class="product-sidebar__actions__prices__price">
+          {{ product.price }}₽
+        </p>
       </div>
     </div>
   </div>
@@ -52,101 +56,115 @@
 import productsMixin from "@/mixins/product.js";
 
 export default {
-  mixins: [productsMixin]
-}
+  mixins: [productsMixin],
+  data() {
+    return {
+      minHeight: 110,
+    };
+  },
+  mounted() {
+    console.log(parseInt(this.$el.scrollHeight));
+    this.$el.style.height =
+      Math.max(parseInt(this.$el.scrollHeight) + 40, this.minHeight) + "px";
+    this.$el.style.padding = "20px 0px";
+  },
+  destroyed() {
+    this.$el.style.height = "0px";
+    this.$el.style.minHeight = "0px";
+    this.$el.style.padding = "0px 0px";
+  },
+};
 </script>
 <style lang="scss" scoped>
-
-.product-sidebar{
-      width: 100%;
-      padding: 20px 0px;
-      min-height: 110px;
+.product-sidebar {
+  width: 100%;
+  height: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  border-bottom: 1px dashed $dark_grey;
+  position: relative;
+  transition: $transition;
+  &:last-of-type {
+    border-bottom: none;
+  }
+  &__close {
+    top: 20px;
+    right: 0px;
+    position: absolute;
+    background: transparent;
+    outline: none;
+    border: none;
+    width: 15px;
+    height: 15px;
+  }
+  &__info {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+    &__image {
+      width: 50px;
+      height: auto;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+    &__name {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 20px;
+      flex-grow: 1;
+      margin-right: 18px;
+    }
+  }
+  &__actions {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__buttons {
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      flex-direction: column;
-      border-bottom: 1px dashed $dark_grey;
-      position: relative;
-      &:last-of-type {
-        border-bottom: none;
+      flex-direction: row;
+      &__count {
+        margin: 0px 10px;
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        max-width: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
-      &__close {
-        top: 20px;
-        right: 0px;
-        position: absolute;
-        background: transparent;
-        outline: none;
-        border: none;
-        width: 15px;
-        height: 15px;
-        
-      }
-      &__info {
-        width: 100%;
+    }
+    &__prices {
+      &__price {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
         display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-direction: row;
-        &__image {
-          width: 50px;
-          height: auto;
-          margin-right: 10px;
-          flex-shrink: 0;
-        }
-        &__name {
-          font-family: "SF Pro Display";
+        align-items: center;
+        &_full {
+          font-family: "Montserrat";
           font-style: normal;
           font-weight: 400;
           font-size: 15px;
-          line-height: 20px;
-          flex-grow: 1;
-          margin-right: 18px;
-        }
-      }
-      &__actions {
-        margin-top: 10px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        &__buttons {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          flex-direction: row;
-          &__count {
-            margin: 0px 10px;
-            font-family: "SF Pro Display";
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 19px;
-            max-width: 40px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-        }
-        &__prices {
-          &__price {
-            font-family: "Montserrat";
-            font-style: normal;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 20px;
-            display: flex;
-            align-items: center;
-            &_full {
-              font-family: "Montserrat";
-              font-style: normal;
-              font-weight: 400;
-              font-size: 15px;
-              line-height: 19px;
-              text-decoration: line-through;
-              color: $extra_dark_grey;
-            }
-          }
+          line-height: 19px;
+          text-decoration: line-through;
+          color: $extra_dark_grey;
         }
       }
     }
+  }
+}
 </style>
