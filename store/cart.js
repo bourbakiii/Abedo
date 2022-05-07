@@ -44,7 +44,7 @@ export const actions = {
     add_to_cart(state, { product, partner }) {
         product.count = product.min_count;
         Vue.set(product, "count", product.min_count);
-        if (!+state.state?.partner?.id) state.dispatch("change_shop", { product, partner })
+        if (!+state.state?.partner?.id || !state.state.products.length) state.dispatch("change_shop", { product, partner })
         else if (+state.state?.partner?.id == +partner.id) {
             state.commit('set_partner', partner);
             state.commit('set', { index: state.state.products.length, product });
@@ -77,6 +77,6 @@ export const getters = {
     total_price(state) {
         return state.products.map(product => +product.price * +product.count).reduce(function (accumulator, currentValue) {
             return accumulator + currentValue;
-        });
+        })??0;
     }
 };
