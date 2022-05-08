@@ -101,7 +101,7 @@ export default {};
   background-color: $black;
   flex-direction: column !important;
   box-sizing: border-box;
-
+  z-index: $z_navigation;
   &__bottom-wrapper {
     width: 100%;
     display: flex;

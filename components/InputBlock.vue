@@ -9,8 +9,8 @@
       </span>
       <input
         @input="$emit('input', $event.target.value)"
+        :value="value"
         v-mask="mask"
-        v-model="value"
         :id="id"
         class="input-block__input__input"
         :type="type.toLowerCase()"
@@ -25,12 +25,6 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      mounted: false,
-      value: "",
-    };
-  },
   props: {
     id: {
       required: true,
@@ -71,7 +65,9 @@ export default {
       required: false,
       default: '',
     },
-    modelValue: { default: "" },
+    value:{
+      required:false
+    }
   },
 };
 </script>

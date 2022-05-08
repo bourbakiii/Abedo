@@ -1,8 +1,15 @@
 <template>
-  <button @click='$emit("click")' class="button button-standart">
+  <button :type='type' @click='$emit("click")' class="button button-standart">
     <slot />
   </button>
 </template>
+<script>
+export default {
+  props:[
+    'type'
+  ]
+}
+</script>
 
 <style lang="scss" scoped>
 .button {
