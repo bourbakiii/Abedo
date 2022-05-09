@@ -247,10 +247,10 @@
 export default {
   mounted() {
     document.addEventListener("scroll", () => {
-      if (window.scrollY > this.$store.state.variables.navigation_transtion_to)
+      if (window.scrollY > this.$store.state.variables.navigation_transition_to)
         document.querySelector(".navigation-wrapper").classList.add("scaled");
       else if (
-        window.scrollY < this.$store.state.variables.navigation_transtion_back
+        window.scrollY < this.$store.state.variables.navigation_transition_back
       )
         document
           .querySelector(".navigation-wrapper")

@@ -93,6 +93,7 @@ export default {
     text-overflow: ellipsis;
     overflow: hidden;
     margin-bottom: 10px;
+    white-space: nowrap;
   }
   &__input {
     width: 100%;

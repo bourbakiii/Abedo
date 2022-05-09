@@ -16,10 +16,10 @@ export default {
   },
   css: [
     '@/assets/scss/style.scss',
-    '@/assets/scss/variables.scss',
-    '@/assets/scss/transitions.scss',
-    '@/assets/scss/fonts.scss',
-    '@/assets/scss/titles.scss',
+    // '@/assets/scss/variables.scss',
+    // '@/assets/scss/transitions.scss',
+    // '@/assets/scss/fonts.scss',
+    // '@/assets/scss/titles.scss',
     "swiper/css/swiper.css"
   ],
   plugins: [
@@ -36,11 +36,11 @@ export default {
   },
   styleResources: {
     scss: [
-      '@assets/scss/variables.scss',
+      // '@assets/scss/variables.scss',
       '@assets/scss/style.scss',
-      '@assets/scss/transitions.scss',
-      '@/assets/scss/fonts.scss',
-      '@/assets/scss/titles.scss',
+      // '@assets/scss/transitions.scss',
+      // '@/assets/scss/fonts.scss',
+      // '@/assets/scss/titles.scss',
     ]
   },
   axios: {

@@ -1,4 +1,4 @@
 export const state = () => ({
-    navigation_transtion_to: 100,
-    navigation_transtion_back: 60
+    navigation_transition_to: 100,
+    navigation_transition_back: 60
   });

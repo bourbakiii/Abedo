@@ -52,6 +52,14 @@ export default {
       border-color: $green;
     }
   }
+  &.red {
+    border-color: $red !important;
+    color: $red;
+    &:hover {
+      background-color: $red;
+      color:$white;
+    }
+  }
   &.filled {
     background-color: $darkblue;
     border-color: $darkblue;
