@@ -7,7 +7,7 @@
       :readonly="!editing"
       :class="{ editing }"
     />
-    <button @click='remove' type='button' class="address-item__remove">
+    <button @click="remove" type="button" class="address-item__remove">
       Удалить
     </button>
     <div class="address-item__content">
@@ -17,12 +17,12 @@
           :id="`adress-${address.id}-dadata`"
           name=""
           text="Адрес доставки"
-          :value="address.value?address.value:parseAddress(address)"
+          :value="address.value ? address.value : parseAddress(address)"
           :readonly="!editing"
-          :autocomplete='false'
+          :autocomplete="false"
           @input="
             ($event) => {
-               address.house = null;
+              address.house = null;
               address.value = $event;
               get_dadata();
             }
@@ -35,7 +35,7 @@
             :class="`address-item__content__dadata__suggestions-${address.id}`"
           >
             <button
-            type='button'
+              type="button"
               :key="address.value"
               v-for="address in suggestions"
               class="address-item__content__dadata__suggestions__address"
@@ -89,9 +89,7 @@
           type="button"
           class="address-item__content__edit filled"
           v-if="!editing"
-          @click="
-              editing = true;
-          "
+          @click="editing = true"
           >Изменить</ButtonStandart
         >
       </transition>
@@ -165,12 +163,23 @@ export default {
     }
   },
   methods: {
-    remove(){
-      this.$axios.delete(`/api/user/address/${this.address.id}/delete`,{
-        headers:{
-          Authorization: `Bearer ${this.$store.state.account.token}`
-        }
-      }).then(()=>{});
+    remove() {
+      this.$axios
+        .delete(`/api/user/address/${this.address.id}/delete`, {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.account.token}`,
+          },
+        })
+        .then(() => {
+          this.$store.commit("account/action", (state) => {
+            state.user.addresses.splice(
+              state.user.addresses
+                .map((el) => +el.id)
+                .indexOf(+this.address.id),
+              1
+            );
+          });
+        });
     },
     stopEditing() {
       for (let key in this.start_address) {
@@ -215,17 +224,16 @@ export default {
 .edit-button {
   &-enter,
   &-leave-to {
-    
     opacity: 0;
-     height: 0px !important;
-      margin-left: auto !important;
-      margin-top: 0px !important;
+    height: 0px !important;
+    margin-left: auto !important;
+    margin-top: 0px !important;
     @media screen and (min-width: $phone) {
       height: 50px !important;
-     width: 0px !important;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-    margin: 0px !important;
+      width: 0px !important;
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+      margin: 0px !important;
     }
   }
   &-enter-active,
@@ -238,7 +246,7 @@ export default {
   &-leave-to {
     margin-top: 0px !important;
     opacity: 0 !important;
-    button{
+    button {
       height: 0px !important;
     }
   }
@@ -253,23 +261,24 @@ export default {
   border: 1px solid $dark_grey;
   padding: 30px 30px 40px;
   border-radius: 20px;
-    position: relative;
+  position: relative;
   @media screen and (max-width: $tablet) {
     padding: 15px;
   }
-  &__remove{
+  &__remove {
     position: absolute;
-    top: 19px; right: 13px;
+    top: 19px;
+    right: 13px;
 
-font-family: 'SF Pro Display';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 17px;
-background-color: transparent;
-border: none;
-outline:none;
-color:$red;
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: $red;
   }
   &__name {
     font-family: "SF Pro Display";
@@ -284,9 +293,10 @@ color:$red;
     margin-bottom: 28px;
     outline: none;
     transition: all $transition;
-    border: 1px solid $black;
+    border:none;
+    border-bottom: 1px solid $black;
     &:not(.editing) {
-      border: 1px solid transparent;
+      border-bottom: 1px solid transparent;
       margin-bottom: 32px;
     }
   }
@@ -428,20 +438,20 @@ color:$red;
       }
     }
   }
-   &__errors {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      flex-direction: column;
-      width: 100%;
-      transition: 0.3s;
-      &_margined {
-        margin-top: 15px;
-      }
-      transition: calc($transition * 2);
-      .empty {
-        margin-top: 0px;
-      }
+  &__errors {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    transition: 0.3s;
+    &_margined {
+      margin-top: 15px;
     }
+    transition: calc($transition * 2);
+    .empty {
+      margin-top: 0px;
+    }
+  }
 }
 </style>
