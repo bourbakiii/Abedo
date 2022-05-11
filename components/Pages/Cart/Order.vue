@@ -97,29 +97,34 @@
           />
         </div>
       </div>
-      <div class="order__delivery__prices" v-if="delivery_price || door_delivery_price">
+      <div
+        class="order__delivery__prices"
+        v-if="delivery_price || door_delivery_price"
+      >
         <div class="order__delivery__prices__item" v-if="delivery_price">
           <div class="order__delivery__prices__item__name-block">
             <p class="order__delivery__prices__item__name">
               Стоимость доставки
             </p>
           </div>
-          <p class="order__delivery__prices__item__price">{{delivery_price}} ₽</p>
+          <p class="order__delivery__prices__item__price">
+            {{ delivery_price }} ₽
+          </p>
         </div>
-        <div class="order__delivery__prices__item" v-if='door_delivery_price'>
+        <div class="order__delivery__prices__item" v-if="door_delivery_price">
           <div class="order__delivery__prices__item__name-block">
             <Checkbox
               id="door_delivery"
               class="order__delivery__prices__item__checkbox"
-              value="true"
               v-model="door_delivery"
-              disabled="true"
             />
             <p class="order__delivery__prices__item__name">
               Стоимость доставки
             </p>
           </div>
-          <p class="order__delivery__prices__item__price">+ {{door_delivery_price}} ₽</p>
+          <p class="order__delivery__prices__item__price">
+            + {{ door_delivery_price }} ₽
+          </p>
         </div>
       </div>
     </div>
@@ -129,7 +134,8 @@
         <Radiobutton
           class="order__payment__item__radio"
           id="payment_type"
-          :value="0"
+          :value="true"
+          trueValue="true"
           v-model="payment_type"
         />
         <p class="order__payment__item__name">Наличными при получении</p>
@@ -138,7 +144,8 @@
         <Radiobutton
           class="order__payment__item__radio"
           id="payment_type"
-          :value="1"
+          :value="false"
+          trueValue="false"
           v-model="payment_type"
         />
         <p class="order__payment__item__name">Перевод на банковсвкую карту</p>
@@ -182,23 +189,26 @@ export default {
       apartment: null,
       intercom: null,
       additional: null,
-      payment_type: 0,
+      payment_type: 2,
       door_delivery: false,
       delivery_price: null,
-      door_delivery_price: null
+      door_delivery_price: null,
     };
   },
-  fetchOnServer:false,
-  fetch(){
-    if(!this.$store.state.cart.partner.id)return;
-    this.$axios.get("/api/shops/delivery",{params:{
-      shop_id: this.$store.state.cart.partner.id
-    }}).then(({data: {delivery}})=>{
-
-      this.delivery_price = delivery.delivery_price;
-      this.door_delivery_price = delivery.door_delivery_price;
-    });
-  }
+  fetchOnServer: false,
+  fetch() {
+    if (!this.$store.state.cart.partner.id) return;
+    this.$axios
+      .get("/api/shops/delivery", {
+        params: {
+          shop_id: this.$store.state.cart.partner.id,
+        },
+      })
+      .then(({ data: { delivery } }) => {
+        this.delivery_price = delivery.delivery_price;
+        this.door_delivery_price = delivery.door_delivery_price;
+      });
+  },
 };
 </script>
 <style lang="scss" scoped>

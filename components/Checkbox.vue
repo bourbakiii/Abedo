@@ -31,7 +31,7 @@ export default {
     id: {
       required: true,
     },
-    value: { type: String },
+    value: { required: false, },
     modelValue: { default: "" },
     trueValue: { default: true },
     falseValue: { default: false },
