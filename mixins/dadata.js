@@ -27,6 +27,49 @@ export default {
                         this.suggestions = suggestions;
                     });
             }, 500);
-        }
+        },
+        set_address(address) {
+            this.address = { ...this.address, ...address.data, ...address, intercom: null };
+            delete this.address["data"];
+
+            this.suggestions = [];
+        },
+        action({
+            id = null,
+            street,
+            name,
+            city,
+            house,
+            intercom,
+            entrance,
+            floor,
+            flat: apartment,
+            geo_lat: lat,
+            geo_lon: lon,
+        }) {
+
+            this.$axios
+                .post("api/user/saveAddress", null, {
+                    params: {
+                        id,
+                        street,
+                        name,
+                        city,
+                        house,
+                        intercom,
+                        entrance,
+                        floor,
+                        apartment,
+                        lat,
+                        lon,
+                    },
+                    headers: {
+                        Authorization: `Bearer ${this.$store.state.account.token}`,
+                    },
+                })
+                .then(() => {
+                    this.$emit("close");
+                });
+        },
     }
 }

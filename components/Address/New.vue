@@ -1,15 +1,20 @@
 <template>
-  <div class="address-item new-address address">
-    <p class="address-item__name" contenteditable>
-      {{ address.name }}
-    </p>
-        <div class="address-item__content">
-      <div class="address-item__content__dadata" id="address-item__content__dadata-new-address">
+  <form @submit.prevent="action(address)" class="address-item new-address address">
+    <input
+      required
+      type="text"
+      v-model="address.name"
+      placeholder="Введите название"
+      class="address-item__name"
+      contenteditable
+    />
+    <div class="address-item__content">
+      <div
+        class="address-item__content__dadata"
+        id="address-item__content__dadata-new-address"
+      >
         <InputBlock
-          class="
-            address-item__content__input-block
-            address-item__content__input-block_dadata
-          "
+          class="address-item__content__input-block address-item__content__input-block_dadata"
           id="new-address-dadata"
           name=""
           text="Адрес доставки"
@@ -27,6 +32,7 @@
             class="address-item__content__dadata__suggestions"
           >
             <button
+              type="button"
               :key="address.value"
               v-for="address in suggestions"
               class="address-item__content__dadata__suggestions__address"
@@ -39,10 +45,7 @@
       </div>
       <div class="address-item__content__smalls">
         <InputBlock
-          class="
-            address-item__content__input-block
-            address-item__content__input-block_intercom
-          "
+          class="address-item__content__input-block address-item__content__input-block_intercom"
           id="new-address-intercom"
           name=""
           text="№ домофона"
@@ -50,10 +53,7 @@
           @input="address.intercom = $event"
         />
         <InputBlock
-          class="
-            address-item__content__input-block
-            address-item__content__input-block_entrance
-          "
+          class="address-item__content__input-block address-item__content__input-block_entrance"
           id="new-address-entrance"
           name=""
           text="Подъезд"
@@ -61,10 +61,7 @@
           @input="address.entrance = $event"
         />
         <InputBlock
-          class="
-            address-item__content__input-block
-            address-item__content__input-block_floor
-          "
+          class="address-item__content__input-block address-item__content__input-block_floor"
           id="new-address-floor"
           name=""
           text="Этаж"
@@ -72,10 +69,7 @@
           @input="address.floor = $event"
         />
         <InputBlock
-          class="
-            address-item__content__input-block
-            address-item__content__input-block_flat
-          "
+          class="address-item__content__input-block address-item__content__input-block_flat"
           id="new-address-flat"
           name=""
           text="№ квартиры/офиса"
@@ -85,10 +79,18 @@
       </div>
     </div>
     <div class="address-item__buttons">
-        <ButtonStandart class="address-item__buttons__button address-item__buttons__button_decline red">Отменить</ButtonStandart>
-        <ButtonStandart class="address-item__buttons__button address-item__buttons__button_accept green">Добавить</ButtonStandart>
+      <ButtonStandart
+        type="button"
+        @click="$emit('close')"
+        class="address-item__buttons__button address-item__buttons__button_decline red"
+        >Отменить</ButtonStandart
+      >
+      <ButtonStandart
+        class="address-item__buttons__button address-item__buttons__button_accept green"
+        >Добавить</ButtonStandart
+      >
     </div>
-  </div>
+  </form>
 </template>
 <script>
 import dadataMixin from "@/mixins/dadata.js";
@@ -99,22 +101,29 @@ export default {
       address: {},
     };
   },
-  mounted(){
-      document.addEventListener("scroll", () => {
-      if (window.scrollY > this.$store.state.variables.navigation_transition_to)
-        document.querySelector(".navigation-wrapper").classList.add("scaled");
-      else if (
-        window.scrollY < this.$store.state.variables.navigation_transition_back
-      )
-        document
-          .querySelector(".navigation-wrapper")
-          .classList.remove("scaled");
-    });
-  },
-  methods: {
-    set_address(address) {
-      this.address = address;
-      this.suggestions = [];
+  watch: {
+    suggestions(value) {
+      const dropdownClick = (event) => {
+        const dropdown_content = document.querySelector(
+          ".address-item__content__dadata__suggestions"
+        );
+        if (!dropdown_content) return;
+        let element_data = dropdown_content.getBoundingClientRect();
+        if (
+          !(
+            event.x >= element_data.x &&
+            event.x <= element_data.x + element_data.width &&
+            event.y >= element_data.y &&
+            event.y <= element_data.y + element_data.height
+          )
+        ) {
+          this.suggestions = [];
+          document.removeEventListener("click", dropdownClick);
+        }
+      };
+      if (value.length) {
+        document.addEventListener("click", dropdownClick);
+      } else document.removeEventListener("click", dropdownClick);
     },
   },
 };
@@ -126,6 +135,10 @@ export default {
   border: 1px solid $dark_grey;
   padding: 30px 30px 40px;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
   @media screen and (max-width: $tablet) {
     padding: 15px;
   }
@@ -140,6 +153,8 @@ export default {
     width: 100%;
     max-width: 100%;
     margin-bottom: 28px;
+    border: none;
+    outline: none;
   }
   &__content {
     display: flex;
@@ -241,21 +256,23 @@ export default {
         min-width: min-content;
       }
     }
-
   }
-  &__buttons{
-      width:100%;
-      display: flex;align-items: center;justify-content: flex-end;flex-direction: row;
-      margin-top:30px;
-      @media screen and (max-width: $tablet_start) {
-          margin-top:15px;
+  &__buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-top: 30px;
+    @media screen and (max-width: $tablet_start) {
+      margin-top: 15px;
+    }
+    &__button {
+      width: 150px;
+      &:first-child {
+        margin-right: 30px;
       }
-      &__button{
-          width:150px;
-          &:first-child{
-              margin-right: 30px;
-          }
-      }
+    }
   }
 }
 </style>

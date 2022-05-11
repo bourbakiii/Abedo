@@ -1,19 +1,21 @@
 <template>
-  <div class="address-item adress address">
-    <p class="address-item__name" contenteditable>
-      {{ address.name }}
-    </p>
+  <form @submit.prevent='action(address)' class="address-item adress address">
+    <input
+      v-model="address.name"
+      class="address-item__name"
+      contenteditable
+      :readonly="!editing"
+      :class='{editing}'
+    />
     <div class="address-item__content">
       <div class="address-item__content__dadata">
         <InputBlock
-          class="
-            address-item__content__input-block
-            address-item__content__input-block_dadata
-          "
+          class="address-item__content__input-block address-item__content__input-block_dadata"
           :id="`adress-${address.id}-dadata`"
           name=""
           text="Адрес доставки"
-          :value="address.value"
+          :value="parseAddress(address)"
+          :readonly="!editing"
           @input="
             ($event) => {
               address.value = $event;
@@ -25,6 +27,7 @@
           <div
             v-if="suggestions.length"
             class="address-item__content__dadata__suggestions"
+            :class="`address-item__content__dadata__suggestions-${address.id}`"
           >
             <button
               :key="address.value"
@@ -39,68 +42,135 @@
       </div>
       <div class="address-item__content__smalls">
         <InputBlock
-          class="
-            address-item__content__input-block
-            address-item__content__input-block_intercom
-          "
+          class="address-item__content__input-block address-item__content__input-block_intercom"
           :id="`adress-${address.id}-intercom`"
           name=""
           text="№ домофона"
           :value="address.intercom"
           @input="address.intercom = $event"
+          :readonly="!editing"
         />
         <InputBlock
-          class="
-            address-item__content__input-block
-            address-item__content__input-block_entrance
-          "
+          class="address-item__content__input-block address-item__content__input-block_entrance"
           :id="`adress-${address.id}-entrance`"
           name=""
           text="Подъезд"
           :value="address.entrance"
           @input="address.entrance = $event"
+          :readonly="!editing"
         />
         <InputBlock
-          class="
-            address-item__content__input-block
-            address-item__content__input-block_floor
-          "
+          class="address-item__content__input-block address-item__content__input-block_floor"
           :id="`adress-${address.id}-floor`"
           name=""
           text="Этаж"
           :value="address.floor"
           @input="address.floor = $event"
+          :readonly="!editing"
         />
         <InputBlock
-          class="
-            address-item__content__input-block
-            address-item__content__input-block_flat
-          "
+          class="address-item__content__input-block address-item__content__input-block_flat"
           :id="`adress-${address.id}-flat`"
           name=""
           text="№ квартиры/офиса"
           :value="address.flat"
           @input="address.flat = $event"
+          :readonly="!editing"
         />
       </div>
-      <ButtonStandart class="address-item__content__edit filled"
+      <ButtonStandart
+        class="address-item__content__edit filled"
+        v-if="!editing"
+        @click="editing = true"
         >Изменить</ButtonStandart
       >
     </div>
-  </div>
+    <div class="address-item__buttons" v-if="editing">
+      <ButtonStandart
+        type="button"
+        @click="stopEditing"
+        class="address-item__buttons__button address-item__buttons__button_decline red"
+        >Отменить</ButtonStandart
+      >
+      <ButtonStandart
+        class="address-item__buttons__button address-item__buttons__button_accept green"
+        >Изменить</ButtonStandart
+      >
+    </div>
+  </form>
 </template>
 <script>
 import dadataMixin from "@/mixins/dadata.js";
 export default {
   mixins: [dadataMixin],
+  props: {
+    store_address: {
+      required: true,
+    },
+  },
   data() {
     return {
+      suggestions: [],
       address: {},
+      start_address: {},
+      editing: false,
     };
   },
+  created() {
+    for (let key in this.store_address) {
+      if(key == 'apartment')
+      {
+        this.address.flat = this.store_address[key];
+      this.start_address.flat = this.store_address[key];
+      }
+      if(key == 'lat'){
+        this.address.geo_lat = this.store_address[key];
+      this.start_address.geo_lat = this.store_address[key];
+      }
+      if(key == 'lon'){
+        this.address.geo_lon = this.store_address[key];
+      this.start_address.geo_lon = this.store_address[key];
+      }
+      this.address[key] = this.store_address[key];
+      this.start_address[key] = this.store_address[key];
+    }
+  },
   methods: {
-    set_address(address) {
-      this.address = address;
+    stopEditing(){
+       for (let key in this.start_address) {
+         this.address[key] = this.start_address[key];
+       }
+      this.editing = false;
+    },
+    edit(){
+    },
+    parseAddress(address){
+      return `${address.city}, ${address.street} ${address.house}${address.block?', '+address.block:''}`
+    }
+  },
+  watch: {
+    suggestions(value) {
+      const dropdownAddressClick = (event) => {
+        const dropdown_content = document.querySelector(
+          `.address-item__content__dadata__suggestions-${this.address.id}`
+        );
+        if (!dropdown_content) return;
+        let element_data = dropdown_content.getBoundingClientRect();
+        if (
+          !(
+            event.x >= element_data.x &&
+            event.x <= element_data.x + element_data.width &&
+            event.y >= element_data.y &&
+            event.y <= element_data.y + element_data.height
+          )
+        ) {
+          this.suggestions = [];
+          document.removeEventListener("click", dropdownAddressClick);
+        }
+      };
+      if (value.length) {
+        document.addEventListener("click", dropdownAddressClick);
+      } else document.removeEventListener("click", dropdownAddressClick);
     },
   },
 };
@@ -126,6 +196,11 @@ export default {
     width: 100%;
     max-width: 100%;
     margin-bottom: 28px;
+    &:not(.editing){
+      outline: none;
+      border: none;
+      margin-bottom: 32px;
+    }
   }
   &__content {
     display: flex;
@@ -158,6 +233,7 @@ export default {
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
         padding-top: 7px;
         padding-bottom: 17px;
+        z-index: $z_navigation + 1;
         &__address {
           width: 100%;
           box-sizing: border-box;
@@ -247,16 +323,22 @@ export default {
       }
     }
   }
+  &__buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-top: 30px;
+    @media screen and (max-width: $tablet_start) {
+      margin-top: 15px;
+    }
+    &__button {
+      width: 150px;
+      &:first-child {
+        margin-right: 30px;
+      }
+    }
+  }
 }
 </style>
-  </div>
-</template>
-<script>
-export default {
-  props: {
-    address: {
-      required: true,
-    },
-  },
-};
-</script>

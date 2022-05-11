@@ -19,6 +19,7 @@
         :required="required"
         :autocomplete="autocomplete?'on':'off'"
         :minlength="minlength"
+        :readonly='readonly'
       />
     </div>
   </label>
@@ -67,6 +68,10 @@ export default {
     },
     value:{
       required:false
+    },
+    readonly:{
+      required:false,
+      default:false
     }
   },
 };

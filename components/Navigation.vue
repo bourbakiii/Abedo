@@ -115,7 +115,7 @@
                 История заказов
               </NuxtLink>
               <button
-              @click.prevent="$store.dispatch('account/logout')"
+                @click.prevent="$store.dispatch('account/logout')"
                 class="navigation__links-link__dropdown-content-link"
               >
                 Выход
@@ -203,21 +203,17 @@
       </div>
 
       <NuxtLink to="/cart" class="navigation__cart-block">
-   
-      
-        <span
-          class="navigation__cart-block-icon"
-        > 
-        <transition name="indicator" appear>
-        <client-only>
-
-
-          <div v-if='cart_products.length' class="navigation__cart-block-icon__indicator">
-            {{cart_products.length}}
-          </div>
-    </client-only>
-
-        </transition>
+        <span class="navigation__cart-block-icon">
+          <transition name="indicator" appear>
+            <client-only>
+              <div
+                v-if="cart_products.length"
+                class="navigation__cart-block-icon__indicator"
+              >
+                {{ cart_products.length }}
+              </div>
+            </client-only>
+          </transition>
 
           <svg
             class="navigation__cart-block-icon-svg"
@@ -232,14 +228,11 @@
               fill="#5C6784"
             />
           </svg>
-
         </span>
-        
+
         <p class="navigation__cart-block__text delete-note">Корзина</p>
       </NuxtLink>
-
     </div>
-
   </div>
 </template>
 
@@ -262,19 +255,19 @@ export default {
       show_dropdown: false,
     };
   },
-  methods:{
-    dropdownClick(){
-      if(this.token) this.show_dropdown = !this.show_dropdown;
-      else this.$store.commit("modals/open", {modal_name:"login"});
-    }
+  methods: {
+    dropdownClick() {
+      if (this.token) this.show_dropdown = !this.show_dropdown;
+      else this.$store.commit("modals/open", { modal_name: "login" });
+    },
   },
-  computed:{
-    token(){
+  computed: {
+    token() {
       return this.$store.state.account.token;
     },
-    cart_products(){
+    cart_products() {
       return this.$store.state.cart.products;
-    }
+    },
   },
   watch: {
     "$route.path": {
@@ -345,7 +338,7 @@ export default {
       &__icon {
         margin-right: 10px;
       }
-      &:hover{
+      &:hover {
         svg * {
           fill: inherit;
         }
@@ -416,7 +409,6 @@ export default {
             padding-top: 7px;
             padding-bottom: 17px;
             &-link {
-
               width: 100%;
               box-sizing: border-box;
               text-decoration: none;
@@ -429,7 +421,7 @@ export default {
               flex-direction: row;
               transition: $transition;
               background-color: $white;
-                      outline:none;
+              outline: none;
               &:active {
                 transform: scale(0.98);
               }

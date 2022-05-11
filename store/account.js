@@ -14,10 +14,12 @@ export const mutations = {
             state.favourites = [];
         localStorage.setItem('account', JSON.stringify(state));
     },
+    editAddressKey(state, params){
+        state.user.addresses[state.user.addresses.map(el=>+el.id).indexOf(params.id)][params.key] = params.value;
+    },
     local_set(state) {
         const local_data = JSON.parse(localStorage.getItem('account'));
         if (local_data) for (const key in state) state[key] = local_data[key] ?? null
-
     }
 };
 

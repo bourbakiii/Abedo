@@ -7,10 +7,19 @@
           Адреса доставки
         </h1>
         <div class="addresses-page__content__addresses__content">
-          <AddressItem v-for='address in addresses'  :key='address.id' :address='address'/>
+          <AddressItem
+            class="addresses-page__content__addresses__content__item"
+            :key="address.id"
+            v-for="address in addresses"
+            :store_address="address"
+          />
         </div>
         <transition name="add-address-form" mode="out-in">
-          <AddressNew class="addresses-page__content__addresses__new" v-if='show_add_form' />
+          <AddressNew
+            @close="show_add_form = false"
+            class="addresses-page__content__addresses__new"
+            v-if="show_add_form"
+          />
           <ButtonStandart
             v-else
             @click="show_add_form = true"
@@ -42,38 +51,17 @@ export default {
   mixins: [dadataMixin],
   data() {
     return {
-      show_add_form: true,
-      addresses: []
-     
+      show_add_form: false,
     };
   },
-  methods: {
-    set_new_address(address) {
-      this.new_address = Object.assign(this.new_address, {
-        value: address.value,
-        ...address.data,
-      });
-      this.suggestions.new_address = [];
+  computed: {
+    addresses() {
+      return this.$store.state.account.user.addresses ?? [];
     },
-    
   },
 };
 </script>
 <style lang="scss" scoped>
-.add-address-form {
-  &-enter,
-  &-leave-to {
-    opacity: 0;
-    &.addresses-page__content__addresses__new {
-      min-height: 0px !important;
-      max-height: 0px !important;
-    }
-  }
-  &-enter-active,
-  &-leave-active {
-    transition: all $transition;
-  }
-}
 .addresses-page {
   &__content {
     flex-grow: 1;
@@ -102,13 +90,11 @@ export default {
         align-items: center;
         justify-content: flex-start;
         flex-direction: column;
-        overflow: hidden;
         max-width: 100%;
         width: 100%;
         border: 1px $dark_grey;
-        
       }
-      
+
       &__add {
         margin-top: 40px;
         width: 245px;
