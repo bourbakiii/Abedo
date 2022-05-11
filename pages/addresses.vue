@@ -93,10 +93,10 @@ export default {
         max-width: 100%;
         width: 100%;
         border: 1px $dark_grey;
+        margin-bottom: 40px;
       }
 
       &__add {
-        margin-top: 40px;
         width: 245px;
         &:hover & {
           &__icon {

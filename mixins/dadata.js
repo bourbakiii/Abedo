@@ -1,8 +1,11 @@
+import errorsMessages from "./errors-messages";
 export default {
+    mixins: [errorsMessages],
     data() {
         return {
             dadata_timer: null,
-            suggestions: []
+            suggestions: [],
+            errors: []
         }
     },
     methods: {
@@ -29,6 +32,7 @@ export default {
             }, 500);
         },
         set_address(address) {
+            this.address.house = null;
             this.address = { ...this.address, ...address.data, ...address, intercom: null };
             delete this.address["data"];
 
@@ -69,7 +73,15 @@ export default {
                 })
                 .then(() => {
                     this.$emit("close");
-                });
+                    if(this.editing != undefined) this.editing = false;
+                }).catch(({ response }) => {
+                    if ((response.status == 422)) {
+                      this.errors = Object.values(response.data.errors)
+                        .map((el) => el.flat())
+                        .flat();
+                    }
+                  });
+              
         },
     }
 }

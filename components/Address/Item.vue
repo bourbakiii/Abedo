@@ -1,11 +1,11 @@
 <template>
-  <form @submit.prevent='action(address)' class="address-item adress address">
+  <form @submit.prevent="action(address)" class="address-item adress address">
     <input
       v-model="address.name"
       class="address-item__name"
       contenteditable
       :readonly="!editing"
-      :class='{editing}'
+      :class="{ editing }"
     />
     <div class="address-item__content">
       <div class="address-item__content__dadata">
@@ -14,10 +14,12 @@
           :id="`adress-${address.id}-dadata`"
           name=""
           text="Адрес доставки"
-          :value="parseAddress(address)"
+          :value="address.value?address.value:parseAddress(address)"
           :readonly="!editing"
+          :autocomplete='false'
           @input="
             ($event) => {
+               address.house = null;
               address.value = $event;
               get_dadata();
             }
@@ -30,6 +32,7 @@
             :class="`address-item__content__dadata__suggestions-${address.id}`"
           >
             <button
+            type='button'
               :key="address.value"
               v-for="address in suggestions"
               class="address-item__content__dadata__suggestions__address"
@@ -78,25 +81,49 @@
           :readonly="!editing"
         />
       </div>
-      <ButtonStandart
-        class="address-item__content__edit filled"
-        v-if="!editing"
-        @click="editing = true"
-        >Изменить</ButtonStandart
-      >
+      <transition name="edit-button">
+        <ButtonStandart
+          type="button"
+          class="address-item__content__edit filled"
+          v-if="!editing"
+          @click="
+              editing = true;
+          "
+          >Изменить</ButtonStandart
+        >
+      </transition>
     </div>
-    <div class="address-item__buttons" v-if="editing">
-      <ButtonStandart
-        type="button"
-        @click="stopEditing"
-        class="address-item__buttons__button address-item__buttons__button_decline red"
-        >Отменить</ButtonStandart
+    <transition name="address-item__buttons-transition">
+      <div class="address-item__buttons" v-if="editing">
+        <ButtonStandart
+          type="button"
+          @click="stopEditing"
+          class="address-item__buttons__button address-item__buttons__button_decline red"
+          >Отменить</ButtonStandart
+        >
+        <ButtonStandart
+          class="address-item__buttons__button address-item__buttons__button_accept green"
+          >Изменить</ButtonStandart
+        >
+      </div>
+    </transition>
+    <transition-group
+      tag="div"
+      class="address-item__errors"
+      name="message"
+      appear
+      mode="out-in"
+      :class="{
+        'address-item__errors_margined': errors.length,
+      }"
+    >
+      <Message
+        v-for="error in errors"
+        :key="error"
+        class="address-item__errors__item_error address-item__errors__item"
+        >{{ error }}</Message
       >
-      <ButtonStandart
-        class="address-item__buttons__button address-item__buttons__button_accept green"
-        >Изменить</ButtonStandart
-      >
-    </div>
+    </transition-group>
   </form>
 </template>
 <script>
@@ -118,35 +145,34 @@ export default {
   },
   created() {
     for (let key in this.store_address) {
-      if(key == 'apartment')
-      {
+      if (key == "apartment") {
         this.address.flat = this.store_address[key];
-      this.start_address.flat = this.store_address[key];
+        this.start_address.flat = this.store_address[key];
       }
-      if(key == 'lat'){
+      if (key == "lat") {
         this.address.geo_lat = this.store_address[key];
-      this.start_address.geo_lat = this.store_address[key];
+        this.start_address.geo_lat = this.store_address[key];
       }
-      if(key == 'lon'){
+      if (key == "lon") {
         this.address.geo_lon = this.store_address[key];
-      this.start_address.geo_lon = this.store_address[key];
+        this.start_address.geo_lon = this.store_address[key];
       }
       this.address[key] = this.store_address[key];
       this.start_address[key] = this.store_address[key];
     }
   },
   methods: {
-    stopEditing(){
-       for (let key in this.start_address) {
-         this.address[key] = this.start_address[key];
-       }
+    stopEditing() {
+      for (let key in this.start_address) {
+        this.address[key] = this.start_address[key];
+      }
       this.editing = false;
     },
-    edit(){
+    parseAddress(address) {
+      return `${address.city}, ${address.street} ${address.house}${
+        address.block ? ", " + address.block : ""
+      }`;
     },
-    parseAddress(address){
-      return `${address.city}, ${address.street} ${address.house}${address.block?', '+address.block:''}`
-    }
   },
   watch: {
     suggestions(value) {
@@ -168,14 +194,49 @@ export default {
           document.removeEventListener("click", dropdownAddressClick);
         }
       };
-      if (value.length) {
+      if (value.length)
         document.addEventListener("click", dropdownAddressClick);
-      } else document.removeEventListener("click", dropdownAddressClick);
+      else document.removeEventListener("click", dropdownAddressClick);
     },
   },
 };
 </script>
 <style lang="scss" scoped>
+.edit-button {
+  &-enter,
+  &-leave-to {
+    
+    opacity: 0;
+     height: 0px !important;
+      margin-left: auto !important;
+      margin-top: 0px !important;
+    @media screen and (min-width: $phone) {
+      height: 50px !important;
+     width: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin: 0px !important;
+    }
+  }
+  &-enter-active,
+  &-leave-active {
+    transition: all $transition;
+  }
+}
+.address-item__buttons-transition {
+  &-enter,
+  &-leave-to {
+    margin-top: 0px !important;
+    opacity: 0 !important;
+    button{
+      height: 0px !important;
+    }
+  }
+  &-enter-active,
+  &-leave-active {
+    transition: all $transition;
+  }
+}
 .address-item {
   background-color: $white;
   width: 100%;
@@ -196,9 +257,11 @@ export default {
     width: 100%;
     max-width: 100%;
     margin-bottom: 28px;
-    &:not(.editing){
-      outline: none;
-      border: none;
+    outline: none;
+    transition: all $transition;
+    border: 1px solid $black;
+    &:not(.editing) {
+      border: 1px solid transparent;
       margin-bottom: 32px;
     }
   }
@@ -340,5 +403,20 @@ export default {
       }
     }
   }
+   &__errors {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      width: 100%;
+      transition: 0.3s;
+      &_margined {
+        margin-top: 15px;
+      }
+      transition: calc($transition * 2);
+      .empty {
+        margin-top: 0px;
+      }
+    }
 }
 </style>
