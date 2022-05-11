@@ -1,8 +1,12 @@
 <template>
   <form class="order">
     <div class="order__buttons">
-      <ButtonStandart class="order__buttons__button active">Доставка </ButtonStandart>
-      <ButtonStandart class="order__buttons__button order__buttons__button_self">
+      <ButtonStandart class="order__buttons__button active"
+        >Доставка
+      </ButtonStandart>
+      <ButtonStandart
+        class="order__buttons__button order__buttons__button_self"
+      >
         Самовывоз
       </ButtonStandart>
     </div>
@@ -93,49 +97,49 @@
           />
         </div>
       </div>
-      <div class="order__delivery__prices">
-        <div class="order__delivery__prices__item">
+      <div class="order__delivery__prices" v-if="delivery_price || door_delivery_price">
+        <div class="order__delivery__prices__item" v-if="delivery_price">
           <div class="order__delivery__prices__item__name-block">
             <p class="order__delivery__prices__item__name">
               Стоимость доставки
             </p>
           </div>
-          <p class="order__delivery__prices__item__price">120 ₽</p>
+          <p class="order__delivery__prices__item__price">{{delivery_price}} ₽</p>
         </div>
-        <div class="order__delivery__prices__item">
+        <div class="order__delivery__prices__item" v-if='door_delivery_price'>
           <div class="order__delivery__prices__item__name-block">
             <Checkbox
               id="door_delivery"
               class="order__delivery__prices__item__checkbox"
               value="true"
               v-model="door_delivery"
-              disabled='true'
+              disabled="true"
             />
             <p class="order__delivery__prices__item__name">
               Стоимость доставки
             </p>
           </div>
-          <p class="order__delivery__prices__item__price">+ 20 ₽</p>
+          <p class="order__delivery__prices__item__price">+ {{door_delivery_price}} ₽</p>
         </div>
       </div>
     </div>
     <div class="order__payment">
       <h3 class="order__payment__title title-extra-normal">Оплата</h3>
-      <label for='payment_type-0' class="order__payment__item">
+      <label for="payment_type-0" class="order__payment__item">
         <Radiobutton
           class="order__payment__item__radio"
-        id="payment_type"
-        :value="0"
-        v-model="payment_type"
+          id="payment_type"
+          :value="0"
+          v-model="payment_type"
         />
         <p class="order__payment__item__name">Наличными при получении</p>
       </label>
-      <label for='payment_type-1' class="order__payment__item">
+      <label for="payment_type-1" class="order__payment__item">
         <Radiobutton
-               class="order__payment__item__radio"
-        id="payment_type"
-        :value="1"
-        v-model="payment_type"
+          class="order__payment__item__radio"
+          id="payment_type"
+          :value="1"
+          v-model="payment_type"
         />
         <p class="order__payment__item__name">Перевод на банковсвкую карту</p>
       </label>
@@ -180,8 +184,21 @@ export default {
       additional: null,
       payment_type: 0,
       door_delivery: false,
+      delivery_price: null,
+      door_delivery_price: null
     };
   },
+  fetchOnServer:false,
+  fetch(){
+    if(!this.$store.state.cart.partner.id)return;
+    this.$axios.get("/api/shops/delivery",{params:{
+      shop_id: this.$store.state.cart.partner.id
+    }}).then(({data: {delivery}})=>{
+
+      this.delivery_price = delivery.delivery_price;
+      this.door_delivery_price = delivery.door_delivery_price;
+    });
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -210,11 +227,11 @@ export default {
       margin-right: 30px;
       height: 45px;
       width: 157px;
-      &.active{
+      &.active {
         background-color: $darkblue;
-        color:$white;
+        color: $white;
       }
-      &_self{
+      &_self {
         background-color: $dark_grey;
         border-color: transparent;
         color: $black;
