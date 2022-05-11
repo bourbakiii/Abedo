@@ -7,6 +7,9 @@
       :readonly="!editing"
       :class="{ editing }"
     />
+    <button @click='remove' type='button' class="address-item__remove">
+      Удалить
+    </button>
     <div class="address-item__content">
       <div class="address-item__content__dadata">
         <InputBlock
@@ -162,6 +165,13 @@ export default {
     }
   },
   methods: {
+    remove(){
+      this.$axios.delete(`/api/user/address/${this.address.id}/delete`,{
+        headers:{
+          Authorization: `Bearer ${this.$store.state.account.token}`
+        }
+      }).then(()=>{});
+    },
     stopEditing() {
       for (let key in this.start_address) {
         this.address[key] = this.start_address[key];
@@ -243,8 +253,23 @@ export default {
   border: 1px solid $dark_grey;
   padding: 30px 30px 40px;
   border-radius: 20px;
+    position: relative;
   @media screen and (max-width: $tablet) {
     padding: 15px;
+  }
+  &__remove{
+    position: absolute;
+    top: 19px; right: 13px;
+
+font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 17px;
+background-color: transparent;
+border: none;
+outline:none;
+color:$red;
   }
   &__name {
     font-family: "SF Pro Display";
