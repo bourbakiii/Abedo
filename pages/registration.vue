@@ -138,7 +138,7 @@ export default {
           });
         })
         .catch(({ response }) => {
-          if ((response.status == 422)) {
+          if ((response?.status == 422)) {
             this.errors = Object.values(response.data.errors)
               .map((el) => el.flat())
               .flat();

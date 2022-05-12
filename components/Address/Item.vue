@@ -174,9 +174,7 @@ export default {
               Authorization: `Bearer ${this.$store.state.account.token}`,
             },
           })
-          .then(() => {
-            this.$emit("deleteDefaults");
-          });
+          .then(() => {});
       } else {
         await this.$axios
           .post("/api/user/address/default/remove", null, {
@@ -187,9 +185,7 @@ export default {
               Authorization: `Bearer ${this.$store.state.account.token}`,
             },
           })
-          .then(() => {
-            this.$emit("deleteDefaults");
-          });
+          .then(() => {});
       }
     },
     remove() {
@@ -214,8 +210,8 @@ export default {
       for (let key in this.start_address)
         this.address[key] = this.start_address[key];
       this.editing = false;
+      
     },
-    
   },
   watch: {
     suggestions(value) {
@@ -241,7 +237,14 @@ export default {
         document.addEventListener("click", dropdownAddressClick);
       else document.removeEventListener("click", dropdownAddressClick);
     },
-    "$store.state.account.user"() {},
+    // address: {
+    //   handler(value) {
+    //     console.log(value);
+    //     console.log("the adress is changed");
+    //     this.$emit("change_address", value);
+    //   },
+    //   deep: true,
+    // },
   },
 };
 </script>

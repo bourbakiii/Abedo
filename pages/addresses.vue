@@ -12,7 +12,6 @@
             :key="address.id"
             v-for="address in addresses"
             :given_address="address"
-            @clear_defaults="clear_defaults"
           />
         </div>
         <transition name="add-address-form" mode="out-in">
@@ -55,13 +54,7 @@ export default {
       show_add_form: false,
     };
   },
-  methods: {
-    clear_defaults() {
-      this.$store.commit("account/action", (state) => {
-        state.user.addresses.forEach((el) => (el.is_default = false));
-      });
-    },
-  },
+
   computed: {
     addresses() {
       return this.$store.state.account.user.addresses;

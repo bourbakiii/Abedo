@@ -96,7 +96,7 @@ export default {
             this.$store.commit("modals/close");
           });
       }).catch((error)=>{
-        if (error?.response.status == 422) {
+        if (error?.response?.status == 422) {
             this.errors = Object.values(error.response.data.errors)
               .map((el) => el.flat())
               .flat();

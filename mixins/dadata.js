@@ -46,7 +46,16 @@ export default {
                 })
                 .then(({ data }) => {
                     this.$emit("close");
-                    if (this.editing != undefined) this.editing = false;
+                    if (this.editing != undefined) {
+                        this.editing = false;
+                        console.log('legalize it');
+                        console.log(this.address);
+                        this.$store.commit("account/action", (state) => {
+                            state.user.addresses[
+                              state.user.addresses.map((el) => +el.id).indexOf(+value.id)
+                            ] = this.address;
+                          });
+                    }
                     if (!id) {
                         data.address.is_default = 0;
                         this.$store.commit("account/action", (state) => {
@@ -54,7 +63,7 @@ export default {
                         });
                     }
                 }).catch(({ response }) => {
-                    if ((response.status == 422)) {
+                    if ((response?.status == 422)) {
                         this.errors = Object.values(response.data.errors)
                             .map((el) => el.flat())
                             .flat();
