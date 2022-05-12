@@ -37,38 +37,12 @@ export default {
             delete this.address["data"];
             this.suggestions = [];
         },
-        action({
-            id = null,
-            street,
-            name,
-            city,
-            house,
-            intercom,
-            entrance,
-            floor,
-            flat: apartment,
-            geo_lat: lat,
-            geo_lon: lon,
-        }) {
+        action({ id = null, street, name, city, house, intercom, entrance, floor, flat: apartment, geo_lat: lat, geo_lon: lon }, type) {
 
             this.$axios
                 .post("api/user/saveAddress", null, {
-                    params: {
-                        id,
-                        street,
-                        name,
-                        city,
-                        house,
-                        intercom,
-                        entrance,
-                        floor,
-                        apartment,
-                        lat,
-                        lon,
-                    },
-                    headers: {
-                        Authorization: `Bearer ${this.$store.state.account.token}`,
-                    },
+                    params: { id, street, name, city, house, intercom, entrance, floor, apartment, lat, lon },
+                    headers: { Authorization: `Bearer ${this.$store.state.account.token}` },
                 })
                 .then(({ data }) => {
                     this.$emit("close");

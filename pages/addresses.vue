@@ -11,7 +11,7 @@
             class="addresses-page__content__addresses__content__item"
             :key="address.id"
             v-for="address in addresses"
-            :store_address="address"
+            :given_address="address"
             @clear_defaults="clear_defaults"
           />
         </div>
@@ -55,23 +55,18 @@ export default {
       show_add_form: false,
     };
   },
-  methods:{
-    clear_defaults(){
-      this.$store.commit('account/action', (state)=>{
-            state.user.addresses.forEach(el=>el.is_default = false)
-          });
-    }
+  methods: {
+    clear_defaults() {
+      this.$store.commit("account/action", (state) => {
+        state.user.addresses.forEach((el) => (el.is_default = false));
+      });
+    },
   },
   computed: {
     addresses() {
-      return this.$store.state.account.user.addresses ?? [];
+      return this.$store.state.account.user.addresses;
     },
   },
-  watch:{
-    addresses(){
-      console.log("addresses edsited");
-    }
-  }
 };
 </script>
 <style lang="scss" scoped>
@@ -107,10 +102,10 @@ export default {
         width: 100%;
         border: 1px $dark_grey;
         margin-bottom: 40px;
-        &__item{
+        &__item {
           margin-bottom: 15px;
-          &:last-of-type{
-            margin-bottom:0px;
+          &:last-of-type {
+            margin-bottom: 0px;
           }
         }
       }

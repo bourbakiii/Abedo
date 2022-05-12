@@ -34,6 +34,12 @@ export const actions = {
                 user.addresses.forEach(el => {
                     el.is_default = Boolean(el.is_default);
                     el.value = `${el.city}, ${el.street} ${el.house}${el.block ? ", " + el.block : ""}`;
+                    el.flat = el.apartment;
+                    el.get_lat = el.lat;
+                    el.get_lon = el.lon;
+                    delete el.apartment;
+                    delete el.lat;
+                    delete el.lon;
                 });
                 state.user = user;
             })
