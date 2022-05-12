@@ -1,12 +1,12 @@
 <template>
-  <label :class='{"checked": isChecked, "disabled": disabled}' class="checkbox">
+  <label :class="{ checked: isChecked, disabled: disabled }" class="checkbox">
     <input
       class="checkbox__input"
       type="checkbox"
       :checked="isChecked"
       :value="value"
       @change="updateInput"
-      :disabled='disabled'
+      :disabled="disabled"
     />
     <svg
       class="checkbox__icon"
@@ -31,7 +31,7 @@ export default {
     id: {
       required: true,
     },
-    value: { required: false, },
+    value: { required: false },
     modelValue: { default: "" },
     trueValue: { default: true },
     falseValue: { default: false },
@@ -94,7 +94,7 @@ export default {
       stroke: $white;
     }
   }
-  &.disabled{
+  &.disabled {
     background-color: $dark_grey;
   }
   &__input {

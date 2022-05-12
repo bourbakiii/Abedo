@@ -21,6 +21,7 @@
       type="text"
       text="Телефон"
       error="true"
+      :value="phone"
     />
     <div class="order__delivery">
       <div class="order__delivery__content">
@@ -37,16 +38,18 @@
         </div>
         <div class="order__delivery__content__content">
           <div class="order__delivery__content__content__address">
-            <InputBlock
-              @input="inputBlockChange"
-              placeholder="Введите адрес доставки"
-              class="order__delivery__content__content__address__dadata"
-              name="dadata"
-              id="dadata"
-              type="text"
-              text="Адрес доставки"
-              error="true"
-            />
+            <div class="order__delivery__content__content__address__dadata">
+              <InputBlock
+                @input="inputBlockChange"
+                placeholder="Введите адрес доставки"
+                class="order__delivery__content__content__address__dadata__input"
+                name="dadata"
+                id="dadata"
+                type="text"
+                text="Адрес доставки"
+                error="true"
+              />
+            </div>
             <InputBlock
               @input="inputBlockChange"
               placeholder=""
@@ -97,6 +100,7 @@
           />
         </div>
       </div>
+      {{addresses_names}}
       <div
         class="order__delivery__prices"
         v-if="delivery_price || door_delivery_price"
@@ -182,12 +186,18 @@ export default {
   mixins: [inputBlockMixin],
   data() {
     return {
-      phone: null,
-      address: null,
-      entrance: null,
-      floor: null,
-      apartment: null,
-      intercom: null,
+      phone: this.$store.state.account.user.phone ?? null,
+      address: {
+        name: null,
+        value: null,
+        street: null,
+        entrance: null,
+        floor: null,
+        flat: null,
+        intercom: null,
+        city: null,
+        hose: null,
+      },
       additional: null,
       payment_type: 2,
       door_delivery: false,
@@ -208,6 +218,21 @@ export default {
         this.delivery_price = delivery.delivery_price;
         this.door_delivery_price = delivery.door_delivery_price;
       });
+  },
+  computed: {
+    addresses_names() {
+      return (this.$store.state.account?.user.addresses ?? []).map(
+        (el) => el.name
+      );
+    },
+  },
+  watch: {
+    "$store.state.account": {
+      handler() {
+        this.phone = this.$store.state.account.user.phone ?? null;
+      },
+      deep: true,
+    },
   },
 };
 </script>

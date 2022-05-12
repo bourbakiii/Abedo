@@ -94,6 +94,20 @@
         >
       </transition>
     </div>
+    {{ address.id_default }}
+
+    <label
+      :for="`address-item__default-${address.id}`"
+      class="address-item__default"
+    >
+      <Checkbox
+        :id="`address-item__default-${address.id}`"
+        class="address-item__default__checkbox"
+        v-model="address.is_default"
+        @change="change_default"
+      />
+      <p class="address-item__default__text">По умолчанию</p>
+    </label>
     <transition name="address-item__buttons-transition">
       <div class="address-item__buttons" v-if="editing">
         <ButtonStandart
@@ -139,7 +153,7 @@ export default {
   data() {
     return {
       suggestions: [],
-      address: {},
+      address: { is_default: false },
       start_address: {},
       editing: false,
     };
@@ -163,6 +177,33 @@ export default {
     }
   },
   methods: {
+    async change_default(value) {
+      if (value) {
+        await this.$axios.post("/api/user/address/default", null, {
+          params: {
+            id: this.address.id,
+          },
+          headers: {
+            Authorization: `Bearer ${this.$store.state.account.token}`,
+          },
+        }).then(()=>{
+          this.$emit('deleteDefaults');
+          
+        });
+      } else {
+        await this.$axios.post("/api/user/address/default/remove", null, {
+          params: {
+            id: this.address.id,
+          },
+          headers: {
+            Authorization: `Bearer ${this.$store.state.account.token}`,
+          },
+        }).then(()=>{
+          
+          this.$emit('deleteDefaults');
+          });
+      }
+    },
     remove() {
       this.$axios
         .delete(`/api/user/address/${this.address.id}/delete`, {
@@ -217,6 +258,9 @@ export default {
         document.addEventListener("click", dropdownAddressClick);
       else document.removeEventListener("click", dropdownAddressClick);
     },
+    '$store.state.account.user'(){
+      
+    }
   },
 };
 </script>
@@ -246,6 +290,9 @@ export default {
   &-leave-to {
     margin-top: 0px !important;
     opacity: 0 !important;
+    label {
+      height: 0px;
+    }
     button {
       height: 0px !important;
     }
@@ -293,7 +340,7 @@ export default {
     margin-bottom: 28px;
     outline: none;
     transition: all $transition;
-    border:none;
+    border: none;
     border-bottom: 1px solid $black;
     &:not(.editing) {
       border-bottom: 1px solid transparent;
@@ -419,6 +466,18 @@ export default {
         margin-top: 15px;
         width: 150px;
       }
+    }
+  }
+  &__default {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    align-self: flex-start;
+    width: max-content;
+    margin: 10px 0px;
+    &__text {
+      margin-left: 10px;
     }
   }
   &__buttons {

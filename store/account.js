@@ -31,6 +31,8 @@ export const actions = {
             }
         }).then(async ({ data: { user } }) => {
             await state.commit("action", (state) => {
+                user.addresses.forEach(el=>el.is_default = Boolean(el.is_default));
+                console.log(user);
                 state.user = user;
             })
             await state.dispatch("favourites");

@@ -74,9 +74,12 @@ export default {
                 .then(({data}) => {
                     this.$emit("close");
                     if(this.editing != undefined) this.editing = false;
-                    if(!id)  this.$store.commit("account/action", (state) => {
+                    if(!id) {
+                        data.address.is_default = 0;
+                        this.$store.commit("account/action", (state) => {
                         state.user.addresses.push(data.address);
                       });
+                    }
                 }).catch(({ response }) => {
                     if ((response.status == 422)) {
                       this.errors = Object.values(response.data.errors)
