@@ -17,7 +17,7 @@
           :id="`adress-${address.id}-dadata`"
           name=""
           text="Адрес доставки"
-          :value="address.value ? address.value : parseAddress(address)"
+          :value="address.value"
           :readonly="!editing"
           :autocomplete="false"
           @input="
@@ -179,28 +179,30 @@ export default {
   methods: {
     async change_default(value) {
       if (value) {
-        await this.$axios.post("/api/user/address/default", null, {
-          params: {
-            id: this.address.id,
-          },
-          headers: {
-            Authorization: `Bearer ${this.$store.state.account.token}`,
-          },
-        }).then(()=>{
-          this.$emit('deleteDefaults');
-          
-        });
+        await this.$axios
+          .post("/api/user/address/default", null, {
+            params: {
+              id: this.address.id,
+            },
+            headers: {
+              Authorization: `Bearer ${this.$store.state.account.token}`,
+            },
+          })
+          .then(() => {
+            this.$emit("deleteDefaults");
+          });
       } else {
-        await this.$axios.post("/api/user/address/default/remove", null, {
-          params: {
-            id: this.address.id,
-          },
-          headers: {
-            Authorization: `Bearer ${this.$store.state.account.token}`,
-          },
-        }).then(()=>{
-          
-          this.$emit('deleteDefaults');
+        await this.$axios
+          .post("/api/user/address/default/remove", null, {
+            params: {
+              id: this.address.id,
+            },
+            headers: {
+              Authorization: `Bearer ${this.$store.state.account.token}`,
+            },
+          })
+          .then(() => {
+            this.$emit("deleteDefaults");
           });
       }
     },
@@ -228,11 +230,7 @@ export default {
       }
       this.editing = false;
     },
-    parseAddress(address) {
-      return `${address.city}, ${address.street} ${address.house}${
-        address.block ? ", " + address.block : ""
-      }`;
-    },
+    
   },
   watch: {
     suggestions(value) {
@@ -258,9 +256,7 @@ export default {
         document.addEventListener("click", dropdownAddressClick);
       else document.removeEventListener("click", dropdownAddressClick);
     },
-    '$store.state.account.user'(){
-      
-    }
+    "$store.state.account.user"() {},
   },
 };
 </script>

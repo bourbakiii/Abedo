@@ -14,8 +14,8 @@ export const mutations = {
             state.favourites = [];
         localStorage.setItem('account', JSON.stringify(state));
     },
-    editAddressKey(state, params){
-        state.user.addresses[state.user.addresses.map(el=>+el.id).indexOf(params.id)][params.key] = params.value;
+    editAddressKey(state, params) {
+        state.user.addresses[state.user.addresses.map(el => +el.id).indexOf(params.id)][params.key] = params.value;
     },
     local_set(state) {
         const local_data = JSON.parse(localStorage.getItem('account'));
@@ -27,18 +27,19 @@ export const actions = {
     async get(state) {
         await this.$axios.get(`/api/user`, {
             headers: {
-                "Authorization": "Bearer " + state.state.token
+                "Authorization": `Bearer ${state.state.token}`
             }
         }).then(async ({ data: { user } }) => {
-            await state.commit("action", (state) => {
-                user.addresses.forEach(el=>el.is_default = Boolean(el.is_default));
-                console.log(user);
+            await state.commit("action", state => {
+                user.addresses.forEach(el => {
+                    el.is_default = Boolean(el.is_default);
+                    el.value = `${el.city}, ${el.street} ${el.house}${el.block ? ", " + el.block : ""}`;
+                });
                 state.user = user;
             })
             await state.dispatch("favourites");
-        }).catch((error) => {
-            console.log(error.response);
-            if (error?.response.status == 401)
+        }).catch(error => {
+            if (error?.response?.status == 401)
                 state.dispatch("logout");
         })
     },

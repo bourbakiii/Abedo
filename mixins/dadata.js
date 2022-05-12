@@ -18,7 +18,7 @@ export default {
                         {
                             query: this.address.value,
                             locations: [{ region: "Северная Осетия - Алания" }],
-                        }, // data
+                        },
                         {
                             headers: {
                                 contentType: "application/json",
@@ -35,7 +35,6 @@ export default {
             this.address.house = null;
             this.address = { ...this.address, ...address.data, ...address, intercom: null };
             delete this.address["data"];
-
             this.suggestions = [];
         },
         action({
@@ -71,23 +70,23 @@ export default {
                         Authorization: `Bearer ${this.$store.state.account.token}`,
                     },
                 })
-                .then(({data}) => {
+                .then(({ data }) => {
                     this.$emit("close");
-                    if(this.editing != undefined) this.editing = false;
-                    if(!id) {
+                    if (this.editing != undefined) this.editing = false;
+                    if (!id) {
                         data.address.is_default = 0;
                         this.$store.commit("account/action", (state) => {
-                        state.user.addresses.push(data.address);
-                      });
+                            state.user.addresses.push(data.address);
+                        });
                     }
                 }).catch(({ response }) => {
                     if ((response.status == 422)) {
-                      this.errors = Object.values(response.data.errors)
-                        .map((el) => el.flat())
-                        .flat();
+                        this.errors = Object.values(response.data.errors)
+                            .map((el) => el.flat())
+                            .flat();
                     }
-                  });
-              
+                });
+
         },
     }
 }
