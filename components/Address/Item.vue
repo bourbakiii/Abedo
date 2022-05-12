@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent="action(address)" class="address-item adress address">
+  <form
+    @submit.prevent="action(address, 'edit')"
+    class="address-item adress address"
+  >
     <input
       v-model="address.name"
       class="address-item__name"
@@ -146,61 +149,57 @@ import dadataMixin from "@/mixins/dadata.js";
 export default {
   mixins: [dadataMixin],
   props: {
-    store_address: {
+    given_address: {
       required: true,
     },
   },
   data() {
     return {
       suggestions: [],
-      address: { is_default: false },
-      start_address: {},
+      address: this.given_address,
+      start_address: { ...this.given_address },
       editing: false,
     };
   },
-  created() {
-    for (let key in this.store_address) {
-      if (key == "apartment") {
-        this.address.flat = this.store_address[key];
-        this.start_address.flat = this.store_address[key];
-      }
-      if (key == "lat") {
-        this.address.geo_lat = this.store_address[key];
-        this.start_address.geo_lat = this.store_address[key];
-      }
-      if (key == "lon") {
-        this.address.geo_lon = this.store_address[key];
-        this.start_address.geo_lon = this.store_address[key];
-      }
-      this.address[key] = this.store_address[key];
-      this.start_address[key] = this.store_address[key];
-    }
-  },
+
   methods: {
     async change_default(value) {
       if (value) {
-        await this.$axios.post("/api/user/address/default", null, {
-          params: {
-            id: this.address.id,
-          },
-          headers: {
-            Authorization: `Bearer ${this.$store.state.account.token}`,
-          },
-        }).then(()=>{
-          this.$emit('deleteDefaults');
-          
-        });
+        await this.$axios
+          .post("/api/user/address/default", null, {
+            params: {
+              id: this.address.id,
+            },
+            headers: {
+              Authorization: `Bearer ${this.$store.state.account.token}`,
+            },
+          })
+          .then(() => {
+            this.$store.commit("account/action", (state) => {
+            console.log("ты ебантей?");
+              state.user.addresses.forEach((address) => {
+                address.is_default = false;
+              });
+              state.user.addresses[state.user.addresses.map(el=>+el.id).indexOf(+this.address.id)].is_default = true;
+            });
+          });
       } else {
-        await this.$axios.post("/api/user/address/default/remove", null, {
-          params: {
-            id: this.address.id,
-          },
-          headers: {
-            Authorization: `Bearer ${this.$store.state.account.token}`,
-          },
-        }).then(()=>{
-          
-          this.$emit('deleteDefaults');
+        await this.$axios
+          .post("/api/user/address/default/remove", null, {
+            params: {
+              id: this.address.id,
+            },
+            headers: {
+              Authorization: `Bearer ${this.$store.state.account.token}`,
+            },
+          })
+          .then(() => {
+            console.log("да я ебал все это");
+            this.$store.commit("account/action", (state) =>
+              state.user.addresses.forEach((address) => {
+                address.is_default = false;
+              })
+            );
           });
       }
     },
@@ -223,9 +222,8 @@ export default {
         });
     },
     stopEditing() {
-      for (let key in this.start_address) {
+      for (let key in this.start_address)
         this.address[key] = this.start_address[key];
-      }
       this.editing = false;
     },
     parseAddress(address) {
@@ -258,9 +256,6 @@ export default {
         document.addEventListener("click", dropdownAddressClick);
       else document.removeEventListener("click", dropdownAddressClick);
     },
-    '$store.state.account.user'(){
-      
-    }
   },
 };
 </script>
@@ -341,10 +336,12 @@ export default {
     outline: none;
     transition: all $transition;
     border: none;
-    border-bottom: 1px solid $black;
+    border-bottom: 1px solid $dark_grey;
+    padding-bottom: 4px;
     &:not(.editing) {
       border-bottom: 1px solid transparent;
       margin-bottom: 32px;
+      padding-bottom: 0px;
     }
   }
   &__content {

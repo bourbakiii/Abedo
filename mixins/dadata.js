@@ -35,59 +35,31 @@ export default {
             this.address.house = null;
             this.address = { ...this.address, ...address.data, ...address, intercom: null };
             delete this.address["data"];
-
             this.suggestions = [];
         },
-        action({
-            id = null,
-            street,
-            name,
-            city,
-            house,
-            intercom,
-            entrance,
-            floor,
-            flat: apartment,
-            geo_lat: lat,
-            geo_lon: lon,
-        }) {
+        action({ id = null, street, name, city, house, intercom, entrance, floor, flat: apartment, geo_lat: lat, geo_lon: lon }, type) {
 
             this.$axios
                 .post("api/user/saveAddress", null, {
-                    params: {
-                        id,
-                        street,
-                        name,
-                        city,
-                        house,
-                        intercom,
-                        entrance,
-                        floor,
-                        apartment,
-                        lat,
-                        lon,
-                    },
-                    headers: {
-                        Authorization: `Bearer ${this.$store.state.account.token}`,
-                    },
+                    params: { id, street, name, city, house, intercom, entrance, floor, apartment, lat, lon },
+                    headers: { Authorization: `Bearer ${this.$store.state.account.token}` },
                 })
-                .then(({data}) => {
-                    this.$emit("close");
-                    if(this.editing != undefined) this.editing = false;
-                    if(!id) {
+                .then(({ data }) => {
+                    if (type == 'edit') {
+                        this.editing = false;
+                        this.start_address = this.address;
+                        this.$store.commit("account/action", state => state.user.addresses[state.user.addresses.map(el => +el.id).indexOf(+this.address.id)] = this.address);
+                    }
+                    else {
+                        this.$emit("close");
                         data.address.is_default = 0;
                         this.$store.commit("account/action", (state) => {
-                        state.user.addresses.push(data.address);
-                      });
+                            state.user.addresses.push(data.address);
+                        });
                     }
                 }).catch(({ response }) => {
-                    if ((response.status == 422)) {
-                      this.errors = Object.values(response.data.errors)
-                        .map((el) => el.flat())
-                        .flat();
-                    }
-                  });
-              
+                    if (response.status == 422) this.errors = Object.values(response.data.errors).map((el) => el.flat()).flat();
+                });
         },
     }
 }
