@@ -139,21 +139,7 @@
     transition: all $transition;
   }
 }
-.cart-screens{
-  &-enter,&-leave-to{
-    opacity: 0;
-    overflow: hidden;
-    height:0px !important;
-  }
 
-  &-enter-active{
- transition: all $transition;
-  }
-
-  &-leave-active {
-    transition: all calc($transition * 2);
-}
-}
 .indicator {
   &-enter,
   &-leave-to {

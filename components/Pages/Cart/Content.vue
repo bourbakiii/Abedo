@@ -1,49 +1,73 @@
 <template>
   <div class="cart">
     <div class="cart__hood adaptive-non">
-      <img v-if='cart_partner.logo' :src="`${$axios.defaults.baseURL}${cart_partner.logo.original}`" class="cart__hood__image" />
-      <p class="cart__hood__name">{{cart_partner.name}}</p>
-      <button @click='$store.commit("cart/clear")' class="cart__hood__button">Очистить</button>
+      <img
+        v-if="cart_partner.logo"
+        :src="`${$axios.defaults.baseURL}${cart_partner.logo.original}`"
+        class="cart__hood__image"
+      />
+      <p class="cart__hood__name">{{ cart_partner.name }}</p>
+      <button @click="$store.commit('cart/clear')" class="cart__hood__button">
+        Очистить
+      </button>
     </div>
     <div class="cart__hood cart__hood__adaptive adaptive">
       <p class="cart__hood__adaptive__name">Корзина</p>
-      <button @click='$store.commit("cart/clear")' class="cart__hood__adaptive__button">
+      <button
+        @click="$store.commit('cart/clear')"
+        class="cart__hood__adaptive__button"
+      >
         Очистить
       </button>
     </div>
     <div class="cart__products">
-      <ProductCartItem  v-for="product in cart_products" :key="product.id" :product="product"/>
+      <ProductCartItem
+        v-for="product in cart_products"
+        :key="product.id"
+        :product="product"
+      />
     </div>
-    <div class="cart__promo">
+    <div v-if="token" class="cart__promo">
       <p class="cart__promo__text">Введите промокод</p>
       <input type="text" name="promo" id="promo" class="cart__promo__input" />
     </div>
-    <div class="cart__prices">
+    <div v-else class="cart__promo cart__promo_empty">
+      Для оформления заказа необходимо<button
+        class="cart__promo_empty__button"
+        type="button"
+        @click="$store.commit('modals/open', { modal_name: 'login' })"
+      >
+        Войти в личный кабинет
+      </button>
+    </div>
+    <div  v-if="token" class="cart__prices">
       <p class="cart__prices__pre">Итого:</p>
-      <p class="cart__prices__price">{{total_price}}₽</p>
-      <p class="cart__prices__price_full">500₽</p> 
+      <p class="cart__prices__price">{{ total_price }}₽</p>
+      <p class="cart__prices__price_full">500₽</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  computed:{
-    cart_products(){
+  computed: {
+    cart_products() {
       return this.$store.state.cart.products;
     },
-    cart_partner(){
+    cart_partner() {
       return this.$store.state.cart.partner;
     },
-    total_price(){
-      return this.$store.getters['cart/total_price'];
-    }
-  }
-}
+    total_price() {
+      return this.$store.getters["cart/total_price"];
+    },
+    token() {
+      return this.$store.state.account.token;
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
-.cart-product{
-  
+.cart-product {
   &-enter,
   &-leave-to {
     height: 0px !important;
@@ -165,8 +189,6 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    
-   
   }
   &__promo {
     display: flex;
@@ -223,6 +245,27 @@ export default {
         width: 100%;
         max-width: 161px;
         height: 40px;
+      }
+    }
+    &_empty {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 20px;
+      padding-bottom: 20px;
+      &__button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        text-decoration: underline;
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 20px;
+        margin-left:5px;
+        font-weight:600;
       }
     }
   }
