@@ -9,8 +9,8 @@
         <div class="orders-page__content__orders__content">
           <div
             class="orders-page__content__orders__content__item"
-            v-for="(item, index) in 2"
-            :key="index"
+            v-for="order in orders"
+            :key="order.id"
           >
             <div class="orders-page__content__orders__content__item__data">
               <div
@@ -20,13 +20,13 @@
                   class="orders-page__content__orders__content__item__data__block__name"
                   contenteditable
                 >
-                  Кафе “Лимончелло”
+                  !!! не приходит !!!
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
                   contenteditable
                 >
-                  №11234
+                  №{{ order.id }}
                 </p>
               </div>
               <div
@@ -41,7 +41,7 @@
                   class="orders-page__content__orders__content__item__data__block__value"
                   contenteditable
                 >
-                  23.03.2020 12:03
+                  {{ order.created_at }}
                 </p>
               </div>
               <div
@@ -56,7 +56,7 @@
                   class="orders-page__content__orders__content__item__data__block__value"
                   contenteditable
                 >
-                  г. Владикавказ, ул. Тестовая 321
+                  {{ parseAddress(order) }}
                 </p>
               </div>
               <div
@@ -71,7 +71,7 @@
                   class="orders-page__content__orders__content__item__data__block__value"
                   contenteditable
                 >
-                  90 334 ₽
+                  {{order.price_with_discount}}₽
                 </p>
               </div>
               <div
@@ -86,17 +86,18 @@
                   class="orders-page__content__orders__content__item__data__block__value"
                   contenteditable
                 >
-                  Доставлено
+                  {{order.statuses[order.statuses.length -1].title}}
                 </p>
               </div>
             </div>
             <div class="orders-page__content__orders__content__item__buttons">
               <ButtonStandart
-                @click.native="() => $router.push('/orders/1')"
+                @click.native="() => $router.push(`/orders/${order.id}`)"
                 class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_open"
                 >Открыть</ButtonStandart
               >
               <ButtonStandart
+              @click='()=>$store.commit("modals/open",{modal_name:"rate"})'
                 class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_rate"
                 >Оценить</ButtonStandart
               >
@@ -109,7 +110,38 @@
 </template>
 
 <script>
-export default {};
+import parserMixin from "@/mixins/parser.js";
+export default {
+  mixins: [parserMixin],
+  data() {
+    return {
+      orders: [],
+    };
+  },
+  fetchOnServer: false,
+  async fetch() {
+    await this.$axios
+      .get("/api/orderHistory", {
+        headers: { Authorization: `Bearer ${this.token}` },
+      })
+      .then(({ data: { orders } }) => {
+        this.orders = orders;
+      });
+  },
+  computed: {
+    token() {
+      return this.$store.state.account.token;
+    },
+  },
+  watch: {
+    token: {
+      handler(value) {
+        if (value) this.$fetch();
+      },
+      deep: true,
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -191,6 +223,7 @@ export default {};
                 max-width: 130px;
                 min-width: 130px;
                 margin-right: 30px;
+                background-color: lightcoral;
                 @media screen and (max-width: $maxwidth) {
                   margin-right: 10px;
                 }
