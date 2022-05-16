@@ -27,20 +27,30 @@
       <div class="order__delivery__content">
         <div class="order__delivery__content__select">
           <InputBlock
-            @input="inputBlockChange"
-            placeholder=""
-            class="order__delivery__content__select__select"
+            :value="addresses_names[0]"
+            
+            class="order__delivery__content__select__input-block"
             name="select"
             id="select"
             type="text"
             text="Пункт доставки"
+            arrow="true"
+            :readonly='true'
+            @click='openDropdown'
           />
+          <transition name='opacity'>
+          <div v-if='show_dropdown' class="order__delivery__content__select__dropdown">
+            <button @click='selectAddress(address)' type='button' v-for='address in addresses' :key='address.id' class="order__delivery__content__select__dropdown__button">
+              {{address.name}}
+            </button>
+          </div>
+          </transition>
         </div>
         <div class="order__delivery__content__content">
           <div class="order__delivery__content__content__address">
             <div class="order__delivery__content__content__address__dadata">
               <InputBlock
-                @input="inputBlockChange"
+              :value='address.value'
                 placeholder="Введите адрес доставки"
                 class="order__delivery__content__content__address__dadata__input"
                 name="dadata"
@@ -51,8 +61,9 @@
               />
             </div>
             <InputBlock
-              @input="inputBlockChange"
-              placeholder=""
+:value='address.entrance'
+@input='adress.entrance = $event'
+              
               class="order__delivery__content__content__address__entrance"
               name="entrance"
               id="entrance"
@@ -61,8 +72,9 @@
               error="true"
             />
             <InputBlock
-              @input="inputBlockChange"
-              placeholder=""
+              :value='address.floor'
+@input='adress.floor = $event'
+              
               class="order__delivery__content__content__address__floor"
               name="floor"
               id="floor"
@@ -70,17 +82,19 @@
               text="Этаж"
             />
             <InputBlock
-              @input="inputBlockChange"
-              placeholder=""
-              class="order__delivery__content__content__address__apartment"
-              name="apartment"
-              id="apartment"
+              :value='address.flat'
+@input='adress.flat = $event'
+              
+              class="order__delivery__content__content__address__flat"
+              name="flat"
+              id="flat"
               type="text"
               text="№ квартиры/офиса"
             />
             <InputBlock
-              @input="inputBlockChange"
-              placeholder=""
+                            :value='address.intercom'
+@input='adress.intercom = $event'
+              
               class="order__delivery__content__content__address__intercom"
               name="intercom"
               id="intercom"
@@ -89,7 +103,8 @@
             />
           </div>
           <InputBlock
-            @input="inputBlockChange"
+            :value='description'
+@input='description = $event'
             placeholder="Напишите как вас найти, или пожелания к блюду"
             class="order__delivery__content__content__additional"
             name="additional"
@@ -100,7 +115,6 @@
           />
         </div>
       </div>
-      {{addresses_names}}
       <div
         class="order__delivery__prices"
         v-if="delivery_price || door_delivery_price"
@@ -112,7 +126,7 @@
             </p>
           </div>
           <p class="order__delivery__prices__item__price">
-            {{ delivery_price }} ₽
+            {{ delivery_price }}₽
           </p>
         </div>
         <div class="order__delivery__prices__item" v-if="door_delivery_price">
@@ -127,7 +141,7 @@
             </p>
           </div>
           <p class="order__delivery__prices__item__price">
-            + {{ door_delivery_price }} ₽
+            + {{ door_delivery_price }}₽
           </p>
         </div>
       </div>
@@ -157,8 +171,8 @@
     </div>
     <div class="order__price">
       <p class="order__price__pre">Итого:</p>
-      <p class="order__price__price">330 ₽</p>
-      <p class="order__price__price_full">350 ₽</p>
+      <p class="order__price__price">330₽</p>
+      <p class="order__price__price_full">350₽</p>
     </div>
     <ButtonStandart class="order__button">
       <svg
@@ -198,11 +212,13 @@ export default {
         city: null,
         hose: null,
       },
+      description: null,
       additional: null,
       payment_type: 2,
       door_delivery: false,
       delivery_price: null,
       door_delivery_price: null,
+      show_dropdown: false
     };
   },
   fetchOnServer: false,
@@ -219,12 +235,48 @@ export default {
         this.door_delivery_price = delivery.door_delivery_price;
       });
   },
+  methods:{
+    selectAddress(address){
+      this.address = address;
+    },
+     openDropdown(){
+        this.show_dropdown = true;
+        document.addEventListener("click", this.nonDropdownClick);
+    },
+    closeDropdown() {
+      this.show_dropdown = false;
+      document.removeEventListener("click", this.nonDropdownClick);
+    },
+    nonDropdownClick(event) {
+      const dropdown_content = document.querySelector(
+        ".order__delivery__content__select"
+      );
+      if (!dropdown_content) return;
+      let element_data = dropdown_content.getBoundingClientRect();
+      if (
+        !(
+          event.x >= element_data.x &&
+          event.x <= element_data.x + element_data.width &&
+          event.y >= element_data.y &&
+          event.y <= element_data.y + element_data.height
+        )
+      )
+        this.closeDropdown();
+    },
+  },
   computed: {
     addresses_names() {
       return (this.$store.state.account?.user.addresses ?? []).map(
         (el) => el.name
       );
     },
+    addresses(){
+      return this.$store.state.account?.user.addresses??[]
+    }
+  },
+  created(){
+    let index = this.addresses.map(el=>el.is_default).indexOf(true);
+    if(index>=0) return this.address = this.addresses[index];
   },
   watch: {
     "$store.state.account": {
@@ -305,9 +357,54 @@ export default {
         width: 265px;
         margin-right: 60px;
         flex-shrink: 0;
+        position: relative;
         @media screen and (max-width: $notebook) {
           width: 100%;
           margin-bottom: 30px;
+        }
+        &__dropdown {
+          position: relative;
+          z-index: 10;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          background-color: $white;
+          position: absolute;
+          top: 100%;
+          left: 0%;
+          width: 100%;
+          border-radius: 20px;
+          overflow: hidden;
+          height: auto;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-direction: column;
+          box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+          padding: 7px 10px;
+          &__button {
+            outline: none;
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+            text-decoration: none;
+            border-bottom: 1px solid $dark_grey;
+            min-height: 50px;
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: row;
+            transition: $transition;
+            background-color: $white;
+            outline: none;
+            &:active {
+              transform: scale(0.98);
+            }
+            &:last-child {
+              border: none;
+            }
+          }
         }
       }
       &__content {
@@ -333,7 +430,7 @@ export default {
             grid-column-end: 5;
           }
           @media screen and (max-width: $tablet) {
-            &__apartment,
+            &__flat,
             &__entrance {
               grid-column-start: 1;
               grid-column-end: 3;
