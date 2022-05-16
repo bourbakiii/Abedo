@@ -68,16 +68,28 @@
               placeholder="Выберите пол"
               type="text"
               :required="false"
-              :arrow="true"
+              :arrow="editing"
               class="profile-page__form__content__input-block profile-page__form__content__gender__input-block"
             />
             <transition name="opacity">
               <div
-                v-if="show_dropdown"
+                v-if="show_dropdown && editing"
                 class="profile-page__form__content__gender__dropdown"
               >
-              <button type='button' @click='selectGender("Мужской")' class="profile-page__form__content__gender__dropdown__button">Мужской</button>
-              <button type='button' @click='selectGender("Женский")' class="profile-page__form__content__gender__dropdown__button">Женский</button>
+                <button
+                  type="button"
+                  @click="selectGender('Мужской')"
+                  class="profile-page__form__content__gender__dropdown__button"
+                >
+                  Мужской
+                </button>
+                <button
+                  type="button"
+                  @click="selectGender('Женский')"
+                  class="profile-page__form__content__gender__dropdown__button"
+                >
+                  Женский
+                </button>
               </div>
             </transition>
           </button>
@@ -182,32 +194,34 @@ export default {
   },
 
   methods: {
-    selectGender(gender){
-      this.user.gender=gender;
+    selectGender(gender) {
+      this.user.gender = gender;
     },
     open() {
-      this.show_dropdown = true;
-      document.addEventListener('click', this.nonDropdownClick);
+      if (this.editing) {
+        this.show_dropdown = true;
+        document.addEventListener("click", this.nonDropdownClick);
+      }
     },
-    close(){
+    close() {
       this.show_dropdown = false;
-      document.removeEventListener('click', this.nonDropdownClick);
+      document.removeEventListener("click", this.nonDropdownClick);
     },
-    nonDropdownClick(event){
-        const dropdown_content = document.querySelector(
-          ".profile-page__form__content__gender"
-        );
-        if (!dropdown_content) return;
-        let element_data = dropdown_content.getBoundingClientRect();
-        if (
-          !(
-            event.x >= element_data.x &&
-            event.x <= element_data.x + element_data.width &&
-            event.y >= element_data.y &&
-            event.y <= element_data.y + element_data.height
-          )
-        ) 
-         this.close();
+    nonDropdownClick(event) {
+      const dropdown_content = document.querySelector(
+        ".profile-page__form__content__gender"
+      );
+      if (!dropdown_content) return;
+      let element_data = dropdown_content.getBoundingClientRect();
+      if (
+        !(
+          event.x >= element_data.x &&
+          event.x <= element_data.x + element_data.width &&
+          event.y >= element_data.y &&
+          event.y <= element_data.y + element_data.height
+        )
+      )
+        this.close();
     },
     edit() {
       this.errors = [];
@@ -243,6 +257,17 @@ export default {
   computed: {
     token() {
       return this.$store.state.account.token;
+    },
+  },
+  watch: {
+    "$store.state.account.user": {
+      handler() {
+        (this.user = { ...this.$store.state.account.user }),
+          (this.start_user = { ...this.$store.state.account.user }),
+          (this.editing = false);
+        console.log("Token changed");
+      },
+      deep: true,
     },
   },
 };
@@ -322,7 +347,7 @@ export default {
           top: 100%;
           left: 0%;
           width: 100%;
-          border-radius:20px;
+          border-radius: 20px;
           overflow: hidden;
           height: auto;
           display: flex;
@@ -332,7 +357,7 @@ export default {
           box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
           padding: 7px 10px;
           &__button {
-            outline:none;
+            outline: none;
             border: none;
             width: 100%;
             box-sizing: border-box;
