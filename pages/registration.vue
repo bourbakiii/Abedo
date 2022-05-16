@@ -11,7 +11,7 @@
           v-model="form.phone"
           pre="+7"
           mask="(###) ###-##-##"
-          placeholder="000 000 000 00"
+          placeholder="(000) 000 000 00"
           class="registration-page__content__input-block registration-page__content__phone"
           name="phone"
           id="login_phone"

@@ -50,7 +50,6 @@ export const actions = {
             state.commit('set', { index: state.state.products.length, product });
         }
         else this.commit('modals/open', { modal_name: 'switch_shop', product: product, partner: partner });
-
     },
     crease(state, product) {
         state.commit("action", () => product.count++);

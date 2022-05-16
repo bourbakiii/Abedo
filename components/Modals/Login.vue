@@ -23,7 +23,7 @@
       v-model="form.phone"
       pre="+7"
       mask="(###) ###-##-##"
-      placeholder="000 000 000 00"
+      placeholder="(000) 000 000 00"
       class="login-modal__phone"
       name="phone"
       id="login_phone"

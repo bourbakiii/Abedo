@@ -41,6 +41,7 @@ export const actions = {
                     delete el.lat;
                     delete el.lon;
                 });
+                user.gender = user.gender=='male'?'Мужской':'Женский';
                 state.user = user;
             })
             await state.dispatch("favourites");
