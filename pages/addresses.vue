@@ -12,6 +12,7 @@
             :key="address.id"
             v-for="address in addresses"
             :given_address="address"
+            @change_default='changeDefault'
           />
         </div>
         <transition name="add-address-form" mode="out-in">
@@ -54,7 +55,11 @@ export default {
       show_add_form: false,
     };
   },
-
+  methods:{
+    changeDefault(address){
+      console.object("to change defauklt address");
+    }
+  },
   computed: {
     addresses() {
       return this.$store.state.account.user.addresses;

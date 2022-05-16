@@ -97,7 +97,7 @@
         >
       </transition>
     </div>
-    {{ address.id_default }}
+    {{ address.is_default }}
 
     <label
       :for="`address-item__default-${address.id}`"
@@ -107,7 +107,7 @@
         :id="`address-item__default-${address.id}`"
         class="address-item__default__checkbox"
         v-model="address.is_default"
-        @change="change_default"
+        @change="$emit('change_default', address)"
       />
       <p class="address-item__default__text">По умолчанию</p>
     </label>
@@ -163,31 +163,6 @@ export default {
   },
 
   methods: {
-    async change_default(value) {
-      if (value) {
-        await this.$axios
-          .post("/api/user/address/default", null, {
-            params: {
-              id: this.address.id,
-            },
-            headers: {
-              Authorization: `Bearer ${this.$store.state.account.token}`,
-            },
-          })
-          .then(() => {});
-      } else {
-        await this.$axios
-          .post("/api/user/address/default/remove", null, {
-            params: {
-              id: this.address.id,
-            },
-            headers: {
-              Authorization: `Bearer ${this.$store.state.account.token}`,
-            },
-          })
-          .then(() => {});
-      }
-    },
     remove() {
       this.$axios
         .delete(`/api/user/address/${this.address.id}/delete`, {
