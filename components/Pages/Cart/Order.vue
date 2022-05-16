@@ -1,5 +1,5 @@
 <template>
-  <form class="order">
+  <form @submit.prevent="make" class="order">
     <div class="order__buttons">
       <ButtonStandart class="order__buttons__button active"
         >Доставка
@@ -28,29 +28,36 @@
         <div class="order__delivery__content__select">
           <InputBlock
             :value="addresses_names[0]"
-            
             class="order__delivery__content__select__input-block"
             name="select"
             id="select"
             type="text"
             text="Пункт доставки"
             arrow="true"
-            :readonly='true'
-            @click='openDropdown'
+            :readonly="true"
+            @click="openDropdown"
           />
-          <transition name='opacity'>
-          <div v-if='show_dropdown' class="order__delivery__content__select__dropdown">
-            <button @click='selectAddress(address)' type='button' v-for='address in addresses' :key='address.id' class="order__delivery__content__select__dropdown__button">
-              {{address.name}}
-            </button>
-          </div>
+          <transition name="opacity">
+            <div
+              v-if="show_dropdown"
+              class="order__delivery__content__select__dropdown"
+            >
+              <button
+                @click="selectAddress(address)"
+                type="button"
+                v-for="address in addresses"
+                :key="address.id"
+                class="order__delivery__content__select__dropdown__button"
+              >
+                {{ address.name }}
+              </button>
+            </div>
           </transition>
         </div>
         <div class="order__delivery__content__content">
           <div class="order__delivery__content__content__address">
             <div class="order__delivery__content__content__address__dadata">
               <InputBlock
-              :value='address.value'
                 placeholder="Введите адрес доставки"
                 class="order__delivery__content__content__address__dadata__input"
                 name="dadata"
@@ -58,12 +65,37 @@
                 type="text"
                 text="Адрес доставки"
                 error="true"
+                :value="address.value"
+                :autocomplete="false"
+                @input="
+                  ($event) => {
+                    address.house = null;
+                    address.value = $event;
+                    get_dadata();
+                  }
+                "
               />
+              <transition name="opacity">
+                <div
+                  v-if="suggestions.length"
+                  class="order__delivery__content__content__address__dadata__suggestions"
+                  :class="`order__delivery__content__content__address__dadata__suggestions-${address.id}`"
+                >
+                  <button
+                    type="button"
+                    :key="address.value"
+                    v-for="address in suggestions"
+                    class="order__delivery__content__content__address__dadata__suggestions__address"
+                    @click="set_address(address)"
+                  >
+                    {{ address.value }}
+                  </button>
+                </div>
+              </transition>
             </div>
             <InputBlock
-:value='address.entrance'
-@input='adress.entrance = $event'
-              
+              :value="address.entrance"
+              @input="address.entrance = $event"
               class="order__delivery__content__content__address__entrance"
               name="entrance"
               id="entrance"
@@ -72,9 +104,8 @@
               error="true"
             />
             <InputBlock
-              :value='address.floor'
-@input='adress.floor = $event'
-              
+              :value="address.floor"
+              @input="address.floor = $event"
               class="order__delivery__content__content__address__floor"
               name="floor"
               id="floor"
@@ -82,9 +113,8 @@
               text="Этаж"
             />
             <InputBlock
-              :value='address.flat'
-@input='adress.flat = $event'
-              
+              :value="address.flat"
+              @input="address.flat = $event"
               class="order__delivery__content__content__address__flat"
               name="flat"
               id="flat"
@@ -92,9 +122,8 @@
               text="№ квартиры/офиса"
             />
             <InputBlock
-                            :value='address.intercom'
-@input='adress.intercom = $event'
-              
+              :value="address.intercom"
+              @input="address.intercom = $event"
               class="order__delivery__content__content__address__intercom"
               name="intercom"
               id="intercom"
@@ -103,15 +132,15 @@
             />
           </div>
           <InputBlock
-            :value='description'
-@input='description = $event'
+            :value="description"
+            @input="description = $event"
             placeholder="Напишите как вас найти, или пожелания к блюду"
             class="order__delivery__content__content__additional"
             name="additional"
             id="additional"
             type="text"
             text="Комментарий"
-            error="true"
+            :required='false'
           />
         </div>
       </div>
@@ -196,8 +225,9 @@
 </template>
 <script>
 import inputBlockMixin from "@/mixins/input-block.js";
+import dadataMixin from "@/mixins/dadata.js";
 export default {
-  mixins: [inputBlockMixin],
+  mixins: [dadataMixin, inputBlockMixin],
   data() {
     return {
       phone: this.$store.state.account.user.phone ?? null,
@@ -210,7 +240,7 @@ export default {
         flat: null,
         intercom: null,
         city: null,
-        hose: null,
+        house: null,
       },
       description: null,
       additional: null,
@@ -218,7 +248,7 @@ export default {
       door_delivery: false,
       delivery_price: null,
       door_delivery_price: null,
-      show_dropdown: false
+      show_dropdown: false,
     };
   },
   fetchOnServer: false,
@@ -235,13 +265,13 @@ export default {
         this.door_delivery_price = delivery.door_delivery_price;
       });
   },
-  methods:{
-    selectAddress(address){
-      this.address = address;
+  methods: {
+    selectAddress(address) {
+      this.address = { ...address };
     },
-     openDropdown(){
-        this.show_dropdown = true;
-        document.addEventListener("click", this.nonDropdownClick);
+    openDropdown() {
+      this.show_dropdown = true;
+      document.addEventListener("click", this.nonDropdownClick);
     },
     closeDropdown() {
       this.show_dropdown = false;
@@ -263,6 +293,9 @@ export default {
       )
         this.closeDropdown();
     },
+    make() {
+      console.log("the is a make order functiom");
+    },
   },
   computed: {
     addresses_names() {
@@ -270,13 +303,13 @@ export default {
         (el) => el.name
       );
     },
-    addresses(){
-      return this.$store.state.account?.user.addresses??[]
-    }
+    addresses() {
+      return this.$store.state.account?.user.addresses ?? [];
+    },
   },
-  created(){
-    let index = this.addresses.map(el=>el.is_default).indexOf(true);
-    if(index>=0) return this.address = this.addresses[index];
+  created() {
+    let index = this.addresses.map((el) => el.is_default).indexOf(true);
+    if (index >= 0) this.address = { ...this.addresses[index] };
   },
   watch: {
     "$store.state.account": {
@@ -284,6 +317,30 @@ export default {
         this.phone = this.$store.state.account.user.phone ?? null;
       },
       deep: true,
+    },
+    suggestions(value) {
+      console.log("1231231232");
+      const dropdownAddressClick = (event) => {
+        const dropdown_content = document.querySelector(
+          `.order__delivery__content__content__address__dadata`
+        );
+        if (!dropdown_content) return;
+        let element_data = dropdown_content.getBoundingClientRect();
+        if (
+          !(
+            event.x >= element_data.x &&
+            event.x <= element_data.x + element_data.width &&
+            event.y >= element_data.y &&
+            event.y <= element_data.y + element_data.height
+          )
+        ) {
+          this.suggestions = [];
+          document.removeEventListener("click", dropdownAddressClick);
+        }
+      };
+      if (value.length)
+        document.addEventListener("click", dropdownAddressClick);
+      else document.removeEventListener("click", dropdownAddressClick);
     },
   },
 };
@@ -426,8 +483,50 @@ export default {
             grid-gap: 30px 15px;
           }
           &__dadata {
+            position: relative;
             grid-column-start: 1;
             grid-column-end: 5;
+            &__suggestions {
+              background-color: $white;
+              position: absolute;
+              top: 100%;
+              left: 0%;
+              width: 100%;
+              border-radius: 20px;
+              overflow: hidden;
+              height: auto;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              flex-direction: column;
+              box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+              padding-top: 7px;
+              padding-bottom: 17px;
+              z-index: $z_navigation + 1;
+              &__address {
+                width: 100%;
+                box-sizing: border-box;
+                text-decoration: none;
+                border-bottom: 1px solid $dark_grey;
+                min-height: 50px;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                flex-direction: row;
+                transition: $transition;
+                background-color: $white;
+                outline: none;
+                border: none;
+                text-align: left;
+                &:active {
+                  transform: scale(0.98);
+                }
+                &:last-child {
+                  border: none;
+                }
+              }
+            }
           }
           @media screen and (max-width: $tablet) {
             &__flat,
