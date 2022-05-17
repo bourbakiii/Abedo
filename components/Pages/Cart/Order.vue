@@ -12,7 +12,7 @@
       </ButtonStandart>
     </div>
     <InputBlock
-      @input="inputBlockChange"
+      @input="phone = $event"
       pre="+7"
       mask="(###) ###-##-##"
       placeholder="(000) 000 000 00"
@@ -209,8 +209,8 @@
     </div>
     <div class="order__price">
       <p class="order__price__pre">Итого:</p>
-      <p class="order__price__price">330₽</p>
-      <p class="order__price__price_full">350₽</p>
+      <p class="order__price__price">{{total_order_discount_price}}₽</p>
+      <p v-if='total_order_discount_price < total_order_price' class="order__price__price_full">{{total_order_price}}₽</p>
     </div>
     <ButtonStandart class="order__button">
       <svg
@@ -240,7 +240,7 @@ export default {
   mixins: [dadataMixin, inputBlockMixin],
   data() {
     return {
-      phone: this.$store.state.account.user.phone ?? null,
+      phone: this.parsePhone(this.$store.state.account.user.phone)??null,
       address: {
         name: null,
         value: null,
@@ -276,6 +276,9 @@ export default {
       });
   },
   methods: {
+    parsePhone(phone){
+      return phone ? `(${phone[0]}${phone[1]}${phone[2]}) ${phone[3]}${phone[4]}${phone[5]} ${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`: null
+    },
     changeRadio(value) {
       console.log(Boolean(value));
       this.is_cashless_payment = Boolean(value);
@@ -328,7 +331,7 @@ export default {
         with_door_delivery: +this.door_delivery,
         address: this.address.value,
         ...copy_address,
-        phone: this.$store.state.account.user.phone,
+        phone: parseInt(this.phone.replace(/\D+/g,"")),
         is_cashless_payment: +this.is_cashless_payment,
         with_gifts: +this.with_gifts
       });
@@ -345,8 +348,8 @@ export default {
         .then(({ data }) => {
           console.log("success");
           console.log(data);
-          // this.$store.commit('cart/clear');
-          // this.$router.push('/success');
+          this.$store.commit('cart/clear');
+          this.$router.push('/success');
         })
         .catch((error) => {
           console.log("error");
@@ -355,6 +358,12 @@ export default {
     },
   },
   computed: {
+    total_order_price(){
+      return this.$store.getters["cart/total_price"] + this.delivery_price + (this.door_delivery?this.door_delivery_price:0);
+    },
+    total_order_discount_price(){
+      return this.$store.getters["cart/total_price"] + this.delivery_price + (this.door_delivery?this.door_delivery_price:0);
+    },
     cart_products() {
       return this.$store.state.cart.products;
     },
@@ -384,7 +393,7 @@ export default {
   watch: {
     "$store.state.account": {
       handler() {
-        this.phone = this.$store.state.account.user.phone ?? null;
+        this.phone = this.parsePhone(this.$store.state.account.user.phone) ?? null;
       },
       deep: true,
     },

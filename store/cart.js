@@ -74,8 +74,15 @@ export const actions = {
 
 export const getters = {
     total_price(state) {
-        return state.products.map(product => +product.price * +product.count).reduce(function (accumulator, currentValue) {
+        let summ = 0;
+        summ = state.products.map(product => +product.price * +product.count).reduce(function (accumulator, currentValue) {
             return accumulator + currentValue;
         })??0;
-    }
+        return summ;
+    },
+    // total_price(state) {
+    //     return state.products.map(product => +product.price * +product.count).reduce(function (accumulator, currentValue) {
+    //         return accumulator + currentValue;
+    //     })??0;
+    // }
 };
