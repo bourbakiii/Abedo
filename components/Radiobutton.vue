@@ -1,6 +1,6 @@
 <template>
 
-<label :class='{"checked": isChecked}' class="radiobutton" :for="id">
+<label  :class='{"checked": checked}' class="radiobutton" :for="id">
       <svg
         class="radiobutton__icon"
         width="10"
@@ -13,7 +13,7 @@
       </svg>
       
   
-    <input class="radiobutton__input" :id="id" type="radio" :checked="isChecked" :value="value" @change="$emit('change', $event.target.value)" />
+    <input class="radiobutton__input" :id="id" type="radio" :checked='checked' :value="value" @change="$emit('change', value)" />
     </label>
 
 
@@ -29,13 +29,12 @@ export default {
   props: {
     "id": {required:true},
     "modelValue": { default: "" },
-    "value": {  default: true }
-  },
-  computed: {
-    isChecked() {
-      return this.modelValue == this.value
+    "value": {  default: true },
+    "checked": {
+      required: true,
+      default:false,
     }
-  }
+  },
 }
 </script>
 

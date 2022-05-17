@@ -5,6 +5,7 @@
         >Доставка
       </ButtonStandart>
       <ButtonStandart
+        v-if="false"
         class="order__buttons__button order__buttons__button_self"
       >
         Самовывоз
@@ -27,7 +28,7 @@
       <div class="order__delivery__content">
         <div class="order__delivery__content__select">
           <InputBlock
-            :value="addresses_names[0]"
+            :value="address.name"
             class="order__delivery__content__select__input-block"
             name="select"
             id="select"
@@ -140,7 +141,7 @@
             id="additional"
             type="text"
             text="Комментарий"
-            :required='false'
+            :required="false"
           />
         </div>
       </div>
@@ -166,7 +167,7 @@
               v-model="door_delivery"
             />
             <p class="order__delivery__prices__item__name">
-              Стоимость доставки
+              Доставить до двери
             </p>
           </div>
           <p class="order__delivery__prices__item__price">
@@ -177,25 +178,33 @@
     </div>
     <div class="order__payment">
       <h3 class="order__payment__title title-extra-normal">Оплата</h3>
-      <label for="payment_type-0" class="order__payment__item">
+      <label
+        for="payment_type-0"
+        :class="{ order__payment__item_checked: is_cashless_payment == false }"
+        class="order__payment__item"
+      >
         <Radiobutton
           class="order__payment__item__radio"
-          id="payment_type"
-          :value="true"
-          trueValue="true"
-          v-model="payment_type"
+          id="payment_type-0"
+          :value="false"
+          :checked="is_cashless_payment == false"
+          @change="changeRadio"
         />
         <p class="order__payment__item__name">Наличными при получении</p>
       </label>
-      <label for="payment_type-1" class="order__payment__item">
+      <label
+        for="payment_type-1"
+        :class="{ order__payment__item_checked: is_cashless_payment == true }"
+        class="order__payment__item"
+      >
         <Radiobutton
           class="order__payment__item__radio"
-          id="payment_type"
-          :value="false"
-          trueValue="false"
-          v-model="payment_type"
+          id="payment_type-1"
+          :value="true"
+          :checked="is_cashless_payment == true"
+          @change="changeRadio"
         />
-        <p class="order__payment__item__name">Перевод на банковсвкую карту</p>
+        <p class="order__payment__item__name">Перевод на банковскую карту</p>
       </label>
     </div>
     <div class="order__price">
@@ -226,6 +235,7 @@
 <script>
 import inputBlockMixin from "@/mixins/input-block.js";
 import dadataMixin from "@/mixins/dadata.js";
+import qs from "qs";
 export default {
   mixins: [dadataMixin, inputBlockMixin],
   data() {
@@ -244,7 +254,7 @@ export default {
       },
       description: null,
       additional: null,
-      payment_type: 2,
+      is_cashless_payment: false,
       door_delivery: false,
       delivery_price: null,
       door_delivery_price: null,
@@ -266,6 +276,10 @@ export default {
       });
   },
   methods: {
+    changeRadio(value) {
+      console.log(Boolean(value));
+      this.is_cashless_payment = Boolean(value);
+    },
     selectAddress(address) {
       this.address = { ...address };
     },
@@ -294,10 +308,66 @@ export default {
         this.closeDropdown();
     },
     make() {
-      console.log("the is a make order functiom");
+      let order_products_format = [];
+      for (const product of this.cart_products) {
+        let { id, count, props = [] } = product;
+        order_products_format.push({ id, count, props });
+      }
+      //////////////////////////////////////////////////////
+      let copy_address = { ...this.address };
+      copy_address.lon = copy_address.get_lon;
+      copy_address.lat = copy_address.get_lat;
+      copy_address.apartment = copy_address.flat;
+      delete copy_address.get_lon,
+        delete copy_address.get_lat,
+        delete copy_address.flat;
+      let params = qs.stringify({
+        products: [...order_products_format],
+        with_delivery: +true,
+        shop_id: this.cart_partner.id,
+        with_door_delivery: +this.door_delivery,
+        address: this.address.value,
+        ...copy_address,
+        phone: this.$store.state.account.user.phone,
+        is_cashless_payment: +this.is_cashless_payment,
+        with_gifts: +this.with_gifts
+      });
+      console.log("the params is");
+      console.log(params);
+      //////////////////////
+      this.$axios
+        .post(`/api/order/make`, params, {
+          // body: params,
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .then(({ data }) => {
+          console.log("success");
+          console.log(data);
+          // this.$store.commit('cart/clear');
+          // this.$router.push('/success');
+        })
+        .catch((error) => {
+          console.log("error");
+          console.log(data);
+        });
     },
   },
   computed: {
+    cart_products() {
+      return this.$store.state.cart.products;
+    },
+    cart_partner() {
+      return this.$store.state.cart.partner;
+    },
+    token() {
+      return this.$store.state.account.token;
+    },
+    with_gifts(){
+      //  !!!
+      return false;
+    },
     addresses_names() {
       return (this.$store.state.account?.user.addresses ?? []).map(
         (el) => el.name
@@ -631,6 +701,19 @@ export default {
       justify-content: flex-start;
       flex-direction: row;
       margin-bottom: 20px;
+      &,
+      * {
+        transition: all $transition;
+      }
+      .order__payment__item__radio {
+        &.checked {
+          border-color: $white;
+
+          * {
+            stroke: $white;
+          }
+        }
+      }
       @media screen and (max-width: $tablet) {
         min-height: 50px;
         margin-bottom: 15px;
@@ -639,7 +722,16 @@ export default {
       &:last-of-type {
         margin-bottom: 0px;
       }
+      &_checked {
+        background-color: $darkblue;
+      }
+      &_checked & {
+        &__name {
+          color: $white;
+        }
+      }
       &__radio {
+        flex-shrink: 0;
         margin-right: 10px;
       }
       &__name {
