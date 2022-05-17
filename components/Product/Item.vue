@@ -1,49 +1,78 @@
 <template>
-  <div @click.self='go_by_link'  class="product product-item product_in-cart">
-    <div @click='go_by_link' v-if="product.discount" class="product-item__discount">-10%</div>
+  <div @click.self="go_by_link" class="product product-item product_in-cart">
+    <div
+      @click="go_by_link"
+      v-if="discount_percent"
+      class="product-item__discount"
+    >
+      -{{ discount_percent }}%
+    </div>
     <img
-    @click='go_by_link'
+      @click="go_by_link"
       v-if="product.image.original"
       :src="`${$axios.defaults.baseURL}${product.image.original}`"
       class="product-item__image"
     />
-    <div @click='go_by_link' class="product-item__info">
-      <p class="product-item__info__name">{{product.name}}</p>
+    <div @click="go_by_link" class="product-item__info">
+      <p class="product-item__info__name">{{ product.name }}</p>
       <div class="product-item__info__prices adaptive-non">
-        <p class="product-item__info__prices__price">{{product.price}}</p>
-        <p class="product-item__info__prices__weight">/ {{product.weight}} {{product.weight_unit.short_name}}</p>
-        <p v-if='product.discount' class="product-item__info__prices__price_full">4000 ₽</p>
+        <p class="product-item__info__prices__price">{{ product.price }}₽</p>
+        <p class="product-item__info__prices__weight">
+          / {{ product.weight }} {{ product.weight_unit.short_name }}
+        </p>
+        <p
+          v-if="discount_percent"
+          class="product-item__info__prices__price_full"
+        >
+          {{ product_price_with_discount }}₽
+        </p>
       </div>
       <div class="product-item__info__weight adaptive" contenteditable>
-        450 г
+        {{ product.weight }}г
       </div>
       <div class="product-item__info__prices__mobile adaptive">
         <p class="product-item__info__prices__mobile__price" contenteditable>
-         {{product.price}}
+          {{ product.price }}₽
         </p>
         <p
-        v-if='product.discount' 
+          v-if="discount_percent"
           class="product-item__info__prices__mobile__price_full"
           contenteditable
         >
-          10 345 ₽
+          {{ product_price_with_discount }}₽
         </p>
       </div>
     </div>
-    <div @click.self='go_by_link' class="product-item__buttons">
-      <div  @click.self='go_by_link' v-if="!in_cart" class="product-item__buttons__add">
+    <div @click.self="go_by_link" class="product-item__buttons">
+      <div
+        @click.self="go_by_link"
+        v-if="!in_cart"
+        class="product-item__buttons__add"
+      >
         <ButtonSmallCart
-        @click="add_to_cart(partner)"
+          @click="add_to_cart(partner)"
           class="product-item__buttons__button_add_small adaptive"
         />
-        <ButtonStandart @click="add_to_cart(partner)" class="product-item__buttons__button_add adaptive-non">
+        <ButtonStandart
+          @click="add_to_cart(partner)"
+          class="product-item__buttons__button_add adaptive-non"
+        >
           В корзину
         </ButtonStandart>
       </div>
-      <div  @click.self='go_by_link' v-else class="product-item__buttons__button_creases">
-        <ButtonProduct @click='decrease' size="40" icon="minus" />
-        <p @click.self='go_by_link' class="product-item__buttons__button_creases__count">{{count}}</p>
-        <ButtonProduct @click='crease' size="40" icon="plus" />
+      <div
+        @click.self="go_by_link"
+        v-else
+        class="product-item__buttons__button_creases"
+      >
+        <ButtonProduct @click="decrease" size="40" icon="minus" />
+        <p
+          @click.self="go_by_link"
+          class="product-item__buttons__button_creases__count"
+        >
+          {{ count }}
+        </p>
+        <ButtonProduct @click="crease" size="40" icon="plus" />
       </div>
     </div>
   </div>
@@ -53,15 +82,14 @@ import productsMixin from "@/mixins/product.js";
 
 export default {
   mixins: [productsMixin],
-  methods:{
-    go_by_link(){
-      this.$router.push(`/product/${this.product.id}`)
-    }
-  }
+  methods: {
+    go_by_link() {
+      this.$router.push(`/product/${this.product.id}`);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
-
 .product-item {
   display: flex;
   align-items: center;
@@ -154,8 +182,8 @@ export default {
         font-weight: 500;
         font-size: 12px;
         line-height: 17px;
-         -webkit-line-clamp: 2;
-      line-clamp: 2;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
       }
     }
     &__weight {
@@ -251,9 +279,13 @@ export default {
       margin-top: 10px;
       margin-bottom: 17px;
     }
+    &__add{
+      width:100%;
+    }
     &__button_add {
       height: 40px;
-      width: 228px;
+      width: 100% !important;
+      max-width:228px !important;
     }
     &__button_creases {
       display: flex;

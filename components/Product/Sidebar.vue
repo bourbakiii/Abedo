@@ -42,11 +42,11 @@
         />
       </div>
       <div class="product-sidebar__actions__prices">
-        <p class="product-sidebar__actions__prices__price_full">
+        <p v-if='discount_percent' class="product-sidebar__actions__prices__price_full">
           {{ product.price }}₽
         </p>
         <p class="product-sidebar__actions__prices__price">
-          {{ product.price }}₽
+          {{ product_price_with_discount }}₽
         </p>
       </div>
     </div>

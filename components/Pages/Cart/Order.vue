@@ -346,23 +346,19 @@ export default {
           },
         })
         .then(({ data }) => {
-          console.log("success");
-          console.log(data);
           this.$store.commit('cart/clear');
           this.$router.push('/success');
-        })
-        .catch((error) => {
-          console.log("error");
-          console.log(data);
         });
     },
   },
   computed: {
     total_order_price(){
-      return this.$store.getters["cart/total_price"] + this.delivery_price + (this.door_delivery?this.door_delivery_price:0);
+      let summ = +this.$store.getters["cart/total_price"] + +this.delivery_price + +(this.door_delivery?this.door_delivery_price:0);
+      return summ%1==0?summ:summ.toFixed(2);
     },
     total_order_discount_price(){
-      return this.$store.getters["cart/total_price"] + this.delivery_price + (this.door_delivery?this.door_delivery_price:0);
+      let summ = +this.$store.getters["cart/total_discount_price"] + +this.delivery_price + +(this.door_delivery?this.door_delivery_price:0);
+      return summ%1==0?summ:summ.toFixed(2);
     },
     cart_products() {
       return this.$store.state.cart.products;

@@ -42,8 +42,8 @@
     </div>
     <div  v-if="token" class="cart__prices">
       <p class="cart__prices__pre">Итого:</p>
-      <p class="cart__prices__price">{{ total_price }}₽</p>
-      <p class="cart__prices__price_full">500₽</p>
+      <p class="cart__prices__price">{{ total_price_with_discount }}₽</p>
+      <p v-if='total_price_with_discount<total_price' class="cart__prices__price_full">{{ total_price }}₽</p>
     </div>
   </div>
 </template>
@@ -59,6 +59,9 @@ export default {
     },
     total_price() {
       return this.$store.getters["cart/total_price"];
+    },
+    total_price_with_discount() {
+      return this.$store.getters["cart/total_discount_price"];
     },
     token() {
       return this.$store.state.account.token;

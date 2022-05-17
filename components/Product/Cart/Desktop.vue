@@ -11,9 +11,9 @@
       </p>
     </div>
 
-    <p class="product-cart__price" contenteditable>{{ product.price }}₽</p>
+    <p class="product-cart__price" contenteditable>{{ product_price_with_discount }}₽</p>
     <p class="product-cart__price product-cart__price_full" contenteditable>
-      {{ product_total_price }}₽
+      {{ product_total_price_with_discount }}₽
     </p>
     <div class="product-cart__buttons">
       <ButtonProduct

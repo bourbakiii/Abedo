@@ -31,10 +31,11 @@
           {{price}}₽
         </p>
         <p
+        v-if="discount_percent"
           class="product-cart-adaptive__data__prices__price_full"
           contenteditable
         >
-          1000₽
+          {{product_price_with_discount}}₽
         </p>
       </div>
 
