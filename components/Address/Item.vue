@@ -106,7 +106,7 @@
       <Checkbox
         :id="`address-item__default-${address.id}`"
         class="address-item__default__checkbox"
-        v-model="address.is_default"
+        :value="address.is_default"
         @change="$emit('change_default', address)"
       />
       <p class="address-item__default__text">По умолчанию</p>
@@ -185,7 +185,6 @@ export default {
       for (let key in this.start_address)
         this.address[key] = this.start_address[key];
       this.editing = false;
-      
     },
   },
   watch: {

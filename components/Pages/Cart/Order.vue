@@ -5,7 +5,6 @@
         >Доставка
       </ButtonStandart>
       <ButtonStandart
-        v-if="false"
         class="order__buttons__button order__buttons__button_self"
       >
         Самовывоз
