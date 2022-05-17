@@ -156,7 +156,7 @@
             </p>
           </div>
           <p class="order__delivery__prices__item__price">
-            {{ delivery_price }}₽
+            {{ final_delivery_price_text(delivery_price) }}
           </p>
         </div>
         <div class="order__delivery__prices__item" v-if="door_delivery_price">
@@ -235,9 +235,10 @@
 <script>
 import inputBlockMixin from "@/mixins/input-block.js";
 import dadataMixin from "@/mixins/dadata.js";
+import parserMixin from "@/mixins/parser.js";
 import qs from "qs";
 export default {
-  mixins: [dadataMixin, inputBlockMixin],
+  mixins: [dadataMixin, inputBlockMixin, parserMixin],
   data() {
     return {
       phone: this.parsePhone(this.$store.state.account.user.phone)??null,
@@ -256,7 +257,7 @@ export default {
       additional: null,
       is_cashless_payment: false,
       door_delivery: false,
-      delivery_price: null,
+      delivery_price: +this.$store.state.cart?.partner?.delivery?.price,
       door_delivery_price: null,
       show_dropdown: false,
     };
@@ -353,11 +354,11 @@ export default {
   },
   computed: {
     total_order_price(){
-      let summ = +this.$store.getters["cart/total_price"] + +this.delivery_price + +(this.door_delivery?this.door_delivery_price:0);
+      let summ = +this.$store.getters["cart/total_price"] + +this.final_delivery_price(this.delivery_price) + +(this.door_delivery?this.door_delivery_price:0);
       return summ%1==0?summ:summ.toFixed(2);
     },
     total_order_discount_price(){
-      let summ = +this.$store.getters["cart/total_discount_price"] + +this.delivery_price + +(this.door_delivery?this.door_delivery_price:0);
+      let summ = +this.$store.getters["cart/total_discount_price"] + +this.final_delivery_price(this.delivery_price) + +(this.door_delivery?this.door_delivery_price:0);
       return summ%1==0?summ:summ.toFixed(2);
     },
     cart_products() {

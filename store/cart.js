@@ -82,9 +82,10 @@ export const getters = {
     },
     total_discount_price(state) {
         let summ = 0;
-        summ = state.products.map(product => (+product.price.toFixed(2) - (product.price.toFixed(2) * (product.discount.percent ?? 0) / 100).toFixed(2)) * +product.count).reduce(function (accumulator, currentValue) {
+        summ = state.products.map(product => (+product.price.toFixed(2) - (product.price.toFixed(2) * (product.discount?.percent ?? 0) / 100).toFixed(2)) * +product.count).reduce(function (accumulator, currentValue) {
             return accumulator + currentValue;
         }) ?? 0;
         return summ % 1 == 0 ? +summ : +summ.toFixed(2);
-    }
+    },
+
 };

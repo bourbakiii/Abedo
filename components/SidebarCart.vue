@@ -76,7 +76,7 @@
           <p
             class="sidebar-cart__content__row__value sidebar-cart__content__row_delivery__value"
           >
-            Бесплатно
+            {{final_delivery_price_text()}}
           </p>
         </div>
         <div
@@ -113,7 +113,9 @@
   </div>
 </template>
 <script>
+import parserMixin from '@/mixins/parser.js';
 export default {
+  mixins: [parserMixin],
   computed: {
     cart_products() {
       return this.$store.state.cart.products;
@@ -122,10 +124,10 @@ export default {
       return this.$store.state.cart.partner;
     },
     total_price(){
-      return this.$store.getters['cart/total_price'];
-    }
+      let summ = this.$store.getters['cart/total_discount_price'] + this.final_delivery_price();
+      return summ%1==0?summ:summ.toFixed(2);
+    },
   },
-
 };
 </script>
 <style lang="scss" scoped>
