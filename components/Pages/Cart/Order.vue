@@ -230,15 +230,33 @@
 
       Оформить заказ</ButtonStandart
     >
+    <transition-group
+          tag="div"
+          class="order__messages"
+          name="message"
+          appear
+          mode="out-in"
+          :class="{
+            'order__messages_margined': errors.length,
+          }"
+        >
+          <Message
+            v-for="error in errors"
+            :key="error"
+            class="order__messages__item_error order__messages__item"
+            >{{ error }}</Message
+          >
+        </transition-group>
   </form>
 </template>
 <script>
 import inputBlockMixin from "@/mixins/input-block.js";
 import dadataMixin from "@/mixins/dadata.js";
 import parserMixin from "@/mixins/parser.js";
+  import errorsMessagesMixin from "@/mixins/errors-messages.js";
 import qs from "qs";
 export default {
-  mixins: [dadataMixin, inputBlockMixin, parserMixin],
+  mixins: [dadataMixin, inputBlockMixin, parserMixin, errorsMessagesMixin],
   data() {
     return {
       phone: this.parsePhone(this.$store.state.account.user.phone)??null,
@@ -336,9 +354,8 @@ export default {
         is_cashless_payment: +this.is_cashless_payment,
         with_gifts: +this.with_gifts
       });
-      console.log("the params is");
-      console.log(params);
-      //////////////////////
+      this.errors=[];
+      //////////////////////////////////////////////////////
       this.$axios
         .post(`/api/order/make`, params, {
           // body: params,
@@ -349,6 +366,17 @@ export default {
         .then(({ data }) => {
           this.$store.commit('cart/clear');
           this.$router.push('/success');
+        }).catch((error)=>{
+          if (error?.response?.status == 422) {
+            this.errors = Object.values(error.response.data.errors)
+              .map((el) => el.flat())
+              .flat();
+          }
+          else if (error?.response?.status == 400){
+            this.errors = [error.response.data.message];
+          }
+          const element = document.querySelector(`.order__messages`);
+              element.scrollIntoView({block: "center", behavior: "smooth"});
         });
     },
   },
@@ -842,5 +870,20 @@ export default {
       }
     }
   }
+  &__messages {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      width: 100%;
+      transition: 0.3s;
+      &_margined {
+        margin-top: 15px;
+      }
+      transition: calc($transition * 2);
+      .empty {
+        margin-top: 0px;
+      }
+    }
 }
 </style>

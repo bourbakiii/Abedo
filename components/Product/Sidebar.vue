@@ -23,8 +23,8 @@
       />
       <p class="product-sidebar__info__name">{{ product.name }}</p>
     </div>
-    <div class="product-sidebar__actions">
-      <div class="product-sidebar__actions__buttons">
+    <div  class="product-sidebar__actions">
+      <div v-if='product.is_active' class="product-sidebar__actions__buttons">
         <ButtonProduct
           class="product-sidebar__actions__buttons__button"
           size="26"

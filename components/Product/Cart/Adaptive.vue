@@ -9,7 +9,7 @@
         :src="`${$axios.defaults.baseURL}${product.image.small}`"
         class="product-cart-adaptive__data__image"
       />
-      <div class="product-cart-adaptive__data__buttons">
+      <div v-if='product.is_active' class="product-cart-adaptive__data__buttons">
         <ButtonProduct
           icon="minus"
           size="30"

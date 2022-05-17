@@ -43,7 +43,7 @@
         </p>
       </div>
     </div>
-    <div @click.self="go_by_link" class="product-item__buttons">
+    <div v-if='product.is_active' @click.self="go_by_link" class="product-item__buttons">
       <div
         @click.self="go_by_link"
         v-if="!in_cart"
