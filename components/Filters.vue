@@ -40,7 +40,9 @@
       <Checkbox
         class="filters__checkbox__checkbox"
         id="delivery"
-        v-model="filters.has_delivery"
+        :value="!filters.has_delivery"
+        :checked="filters.has_delivery"
+        @change="filters.has_delivery = !$event"
       />
       <p class="filters__checkbox__name">Бесплатная доставка</p>
     </label>
@@ -48,7 +50,9 @@
       <Checkbox
         class="filters__checkbox__checkbox"
         id="gift"
-        v-model="filters.has_gift"
+        :value="!filters.has_gift"
+        :checked="filters.has_gift"
+        @change="filters.has_gift = !$event"
       />
       <p class="filters__checkbox__name">Наличие подарка</p>
     </label>
@@ -56,7 +60,9 @@
       <Checkbox
         class="filters__checkbox__checkbox"
         id="discount"
-        v-model="filters.has_discount"
+        :value="!filters.has_discount"
+        :checked="filters.has_discount"
+        @change="filters.has_discount = !$event"
       />
       <p class="filters__checkbox__name">Наличие скидок</p>
     </label>

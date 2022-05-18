@@ -158,12 +158,14 @@
             {{ final_delivery_price_text(delivery_price) }}
           </p>
         </div>
-        <div class="order__delivery__prices__item" v-if="door_delivery_price">
+        <label for= 'door_delivery' class="order__delivery__prices__item" v-if="door_delivery_price">
           <div class="order__delivery__prices__item__name-block">
             <Checkbox
               id="door_delivery"
               class="order__delivery__prices__item__checkbox"
-              v-model="door_delivery"
+              :value="!door_delivery"
+              :checked='door_delivery'
+              @change='door_delivery = !$event'
             />
             <p class="order__delivery__prices__item__name">
               Доставить до двери
@@ -172,7 +174,7 @@
           <p class="order__delivery__prices__item__price">
             + {{ door_delivery_price }}₽
           </p>
-        </div>
+        </label>
       </div>
     </div>
     <div class="order__payment">
@@ -208,8 +210,13 @@
     </div>
     <div class="order__price">
       <p class="order__price__pre">Итого:</p>
-      <p class="order__price__price">{{total_order_discount_price}}₽</p>
-      <p v-if='total_order_discount_price < total_order_price' class="order__price__price_full">{{total_order_price}}₽</p>
+      <p class="order__price__price">{{ total_order_discount_price }}₽</p>
+      <p
+        v-if="total_order_discount_price < total_order_price"
+        class="order__price__price_full"
+      >
+        {{ total_order_price }}₽
+      </p>
     </div>
     <ButtonStandart class="order__button">
       <svg
@@ -230,35 +237,35 @@
       Оформить заказ</ButtonStandart
     >
     <transition-group
-          tag="div"
-          class="order__messages"
-          name="message"
-          appear
-          mode="out-in"
-          :class="{
-            'order__messages_margined': errors.length,
-          }"
-        >
-          <Message
-            v-for="error in errors"
-            :key="error"
-            class="order__messages__item_error order__messages__item"
-            >{{ error }}</Message
-          >
-        </transition-group>
+      tag="div"
+      class="order__messages"
+      name="message"
+      appear
+      mode="out-in"
+      :class="{
+        order__messages_margined: errors.length,
+      }"
+    >
+      <Message
+        v-for="error in errors"
+        :key="error"
+        class="order__messages__item_error order__messages__item"
+        >{{ error }}</Message
+      >
+    </transition-group>
   </form>
 </template>
 <script>
 import inputBlockMixin from "@/mixins/input-block.js";
 import dadataMixin from "@/mixins/dadata.js";
 import parserMixin from "@/mixins/parser.js";
-  import errorsMessagesMixin from "@/mixins/errors-messages.js";
+import errorsMessagesMixin from "@/mixins/errors-messages.js";
 import qs from "qs";
 export default {
   mixins: [dadataMixin, inputBlockMixin, parserMixin, errorsMessagesMixin],
   data() {
     return {
-      phone: this.parsePhone(this.$store.state.account.user.phone)??null,
+      phone: this.parsePhone(this.$store.state.account.user.phone) ?? null,
       address: {
         name: null,
         value: null,
@@ -294,11 +301,16 @@ export default {
       });
   },
   methods: {
-    parsePhone(phone){
-      return phone ? `(${phone[0]}${phone[1]}${phone[2]}) ${phone[3]}${phone[4]}${phone[5]} ${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`: null
+    logChange(value){
+      console.log("the value is");
+      console.log(value)
+    },
+    parsePhone(phone) {
+      return phone
+        ? `(${phone[0]}${phone[1]}${phone[2]}) ${phone[3]}${phone[4]}${phone[5]} ${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`
+        : null;
     },
     changeRadio(value) {
-      console.log(Boolean(value));
       this.is_cashless_payment = Boolean(value);
     },
     selectAddress(address) {
@@ -348,12 +360,13 @@ export default {
         shop_id: this.cart_partner.id,
         with_door_delivery: +this.door_delivery,
         address: this.address.value,
+        comment: this.description,
         ...copy_address,
-        phone: parseInt(this.phone.replace(/\D+/g,"")),
+        phone: parseInt(this.phone.replace(/\D+/g, "")),
         is_cashless_payment: +this.is_cashless_payment,
-        with_gifts: +this.with_gifts
+        with_gifts: +this.with_gifts,
       });
-      this.errors=[];
+      this.errors = [];
       //////////////////////////////////////////////////////
       this.$axios
         .post(`/api/order/make`, params, {
@@ -363,30 +376,36 @@ export default {
           },
         })
         .then(({ data }) => {
-          this.$store.commit('cart/clear');
-          this.$router.push('/success');
-        }).catch((error)=>{
+          this.$store.commit("cart/clear");
+          this.$router.push("/success");
+        })
+        .catch((error) => {
           if (error?.response?.status == 422) {
             this.errors = Object.values(error.response.data.errors)
               .map((el) => el.flat())
               .flat();
-          }
-          else if (error?.response?.status == 400){
+          } else if (error?.response?.status == 400) {
             this.errors = [error.response.data.message];
           }
           const element = document.querySelector(`.order__messages`);
-              element.scrollIntoView({block: "center", behavior: "smooth"});
+          element.scrollIntoView({ block: "center", behavior: "smooth" });
         });
     },
   },
   computed: {
-    total_order_price(){
-      let summ = +this.$store.getters["cart/total_price"] + +this.final_delivery_price(this.delivery_price) + +(this.door_delivery?this.door_delivery_price:0);
-      return summ%1==0?summ:summ.toFixed(2);
+    total_order_price() {
+      let summ =
+        +this.$store.getters["cart/total_price"] +
+        +this.final_delivery_price(this.delivery_price) +
+        +(this.door_delivery ? this.door_delivery_price : 0);
+      return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
-    total_order_discount_price(){
-      let summ = +this.$store.getters["cart/total_discount_price"] + +this.final_delivery_price(this.delivery_price) + +(this.door_delivery?this.door_delivery_price:0);
-      return summ%1==0?summ:summ.toFixed(2);
+    total_order_discount_price() {
+      let summ =
+        +this.$store.getters["cart/total_discount_price"] +
+        +this.final_delivery_price(this.delivery_price) +
+        +(this.door_delivery ? this.door_delivery_price : 0);
+      return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
     cart_products() {
       return this.$store.state.cart.products;
@@ -397,7 +416,7 @@ export default {
     token() {
       return this.$store.state.account.token;
     },
-    with_gifts(){
+    with_gifts() {
       //  !!!
       return false;
     },
@@ -413,11 +432,13 @@ export default {
   created() {
     let index = this.addresses.map((el) => el.is_default).indexOf(true);
     if (index >= 0) this.address = { ...this.addresses[index] };
+    else if (this.addresses.length) this.address = { ...this.addresses[0] };
   },
   watch: {
     "$store.state.account": {
       handler() {
-        this.phone = this.parsePhone(this.$store.state.account.user.phone) ?? null;
+        this.phone =
+          this.parsePhone(this.$store.state.account.user.phone) ?? null;
       },
       deep: true,
     },
@@ -668,7 +689,7 @@ export default {
         flex-direction: row;
         min-height: 50px;
         border-top: 1px solid $extra_dark_grey;
-        &:last-of-type {
+        &:last-child {
           border-bottom: 1px solid $extra_dark_grey;
         }
         &__checkbox {
@@ -870,19 +891,19 @@ export default {
     }
   }
   &__messages {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      flex-direction: column;
-      width: 100%;
-      transition: 0.3s;
-      &_margined {
-        margin-top: 15px;
-      }
-      transition: calc($transition * 2);
-      .empty {
-        margin-top: 0px;
-      }
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    transition: 0.3s;
+    &_margined {
+      margin-top: 15px;
     }
+    transition: calc($transition * 2);
+    .empty {
+      margin-top: 0px;
+    }
+  }
 }
 </style>

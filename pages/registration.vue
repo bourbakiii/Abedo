@@ -90,7 +90,10 @@
         <div class="registration-page__content_code__confirmation">
           <Checkbox
             id="code__confirmation"
-            v-model="confirmation"
+                          
+              :checked='confirmation'
+              :value="!confirmation"
+              @change='confirmation = !$event'
             class="registration-page__content_code__confirmation__checkbox"
           />
           <p class="registration-page__content_code__confirmation__text">
