@@ -101,14 +101,14 @@
       :for="`address-item__default-${address.id}`"
       class="address-item__default"
     >
-        <Checkbox
-          :id="`address-item__default-${address.id}`"
-          class="address-item__default__checkbox"
-          :value="address.is_default"
-          :checked="address.is_default"
-          @change="$emit('change_default', address)"
-        />
-        <p type='button' class="address-item__default__text">По умолчанию</p>
+      <Checkbox
+        :id="`address-item__default-${address.id}`"
+        class="address-item__default__checkbox"
+        :value="address.is_default"
+        :checked="address.is_default"
+        @change="changeDefault"
+      />
+      <p type="button" class="address-item__default__text">По умолчанию</p>
     </label>
     <transition name="address-item__buttons-transition">
       <div class="address-item__buttons" v-if="editing">
@@ -185,6 +185,57 @@ export default {
         this.address[key] = this.start_address[key];
       this.editing = false;
     },
+    changeDefault() {
+      console.log("Почему ты вызываешься-то?");
+      this.$store.commit("account/action", (state) => {
+        let store_address = state.user.addresses.find(
+          (el) => +el.id == +this.address.id
+        );
+        let store_address_start_value = store_address.is_default;
+        let index_of_default_start = state.user.addresses
+          .map((el) => el.is_default)
+          .indexOf(true);
+        clearDefaults();
+        if (store_address_start_value) {
+          this.$axios
+            .post(
+              "/api/user/address/default/remove",
+              {},
+              { headers: { Authorization: `Bearer ${this.token}` } }
+            )
+            .catch(() => {
+              this.$store.commit("account/action", (state) => {
+              store_address.is_default = true;
+              });
+            });
+        } else {
+          this.$store.commit("account/action", (state) => {
+              store_address.is_default = true;
+              });
+          this.$axios
+            .post(
+              "/api/user/address/default",
+              { id: this.address.id },
+              { headers: { Authorization: `Bearer ${this.token}` } }
+            )
+            .catch(() => {
+              this.$store.commit("account/action", (state) => {
+              store_address.is_default = false;
+              });
+              if (index_of_default_start > 0)
+                state.user.addresses[index_of_default_start].is_default = true;
+            });
+        }
+        function clearDefaults() {
+          state.user.addresses.forEach((el) => (el.is_default = false));
+        }
+      });
+    },
+  },
+  computed: {
+    token() {
+      return this.$store.state.account.token;
+    },
   },
   watch: {
     suggestions(value) {
@@ -210,12 +261,12 @@ export default {
         document.addEventListener("click", dropdownAddressClick);
       else document.removeEventListener("click", dropdownAddressClick);
     },
-    'given_address':{
-      handler(value){
-        [this.address, this.start_address] = [{...this.given_address}];
+    given_address: {
+      handler(value) {
+        [this.address, this.start_address] = [{ ...this.given_address }];
       },
-      deep:true
-    }
+      deep: true,
+    },
   },
 };
 </script>
@@ -433,16 +484,17 @@ export default {
     align-self: flex-start;
     width: max-content;
     margin: 10px 0px;
-    width:100%;height:100%;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
 
     &__text {
       background-color: transparent;
-      outline:none;
-      border:none;
+      outline: none;
+      border: none;
       margin-left: 10px;
-      &::selection{
-        background-color:  transparent;
+      &::selection {
+        background-color: transparent;
       }
     }
   }
