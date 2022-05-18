@@ -186,7 +186,6 @@ export default {
       this.editing = false;
     },
     changeDefault() {
-      console.log("Почему ты вызываешься-то?");
       this.$store.commit("account/action", (state) => {
         let store_address = state.user.addresses.find(
           (el) => +el.id == +this.address.id
@@ -205,13 +204,13 @@ export default {
             )
             .catch(() => {
               this.$store.commit("account/action", (state) => {
-              store_address.is_default = true;
+                store_address.is_default = true;
               });
             });
         } else {
           this.$store.commit("account/action", (state) => {
-              store_address.is_default = true;
-              });
+            store_address.is_default = true;
+          });
           this.$axios
             .post(
               "/api/user/address/default",
@@ -220,7 +219,7 @@ export default {
             )
             .catch(() => {
               this.$store.commit("account/action", (state) => {
-              store_address.is_default = false;
+                store_address.is_default = false;
               });
               if (index_of_default_start > 0)
                 state.user.addresses[index_of_default_start].is_default = true;
@@ -479,13 +478,11 @@ export default {
   &__default {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: row;
     align-self: flex-start;
     width: max-content;
     margin: 10px 0px;
-    width: 100%;
-    height: 100%;
     cursor: pointer;
 
     &__text {
