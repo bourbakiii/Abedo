@@ -29,7 +29,7 @@
     </div>
     <form @submit.prevent='checkPromocode' v-if="token" class="cart__promo">
       <p class="cart__promo__text">Введите промокод</p>
-      <input v-model='promocode' type="text" name="promo" id="promo" class="cart__promo__input" />
+      <input :value='$store.state.cart.promo' @input="$store.commit('cart/action',(state)=>state.promo=$event.target.value)" type="text" name="promo" id="promo" class="cart__promo__input" />
       <ButtonStandart  class='cart__promo__button'>Применить</ButtonStandart>
     </form>
     <div v-else class="cart__promo cart__promo_empty">
@@ -58,7 +58,7 @@ export default {
   },
   methods:{
     checkPromocode(){
-      console.log("promocode checked");
+      this.$store.dispatch('cart/synchronization');
     }
   },
   computed: {

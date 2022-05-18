@@ -158,14 +158,18 @@
             {{ final_delivery_price_text(delivery_price) }}
           </p>
         </div>
-        <label for= 'door_delivery' class="order__delivery__prices__item" v-if="door_delivery_price">
+        <label
+          for="door_delivery"
+          class="order__delivery__prices__item"
+          v-if="door_delivery_price"
+        >
           <div class="order__delivery__prices__item__name-block">
             <Checkbox
               id="door_delivery"
               class="order__delivery__prices__item__checkbox"
               :value="!door_delivery"
-              :checked='door_delivery'
-              @change='door_delivery = !$event'
+              :checked="door_delivery"
+              @change="door_delivery = !$event"
             />
             <p class="order__delivery__prices__item__name">
               Доставить до двери
@@ -301,13 +305,9 @@ export default {
       });
   },
   methods: {
-    logChange(value){
-      console.log("the value is");
-      console.log(value)
-    },
     parsePhone(phone) {
       return phone
-        ? `(${phone[0]}${phone[1]}${phone[2]}) ${phone[3]}${phone[4]}${phone[5]} ${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`
+        ? `(${phone[0]}${phone[1]}${phone[2]}) ${phone[3]}${phone[4]}${phone[5]}-${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`
         : null;
     },
     changeRadio(value) {
@@ -391,6 +391,15 @@ export default {
           element.scrollIntoView({ block: "center", behavior: "smooth" });
         });
     },
+    setStartAddress() {
+      let index = this.addresses.map((el) => el.is_default).indexOf(true);
+      if (index >= 0) this.address = { ...this.addresses[index] };
+      else if (this.addresses.length) this.address = { ...this.addresses[0] };
+    },
+  },
+  created() {
+    console.log("yes im here");
+    this.setStartAddress();
   },
   computed: {
     total_order_price() {
@@ -429,16 +438,12 @@ export default {
       return this.$store.state.account?.user.addresses ?? [];
     },
   },
-  created() {
-    let index = this.addresses.map((el) => el.is_default).indexOf(true);
-    if (index >= 0) this.address = { ...this.addresses[index] };
-    else if (this.addresses.length) this.address = { ...this.addresses[0] };
-  },
   watch: {
     "$store.state.account": {
       handler() {
         this.phone =
           this.parsePhone(this.$store.state.account.user.phone) ?? null;
+          this.setStartAddress();
       },
       deep: true,
     },

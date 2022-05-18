@@ -2,7 +2,8 @@ import Vue from "vue";
 let local_storage_name = "cart";
 export const state = () => ({
     products: [],
-    partner: {}
+    partner: {},
+    promo: null
 });
 export const mutations = {
     action(state, action) {
@@ -68,6 +69,11 @@ export const actions = {
         state.commit('clear');
         state.commit("set", { index: state.commit('set', { index: state.state.products.length, product }), product: product });
         state.commit("set_partner", partner);
+    },
+    synchronization(state) {
+        console.log("ты девочка искра");
+        const {promo} = state.state
+        console.log(promo);
     }
 };
 
