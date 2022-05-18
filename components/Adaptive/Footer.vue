@@ -50,8 +50,14 @@
         />
       </svg>
       <client-only>
-        <transition name='indicator' appear>
-      <div class="footer__button_cart__count" v-if='cart_products.length' contenteditable>{{cart_products.length}}</div>
+        <transition name="indicator" appear>
+          <div
+            class="footer__button_cart__count"
+            v-if="cart_products.length"
+            contenteditable
+          >
+            {{ cart_products.length }}
+          </div>
         </transition>
       </client-only>
     </NuxtLink>
@@ -69,7 +75,10 @@
         />
       </svg>
     </NuxtLink>
-    <button @click.prevent="show_left_menu = true" class="footer__button footer__button_left-menu">
+    <button
+      @click.prevent="show_left_menu = true"
+      class="footer__button footer__button_left-menu"
+    >
       <svg
         width="30"
         height="30"
@@ -111,11 +120,11 @@ export default {
       show_left_menu: false,
     };
   },
-  computed:{
-    cart_products(){
+  computed: {
+    cart_products() {
       return this.$store.state.cart.products;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -142,8 +151,8 @@ export default {
     }
     svg {
       * {
-      transition: $transition;
-    }
+        transition: $transition;
+      }
     }
     &:active,
     &:hover {
@@ -151,15 +160,19 @@ export default {
         fill: $darkblue;
       }
     }
-    &_partners{
-      margin-right: 11.5%;
-    }
-    &_left-menu{
-      margin-left: 11.5%;
+    @media screen and (max-width: $phone) {
+      &_partners {
+        margin-right: 11.5%;
+      }
+      &_left-menu {
+        margin-left: 11.5%;
+      }
     }
     &_cart {
       position: relative;
+      @media screen and (max-width: $phone) {
       margin: 0px auto;
+      }
       &__count {
         position: absolute;
         min-width: 20px;

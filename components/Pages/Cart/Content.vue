@@ -27,10 +27,11 @@
         :product="product"
       />
     </div>
-    <div v-if="token" class="cart__promo">
+    <form @submit.prevent='checkPromocode' v-if="token" class="cart__promo">
       <p class="cart__promo__text">Введите промокод</p>
-      <input type="text" name="promo" id="promo" class="cart__promo__input" />
-    </div>
+      <input v-model='promocode' type="text" name="promo" id="promo" class="cart__promo__input" />
+      <ButtonStandart  class='cart__promo__button'>Применить</ButtonStandart>
+    </form>
     <div v-else class="cart__promo cart__promo_empty">
       Для оформления заказа необходимо<button
         class="cart__promo_empty__button"
@@ -50,6 +51,16 @@
 
 <script>
 export default {
+  data(){
+    return {
+      promocode: null
+    }
+  },
+  methods:{
+    checkPromocode(){
+      console.log("promocode checked");
+    }
+  },
   computed: {
     cart_products() {
       return this.$store.state.cart.products;
@@ -270,6 +281,10 @@ export default {
         margin-left:5px;
         font-weight:600;
       }
+    }
+    &__button{
+      margin-left: 30px; 
+      padding: 0px 20px;
     }
   }
   &__prices {
