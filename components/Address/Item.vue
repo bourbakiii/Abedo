@@ -97,19 +97,18 @@
         >
       </transition>
     </div>
-    {{ address.is_default }}
-
     <label
       :for="`address-item__default-${address.id}`"
       class="address-item__default"
     >
-      <Checkbox
-        :id="`address-item__default-${address.id}`"
-        class="address-item__default__checkbox"
-        :value="address.is_default"
-        @change="$emit('change_default', address)"
-      />
-      <p class="address-item__default__text">По умолчанию</p>
+        <Checkbox
+          :id="`address-item__default-${address.id}`"
+          class="address-item__default__checkbox"
+          :value="address.is_default"
+          :checked="address.is_default"
+          @change="$emit('change_default', address)"
+        />
+        <p type='button' class="address-item__default__text">По умолчанию</p>
     </label>
     <transition name="address-item__buttons-transition">
       <div class="address-item__buttons" v-if="editing">
@@ -159,9 +158,9 @@ export default {
       address: this.given_address,
       start_address: { ...this.given_address },
       editing: false,
+      default_timer: null,
     };
   },
-
   methods: {
     remove() {
       this.$axios
@@ -211,14 +210,12 @@ export default {
         document.addEventListener("click", dropdownAddressClick);
       else document.removeEventListener("click", dropdownAddressClick);
     },
-    // address: {
-    //   handler(value) {
-    //     console.log(value);
-    //     console.log("the adress is changed");
-    //     this.$emit("change_address", value);
-    //   },
-    //   deep: true,
-    // },
+    'given_address':{
+      handler(value){
+        [this.address, this.start_address] = [{...this.given_address}];
+      },
+      deep:true
+    }
   },
 };
 </script>
@@ -436,8 +433,17 @@ export default {
     align-self: flex-start;
     width: max-content;
     margin: 10px 0px;
+    width:100%;height:100%;
+    cursor: pointer;
+
     &__text {
+      background-color: transparent;
+      outline:none;
+      border:none;
       margin-left: 10px;
+      &::selection{
+        background-color:  transparent;
+      }
     }
   }
   &__buttons {

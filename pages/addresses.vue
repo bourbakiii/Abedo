@@ -12,7 +12,7 @@
             :key="address.id"
             v-for="address in addresses"
             :given_address="address"
-            @change_default='changeDefault'
+            @change_default="changeDefault"
           />
         </div>
         <transition name="add-address-form" mode="out-in">
@@ -55,14 +55,53 @@ export default {
       show_add_form: false,
     };
   },
-  methods:{
-    changeDefault(address){
-      console.object("to change defauklt address");
-    }
+  methods: {
+    changeDefault(address) {
+      console.log("Почему ты вызываешься-то?");
+      this.$store.commit("account/action", (state) => {
+        let store_address = state.user.addresses.find(
+          (el) => +el.id == +address.id
+        );
+        let store_address_start_value = store_address.is_default;
+        let index_of_default_start = state.user.addresses.map(el=>el.is_default).indexOf(true);
+        clearDefaults();
+        console.log(store_address_start_value)
+        if (store_address_start_value) {
+          this.$axios
+            .post(
+              "/api/user/address/default/remove",{},
+              { headers: { Authorization: `Bearer ${this.token}` } }
+            )
+            .catch(() => {
+              store_address.is_default = true;
+            });
+        }
+        else{
+          console.log("second");
+          store_address.is_default = true;
+          this.$axios
+            .post(
+              "/api/user/address/default",
+              { id: address.id},
+              { headers: { Authorization: `Bearer ${this.token}` } }
+            )
+            .catch(() => {
+              store_address.is_default = false;
+              if(index_of_default_start>0) state.user.addresses[index_of_default_start].is_default = true;
+            });
+        }
+        function clearDefaults(){
+          state.user.addresses.forEach(el=>el.is_default = false);
+        }
+      });
+    },
   },
   computed: {
     addresses() {
       return this.$store.state.account.user.addresses;
+    },
+    token() {
+      return this.$store.state.account.token;
     },
   },
 };

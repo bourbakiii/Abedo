@@ -1,12 +1,13 @@
 <template>
-  <label :class="{ checked: isChecked, disabled: disabled }" class="checkbox">
+  <label :for='id' :class="{ checked: checked, disabled: disabled }" class="checkbox">
     <input
       class="checkbox__input"
       type="checkbox"
-      :checked="isChecked"
+      :checked="checked"
       :value="value"
       @change="updateInput"
       :disabled="disabled"
+      :id='id'
     />
     <svg
       class="checkbox__icon"
@@ -36,29 +37,20 @@ export default {
     trueValue: { default: true },
     falseValue: { default: false },
     disabled: { default: false },
-  },
-  computed: {
-    isChecked() {
-      if (this.modelValue instanceof Array) {
-        return this.modelValue.includes(this.value);
-      }
-      // Note that `true-value` and `false-value` are camelCase in the JS
-      return this.modelValue === this.trueValue;
-    },
+    checked: { required: true },
   },
   methods: {
     updateInput(event) {
-      let isChecked = event.target.checked;
       if (this.modelValue instanceof Array) {
         let newValue = [...this.modelValue];
-        if (isChecked) {
+        if (this.checked) {
           newValue.push(this.value);
         } else {
           newValue.splice(newValue.indexOf(this.value), 1);
         }
         this.$emit("change", newValue);
       } else {
-        this.$emit("change", isChecked ? this.trueValue : this.falseValue);
+        this.$emit("change", this.checked ? this.trueValue : this.falseValue);
       }
     },
   },

@@ -48,8 +48,6 @@ export default {
                     this.$emit("close");
                     if (this.editing != undefined) {
                         this.editing = false;
-                        console.log('legalize it');
-                        console.log(this.address);
                         this.$store.commit("account/action", (state) => {
                             state.user.addresses[
                               state.user.addresses.map((el) => +el.id).indexOf(+value.id)
