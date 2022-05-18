@@ -465,6 +465,8 @@ export default {
           border: 1px solid $dark_grey;
           height: 40px;
           width: 40px;
+          border: 1px solid $extra_dark_grey;
+border-radius: 50px;
         }
         margin-right: 20px;
         flex-shrink: 0;
