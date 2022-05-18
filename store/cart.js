@@ -1,4 +1,5 @@
 import Vue from "vue";
+import qs from 'qs';
 let local_storage_name = "cart";
 export const state = () => ({
     products: [],
@@ -72,8 +73,22 @@ export const actions = {
     },
     synchronization(state) {
         console.log("ты девочка искра");
-        const {promo} = state.state
-        console.log(promo);
+        const { promo, products } = state.state;
+        let product_entries_final = products.map(el => Object.entries(el).filter(el => el[0] == 'id' || el[0] == 'props' || el[0] == 'count'));
+        let products_final = [];
+        for(let entire of product_entries_final){
+            // products_final.push({entire[0]: entire[1]});
+        }
+        // console.log("products final are");
+        // console.log(products_final);
+        // console.log(promo);
+        // let params = qs.stringify({
+        //     products: products,
+        // });
+        // console.log("the params is");
+        // console.log(params);
+
+        // this.$axios.get('/api/order/getOrder',{params: params});
     }
 };
 
