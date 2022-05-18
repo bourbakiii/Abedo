@@ -3,8 +3,8 @@
     <button class="shop-adaptive__favourite">
       <svg
         class="shop-adaptive__favourite__icon"
-        width="12"
-        height="12"
+        width="14"
+        height="13"
         viewBox="0 0 20 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
