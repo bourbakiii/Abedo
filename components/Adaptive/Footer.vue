@@ -1,9 +1,9 @@
 <template>
   <div class="footer">
-    <NuxtLink to="/partners" class="footer__button">
+    <NuxtLink to="/partners" class="footer__button footer__button_partners">
       <svg
-        width="24"
-        height="24"
+        width="30"
+        height="30"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -24,8 +24,8 @@
     </NuxtLink>
     <NuxtLink to="/favourites" class="footer__button">
       <svg
-        width="20"
-        height="18"
+        width="25"
+        height="22.5"
         viewBox="0 0 20 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -38,8 +38,8 @@
     </NuxtLink>
     <NuxtLink to="/cart" class="footer__button footer__button_cart">
       <svg
-        width="20"
-        height="20"
+        width="25"
+        height="25"
         viewBox="0 0 20 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -57,8 +57,8 @@
     </NuxtLink>
     <NuxtLink to="/search" class="footer__button">
       <svg
-        width="19"
-        height="19"
+        width="23.23"
+        height="23.75"
         viewBox="0 0 19 19"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -69,10 +69,10 @@
         />
       </svg>
     </NuxtLink>
-    <button @click.prevent="show_left_menu = true" class="footer__button">
+    <button @click.prevent="show_left_menu = true" class="footer__button footer__button_left-menu">
       <svg
-        width="24"
-        height="24"
+        width="30"
+        height="30"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +129,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 34px;
+  padding: 0px 28.5px;
 
   &__button {
     background-color: transparent;
@@ -140,8 +140,10 @@ export default {
         fill: $darkblue;
       }
     }
-    svg * {
+    svg {
+      * {
       transition: $transition;
+    }
     }
     &:active,
     &:hover {
@@ -149,9 +151,15 @@ export default {
         fill: $darkblue;
       }
     }
-
+    &_partners{
+      margin-right: 11.5%;
+    }
+    &_left-menu{
+      margin-left: 11.5%;
+    }
     &_cart {
       position: relative;
+      margin: 0px auto;
       &__count {
         position: absolute;
         min-width: 20px;

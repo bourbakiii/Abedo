@@ -90,10 +90,9 @@
         <div class="registration-page__content_code__confirmation">
           <Checkbox
             id="code__confirmation"
-                          
-              :checked='confirmation'
-              :value="!confirmation"
-              @change='confirmation = !$event'
+            :checked="confirmation"
+            :value="!confirmation"
+            @change="confirmation = !$event"
             class="registration-page__content_code__confirmation__checkbox"
           />
           <p class="registration-page__content_code__confirmation__text">
@@ -110,7 +109,7 @@
 <script>
 import errorsMessagesMixin from "@/mixins/errors-messages.js";
 export default {
-  mixins:[errorsMessagesMixin],
+  mixins: [errorsMessagesMixin],
   data() {
     return {
       form: {
@@ -131,9 +130,9 @@ export default {
       }
       this.$axios
         .post(`${this.$axios.defaults.baseURL}/api/register`, {
-        phone: parseInt(this.form.phone.replace(/\D+/g,"")),
+          phone: parseInt(this.form.phone.replace(/\D+/g, "")),
           password: this.form.password,
-          password_confirmation: this.form.password_confirmation
+          password_confirmation: this.form.password_confirmation,
         })
         .then((response) => {
           this.$store.commit("temporary/action", (state) => {
@@ -141,7 +140,7 @@ export default {
           });
         })
         .catch(({ response }) => {
-          if ((response?.status == 422)) {
+          if (response?.status == 422) {
             this.errors = Object.values(response.data.errors)
               .map((el) => el.flat())
               .flat();
