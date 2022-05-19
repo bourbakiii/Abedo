@@ -304,6 +304,7 @@ export default {
         this.door_delivery_price = delivery.door_delivery_price;
       });
   },
+
   methods: {
     parsePhone(phone) {
       return phone

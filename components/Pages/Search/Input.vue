@@ -38,6 +38,7 @@
           class="search-input-input"
           v-model="keyword"
           @change="timerHandler"
+          minlength='3'
         />
         <transition name="opacity">
           <button

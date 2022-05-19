@@ -4,7 +4,8 @@ let local_storage_name = "cart";
 export const state = () => ({
     products: [],
     partner: {},
-    promo: null
+    promo: null,
+    promo_result: null
 });
 export const mutations = {
     action(state, action) {
@@ -72,23 +73,32 @@ export const actions = {
         state.commit("set_partner", partner);
     },
     synchronization(state) {
-        console.log("ты девочка искра");
-        const { promo, products } = state.state;
-        let product_entries_final = products.map(el => Object.entries(el).filter(el => el[0] == 'id' || el[0] == 'props' || el[0] == 'count'));
+        const { promo, products, partner } = state.state;
         let products_final = [];
-        for(let entire of product_entries_final){
-            // products_final.push({entire[0]: entire[1]});
+        for (let product of products) {
+            products_final.push({
+                id: product.id,
+                count: product.count,
+                props: product.props
+            });
         }
         // console.log("products final are");
         // console.log(products_final);
         // console.log(promo);
-        // let params = qs.stringify({
-        //     products: products,
+        let params = qs.stringify({
+            promo_code: promo,
+            products: products_final,
+            shop_id: partner.id
+        });
+        console.log("the params is");
+        console.log(params);
+        // this.$axios.get(`/api/order/getOrder?${params}`).then((response) => {
+        //     console.log("Response");
+        //     console.log(response.data);
+        // }).catch((error) => {
+        //     console.log(error);
+        //     console.log(error);
         // });
-        // console.log("the params is");
-        // console.log(params);
-
-        // this.$axios.get('/api/order/getOrder',{params: params});
     }
 };
 
