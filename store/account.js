@@ -6,16 +6,16 @@ export const state = () => ({
 export const mutations = {
     action(state, action) {
         action(state);
-        localStorage.setItem('account', JSON.stringify(state));
+        this.$cookies.set('account', state);
     },
     clear(state) {
         state.token = null,
             state.user = {},
             state.favourites = [];
-        localStorage.setItem('account', JSON.stringify(state));
+        this.$cookies.set('account', state);
     },
     local_set(state) {
-        const local_data = JSON.parse(localStorage.getItem('account'));
+        const local_data = this.$cookies.get('account');
         if (local_data) for (const key in state) state[key] = local_data[key] ?? null
     }
 };
@@ -38,7 +38,7 @@ export const actions = {
                     delete el.lat;
                     delete el.lon;
                 });
-                user.gender = user.gender=='male'?'Мужской':'Женский';
+                user.gender = user.gender == 'male' ? 'Мужской' : 'Женский';
                 state.user = user;
             })
             await state.dispatch("favourites");

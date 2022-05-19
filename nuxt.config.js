@@ -29,7 +29,7 @@ export default {
   components: true,
   build: {},
   buildModules: [],
-  modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/style-resources', 'cookie-universal-nuxt'],
   generate:{
     crawler: false,
     fallback: true,

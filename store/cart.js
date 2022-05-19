@@ -10,32 +10,29 @@ export const state = () => ({
 export const mutations = {
     action(state, action) {
         action(state);
-        localStorage.setItem(local_storage_name, JSON.stringify(state));
+        this.$cookies.set(local_storage_name, state);
     },
     set(state, { index, product }) {
         Vue.set(state.products, index, product)
-        localStorage.setItem(local_storage_name, JSON.stringify(state));
+        this.$cookies.set(local_storage_name, state);
     },
     remove(state, index) {
         Vue.delete(state.products, index);
-        localStorage.setItem(local_storage_name, JSON.stringify(state));
+        this.$cookies.set(local_storage_name, state);
     },
     clear(state) {
         Vue.set(state, "products", []);
-        localStorage.setItem(local_storage_name, JSON.stringify(state));
+        this.$cookies.set(local_storage_name, state);
     },
     set_partner(state, partner) {
         Vue.set(state, 'partner', partner);
-        localStorage.setItem(local_storage_name, JSON.stringify(state));
+        this.$cookies.set(local_storage_name, state);
     },
     local_set(state) {
-        const local_data = JSON.parse(localStorage.getItem(local_storage_name));
-        if (local_data != null) {
-            console.log(local_data);
+        const local_data = this.$cookies.get(local_storage_name);
+        if (local_data) {
             state.products = local_data.products;
             state.partner = local_data.partner;
-            console.log(state.products);
-            // for (const key in local_data) state[key] = local_data[key];
         }
 
     }

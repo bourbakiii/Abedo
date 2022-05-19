@@ -91,6 +91,7 @@ export default {
       }).then(async ({data:{token}})=>{
           this.$store.commit("account/action", (state) => {
             state.token = token;
+            this.$cookies.set('token',token);
           });
           await this.$store.dispatch("account/get").then(()=>{
             this.$store.commit("modals/close");
