@@ -22,6 +22,7 @@
 </template>
 <script>
 export default {
+  middleware: ['auth'],
   computed:{
     partners(){
       return this.$store.state.account.favourites;

@@ -192,7 +192,6 @@ export default {
       show_dropdown: false,
     };
   },
-
   methods: {
     selectGender(gender) {
       this.user.gender = gender;

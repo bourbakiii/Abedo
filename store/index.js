@@ -1,5 +1,7 @@
 export const actions = {
-    async nuxtServerInit({ state, dispatch }) {
+    async nuxtServerInit(context) {
+        console.log("nuxtserverinit hook");
+        console.log(Object.keys(context));
     },
     clientHook({ state, dispatch, commit }) {
         commit("cart/local_set");
@@ -8,6 +10,5 @@ export const actions = {
         if (state.account.token) {
             dispatch("account/get");
         }
-
     }
 }
