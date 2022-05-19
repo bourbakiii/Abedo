@@ -61,6 +61,7 @@ export const actions = {
     async logout(state) {
         const token = state.state.token;
         state.commit("clear");
+        this.$router.push('/');
         await this.$axios.get(`/api/logout`, {
             headers: {
                 "Authorization": "Bearer " + token

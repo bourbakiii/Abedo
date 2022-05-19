@@ -49,6 +49,7 @@
 <script>
 import dadataMixin from "@/mixins/dadata.js";
 export default {
+  middleware: ['auth'],
   mixins: [dadataMixin],
   data() {
     return {
@@ -62,7 +63,6 @@ export default {
     addresses() {
       return this.$store.state.account.user.addresses;
     },
-
   },
 };
 </script>

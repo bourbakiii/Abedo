@@ -184,6 +184,7 @@
 import errorsMessagesMixin from "@/mixins/errors-messages.js";
 export default {
   mixins: [errorsMessagesMixin],
+  middleware: ['auth'],
   data() {
     return {
       editing: false,

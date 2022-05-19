@@ -1,8 +1,11 @@
-export default function ({store}) {
-    // Add the userAgent property to the context
-    // console.log("ЭТО МУЗЫКА ЛЮБОВЬ ГОВОРИТ ЗА НАС")
-    // console.log(store.state);
-    // context.userAgent = process.server
-    //   ? context.req.headers['user-agent']
-    //   : navigator.userAgent
+export default function ({ app, store, redirect, next, ...additional }) {
+  console.log(process.server);
+  if (!(app.$cookies.get('account'))?.token) {
+    if(!process.server)
+    {
+    store.commit("modals/open", { modal_name: "login" })
+    next(false);
+    }
+    else redirect('/');
   }
+}
