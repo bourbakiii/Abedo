@@ -11,23 +11,30 @@ export const state = () => ({
 export const mutations = {
     action(state, action) {
         action(state);
+        
         this.$cookies.set(local_storage_name, state);
     },
     set(state, { index, product }) {
         Vue.set(state.products, index, product)
+        
         this.$cookies.set(local_storage_name, state);
     },
     remove(state, index) {
         Vue.delete(state.products, index);
+        
         this.$cookies.set(local_storage_name, state);
     },
     clear(state) {
         Vue.set(state, "products", []);
+        
         this.$cookies.set(local_storage_name, state);
     },
     set_partner(state, partner) {
         Vue.set(state, 'partner', partner);
+        
         this.$cookies.set(local_storage_name, state);
+        console.log("result of set partners mutation");
+        console.log(this.$cookies.get(local_storage_name))
     },
     local_set(state) {
         const local_data = this.$cookies.get(local_storage_name);
