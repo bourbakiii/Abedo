@@ -12,8 +12,6 @@ export default {
             let free_order_price = +this.$store.state.cart.partner?.free_order_price
             if (!delivery_price) delivery_price = this.$store.state.cart.partner?.delivery?.price
             if (!delivery_price) delivery_price = 0;
-            console.log("the delivery is");
-            console.log(delivery_price);
             if (free_order_price) {
                 let summ = 0;
                 summ = products.map(product => (+product.price.toFixed(2) - (product.price.toFixed(2) * (product.discount?.percent ?? 0) / 100).toFixed(2)) * +product.count).reduce(function (accumulator, currentValue) {

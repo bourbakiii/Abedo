@@ -410,8 +410,6 @@ export default {
       return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
     total_order_discount_price() {
-      console.log("calculated ");
-      console.log(this.final_delivery_price(+this.delivery_price));
       let summ =
         +this.$store.getters["cart/total_discount_price"] +
         +this.final_delivery_price(+this.delivery_price) +

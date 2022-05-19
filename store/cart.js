@@ -71,15 +71,7 @@ export const actions = {
         state.commit("set_partner", partner);
     },
     synchronization(state) {
-
-        state.commit("action", (state)=>{
-            clearTimeout(state.synchronization_timer);
-            state.synchronization_timer = setTimeout(sync, 400);
-        });
-
-
-
-        const sync = (state)=>{
+        const sync = ()=>{
             console.log("sync function");
             const { promo, products, partner } = state.state;
             let products_final = [];
@@ -108,6 +100,14 @@ export const actions = {
             //     console.log(error);
             // });
         }
+
+        state.commit("action", (state)=>{
+            clearTimeout(state.synchronization_timer);
+            state.synchronization_timer = setTimeout(sync, 600);
+        });
+
+
+
     }
 };
 
