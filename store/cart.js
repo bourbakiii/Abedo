@@ -5,7 +5,8 @@ export const state = () => ({
     products: [],
     partner: {},
     promo: null,
-    promo_result: null
+    promo_result: null,
+    synchronization_timer: null
 });
 export const mutations = {
     action(state, action) {
@@ -70,32 +71,43 @@ export const actions = {
         state.commit("set_partner", partner);
     },
     synchronization(state) {
-        const { promo, products, partner } = state.state;
-        let products_final = [];
-        for (let product of products) {
-            products_final.push({
-                id: product.id,
-                count: product.count,
-                props: product.props
-            });
-        }
-        // console.log("products final are");
-        // console.log(products_final);
-        // console.log(promo);
-        let params = qs.stringify({
-            promo_code: promo,
-            products: products_final,
-            shop_id: partner.id
+
+        state.commit("action", (state)=>{
+            clearTimeout(state.synchronization_timer);
+            state.synchronization_timer = setTimeout(sync, 400);
         });
-        console.log("the params is");
-        console.log(params);
-        // this.$axios.get(`/api/order/getOrder?${params}`).then((response) => {
-        //     console.log("Response");
-        //     console.log(response.data);
-        // }).catch((error) => {
-        //     console.log(error);
-        //     console.log(error);
-        // });
+
+
+
+        const sync = (state)=>{
+            console.log("sync function");
+            const { promo, products, partner } = state.state;
+            let products_final = [];
+            for (let product of products) {
+                products_final.push({
+                    id: product.id,
+                    count: product.count,
+                    props: product.props
+                });
+            }
+            // console.log("products final are");
+            // console.log(products_final);
+            // console.log(promo);
+            let params = qs.stringify({
+                promo_code: promo,
+                products: products_final,
+                shop_id: partner.id
+            });
+            console.log("the params is");
+            console.log(params);
+            // this.$axios.get(`/api/order/getOrder?${params}`).then((response) => {
+            //     console.log("Response");
+            //     console.log(response.data);
+            // }).catch((error) => {
+            //     console.log(error);
+            //     console.log(error);
+            // });
+        }
     }
 };
 

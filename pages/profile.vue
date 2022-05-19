@@ -265,7 +265,6 @@ export default {
         (this.user = { ...this.$store.state.account.user }),
           (this.start_user = { ...this.$store.state.account.user }),
           (this.editing = false);
-        console.log("Token changed");
       },
       deep: true,
     },

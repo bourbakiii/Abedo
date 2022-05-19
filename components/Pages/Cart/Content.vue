@@ -21,11 +21,13 @@
       </button>
     </div>
     <div class="cart__products">
+      <client-only>
       <ProductCartItem
         v-for="product in cart_products"
         :key="product.id"
         :product="product"
       />
+      </client-only>
     </div>
     <form @submit.prevent='checkPromocode' v-if="token" class="cart__promo">
       <p class="cart__promo__text">Введите промокод</p>

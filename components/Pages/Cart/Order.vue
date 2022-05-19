@@ -399,21 +399,22 @@ export default {
     },
   },
   created() {
-    console.log("yes im here");
     this.setStartAddress();
   },
   computed: {
     total_order_price() {
       let summ =
         +this.$store.getters["cart/total_price"] +
-        +this.final_delivery_price(this.delivery_price) +
+        +this.final_delivery_price(+this.delivery_price) +
         +(this.door_delivery ? this.door_delivery_price : 0);
       return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
     total_order_discount_price() {
+      console.log("calculated ");
+      console.log(this.final_delivery_price(+this.delivery_price));
       let summ =
         +this.$store.getters["cart/total_discount_price"] +
-        +this.final_delivery_price(this.delivery_price) +
+        +this.final_delivery_price(+this.delivery_price) +
         +(this.door_delivery ? this.door_delivery_price : 0);
       return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
@@ -449,7 +450,6 @@ export default {
       deep: true,
     },
     suggestions(value) {
-      console.log("1231231232");
       const dropdownAddressClick = (event) => {
         const dropdown_content = document.querySelector(
           `.order__delivery__content__content__address__dadata`
