@@ -30,24 +30,30 @@
       </client-only>
     </div>
     <form @submit.prevent="checkPromocode" v-if="token" class="cart__promo">
-      <p class="cart__promo__text">Введите промокод</p>
-      <input
-        :value="$store.state.cart.promo"
-        @input="
-          $store.commit(
-            'cart/action',
-            (state) => (state.promo = $event.target.value)
-          )
-        "
-        type="text"
-        name="promo"
-        id="promo"
-        class="cart__promo__input"
-      />
-      <ButtonStandart class="cart__promo__button">Применить</ButtonStandart>
+      как выводить ошибку/успех промо?
+      <div class="cart__promo__content">     
+        <p class="cart__promo__content__text">Введите промокод</p>
+        <input
+          :value="$store.state.cart.promo"
+          @input="
+            $store.commit(
+              'cart/action',
+              (state) => (state.promo = $event.target.value)
+            )
+          "
+          type="text"
+          name="promo"
+          id="promo"
+          class="cart__promo__content__input"
+          :class="`cart__promo__content__input_${promo_result.success?'decline':'accept'}`"
+        />
+        <ButtonStandart class="cart__promo__content__button">Применить</ButtonStandart
+        >
+      </div>
     </form>
     <div v-else class="cart__promo cart__promo_empty">
-      Для оформления заказа необходимо<button
+      Для оформления заказа необходимо
+      <button
         class="cart__promo_empty__button"
         type="button"
         @click="$store.commit('modals/open', { modal_name: 'login' })"
@@ -76,6 +82,11 @@ export default {
     };
   },
   methods: {
+    loggy(){
+      console.log("queryselector");
+      console.log(document.querySelector(".cart__promo__error"))
+      // document.querySelector(".cart__promo__error").height = `${document.querySelector(".cart__promo__error").scrollHeight}px`
+    },
     checkPromocode() {
       this.$store.dispatch("cart/synchronization");
     },
@@ -95,6 +106,9 @@ export default {
     },
     token() {
       return this.$store.state.account.token;
+    },
+    promo_result() {
+      return this.$store.state.cart.promo_result;
     },
   },
 };
@@ -225,61 +239,74 @@ export default {
   }
   &__promo {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 40px;
-    width: 100%;
+    flex-direction: column;
     align-self: flex-start;
-    @media screen and (max-width: $tablet) {
-      padding: 30px 0px;
-      border-top: 1px solid $dark_grey;
-      border-bottom: 1px solid $dark_grey;
+    &__content {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-top: 40px;
       width: 100%;
-      max-width: 336px;
-      justify-content: space-between;
-      margin-top: 0px;
-    }
-    &__text {
-      font-family: "SF Pro Display";
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      margin-right: 40px;
-      flex-shrink: 0;
+      align-self: flex-start;
 
       @media screen and (max-width: $tablet) {
-        margin-right: 0px;
+        padding: 30px 0px;
+        border-top: 1px solid $dark_grey;
+        border-bottom: 1px solid $dark_grey;
+        width: 100%;
+        max-width: 336px;
+        justify-content: space-between;
+        margin-top: 0px;
+      }
+      &__text {
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
         line-height: 19px;
+        margin-right: 40px;
+        flex-shrink: 0;
+
+        @media screen and (max-width: $tablet) {
+          margin-right: 0px;
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 19px;
+        }
+      }
+      &__input {
+        border: 1px solid $extra_dark_grey;
+        border-radius: 50px;
+        text-align: center;
+        padding: 0px 10px;
+        outline: none;
+        max-width: 180px;
+        height: 50px;
+        flex-grow: 1;
+        flex-shrink: 0;
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        @media screen and (max-width: $tablet) {
+          width: 100%;
+          max-width: 161px;
+          height: 40px;
+        }
+      }
+      &__button {
+        margin-left: 30px;
+        padding: 0px 20px;
       }
     }
-    &__input {
-      border: 1px solid $extra_dark_grey;
-      border-radius: 50px;
-      text-align: center;
-      padding: 0px 10px;
-      outline: none;
-      max-width: 180px;
-      height: 50px;
-      flex-grow: 1;
-      flex-shrink: 0;
-      font-family: "SF Pro Display";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 20px;
-      @media screen and (max-width: $tablet) {
-        width: 100%;
-        max-width: 161px;
-        height: 40px;
-      }
-    }
+
     &_empty {
       font-family: "SF Pro Display";
       font-style: normal;
@@ -300,10 +327,6 @@ export default {
         margin-left: 5px;
         font-weight: 600;
       }
-    }
-    &__button {
-      margin-left: 30px;
-      padding: 0px 20px;
     }
   }
   &__prices {

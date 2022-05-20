@@ -5,7 +5,11 @@ export const state = () => ({
     products: [],
     partner: {},
     promo: null,
-    promo_result: null,
+    promo_result: {
+        success: null,
+        value: null,
+        timer: null
+    },
     synchronization_timer: null
 });
 export const mutations = {
@@ -30,7 +34,7 @@ export const mutations = {
         localStorage.setItem(local_storage_name, JSON.stringify(state));
     },
     local_set(state) {
-        const local_data = JSON.parse(localStorage.getItem(local_storage_name)??null);
+        const local_data = JSON.parse(localStorage.getItem(local_storage_name) ?? null);
         if (local_data) {
             state.products = local_data.products;
             state.partner = local_data.partner;
@@ -89,15 +93,12 @@ export const actions = {
                 products: products_final,
                 shop_id: partner.id
             });
-            console.log("the params is");
-            console.log(params);
-            // this.$axios.get(`/api/order/getOrder?${params}`).then((response) => {
-            //     console.log("Response");
-            //     console.log(response.data);
-            // }).catch((error) => {
-            //     console.log(error);
-            //     console.log(error);
-            // });
+            this.$axios.get(`/api/order/getOrder?${params}`).then((response) => {
+                console.log("Response");
+                console.log(response.data);
+            }).catch(error => {
+                if (error?.response?.status == 422) state.commit('action', state => state.promo_result.value = error.response.data.errors.promo_code[0] ?? null)
+            });
         }
 
         state.commit("action", (state) => {
