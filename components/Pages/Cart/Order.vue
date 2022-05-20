@@ -443,7 +443,7 @@ export default {
       handler() {
         this.phone =
           this.parsePhone(this.$store.state.account.user.phone) ?? null;
-          this.setStartAddress();
+        this.setStartAddress();
       },
       deep: true,
     },

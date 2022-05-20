@@ -6,16 +6,16 @@ export const state = () => ({
 export const mutations = {
     action(state, action) {
         action(state);
-        this.$cookies.set('account', state);
+        localStorage.setItem('account',JSON.stringify(state));
     },
     clear(state) {
         state.token = null,
             state.user = {},
             state.favourites = [];
-        this.$cookies.set('account', state);
+            localStorage.setItem('account',JSON.stringify(state));
     },
     local_set(state) {
-        const local_data = this.$cookies.get('account');
+        const local_data = JSON.parse(localStorage.getItem('account')??null);
         if (local_data) for (const key in state) state[key] = local_data[key] ?? null
     }
 };
@@ -62,7 +62,8 @@ export const actions = {
         const token = state.state.token;
         state.commit("clear");
         this.$router.push('/');
-        await this.$axios.get(`/api/logout`, {
+        this.$cookies.remove("token");
+        await this.$axios.get("/api/logout", {
             headers: {
                 "Authorization": "Bearer " + token
             }

@@ -85,24 +85,28 @@ export default {
   },
   methods: {
     async login() {
-      this.$axios.post(`${this.$axios.defaults.baseURL}/api/login`, {
-        phone: parseInt(this.form.phone.replace(/\D+/g,"")),
-          password: this.form.password
-      }).then(async ({data:{token}})=>{
+      this.$axios
+        .post(`${this.$axios.defaults.baseURL}/api/login`, {
+          phone: parseInt(this.form.phone.replace(/\D+/g, "")),
+          password: this.form.password,
+        })
+        .then(async ({ data: { token } }) => {
           this.$store.commit("account/action", (state) => {
             state.token = token;
-            this.$cookies.set('token',token);
+            this.$cookies.set("token", token);
+            localStorage.setItem("token", token);
           });
-          await this.$store.dispatch("account/get").then(()=>{
+          await this.$store.dispatch("account/get").then(() => {
             this.$store.commit("modals/close");
           });
-      }).catch((error)=>{
-        if (error?.response?.status == 422) {
+        })
+        .catch((error) => {
+          if (error?.response?.status == 422) {
             this.errors = Object.values(error.response.data.errors)
               .map((el) => el.flat())
               .flat();
           }
-      });
+        });
     },
   },
 };
@@ -154,19 +158,19 @@ export default {
     margin-top: 20px;
   }
   &__errors {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      flex-direction: column;
-      width: 100%;
-      transition: 0.3s;
-      &_margined {
-        margin-top: 15px;
-      }
-      transition: calc($transition * 2);
-      .empty {
-        margin-top: 0px;
-      }
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    transition: 0.3s;
+    &_margined {
+      margin-top: 15px;
     }
+    transition: calc($transition * 2);
+    .empty {
+      margin-top: 0px;
+    }
+  }
 }
 </style>

@@ -22,17 +22,29 @@
     </div>
     <div class="cart__products">
       <client-only>
-      <ProductCartItem
-        v-for="product in cart_products"
-        :key="product.id"
-        :product="product"
-      />
+        <ProductCartItem
+          v-for="product in cart_products"
+          :key="product.id"
+          :product="product"
+        />
       </client-only>
     </div>
-    <form @submit.prevent='checkPromocode' v-if="token" class="cart__promo">
+    <form @submit.prevent="checkPromocode" v-if="token" class="cart__promo">
       <p class="cart__promo__text">Введите промокод</p>
-      <input :value='$store.state.cart.promo' @input="$store.commit('cart/action',(state)=>state.promo=$event.target.value)" type="text" name="promo" id="promo" class="cart__promo__input" />
-      <ButtonStandart  class='cart__promo__button'>Применить</ButtonStandart>
+      <input
+        :value="$store.state.cart.promo"
+        @input="
+          $store.commit(
+            'cart/action',
+            (state) => (state.promo = $event.target.value)
+          )
+        "
+        type="text"
+        name="promo"
+        id="promo"
+        class="cart__promo__input"
+      />
+      <ButtonStandart class="cart__promo__button">Применить</ButtonStandart>
     </form>
     <div v-else class="cart__promo cart__promo_empty">
       Для оформления заказа необходимо<button
@@ -43,25 +55,30 @@
         Войти в личный кабинет
       </button>
     </div>
-    <div  v-if="token" class="cart__prices">
+    <div v-if="token" class="cart__prices">
       <p class="cart__prices__pre">Итого:</p>
       <p class="cart__prices__price">{{ total_price_with_discount }}₽</p>
-      <p v-if='total_price_with_discount<total_price' class="cart__prices__price_full">{{ total_price }}₽</p>
+      <p
+        v-if="total_price_with_discount < total_price"
+        class="cart__prices__price_full"
+      >
+        {{ total_price }}₽
+      </p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      promocode: null
-    }
+      promocode: null,
+    };
   },
-  methods:{
-    checkPromocode(){
-      this.$store.dispatch('cart/synchronization');
-    }
+  methods: {
+    checkPromocode() {
+      this.$store.dispatch("cart/synchronization");
+    },
   },
   computed: {
     cart_products() {
@@ -280,12 +297,12 @@ export default {
         font-weight: 400;
         font-size: 20px;
         line-height: 20px;
-        margin-left:5px;
-        font-weight:600;
+        margin-left: 5px;
+        font-weight: 600;
       }
     }
-    &__button{
-      margin-left: 30px; 
+    &__button {
+      margin-left: 30px;
       padding: 0px 20px;
     }
   }

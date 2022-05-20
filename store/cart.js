@@ -11,38 +11,30 @@ export const state = () => ({
 export const mutations = {
     action(state, action) {
         action(state);
-        
-        this.$cookies.set(local_storage_name, state);
+        localStorage.setItem(local_storage_name, JSON.stringify(state));
     },
     set(state, { index, product }) {
         Vue.set(state.products, index, product)
-        
-        this.$cookies.set(local_storage_name, state);
+        localStorage.setItem(local_storage_name, JSON.stringify(state));
     },
     remove(state, index) {
         Vue.delete(state.products, index);
-        
-        this.$cookies.set(local_storage_name, state);
+        localStorage.setItem(local_storage_name, JSON.stringify(state));
     },
     clear(state) {
         Vue.set(state, "products", []);
-        
-        this.$cookies.set(local_storage_name, state);
+        localStorage.setItem(local_storage_name, JSON.stringify(state));
     },
     set_partner(state, partner) {
         Vue.set(state, 'partner', partner);
-        
-        this.$cookies.set(local_storage_name, state);
-        console.log("result of set partners mutation");
-        console.log(this.$cookies.get(local_storage_name))
+        localStorage.setItem(local_storage_name, JSON.stringify(state));
     },
     local_set(state) {
-        const local_data = this.$cookies.get(local_storage_name);
+        const local_data = JSON.parse(localStorage.getItem(local_storage_name)??null);
         if (local_data) {
             state.products = local_data.products;
             state.partner = local_data.partner;
         }
-
     }
 };
 export const actions = {
@@ -78,7 +70,7 @@ export const actions = {
         state.commit("set_partner", partner);
     },
     synchronization(state) {
-        const sync = ()=>{
+        const sync = () => {
             console.log("sync function");
             const { promo, products, partner } = state.state;
             let products_final = [];
@@ -108,7 +100,7 @@ export const actions = {
             // });
         }
 
-        state.commit("action", (state)=>{
+        state.commit("action", (state) => {
             clearTimeout(state.synchronization_timer);
             state.synchronization_timer = setTimeout(sync, 600);
         });

@@ -14,6 +14,8 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/abedo-logo.ico' }
     ]
   },
+  ssr: true,
+  target: 'server',
   css: [
     '@/assets/scss/style.scss',
     // '@/assets/scss/variables.scss',
@@ -29,7 +31,7 @@ export default {
   components: true,
   build: {},
   buildModules: [],
-  modules: ['@nuxtjs/axios', '@nuxtjs/style-resources', 'cookie-universal-nuxt'],
+  modules: [ 'cookie-universal-nuxt','@nuxtjs/axios', '@nuxtjs/style-resources',],
   generate:{
     crawler: false,
     fallback: true,
