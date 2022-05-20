@@ -13,10 +13,11 @@
             class="product-page__over__content__main__name title-extra-normal"
             contenteditable
           >
-            Сырное ассорти
+            {{ product.name }}
           </h1>
           <div class="product-page__over__content__main__images adaptive-non">
             <div
+              v-if="product.more_images"
               class="product-page__over__content__main__images__slider__wrapper"
             >
               <div class="product-page__over__content__main__images__slider">
@@ -44,10 +45,12 @@
                 >
                   <swiper-slide
                     class="product-page__over__content__main__images__slider__swiper__slide"
-                    v-for="(slide, index) in 12"
+                    v-for="(slide, index) in product.more_images.map(
+                      (el) => el.small
+                    )"
                     :key="index"
                     ><img
-                      src="@/assets/images/product-placeholder.png"
+                      :src="`${$axios.defaults.baseURL}${slide}`"
                       class="product-page__over__content__main__images__slider__swiper__slide__image"
                   /></swiper-slide>
                 </swiper>
@@ -78,13 +81,15 @@
               </div>
             </div>
             <img
-              src="@/assets/images/product-placeholder.png"
+              v-if="product.image"
+              :src="`${$axios.defaults.baseURL}${product.image.original}`"
               class="product-page__over__content__main__images__image"
             />
           </div>
 
           <div class="product-page__over__content__main__additional">
             <div
+              v-if="product.description"
               class="product-page__over__content__main__additional__description"
             >
               <p
@@ -96,17 +101,14 @@
                 class="product-page__over__content__main__additional__description__text"
                 contenteditable
               >
-                Моцарелла, рикотта или фета (свежие); шаурс, нешатель (мягкие);
-                эдам, гауда (полумягкие); маасдам, эмменталь (твердые);
-                пармезан, грюйер (твердые, пикантные); пекорино, шеврет (козий,
-                овечий сыры); рокфор, горгонзола или дор блю (с голубой
-                плесенью).
+                {{ product.description }}
               </p>
             </div>
             <div
               class="product-page__over__content__main__additional__information"
             >
               <div
+                v-if="product.min_count > 1"
                 class="product-page__over__content__main__additional__information__min-count"
               >
                 <svg
@@ -144,22 +146,24 @@
                   class="product-page__over__content__main__additional__information__prices__price"
                   contenteditable
                 >
-                  3 500 ₽
+                  {{ product_price_with_discount }}₽
                 </p>
                 <p
                   class="product-page__over__content__main__additional__information__prices__weight"
                   contenteditable
                 >
-                  / 150 г
+                  / {{ product.weight }}{{ product.weight_unit.short_name }}
                 </p>
                 <p
+                  v-if="product.discount"
                   class="product-page__over__content__main__additional__information__prices__price_full"
                   contenteditable
                 >
-                  450 ₽
+                  {{ price }}₽
                 </p>
               </div>
               <div
+                v-if='product.options.length'
                 class="product-page__over__content__main__additional__information__options"
               >
                 <p
@@ -172,33 +176,41 @@
                 >
                   <div
                     class="product-page__over__content__main__additional__information__options__content__item"
+                    v-for='option in product.options'
+                    :key='option.id'
                   >
                     <p
                       class="product-page__over__content__main__additional__information__options__content__item__name"
                       contenteditable
                     >
-                      Моцарелла классического итальянского производства
+                      {{option.name}}
                     </p>
                     <Checkbox
-                      id="some_id"
+                      :id="`option-${option.id}`"
                       value="1"
-                      v-model="val"
                       class="product-page__over__content__main__additional__information__options__content__item__checkbox"
                     />
+          <!-- :value="option.id"
+        :checked="va"
+        @change="filters.has_discount = !$event" -->
                     <p
                       class="product-page__over__content__main__additional__information__options__content__item__price"
                       contenteditable
                     >
-                      3 000 ₽
+                      {{option.price}}₽
                     </p>
                   </div>
                 </div>
               </div>
+              <div class="product-page__over__content__main__additional__information__buttons adaptive-non">
+
               <ButtonStandart
-                class="product-page__over__content__main__additional__information__button adaptive-non"
+              v-if='!in_cart'
+                class="product-page__over__content__main__additional__information__buttons__button adaptive-non"
+                @click='add_to_cart(product.section.shop)'
               >
                 <svg
-                  class="product-page__over__content__main__additional__information__button__icon"
+                  class="product-page__over__content__main__additional__information__buttons__button__icon"
                   width="15"
                   height="15"
                   viewBox="0 0 15 15"
@@ -212,6 +224,27 @@
                 </svg>
                 В корзину
               </ButtonStandart>
+              <div v-else class="product-page__over__content__main__additional__information__buttons__carted">
+                <ButtonProduct
+                class="product-page__over__content__main__additional__information__buttons__carted__button"
+                size="30"
+                icon="minus"
+                @click='decrease'
+              />
+              <p
+                class="product-page__over__content__main__additional__information__buttons__count"
+                contenteditable
+              >
+                {{count}}
+              </p>
+              <ButtonProduct
+                class="product-page__over__content__main__additional__information__buttons__carted__button"
+                size="30"
+                icon="plus"
+                @click='crease'
+              />
+              </div>
+              </div>
             </div>
           </div>
           <div
@@ -221,39 +254,47 @@
               class="product-page__over__content__main__adaptive-actions__price"
               contenteditable
             >
-              2 330 ₽
+              {{ product_price_with_discount }}₽
             </p>
             <p
               class="product-page__over__content__main__adaptive-actions__price_full"
               contenteditable
             >
-              2 330 ₽
+              {{ price }}₽
             </p>
             <div
+            v-if='in_cart'
               class="product-page__over__content__main__adaptive-actions__actions"
             >
               <ButtonProduct
                 class="product-page__over__content__main__adaptive-actions__actions__button_minus product-page__over__content__main__adaptive-actions__actions__button"
                 size="30"
                 icon="minus"
+                @click='decrease'
               />
               <p
                 class="product-page__over__content__main__adaptive-actions__actions__count"
                 contenteditable
               >
-                1
+                {{count}}
               </p>
               <ButtonProduct
                 class="product-page__over__content__main__adaptive-actions__actions__button_plus product-page__over__content__main__adaptive-actions__actions__button"
                 size="30"
                 icon="plus"
+                @click='crease'
               />
             </div>
             <ButtonSmallCart
+            v-else
+            @click='add_to_cart(product.section.shop)'
               class="product-page__over__content__main__adaptive-actions__add"
             />
           </div>
-          <button class="product-page__over__content__main__back adaptive-non">
+          <NuxtLink
+            :to="`/partners/${product.section.shop_id}`"
+            class="product-page__over__content__main__back adaptive-non"
+          >
             <svg
               class="product-page__over__content__main__back__icon"
               width="12"
@@ -268,7 +309,7 @@
               />
             </svg>
             Вернуться к списку товаров
-          </button>
+          </NuxtLink>
         </div>
         <SidebarCart
           class="product-page__over__content__sidebar adaptive-non"
@@ -280,36 +321,40 @@
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import Checkbox from "../../components/Checkbox.vue";
+import productMixin from "@/mixins/product.js";
 export default {
-  name: "swiper-example-mousewheel-control",
-  title: "Mousewheel control",
+  name: "product-images-slider",
+  title: "Product images slider",
+  mixins: [productMixin],
+  //нельзя убирать из-за примеси
+  props: null,
+  //////////////////////////////
   components: {
     Swiper,
     SwiperSlide,
     Checkbox,
   },
   async asyncData({ $axios, route, error }) {
-    // let product = {},
-    //   loading = true;
-    // await $axios
-    //   .$get(`${$axios.defaults.baseURL}/api/shop/${route.params.partner_id}`)
-    //   .then(async ({ shop }) => {
-    //     partner = shop;
-    //     await $axios
-    //       .$get(
-    //         `${$axios.defaults.baseURL}/api/shares/shop/${route.params.partner_id}`
-    //       )
-    //       .then(({shares : {data}}) => {
-    //         stocks=data;
-    //       });
-    //   })
-    //   .catch(() => {
-    //     error({ statusCode: 404, message: "Ошибка при получении партнера" });
-    //   })
-    //   .finally(() => {
-    //     loading = false;
-    //   });
-    // return { loading, partner,stocks };
+    let to_return_product = {},
+      loading = true;
+    await $axios
+      .$get(
+        `${$axios.defaults.baseURL}/api/product/${route.params.product_id}}`
+      )
+      .then(({ product }) => {
+        console.log("THE PRODUCT US");
+        console.log(product);
+        if (!product)
+          return error({ statusCode: 404, message: "Продукт неактивен" });
+        to_return_product = product;
+      })
+      .catch(() => {
+        error({ statusCode: 404, message: "Ошибка при получении продукта" });
+      })
+      .finally(() => {
+        loading = false;
+      });
+    return { loading, product: to_return_product };
   },
   data() {
     return {
@@ -325,7 +370,6 @@ export default {
             ".product-page__over__content__main__images__slider__button__prev",
         },
       },
-
       val: [],
     };
   },
@@ -336,14 +380,15 @@ export default {
 .product-page {
   justify-content: flex-start;
   padding-bottom: 30px !important;
-
+  align-items: center;
   &__over {
     position: relative;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    max-width: 100%;
+    max-width: $maxwidth;
+    width: 100%;
     &__content {
       display: flex;
       align-items: flex-start;
@@ -376,7 +421,7 @@ export default {
           }
         }
         &__images {
-          height: 662px;
+          height: max-content;
           width: 100%;
           display: flex;
           align-items: center;
@@ -389,6 +434,8 @@ export default {
             overflow: hidden;
             width: 100%;
             height: 100%;
+            max-height: 617px;
+            min-height: 200px;
             &__button {
               width: 50px;
               height: 50px;
@@ -431,6 +478,7 @@ export default {
                 max-width: 100%;
                 width: 100%;
                 height: max-content;
+                cursor: pointer;
                 &__image {
                   object-fit: contain;
                   width: 100%;
@@ -443,6 +491,9 @@ export default {
           &__image {
             width: 100%;
             max-width: 100%;
+            height: max-content;
+            overflow: hidden;
+            // object-fit: contain;
           }
         }
         &__additional {
@@ -457,6 +508,7 @@ export default {
           }
           &__description {
             width: 55%;
+            flex-shrink:0;
             margin-right: 60px;
             @media screen and (max-width: $notebook) {
               margin-right: 40px;
@@ -498,7 +550,7 @@ export default {
             }
           }
           &__information {
-            width: 45%;
+            width: 100%;
             display: flex;
             align-items: flex-start;
             justify-content: flex-start;
@@ -728,7 +780,7 @@ export default {
           background-color: transparent;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
           border: none;
           outline: none;
           text-decoration: underline;

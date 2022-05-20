@@ -19,6 +19,14 @@
 import productsMixin from '@/mixins/product.js'
 export default {
   mixins: [productsMixin],
+  props: {
+        product: {
+            required: true,
+        },
+        partner:{
+            required: false
+        }
+    },
 }
 </script>
 <style lang="scss" scoped>
