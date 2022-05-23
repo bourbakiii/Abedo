@@ -6,13 +6,13 @@
         :src="`${$axios.defaults.baseURL}${product.image.original}`"
         class="product-cart__image-block__image"
       />
-      <p class="product-cart__image-block__text" contenteditable>
+      <p class="product-cart__image-block__text" >
         {{ product.name }}
       </p>
     </div>
 
-    <p class="product-cart__price" contenteditable>{{ product_price_with_discount }}₽</p>
-    <p class="product-cart__price product-cart__price_full" contenteditable>
+    <p class="product-cart__price" >{{ product_price_with_discount }}₽</p>
+    <p class="product-cart__price product-cart__price_full" >
       {{ product_total_price_with_discount }}₽
     </p>
     <div class="product-cart__buttons" v-if='product.is_active'>
@@ -22,7 +22,7 @@
         icon="minus"
         @click="decrease"
       />
-      <p class="product-cart__buttons__count" contenteditable>{{ count }}</p>
+      <p class="product-cart__buttons__count" >{{ count }}</p>
       <ButtonProduct
         class="product-cart__buttons__button"
         size="40"

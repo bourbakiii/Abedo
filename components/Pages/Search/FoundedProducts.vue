@@ -11,7 +11,7 @@
           />
           <p
             class="founded-products__content__item__shop__name"
-            contenteditable
+            
           >
             Кафе “Лимончелло”
           </p>

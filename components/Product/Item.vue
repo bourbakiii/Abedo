@@ -27,17 +27,17 @@
           {{ product_price_with_discount }}₽
         </p>
       </div>
-      <div class="product-item__info__weight adaptive" contenteditable>
+      <div class="product-item__info__weight adaptive" >
         {{ product.weight }}г
       </div>
       <div class="product-item__info__prices__mobile adaptive">
-        <p class="product-item__info__prices__mobile__price" contenteditable>
+        <p class="product-item__info__prices__mobile__price" >
           {{ product.price }}₽
         </p>
         <p
           v-if="discount_percent"
           class="product-item__info__prices__mobile__price_full"
-          contenteditable
+          
         >
           {{ product_price_with_discount }}₽
         </p>

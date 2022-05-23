@@ -18,13 +18,13 @@
               >
                 <p
                   class="orders-page__content__orders__content__item__data__block__name"
-                  contenteditable
+                  
                 >
                   !!! не приходит !!!
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-                  contenteditable
+                  
                 >
                   №{{ order.id }}
                 </p>
@@ -39,7 +39,7 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-                  contenteditable
+                  
                 >
                   {{ order.created_at }}
                 </p>
@@ -54,7 +54,7 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-                  contenteditable
+                  
                 >
                   {{ parseAddress(order) }}
                 </p>
@@ -69,7 +69,7 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-                  contenteditable
+                  
                 >
                   {{order.price_with_discount}}₽
                 </p>
@@ -84,7 +84,7 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-                  contenteditable
+                  
                 >
                   {{order.statuses[order.statuses.length -1].title}}
                 </p>

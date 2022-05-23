@@ -10,11 +10,11 @@
       <div class="stock__content">
         <div class="stock__content__hood" :class="{ 'befored': !(stock.shop.image.length) }">
           <img v-if="stock.shop.image.length" :src="`${$axios.defaults.baseURL}${stock.shop.image[0].small}`" class="stock__content__hood__logo" />
-          <p class="stock__content__hood__name" contenteditable>
+          <p class="stock__content__hood__name" >
             {{stock.shop.name}}
           </p>
         </div>
-        <p class="stock__content__text" contenteditable>
+        <p class="stock__content__text" >
           {{stock.title}}
         </p>
       </div>

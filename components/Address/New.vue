@@ -6,7 +6,7 @@
       v-model="address.name"
       placeholder="Введите название"
       class="address-item__name"
-      contenteditable
+      
     />
     <div class="address-item__content">
       <div

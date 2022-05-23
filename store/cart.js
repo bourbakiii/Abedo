@@ -45,8 +45,9 @@ export const actions = {
     action(state, action) {
         action(state);
     },
-    add_to_cart(state, { product, partner }) {
+    add_to_cart(state, { product, partner, selected_options=[] }) {
         product.count = product.min_count;
+        product.selected_options =selected_options;
         Vue.set(product, "count", product.min_count);
         if (!+state.state?.partner?.id || !state.state.products.length) state.dispatch("change_shop", { product, partner })
         else if (+state.state?.partner?.id == +partner.id) {

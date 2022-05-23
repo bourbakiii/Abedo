@@ -1,6 +1,6 @@
 <template>
   <div class="partner-modal modal">
-    <h3 class="partner-modal__title title-normal" contenteditable>
+    <h3 class="partner-modal__title title-normal" >
       {{partner.name}}
     </h3>
     <button
@@ -31,7 +31,7 @@
         <p class="partner-modal__content__description__pre">
           Описание ресторана “{{partner.name}}”
         </p>
-        <p class="partner-modal__content__description__text" contenteditable>
+        <p class="partner-modal__content__description__text" >
           {{partner.description}}
         </p>
       </div>
@@ -83,7 +83,7 @@
           </div>
           <p
             class="partner-modal__content__information__item__content"
-            contenteditable
+            
           >
            {{worktime}}
           </p>
@@ -135,7 +135,7 @@
           </div>
           <p
             class="partner-modal__content__information__item__content"
-            contenteditable
+            
           >
             {{partner.requisites.address}}
           </p>
@@ -175,7 +175,7 @@
           </div>
           <p
             class="partner-modal__content__information__item__content"
-            contenteditable
+            
           >
             +7{{partner.contact_phone}}
           </p>
@@ -240,7 +240,7 @@
               </p>
               <p
                 class="partner-modal__content__information__item__content__subcontent__item__value"
-                contenteditable
+                
               >
                {{partner.requisites.name}}
               </p>
@@ -256,7 +256,7 @@
               </p>
               <p
                 class="partner-modal__content__information__item__content__subcontent__item__value"
-                contenteditable
+                
               >
                 {{partner.requisites.inn}}
               </p>
@@ -272,7 +272,7 @@
               </p>
               <p
                 class="partner-modal__content__information__item__content__subcontent__item__value"
-                contenteditable
+                
               >
                 {{partner.requisites.ogrn}}
               </p>
@@ -288,7 +288,7 @@
               </p>
               <p
                 class="partner-modal__content__information__item__content__subcontent__item__value"
-                contenteditable
+                
               >
                 {{partner.requisites.address}}
               </p>

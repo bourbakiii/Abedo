@@ -6,7 +6,7 @@
     <input
       v-model="address.name"
       class="address-item__name"
-      contenteditable
+      
       :readonly="!editing"
       :class="{ editing }"
     />

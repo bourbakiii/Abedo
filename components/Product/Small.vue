@@ -5,13 +5,13 @@
       :src="`${$axios.defaults.baseURL}${product.image.original}`"
       class="product-small__image"
     />
-    <p class="product-small__name" contenteditable="">
+    <p class="product-small__name">
       {{product.name}}
     </p>
     <div class="product-small__info">
-      <p class="product-small__info__price" contenteditable>350 ₽</p>
-      <p class="product-small__info__weight" contenteditable>/ 150 г</p>
-      <div class="product-small__info__full-price" contenteditable>450 ₽</div>
+      <p class="product-small__info__price" >350 ₽</p>
+      <p class="product-small__info__weight" >/ 150 г</p>
+      <div class="product-small__info__full-price" >450 ₽</div>
     </div>
   </NuxtLink>
 </template>

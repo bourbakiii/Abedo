@@ -7,56 +7,56 @@
           src="@/assets/images/limonchello.png"
           class="information__content__hood__image"
         />
-        <p class="information__content__hood__name" contenteditable>
+        <p class="information__content__hood__name" >
           Кафе “Лимончелло”
         </p>
       </div>
       <div class="information__content__content">
         <div class="information__content__content__item">
-          <p class="information__content__content__item__name" contenteditable>
+          <p class="information__content__content__item__name" >
             Телефон
           </p>
-          <p class="information__content__content__item__value" contenteditable>
+          <p class="information__content__content__item__value" >
             +7 999 000 000 00
           </p>
         </div>
         <div class="information__content__content__item">
-          <p class="information__content__content__item__name" contenteditable>
+          <p class="information__content__content__item__name" >
             Телефон
           </p>
-          <p class="information__content__content__item__value" contenteditable>
+          <p class="information__content__content__item__value" >
             +7 999 000 000 00
           </p>
         </div>
         <div class="information__content__content__item">
-          <p class="information__content__content__item__name" contenteditable>
+          <p class="information__content__content__item__name" >
             Телефон
           </p>
-          <p class="information__content__content__item__value" contenteditable>
+          <p class="information__content__content__item__value" >
             +7 999 000 000 00
           </p>
         </div>
         <div class="information__content__content__item">
-          <p class="information__content__content__item__name" contenteditable>
+          <p class="information__content__content__item__name" >
             Телефон
           </p>
-          <p class="information__content__content__item__value" contenteditable>
+          <p class="information__content__content__item__value" >
             +7 999 000 000 00
           </p>
         </div>
         <div class="information__content__content__item">
-          <p class="information__content__content__item__name" contenteditable>
+          <p class="information__content__content__item__name" >
             Телефон
           </p>
-          <p class="information__content__content__item__value" contenteditable>
+          <p class="information__content__content__item__value" >
             +7 999 000 000 00
           </p>
         </div>
         <div class="information__content__content__item">
-          <p class="information__content__content__item__name" contenteditable>
+          <p class="information__content__content__item__name" >
             Телефон
           </p>
-          <p class="information__content__content__item__value" contenteditable>
+          <p class="information__content__content__item__value" >
             +7 999 000 000 00
           </p>
         </div>

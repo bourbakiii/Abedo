@@ -8,7 +8,7 @@
       />
       <div class="shop-block__content__info">
         <div class="shop-block__content__info__top">
-          <span class="shop-block__content__info__top__name" contenteditable>
+          <span class="shop-block__content__info__top__name" >
             {{ partner.name }}
           </span>
           <span
@@ -37,7 +37,7 @@
         <p
           v-if="cuisines"
           class="shop-block__content__info__cuisines"
-          contenteditable
+          
         >
           {{ cuisines }}
         </p>
@@ -134,7 +134,7 @@
       </span>
       <p
         class="shop-block__additional__text shop-block__phone__text"
-        contenteditable
+        
       >
         +7{{ partner.contact_phone }}
       </p>
@@ -218,7 +218,7 @@
           </defs>
         </svg>
       </span>
-      <p class="shop-block__additional__text" contenteditable>
+      <p class="shop-block__additional__text" >
         Бесплатная доставка при заказе от {{ partner.free_order_price }}₽
       </p>
     </div>
@@ -241,7 +241,7 @@
           />
         </svg>
       </span>
-      <p class="shop-block__additional__text" contenteditable>
+      <p class="shop-block__additional__text" >
         Подарок “{{ partner.order_gifts[0].product.name }}” при заказе от
         {{ partner.order_gifts[0].order_price }}₽
       </p>

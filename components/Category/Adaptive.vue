@@ -9,7 +9,7 @@
     class="category category-adaptive"
   >
     <div class="category-adaptive__overlay"></div>
-    <p class="category-adaptive__name" contenteditable>{{category.name}}</p>
+    <p class="category-adaptive__name" >{{category.name}}</p>
   </NuxtLink>
 </template>
 <script>

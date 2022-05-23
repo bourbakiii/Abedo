@@ -14,7 +14,7 @@
         fill="#5C6784"
       />
     </svg>
-    <p class="navigation-slot-label__text" contenteditable>Европейская кухня</p>
+    <p class="navigation-slot-label__text" >Европейская кухня</p>
     <svg
       class="navigation-slot-label__info"
       width="26"

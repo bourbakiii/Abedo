@@ -11,14 +11,14 @@
           src="@/assets/images/product-placeholder.png"
           class="products__content__item__image"
         />
-        <p class="products__content__item__name" contenteditable>
+        <p class="products__content__item__name" >
           Сырное ассорти
         </p>
-        <p class="products__content__item__count" contenteditable>10</p>
-        <p class="products__content__item__price" contenteditable>350 ₽</p>
+        <p class="products__content__item__count" >10</p>
+        <p class="products__content__item__price" >350 ₽</p>
         <p
           class="products__content__item__price products__content__item__price__all"
-          contenteditable
+          
         >
           3500 ₽
         </p>
@@ -30,7 +30,7 @@
         :key="index"
         class="products__content_adaptive__item"
       >
-        <p class="products__content_adaptive__item__name" contenteditable>
+        <p class="products__content_adaptive__item__name" >
           Улитки escargots по-бургундски в масле замороженные
         </p>
         <div class="products__content_adaptive__item__data">
@@ -46,7 +46,7 @@
             />
             <p
               class="products__content_adaptive__item__data__buttons__count"
-              contenteditable
+              
             >
               100
             </p>
@@ -59,13 +59,13 @@
           <div class="products__content_adaptive__item__data__prices">
             <p
               class="products__content_adaptive__item__data__prices__price"
-              contenteditable
+              
             >
               10 345 ₽
             </p>
             <p
               class="products__content_adaptive__item__data__prices__price_full"
-              contenteditable
+              
             >
               10 345 ₽
             </p>

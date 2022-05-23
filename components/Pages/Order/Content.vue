@@ -7,19 +7,19 @@
           src="@/assets/images/product-placeholder.png"
           class="order-content__content__item__image"
         />
-        <p class="order-content__content__item__name" contenteditable>
+        <p class="order-content__content__item__name" >
           Сырное ассорти
         </p>
         <div class="order-content__content__item__data">
-          <p class="order-content__content__item__data__count" contenteditable>
+          <p class="order-content__content__item__data__count" >
             10
           </p>
-          <p class="order-content__content__item__data__price" contenteditable>
+          <p class="order-content__content__item__data__price" >
             350 ₽
           </p>
           <p
             class="order-content__content__item__data__price order-content__content__item__data__price_full"
-            contenteditable
+            
           >
             3 500 ₽
           </p>
@@ -30,19 +30,19 @@
           src="@/assets/images/product-placeholder.png"
           class="order-content__content__item__image"
         />
-        <p class="order-content__content__item__name" contenteditable>
+        <p class="order-content__content__item__name" >
           Сырное ассорти
         </p>
         <div class="order-content__content__item__data">
-          <p class="order-content__content__item__data__count" contenteditable>
+          <p class="order-content__content__item__data__count" >
             10
           </p>
-          <p class="order-content__content__item__data__price" contenteditable>
+          <p class="order-content__content__item__data__price" >
             350 ₽
           </p>
           <p
             class="order-content__content__item__data__price order-content__content__item__data__price_full"
-            contenteditable
+            
           >
             3 500 ₽
           </p>
@@ -53,19 +53,19 @@
           src="@/assets/images/product-placeholder.png"
           class="order-content__content__item__image"
         />
-        <p class="order-content__content__item__name" contenteditable>
+        <p class="order-content__content__item__name" >
           Сырное ассорти
         </p>
         <div class="order-content__content__item__data">
-          <p class="order-content__content__item__data__count" contenteditable>
+          <p class="order-content__content__item__data__count" >
             10
           </p>
-          <p class="order-content__content__item__data__price" contenteditable>
+          <p class="order-content__content__item__data__price" >
             350 ₽
           </p>
           <p
             class="order-content__content__item__data__price order-content__content__item__data__price_full"
-            contenteditable
+            
           >
             3 500 ₽
           </p>

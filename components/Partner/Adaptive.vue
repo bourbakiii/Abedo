@@ -16,10 +16,10 @@
       </svg>
     </button>
     <div class="shop-adaptive__info">
-      <p class="shop-adaptive__info__name" contenteditable>
+      <p class="shop-adaptive__info__name" >
         {{ partner.name }}
       </p>
-      <p class="shop-adaptive__info__category" contenteditable>
+      <p class="shop-adaptive__info__category" >
         {{ cuisines }}
       </p>
     </div>

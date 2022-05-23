@@ -1,6 +1,6 @@
 <template>
   <div class="product-cart-adaptive product">
-    <p class="product-cart-adaptive__name" contenteditable>
+    <p class="product-cart-adaptive__name" >
       {{ product.name }}
     </p>
     <div class="product-cart-adaptive__data">
@@ -16,7 +16,7 @@
           class="product-cart-adaptive__data__buttons__button"
           @click="decrease"
         />
-        <p class="product-cart-adaptive__data__buttons__count" contenteditable>
+        <p class="product-cart-adaptive__data__buttons__count" >
          {{count}}
         </p>
         <ButtonProduct
@@ -27,13 +27,13 @@
         />
       </div>
       <div class="product-cart-adaptive__data__prices">
-        <p class="product-cart-adaptive__data__prices__price" contenteditable>
+        <p class="product-cart-adaptive__data__prices__price" >
           {{price}}₽
         </p>
         <p
         v-if="discount_percent"
           class="product-cart-adaptive__data__prices__price_full"
-          contenteditable
+          
         >
           {{product_price_with_discount}}₽
         </p>

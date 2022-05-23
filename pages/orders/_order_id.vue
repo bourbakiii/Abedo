@@ -6,7 +6,7 @@
       <PagesOrderProducts class="order-page__content__products" />
       <div class="order-page__content__least">
         <p class="order-page__content__least__pre">Итого:</p>
-        <p class="order-page__content__least__price" contenteditable>1 330 ₽</p>
+        <p class="order-page__content__least__price" >1 330 ₽</p>
       </div>
       <button
         @click="$router.push('/orders')"

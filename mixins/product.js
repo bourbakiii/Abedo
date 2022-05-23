@@ -1,8 +1,9 @@
 export default {
     methods: {
-        add_to_cart(partner) {
+        add_to_cart(partner, selected_options) {
+            if(!selected_options) selected_options = [];
             if (!partner) alert("Не передан партнер");
-            this.$store.dispatch('cart/add_to_cart', { product: this.product, partner });
+            this.$store.dispatch('cart/add_to_cart', { product: this.product, partner, selected_options });
         },
         crease() {
             this.$store.dispatch('cart/crease', this.product);

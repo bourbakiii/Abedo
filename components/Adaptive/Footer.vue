@@ -54,7 +54,7 @@
           <div
             class="footer__button_cart__count"
             v-if="cart_products.length"
-            contenteditable
+            
           >
             {{ cart_products.length }}
           </div>
