@@ -2,11 +2,12 @@
   <div class="page order-page wrapper">
     <div class="order-page__content content">
       <Breadcrumbs class="order-page__content__breadcrumbsad adaptive-non" />
-      <PagesOrderInformation class="order-page__content__information" />
-      <PagesOrderProducts class="order-page__content__products" />
+      <PagesOrderInformation  class="order-page__content__information" />
+      <PagesOrderProducts :consist='order.consist' class="order-page__content__products" />
       <div class="order-page__content__least">
         <p class="order-page__content__least__pre">Итого:</p>
-        <p class="order-page__content__least__price" >1 330 ₽</p>
+        <p class="order-page__content__least__price">{{order.price_with_discount}}₽</p>
+        <p v-if='order.price_with_discount<order.price' class="order-page__content__least__price_full">{{order.price}}₽</p>
       </div>
       <button
         @click="$router.push('/orders')"
@@ -32,30 +33,30 @@
 </template>
 <script>
 export default {
-async asyncData({ $axios, route, error }) {
-    // let order = {},
-    //   loading = true;
-    // await $axios
-    //   .$get(`${$axios.defaults.baseURL}/api/shop/${route.params.partner_id}`)
-    //   .then(async ({ shop }) => {
-    //     partner = shop;
-    //     await $axios
-    //       .$get(
-    //         `${$axios.defaults.baseURL}/api/shares/shop/${route.params.partner_id}`
-    //       )
-    //       .then(({ shares: { data } }) => {
-    //         stocks = data;
-    //       });
-    //   })
-    //   .catch(() => {
-    //     error({ statusCode: 404, message: "Ошибка при получении партнера" });
-    //   })
-    //   .finally(() => {
-    //     loading = false;
-    //   });
-    // return { loading, partner, stocks };
+  async asyncData({ $axios, route, error,store }) {
+    let to_return_order = {},
+      loading = true;
+    await $axios
+      .$get(`${$axios.defaults.baseURL}/api/order/${route.params.order_id}}`,{headers:{
+        Authorization: `Bearer ${store.state.account.token}`
+      }})
+      .then(({order}) => {
+        to_return_order = order;
+      })
+      .catch(() => {
+        error({ statusCode: 404, message: "Ошибка при получении заказа" });
+      })
+      .finally(() => {
+        loading = false;
+      });
+    return { loading, order: to_return_order };
   },
-}
+  computed:{
+    token(){
+      return this.$store.state.account.token;
+    }
+  }
+};
 </script>
 <style lang="scss" scoped>
 .order-page {
@@ -114,6 +115,20 @@ async asyncData({ $axios, route, error }) {
           font-size: 20px;
           line-height: 23px;
         }
+        &_full {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        text-decoration-line: line-through;
+        margin-left: 15px;
+        @media screen and (max-width: $tablet) {
+          margin-left: 20px;
+          font-size: 16px;
+          line-height: 20px;
+        }
+      }
       }
     }
     &__back {

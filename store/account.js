@@ -4,18 +4,21 @@ export const state = () => ({
     favourites: []
 });
 export const mutations = {
+    actionWithoutLocalStorage(state, action) {
+        action(state);
+    },
     action(state, action) {
         action(state);
-        localStorage.setItem('account',JSON.stringify(state));
+        localStorage.setItem('account', JSON.stringify(state));
     },
     clear(state) {
         state.token = null,
             state.user = {},
             state.favourites = [];
-            localStorage.setItem('account',JSON.stringify(state));
+        localStorage.setItem('account', JSON.stringify(state));
     },
     local_set(state) {
-        const local_data = JSON.parse(localStorage.getItem('account')??null);
+        const local_data = JSON.parse(localStorage.getItem('account') ?? null);
         if (local_data) for (const key in state) state[key] = local_data[key] ?? null
     }
 };

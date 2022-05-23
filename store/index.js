@@ -1,5 +1,9 @@
 export const actions = {
     async nuxtServerInit({ state, dispatch, commit }, { req }) {
+        commit("account/actionWithoutLocalStorage", (state)=>{
+            state.token = this.$cookies.get('token')??null;
+        });
+
     },
     clientHook({ state, dispatch, commit }) {
         commit("cart/local_set");

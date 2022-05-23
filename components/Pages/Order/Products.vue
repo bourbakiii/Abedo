@@ -3,24 +3,25 @@
     <h2 class="products__title title-extra-normal">Заказанные позиции</h2>
     <div class="products__content adaptive-non">
       <div
-        v-for="(item, index) in 3"
+        v-for="(item, index) in consist"
         :key="index"
         class="products__content__item"
       >
         <img
-          src="@/assets/images/product-placeholder.png"
+        v-if='item.product.image.length'
+          :src="`${axios.defaults.baseURl}${item.product.image.original}`"
           class="products__content__item__image"
         />
         <p class="products__content__item__name" >
-          Сырное ассорти
+          {{item.product.name}}
         </p>
-        <p class="products__content__item__count" >10</p>
-        <p class="products__content__item__price" >350 ₽</p>
+        <p class="products__content__item__count" >{{item.count}}</p>
+        <p class="products__content__item__price" > {{item.price%1==0?item.price:(item.price).toFixed(2)}}₽</p>
         <p
           class="products__content__item__price products__content__item__price__all"
           
         >
-          3500 ₽
+          {{item.price*item.count%1==0?item.price*item.count:(item.price*item.count).toFixed(2)}}₽
         </p>
       </div>
     </div>
@@ -91,6 +92,15 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props:{
+    consist:{
+      required: true
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 .products {
   width: 100%;
