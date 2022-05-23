@@ -15,6 +15,10 @@ export default {
             this.$store.dispatch('cart/remove', this.product);
         }
     },
+    created(){
+        console.log("loaded");
+            this.product.selected_options = this.$store.state.cart.products.find((el) => +el.id)?.selected_options;
+    },
     computed: {
         discount_percent(){
             return this.product.discount?.percent??null;

@@ -23,8 +23,8 @@
       />
       <p class="product-sidebar__info__name">{{ product.name }}</p>
     </div>
-    <div  class="product-sidebar__actions">
-      <div v-if='product.is_active' class="product-sidebar__actions__buttons">
+    <div class="product-sidebar__actions">
+      <div v-if="product.is_active" class="product-sidebar__actions__buttons">
         <ButtonProduct
           class="product-sidebar__actions__buttons__button"
           size="26"
@@ -42,11 +42,31 @@
         />
       </div>
       <div class="product-sidebar__actions__prices">
-        <p v-if='discount_percent' class="product-sidebar__actions__prices__price_full">
+        <p
+          v-if="discount_percent"
+          class="product-sidebar__actions__prices__price_full"
+        >
           {{ product.price }}₽
         </p>
         <p class="product-sidebar__actions__prices__price">
           {{ product_price_with_discount }}₽
+        </p>
+      </div>
+    </div>
+    <div
+      v-if="selected_options.length"
+      class="product-sidebar__selected-options"
+    >
+      <div
+        class="product-sidebar__selected-options__item"
+        v-for="option in selected_options"
+        :key="option.id"
+      >
+        <p class="product-sidebar__selected-options__item__name">
+          {{ option.name }}
+        </p>
+        <p class="product-sidebar__selected-options__item__price">
+          {{ option.price * product.count }}₽
         </p>
       </div>
     </div>
@@ -58,40 +78,30 @@ import productsMixin from "@/mixins/product.js";
 export default {
   mixins: [productsMixin],
   props: {
-        product: {
-            required: true,
-        },
-        partner:{
-            required: false
-        }
+    product: {
+      required: true,
     },
-  data() {
-    return {
-      minHeight: 110,
-    };
+    partner: {
+      required: false,
+    },
   },
-  mounted() {
-    this.$el.style.height =
-      Math.max(parseInt(this.$el.scrollHeight) + 40, this.minHeight) + "px";
-    this.$el.style.padding = "20px 0px";
-  },
-  destroyed() {
-    this.$el.style.height = "0px";
-    this.$el.style.minHeight = "0px";
-    this.$el.style.padding = "0px 0px";
+  computed: {
+    selected_options() {
+      return this.product.selected_options??[];
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
 .product-sidebar {
   width: 100%;
-  height: 0px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
   border-bottom: 1px dashed $dark_grey;
   position: relative;
+  padding: 20px 0px;
   transition: $transition;
   &:last-of-type {
     border-bottom: none;
@@ -106,6 +116,7 @@ export default {
     width: 15px;
     height: 15px;
   }
+  
   &__info {
     width: 100%;
     display: flex;
@@ -171,6 +182,39 @@ export default {
           text-decoration: line-through;
           color: $extra_dark_grey;
         }
+      }
+    }
+  }
+  &__selected-options {
+    width: 100%;
+    margin:10px 0px 0px;
+    &__item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+      margin-bottom: 5px;
+      &:last-of-type {
+        margin-bottom: 0px;
+      }
+      &__name {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 20px;
+        flex-grow: 1;
+        margin-right: 10px;
+      }
+      &__price {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
       }
     }
   }

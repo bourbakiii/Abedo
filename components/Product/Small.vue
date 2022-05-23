@@ -9,9 +9,9 @@
       {{product.name}}
     </p>
     <div class="product-small__info">
-      <p class="product-small__info__price" >350 ₽</p>
-      <p class="product-small__info__weight" >/ 150 г</p>
-      <div class="product-small__info__full-price" >450 ₽</div>
+      <p class="product-small__info__price" >350₽</p>
+      <p class="product-small__info__weight" >/ 150г</p>
+      <div class="product-small__info__full-price" >450₽</div>
     </div>
   </NuxtLink>
 </template>

@@ -82,11 +82,6 @@ export default {
     };
   },
   methods: {
-    loggy(){
-      console.log("queryselector");
-      console.log(document.querySelector(".cart__promo__error"))
-      // document.querySelector(".cart__promo__error").height = `${document.querySelector(".cart__promo__error").scrollHeight}px`
-    },
     checkPromocode() {
       this.$store.dispatch("cart/synchronization");
     },

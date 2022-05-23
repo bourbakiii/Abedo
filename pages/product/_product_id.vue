@@ -165,19 +165,28 @@
                 >
                   Дополнительные опции
                 </p>
+                {{product.selected_options}}
                 <div
                   class="product-page__over__content__main__additional__information__options__content"
                 >
                   <label
                     class="product-page__over__content__main__additional__information__options__content__item"
-                    v-for="option in product.options"
+                    v-for="(option, index) in product.options"
                     :key="option.id"
                     :for="`option-${option.id}`"
                   >
+                  {{
+                    product.selected_options.findIndex(
+                          (el) => +el.id == +option.id
+                        )
+                  }}
                     <Checkbox
-                      :value="+option.id"
-                      :checked="selected_options.includes(+option.id)"
-                      @change="selectOption(+option.id)"
+                      :checked="
+                        product.selected_options.findIndex(
+                          (el) => +el.id == +option.id
+                        ) >= 0
+                      "
+                      @change="selectOption({ id: +option.id, index })"
                       :id="`option-${option.id}`"
                       class="product-page__over__content__main__additional__information__options__content__item__checkbox"
                     />
@@ -186,9 +195,6 @@
                     >
                       {{ option.name }}
                     </p>
-                    <!-- :value="option.id"
-        :checked="va"
-        @change="filters.has_discount = !$event" -->
                     <p
                       class="product-page__over__content__main__additional__information__options__content__item__price"
                     >
@@ -203,7 +209,9 @@
                 <ButtonStandart
                   v-if="!in_cart"
                   class="product-page__over__content__main__additional__information__buttons__button adaptive-non"
-                  @click="add_to_cart(product.section.shop, selected_options)"
+                  @click="
+                    add_to_cart(product.section.shop, product.selected_options)
+                  "
                 >
                   <svg
                     class="product-page__over__content__main__additional__information__buttons__button__icon"
@@ -321,9 +329,7 @@ export default {
   name: "product-images-slider",
   title: "Product images slider",
   mixins: [productMixin],
-  //нельзя убирать из-за примеси
-  props: null,
-  //////////////////////////////
+
   components: {
     Swiper,
     SwiperSlide,
@@ -337,8 +343,6 @@ export default {
         `${$axios.defaults.baseURL}/api/product/${route.params.product_id}}`
       )
       .then(({ product }) => {
-        console.log("THE PRODUCT US");
-        console.log(product);
         if (!product)
           return error({ statusCode: 404, message: "Продукт неактивен" });
         to_return_product = product;
@@ -358,6 +362,7 @@ export default {
         slidesPerView: "auto",
         spaceBetween: 8,
         mousewheel: true,
+
         navigation: {
           nextEl:
             ".product-page__over__content__main__images__slider__button__next",
@@ -365,30 +370,23 @@ export default {
             ".product-page__over__content__main__images__slider__button__prev",
         },
       },
-      selected_options: [],
     };
   },
+
   methods: {
-    selectOption(id) {
-      if (this.selected_options.includes(id)) {
-        console.log("1");
-        this.selected_options.splice(this.selected_options.indexOf(id), 1);
-      } else {
-        console.log("2");
-        this.selected_options.push(id);
-      }
-    },
-  },
-  watch: {
-    selected_options() {
-      if(this.in_cart)
-      {
-      this.$store.commit('cart/action', (state)=>{
-        state.products.find(el=>+el.id==+this.product.id).selected_options = [...this.selected_options];
-      });
-      console.log(this.in_cart);
-      }
-      // if(in_cart
+    selectOption({ id, index }) {
+      console.log("ты вызываешься хотя бы?");
+      let selected_index = this.product.selected_options.findIndex(
+        (el) => +el.id == +id
+      );
+        this.$store.commit("cart/action", (state) => {
+          let selected_options = this.inCart
+            ? state.products.find((el) => +el.id)?.selected_options
+            : this.product.selected_options;
+            console.log(selected_index);
+            if (selected_index >= 0) selected_options.splice(selected_index, 1);
+          else selected_options.push(this.product.options[index]);
+        });
     },
   },
 };
@@ -681,10 +679,10 @@ export default {
                   justify-content: space-between;
                   flex-direction: row;
 
--moz-user-select: none;
--khtml-user-select: none;
--webkit-user-select: none;
-user-select: none;
+                  -moz-user-select: none;
+                  -khtml-user-select: none;
+                  -webkit-user-select: none;
+                  user-select: none;
 
                   &:last-of-type {
                     border-bottom: none;
@@ -703,7 +701,7 @@ user-select: none;
                     margin-right: 40px;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    
+
                     @media screen and (max-width: $notebook) {
                       margin-right: 20px;
                     }
