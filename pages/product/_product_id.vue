@@ -176,7 +176,7 @@
                   >
                     <Checkbox
                       :value="+option.id"
-                      :checked="selected_options.includes(+option.id)"
+                      :checked="false"
                       @change="selectOption(+option.id)"
                       :id="`option-${option.id}`"
                       class="product-page__over__content__main__additional__information__options__content__item__checkbox"
@@ -203,7 +203,7 @@
                 <ButtonStandart
                   v-if="!in_cart"
                   class="product-page__over__content__main__additional__information__buttons__button adaptive-non"
-                  @click="add_to_cart(product.section.shop, selected_options)"
+                  @click="add_to_cart(product.section.shop)"
                 >
                   <svg
                     class="product-page__over__content__main__additional__information__buttons__button__icon"
@@ -282,7 +282,7 @@
             </div>
             <ButtonSmallCart
               v-else
-              @click="add_to_cart(product.section.shop, selected_options)"
+              @click="add_to_cart(product.section.shop)"
               class="product-page__over__content__main__adaptive-actions__add"
             />
           </div>
@@ -365,31 +365,15 @@ export default {
             ".product-page__over__content__main__images__slider__button__prev",
         },
       },
-      selected_options: [],
     };
   },
   methods: {
     selectOption(id) {
-      if (this.selected_options.includes(id)) {
-        console.log("1");
-        this.selected_options.splice(this.selected_options.indexOf(id), 1);
-      } else {
-        console.log("2");
-        this.selected_options.push(id);
-      }
+      
     },
   },
   watch: {
-    selected_options() {
-      if(this.in_cart)
-      {
-      this.$store.commit('cart/action', (state)=>{
-        state.products.find(el=>+el.id==+this.product.id).selected_options = [...this.selected_options];
-      });
-      console.log(this.in_cart);
-      }
-      // if(in_cart
-    },
+   
   },
 };
 </script>
