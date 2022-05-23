@@ -76,7 +76,6 @@ export const actions = {
     },
     synchronization(state) {
         const sync = () => {
-            console.log("sync function");
             const { promo, products, partner } = state.state;
             let products_final = [];
             for (let product of products) {
@@ -106,9 +105,6 @@ export const actions = {
             clearTimeout(state.synchronization_timer);
             state.synchronization_timer = setTimeout(sync, 600);
         });
-
-
-
     }
 };
 
@@ -116,16 +112,23 @@ export const actions = {
 export const getters = {
     total_price(state) {
         let summ = 0;
-        summ = state.products.map(product => +product.price.toFixed(2) * +product.count).reduce(function (accumulator, currentValue) {
-            return accumulator + currentValue;
-        }, 0) ?? 0;
+        // state.products.forEach(product => {
+        //     summ += product.price.toFixed(2) * +product.count;
+        //     summ += product.selected_options.map(option => +option.price * +product.count).reduce(function (accumulator, currentValue) {
+        //         return accumulator + currentValue;
+        //     }, 0);
+        // });
+
         return summ % 1 == 0 ? +summ : +summ.toFixed(2);
     },
     total_discount_price(state) {
         let summ = 0;
-        summ = state.products.map(product => (+product.price.toFixed(2) - (product.price.toFixed(2) * (product.discount?.percent ?? 0) / 100).toFixed(2)) * +product.count).reduce(function (accumulator, currentValue) {
-            return accumulator + currentValue;
-        }, 0) ?? 0;
+        // state.products.forEach(product => {
+        //     summ += (+product.price.toFixed(2) - (product.price.toFixed(2) * (product.discount?.percent ?? 0) / 100).toFixed(2)) * +product.count;
+        //     summ += product.selected_options.map(option => +option.price * +product.count).reduce(function (accumulator, currentValue) {
+        //         return accumulator + currentValue;
+        //     }, 0);
+        // });
         return summ % 1 == 0 ? +summ : +summ.toFixed(2);
     },
 

@@ -170,25 +170,29 @@
                 >
                   <label
                     class="product-page__over__content__main__additional__information__options__content__item"
-                    v-for="option in product.options"
+                    v-for="(option, index) in product.options"
                     :key="option.id"
                     :for="`option-${option.id}`"
                   >
+                  <client-only>
                     <Checkbox
+<<<<<<< HEAD
                       :value="+option.id"
                       :checked="false"
                       @change="selectOption(+option.id)"
+=======
+                      :checked="checkForACheck({id:+option.id})"
+                      @change="selectOption({ id: +option.id, index })"
+>>>>>>> eb5d0e86ba0e0fdfb970c42b2e9ceb0bf1240e79
                       :id="`option-${option.id}`"
                       class="product-page__over__content__main__additional__information__options__content__item__checkbox"
                     />
+                  </client-only>
                     <p
                       class="product-page__over__content__main__additional__information__options__content__item__name"
                     >
                       {{ option.name }}
                     </p>
-                    <!-- :value="option.id"
-        :checked="va"
-        @change="filters.has_discount = !$event" -->
                     <p
                       class="product-page__over__content__main__additional__information__options__content__item__price"
                     >
@@ -203,7 +207,13 @@
                 <ButtonStandart
                   v-if="!in_cart"
                   class="product-page__over__content__main__additional__information__buttons__button adaptive-non"
+<<<<<<< HEAD
                   @click="add_to_cart(product.section.shop)"
+=======
+                  @click="
+                    add_to_cart(product.section.shop)
+                  "
+>>>>>>> eb5d0e86ba0e0fdfb970c42b2e9ceb0bf1240e79
                 >
                   <svg
                     class="product-page__over__content__main__additional__information__buttons__button__icon"
@@ -321,9 +331,6 @@ export default {
   name: "product-images-slider",
   title: "Product images slider",
   mixins: [productMixin],
-  //нельзя убирать из-за примеси
-  props: null,
-  //////////////////////////////
   components: {
     Swiper,
     SwiperSlide,
@@ -337,8 +344,6 @@ export default {
         `${$axios.defaults.baseURL}/api/product/${route.params.product_id}}`
       )
       .then(({ product }) => {
-        console.log("THE PRODUCT US");
-        console.log(product);
         if (!product)
           return error({ statusCode: 404, message: "Продукт неактивен" });
         to_return_product = product;
@@ -367,6 +372,7 @@ export default {
       },
     };
   },
+
   methods: {
     selectOption(id) {
       
@@ -665,10 +671,10 @@ export default {
                   justify-content: space-between;
                   flex-direction: row;
 
--moz-user-select: none;
--khtml-user-select: none;
--webkit-user-select: none;
-user-select: none;
+                  -moz-user-select: none;
+                  -khtml-user-select: none;
+                  -webkit-user-select: none;
+                  user-select: none;
 
                   &:last-of-type {
                     border-bottom: none;
@@ -687,7 +693,7 @@ user-select: none;
                     margin-right: 40px;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    
+
                     @media screen and (max-width: $notebook) {
                       margin-right: 20px;
                     }
