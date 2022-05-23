@@ -165,7 +165,6 @@
                 >
                   Дополнительные опции
                 </p>
-                {{product.selected_options}}
                 <div
                   class="product-page__over__content__main__additional__information__options__content"
                 >
@@ -175,21 +174,14 @@
                     :key="option.id"
                     :for="`option-${option.id}`"
                   >
-                  {{
-                    product.selected_options.findIndex(
-                          (el) => +el.id == +option.id
-                        )
-                  }}
+                  <client-only>
                     <Checkbox
-                      :checked="
-                        product.selected_options.findIndex(
-                          (el) => +el.id == +option.id
-                        ) >= 0
-                      "
+                      :checked="checkForACheck({id:+option.id})"
                       @change="selectOption({ id: +option.id, index })"
                       :id="`option-${option.id}`"
                       class="product-page__over__content__main__additional__information__options__content__item__checkbox"
                     />
+                  </client-only>
                     <p
                       class="product-page__over__content__main__additional__information__options__content__item__name"
                     >
@@ -210,7 +202,7 @@
                   v-if="!in_cart"
                   class="product-page__over__content__main__additional__information__buttons__button adaptive-non"
                   @click="
-                    add_to_cart(product.section.shop, product.selected_options)
+                    add_to_cart(product.section.shop)
                   "
                 >
                   <svg
@@ -290,7 +282,7 @@
             </div>
             <ButtonSmallCart
               v-else
-              @click="add_to_cart(product.section.shop, selected_options)"
+              @click="add_to_cart(product.section.shop)"
               class="product-page__over__content__main__adaptive-actions__add"
             />
           </div>
@@ -329,7 +321,6 @@ export default {
   name: "product-images-slider",
   title: "Product images slider",
   mixins: [productMixin],
-
   components: {
     Swiper,
     SwiperSlide,
@@ -362,7 +353,6 @@ export default {
         slidesPerView: "auto",
         spaceBetween: 8,
         mousewheel: true,
-
         navigation: {
           nextEl:
             ".product-page__over__content__main__images__slider__button__next",
@@ -370,24 +360,25 @@ export default {
             ".product-page__over__content__main__images__slider__button__prev",
         },
       },
+        selected:[]
     };
   },
 
   methods: {
     selectOption({ id, index }) {
-      console.log("ты вызываешься хотя бы?");
-      let selected_index = this.product.selected_options.findIndex(
-        (el) => +el.id == +id
-      );
-        this.$store.commit("cart/action", (state) => {
-          let selected_options = this.inCart
-            ? state.products.find((el) => +el.id)?.selected_options
-            : this.product.selected_options;
-            console.log(selected_index);
-            if (selected_index >= 0) selected_options.splice(selected_index, 1);
-          else selected_options.push(this.product.options[index]);
-        });
+      let where_search = this.in_cart?(this.cart_products.find(el=>+el.id==+this.product.id).selected_options):this.selected;
+      console.log(123);
+      const found_index = where_search.findIndex(el=>+el.id==+id);
+      this.$store.commit("cart/action", (state)=>{
+        if(found_index>=0) where_search.splice(found_index,1);
+        else where_search.push(this.product.options[index]);
+      });
     },
+    checkForACheck({id}){
+      if(this.in_cart) return this.cart_products.find(el=>+el.id==+this.product.id)?.selected_options.findIndex(el=>+el.id==+id)>=0;
+      else return this.selected.findIndex(el=>+el.id==+id)>=0;
+
+    }
   },
 };
 </script>

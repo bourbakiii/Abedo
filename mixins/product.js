@@ -1,9 +1,8 @@
 export default {
     methods: {
-        add_to_cart(partner, selected_options) {
-            if(!selected_options) selected_options = [];
+        add_to_cart(partner) {
             if (!partner) alert("Не передан партнер");
-            this.$store.dispatch('cart/add_to_cart', { product: this.product, partner, selected_options });
+            this.$store.dispatch('cart/add_to_cart', { product: this.product, partner });
         },
         crease() {
             this.$store.dispatch('cart/crease', this.product);
@@ -14,10 +13,6 @@ export default {
         remove() {
             this.$store.dispatch('cart/remove', this.product);
         }
-    },
-    created(){
-        console.log("loaded");
-            this.product.selected_options = this.$store.state.cart.products.find((el) => +el.id)?.selected_options;
     },
     computed: {
         discount_percent(){
@@ -31,7 +26,7 @@ export default {
             return this.$store.state.cart.products;
         },
         in_cart() {
-            return this.cart_products.map(product => +product.id).includes(+this.product.id);
+            return this.cart_products.map(product => +product.id).includes(+this.product.id);;
         },
         count() {
             if (!this.in_cart) return -1;
@@ -49,5 +44,6 @@ export default {
             let price = this.count * this.product_price_with_discount
             return price%1==0?price:price.toFixed(2);
         }
-    }
+    },
+
 }
