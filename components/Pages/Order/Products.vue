@@ -136,6 +136,9 @@ export default {
       justify-content: flex-start;
       flex-direction: row;
       border-bottom: 1px dashed $extra_dark_grey;
+      &:last-of-type{
+        border-bottom: none;
+      }
       &__image {
         object-fit: contain;
         border-radius: 10px;

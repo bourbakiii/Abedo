@@ -170,20 +170,15 @@
                 >
                   <label
                     class="product-page__over__content__main__additional__information__options__content__item"
-                    v-for="(option, index) in product.options"
+                    v-for="(option) in product.options"
                     :key="option.id"
                     :for="`option-${option.id}`"
                   >
                   <client-only>
                     <Checkbox
-<<<<<<< HEAD
                       :value="+option.id"
                       :checked="false"
                       @change="selectOption(+option.id)"
-=======
-                      :checked="checkForACheck({id:+option.id})"
-                      @change="selectOption({ id: +option.id, index })"
->>>>>>> eb5d0e86ba0e0fdfb970c42b2e9ceb0bf1240e79
                       :id="`option-${option.id}`"
                       class="product-page__over__content__main__additional__information__options__content__item__checkbox"
                     />
@@ -207,13 +202,7 @@
                 <ButtonStandart
                   v-if="!in_cart"
                   class="product-page__over__content__main__additional__information__buttons__button adaptive-non"
-<<<<<<< HEAD
                   @click="add_to_cart(product.section.shop)"
-=======
-                  @click="
-                    add_to_cart(product.section.shop)
-                  "
->>>>>>> eb5d0e86ba0e0fdfb970c42b2e9ceb0bf1240e79
                 >
                   <svg
                     class="product-page__over__content__main__additional__information__buttons__button__icon"

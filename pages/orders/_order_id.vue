@@ -2,7 +2,7 @@
   <div class="page order-page wrapper">
     <div class="order-page__content content">
       <Breadcrumbs class="order-page__content__breadcrumbsad adaptive-non" />
-      <PagesOrderInformation  class="order-page__content__information" />
+      <PagesOrderInformation :order='order' class="order-page__content__information" />
       <PagesOrderProducts :consist='order.consist' class="order-page__content__products" />
       <div class="order-page__content__least">
         <p class="order-page__content__least__pre">Итого:</p>

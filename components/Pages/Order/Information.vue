@@ -1,14 +1,15 @@
 <template>
   <div class="information">
-    <h1 class="information__title title-normal">Заказ №11234</h1>
+    <h1 class="information__title title-normal">Заказ №{{order.id}}</h1>
     <div class="information__content">
       <div class="information__content__hood">
         <img
-          src="@/assets/images/limonchello.png"
+          v-if="order.shop.image.length"
+          :src="`${$axios.defaults.baseURL}${order.shop.image[0].small}`"
           class="information__content__hood__image"
         />
         <p class="information__content__hood__name" >
-          Кафе “Лимончелло”
+          {{order.shop.name}}
         </p>
       </div>
       <div class="information__content__content">
@@ -17,53 +18,64 @@
             Телефон
           </p>
           <p class="information__content__content__item__value" >
-            +7 999 000 000 00
+             {{order.phone}}
           </p>
         </div>
         <div class="information__content__content__item">
           <p class="information__content__content__item__name" >
-            Телефон
+            Адрес доставки
           </p>
           <p class="information__content__content__item__value" >
-            +7 999 000 000 00
+            {{parseAddress(order)}}
           </p>
         </div>
-        <div class="information__content__content__item">
+        <div v-if="order.entrance" class="information__content__content__item">
           <p class="information__content__content__item__name" >
-            Телефон
+            Подъезд
           </p>
           <p class="information__content__content__item__value" >
-            +7 999 000 000 00
+            {{order.entrance}}
           </p>
         </div>
-        <div class="information__content__content__item">
+        <div v-if="order.floor" class="information__content__content__item">
           <p class="information__content__content__item__name" >
-            Телефон
+            Этаж
           </p>
           <p class="information__content__content__item__value" >
-            +7 999 000 000 00
+            {{order.floor}}
           </p>
         </div>
-        <div class="information__content__content__item">
+        <div v-if="order.apartment" class="information__content__content__item">
           <p class="information__content__content__item__name" >
-            Телефон
+            № квартиры/офиса
           </p>
           <p class="information__content__content__item__value" >
-            +7 999 000 000 00
+            {{order.apartment}}
           </p>
         </div>
-        <div class="information__content__content__item">
+        <div v-if="order.intercom" class="information__content__content__item">
           <p class="information__content__content__item__name" >
-            Телефон
+            № домофона
           </p>
           <p class="information__content__content__item__value" >
-            +7 999 000 000 00
+            {{order.intercom}}
           </p>
         </div>
       </div>
     </div>
   </div>
 </template>
+<script>
+import parserMixin from '@/mixins/parser.js';
+export default {
+  props:{
+    order: {
+      required: true
+    }
+  },
+  mixins: [parserMixin]
+}
+</script>
 <style lang="scss" scoped>
 .information {
   display: flex;

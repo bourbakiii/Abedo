@@ -52,18 +52,13 @@
               />
             </div>
           </div>
-          <transition-group
-            tag="div"
-            class="sidebar-cart__content__products"
-            name="sidebar-product"
-            appear
-          >
+          <div class="sidebar-cart__content__products">
             <ProductSidebar
               v-for="product in cart_products"
               :key="product.id"
               :product="product"
             />
-          </transition-group>
+          </div>
           <div
             class="sidebar-cart__content__row sidebar-cart__content__row_delivery"
           >
