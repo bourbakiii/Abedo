@@ -4,11 +4,10 @@ let local_storage_name = "cart";
 export const state = () => ({
     products: [],
     partner: {},
-    promo: null,
-    promo_result: {
+    promo: {
         success: null,
         value: null,
-        timer: null
+        message: null
     },
     synchronization_timer: null
 });
@@ -76,6 +75,7 @@ export const actions = {
     },
     synchronization(state) {
         const sync = () => {
+            console.log("Вызов 2");
             const { promo, products, partner } = state.state;
             let products_final = [];
             for (let product of products) {
@@ -89,22 +89,39 @@ export const actions = {
             // console.log(products_final);
             // console.log(promo);
             let params = qs.stringify({
-                promo_code: promo,
+                promo_code: promo.value,
                 products: products_final,
                 shop_id: partner.id
             });
-            this.$axios.get(`/api/order/getOrder?${params}`).then((response) => {
+            // state.commit('action', state => {
+            //     state.promo.success = null,
+            //         state.promo.message = null
+            // })
+            this.$axios.get(`/api/order/getOrder?${params}`).then(({ data: { order } }) => {
                 console.log("Response");
-                console.log(response.data);
+                console.log(order);
+                    state.commit('action', (state) => {
+                        state.products.forEach
+                        state.promo.message = null;
+                        state.promo.success = null;
+                        if (order.promo) {
+                        state.promo.success = true;
+                        }
+                })
             }).catch(error => {
-                if (error?.response?.status == 422) state.commit('action', state => state.promo_result.value = error.response.data.errors.promo_code[0] ?? null)
+                if (error?.response?.status == 422) state.commit('action', state => {
+                    state.promo.success = false;
+                    state.promo.message = error.response.data.errors.promo_code[0] ?? null
+                })
             });
-        }
-
-        state.commit("action", (state) => {
+        };
+        console.log("Вызов 1");
+        state.commit('action', (state) => {
             clearTimeout(state.synchronization_timer);
-            state.synchronization_timer = setTimeout(sync, 600);
+            state.synchronization_timer = setTimeout(sync, 500);
         });
+
+
     }
 };
 
@@ -124,7 +141,7 @@ export const getters = {
     total_discount_price(state) {
         let summ = 0;
         state.products.forEach(product => {
-            let discount_percent = +product.discount?.percent||+product.section.discount?.percent||0;
+            let discount_percent = +product.discount?.percent || +product.section.discount?.percent || 0;
             summ += (+product.price.toFixed(2) - (product.price.toFixed(2) * (discount_percent) / 100).toFixed(2)) * +product.count;
             // summ += product.selected_options.map(option => +option.price * +product.count).reduce(function (accumulator, currentValue) {
             //     return accumulator + currentValue;

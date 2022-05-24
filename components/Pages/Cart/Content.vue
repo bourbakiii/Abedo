@@ -31,25 +31,32 @@
     </div>
     <form @submit.prevent="checkPromocode" v-if="token" class="cart__promo">
       как выводить ошибку/успех промо?
-      <div class="cart__promo__content">     
+
+      <div class="cart__promo__content">
         <p class="cart__promo__content__text">Введите промокод</p>
         <input
-          :value="$store.state.cart.promo"
+          :value="promo.value"
           @input="
             $store.commit(
               'cart/action',
-              (state) => (state.promo = $event.target.value)
+              (state) => (state.promo.value = $event.target.value)
             )
           "
           type="text"
           name="promo"
           id="promo"
           class="cart__promo__content__input"
-          :class="`cart__promo__content__input_${promo_result.success?'decline':'accept'}`"
+          :class="`cart__promo__content__input_${
+            promo.success ? 'decline' : 'accept'
+          } ${promo.success == null ? '' : 'result_' + promo.success}`"
         />
-        <ButtonStandart class="cart__promo__content__button">Применить</ButtonStandart
+        <ButtonStandart class="cart__promo__content__button"
+          >Применить</ButtonStandart
         >
       </div>
+      <p class="cart__promo__message">
+        {{ promo.message }}
+      </p>
     </form>
     <div v-else class="cart__promo cart__promo_empty">
       Для оформления заказа необходимо
@@ -102,8 +109,8 @@ export default {
     token() {
       return this.$store.state.account.token;
     },
-    promo_result() {
-      return this.$store.state.cart.promo_result;
+    promo() {
+      return this.$store.state.cart.promo;
     },
   },
 };
@@ -295,13 +302,25 @@ export default {
           max-width: 161px;
           height: 40px;
         }
+        &.result_true {
+          border-color: $green;
+        }
+        &.result_false {
+          border-color: $red;
+        }
       }
       &__button {
         margin-left: 30px;
         padding: 0px 20px;
       }
     }
-
+    &__message {
+      font-family: "SF Pro Display";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      color: $red;
+    }
     &_empty {
       font-family: "SF Pro Display";
       font-style: normal;

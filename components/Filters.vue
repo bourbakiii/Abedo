@@ -149,7 +149,7 @@ export default {
       @media screen and (max-width: $sidebar_dn) {
         width: 100%;
       }
-      width: 414px;
+      width: 415px;
       height: 50px;
       border-radius: 90px;
       background-color: $white;

@@ -1,10 +1,17 @@
 <template>
   <form @submit.prevent="make" class="order">
     <div class="order__buttons">
-      <ButtonStandart class="order__buttons__button active"
+      <ButtonStandart
+        type="button"
+        @click="self_get = false"
+        :class="{ active: !self_get }"
+        class="order__buttons__button"
         >Доставка
       </ButtonStandart>
       <ButtonStandart
+        type="button"
+        @click="enableSelfGet"
+        :class="{ active: self_get }"
         class="order__buttons__button order__buttons__button_self"
       >
         Самовывоз
@@ -23,7 +30,7 @@
       error="true"
       :value="phone"
     />
-    <div class="order__delivery">
+    <div v-if="!self_get" class="order__delivery">
       <div class="order__delivery__content">
         <div class="order__delivery__content__select">
           <InputBlock
@@ -181,6 +188,9 @@
         </label>
       </div>
     </div>
+    <div v-else class="order__delivery">
+      {{ parseAddress(cart_partner) }}
+    </div>
     <div class="order__payment">
       <h3 class="order__payment__title title-extra-normal">Оплата</h3>
       <label
@@ -288,6 +298,7 @@ export default {
       delivery_price: +this.$store.state.cart?.partner?.delivery?.price,
       door_delivery_price: null,
       show_dropdown: false,
+      self_get: false,
     };
   },
   fetchOnServer: false,
@@ -304,8 +315,11 @@ export default {
         this.door_delivery_price = delivery.door_delivery_price;
       });
   },
-
   methods: {
+    enableSelfGet() {
+      this.door_delivery = false;
+      this.self_get = true;
+    },
     parsePhone(phone) {
       return phone
         ? `(${phone[0]}${phone[1]}${phone[2]}) ${phone[3]}${phone[4]}${phone[5]}-${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`
@@ -348,19 +362,22 @@ export default {
         order_products_format.push({ id, count, props });
       }
       //////////////////////////////////////////////////////
-      let copy_address = { ...this.address };
-      copy_address.lon = copy_address.get_lon;
-      copy_address.lat = copy_address.get_lat;
-      copy_address.apartment = copy_address.flat;
-      delete copy_address.get_lon,
-        delete copy_address.get_lat,
-        delete copy_address.flat;
+      let copy_address = {};
+      if (!this.self_get) {
+        copy_address = { ...this.address };
+        copy_address.lon = copy_address.get_lon;
+        copy_address.lat = copy_address.get_lat;
+        copy_address.apartment = copy_address.flat;
+        delete copy_address.get_lon,
+          delete copy_address.get_lat,
+          delete copy_address.flat;
+      }
       let params = qs.stringify({
         products: [...order_products_format],
-        with_delivery: +true,
+        with_delivery: +!this.self_get,
         shop_id: this.cart_partner.id,
         with_door_delivery: +this.door_delivery,
-        address: this.address.value,
+        address: this.self_get ? null : this.address.value,
         comment: this.description,
         ...copy_address,
         phone: parseInt(this.phone.replace(/\D+/g, "")),
@@ -499,14 +516,12 @@ export default {
       margin-right: 30px;
       height: 45px;
       width: 157px;
+      background-color: $dark_grey;
+      border-color: transparent;
+      color: $black;
       &.active {
         background-color: $darkblue;
         color: $white;
-      }
-      &_self {
-        background-color: $dark_grey;
-        border-color: transparent;
-        color: $black;
       }
       @media screen and (max-width: $tablet) {
         margin-right: 20px;
