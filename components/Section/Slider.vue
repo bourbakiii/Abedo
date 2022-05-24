@@ -5,8 +5,8 @@
     class="subsections slider"
     :options="swiperOption"
   >
-    <swiper-slide v-for="chapter in chapters" :key="chapter.id">
-      <ChapterItem :chapter="chapter" />
+    <swiper-slide v-for="section in sections" :key="section.id">
+      <SectionItem :section="section" />
     </swiper-slide>
   </swiper>
 </template>
@@ -19,7 +19,7 @@ export default {
   title: "Auto slides per view / Carousel mode",
   name: "slider",
   props:{
-    chapters:{
+    sections:{
       required:true,
     }
   },

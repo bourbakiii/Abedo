@@ -9,9 +9,9 @@
       {{product.name}}
     </p>
     <div class="product-small__info">
-      <p class="product-small__info__price" >350₽</p>
-      <p class="product-small__info__weight" >/ 150г</p>
-      <div class="product-small__info__full-price" >450₽</div>
+      <p class="product-small__info__price" >{{product_price_with_discount}}₽</p>
+      <p class="product-small__info__weight" >/ {{ product.weight }}{{ product.weight_unit.short_name }}</p>
+      <div v-if='discount_percent' class="product-small__info__full-price" >{{product.price}}₽</div>
     </div>
   </NuxtLink>
 </template>

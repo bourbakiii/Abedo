@@ -3,35 +3,37 @@
     <h2 class="catalog__title title-extra-normal adaptive-non">
       Разделы каталога “{{ partner.name }}”
     </h2>
-    <div class="catalog__chapters adaptive-non">
-      <ChapterItem
-        class="catalog__chapters__item"
-        v-for="chapter in chapters"
-        :key="chapter.id"
-        :chapter="chapter"
+    <div class="catalog__sections adaptive-non">
+      <SectionItem
+        class="catalog__sections__item"
+        v-for="section in sections"
+        :key="section.id"
+        :section="section"
       />
     </div>
-    <ChapterSlider :chapters="chapters" class="catalog__chapters__slider adaptive" />
+    <SectionSlider
+      :sections="sections"
+      class="catalog__sections__slider adaptive"
+    />
     <div class="catalog__products">
       <div
-        class="catalog__products__chapter"
-        :id="`chapter-${chapter.id}`"
-        v-for="chapter in chapters"
-        :key="chapter.id"
+        class="catalog__products__section"
+        :id="`section-${section.id}`"
+        v-for="section in sections"
+        :key="section.id"
       >
-        <h3 class="catalog__products__chapter__title title-small">
-          {{ chapter.name }}
+        <h3 class="catalog__products__section__title title-small">
+          {{ section.name }}
         </h3>
-        <div class="catalog__products__chapter__content">
-         
+        <div class="catalog__products__section__content">
           <ProductItem
-            class="catalog__products__chapter__content__item"
-            v-for="product in chapter.products"
+            class="catalog__products__section__content__item"
+            v-for="product in section.products"
             :key="product.id"
-            :product="product"
+            :product="Object.assign(product, sectionWithoutProducts(section))"
             :partner="partner"
           />
-
+          <!-- Сменить функцию на деструктуризацию -->
         </div>
       </div>
     </div>
@@ -48,13 +50,20 @@ export default {
     await this.$axios
       .get(`/api/shops/${this.$route.params.partner_id}/menu`)
       .then(({ data: { sections } }) => {
-        this.chapters = sections;
+        this.sections = sections;
       });
   },
   data() {
     return {
-      chapters: [],
+      sections: [],
     };
+  },
+  methods: {
+    sectionWithoutProducts(section) {
+      let object = { ...section };
+      delete object.products;
+      return { section: object };
+    },
   },
 };
 </script>
@@ -69,7 +78,7 @@ export default {
     align-self: flex-start;
     margin-bottom: 30px;
   }
-  &__chapters {
+  &__sections {
     width: 100%;
     display: flex;
     align-items: center;
@@ -97,7 +106,7 @@ export default {
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    &__chapter {
+    &__section {
       width: 100%;
       display: flex;
       align-items: flex-start;

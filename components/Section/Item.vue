@@ -1,12 +1,12 @@
 <template>
-  <button @click.prevent='act' class="chapter-item">
-      {{chapter.name}}
+  <button @click.prevent='act' class="section-item">
+      {{section.name}}
       </button>
 </template>
 <script>
 export default {
     props:{
-        chapter:{
+        section:{
             required: true
         },
         action:{
@@ -17,7 +17,7 @@ export default {
         act(){
             if(this.action) this.action();
             else {
-            const element = document.getElementById(`chapter-${this.chapter.id}`);
+            const element = document.getElementById(`section-${this.section.id}`);
               element.scrollIntoView({block: "center", behavior: "smooth"});
             }
         }
@@ -25,7 +25,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.chapter-item {
+.section-item {
   border-radius: 50px;
   background-color: $white;
   border: 1px solid $darkblue;

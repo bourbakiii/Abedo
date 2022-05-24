@@ -15,12 +15,13 @@ export default {
         }
     },
     computed: {
-        discount_percent(){
-            return this.product.discount?.percent??null;
+        discount_percent() {
+            
+            return +this.product.discount?.percent||+this.product.section.discount?.percent||null;
         },
-        product_price_with_discount(){
-            let price_with_discount = this.product.price - (this.product.price * this.discount_percent/100??0);
-            return price_with_discount%1==0?price_with_discount:price_with_discount.toFixed(2);
+        product_price_with_discount() {
+            let price_with_discount = this.product.price - (this.product.price * this.discount_percent / 100 ?? 0);
+            return price_with_discount % 1 == 0 ? price_with_discount : price_with_discount.toFixed(2);
         },
         cart_products() {
             return this.$store.state.cart.products;
@@ -38,11 +39,11 @@ export default {
         },
         product_total_price() {
             let price = this.count * this.product.price
-            return price%1==0?price:price.toFixed(2);
+            return price % 1 == 0 ? price : price.toFixed(2);
         },
         product_total_price_with_discount() {
             let price = this.count * this.product_price_with_discount
-            return price%1==0?price:price.toFixed(2);
+            return price % 1 == 0 ? price : price.toFixed(2);
         }
     },
 

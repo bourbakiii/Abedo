@@ -150,7 +150,7 @@
                   / {{ product.weight }}{{ product.weight_unit.short_name }}
                 </p>
                 <p
-                  v-if="product.discount"
+                  v-if="product.discount||product.section.discount"
                   class="product-page__over__content__main__additional__information__prices__price_full"
                 >
                   {{ price }}₽

@@ -18,7 +18,7 @@
       <div class="product-item__info__prices adaptive-non">
         <p class="product-item__info__prices__price">{{ product.price }}₽</p>
         <p class="product-item__info__prices__weight">
-          / {{ product.weight }} {{ product.weight_unit.short_name }}
+          / {{ product.weight }}{{ product.weight_unit.short_name }}
         </p>
         <p
           v-if="discount_percent"
