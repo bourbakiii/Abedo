@@ -31,7 +31,7 @@ export const mutations = {
     localStorage.setItem(local_storage_name, JSON.stringify(state));
   },
     clearPromo(state) {
-    console.log("Мира и так мало вокруг");
+    // console.log("Мира и так мало вокруг");
       state.promo = {
         success: null,
         value: null,
