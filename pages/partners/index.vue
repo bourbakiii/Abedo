@@ -165,13 +165,11 @@
           </p>
         </button>
       </div>
-      <transition name="filter">
         <Filters
           @send="setFilters"
           v-if="show_filters"
           class="partners-page__filters"
         />
-      </transition>
       <div class="partners-page__partners">
         <CategorySidebar
           class="partners-page__partners__sidebar adaptive-non"

@@ -71,27 +71,25 @@
               :arrow="editing"
               class="profile-page__form__content__input-block profile-page__form__content__gender__input-block"
             />
-            <transition name="opacity">
-              <div
-                v-if="show_dropdown && editing"
-                class="profile-page__form__content__gender__dropdown"
+            <div
+              v-if="show_dropdown && editing"
+              class="profile-page__form__content__gender__dropdown"
+            >
+              <button
+                type="button"
+                @click="selectGender('Мужской')"
+                class="profile-page__form__content__gender__dropdown__button"
               >
-                <button
-                  type="button"
-                  @click="selectGender('Мужской')"
-                  class="profile-page__form__content__gender__dropdown__button"
-                >
-                  Мужской
-                </button>
-                <button
-                  type="button"
-                  @click="selectGender('Женский')"
-                  class="profile-page__form__content__gender__dropdown__button"
-                >
-                  Женский
-                </button>
-              </div>
-            </transition>
+                Мужской
+              </button>
+              <button
+                type="button"
+                @click="selectGender('Женский')"
+                class="profile-page__form__content__gender__dropdown__button"
+              >
+                Женский
+              </button>
+            </div>
           </button>
           <InputBlock
             :readonly="!editing"
@@ -129,42 +127,36 @@
           />
         </div>
         <div class="profile-page__form__buttons">
-          <transition name="edit-buttons" mode="out-in">
+          <ButtonStandart
+            type="button"
+            @click="editing = true"
+            v-if="!editing"
+            class="profile-page__form__buttons__button profile-page__form__buttons__button_edit filled"
+          >
+            Изменить
+          </ButtonStandart>
+          <div v-else class="profile-page__form__buttons__edits">
+            <ButtonStandart
+              class="profile-page__form__buttons__button profile-page__form__buttons__button_save filled"
+              >Сохранить
+            </ButtonStandart>
             <ButtonStandart
               type="button"
-              @click="editing = true"
-              v-if="!editing"
-              class="profile-page__form__buttons__button profile-page__form__buttons__button_edit filled"
+              @click="
+                () => {
+                  errors = [];
+                  user = { ...start_user };
+                  editing = false;
+                }
+              "
+              class="profile-page__form__buttons__button profile-page__form__buttons__button_decline"
             >
-              Изменить
+              Отмена
             </ButtonStandart>
-            <div v-else class="profile-page__form__buttons__edits">
-              <ButtonStandart
-                class="profile-page__form__buttons__button profile-page__form__buttons__button_save filled"
-                >Сохранить
-              </ButtonStandart>
-              <ButtonStandart
-                type="button"
-                @click="
-                  () => {
-                    errors = [];
-                    user = { ...start_user };
-                    editing = false;
-                  }
-                "
-                class="profile-page__form__buttons__button profile-page__form__buttons__button_decline"
-              >
-                Отмена
-              </ButtonStandart>
-            </div>
-          </transition>
+          </div>
         </div>
-        <transition-group
-          tag="div"
+        <div
           class="profile-page__form__messages"
-          name="message"
-          appear
-          mode="out-in"
           :class="{
             'profile-page__form__messages_margined': errors.length,
           }"
@@ -175,7 +167,7 @@
             class="profile-page__form__messages__item_error profile-page__form__messages__item"
             >{{ error }}</Message
           >
-        </transition-group>
+        </div>
       </form>
     </div>
   </div>
@@ -184,7 +176,7 @@
 import errorsMessagesMixin from "@/mixins/errors-messages.js";
 export default {
   mixins: [errorsMessagesMixin],
-  middleware: ['auth'],
+  middleware: ["auth"],
   data() {
     return {
       editing: false,

@@ -52,23 +52,17 @@
       >
     </div>
     <ButtonStandart class="login-modal__button">Войти</ButtonStandart>
-    <transition-group
-      tag="div"
-      class="login-modal__errors"
-      name="message"
-      appear
-      mode="out-in"
-      :class="{
+    <div  :class="{
         'login-modal__errors_margined': errors.length,
-      }"
-    >
-      <Message
+      }" class="login-modal__errors">
+<Message
         v-for="error in errors"
         :key="error"
         class="login-modal__errors__item_error login-modal__errors__item"
         >{{ error }}</Message
       >
-    </transition-group>
+    </div>
+
   </form>
 </template>
 <script>

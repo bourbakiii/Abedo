@@ -15,7 +15,6 @@
             
           />
         </div>
-        <transition name="add-address-form" mode="out-in">
           <AddressNew
             @close="show_add_form = false"
             class="addresses-page__content__addresses__new"
@@ -41,7 +40,6 @@
             </svg>
             Добавить адрес
           </ButtonStandart>
-        </transition>
       </div>
     </div>
   </div>

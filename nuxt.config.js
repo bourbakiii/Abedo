@@ -29,7 +29,13 @@ export default {
     '@/plugins/clientHook.client.js'
   ],
   components: true,
-  build: {},
+  build: {
+    extend(config, ctx) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+      }
+    }
+  },
   buildModules: [],
   modules: [ 'cookie-universal-nuxt','@nuxtjs/axios', '@nuxtjs/style-resources',],
   generate:{

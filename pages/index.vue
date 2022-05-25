@@ -119,12 +119,10 @@
                 </p>
               </button>
             </div>
-            <transition name="filter">
               <Filters
                 v-if="show_filters"
                 class="index-page__content__new-shops__filters"
               />
-            </transition>
             <div class="index-page__content__new-shops__content">
               <client-only>
                 <PartnerItem

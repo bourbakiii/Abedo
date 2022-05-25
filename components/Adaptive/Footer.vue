@@ -50,7 +50,7 @@
         />
       </svg>
       <client-only>
-        <transition name="indicator" appear>
+       
           <div
             class="footer__button_cart__count"
             v-if="cart_products.length"
@@ -58,7 +58,6 @@
           >
             {{ cart_products.length }}
           </div>
-        </transition>
       </client-only>
     </NuxtLink>
     <NuxtLink to="/search" class="footer__button">
@@ -104,13 +103,12 @@
         />
       </svg>
     </button>
-    <transition name="left-menu">
+  
       <LeftMenu
         v-if="show_left_menu"
         @close="show_left_menu = false"
         class="footer__left-menu"
       />
-    </transition>
   </div>
 </template>
 <script>

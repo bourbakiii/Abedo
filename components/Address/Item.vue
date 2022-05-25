@@ -31,7 +31,7 @@
             }
           "
         />
-        <transition name="opacity">
+       
           <div
             v-if="suggestions.length"
             class="address-item__content__dadata__suggestions"
@@ -47,7 +47,6 @@
               {{ address.value }}
             </button>
           </div>
-        </transition>
       </div>
       <div class="address-item__content__smalls">
         <InputBlock
@@ -87,7 +86,7 @@
           :readonly="!editing"
         />
       </div>
-      <transition name="edit-button">
+     
         <ButtonStandart
           type="button"
           class="address-item__content__edit filled"
@@ -95,7 +94,6 @@
           @click="editing = true"
           >Изменить</ButtonStandart
         >
-      </transition>
     </div>
     <label
       :for="`address-item__default-${address.id}`"
@@ -110,7 +108,7 @@
       />
       <p type="button" class="address-item__default__text">По умолчанию</p>
     </label>
-    <transition name="address-item__buttons-transition">
+   
       <div class="address-item__buttons" v-if="editing">
         <ButtonStandart
           type="button"
@@ -123,8 +121,8 @@
           >Изменить</ButtonStandart
         >
       </div>
-    </transition>
-    <transition-group
+    
+
       tag="div"
       class="address-item__errors"
       name="message"
@@ -140,7 +138,6 @@
         class="address-item__errors__item_error address-item__errors__item"
         >{{ error }}</Message
       >
-    </transition-group>
   </form>
 </template>
 <script>

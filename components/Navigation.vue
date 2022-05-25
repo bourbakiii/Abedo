@@ -123,7 +123,7 @@
             />
           </svg>
           <p class="navigation__links-link__text">Кабинет</p>
-          <transition name="opacity">
+         
             <div
               v-if="show_dropdown && token"
               class="navigation__links-link__dropdown-content"
@@ -153,7 +153,6 @@
                 Выход
               </button>
             </div>
-          </transition>
         </button>
         <NuxtLink to="/stocks" class="navigation__links-link">
           <svg
@@ -235,7 +234,7 @@
       </div>
       <NuxtLink to="/cart" class="navigation__cart-block">
         <span class="navigation__cart-block-icon">
-          <transition name="indicator" appear>
+         
             <client-only>
               <div
                 v-if="cart_products.length"
@@ -244,7 +243,6 @@
                 {{ cart_products.length }}
               </div>
             </client-only>
-          </transition>
           <svg
             class="navigation__cart-block-icon-svg"
             width="20"

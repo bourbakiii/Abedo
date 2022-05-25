@@ -104,7 +104,7 @@ export default {
   padding: 20px 0px;
   transition: $transition;
   &:last-of-type {
-    border-bottom: none;
+    border-bottom-width: 0px;
   }
   &__close {
     top: 20px;

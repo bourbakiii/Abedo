@@ -1,12 +1,10 @@
 <template>
-    <transition appear name="item-transition">
       <PartnerDesktop
         :partner="partner"
         v-if="width > 768"
         class="partner-item"
       />
       <PartnerAdaptive :partner="partner" v-else class="partner-item"/>
-    </transition>
 </template>
 <script>
 export default {

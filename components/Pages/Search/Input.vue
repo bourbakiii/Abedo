@@ -40,7 +40,6 @@
           @change="timerHandler"
           minlength='3'
         />
-        <transition name="opacity">
           <button
             v-if="keyword.length"
             @click.prevent="keyword = ''"
@@ -60,7 +59,6 @@
               />
             </svg>
           </button>
-        </transition>
       </form>
     </div>
   </div>

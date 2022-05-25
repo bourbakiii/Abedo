@@ -1,12 +1,10 @@
 <template>
-  <transition appear :name="width > 768?`cart-product`:`opacity`">
     <ProductCartDesktop
       :product="product"
       v-if="width > 768"
       class="product-item"
     />
     <ProductCartAdaptive :product="product" v-else class="product-item" />
-  </transition>
 </template>
 <script>
 export default {

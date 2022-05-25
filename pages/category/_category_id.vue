@@ -110,13 +110,11 @@
           </svg>
         </button>
       </div>
-      <transition name="filter">
         <Filters
           @send="setFilters"
           v-if="show_filters"
           class="categories-page__content__filters"
         />
-      </transition>
       <div
         :class="{ 'small-margin': show_filters }"
         class="categories-page__content__shops"

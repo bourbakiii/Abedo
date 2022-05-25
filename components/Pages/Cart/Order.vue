@@ -44,7 +44,6 @@
             :readonly="true"
             @click="openDropdown"
           />
-          <transition name="opacity">
             <div
               v-if="show_dropdown"
               class="order__delivery__content__select__dropdown"
@@ -59,7 +58,6 @@
                 {{ address.name }}
               </button>
             </div>
-          </transition>
         </div>
         <div class="order__delivery__content__content">
           <div class="order__delivery__content__content__address">
@@ -82,7 +80,6 @@
                   }
                 "
               />
-              <transition name="opacity">
                 <div
                   v-if="suggestions.length"
                   class="order__delivery__content__content__address__dadata__suggestions"
@@ -98,7 +95,6 @@
                     {{ address.value }}
                   </button>
                 </div>
-              </transition>
             </div>
             <InputBlock
               :value="address.entrance"
@@ -250,23 +246,18 @@
 
       Оформить заказ</ButtonStandart
     >
-    <transition-group
-      tag="div"
-      class="order__messages"
-      name="message"
-      appear
-      mode="out-in"
-      :class="{
+    <div :class="{
         order__messages_margined: errors.length,
-      }"
-    >
+      }" class="order__messages">
+
       <Message
         v-for="error in errors"
         :key="error"
         class="order__messages__item_error order__messages__item"
         >{{ error }}</Message
       >
-    </transition-group>
+    </div>
+
   </form>
 </template>
 <script>

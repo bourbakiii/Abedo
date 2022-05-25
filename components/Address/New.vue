@@ -26,7 +26,7 @@
             }
           "
         />
-        <transition name="opacity">
+       
           <div
             v-if="suggestions.length"
             class="address-item__content__dadata__suggestions"
@@ -41,7 +41,6 @@
               {{ address.value }}
             </button>
           </div>
-        </transition>
       </div>
       <div class="address-item__content__smalls">
         <InputBlock

@@ -16,7 +16,7 @@
           />
         </svg>
       </div>
-      <transition name="cart-sidebar-content" appear>
+     
         <div v-if="cart_products.length" class="sidebar-cart__content">
           <div class="sidebar-cart__content__hood">
             <div class="sidebar-cart__content__hood__title-row">
@@ -98,7 +98,6 @@
         <div v-else class="sidebar-cart__content_empty sidebar-cart__content">
           <h3 class="title-extra-small">Корзина пуста</h3>
         </div>
-      </transition>
     </client-only>
   </div>
 </template>

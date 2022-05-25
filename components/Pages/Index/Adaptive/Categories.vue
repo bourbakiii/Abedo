@@ -1,14 +1,14 @@
 <template>
   <div class="adaptive-categories wrapper adaptive-non-wrapper">
     <h1 class="adaptive-categories__title title-small">Категории</h1>
-      <transition-group tag='div' class="adaptive-categories__content" appear name="item-transition">
+      <div class="adaptive-categories__content">
       <CategoryAdaptive
         v-for="category in categories"
         :category="category"
         :key="category.id"
         class="adaptive-categories__item"
       />
-      </transition-group>
+     </div>
     </div>
 </template>
 <script>

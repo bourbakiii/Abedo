@@ -37,7 +37,6 @@
           v-model="keyword"
           @input="timerHandler"
         />
-        <transition name="opacity">
           <button
             v-if="keyword"
             @click.prevent="keyword = null"
@@ -57,8 +56,6 @@
               />
             </svg>
           </button>
-        </transition>
-        <transition name="opacity">
           <div
             class="search__input__dropdown-content push-hover-active"
             @mouseenter="showResult"
@@ -149,7 +146,6 @@
           >
             Ничего не найдено
           </div>
-        </transition>
       </form>
 
       <div class="search__categories" v-if="categories.length">

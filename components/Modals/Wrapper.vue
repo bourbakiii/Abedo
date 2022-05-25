@@ -1,5 +1,4 @@
 <template>
-  <transition name="opacity" appear>
     <div
       @click.self="$store.commit('modals/close')"
       v-if="wrapper_show"
@@ -27,7 +26,6 @@
         class="modals-wrapper__content modal-content"
       />
     </div>
-  </transition>
 </template>
 <script>
 export default {

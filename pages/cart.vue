@@ -3,7 +3,6 @@
     <div class="cart-page__content-wrapper content">
       <Breadcrumbs class="cart-page__breadcrumbs adaptive-non" />
       <div class="cart-page__contents">
-        <transition appear name="opacity" mode="out-in">
           <div v-if="cart_products.length" class="cart-page__content">
             <h1
               class="cart-page__content_empty__title title-normal adaptive-non"
@@ -11,9 +10,7 @@
               Оформления заказа
             </h1>
             <PagesCartContent class="cart-page__content__cart" />
-            <transition name='opacity'>
             <PagesCartOrder v-if="token" class="cart-page__content__order" />
-            </transition>
           </div>
           <div v-else class="cart-page__content_empty">
             <h1 class="cart-page__content_empty__title title-normal">
@@ -41,7 +38,6 @@
               >За покупками</ButtonStandart
             >
           </div>
-        </transition>
       </div>
     </div>
   </div>

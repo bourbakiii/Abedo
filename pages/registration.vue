@@ -50,15 +50,11 @@
           >Подтвердить телефон</ButtonStandart
         >
         <!-- <client-only> -->
-        <transition-group
-          tag="div"
-          class="registration-page__content__errors"
-          name="message"
-          appear
-          mode="out-in"
+        <div
           :class="{
             'registration-page__content__errors_margined': errors.length,
           }"
+          class="registration-page__content__errors"
         >
           <Message
             v-for="error in errors"
@@ -66,7 +62,9 @@
             class="registration-page__content__errors__item_error registration-page__content__errors__item"
             >{{ error }}</Message
           >
-        </transition-group>
+        </div>
+
+        >
         <!-- </client-only> -->
       </form>
       <form
