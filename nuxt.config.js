@@ -6,12 +6,12 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no ' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/abedo-logo.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/new-logo-favicon.png' }
     ]
   },
   ssr: true,
@@ -29,13 +29,13 @@ export default {
     '@/plugins/clientHook.client.js'
   ],
   components: true,
-  build: {
-    extend(config, ctx) {
-      if (ctx.isDev) {
-        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-      }
-    }
-  },
+  // build: {
+  //   extend(config, ctx) {
+  //     if (ctx.isDev) {
+  //       config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+  //     }
+  //   }
+  // },
   buildModules: [],
   modules: [ 'cookie-universal-nuxt','@nuxtjs/axios', '@nuxtjs/style-resources',],
   generate:{
