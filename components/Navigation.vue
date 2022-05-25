@@ -100,10 +100,12 @@
       </ButtonStandart
       >
       <div class="navigation__links">
-<!--          @mouseenter.prevent="show_dropdown = true"-->
-<!--          @mouseleave.prevent="show_dropdown = false"-->
+        <!--          @mouseenter.prevent="show_dropdown = true"-->
+        <!--          @mouseleave.prevent="show_dropdown = false"-->
         <button
           class="navigation__links-link navigation__links-link__dropdown"
+          @mouseenter.prevent="show_dropdown = true"
+          @mouseleave.prevent="show_dropdown = false"
           @mousedown.prevent="dropdownClick"
         >
           <svg
@@ -124,40 +126,40 @@
               stroke-linecap="round"
             />
           </svg>
-          <p @click="loggy" class="navigation__links-link__text">Кабинет</p>
-<!--          <client-only @click="loggy">-->
-            {{show_dropdown && token}}
-          <div
-            @click="loggy"
-            v-if="show_dropdown && token"
-            class="navigation__links-link__dropdown-content"
-          >
-            <NuxtLink
-              to="/profile"
-              class="navigation__links-link__dropdown-content-link"
-            >
-              Мои данные
-            </NuxtLink>
-            <NuxtLink
-              to="/addresses"
-              class="navigation__links-link__dropdown-content-link"
-            >
-              Адреса доставки
-            </NuxtLink>
-            <NuxtLink
-              to="/orders"
-              class="navigation__links-link__dropdown-content-link"
-            >
-              История заказов
-            </NuxtLink>
-            <button
-              @click="$store.dispatch('account/logout')"
-              class="navigation__links-link__dropdown-content-link"
-            >
-              Выход
-            </button>
-          </div>
-<!--          </client-only>-->
+          <p class="navigation__links-link__text">Кабинет</p>
+          <client-only>
+            <transition name="opacity">
+              <div
+                v-if="show_dropdown && token"
+                class="navigation__links-link__dropdown-content"
+              >
+                <NuxtLink
+                  to="/profile"
+                  class="navigation__links-link__dropdown-content-link"
+                >
+                  Мои данные
+                </NuxtLink>
+                <NuxtLink
+                  to="/addresses"
+                  class="navigation__links-link__dropdown-content-link"
+                >
+                  Адреса доставки
+                </NuxtLink>
+                <NuxtLink
+                  to="/orders"
+                  class="navigation__links-link__dropdown-content-link"
+                >
+                  История заказов
+                </NuxtLink>
+                <button
+                  @click.prevent="$store.dispatch('account/logout')"
+                  class="navigation__links-link__dropdown-content-link"
+                >
+                  Выход
+                </button>
+              </div>
+            </transition>
+          </client-only>
         </button>
         <NuxtLink to="/stocks" class="navigation__links-link">
           <svg
@@ -261,7 +263,7 @@
             />
           </svg>
         </span>
-        <p class="navigation__cart-block__text delete-note">Корзина</p>
+          <p class="navigation__cart-block__text delete-note">Корзина</p>
         </client-only>
       </NuxtLink>
     </div>
@@ -288,9 +290,6 @@ export default {
     };
   },
   methods: {
-    loggy(){
-      console.log("loggy function");
-    },
     dropdownClick() {
       if (this.token) this.show_dropdown = !this.show_dropdown;
       else this.$store.commit("modals/open", {modal_name: "login"});
