@@ -1,10 +1,10 @@
 <template>
-  <div class="founded-shops">
-    <h1 class="founded-shops__title title-normal">Найденные заведения</h1>
-    <div class="founded-shops__content content">
+  <div class="founded-partners">
+    <h1 class="founded-partners__title title-normal">Найденные заведения</h1>
+    <div class="founded-partners__content content">
       <client-only>
       <PartnerItem
-        class="founded-shops__content__item adaptive-non"
+        class="founded-partners__content__item"
         v-for="partner in partners"
         :key="partner.id"
         :partner='partner'
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "FoundedShops",
+  name: "FoundedPartners",
   props:{
     partners: {
       required: true,
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.founded-shops {
+.founded-partners {
   width: 100%;
   max-width: $maxwidth;
   display: flex;
@@ -59,7 +59,7 @@ export default {
       grid-template-columns: repeat(1, 1fr);
       grid-gap: 15px;
     }
-    
+
     &__item {
       width: auto;
       overflow: hidden;

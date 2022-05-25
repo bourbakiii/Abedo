@@ -27,54 +27,57 @@
           {{ product_price_with_discount }}₽
         </p>
       </div>
-      <div class="product-item__info__weight adaptive" >
+      <div class="product-item__info__weight adaptive">
         {{ product.weight }}г
       </div>
       <div class="product-item__info__prices__mobile adaptive">
-        <p class="product-item__info__prices__mobile__price" >
+        <p class="product-item__info__prices__mobile__price">
           {{ product.price }}₽
         </p>
         <p
           v-if="discount_percent"
           class="product-item__info__prices__mobile__price_full"
-          
+
         >
           {{ product_price_with_discount }}₽
         </p>
       </div>
     </div>
     <div v-if='product.is_active' @click.self="go_by_link" class="product-item__buttons">
-      
-      <div
-        @click.self="go_by_link"
-        v-if="!in_cart"
-        class="product-item__buttons__add"
-      >
-        <ButtonSmallCart
-          @click="add_to_cart(partner)"
-          class="product-item__buttons__button_add_small adaptive"
-        />
-        <ButtonStandart
-          @click="add_to_cart(partner)"
-          class="product-item__buttons__button_add adaptive-non"
-        >
-          В корзину
-        </ButtonStandart>
-      </div>
-      <div
-        @click.self="go_by_link"
-        v-else
-        class="product-item__buttons__button_creases"
-      >
-        <ButtonProduct @click="decrease" size="40" icon="minus" />
-        <p
+      <client-only>
+        <div
           @click.self="go_by_link"
-          class="product-item__buttons__button_creases__count"
+          v-if="!in_cart"
+          class="product-item__buttons__add"
         >
-          {{ count }}
-        </p>
-        <ButtonProduct @click="crease" size="40" icon="plus" />
-      </div>
+          <ButtonSmallCart
+            @click="add_to_cart(partner)"
+            class="product-item__buttons__button_add_small adaptive"
+          />
+
+          <ButtonStandart
+            @click="add_to_cart(partner)"
+            class="product-item__buttons__button_add adaptive-non"
+          >
+            В корзину
+          </ButtonStandart>
+        </div>
+        <div
+          @click.self="go_by_link"
+          v-else
+          class="product-item__buttons__button_creases"
+        >
+
+          <ButtonProduct @click="decrease" size="40" icon="minus"/>
+          <p
+            @click.self="go_by_link"
+            class="product-item__buttons__button_creases__count"
+          >
+            {{ count }}
+          </p>
+          <ButtonProduct @click="crease" size="40" icon="plus"/>
+        </div>
+      </client-only>
     </div>
   </div>
 </template>
@@ -84,13 +87,13 @@ import productsMixin from "@/mixins/product.js";
 export default {
   mixins: [productsMixin],
   props: {
-        product: {
-            required: true,
-        },
-        partner:{
-            required: false
-        }
+    product: {
+      required: true,
     },
+    partner: {
+      required: false
+    }
+  },
   methods: {
     go_by_link() {
       this.$router.push(`/product/${this.product.id}`);
@@ -114,9 +117,11 @@ export default {
     border-radius: 8px;
     height: 249px;
   }
+
   &_in-cart {
     border: 2px solid $orange;
   }
+
   &__discount {
     position: absolute;
     top: 20px;
@@ -148,6 +153,7 @@ export default {
       line-height: 10px;
     }
   }
+
   &__image {
     width: 100%;
     height: 190px;
@@ -158,6 +164,7 @@ export default {
       height: 111px;
     }
   }
+
   &__info {
     display: flex;
     align-items: flex-start;
@@ -169,6 +176,7 @@ export default {
     }
     width: 100%;
     flex-grow: 1;
+
     &__name {
       width: 100%;
       font-family: "SF Pro Display";
@@ -195,6 +203,7 @@ export default {
         line-clamp: 2;
       }
     }
+
     &__weight {
       font-family: "SF Pro Display";
       font-style: normal;
@@ -207,6 +216,7 @@ export default {
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+
     &__prices {
       flex-shrink: 0;
       width: 100%;
@@ -216,6 +226,7 @@ export default {
       flex-direction: row;
       flex-wrap: wrap;
       margin-top: 15px;
+
       &__mobile {
         display: flex;
         align-items: center;
@@ -225,6 +236,7 @@ export default {
         margin-top: 7px;
         max-width: 100%;
         width: 100%;
+
         &__price {
           font-family: "SF Pro Display";
           font-style: normal;
@@ -232,6 +244,7 @@ export default {
           font-size: 15px;
           line-height: 16px;
           white-space: nowrap;
+
           &_full {
             font-family: "SF Pro Display";
             font-style: normal;
@@ -245,12 +258,14 @@ export default {
           }
         }
       }
+
       &__price {
         font-family: "Montserrat";
         font-style: normal;
         font-weight: 600;
         font-size: 16px;
         line-height: 20px;
+
         &_full {
           font-family: "Montserrat";
           font-style: normal;
@@ -262,6 +277,7 @@ export default {
           margin-left: min(10px, 100%);
         }
       }
+
       &__weight {
         margin-left: 5px;
         font-family: "SF Pro Display";
@@ -273,6 +289,7 @@ export default {
       }
     }
   }
+
   &__buttons {
     margin-top: 25px;
     margin-bottom: 25px;
@@ -288,19 +305,23 @@ export default {
       margin-top: 10px;
       margin-bottom: 17px;
     }
-    &__add{
-      width:100%;
+
+    &__add {
+      width: 100%;
     }
+
     &__button_add {
       height: 40px;
       width: 100% !important;
-      max-width:228px !important;
+      max-width: 228px !important;
     }
+
     &__button_creases {
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: row;
+
       &__count {
         width: 60px;
         max-width: 50%;

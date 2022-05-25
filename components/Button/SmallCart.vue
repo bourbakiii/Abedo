@@ -1,5 +1,6 @@
 <template>
   <button @click='$emit("click")' class="button-small-cart">
+    <client-only>
         <svg
           class="button-small-cart__icon"
           width="18"
@@ -25,6 +26,7 @@
             fill="white"
           />
         </svg>
+    </client-only>
       </button>
 </template>
 

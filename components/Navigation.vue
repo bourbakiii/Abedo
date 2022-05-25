@@ -46,7 +46,8 @@
       <ButtonStandart
         @click.native="() => $router.push('/partners')"
         class="navigation__button"
-        ><svg
+      >
+        <svg
           class="navigation__button__icon"
           width="24"
           height="24"
@@ -95,13 +96,14 @@
             stroke-linejoin="round"
           />
         </svg>
-        Заведения</ButtonStandart
+        Заведения
+      </ButtonStandart
       >
       <div class="navigation__links">
+<!--          @mouseenter.prevent="show_dropdown = true"-->
+<!--          @mouseleave.prevent="show_dropdown = false"-->
         <button
           class="navigation__links-link navigation__links-link__dropdown"
-          @mouseenter.prevent="show_dropdown = true"
-          @mouseleave.prevent="show_dropdown = false"
           @mousedown.prevent="dropdownClick"
         >
           <svg
@@ -112,8 +114,8 @@
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="12" cy="10" r="3" fill="#5C6784" />
-            <circle cx="12" cy="12" r="9" stroke="#5C6784" stroke-width="1.2" />
+            <circle cx="12" cy="10" r="3" fill="#5C6784"/>
+            <circle cx="12" cy="12" r="9" stroke="#5C6784" stroke-width="1.2"/>
             <path
               d="M17.8719 18.8083C17.9489 18.7468 17.9799 18.6436 17.9452 18.5513C17.5693 17.5518 16.8134 16.6706 15.7814 16.0332C14.6966 15.3632 13.3674 15 12 15C10.6326 15 9.30341 15.3632 8.21858 16.0332C7.18663 16.6706 6.43066 17.5518 6.05477 18.5513C6.02009 18.6436 6.05115 18.7468 6.12813 18.8083C9.56196 21.552 14.438 21.552 17.8719 18.8083Z"
               fill="#5C6784"
@@ -122,37 +124,40 @@
               stroke-linecap="round"
             />
           </svg>
-          <p class="navigation__links-link__text">Кабинет</p>
-
-            <div
-              v-if="show_dropdown && token"
-              class="navigation__links-link__dropdown-content"
+          <p @click="loggy" class="navigation__links-link__text">Кабинет</p>
+<!--          <client-only @click="loggy">-->
+            {{show_dropdown && token}}
+          <div
+            @click="loggy"
+            v-if="show_dropdown && token"
+            class="navigation__links-link__dropdown-content"
+          >
+            <NuxtLink
+              to="/profile"
+              class="navigation__links-link__dropdown-content-link"
             >
-              <NuxtLink
-                to="/profile"
-                class="navigation__links-link__dropdown-content-link"
-              >
-                Мои данные
-              </NuxtLink>
-              <NuxtLink
-                to="/addresses"
-                class="navigation__links-link__dropdown-content-link"
-              >
-                Адреса доставки
-              </NuxtLink>
-              <NuxtLink
-                to="/orders"
-                class="navigation__links-link__dropdown-content-link"
-              >
-                История заказов
-              </NuxtLink>
-              <button
-                @click.prevent="$store.dispatch('account/logout')"
-                class="navigation__links-link__dropdown-content-link"
-              >
-                Выход
-              </button>
-            </div>
+              Мои данные
+            </NuxtLink>
+            <NuxtLink
+              to="/addresses"
+              class="navigation__links-link__dropdown-content-link"
+            >
+              Адреса доставки
+            </NuxtLink>
+            <NuxtLink
+              to="/orders"
+              class="navigation__links-link__dropdown-content-link"
+            >
+              История заказов
+            </NuxtLink>
+            <button
+              @click="$store.dispatch('account/logout')"
+              class="navigation__links-link__dropdown-content-link"
+            >
+              Выход
+            </button>
+          </div>
+<!--          </client-only>-->
         </button>
         <NuxtLink to="/stocks" class="navigation__links-link">
           <svg
@@ -211,7 +216,7 @@
             </g>
             <defs>
               <clipPath id="clip0_1887_4787">
-                <rect width="20" height="20" fill="white" />
+                <rect width="20" height="20" fill="white"/>
               </clipPath>
             </defs>
           </svg>
@@ -233,16 +238,15 @@
         </NuxtLink>
       </div>
       <NuxtLink to="/cart" class="navigation__cart-block">
+        <client-only>
         <span class="navigation__cart-block-icon">
 
-<!--            <client-only>-->
-<!--              <div-->
-<!--                v-if="cart_products.length"-->
-<!--                class="navigation__cart-block-icon__indicator"-->
-<!--              >-->
-<!--                {{ cart_products.length }}-->
-<!--              </div>-->
-<!--            </client-only>-->
+              <div
+                v-if="cart_products.length"
+                class="navigation__cart-block-icon__indicator"
+              >
+                {{ cart_products.length }}
+              </div>
           <svg
             class="navigation__cart-block-icon-svg"
             width="20"
@@ -257,8 +261,8 @@
             />
           </svg>
         </span>
-
         <p class="navigation__cart-block__text delete-note">Корзина</p>
+        </client-only>
       </NuxtLink>
     </div>
   </div>
@@ -280,13 +284,16 @@ export default {
   },
   data() {
     return {
-      show_dropdown: false,
+      show_dropdown: true,
     };
   },
   methods: {
+    loggy(){
+      console.log("loggy function");
+    },
     dropdownClick() {
       if (this.token) this.show_dropdown = !this.show_dropdown;
-      else this.$store.commit("modals/open", { modal_name: "login" });
+      else this.$store.commit("modals/open", {modal_name: "login"});
     },
   },
   computed: {
@@ -319,17 +326,21 @@ export default {
   padding: 5px 10px;
   z-index: $z_navigation;
   transition: height $transition;
+
   .delete-note {
     @media screen and (max-width: $notebook) {
       display: none;
     }
   }
+
   &.scaled {
     height: 70px;
+
     .navigation > * {
       transform: scale(0.85);
     }
   }
+
   .navigation {
     width: 100%;
     height: 100%;
@@ -337,9 +348,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     > * {
       transition: transform $transition !important;
     }
+
     &__logo {
       display: flex;
       align-items: center;
@@ -348,10 +361,12 @@ export default {
         width: 160px;
         transform: scale(0.8);
       }
+
       &-image:first-of-type {
         margin-right: 18px;
       }
     }
+
     &__button {
       background-color: $darkblue;
       color: $white;
@@ -363,14 +378,17 @@ export default {
       width: 181px;
       height: 50px;
       padding: 5px 0px;
+
       &__icon {
         margin-right: 10px;
       }
+
       &:hover {
         svg * {
           fill: inherit;
         }
       }
+
       @media screen and (max-width: $notebook + 20px) {
         &__icon {
           display: none;
@@ -379,29 +397,35 @@ export default {
         width: 160px;
       }
     }
+
     &__links {
       width: max-content;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-direction: row;
+
       &-link {
         display: flex;
         align-items: center;
         justify-content: center;
         text-decoration: none;
+
         &:first-of-type {
           margin-right: 40px;
           @media screen and (max-width: $notebook) {
             margin-right: 10px;
           }
         }
+
         &:hover {
           text-decoration: underline;
         }
+
         &-svg {
           margin-right: 13px;
         }
+
         &__text {
           font-family: "Montserrat";
           font-style: normal;
@@ -410,16 +434,19 @@ export default {
           line-height: 20px;
           display: flex;
           align-items: center;
+
           .delete-note {
             margin-left: 5px;
           }
         }
+
         &__dropdown {
           position: relative;
           z-index: 10;
           background-color: transparent;
           border: none;
           outline: none;
+
           &-content {
             background-color: $white;
             position: absolute;
@@ -436,6 +463,7 @@ export default {
             box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
             padding-top: 7px;
             padding-bottom: 17px;
+
             &-link {
               width: 100%;
               box-sizing: border-box;
@@ -450,9 +478,11 @@ export default {
               transition: $transition;
               background-color: $white;
               outline: none;
+
               &:active {
                 transform: scale(0.98);
               }
+
               &:last-child {
                 border: none;
               }
@@ -461,6 +491,7 @@ export default {
         }
       }
     }
+
     &__icons {
       display: flex;
       align-items: center;
@@ -471,6 +502,7 @@ export default {
         width: 110px;
         transform: scale(0.9);
       }
+
       &-icon {
         cursor: pointer;
         width: 50px;
@@ -481,17 +513,21 @@ export default {
         border-radius: 90px;
         border: 1px solid $extra_dark_grey;
         transition: $transition;
+
         * {
           transition: $transition;
         }
+
         &:hover {
           border-color: $darkblue;
+
           * {
             fill: $darkblue;
           }
         }
       }
     }
+
     &__cart-block {
       display: flex;
       align-items: center;
@@ -500,12 +536,14 @@ export default {
       @media screen and (max-width: $notebook) {
         transform: scale(0.9);
       }
+
       &:hover {
         .navigation__cart-block__text {
           color: $darkblue;
           text-decoration: underline;
         }
       }
+
       &-icon {
         position: relative;
         cursor: pointer;
@@ -517,6 +555,7 @@ export default {
         border-radius: 90px;
         border: 1px solid $darkblue;
         margin-right: 15px;
+
         &__indicator {
           height: 24px;
           min-width: 24px;
@@ -543,6 +582,7 @@ export default {
           align-items: center;
         }
       }
+
       &__text {
         transition: $transition;
         font-family: "Montserrat";

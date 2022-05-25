@@ -3,6 +3,8 @@
     <div class="cart-page__content-wrapper content">
       <Breadcrumbs class="cart-page__breadcrumbs adaptive-non" />
       <div class="cart-page__contents">
+
+            <client-only>
           <div v-if="cart_products.length" class="cart-page__content">
             <h1
               class="cart-page__content_empty__title title-normal adaptive-non"
@@ -38,6 +40,7 @@
               >За покупками</ButtonStandart
             >
           </div>
+            </client-only>
       </div>
     </div>
   </div>

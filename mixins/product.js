@@ -16,8 +16,8 @@ export default {
   },
   mounted(context) {
     const {$store: {state, dispatch, commit}} = this;
-    console.log("the $store is:");
-    console.log(state);
+    // console.log("the $store is:");
+    // console.log(state);
     commit('cart/action', (state) => {
     this.product.selected_options = [...(this.$store.state.cart.products.find(el=>+el.id==+this.product.id)?.selected_options||[])];
 
