@@ -123,7 +123,7 @@
             />
           </svg>
           <p class="navigation__links-link__text">Кабинет</p>
-         
+
             <div
               v-if="show_dropdown && token"
               class="navigation__links-link__dropdown-content"
@@ -234,15 +234,15 @@
       </div>
       <NuxtLink to="/cart" class="navigation__cart-block">
         <span class="navigation__cart-block-icon">
-         
-            <client-only>
-              <div
-                v-if="cart_products.length"
-                class="navigation__cart-block-icon__indicator"
-              >
-                {{ cart_products.length }}
-              </div>
-            </client-only>
+
+<!--            <client-only>-->
+<!--              <div-->
+<!--                v-if="cart_products.length"-->
+<!--                class="navigation__cart-block-icon__indicator"-->
+<!--              >-->
+<!--                {{ cart_products.length }}-->
+<!--              </div>-->
+<!--            </client-only>-->
           <svg
             class="navigation__cart-block-icon-svg"
             width="20"

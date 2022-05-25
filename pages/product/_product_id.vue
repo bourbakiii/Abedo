@@ -1,13 +1,13 @@
 <template>
   <div class="page product-page wrapper">
     <div class="product-page__over">
-      <Breadcrumbs class="product-page__over__breadcrumbs adaptive-non" />
+      <Breadcrumbs class="product-page__over__breadcrumbs adaptive-non"/>
       <div class="product-page__over__content content">
         <div class="product-page__over__content__main">
           <div
             class="product-page__over__content__main__images__adaptive__slider adaptive"
           >
-            <ProductImagesSlider class="images-slider" />
+            <ProductImagesSlider class="images-slider"/>
           </div>
           <h1
             class="product-page__over__content__main__name title-extra-normal"
@@ -48,9 +48,9 @@
                       (el) => el.small
                     )"
                     :key="index"
-                    ><img
-                      :src="`${$axios.defaults.baseURL}${slide}`"
-                      class="product-page__over__content__main__images__slider__swiper__slide__image"
+                  ><img
+                    :src="`${$axios.defaults.baseURL}${slide}`"
+                    class="product-page__over__content__main__images__slider__swiper__slide__image"
                   /></swiper-slide>
                 </swiper>
                 <button
@@ -72,7 +72,7 @@
                     </g>
                     <defs>
                       <clipPath id="clip0_2221_7034">
-                        <rect width="20" height="20" fill="white" />
+                        <rect width="20" height="20" fill="white"/>
                       </clipPath>
                     </defs>
                   </svg>
@@ -150,7 +150,7 @@
                   / {{ product.weight }}{{ product.weight_unit.short_name }}
                 </p>
                 <p
-                  v-if="product.discount||product.section.discount"
+                  v-if="product.discount || product.section.discount"
                   class="product-page__over__content__main__additional__information__prices__price_full"
                 >
                   {{ price }}₽
@@ -170,19 +170,17 @@
                 >
                   <label
                     class="product-page__over__content__main__additional__information__options__content__item unselectable"
-                    v-for="(option) in product.options"
+                    v-for="option in product.options"
                     :key="option.id"
                     :for="`option-${option.id}`"
                   >
-                  <client-only>
                     <Checkbox
                       :value="+option.id"
-                      :checked="false"
-                      @change="selectOption(+option.id)"
+                      :checked="(product.selected_options||[]).includes(option)"
+                      @change="selectOption(option)"
                       :id="`option-${option.id}`"
                       class="product-page__over__content__main__additional__information__options__content__item__checkbox"
                     />
-                  </client-only>
                     <p
                       class="product-page__over__content__main__additional__information__options__content__item__name"
                     >
@@ -313,9 +311,10 @@
   </div>
 </template>
 <script>
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import {Swiper, SwiperSlide} from "vue-awesome-swiper";
 import Checkbox from "../../components/Checkbox.vue";
 import productMixin from "@/mixins/product.js";
+
 export default {
   name: "product-images-slider",
   title: "Product images slider",
@@ -325,25 +324,25 @@ export default {
     SwiperSlide,
     Checkbox,
   },
-  async asyncData({ $axios, route, error }) {
+  async asyncData({$axios, route, error}) {
     let to_return_product = {},
       loading = true;
     await $axios
       .$get(
         `${$axios.defaults.baseURL}/api/product/${route.params.product_id}}`
       )
-      .then(({ product }) => {
+      .then(({product}) => {
         if (!product)
-          return error({ statusCode: 404, message: "Продукт неактивен" });
+          return error({statusCode: 404, message: "Продукт неактивен"});
         to_return_product = product;
       })
       .catch(() => {
-        error({ statusCode: 404, message: "Ошибка при получении продукта" });
+        error({statusCode: 404, message: "Ошибка при получении продукта"});
       })
       .finally(() => {
         loading = false;
       });
-    return { loading, product: to_return_product };
+    return {loading, product: to_return_product};
   },
   data() {
     return {
@@ -361,15 +360,21 @@ export default {
       },
     };
   },
-
   methods: {
-    selectOption(id) {
-      
+    selectOption(option) {
+      const select_option_index = this.product.selected_options.findIndex(el => +el.id == +option.id);
+      this.$store.commit('cart/action', state => {
+        if (select_option_index >= 0) {
+          this.product.selected_options.splice(select_option_index, 1);
+        } else {
+          this.product.selected_options.push(option);
+        }
+      })
+      console.log('This selected options is');
+      console.log(this.product.selected_options);
     },
   },
-  watch: {
-   
-  },
+  watch: {},
 };
 </script>
 
@@ -378,6 +383,7 @@ export default {
   justify-content: flex-start;
   padding-bottom: 30px !important;
   align-items: center;
+
   &__over {
     position: relative;
     display: flex;
@@ -386,11 +392,13 @@ export default {
     flex-direction: column;
     max-width: $maxwidth;
     width: 100%;
+
     &__content {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       flex-direction: row;
+
       &__main {
         width: 80%;
         padding-bottom: 100px;
@@ -403,6 +411,7 @@ export default {
           width: 100%;
           padding-bottom: 0px;
         }
+
         &__name {
           width: 100%;
           max-width: 100%;
@@ -417,6 +426,7 @@ export default {
             margin-bottom: 18px;
           }
         }
+
         &__images {
           height: max-content;
           width: 100%;
@@ -424,15 +434,18 @@ export default {
           align-items: center;
           flex-direction: row;
           justify-content: space-between;
+
           &__adaptive__slider {
             margin-bottom: 40px;
           }
+
           &__slider {
             overflow: hidden;
             width: 100%;
             height: 100%;
             max-height: 617px;
             min-height: 200px;
+
             &__button {
               width: 50px;
               height: 50px;
@@ -444,18 +457,22 @@ export default {
               border: none;
               position: absolute;
               left: 50%;
+
               &.swiper-button-disabled {
                 opacity: 0.5;
               }
+
               &__prev {
                 top: 0px;
                 transform: translate(-50%, -50%);
               }
+
               &__next {
                 bottom: 0px;
                 transform: translate(-50%, 50%);
               }
             }
+
             &__wrapper {
               position: relative;
               width: 126px;
@@ -467,15 +484,18 @@ export default {
               flex-grow: 0;
               padding: 50px 5px;
             }
+
             &__swiper {
               width: 100%;
               height: 100%;
               overflow: hidden;
+
               &__slide {
                 max-width: 100%;
                 width: 100%;
                 height: max-content;
                 cursor: pointer;
+
                 &__image {
                   object-fit: contain;
                   width: 100%;
@@ -485,6 +505,7 @@ export default {
               }
             }
           }
+
           &__image {
             width: 100%;
             max-width: 100%;
@@ -493,6 +514,7 @@ export default {
             // object-fit: contain;
           }
         }
+
         &__additional {
           display: flex;
           align-items: flex-start;
@@ -504,6 +526,7 @@ export default {
             margin-top: 0px;
             flex-direction: column;
           }
+
           &__description {
             width: 51%;
             flex-shrink: 0;
@@ -516,6 +539,7 @@ export default {
               margin-right: 0px;
               margin-bottom: 13px;
             }
+
             &__pre {
               font-family: "Montserrat";
               font-style: normal;
@@ -532,6 +556,7 @@ export default {
                 margin-bottom: 10px;
               }
             }
+
             &__text {
               font-family: "SF Pro Display";
               font-style: normal;
@@ -547,6 +572,7 @@ export default {
               }
             }
           }
+
           &__information {
             width: 100%;
             display: flex;
@@ -557,6 +583,7 @@ export default {
             @media screen and (max-width: $tablet) {
               width: 100%;
             }
+
             &__min-count {
               width: 100%;
               display: flex;
@@ -572,9 +599,11 @@ export default {
                 border-top: 1px solid $dark_grey;
                 border-bottom: 1px solid $dark_grey;
               }
+
               &__icon {
                 margin-right: 20px;
               }
+
               &__text {
                 font-family: "SF Pro Display";
                 font-style: normal;
@@ -592,6 +621,7 @@ export default {
               justify-content: flex-start;
               flex-direction: row;
               margin-bottom: 20px;
+
               &__price {
                 font-family: "Montserrat";
                 font-style: normal;
@@ -599,6 +629,7 @@ export default {
                 font-size: 18px;
                 line-height: 22px;
                 color: $red;
+
                 &_full {
                   margin-left: 20px;
                   font-family: "Montserrat";
@@ -609,6 +640,7 @@ export default {
                   text-decoration-line: line-through;
                 }
               }
+
               &__weight {
                 font-family: "SF Pro Display";
                 font-style: normal;
@@ -618,6 +650,7 @@ export default {
                 color: $darkblue;
               }
             }
+
             &__options {
               display: flex;
               align-items: flex-start;
@@ -628,6 +661,7 @@ export default {
               background: $white;
               border-radius: 20px;
               padding: 20px 20px 0px;
+
               &__pre {
                 font-family: "Montserrat";
                 font-style: normal;
@@ -643,12 +677,14 @@ export default {
                   margin-bottom: 13px;
                 }
               }
+
               &__content {
                 width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
                 flex-direction: column;
+
                 &__item {
                   cursor: pointer;
                   width: 100%;
@@ -660,14 +696,15 @@ export default {
                   justify-content: space-between;
                   flex-direction: row;
 
-
                   &:last-of-type {
                     border-bottom: none;
                   }
+
                   @media screen and (max-width: $tablet) {
                     min-height: 53px;
                     padding: 8px 0px;
                   }
+
                   &__name {
                     font-family: "SF Pro Display";
                     font-style: normal;
@@ -686,6 +723,7 @@ export default {
                       margin-right: 10px;
                     }
                   }
+
                   &__checkbox {
                     width: 26px;
                     height: 26px;
@@ -697,6 +735,7 @@ export default {
                       margin-right: 0px;
                     }
                   }
+
                   &__price {
                     font-family: "Montserrat";
                     font-style: normal;
@@ -714,21 +753,26 @@ export default {
                 }
               }
             }
+
             &__buttons {
               &__button {
                 width: 228px;
+
                 &__icon {
                   * {
                     fill: $darkblue;
                   }
+
                   margin-right: 10px;
                 }
               }
+
               &__carted {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 flex-direction: row;
+
                 &__count {
                   margin: 0px 12px;
                   font-family: "SF Pro Display";
@@ -740,6 +784,7 @@ export default {
                   overflow: hidden;
                   white-space: nowrap;
                 }
+
                 &__button {
                   width: 50px;
                   height: 50px;
@@ -748,6 +793,7 @@ export default {
             }
           }
         }
+
         &__adaptive-actions {
           width: 100%;
           display: flex;
@@ -755,6 +801,7 @@ export default {
           justify-content: flex-start;
           flex-direction: row;
           flex-wrap: wrap;
+
           &__price {
             font-family: "SF Pro Display";
             font-style: normal;
@@ -762,6 +809,7 @@ export default {
             font-size: 18px;
             line-height: 21px;
             white-space: nowrap;
+
             &_full {
               margin-left: 10px;
               white-space: nowrap;
@@ -774,6 +822,7 @@ export default {
               text-decoration: line-through;
             }
           }
+
           &__actions {
             display: flex;
             align-items: center;
@@ -783,10 +832,12 @@ export default {
             flex-shrink: 0;
             margin-left: auto;
             overflow: hidden;
+
             &__button {
               width: 100%;
               flex-shrink: 0;
             }
+
             &__count {
               margin: 0px 12px;
               font-family: "SF Pro Display";
@@ -799,10 +850,12 @@ export default {
               white-space: nowrap;
             }
           }
+
           &__add {
             margin-left: auto;
           }
         }
+
         &__back {
           font-family: "SF Pro Display";
           font-style: normal;
@@ -818,11 +871,13 @@ export default {
           border: none;
           outline: none;
           text-decoration: underline;
+
           &__icon {
             margin-right: 10px;
           }
         }
       }
+
       &__sidebar {
         width: 294px;
         flex-shrink: 0;
