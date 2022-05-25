@@ -286,7 +286,7 @@ export default {
   },
   data() {
     return {
-      show_dropdown: true,
+      show_dropdown: false,
     };
   },
   methods: {

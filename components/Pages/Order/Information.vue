@@ -21,12 +21,12 @@
              {{order.phone}}
           </p>
         </div>
-        <div class="information__content__content__item">
+        <div  class="information__content__content__item">
           <p class="information__content__content__item__name" >
             Адрес доставки
           </p>
           <p class="information__content__content__item__value" >
-            {{parseAddress(order)}}
+            {{order.address?parseAddress(order):parseAddress(order.shop)}}
           </p>
         </div>
         <div v-if="order.entrance" class="information__content__content__item">

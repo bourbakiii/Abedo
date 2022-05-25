@@ -55,6 +55,17 @@ export default {
       return this.$store.state.account.token;
     },
   },
+  beforeDestroy() {
+    this.$store.commit("cart/clearPromo");
+  },
+  watch:{
+    "$route.path": {
+      handler() {
+        this.$store.commit("cart/clearPromo");
+      },
+      deep: true,
+    },
+  }
 };
 </script>
 <style lang="scss" scoped>

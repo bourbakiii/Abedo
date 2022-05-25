@@ -20,8 +20,6 @@ export default {
     // console.log(state);
     commit('cart/action', (state) => {
     this.product.selected_options = [...(this.$store.state.cart.products.find(el=>+el.id==+this.product.id)?.selected_options||[])];
-
-      console.log("Cart action function");
     })
   },
   computed: {

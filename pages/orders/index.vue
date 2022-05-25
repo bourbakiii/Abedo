@@ -9,7 +9,7 @@
         <div class="orders-page__content__orders__content">
           <div
             class="orders-page__content__orders__content__item"
-            v-for="order in orders"
+            v-for="order in orders.reverse()"
             :key="order.id"
           >
             <div class="orders-page__content__orders__content__item__data">
@@ -18,13 +18,13 @@
               >
                 <p
                   class="orders-page__content__orders__content__item__data__block__name"
-                  
+
                 >
                   !!! не приходит !!!
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-                  
+
                 >
                   №{{ order.id }}
                 </p>
@@ -39,7 +39,7 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-                  
+
                 >
                   {{ order.created_at }}
                 </p>
@@ -54,7 +54,7 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-                  
+
                 >
                   {{ parseAddress(order) }}
                 </p>
@@ -69,7 +69,7 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-                  
+
                 >
                   {{order.price_with_discount}}₽
                 </p>
@@ -84,7 +84,7 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-                  
+
                 >
                   {{order.statuses[order.statuses.length -1].title}}
                 </p>

@@ -6,7 +6,7 @@
         @click="self_get = false"
         :class="{ active: !self_get }"
         class="order__buttons__button"
-        >Доставка
+      >Доставка
       </ButtonStandart>
       <ButtonStandart
         type="button"
@@ -247,7 +247,8 @@
         />
       </svg>
 
-      Оформить заказ</ButtonStandart
+      Оформить заказ
+    </ButtonStandart
     >
     <div
       :class="{
@@ -259,7 +260,8 @@
         v-for="error in errors"
         :key="error"
         class="order__messages__item_error order__messages__item"
-        >{{ error }}</Message
+      >{{ error }}
+      </Message
       >
     </div>
   </form>
@@ -270,6 +272,7 @@ import dadataMixin from "@/mixins/dadata.js";
 import parserMixin from "@/mixins/parser.js";
 import errorsMessagesMixin from "@/mixins/errors-messages.js";
 import qs from "qs";
+
 export default {
   mixins: [dadataMixin, inputBlockMixin, parserMixin, errorsMessagesMixin],
   data() {
@@ -305,7 +308,7 @@ export default {
           shop_id: this.$store.state.cart.partner.id,
         },
       })
-      .then(({ data: { delivery } }) => {
+      .then(({data: {delivery}}) => {
         this.delivery_price = delivery.delivery_price;
         this.door_delivery_price = delivery.door_delivery_price;
       });
@@ -324,7 +327,7 @@ export default {
       this.is_cashless_payment = Boolean(value);
     },
     selectAddress(address) {
-      this.address = { ...address };
+      this.address = {...address};
     },
     openDropdown() {
       this.show_dropdown = true;
@@ -353,13 +356,13 @@ export default {
     make() {
       let order_products_format = [];
       for (const product of this.cart_products) {
-        let { id, count, props = [] } = product;
-        order_products_format.push({ id, count, props });
+        let {id, count, props = []} = product;
+        order_products_format.push({id, count, props});
       }
       //////////////////////////////////////////////////////
       let copy_address = {};
       if (!this.self_get) {
-        copy_address = { ...this.address };
+        copy_address = {...this.address};
         copy_address.lon = copy_address.get_lon;
         copy_address.lat = copy_address.get_lat;
         copy_address.apartment = copy_address.flat;
@@ -378,6 +381,7 @@ export default {
         phone: parseInt(this.phone.replace(/\D+/g, "")),
         is_cashless_payment: +this.is_cashless_payment,
         with_gifts: +this.with_gifts,
+        promo_code: this.$store.state.cart.promo.value||null
       });
       this.errors = [];
       //////////////////////////////////////////////////////
@@ -388,7 +392,7 @@ export default {
             Authorization: `Bearer ${this.token}`,
           },
         })
-        .then(({ data }) => {
+        .then(({data}) => {
           this.$store.commit("cart/clear");
           this.$router.push("/success");
         })
@@ -401,19 +405,19 @@ export default {
             this.errors = [error.response.data.message];
           }
           const element = document.querySelector(`.order__messages`);
-          element.scrollIntoView({ block: "center", behavior: "smooth" });
+          element.scrollIntoView({block: "center", behavior: "smooth"});
         });
     },
     setStartAddress() {
       let index = this.addresses.map((el) => el.is_default).indexOf(true);
-      if (index >= 0) this.address = { ...this.addresses[index] };
-      else if (this.addresses.length) this.address = { ...this.addresses[0] };
+      if (index >= 0) this.address = {...this.addresses[index]};
+      else if (this.addresses.length) this.address = {...this.addresses[0]};
     },
   },
   created() {
     this.setStartAddress();
   },
-  mounted(){
+  mounted() {
     this.self_get = Boolean(localStorage.getItem("self_get"));
   },
   computed: {
@@ -454,6 +458,7 @@ export default {
     },
   },
   watch: {
+
     "$store.state.account": {
       handler() {
         this.phone =
@@ -486,7 +491,6 @@ export default {
       else document.removeEventListener("click", dropdownAddressClick);
     },
     self_get() {
-      console.log("self get changed");
       localStorage.setItem("self_get", this.self_get);
     },
   },
@@ -507,6 +511,7 @@ export default {
     border-radius: 0px;
     padding: 0px;
   }
+
   &__buttons {
     width: 100%;
     margin-bottom: 30px;
@@ -514,6 +519,7 @@ export default {
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
+
     &__button {
       margin-right: 30px;
       height: 45px;
@@ -521,24 +527,29 @@ export default {
       background-color: $dark_grey;
       border-color: transparent;
       color: $black;
+
       &.active {
         background-color: $darkblue;
         color: $white;
       }
+
       @media screen and (max-width: $tablet) {
         margin-right: 20px;
         width: 134px;
         height: 35px !important;
       }
+
       &:last-of-type {
         margin-right: 0px;
       }
     }
   }
+
   &__phone {
     width: 100%;
     margin-bottom: 30px;
   }
+
   &__delivery {
     display: flex;
     align-items: flex-start;
@@ -546,6 +557,7 @@ export default {
     flex-direction: column;
     width: 100%;
     margin-bottom: 30px;
+
     &__content {
       width: 100%;
       display: flex;
@@ -556,6 +568,7 @@ export default {
         flex-direction: column;
       }
       align-items: flex-start;
+
       &__select {
         width: 265px;
         margin-right: 60px;
@@ -565,6 +578,7 @@ export default {
           width: 100%;
           margin-bottom: 30px;
         }
+
         &__dropdown {
           position: relative;
           z-index: 10;
@@ -585,6 +599,7 @@ export default {
           flex-direction: column;
           box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
           padding: 7px 10px;
+
           &__button {
             outline: none;
             border: none;
@@ -601,15 +616,18 @@ export default {
             transition: $transition;
             background-color: $white;
             outline: none;
+
             &:active {
               transform: scale(0.98);
             }
+
             &:last-child {
               border: none;
             }
           }
         }
       }
+
       &__content {
         display: flex;
         justify-content: flex-start;
@@ -619,6 +637,7 @@ export default {
         @media screen and (max-width: $notebook) {
           width: 100%;
         }
+
         &__address {
           width: 100%;
           display: grid;
@@ -628,10 +647,12 @@ export default {
           @media screen and (max-width: $phone) {
             grid-gap: 30px 15px;
           }
+
           &__dadata {
             position: relative;
             grid-column-start: 1;
             grid-column-end: 5;
+
             &__suggestions {
               background-color: $white;
               position: absolute;
@@ -649,6 +670,7 @@ export default {
               padding-top: 7px;
               padding-bottom: 17px;
               z-index: $z_navigation + 1;
+
               &__address {
                 width: 100%;
                 box-sizing: border-box;
@@ -665,15 +687,18 @@ export default {
                 outline: none;
                 border: none;
                 text-align: left;
+
                 &:active {
                   transform: scale(0.98);
                 }
+
                 &:last-child {
                   border: none;
                 }
               }
             }
           }
+
           @media screen and (max-width: $tablet) {
             &__flat,
             &__entrance {
@@ -688,11 +713,13 @@ export default {
             }
           }
         }
+
         &__additional {
           width: 100%;
         }
       }
     }
+
     &__prices {
       width: 100%;
       display: flex;
@@ -703,6 +730,7 @@ export default {
       @media screen and (max-width: $tablet) {
         margin: 30px 0px;
       }
+
       &__item {
         width: 100%;
         display: flex;
@@ -711,12 +739,15 @@ export default {
         flex-direction: row;
         min-height: 50px;
         border-top: 1px solid $extra_dark_grey;
+
         &:last-child {
           border-bottom: 1px solid $extra_dark_grey;
         }
+
         &__checkbox {
           margin-right: 13px;
         }
+
         &__name-block {
           display: flex;
           align-items: center;
@@ -724,6 +755,7 @@ export default {
           flex-direction: row;
           width: 200px;
           margin-right: 15px;
+
           &__name {
             font-family: "SF Pro Display";
             font-style: normal;
@@ -732,6 +764,7 @@ export default {
             line-height: 19px;
           }
         }
+
         &__price {
           font-family: "Montserrat";
           font-style: normal;
@@ -739,11 +772,14 @@ export default {
           font-size: 16px;
           line-height: 20px;
         }
-        &_door-delivery{cursor: pointer;
+
+        &_door-delivery {
+          cursor: pointer;
         }
       }
     }
   }
+
   &__payment {
     width: 100%;
     display: flex;
@@ -755,6 +791,7 @@ export default {
     @media screen and (max-width: $tablet) {
       border-bottom: none;
     }
+
     &__title {
       margin-bottom: 30px;
       @media screen and (max-width: $tablet) {
@@ -765,6 +802,7 @@ export default {
         line-height: 24px;
       }
     }
+
     &__item {
       cursor: pointer;
       background: $blue_grey;
@@ -779,10 +817,12 @@ export default {
       justify-content: flex-start;
       flex-direction: row;
       margin-bottom: 20px;
+
       &,
       * {
         transition: all $transition;
       }
+
       .order__payment__item__radio {
         &.checked {
           border-color: $white;
@@ -792,26 +832,32 @@ export default {
           }
         }
       }
+
       @media screen and (max-width: $tablet) {
         min-height: 50px;
         margin-bottom: 15px;
         border: 1px solid $darkblue;
       }
+
       &:last-of-type {
         margin-bottom: 0px;
       }
+
       &_checked {
         background-color: $darkblue;
       }
+
       &_checked & {
         &__name {
           color: $white;
         }
       }
+
       &__radio {
         flex-shrink: 0;
         margin-right: 10px;
       }
+
       &__name {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -821,6 +867,7 @@ export default {
       }
     }
   }
+
   &__price {
     width: 100%;
     display: flex;
@@ -831,6 +878,7 @@ export default {
     @media screen and (max-width: $tablet) {
       padding-top: 0px;
     }
+
     &__pre {
       font-family: "SF Pro Display";
       font-style: normal;
@@ -844,6 +892,7 @@ export default {
         line-height: 24px;
       }
     }
+
     &__price {
       font-family: "Montserrat";
       font-style: normal;
@@ -857,6 +906,7 @@ export default {
         font-size: 20px;
         line-height: 24px;
       }
+
       &_full {
         margin-left: 10px;
         text-decoration: line-through;
@@ -871,6 +921,7 @@ export default {
       }
     }
   }
+
   &__button {
     margin-top: 30px;
     display: flex;
@@ -880,15 +931,18 @@ export default {
     height: 50px;
     width: 228px;
     padding: 0px 5px;
+
     svg * {
       stroke: $darkblue;
       fill: transparent !important;
     }
+
     &:hover {
       svg * {
         stroke: $white;
       }
     }
+
     @media screen and (max-width: $tablet) {
       align-self: flex-start;
       width: 100%;
@@ -900,20 +954,24 @@ export default {
         display: none;
       }
     }
+
     &:hover &,
     &:active & {
       &__icon * {
         fill: $white;
       }
     }
+
     &__icon {
       margin-right: 10px;
+
       &,
       * {
         transition: $transition;
       }
     }
   }
+
   &__messages {
     display: flex;
     align-items: center;
@@ -921,10 +979,13 @@ export default {
     flex-direction: column;
     width: 100%;
     transition: 0.3s;
+
     &_margined {
       margin-top: 15px;
     }
+
     transition: calc($transition * 2);
+
     .empty {
       margin-top: 0px;
     }

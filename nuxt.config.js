@@ -8,7 +8,7 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/new-logo-favicon.png' }
@@ -37,15 +37,15 @@ export default {
   //   }
   // },
   buildModules: [],
-  modules: [ 'cookie-universal-nuxt','@nuxtjs/axios', '@nuxtjs/style-resources',],
+  modules: [ 'cookie-universal-nuxt','@nuxtjs/axios', '@nuxtjs/style-resources'],
   generate:{
     crawler: false,
-    fallback: true,
+    fallback: true
   },
   styleResources: {
     scss: [
       // '@assets/scss/variables.scss',
-      '@assets/scss/style.scss',
+      '@assets/scss/style.scss'
       // '@assets/scss/transitions.scss',
       // '@/assets/scss/fonts.scss',
       // '@/assets/scss/titles.scss',
@@ -53,7 +53,7 @@ export default {
   },
   axios: {
     // baseUrl: "http://127.0.0.1:8000"
-    baseUrl: "https://abedo.ru",
+    baseUrl: "https://abedo.ru"
   },
   pageTransition: {
     name: 'page',

@@ -42,6 +42,7 @@
               (state) => (state.promo.value = $event.target.value)
             )
           "
+          autocomplete="off"
           type="text"
           name="promo"
           id="promo"

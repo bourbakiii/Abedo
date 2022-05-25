@@ -6,7 +6,7 @@
     <input
       v-model="address.name"
       class="address-item__name"
-      
+
       :readonly="!editing"
       :class="{ editing }"
     />
@@ -31,7 +31,7 @@
             }
           "
         />
-       
+
           <div
             v-if="suggestions.length"
             class="address-item__content__dadata__suggestions"
@@ -86,7 +86,7 @@
           :readonly="!editing"
         />
       </div>
-     
+
         <ButtonStandart
           type="button"
           class="address-item__content__edit filled"
@@ -108,7 +108,7 @@
       />
       <p type="button" class="address-item__default__text">По умолчанию</p>
     </label>
-   
+
       <div class="address-item__buttons" v-if="editing">
         <ButtonStandart
           type="button"
@@ -121,17 +121,6 @@
           >Изменить</ButtonStandart
         >
       </div>
-    
-
-      tag="div"
-      class="address-item__errors"
-      name="message"
-      appear
-      mode="out-in"
-      :class="{
-        'address-item__errors_margined': errors.length,
-      }"
-    >
       <Message
         v-for="error in errors"
         :key="error"
