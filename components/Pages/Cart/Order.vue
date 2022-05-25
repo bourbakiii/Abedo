@@ -163,7 +163,7 @@
         </div>
         <label
           for="door_delivery"
-          class="order__delivery__prices__item"
+          class="order__delivery__prices__item order__delivery__prices__item_door-delivery unselectable"
           v-if="door_delivery_price"
         >
           <div class="order__delivery__prices__item__name-block">
@@ -413,6 +413,9 @@ export default {
   created() {
     this.setStartAddress();
   },
+  mounted(){
+    this.self_get = Boolean(localStorage.getItem("self_get"));
+  },
   computed: {
     total_order_price() {
       let summ =
@@ -481,6 +484,10 @@ export default {
       if (value.length)
         document.addEventListener("click", dropdownAddressClick);
       else document.removeEventListener("click", dropdownAddressClick);
+    },
+    self_get() {
+      console.log("self get changed");
+      localStorage.setItem("self_get", this.self_get);
     },
   },
 };
@@ -731,6 +738,8 @@ export default {
           font-weight: 600;
           font-size: 16px;
           line-height: 20px;
+        }
+        &_door-delivery{cursor: pointer;
         }
       }
     }

@@ -3,21 +3,21 @@
     <h1 class="founded-products__title title-normal">Найденные позиции меню</h1>
     <div class="founded-products__content content">
       <div class="founded-products__content__item">
-        <div class="founded-products__content__item__shop">
+        <NuxtLink :to='`partner/${partner.id}`' class="founded-products__content__item__partner">
           <img
-            v-if="true"
-            src="@/assets/images/limonchello.png"
-            class="founded-products__content__item__shop__image"
+            v-if="partner.image.length"
+            :src="`${$axios.defaults.baseURL}${partner.image[0].original}`"
+            class="founded-products__content__item__partner__image"
           />
           <p
-            class="founded-products__content__item__shop__name"
+            class="founded-products__content__item__partner__name"
             
           >
-            Кафе “Лимончелло”
+            {{partner.name}}
           </p>
-          <div class="founded-products__content__item__shop__rating">
+          <div v-if='+partner.rate.shop_last_order_avg_rating>=0' class="founded-products__content__item__partner__rating">
             <svg
-              class="founded-products__content__item__shop__rating__icon"
+              class="founded-products__content__item__partner__rating__icon"
               width="17"
               height="15"
               viewBox="0 0 17 15"
@@ -29,14 +29,14 @@
                 fill="#F95738"
               />
             </svg>
-            <p class="founded-products__content__item__shop__rating__text">
+            <p class="founded-products__content__item__partner__rating__text">
               Рейтинг:
             </p>
-            <p class="founded-products__content__item__shop__rating__value">
-              4,7
+            <p class="founded-products__content__item__partner__rating__value">
+              {{partner.rate.shop_last_order_avg_rating}}
             </p>
           </div>
-        </div>
+        </NuxtLink>
         <div class="founded-products__content__item__products">
           <ProductSmall
             v-for="product in products"
@@ -52,10 +52,14 @@
 
 <script>
 export default {
-  name: "FoundedShops",
   props: {
     products: [],
-  },
+ },
+ computed:{
+   partner(){
+     return this.products[0].section.shop;
+   }
+ }
 };
 </script>
 
@@ -94,18 +98,17 @@ export default {
       padding: 30px 0px;
       border-radius: 20px;
       background-color: $white;
-      &__shop {
+      &__partner {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-direction: row;
         width: 100%;
-        padding-bottom: 17px;
-        border-bottom: 1px solid $blue_grey;
-        padding: 0px 30px 17px;
+        padding: 0px 30px;
+        margin-bottom: 17px;
         overflow: hidden;
         max-width: 100%;
-        background-color: $red;
+        text-decoration: none;
         @media screen and (max-width: $notebook) {
           padding: 0px 20px 15px;
         }
@@ -177,6 +180,8 @@ export default {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         grid-gap: 20px;
+        border-top: 1px solid $blue_grey;
+
         @media screen and (max-width: $notebook) {
           grid-template-columns: repeat(4, 1fr);
           grid-gap: 15px;
