@@ -44,20 +44,20 @@
             :readonly="true"
             @click="openDropdown"
           />
-            <div
-              v-if="show_dropdown"
-              class="order__delivery__content__select__dropdown"
+          <div
+            v-if="show_dropdown"
+            class="order__delivery__content__select__dropdown"
+          >
+            <button
+              @click="selectAddress(address)"
+              type="button"
+              v-for="address in addresses"
+              :key="address.id"
+              class="order__delivery__content__select__dropdown__button"
             >
-              <button
-                @click="selectAddress(address)"
-                type="button"
-                v-for="address in addresses"
-                :key="address.id"
-                class="order__delivery__content__select__dropdown__button"
-              >
-                {{ address.name }}
-              </button>
-            </div>
+              {{ address.name }}
+            </button>
+          </div>
         </div>
         <div class="order__delivery__content__content">
           <div class="order__delivery__content__content__address">
@@ -80,21 +80,21 @@
                   }
                 "
               />
-                <div
-                  v-if="suggestions.length"
-                  class="order__delivery__content__content__address__dadata__suggestions"
-                  :class="`order__delivery__content__content__address__dadata__suggestions-${address.id}`"
+              <div
+                v-if="suggestions.length"
+                class="order__delivery__content__content__address__dadata__suggestions"
+                :class="`order__delivery__content__content__address__dadata__suggestions-${address.id}`"
+              >
+                <button
+                  type="button"
+                  :key="address.value"
+                  v-for="address in suggestions"
+                  class="order__delivery__content__content__address__dadata__suggestions__address"
+                  @click="set_address(address)"
                 >
-                  <button
-                    type="button"
-                    :key="address.value"
-                    v-for="address in suggestions"
-                    class="order__delivery__content__content__address__dadata__suggestions__address"
-                    @click="set_address(address)"
-                  >
-                    {{ address.value }}
-                  </button>
-                </div>
+                  {{ address.value }}
+                </button>
+              </div>
             </div>
             <InputBlock
               :value="address.entrance"
@@ -185,14 +185,17 @@
       </div>
     </div>
     <div v-else class="order__delivery">
-      {{ parseAddress(cart_partner) }}
+      <h3 class="order__delivery__title title-small">Адрес самовывоза:</h3>
+      <p class="order__delivery__value">
+        {{ parseAddress(cart_partner) }}
+      </p>
     </div>
     <div class="order__payment">
       <h3 class="order__payment__title title-extra-normal">Оплата</h3>
       <label
         for="payment_type-0"
         :class="{ order__payment__item_checked: is_cashless_payment == false }"
-        class="order__payment__item"
+        class="order__payment__item unselectable"
       >
         <Radiobutton
           class="order__payment__item__radio"
@@ -206,7 +209,7 @@
       <label
         for="payment_type-1"
         :class="{ order__payment__item_checked: is_cashless_payment == true }"
-        class="order__payment__item"
+        class="order__payment__item unselectable"
       >
         <Radiobutton
           class="order__payment__item__radio"
@@ -246,10 +249,12 @@
 
       Оформить заказ</ButtonStandart
     >
-    <div :class="{
+    <div
+      :class="{
         order__messages_margined: errors.length,
-      }" class="order__messages">
-
+      }"
+      class="order__messages"
+    >
       <Message
         v-for="error in errors"
         :key="error"
@@ -257,7 +262,6 @@
         >{{ error }}</Message
       >
     </div>
-
   </form>
 </template>
 <script>
@@ -530,10 +534,11 @@ export default {
   }
   &__delivery {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 30px;
     &__content {
       width: 100%;
       display: flex;
@@ -687,7 +692,7 @@ export default {
       align-items: center;
       justify-content: flex-start;
       flex-direction: column;
-      margin: 70px 0px;
+      margin: 70px 0px 40px;
       @media screen and (max-width: $tablet) {
         margin: 30px 0px;
       }

@@ -169,7 +169,7 @@
                   class="product-page__over__content__main__additional__information__options__content"
                 >
                   <label
-                    class="product-page__over__content__main__additional__information__options__content__item"
+                    class="product-page__over__content__main__additional__information__options__content__item unselectable"
                     v-for="(option) in product.options"
                     :key="option.id"
                     :for="`option-${option.id}`"
@@ -660,10 +660,6 @@ export default {
                   justify-content: space-between;
                   flex-direction: row;
 
-                  -moz-user-select: none;
-                  -khtml-user-select: none;
-                  -webkit-user-select: none;
-                  user-select: none;
 
                   &:last-of-type {
                     border-bottom: none;
