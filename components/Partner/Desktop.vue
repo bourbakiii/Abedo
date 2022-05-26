@@ -299,13 +299,6 @@ export default {
             * {
               fill: $white;
             }
-            &:hover {
-              border-color: $white;
-              background-color: transparent;
-              * {
-                fill: $white;
-              }
-            }
           }
         }
       }

@@ -36,7 +36,7 @@
         v-model="filters.keywords"
       />
     </div>
-    <label for="delivery" class="filters__checkbox">
+    <label for="delivery" class="filters__checkbox unselectable">
       <Checkbox
         class="filters__checkbox__checkbox"
         id="delivery"
@@ -46,7 +46,7 @@
       />
       <p class="filters__checkbox__name">Бесплатная доставка</p>
     </label>
-    <label for="gift" class="filters__checkbox">
+    <label for="gift" class="filters__checkbox unselectable">
       <Checkbox
         class="filters__checkbox__checkbox"
         id="gift"
@@ -56,7 +56,7 @@
       />
       <p class="filters__checkbox__name">Наличие подарка</p>
     </label>
-    <label for="discount" class="filters__checkbox">
+    <label for="discount" class="filters__checkbox unselectable">
       <Checkbox
         class="filters__checkbox__checkbox"
         id="discount"
@@ -176,6 +176,7 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    cursor: pointer;
     &__checkbox {
       width: 25px;
       height: 25px;

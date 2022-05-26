@@ -2,6 +2,13 @@
   <div class="shop-block">
     <div class="shop-block__content adaptive-non">
       <img
+        @click.prevent="
+            () =>
+              $store.commit('modals/open', {
+                modal_name: 'partner',
+                partner,
+              })
+          "
         v-if="partner.logo.original"
         :src="`${$axios.defaults.baseURL}${partner.logo.original}`"
         class="shop-block__content__image"
@@ -37,7 +44,7 @@
         <p
           v-if="cuisines"
           class="shop-block__content__info__cuisines"
-          
+
         >
           {{ cuisines }}
         </p>
@@ -134,7 +141,7 @@
       </span>
       <p
         class="shop-block__additional__text shop-block__phone__text"
-        
+
       >
         +7{{ partner.contact_phone }}
       </p>
@@ -286,6 +293,7 @@ export default {
     width: 100%;
     padding: 0px 20px 30px;
     &__image {
+      cursor: pointer;
       width: 258px;
       height: 150px;
       object-fit: contain;

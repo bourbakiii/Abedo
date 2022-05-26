@@ -1,5 +1,5 @@
 <template>
-  <div @click.self="go_by_link" class="product product-item product_in-cart">
+  <div @click.self="go_by_link" class="product product-item" :class="{ 'product-item_in-cart': in_cart}">
     <div
       @click="go_by_link"
       v-if="discount_percent"
@@ -113,15 +113,18 @@ export default {
   position: relative;
   cursor: pointer;
   text-decoration: none;
+  transition: border $transition;
+  border: 2px solid transparent;
+  &_in-cart{
+    border: 2px solid $orange;
+  }
   @media screen and (max-width: $tablet) {
     border-radius: 8px;
     height: 249px;
   }
-
   &_in-cart {
     border: 2px solid $orange;
   }
-
   &__discount {
     position: absolute;
     top: 20px;

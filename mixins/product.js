@@ -10,7 +10,6 @@ export default {
     }, decrease() {
       this.$store.dispatch('cart/decrease', this.product);
     }, remove() {
-
       this.$store.commit('cart/unlocal_action', state => {
         Vue.set(this.product, 'selected_options', []);
       })

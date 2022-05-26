@@ -156,16 +156,17 @@ export default {
       flex-direction: row;
 
       &__count {
-        margin: 0px 10px;
+        margin: 0px 5px;
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
-        max-width: 40px;
+        min-width: 30px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        text-align: center;
       }
     }
 
