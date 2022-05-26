@@ -6,23 +6,68 @@
         :src="`${$axios.defaults.baseURL}${product.image.original}`"
         class="product-cart__image-block__image"
       />
-      <p class="product-cart__image-block__text" >
-        {{ product.name }}
-      </p>
+      <div class="product-cart__image-block__name-block">
+        <p class="product-cart__image-block__name-block__text">
+          {{ product.name }}
+        </p>
+        <div
+          v-if="product.selected_options.length"
+          class="product-cart__image-block__name-block__options"
+        >
+          <div
+            v-for="item in product.selected_options"
+            :key="item.id"
+            class="product-cart__image-block__name-block__options__item"
+          >
+            <svg
+              class="product-cart__image-block__name-block__options__item__icon"
+              width="8"
+              height="8"
+              viewBox="0 0 10 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 1L5 9"
+                stroke="#878787"
+                stroke-width="1.2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M9 5L1 5"
+                stroke="#878787"
+                stroke-width="1.2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <p
+              class="product-cart__image-block__name-block__options__item__name"
+            >
+              {{ item.name }}
+            </p>
+            <p
+              class="product-cart__image-block__name-block__options__item__price"
+            >
+              1x{{ item.price }}₽
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <p class="product-cart__price" >{{ product_price_with_discount }}₽</p>
-    <p class="product-cart__price product-cart__price_full" >
+    <p class="product-cart__price">{{ product_price_with_discount }}₽</p>
+    <p class="product-cart__price product-cart__price_full">
       {{ product_total_price_with_discount }}₽
     </p>
-    <div class="product-cart__buttons" v-if='product.is_active'>
+    <div class="product-cart__buttons" v-if="product.is_active">
       <ButtonProduct
         class="product-cart__buttons__button"
         size="40"
         icon="minus"
         @click="decrease"
       />
-      <p class="product-cart__buttons__count" >{{ count }}</p>
+      <p class="product-cart__buttons__count">{{ count }}</p>
       <ButtonProduct
         class="product-cart__buttons__button"
         size="40"
@@ -52,13 +97,13 @@ import productsMixin from "@/mixins/product.js";
 export default {
   mixins: [productsMixin],
   props: {
-        product: {
-            required: true,
-        },
-        partner:{
-            required: false
-        }
+    product: {
+      required: true,
     },
+    partner: {
+      required: false,
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -70,9 +115,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  &:not(&:last-child)
-  {
-  border-bottom: 1px dashed $extra_dark_grey;
+  &:not(&:last-child) {
+    border-bottom: 1px dashed $extra_dark_grey;
   }
   &__image-block {
     display: flex;
@@ -91,15 +135,59 @@ export default {
       @media screen and (max-width: $notebook) {
         margin-right: 10px;
       }
+      flex-shrink: 0;
     }
-    &__text {
-      font-family: "SF Pro Display";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 20px;
-      justify-content: flex-start;
+    &__name-block {
+      display: flex;
       align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      &__text {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+      &__options {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
+        margin-top:14px;
+        &__item {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-direction: row;
+          margin-bottom: 6px;
+          &:last-of-type {
+            margin-bottom: none;
+          }
+          &__name {
+            font-family: "SF Pro Display";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 18px;
+            margin: 0px 6px 0px 16px;
+            color: $extra_dark_grey;
+          }
+          &__price {
+            font-family: "SF Pro Display";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 16px;
+            color: $extra_dark_grey;
+          }
+        }
+      }
     }
   }
   &__buttons {

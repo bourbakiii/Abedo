@@ -137,9 +137,9 @@ export const getters = {
     let summ = 0;
     state.products.forEach(product => {
       summ += product.price.toFixed(2) * +product.count;
-      // summ += product.selected_options.map(option => +option.price * +product.count).reduce(function (accumulator, currentValue) {
-      //     return accumulator + currentValue;
-      // }, 0);
+      summ += product.selected_options.map(option => +option.price * +product.count).reduce(function (accumulator, currentValue) {
+          return accumulator + currentValue;
+      }, 0);
     });
     return summ % 1 == 0 ? +summ : +summ.toFixed(2);
   }, total_discount_price(state) {
@@ -147,9 +147,9 @@ export const getters = {
     state.products.forEach(product => {
       let discount_percent = +product.discount?.percent || +product.section.discount?.percent || 0;
       summ += (+product.price.toFixed(2) - (product.price.toFixed(2) * (discount_percent) / 100).toFixed(2)) * +product.count;
-      // summ += product.selected_options.map(option => +option.price * +product.count).reduce(function (accumulator, currentValue) {
-      //     return accumulator + currentValue;
-      // }, 0);
+      summ += product.selected_options.map(option => +option.price * +product.count).reduce(function (accumulator, currentValue) {
+          return accumulator + currentValue;
+      }, 0);
     });
     summ -= state.promo.discount;
     return summ % 1 == 0 ? +summ : +summ.toFixed(2);

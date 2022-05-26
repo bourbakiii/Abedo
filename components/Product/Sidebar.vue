@@ -64,11 +64,18 @@
         v-for="option in product.selected_options"
         :key="option.id"
       >
+
+          <svg class="product-sidebar__selected-options__item__icon" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 1L5 9" stroke="#878787" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M9 5L1 5" stroke="#878787" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+
+
         <p class="product-sidebar__selected-options__item__name">
           {{ option.name }}
         </p>
         <p class="product-sidebar__selected-options__item__price">
-          {{ option.price * product.count }}₽
+          1x{{ option.price }}₽
         </p>
       </div>
     </div>
@@ -203,30 +210,36 @@ export default {
       align-items: center;
       justify-content: space-between;
       flex-direction: row;
-      margin-bottom: 5px;
+      margin-bottom: 9px;
 
       &:last-of-type {
         margin-bottom: 0px;
       }
+      &__icon{
+        flex-shrink: 0;
 
+      }
       &__name {
-        font-family: "SF Pro Display";
+        font-family: 'SF Pro Display';
         font-style: normal;
         font-weight: 400;
-        font-size: 15px;
-        line-height: 20px;
+        font-size: 14px;
+        line-height: 17px;
+        color: $extra_dark_grey;
         flex-grow: 1;
         margin-right: 10px;
+        margin: 0px 12px;
+
       }
 
       &__price {
-        font-family: "Montserrat";
+        flex-shrink: 0;
+        font-family: 'SF Pro Display';
         font-style: normal;
-        font-weight: 600;
-        font-size: 15px;
-        line-height: 20px;
-        display: flex;
-        align-items: center;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        color:$extra_dark_grey;
       }
     }
   }
