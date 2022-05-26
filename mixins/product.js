@@ -1,59 +1,55 @@
+import Vue from 'vue';
+
 export default {
   methods: {
     add_to_cart(partner) {
-      if (!partner) alert("Не передан партнер");
+      if (!partner) alert("Не передан партнер при добавлении продукта в корзину");
       this.$store.dispatch('cart/add_to_cart', {product: this.product, partner});
-    },
-    crease() {
+    }, crease() {
       this.$store.dispatch('cart/crease', this.product);
-    },
-    decrease() {
+    }, decrease() {
       this.$store.dispatch('cart/decrease', this.product);
-    },
-    remove() {
+    }, remove() {
+
+      this.$store.commit('cart/unlocal_action', state => {
+        Vue.set(this.product, 'selected_options', []);
+      })
       this.$store.dispatch('cart/remove', this.product);
     }
-  },
-  mounted(context) {
-    const {$store: {state, dispatch, commit}} = this;
-    // console.log("the $store is:");
-    // console.log(state);
-    commit('cart/action', (state) => {
-    this.product.selected_options = [...(this.$store.state.cart.products.find(el=>+el.id==+this.product.id)?.selected_options||[])];
+  }, created() {
+    this.$store.commit('cart/unlocal_action', state => {
+      if (this.in_cart) Vue.set(this.product, 'selected_options', this.$store.state.cart.products.find(el => +el.id == +this.product.id)?.selected_options);
+      else Vue.set(this.product, 'selected_options', []);
     })
   },
   computed: {
     discount_percent() {
-
       return +this.product.discount?.percent || +this.product.section.discount?.percent || null;
-    },
-    product_price_with_discount() {
+    }, product_price_with_discount() {
       let price_with_discount = this.product.price - (this.product.price * this.discount_percent / 100 ?? 0);
       return price_with_discount % 1 == 0 ? price_with_discount : price_with_discount.toFixed(2);
-    },
-    cart_products() {
+    }, cart_products() {
       return this.$store.state.cart.products;
-    },
-    in_cart() {
+    }, in_cart() {
       return this.cart_products.map(product => +product.id).includes(+this.product.id);
-      ;
-    },
-    count() {
+
+    }, count() {
       if (!this.in_cart) return -1;
       this.product.count = this.cart_products.find(product => +product.id == +this.product.id).count;
       return this.product.count;
-    },
-    price() {
+    }, price() {
       return this.product.price;
-    },
-    product_total_price() {
+    }, product_total_price() {
       let price = this.count * this.product.price
       return price % 1 == 0 ? price : price.toFixed(2);
-    },
-    product_total_price_with_discount() {
+    }, product_total_price_with_discount() {
       let price = this.count * this.product_price_with_discount
       return price % 1 == 0 ? price : price.toFixed(2);
     }
   },
-
+  watch: {
+    in_cart(value) {
+      if(!value) Vue.set(this.product, 'selected_options', [])
+    }
+  }
 }

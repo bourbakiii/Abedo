@@ -16,11 +16,13 @@
       </svg>
     </button>
     <div class="product-sidebar__info">
-      <img
+      <NuxtLink class="product-sidebar__info__image" :to="`/product/${product.id}`">
+        <img
         v-if="product.image"
         :src="`${$axios.defaults.baseURL}${product.image.cart_mini}`"
         class="product-sidebar__info__image"
       />
+      </NuxtLink>
       <p class="product-sidebar__info__name">{{ product.name }}</p>
     </div>
     <div class="product-sidebar__actions">
@@ -54,12 +56,12 @@
       </div>
     </div>
     <div
-      v-if="selected_options.length"
+      v-if="product.selected_options.length"
       class="product-sidebar__selected-options"
     >
       <div
         class="product-sidebar__selected-options__item"
-        v-for="option in selected_options"
+        v-for="option in product.selected_options"
         :key="option.id"
       >
         <p class="product-sidebar__selected-options__item__name">
@@ -84,12 +86,7 @@ export default {
     partner: {
       required: false,
     },
-  },
-  computed: {
-    selected_options() {
-      return this.product.selected_options??[];
-    },
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -103,9 +100,11 @@ export default {
   position: relative;
   padding: 20px 0px;
   transition: $transition;
+
   &:last-of-type {
     border-bottom-width: 0px;
   }
+
   &__close {
     top: 20px;
     right: 0px;
@@ -116,13 +115,14 @@ export default {
     width: 15px;
     height: 15px;
   }
-  
+
   &__info {
     width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: row;
+
     &__image {
       width: 50px;
       height: auto;
@@ -130,6 +130,7 @@ export default {
       flex-shrink: 0;
       border-radius: 5px;
     }
+
     &__name {
       font-family: "SF Pro Display";
       font-style: normal;
@@ -140,17 +141,20 @@ export default {
       margin-right: 18px;
     }
   }
+
   &__actions {
     margin-top: 10px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     &__buttons {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       flex-direction: row;
+
       &__count {
         margin: 0px 10px;
         font-family: "SF Pro Display";
@@ -164,6 +168,7 @@ export default {
         white-space: nowrap;
       }
     }
+
     &__prices {
       &__price {
         font-family: "Montserrat";
@@ -173,6 +178,7 @@ export default {
         line-height: 20px;
         display: flex;
         align-items: center;
+
         &_full {
           font-family: "Montserrat";
           font-style: normal;
@@ -185,9 +191,11 @@ export default {
       }
     }
   }
+
   &__selected-options {
     width: 100%;
-    margin:10px 0px 0px;
+    margin: 10px 0px 0px;
+
     &__item {
       width: 100%;
       display: flex;
@@ -195,9 +203,11 @@ export default {
       justify-content: space-between;
       flex-direction: row;
       margin-bottom: 5px;
+
       &:last-of-type {
         margin-bottom: 0px;
       }
+
       &__name {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -207,6 +217,7 @@ export default {
         flex-grow: 1;
         margin-right: 10px;
       }
+
       &__price {
         font-family: "Montserrat";
         font-style: normal;
