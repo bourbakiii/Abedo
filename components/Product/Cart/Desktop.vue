@@ -1,6 +1,6 @@
 <template>
   <div class="product-cart product">
-    <div class="product-cart__image-block">
+    <NuxtLink :to='`/product/${product.id}`' class="product-cart__image-block">
       <img
         v-if="product.image"
         :src="`${$axios.defaults.baseURL}${product.image.original}`"
@@ -54,12 +54,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </NuxtLink>
 
     <p class="product-cart__price">{{ product_price_with_discount }}₽</p>
-    <p class="product-cart__price product-cart__price_full">
-      {{ product_total_price_with_discount }}₽
-    </p>
     <div class="product-cart__buttons" v-if="product.is_active">
       <ButtonProduct
         class="product-cart__buttons__button"
@@ -75,6 +72,10 @@
         @click="crease"
       />
     </div>
+    <p class="product-cart__price product-cart__price_full">
+      {{ product_total_price_with_discount }}₽
+    </p>
+    
     <button @click="remove" class="product-cart__close">
       <svg
         class="product-cart__close__icon"
@@ -126,6 +127,8 @@ export default {
     width: 40%;
     max-width: 40%;
     overflow: hidden;
+    height:max-content;
+    text-decoration: none;
     &__image {
       border-radius: 10px;
       width: 100px;
@@ -167,7 +170,7 @@ export default {
           flex-direction: row;
           margin-bottom: 6px;
           &:last-of-type {
-            margin-bottom: none;
+            margin-bottom: 0px;
           }
           &__name {
             font-family: "SF Pro Display";
@@ -185,6 +188,7 @@ export default {
             font-size: 15px;
             line-height: 16px;
             color: $extra_dark_grey;
+            text-align: center;
           }
         }
       }
@@ -226,6 +230,7 @@ export default {
     font-size: 20px;
     line-height: 24px;
     width: 10%;
+    text-align: center;
     @media screen and (max-width: $notebook) {
       font-size: 16px;
       line-height: 19px;

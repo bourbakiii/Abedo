@@ -1,11 +1,13 @@
 <template>
   <div class="cart">
     <div class="cart__hood adaptive-non">
+      <NuxtLink class="cart__hood__image" :to='`/partners/${cart_partner.id}`'>
       <img
         v-if="cart_partner.logo"
         :src="`${$axios.defaults.baseURL}${cart_partner.logo.original}`"
-        class="cart__hood__image"
+        class="cart__hood__image__image"
       />
+      </NuxtLink>
       <p class="cart__hood__name">{{ cart_partner.name }}</p>
       <button @click="$store.commit('cart/clear')" class="cart__hood__button">
         Очистить
@@ -190,7 +192,6 @@ export default {
       width: 106px;
       height: 77px;
       border: 1px solid $blue_grey;
-      object-fit: contain;
       padding: 5px;
       margin-right: 30px;
       flex-shrink: 0;
@@ -198,6 +199,11 @@ export default {
         width: 100px;
         height: 72px;
         margin-right: 10px;
+      }
+      &__image{
+        width:100%;
+        object-fit: contain;
+
       }
     }
     &__name {

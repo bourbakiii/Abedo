@@ -16,14 +16,39 @@
       </svg>
     </button>
     <div class="product-sidebar__info">
-      <NuxtLink class="product-sidebar__info__image" :to="`/product/${product.id}`">
-        <img
+      <NuxtLink 
         v-if="product.image"
+       class="product-sidebar__info__image" :to="`/product/${product.id}`">
+        <img
         :src="`${$axios.defaults.baseURL}${product.image.cart_mini}`"
         class="product-sidebar__info__image"
       />
       </NuxtLink>
       <p class="product-sidebar__info__name">{{ product.name }}</p>
+    </div>
+    <div
+      v-if="product.selected_options.length"
+      class="product-sidebar__selected-options"
+    >
+      <div
+        class="product-sidebar__selected-options__item"
+        v-for="option in product.selected_options"
+        :key="option.id"
+      >
+
+          <svg class="product-sidebar__selected-options__item__icon" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 1L5 9" stroke="#878787" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M9 5L1 5" stroke="#878787" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+
+
+        <p class="product-sidebar__selected-options__item__name">
+          {{ option.name }}
+        </p>
+        <p class="product-sidebar__selected-options__item__price">
+          1x{{ option.price }}₽
+        </p>
+      </div>
     </div>
     <div class="product-sidebar__actions">
       <div v-if="product.is_active" class="product-sidebar__actions__buttons">
@@ -55,30 +80,7 @@
         </p>
       </div>
     </div>
-    <div
-      v-if="product.selected_options.length"
-      class="product-sidebar__selected-options"
-    >
-      <div
-        class="product-sidebar__selected-options__item"
-        v-for="option in product.selected_options"
-        :key="option.id"
-      >
-
-          <svg class="product-sidebar__selected-options__item__icon" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 1L5 9" stroke="#878787" stroke-width="1.2" stroke-linecap="round"/>
-            <path d="M9 5L1 5" stroke="#878787" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-
-
-        <p class="product-sidebar__selected-options__item__name">
-          {{ option.name }}
-        </p>
-        <p class="product-sidebar__selected-options__item__price">
-          1x{{ option.price }}₽
-        </p>
-      </div>
-    </div>
+    
   </div>
 </template>
 <script>
@@ -90,9 +92,9 @@ export default {
     product: {
       required: true,
     },
-    partner: {
-      required: false,
-    },
+    // partner: {
+    //   required: false,
+    // },
   }
 };
 </script>
@@ -202,7 +204,7 @@ export default {
 
   &__selected-options {
     width: 100%;
-    margin: 10px 0px 0px;
+    margin: 8px 0px 0px;
 
     &__item {
       width: 100%;

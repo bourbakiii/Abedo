@@ -4,7 +4,7 @@ export default {
   methods: {
     add_to_cart(partner) {
       if (!partner) alert("Не передан партнер при добавлении продукта в корзину");
-      this.$store.dispatch('cart/add_to_cart', {product: this.product, partner});
+      this.$store.dispatch('cart/add_to_cart', { product: this.product, partner });
     }, crease() {
       this.$store.dispatch('cart/crease', this.product);
     }, decrease() {
@@ -31,7 +31,6 @@ export default {
       return this.$store.state.cart.products;
     }, in_cart() {
       return this.cart_products.map(product => +product.id).includes(+this.product.id);
-
     }, count() {
       if (!this.in_cart) return -1;
       this.product.count = this.cart_products.find(product => +product.id == +this.product.id).count;
@@ -44,11 +43,23 @@ export default {
     }, product_total_price_with_discount() {
       let price = this.count * this.product_price_with_discount
       return price % 1 == 0 ? price : price.toFixed(2);
+    },
+    product_total_price_with_options() {
+      let price = this.count * this.price + this.product.selected_options.map(el => +el.price).reduce((accumulator, value) => {
+        return accumulator + (value * this.count)
+      }, 0);
+      return price % 1 == 0 ? price : price.toFixed(2);
+    },
+    product_total_price_with_discount_and_options() {
+      let price = this.count * this.product_price_with_discount + this.product.selected_options.map(el => +el.price).reduce((accumulator, value) => {
+        return accumulator + (value * this.count)
+      }, 0);
+      return price % 1 == 0 ? price : price.toFixed(2);
     }
   },
   watch: {
     in_cart(value) {
-      if(!value) Vue.set(this.product, 'selected_options', [])
+      if (!value) Vue.set(this.product, 'selected_options', [])
     }
   }
 }
