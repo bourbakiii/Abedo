@@ -5,13 +5,9 @@
   >
     <div
       @click.self="$router.push(`/partners/${partner.id}`)"
-      :style="`background: ${
-        partner.image
-          ? 'url(' + $axios.defaults.baseURL + partner.image[0].desktop + ')'
-          : 'red'
-      };`"
       class="item__block"
-    >
+    > 
+      <img v-if='partner.image.length' :src="`${$axios.defaults.baseURL}${partner.image[0].desktop}`" class="item__block__image"/>
       <div
         @click.self="$router.push(`/partners/${partner.id}`)"
         class="item__block__content"
@@ -167,10 +163,20 @@ export default {
     width: 100%;
     height: 230px;
     border-radius: 20px;
-
-    background-repeat: no-repeat;
-    background-size: cover;
     overflow: hidden;
+    position: relative;
+    &:hover &{
+&__image{
+  transform: scale(1.1);
+}
+    }
+    &__image{
+      position: absolute;
+      width:100%;
+      height: 100%;
+      object-fit: cover;
+      transition: $transition;
+    }
     &__content {
       display: flex;
       align-items: flex-start;
