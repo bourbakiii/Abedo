@@ -103,12 +103,13 @@
         />
       </svg>
     </button>
-  
+  <transition name="lmenu">
       <LeftMenu
         v-if="show_left_menu"
         @close="show_left_menu = false"
         class="footer__left-menu"
       />
+  </transition>
   </div>
 </template>
 <script>
@@ -126,6 +127,19 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.lmenu-enter, .lmenu-leave-to{
+  opacity: 0;
+  .left-menu-animated{
+    transform: translateX(-50px);
+    }
+}
+.lmenu-enter-active, .lmenu-leave-active{
+  .left-menu-animated{
+    transition: 1s;
+    background-color: red;
+    }
+  transition: $transition*2;
+}
 .footer {
   position: sticky;
   bottom: 0px;

@@ -94,13 +94,14 @@ export default {
     transition: $transition;
     position: relative;
     width: 100%;
-    max-width: 400px;
+    max-width: 403px;
     outline: none;
   border: none;
+
   }
   
   position: relative;
-  padding-bottom: calc(100% * (1 / 2));
+  padding-bottom: calc(100% * (172 / 403));
   @media screen and (max-width: $tablet){
      height: 134px;
     width: 335px;
@@ -155,12 +156,13 @@ export default {
       }
       &__logo {
         height: 100%;
-        width: 120px;
+        width: 100px;
         height: 100%;
         @media screen and (max-width: $tablet) {
           width: 80px;
         }
-        margin-right: 15px;
+        object-fit: contain;
+        margin-right: 20px;
         background-color: $white;
         border-radius: 10px;
         padding: 5px;

@@ -5,9 +5,10 @@
       <div class="product-page__over__content content">
         <div class="product-page__over__content__main">
           <div
+          v-if='product.more_images.length'
             class="product-page__over__content__main__images__adaptive__slider adaptive"
           >
-            <ProductImagesSlider class="images-slider"/>
+            <ProductImagesSlider :images='product.more_images' class="images-slider"/>
           </div>
           <h1
             class="product-page__over__content__main__name title-extra-normal"

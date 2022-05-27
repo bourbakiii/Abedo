@@ -74,29 +74,7 @@
   }
 }
 
-.left-menu {
-  &-enter {
-    opacity: 0;
 
-    .anim {
-      transform: translateX(-80%);
-    }
-  }
-
-  &-leave-to {
-    opacity: 0;
-
-    .anim {
-      transition: 0.1s;
-      transform: translateX(-80%);
-    }
-  }
-
-  &-enter-active,
-  &-leave-active {
-    transition: all $transition;
-  }
-}
 
 .filter {
   &-enter,
