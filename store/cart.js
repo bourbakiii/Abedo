@@ -5,7 +5,7 @@ let local_storage_name = "cart";
 export const state = () => ({
   products: [], partner: {}, promo: {
     success: null, value: null, message: null, discount: 0
-  }, synchronization_timer: null
+  }, gifts:[], synchronization_timer: null
 });
 export const mutations = {
   action(state, action) {
@@ -39,8 +39,9 @@ export const mutations = {
   }, local_set(state) {
     const local_data = JSON.parse(localStorage.getItem(local_storage_name) ?? null);
     if (local_data) {
-      state.products = local_data.products;
       state.partner = local_data.partner;
+      state.products = local_data.products;
+      state.gifts = local_data.gifts;
     }
   }
 };
@@ -104,13 +105,15 @@ export const actions = {
       });
       this.$axios.get(`/api/order/getOrder?${params}`).then(({data: {order}}) => {
         state.commit('action', state => {
-
           state.promo.message = null;
           state.promo.success = null;
           if (order.promo) {
             state.promo.success = true;
             state.promo.discount = order?.promoDiscount || 0;
           }
+          if(order.gifts)
+            state.gifts = order.gifts
+          else state.gifts = [];
         });
       }).catch(error => {
         if (error?.response?.status == 422) {
@@ -119,15 +122,13 @@ export const actions = {
             state.promo.message = error.response.data.errors.promo_code[0] ?? null
           });
         }
-
+        state.gifts = [];
       })
     };
     state.commit('action', (state) => {
       clearTimeout(state.synchronization_timer);
       state.synchronization_timer = setTimeout(sync, 500);
     });
-
-
   }
 };
 

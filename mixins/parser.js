@@ -23,7 +23,6 @@ export default {
         summ -= this.$store.state.cart.promo.discount;
         return +summ >= +free_order_price ? 0 : delivery_price;
       }
-
       return delivery_price;
     },
     final_delivery_price_text() {

@@ -29,6 +29,11 @@
           :key="product.id"
           :product="product"
         />
+         <ProductCartGiftItem
+          v-for="product in cart_gifts"
+          :key="`product-${product.id}`"
+          :product="product"
+        />
       </client-only>
     </div>
     <form @submit.prevent="checkPromocode" v-if="token" class="cart__promo">
@@ -98,6 +103,9 @@ export default {
     },
   },
   computed: {
+    cart_gifts(){
+      return this.$store.state.cart.gifts;
+    },
     cart_products() {
       return this.$store.state.cart.products;
     },
@@ -311,14 +319,14 @@ export default {
         line-height: 20px;
 
         &::placeholder {
-          display: none;
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 500;
           font-size: 14px;
           line-height: 17px;
+          opacity: 0;
           @media screen and (max-width: $tablet) {
-            display: flex;
+            opacity:1;
           }
         }
         @media screen and (max-width: $tablet) {
