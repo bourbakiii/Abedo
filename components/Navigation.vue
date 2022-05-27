@@ -105,7 +105,7 @@
           class="navigation__links-link navigation__links-link__dropdown"
           @mouseenter.prevent="show_dropdown = true"
           @mouseleave.prevent="show_dropdown = false"
-          @mousedown.prevent="dropdownClick"
+          @click.prevent="dropdownClick"
         >
           <svg
             class="navigation__links-link-svg"
@@ -321,7 +321,7 @@ export default {
   background-color: $white;
   box-sizing: border-box;
   padding: 5px 10px;
-  z-index: $z_navigation;
+  z-index: $z_navigation+1;
   transition: height $transition;
 
   .delete-note {
@@ -330,11 +330,22 @@ export default {
     }
   }
 
-  &.scaled {
+  &.scaled{
     height: 70px;
-
-    .navigation > * {
-      transform: scale(0.85);
+    .navigation{
+      &__logo{
+        transform: scale(0.8);
+      }
+      &__button{
+        height: 45px;
+        width: 175px;
+      }
+      &__icons{
+        transform: scale(0.8);
+      }
+      &__cart-block-icon{
+        transform: scale(0.8);
+      }
     }
   }
 
@@ -347,7 +358,7 @@ export default {
     justify-content: space-between;
 
     > * {
-      transition: transform $transition !important;
+      transition:$transition;
     }
 
     &__logo {
@@ -375,7 +386,7 @@ export default {
       width: 181px;
       height: 50px;
       padding: 5px 0px;
-
+      
       &__icon {
         margin-right: 10px;
       }
@@ -475,12 +486,11 @@ export default {
               transition: $transition;
               background-color: $white;
               outline: none;
-              font-family: 'Montserrat';
-font-style: normal;
-font-weight: 400;
-font-size: 15px;
-line-height: 17px;
-
+              font-family: "Montserrat";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 15px;
+              line-height: 17px;
               &:active {
                 transform: scale(0.98);
               }
@@ -535,10 +545,7 @@ line-height: 17px;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      @media screen and (max-width: $notebook) {
-        transform: scale(0.9);
-      }
-
+      
       &:hover {
         .navigation__cart-block__text {
           color: $darkblue;
@@ -557,7 +564,7 @@ line-height: 17px;
         border-radius: 90px;
         border: 1px solid $darkblue;
         margin-right: 15px;
-
+        transition: $transition;
         &__indicator {
           height: 24px;
           min-width: 24px;

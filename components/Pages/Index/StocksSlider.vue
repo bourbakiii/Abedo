@@ -175,6 +175,7 @@ export default {
     background-color: $blue_grey;
     outline: none;
     border: none;
+    z-index: 4;
     @media screen and (max-width: $tablet) {
       display: none;
     }

@@ -281,7 +281,7 @@ export default {
           align-items: center;
           justify-content: center;
           transition: all $transition;
-          z-index: 10;
+          z-index: 4;
           svg * {
             transition: $transition;
             fill: $white;
