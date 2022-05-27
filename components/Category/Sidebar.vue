@@ -4,7 +4,9 @@
     <div class="sidebar__content">
       <button @click='()=>$router.push(`/category/${category.id}`)' v-for='category in categories' :key='category.id' class="sidebar__content__item">
         <img
-          src="@/assets/images/category-item-image-placeholder.png"
+        v-if='category.image'
+        
+          :src="`${$axios.defaults.baseURL}${category.image.small}`"
           class="sidebar__content__item__image"
         />
         <p class="sidebar__content__item__name">
@@ -72,6 +74,9 @@ export default {
       border: none;
       outline: none;
       border-bottom: 1px solid $dark_grey;
+      &:last-of-type{
+        border-bottom: none;
+      }
       *{
           transition: $transition;
       }
@@ -86,20 +91,23 @@ export default {
         }
       }
       &__image {
-        height: 18px;
-        width: auto;
+        width:30px;
+        height: 30px;
         object-fit: contain;
         margin-right: 13px;
         flex-shrink: 0;
+        border-radius: 90px;
       }
       &__name {
         flex-grow: 1;
         text-align: left;
-        font-family: "Montserrat";
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 17px;
+
+font-style: normal;
+font-weight: 500;
+font-size: 15px;
+line-height: 18px;
+
+
       }
       &__icon {
         margin-left: 11px;

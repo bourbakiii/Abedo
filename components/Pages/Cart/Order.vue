@@ -447,8 +447,7 @@ export default {
       return this.$store.state.account.token;
     },
     with_gifts() {
-      //  !!!
-      return false;
+      return Boolean(this.$store.state.cart.gifts.length);
     },
     addresses_names() {
       return (this.$store.state.account?.user.addresses ?? []).map(

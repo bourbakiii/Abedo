@@ -54,10 +54,12 @@
           </div>
           <div class="sidebar-cart__content__products">
             <ProductSidebar
-              v-for="product in cart_products"
-              :key="product.id"
+              v-for="product in [...cart_products, ...cart_gifts]"
+              :is_gift='cart_gifts.includes(product)'
+              :key="cart_gifts.includes(product)?`sidebar-gift-${product.id}`:`sidebar-product-${product.id}`"
               :product="product"
             />
+           
           </div>
           <div
             class="sidebar-cart__content__row sidebar-cart__content__row_delivery"
@@ -106,6 +108,9 @@ import parserMixin from "@/mixins/parser.js";
 export default {
   mixins: [parserMixin],
   computed: {
+    cart_gifts(){
+      return this.$store.state.cart.gifts;
+    },
     cart_products() {
       return this.$store.state.cart.products;
     },

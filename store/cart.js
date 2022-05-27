@@ -84,8 +84,8 @@ export const actions = {
 
   }, async synchronization(state) {
     const sync = async () => {
-
       const { promo, products, partner } = state.state;
+      if(!products.length) return;
       let products_final = [];
       for (let product of products) products_final.push({ id: product.id, count: product.count, props: product.props });
       let params = qs.stringify({

@@ -1,10 +1,13 @@
 <template>
   <div class="page index-page">
-    <PagesIndexSearch :categories='categories' class="index-page__content__search adaptive-non" />
+    <PagesIndexSearch
+      :categories="categories"
+      class="index-page__content__search adaptive-non"
+    />
     <div class="index-page__wrapper wrapper">
       <div class="index-page__content content">
         <PagesIndexAdaptiveCategories
-        :categories='categories'
+          :categories="categories"
           class="index-page__content__adaptive-categories adaptive"
         />
         <PagesIndexStocksSlider class="index-page__content__stocks-slider" />
@@ -119,10 +122,12 @@
                 </p>
               </button>
             </div>
+            <transition name="filter">
               <Filters
                 v-if="show_filters"
                 class="index-page__content__new-shops__filters"
               />
+            </transition>
             <div class="index-page__content__new-shops__content">
               <client-only>
                 <PartnerItem
@@ -169,7 +174,7 @@ export default {
       .then(({ cuisines: { data } }) => {
         this.categories = data;
       });
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -252,7 +257,6 @@ export default {
         &__item {
           overflow: hidden !important;
           width: 100% !important;
-
         }
       }
       &__button {
