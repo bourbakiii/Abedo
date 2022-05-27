@@ -1,20 +1,20 @@
 <template>
+  <transition name="modal">
     <div
       @click.self="$store.commit('modals/close')"
       v-if="wrapper_show"
       class="modals-wrapper non-scrollbar"
     >
-      
       <ModalsRate
         v-if="$store.state.modals.rate.show"
         class="modals-wrapper__content modal-content"
       />
       <ModalsSwitchShop
-        v-if="$store.state.modals.switch_shop.show"
+        v-else-if="$store.state.modals.switch_shop.show"
         class="modals-wrapper__content modal-content"
       />
       <ModalsLogin
-        v-if="$store.state.modals.login.show"
+        v-else-if="$store.state.modals.login.show"
         class="modals-wrapper__content modal-content"
       />
       <!-- <ModalsProduct
@@ -26,6 +26,7 @@
         class="modals-wrapper__content modal-content"
       />
     </div>
+  </transition>
 </template>
 <script>
 export default {
@@ -38,48 +39,70 @@ export default {
       return false;
     },
   },
-  watch:{
-    "$route.path":{
-      handler(){
-        if(this.wrapper_show) this.$store.commit('modals/close');
+  watch: {
+    "$route.path": {
+      handler() {
+        if (this.wrapper_show) this.$store.commit("modals/close");
       },
-      deep:true
-    }
-  }
+      deep: true,
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
-.opacity-enter {
-  .modal-content {
+.modal {
+  &-enter,
+  &-leave-to {
     opacity: 0;
-    transform: translateY(6vh);
+    
+  }
+  &-enter{
+    .modal-content{
+      transform: translateY(50px);
+    }
+  }
+  &-leave-to{
+    .modal-content{
+      transform: translateY(-50px);
+    }
+  }
+  &-leave-active,
+  &-enter-active {
+    transition: $transition;
   }
 }
-.opacity-leave-to {
-  .modal-content {
-    opacity: 0;
-    transform: translateY(-6vh);
-  }
-}
-.opacity-enter-active {
-  .modal-content {
-    transition: 0.35s !important;
-  }
-}
-.opacity-leave-active {
-  .modal-content {
-    transition: 0.45s !important;
-  }
-}
-.opacity-leave-active {
-  transition: 0.15s !important;
-}
+
+// .opacity-enter {
+//   .modal-content {
+//     opacity: 0;
+//     transform: translateY(6vh);
+//   }
+// }
+// .opacity-leave-to {
+//   .modal-content {
+//     opacity: 0;
+//     transform: translateY(-6vh);
+//   }
+// }
+// .opacity-enter-active {
+//   .modal-content {
+//     transition: 0.35s !important;
+//   }
+// }
+// .opacity-leave-active {
+//   .modal-content {
+//     transition: 0.45s !important;
+//   }
+// }
+// .opacity-leave-active {
+//   transition: 0.15s !important;
+// }
 .modals-wrapper {
   position: fixed;
-  top:0px;
-  left:0px;
+  top: 0px;
+  left: 0px;
   width: 100%;
-  height:100%;
+  height: 100%;
   min-height: 100%;
   background-color: rgba($darkblue, 0.9);
   z-index: $z_modal_wrapper;
@@ -92,8 +115,8 @@ export default {
   padding-left: 5%;
   padding-right: 5%;
   overflow: auto;
-@media screen and (max-width:$tablet) {
-  padding:0px;
-}
+  @media screen and (max-width: $tablet) {
+    padding: 0px;
+  }
 }
 </style>
