@@ -528,7 +528,8 @@ export default {
       background-color: $dark_grey;
       border-color: transparent;
       color: $black;
-
+      font-size: 16px;
+      font-weight: 600;
       &.active {
         background-color: $darkblue;
         color: $white;
@@ -944,7 +945,8 @@ export default {
     height: 50px;
     width: 228px;
     padding: 0px 5px;
-
+    font-size: 16px;
+    font-weight: 600;
     svg * {
       stroke: $darkblue;
       fill: transparent !important;

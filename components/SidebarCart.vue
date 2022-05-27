@@ -148,6 +148,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+
   &__icon {
     position: absolute;
     left: 26px;
