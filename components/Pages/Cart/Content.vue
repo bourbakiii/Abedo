@@ -29,7 +29,7 @@
           :key="product.id"
           :product="product"
         />
-         <ProductCartGiftItem
+        <ProductCartGiftItem
           v-for="product in cart_gifts"
           :key="`product-${product.id}`"
           :product="product"
@@ -103,7 +103,7 @@ export default {
     },
   },
   computed: {
-    cart_gifts(){
+    cart_gifts() {
       return this.$store.state.cart.gifts;
     },
     cart_products() {
@@ -326,7 +326,7 @@ export default {
           line-height: 17px;
           opacity: 0;
           @media screen and (max-width: $tablet) {
-            opacity:1;
+            opacity: 1;
           }
         }
         @media screen and (max-width: $tablet) {

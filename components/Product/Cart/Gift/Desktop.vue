@@ -25,49 +25,6 @@
         <p class="product-cart__image-block__name-block__text">
           {{ product.name }}
         </p>
-        <div
-          v-if="product.selected_options.length"
-          class="product-cart__image-block__name-block__options"
-        >
-          <div
-            v-for="item in product.selected_options"
-            :key="item.id"
-            class="product-cart__image-block__name-block__options__item"
-          >
-            <svg
-              class="product-cart__image-block__name-block__options__item__icon"
-              width="8"
-              height="8"
-              viewBox="0 0 10 10"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5 1L5 9"
-                stroke="#878787"
-                stroke-width="1.2"
-                stroke-linecap="round"
-              />
-              <path
-                d="M9 5L1 5"
-                stroke="#878787"
-                stroke-width="1.2"
-                stroke-linecap="round"
-              />
-            </svg>
-
-            <p
-              class="product-cart__image-block__name-block__options__item__name"
-            >
-              {{ item.name }}
-            </p>
-            <p
-              class="product-cart__image-block__name-block__options__item__price"
-            >
-              1x{{ item.price }}₽
-            </p>
-          </div>
-        </div>
       </div>
     </NuxtLink>
     Подарок

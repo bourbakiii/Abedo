@@ -5,7 +5,7 @@ let local_storage_name = "cart";
 export const state = () => ({
   products: [], partner: {}, promo: {
     success: null, value: null, message: null, discount: 0
-  }, gifts:[], synchronization_timer: null
+  }, gifts: [], synchronization_timer: null
 });
 export const mutations = {
   action(state, action) {
@@ -13,11 +13,10 @@ export const mutations = {
     localStorage.setItem(local_storage_name, JSON.stringify(state));
   }, unlocal_action(state, action) {
     action(state);
-  }, set(state, {index, product}) {
+  }, set(state, { index, product }) {
     Vue.set(state.products, index, product)
     localStorage.setItem(local_storage_name, JSON.stringify(state))
   }, remove(state, index) {
-    console.log('remove');
     Vue.set(state.products[index], 'selected_options', []);
     Vue.delete(state.products, index);
     localStorage.setItem(local_storage_name, JSON.stringify(state));
@@ -28,7 +27,6 @@ export const mutations = {
 
 
   clearPromo(state) {
-    // console.log("Мира и так мало вокруг");
     state.promo = {
       success: null, value: null, message: null, discount: 0
     }
@@ -48,73 +46,73 @@ export const mutations = {
 export const actions = {
   action(state, action) {
     action(state);
-  }, add_to_cart(state, {product, partner}) {
+  }, add_to_cart(state, { product, partner }) {
     product.count = product.min_count;
-
-    console.log("adding this product");
-    console.log(product);
-
     Vue.set(product, "count", product.min_count);
     if (!+state.state?.partner?.id || !state.state.products.length) state.dispatch("change_shop", {
       product, partner
     });
     else if (+state.state?.partner?.id == +partner.id) {
       state.commit('set_partner', partner);
-      state.commit('set', {index: state.state.products.length, product})
-    } else this.commit('modals/open', {modal_name: 'switch_shop', product: product, partner: partner});
+      state.commit('set', { index: state.state.products.length, product })
+    } else this.commit('modals/open', { modal_name: 'switch_shop', product: product, partner: partner });
+    state.dispatch("synchronization");
   }, crease(state, product) {
-      console.log("Creasing product");
-      console.log(product);
 
     state.commit("action", () => product.count++);
-    state.commit('set', {index: state.state.products.findIndex(el => +el.id == +product.id), product});
+    state.commit('set', { index: state.state.products.findIndex(el => +el.id == +product.id), product });
+    state.dispatch("synchronization");
+
   }, decrease(state, product) {
     state.commit("action", () => product.count--);
     if (product.count < product.min_count) state.commit("remove", state.state.products.findIndex(el => +el.id == +product.id));
     else state.commit('set', {
       index: state.state.products.findIndex(el => +el.id == +product.id), product
     });
+    state.dispatch("synchronization");
+
   }, remove(state, product) {
     state.commit("remove", state.state.products.map(element => +element.id).indexOf(+product.id));
-  }, change_shop(state, {product, partner}) {
+    state.dispatch("synchronization");
+
+  }, change_shop(state, { product, partner }) {
     this.commit("modals/close");
     state.commit('clear');
-    state.commit("set", {index: state.commit('set', {index: state.state.products.length, product}), product: product});
+    state.commit("set", { index: state.commit('set', { index: state.state.products.length, product }), product: product });
     state.commit("set_partner", partner);
-  }, synchronization(state) {
-    const sync = () => {
-      const {promo, products, partner} = state.state;
+    state.dispatch("synchronization");
+
+  }, async synchronization(state) {
+    const sync = async () => {
+
+      const { promo, products, partner } = state.state;
       let products_final = [];
-      for (let product of products) {
-        products_final.push({
-          id: product.id, count: product.count, props: product.props
-        });
-      }
-      // console.log("products final are");
-      // console.log(products_final);
-      // console.log(promo);
+      for (let product of products) products_final.push({ id: product.id, count: product.count, props: product.props });
       let params = qs.stringify({
         promo_code: promo.value, products: products_final, shop_id: partner.id
       });
-      // state.commit('action', state => {
-      //     state.promo.success = null,
-      //         state.promo.message = null
-      // })
+
       state.commit('action', state => {
         state.promo.discount = 0;
+        clearTimeout(state.synchronization_timer);
+        state.synchronization_timer = null;
       });
-      this.$axios.get(`/api/order/getOrder?${params}`).then(({data: {order}}) => {
-        state.commit('action', state => {
-          state.promo.message = null;
-          state.promo.success = null;
-          if (order.promo) {
-            state.promo.success = true;
-            state.promo.discount = order?.promoDiscount || 0;
-          }
-          if(order.gifts)
-            state.gifts = order.gifts
-          else state.gifts = [];
-        });
+
+      await this.$axios.get(`/api/order/getOrder?${params}`).then(({ data: { order } }) => {
+        if (state.synchronization_timer == null) {
+          state.commit('action', state => {
+            state.promo.message = null;
+            state.promo.success = null;
+
+            if (order.promo) {
+              state.promo.success = true;
+              state.promo.discount = order?.promoDiscount || 0;
+            }
+            if (order.gifts)
+              state.gifts = order.gifts
+            else state.gifts = [];
+          });
+        }
       }).catch(error => {
         if (error?.response?.status == 422) {
           state.commit('action', state => {
@@ -127,7 +125,7 @@ export const actions = {
     };
     state.commit('action', (state) => {
       clearTimeout(state.synchronization_timer);
-      state.synchronization_timer = setTimeout(sync, 500);
+      state.synchronization_timer = setTimeout(sync, 600);
     });
   }
 };
@@ -139,7 +137,7 @@ export const getters = {
     state.products.forEach(product => {
       summ += product.price.toFixed(2) * +product.count;
       summ += product.selected_options.map(option => +option.price * +product.count).reduce(function (accumulator, currentValue) {
-          return accumulator + currentValue;
+        return accumulator + currentValue;
       }, 0);
     });
     return summ % 1 == 0 ? +summ : +summ.toFixed(2);
@@ -149,7 +147,7 @@ export const getters = {
       let discount_percent = +product.discount?.percent || +product.section.discount?.percent || 0;
       summ += (+product.price.toFixed(2) - (product.price.toFixed(2) * (discount_percent) / 100).toFixed(2)) * +product.count;
       summ += product.selected_options.map(option => +option.price * +product.count).reduce(function (accumulator, currentValue) {
-          return accumulator + currentValue;
+        return accumulator + currentValue;
       }, 0);
     });
     summ -= state.promo.discount;
