@@ -422,16 +422,18 @@ export default {
   },
   computed: {
     total_order_price() {
+      console.log("The text is:")
+      console.log(this.self_get?0:+this.delivery_price)
       let summ =
         +this.$store.getters["cart/total_price"] +
-        +this.final_delivery_price(+this.delivery_price) +
+        +this.final_delivery_price(this.self_get?0:+this.delivery_price) +
         +(this.door_delivery ? this.door_delivery_price : 0);
       return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
     total_order_discount_price() {
       let summ =
         +this.$store.getters["cart/total_discount_price"] +
-        +this.final_delivery_price(+this.delivery_price) +
+        +this.final_delivery_price(this.self_get?0:+this.delivery_price) +
         +(this.door_delivery ? this.door_delivery_price : 0);
       return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
@@ -557,7 +559,16 @@ export default {
     flex-direction: column;
     width: 100%;
     margin-bottom: 30px;
-
+    &__title{
+      @media screen and (max-width: $phone_normal){
+        font-size: 18px;
+      }
+    }
+    &__value{
+      @media screen and (max-width: $phone_normal){
+        font-size: 15px;
+      }
+    }
     &__content {
       width: 100%;
       display: flex;
@@ -824,6 +835,8 @@ export default {
       }
 
       .order__payment__item__radio {
+        width: 22.5px;
+        height: 22.5px;
         &.checked {
           border-color: $white;
 
@@ -837,6 +850,7 @@ export default {
         min-height: 50px;
         margin-bottom: 15px;
         border: 1px solid $darkblue;
+         padding: 8px 27px;
       }
 
       &:last-of-type {

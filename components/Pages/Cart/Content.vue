@@ -1,12 +1,12 @@
 <template>
   <div class="cart">
     <div class="cart__hood adaptive-non">
-      <NuxtLink class="cart__hood__image" :to='`/partners/${cart_partner.id}`'>
-      <img
-        v-if="cart_partner.logo"
-        :src="`${$axios.defaults.baseURL}${cart_partner.logo.original}`"
-        class="cart__hood__image__image"
-      />
+      <NuxtLink class="cart__hood__image" :to="`/partners/${cart_partner.id}`">
+        <img
+          v-if="cart_partner.logo"
+          :src="`${$axios.defaults.baseURL}${cart_partner.logo.original}`"
+          class="cart__hood__image__image"
+        />
       </NuxtLink>
       <p class="cart__hood__name">{{ cart_partner.name }}</p>
       <button @click="$store.commit('cart/clear')" class="cart__hood__button">
@@ -44,6 +44,7 @@
               (state) => (state.promo.value = $event.target.value)
             )
           "
+          placeholder="Введите промокод"
           autocomplete="off"
           type="text"
           name="promo"
@@ -200,10 +201,9 @@ export default {
         height: 72px;
         margin-right: 10px;
       }
-      &__image{
-        width:100%;
+      &__image {
+        width: 100%;
         object-fit: contain;
-
       }
     }
     &__name {
@@ -252,6 +252,9 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
     align-self: flex-start;
+    @media screen and (max-width: $phone_normal) {
+      width: 100%;
+    }
     &__content {
       display: flex;
       align-items: center;
@@ -271,6 +274,13 @@ export default {
         justify-content: space-between;
         margin-top: 0px;
       }
+      @media screen and (max-width: $phone_normal) {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+      }
       &__text {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -281,12 +291,7 @@ export default {
         flex-shrink: 0;
 
         @media screen and (max-width: $tablet) {
-          margin-right: 0px;
-          font-family: "SF Pro Display";
-          font-style: normal;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 19px;
+          display: none;
         }
       }
       &__input {
@@ -304,10 +309,28 @@ export default {
         font-weight: 400;
         font-size: 16px;
         line-height: 20px;
+
+        &::placeholder {
+          display: none;
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 17px;
+          @media screen and (max-width: $tablet) {
+            display: flex;
+          }
+        }
         @media screen and (max-width: $tablet) {
           width: 100%;
-          max-width: 161px;
+          max-width: 169px;
           height: 40px;
+          border-color: $extra_dark_grey;
+        }
+        @media screen and (max-width: $phone_normal) {
+          width: 100%;
+          max-width: 100%;
+          margin-bottom: 10px;
         }
         &.result_true {
           border-color: $green;
@@ -319,6 +342,14 @@ export default {
       &__button {
         margin-left: 30px;
         padding: 0px 20px;
+        @media screen and (max-width: $tablet) {
+          height: 40px;
+          width: 121px;
+          margin-left: 10px;
+        }
+        @media screen and (max-width: $phone_normal) {
+          margin-left: 0px;
+        }
       }
     }
     &__message {
