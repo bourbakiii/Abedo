@@ -7,10 +7,10 @@
 <style lang="scss" scoped>
 .category {
   height: 50px;
-  padding: 0px 50px;
+  padding: 4px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: row;
   text-decoration: none;
   border-radius: 50px;
@@ -18,9 +18,10 @@
   * {
     transition: $transition;
   }
-  border: 1px solid $orange;
+  border: 1px solid $extra_dark_grey;
   &:hover {
     background-color: $orange;
+    border-color: $orange;
   }
   &:hover & {
     &-image {
@@ -31,23 +32,20 @@
     }
   }
   &-image {
-    height: 18px;
-    width: auto;
-    object-fit: contain;
-    margin-right: 8px;
+    width: 42px;height:42px;border-radius: 90px;margin-right: 15px;
   }
   &-name {
     max-width: 100%;
-    text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-family: "SF Pro Display";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 17px;
-    text-transform: uppercase;
+font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+
+
   }
   @media screen and (max-width: $notebook) {
     padding: 0px 30px;
