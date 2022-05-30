@@ -363,9 +363,7 @@ export default {
           grid-template-columns: repeat(2, 1fr);
         }
         @media screen and (max-width: $tablet) {
-          grid-template-columns: repeat(1, 1fr);
-          grid-gap: 15px;
-          width: 100%;
+          display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
         }
         &__item {
           width: 100%;
