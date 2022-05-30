@@ -76,7 +76,7 @@ export default {
   width: 100%;
   &__title {
     align-self: flex-start;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   }
   &__sections {
     width: 100%;
@@ -86,9 +86,11 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 50px;
-    position: sticky !important;
-    position: -webkit-sticky !important;
-    top: 70;
+    position: sticky;
+    top: 70px;
+    background-color: $light_grey;
+    z-index: $z_navigation + 1;
+    padding-top: 15px;
     &__slider {
       overflow: hidden;
       margin-bottom: 30px;

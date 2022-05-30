@@ -15,7 +15,11 @@ export const mutations = {
   },
   local_set(state) {
     const local_data = JSON.parse(localStorage.getItem('variables')) ??  {
-      text: null, slot: 'main', info_click: null
+      navigation_transition_to: 100,
+      navigation_transition_back: 60,
+      adaptive_navigation: {
+        text: null, slot: 'main', info_click: null
+      },
     }
     Vue.set(this.state,'variables',local_data);
   }

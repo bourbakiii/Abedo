@@ -137,7 +137,6 @@ export default {
           width: 100%;
           padding-bottom: 0px;
         }
-        overflow: hidden;
         &__shop-block {
           margin-bottom: 70px;
           @media screen and (max-width: $tablet) {

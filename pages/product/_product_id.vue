@@ -438,7 +438,7 @@ export default {
           width: 100%;
           max-width: 100%;
           margin-bottom: 40px;
-          order: 4;
+          // order: 4;
           @media screen and (max-width: $tablet) {
             font-family: "SF Pro Display";
             font-style: normal;
@@ -891,6 +891,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: flex-start;
+          align-self: flex-start;
           border: none;
           outline: none;
           text-decoration: underline;

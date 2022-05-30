@@ -235,6 +235,7 @@ export default {
           width: 55px;
           height: 40px;
           object-fit: contain;
+          padding: 10px;
         }
       }
     }
