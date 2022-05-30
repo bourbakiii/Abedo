@@ -29,6 +29,15 @@ export default {
       return{
         stocks:[]
       }
+    },
+    created(){
+      this.$store.commit('variables/action', state=>{
+      state.adaptive_navigation = { 
+        text: "Акции",
+        slot: 'label',
+        info_click: null
+      }
+    });
     }
 };
 </script>

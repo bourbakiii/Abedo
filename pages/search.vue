@@ -47,6 +47,15 @@ export default {
       
     };
   },
+  created(){
+    this.$store.commit('variables/action', state=>{
+      state.adaptive_navigation = { 
+        text: "Поиск",
+        slot: 'label',
+        info_click: null
+      }
+    });
+  },
   methods:{
     setFounded(data){
       this.founded = data;

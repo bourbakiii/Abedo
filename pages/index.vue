@@ -179,7 +179,8 @@ export default {
     this.$store.commit('variables/action', state=>{
       state.adaptive_navigation = { 
         text: null,
-        slot: 'main'
+        slot: 'main',
+        info_click: null
       }
     });
   }

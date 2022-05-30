@@ -51,6 +51,15 @@ export default {
       });
     return { loading, order: to_return_order };
   },
+  created(){
+    this.$store.commit("variables/action", (state) => {
+      state.adaptive_navigation = {
+        text: `Заказ №${order.id}`,
+        slot: "label",
+        info_click: null,
+      };
+    });
+  },
   computed:{
     token(){
       return this.$store.state.account.token;
@@ -58,6 +67,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 .order-page {
   display: flex;

@@ -54,8 +54,14 @@ export default {
       show_add_form: false,
     };
   },
-  methods: {
-   
+  created(){
+    this.$store.commit('variables/action', state=>{
+      state.adaptive_navigation = { 
+        text: "Адреса",
+        slot: 'label',
+        info_click: null
+      }
+    });
   },
   computed: {
     addresses() {

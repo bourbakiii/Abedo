@@ -27,6 +27,15 @@ export default {
     partners(){
       return this.$store.state.account.favourites;
     }
+  },
+  created(){
+    this.$store.commit('variables/action', state=>{
+      state.adaptive_navigation = { 
+        text: "Избранное",
+        slot: 'label',
+        info_click: null
+      }
+    });
   }
 }
 </script>

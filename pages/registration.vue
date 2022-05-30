@@ -118,6 +118,15 @@ export default {
       confirmation: false,
     };
   },
+  created(){
+    this.$store.commit('variables/action', state=>{
+      state.adaptive_navigation = { 
+        text: "Регистрация",
+        slot: 'label',
+        info_click: null
+      }
+    });
+  },
   methods: {
     registrate() {
       if (this.form.password != this.form.password_confirmation) {

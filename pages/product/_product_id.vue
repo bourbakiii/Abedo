@@ -1,14 +1,17 @@
 <template>
   <div class="page product-page wrapper">
     <div class="product-page__over">
-      <Breadcrumbs class="product-page__over__breadcrumbs adaptive-non"/>
+      <Breadcrumbs class="product-page__over__breadcrumbs adaptive-non" />
       <div class="product-page__over__content content">
         <div class="product-page__over__content__main">
           <div
-          v-if='product.more_images.length'
+            v-if="product.more_images.length"
             class="product-page__over__content__main__images__adaptive__slider adaptive"
           >
-            <ProductImagesSlider :images='product.more_images' class="images-slider"/>
+            <ProductImagesSlider
+              :images="product.more_images"
+              class="images-slider"
+            />
           </div>
           <h1
             class="product-page__over__content__main__name title-extra-normal"
@@ -49,9 +52,9 @@
                       (el) => el.small
                     )"
                     :key="index"
-                  ><img
-                    :src="`${$axios.defaults.baseURL}${slide}`"
-                    class="product-page__over__content__main__images__slider__swiper__slide__image"
+                    ><img
+                      :src="`${$axios.defaults.baseURL}${slide}`"
+                      class="product-page__over__content__main__images__slider__swiper__slide__image"
                   /></swiper-slide>
                 </swiper>
                 <button
@@ -73,7 +76,7 @@
                     </g>
                     <defs>
                       <clipPath id="clip0_2221_7034">
-                        <rect width="20" height="20" fill="white"/>
+                        <rect width="20" height="20" fill="white" />
                       </clipPath>
                     </defs>
                   </svg>
@@ -177,7 +180,11 @@
                   >
                     <Checkbox
                       :value="+option.id"
-                      :checked="product.selected_options.map(el=>+el.id).includes(+option.id)"
+                      :checked="
+                        product.selected_options
+                          .map((el) => +el.id)
+                          .includes(+option.id)
+                      "
                       @change="selectOption(option)"
                       :id="`option-${option.id}`"
                       class="product-page__over__content__main__additional__information__options__content__item__checkbox"
@@ -316,7 +323,7 @@
   </div>
 </template>
 <script>
-import {Swiper, SwiperSlide} from "vue-awesome-swiper";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import Checkbox from "../../components/Checkbox.vue";
 import productMixin from "@/mixins/product.js";
 
@@ -329,25 +336,25 @@ export default {
     SwiperSlide,
     Checkbox,
   },
-  async asyncData({$axios, route, error}) {
+  async asyncData({ $axios, route, error }) {
     let to_return_product = {},
       loading = true;
     await $axios
       .$get(
         `${$axios.defaults.baseURL}/api/product/${route.params.product_id}}`
       )
-      .then(({product}) => {
+      .then(({ product }) => {
         if (!product)
-          return error({statusCode: 404, message: "Продукт неактивен"});
+          return error({ statusCode: 404, message: "Продукт неактивен" });
         to_return_product = product;
       })
       .catch(() => {
-        error({statusCode: 404, message: "Ошибка при получении продукта"});
+        error({ statusCode: 404, message: "Ошибка при получении продукта" });
       })
       .finally(() => {
         loading = false;
       });
-    return {loading, product: to_return_product};
+    return { loading, product: to_return_product };
   },
   data() {
     return {
@@ -365,18 +372,28 @@ export default {
       },
     };
   },
-
+  created() {
+    this.$store.commit("variables/action", (state) => {
+      state.adaptive_navigation = {
+        text: this.product.name,
+        slot: "label",
+        info_click: null,
+      };
+    });
+  },
   methods: {
     selectOption(option) {
-      const select_option_index = this.product.selected_options.findIndex(el => +el.id == +option.id);
-      this.$store.commit('cart/action', state => {
-        if (select_option_index >= 0) this.product.selected_options.splice(select_option_index, 1);
+      const select_option_index = this.product.selected_options.findIndex(
+        (el) => +el.id == +option.id
+      );
+      this.$store.commit("cart/action", (state) => {
+        if (select_option_index >= 0)
+          this.product.selected_options.splice(select_option_index, 1);
         else this.product.selected_options.push(option);
-      })
-        console.log("123");
-      this.$forceUpdate()
-
-    }
+      });
+      console.log("123");
+      this.$forceUpdate();
+    },
   },
 };
 </script>

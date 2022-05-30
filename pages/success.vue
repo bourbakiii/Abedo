@@ -23,6 +23,19 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  created(){
+      this.$store.commit('variables/action', state=>{
+      state.adaptive_navigation = { 
+        text: "Успех",
+        slot: 'label',
+        info_click: null
+      }
+    });
+    }
+}
+</script>
 <style lang="scss" scoped>
 .success-page {
   height: 100%;

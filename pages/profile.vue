@@ -251,6 +251,15 @@ export default {
       return this.$store.state.account.token;
     },
   },
+  created(){
+    this.$store.commit('variables/action', state=>{
+      state.adaptive_navigation = { 
+        text: "Профиль",
+        slot: 'label',
+        info_click: null
+      }
+    });
+  },
   watch: {
     "$store.state.account.user": {
       handler() {
