@@ -16,10 +16,10 @@
             :stocks="stocks"
             class="partner-page__over__content__main__stocks_adaptive adaptive"
           />
-          <PagesPartnerCatalog
-            :partner="partner"
-            class="partner-page__over__content__main__catalog"
-          />
+            <PagesPartnerCatalog
+              :partner="partner"
+              class="partner-page__over__content__main__catalog"
+            />
         </div>
         <SidebarCart
           class="partner-page__over__content__sidebar adaptive-non"
@@ -79,10 +79,10 @@ export default {
         slot: "label",
         rating: this.partner.rate,
 
-        info_click: ()=>
+        info_click: () =>
           this.$store.commit("modals/open", {
             modal_name: "partner",
-            partner: this.partner
+            partner: this.partner,
           }),
       };
     });

@@ -9,6 +9,7 @@
         v-for="section in sections"
         :key="section.id"
         :section="section"
+        :id="`section-item-${section.id}`"
       />
     </div>
     <SectionSlider
@@ -17,8 +18,9 @@
     />
     <div class="catalog__products">
       <div
-        class="catalog__products__section"
+        class="catalog__products__section section"
         :id="`section-${section.id}`"
+        :script_id="section.id"
         v-for="section in sections"
         :key="section.id"
       >
@@ -33,7 +35,6 @@
             :product="Object.assign(product, sectionWithoutProducts(section))"
             :partner="partner"
           />
-          <!-- Сменить функцию на деструктуризацию -->
         </div>
       </div>
     </div>
@@ -65,6 +66,28 @@ export default {
       return { section: object };
     },
   },
+  mounted() {
+    document.addEventListener("scroll", (event) => {
+      for (let element of [
+        ...document.querySelectorAll(".section-item"),
+        ...document.querySelectorAll(".slider-section-item"),
+      ])
+        element.classList.remove("active");
+      for (let element of Array.from(document.querySelectorAll(".section"))) {
+        if (element.getBoundingClientRect().y > 0) {
+          document
+            .getElementById(`section-item-${element.getAttribute(`script_id`)}`)
+            .classList.add("active");
+          document
+            .getElementById(
+              `slider-section-item-${element.getAttribute(`script_id`)}`
+            )
+            .classList.add("active");
+          return;
+        }
+      }
+    });
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -91,9 +114,33 @@ export default {
     background-color: $light_grey;
     z-index: $z_navigation + 1;
     padding-top: 15px;
+    &::before {
+      z-index: 10;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 7px;
+      background: linear-gradient(0deg, transparent, $light_grey);
+      top: 100%;
+      left: 0px;
+    }
     &__slider {
-      overflow: hidden;
-      margin-bottom: 30px;
+      margin-bottom: 15px;
+      padding: 15px 0px;
+      position: sticky;
+      top: 60px;
+      background-color: $light_grey;
+      z-index: $z_navigation + 1;
+      &::before {
+        z-index: 10;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 7px;
+        background: linear-gradient(0deg, transparent, $light_grey);
+        top: 100%;
+        left: 0px;
+      }
     }
     &__item {
       flex-grow: 0;

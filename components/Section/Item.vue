@@ -1,28 +1,28 @@
 <template>
-  <button @click.prevent='act' class="section-item">
-      {{section.name}}
-      </button>
+  <button @click.prevent="act" class="section-item">
+    {{ section.name }}
+  </button>
 </template>
 <script>
 export default {
-    props:{
-        section:{
-            required: true
-        },
-        action:{
-            required:false,
-        }
+  props: {
+    section: {
+      required: true,
     },
-    methods:{
-        act(){
-            if(this.action) this.action();
-            else {
-            const element = document.getElementById(`section-${this.section.id}`);
-              element.scrollIntoView({block: "center", behavior: "smooth"});
-            }
-        }
-    }
-}
+    action: {
+      required: false,
+    },
+  },
+  methods: {
+    act() {
+      if (this.action) this.action();
+      else {
+        const element = document.getElementById(`section-${this.section.id}`);
+        element.scrollIntoView({ block: "center", behavior: "smooth" });
+      }
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .section-item {
@@ -37,10 +37,11 @@ export default {
   white-space: nowrap;
   height: 45px;
   padding: 0px 25px;
-    transition:  $transition;
-  &:hover, &.active{
-      background-color: $darkblue;
-      color:$white;
+  transition: $transition;
+  &:hover,
+  &.active {
+    background-color: $darkblue;
+    color: $white;
   }
 }
 </style>
