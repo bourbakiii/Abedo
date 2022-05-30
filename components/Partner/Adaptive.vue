@@ -1,6 +1,5 @@
 <template>
   <div  @click.self="$router.push(`/partners/${partner.id}`)" class="shop-adaptive shop">
-  {{is_favourite}}
     <button @click="like" class="shop-adaptive__favourite" :class='{"shop-adaptive__favourite_filled": is_favourite}'>
       <svg
         class="shop-adaptive__favourite__icon"
@@ -245,6 +244,7 @@ export default {
   &__favourite{
     background-color: transparent;
     &_filled{
+      border-color: $red !important;
         background-color: $red !important;
         svg * {
           fill:$white;
