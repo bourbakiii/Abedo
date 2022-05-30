@@ -1,16 +1,24 @@
 <template>
-  <div v-if='categories.length' class="sidebar">
+  <div v-if="categories.length" class="sidebar">
     <h2 class="sidebar__title title-small">Категории</h2>
     <div class="sidebar__content">
-      <button @click='()=>$router.push(`/category/${category.id}`)' v-for='category in categories' :key='category.id' class="sidebar__content__item">
+      <button
+        @click="$router.push(`/partners?category=${category.id}`)"
+        v-for="category in categories"
+        :key="category.id"
+        class="sidebar__content__item"
+        :class="{
+          sidebar__content__item__active:
+            +$route.query.category == +category.id,
+        }"
+      >
         <img
-        v-if='category.image'
-        
+          v-if="category.image"
           :src="`${$axios.defaults.baseURL}${category.image.small}`"
           class="sidebar__content__item__image"
         />
         <p class="sidebar__content__item__name">
-          {{category.name}}
+          {{ category.name }}
         </p>
         <svg
           class="sidebar__content__item__icon"
@@ -31,17 +39,23 @@
 </template>
 <script>
 export default {
-  data(){
-    return{
-      categories: []
-    }
+  data() {
+    return {
+      categories: [],
+    };
   },
-  fetch(){
-    this.$axios.get("/api/cuisines/get").then(({data: {cuisines: {data}}})=>{
-      this.categories = data;
-    })
-  }
-}
+  fetch() {
+    this.$axios.get("/api/cuisines/get").then(
+      ({
+        data: {
+          cuisines: { data },
+        },
+      }) => {
+        this.categories = data;
+      }
+    );
+  },
+};
 </script>
 <style lang="scss" scoped>
 .sidebar {
@@ -55,14 +69,14 @@ export default {
   border-radius: 20px;
   &__title {
     margin-bottom: 15px;
-    width:100%;
+    width: 100%;
   }
   &__content {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    width:100%;
+    width: 100%;
     &__item {
       width: 100%;
       min-height: 50px;
@@ -74,13 +88,14 @@ export default {
       border: none;
       outline: none;
       border-bottom: 1px solid $dark_grey;
-      &:last-of-type{
+      &:last-of-type {
         border-bottom: none;
       }
-      *{
-          transition: $transition;
+      * {
+        transition: $transition;
       }
       transition: $transition;
+      &__active &,
       &:hover & {
         &__icon *,
         &__image * {
@@ -90,8 +105,9 @@ export default {
           color: $orange;
         }
       }
+
       &__image {
-        width:30px;
+        width: 30px;
         height: 30px;
         object-fit: contain;
         margin-right: 13px;
@@ -102,12 +118,10 @@ export default {
         flex-grow: 1;
         text-align: left;
 
-font-style: normal;
-font-weight: 500;
-font-size: 15px;
-line-height: 18px;
-
-
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
       }
       &__icon {
         margin-left: 11px;

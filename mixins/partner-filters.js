@@ -5,10 +5,6 @@ export default {
             partners: [],
             show_filters: false,
             loading: false,
-            // params: {
-            //   cuisine: this.$route.params.category_id,
-            // },
-            addititonal_qs_filters:{},
             params: {
                 page: 1,
                 last_page: null,
@@ -23,6 +19,7 @@ export default {
         }
     },
     async fetch() {
+        console.log(123);
         this.loading = true;
         ////// Тут чтобы нормально парамсы вставить
         let filters = {};
@@ -31,9 +28,7 @@ export default {
                 if (key != "keywords") filters[key] = +this.filters[key];
                 else filters[key] = this.filters[key];
 
-                // второй цикл и additional_qs_filters используется для страницы категорий
-                for(let key in this.addititonal_qs_filters)
-                    if (!!this.addititonal_qs_filters[key]) filters[key] = +this.addititonal_qs_filters[key];
+                    if (this.$route.query.category) filters['cuisine'] = this.$route.query.category; 
                 
         ////////////////////////////////////////////
         await this.$axios
@@ -62,4 +57,15 @@ export default {
             this.$fetch();
         },
     },
+    watch:{
+        "$route.query.category":{
+            handler(){
+                this.partners = [];
+            this.params.page = 1;
+            this.last_page = 1;
+            this.$fetch();
+            },
+            deep:true
+        }
+    }
 }

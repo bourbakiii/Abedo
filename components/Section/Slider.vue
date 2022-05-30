@@ -41,11 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 .slider {
-  // &__wrapper{
-  //   background-color: red;
-  // }
   width: 100%;
-
   .swiper-slide {
     width: 100%;
     overflow: hidden !important;

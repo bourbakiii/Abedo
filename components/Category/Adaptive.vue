@@ -5,7 +5,7 @@
           ? `linear-gradient(360deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 100%), url(${$axios.defaults.baseURL}${category.image.mobile})`
           : ''
       };`"
-  :to="`/category/${category.id}`"
+  :to="`/partners?category=${category.id}`"
     class="category category-adaptive"
   >
     <div class="category-adaptive__overlay"></div>
