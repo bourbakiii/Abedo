@@ -28,7 +28,7 @@ export default {
       return this.$store.state.account.favourites;
     }
   },
-  created(){
+  mounted(){
     this.$store.commit('variables/action', state=>{
       state.adaptive_navigation = { 
         text: "Избранное",

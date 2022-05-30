@@ -203,7 +203,7 @@
 import partnerFiltersMixin from "@/mixins/partner-filters.js";
 export default {
   mixins: [partnerFiltersMixin],
-  created(){
+  mounted(){
     this.$store.commit("variables/action", (state) => {
       state.adaptive_navigation = {
         text: "Заведения",

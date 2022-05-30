@@ -58,7 +58,7 @@ export default {
   beforeDestroy() {
     this.$store.commit("cart/clearPromo");
   },
-  created(){
+  mounted(){
     this.$store.commit('variables/action', state=>{
       state.adaptive_navigation = { 
         text: "Корзина",

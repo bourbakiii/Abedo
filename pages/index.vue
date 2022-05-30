@@ -175,7 +175,7 @@ export default {
         this.categories = data;
       });
   },
-  created(){
+  mounted(){
     this.$store.commit('variables/action', state=>{
       state.adaptive_navigation = { 
         text: null,

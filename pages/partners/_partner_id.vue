@@ -72,7 +72,7 @@ export default {
       partner: {},
     };
   },
-  created() {
+  mounted() {
     this.$store.commit("variables/action", (state) => {
       state.adaptive_navigation = {
         text: this.partner.name,

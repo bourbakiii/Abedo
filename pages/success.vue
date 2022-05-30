@@ -25,7 +25,7 @@
 </template>
 <script>
 export default {
-  created(){
+  mounted(){
       this.$store.commit('variables/action', state=>{
       state.adaptive_navigation = { 
         text: "Успех",

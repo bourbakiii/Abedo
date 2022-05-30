@@ -54,7 +54,7 @@ export default {
       show_add_form: false,
     };
   },
-  created(){
+  mounted(){
     this.$store.commit('variables/action', state=>{
       state.adaptive_navigation = { 
         text: "Адреса",

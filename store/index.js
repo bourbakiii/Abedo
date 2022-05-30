@@ -8,6 +8,7 @@ export const actions = {
     clientHook({ state, dispatch, commit }) {
         commit("cart/local_set");
         commit("account/local_set");
+        commit("variables/local_set");
         if (state.account.token) dispatch("account/get");
     }
 }

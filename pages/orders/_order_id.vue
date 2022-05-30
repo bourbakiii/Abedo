@@ -51,7 +51,7 @@ export default {
       });
     return { loading, order: to_return_order };
   },
-  created(){
+  mounted(){
     this.$store.commit("variables/action", (state) => {
       state.adaptive_navigation = {
         text: `Заказ №${order.id}`,

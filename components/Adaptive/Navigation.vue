@@ -10,8 +10,6 @@
 export default {
   computed:{
     slot_name(){
-      console.log("here we goooo")
-      console.log(this.$store.state.variables)
       return this.$store.state.variables.adaptive_navigation.slot
     }
   }
@@ -24,7 +22,6 @@ export default {
     position: sticky;
     top: 0px;
     width: 100%;
-    height: 60px;
     background-color: $white;
     padding: 0px 20px;
     display: flex;
