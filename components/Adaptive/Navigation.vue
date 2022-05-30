@@ -1,13 +1,23 @@
 <template>
   <div class="navigation adaptive-navigation__wrapper">
     <div class="adaptive-navigation">
-      <AdaptiveSlotsLabel v-if="$route.name=='partners-partner_id'" class="adaptive-navigation__slot adaptive-navigation__slot__label"/>
-      <AdaptiveSlotsMain v-else class='adaptive-navigation__slot adaptive-navigation__slot__index'/>
+      <AdaptiveSlotsMain v-if='slot_name=="main"' class='adaptive-navigation__slot adaptive-navigation__slot__index'/>
+      <AdaptiveSlotsLabel v-else class="adaptive-navigation__slot adaptive-navigation__slot__label"/>
     </div>
   </div>
 </template>
 <script>
+export default {
+  computed:{
+    slot_name(){
+      console.log("here we goooo")
+      console.log(this.$store.state.variables)
+      return this.$store.state.variables.adaptive_navigation.slot
+    }
+  }
+}
 </script>
+
 <style lang="scss" scoped>
 .adaptive-navigation {
   &__wrapper {

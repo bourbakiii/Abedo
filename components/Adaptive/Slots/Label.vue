@@ -1,7 +1,7 @@
 <template>
   <div class="navigation-slot navigation-slot-label">
     <svg
-    @click='$router.go(-1)'
+      @click="$router.go(-1)"
       class="navigation-slot-label__back"
       width="12"
       height="18"
@@ -14,8 +14,10 @@
         fill="#5C6784"
       />
     </svg>
-    <p class="navigation-slot-label__text" >Европейская кухня</p>
+    <p class="navigation-slot-label__text">{{ text }}</p>
     <svg
+      v-if="info_click"
+      @click='info_click'
       class="navigation-slot-label__info"
       width="26"
       height="26"
@@ -43,6 +45,18 @@
     </svg>
   </div>
 </template>
+<script>
+export default {
+  computed: {
+    text() {
+      return this.$store.state.variables.adaptive_navigation.text;
+    },
+    info_click(){
+      return this.$store.state.variables.adaptive_navigation.info_click;
+    }
+  },
+};
+</script>
 <style lang="scss" scoped>
 .navigation-slot-label {
   width: 100%;
@@ -50,19 +64,19 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  &__text{
-      width:100%;
-      margin: 0px 15px;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      font-family: 'SF Pro Display';
-font-style: normal;
-font-weight: 600;
-font-size: 20px;
-line-height: 20px;
-color:$darkblue;
-text-align: left;
+  &__text {
+    width: 100%;
+    margin: 0px 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 20px;
+    color: $darkblue;
+    text-align: left;
   }
 }
 </style>

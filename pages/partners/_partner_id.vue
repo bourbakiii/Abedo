@@ -72,6 +72,19 @@ export default {
       partner: {},
     };
   },
+  created() {
+    this.$store.commit("variables/action", (state) => {
+      state.adaptive_navigation = {
+        text: this.partner.name,
+        slot: "label",
+        info_click: ()=>
+          this.$store.commit("modals/open", {
+            modal_name: "partner",
+            partner: this.partner
+          }),
+      };
+    });
+  },
   computed: {
     cart_products() {
       return this.$store.state.cart.products;

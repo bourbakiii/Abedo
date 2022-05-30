@@ -175,6 +175,14 @@ export default {
         this.categories = data;
       });
   },
+  created(){
+    this.$store.commit('variables/action', state=>{
+      state.adaptive_navigation = { 
+        text: null,
+        slot: 'main'
+      }
+    });
+  }
 };
 </script>
 <style lang="scss" scoped>

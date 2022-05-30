@@ -141,7 +141,7 @@
           </p>
         </div>
         <div v-if="partner.contact_phone" class="partner-modal__content__information__item">
-          <div v-class="partner-modal__content__information__item__hood">
+          <div class="partner-modal__content__information__item__hood">
             <svg
               class="partner-modal__content__information__item__hood__icon"
               width="15"
