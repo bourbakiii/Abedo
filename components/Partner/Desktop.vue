@@ -6,8 +6,12 @@
     <div
       @click.self="$router.push(`/partners/${partner.id}`)"
       class="item__block"
-    > 
-      <img v-if='partner.image.length' :src="`${$axios.defaults.baseURL}${partner.image[0].desktop}`" class="item__block__image"/>
+    >
+      <img
+        v-if="partner.image.length"
+        :src="`${$axios.defaults.baseURL}${partner.image[0].desktop}`"
+        class="item__block__image"
+      />
       <div
         @click.self="$router.push(`/partners/${partner.id}`)"
         class="item__block__content"
@@ -165,14 +169,14 @@ export default {
     border-radius: 20px;
     overflow: hidden;
     position: relative;
-    &:hover &{
-&__image{
-  transform: scale(1.1);
-}
+    &:hover & {
+      &__image {
+        transform: scale(1.1);
+      }
     }
-    &__image{
+    &__image {
       position: absolute;
-      width:100%;
+      width: 100%;
       height: 100%;
       object-fit: cover;
       transition: $transition;

@@ -1,6 +1,7 @@
 <template>
-  <NuxtLink to="/partners/1" class="shop-adaptive shop">
-    <button class="shop-adaptive__favourite">
+  <div  @click.self="$router.push(`/partners/${partner.id}`)" class="shop-adaptive shop">
+  {{is_favourite}}
+    <button @click="like" class="shop-adaptive__favourite" :class='{"shop-adaptive__favourite_filled": is_favourite}'>
       <svg
         class="shop-adaptive__favourite__icon"
         width="16"
@@ -15,7 +16,7 @@
         />
       </svg>
     </button>
-    <div class="shop-adaptive__info">
+    <div @click="$router.push(`/partners/${partner.id}`)" class="shop-adaptive__info">
       <p class="shop-adaptive__info__name" >
         {{ partner.name }}
       </p>
@@ -23,7 +24,7 @@
         {{ cuisines }}
       </p>
     </div>
-    <div class="shop-adaptive__icons">
+    <div @click="$router.push(`/partners/${partner.id}`)" class="shop-adaptive__icons">
       <span
         v-if="partner.order_gifts.length"
         class="shop-adaptive__icons__icon__wrapper shop-adaptive__icons__icon__gift"
@@ -116,6 +117,7 @@
       </span>
     </div>
     <svg
+    @click="$router.push(`/partners/${partner.id}`)"
       class="shop-adaptive__icon"
       width="9"
       height="15"
@@ -128,10 +130,12 @@
         fill="#5C6784"
       />
     </svg>
-  </NuxtLink>
+  </div>
 </template>
 <script>
+import partnerMixin from "@/mixins/partner.js";
 export default {
+  mixins: [partnerMixin],
   props: {
     partner: {
       required: false,
@@ -238,13 +242,26 @@ export default {
   &:hover {
     background-color: $darkblue;
   }
-  &:hover & {
-    &__favourite {
-      border-color: $white;
-      svg * {
-        fill: white;
+  &__favourite{
+    background-color: transparent;
+    &_filled{
+        background-color: $red !important;
+        svg * {
+          fill:$white;
+        }
       }
-    }
+  }
+  &:hover & {
+    &__favourite{
+      &:not(&_filled)
+      {
+        border-color: $white;
+        svg * {
+          fill: $white;
+        }
+      }
+
+  }
     &__info {
       &__name {
         color: $white;

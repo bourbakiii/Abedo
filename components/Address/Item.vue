@@ -485,7 +485,7 @@ export default {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-direction: row;
     margin-top: 30px;
     @media screen and (max-width: $tablet_start) {

@@ -1,5 +1,24 @@
 <template>
-  <div class="stocks__wrapper" v-if='stocks.length'>
+  <div class="stocks__wrapper" v-if="stocks.length">
+    <div class="stocks__title-block adaptive">
+      <h2 class="stocks__title-block__title title title-small">Акции</h2>
+      <NuxtLink to='/stocks' class="stocks__title-block__button">
+        Все акции
+        <svg
+          class="stocks__title-block__button__icon"
+          width="6"
+          height="10"
+          viewBox="0 0 6 10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M-3.8557e-07 1.17918L3.71005 5L-5.15436e-08 8.82082L1.14496 10L6 5L1.14496 -5.00476e-08L-3.8557e-07 1.17918Z"
+            fill="#5C6784"
+          />
+        </svg>
+      </NuxtLink>
+    </div>
     <div class="stocks__content">
       <swiper
         :auto-destroy="false"
@@ -78,10 +97,9 @@ export default {
   async fetch() {
     await this.$axios
       .$get(`${this.$axios.defaults.baseURL}/api/shares`)
-      .then(({shares:{data}}) => {
-        this.stocks=data;
+      .then(({ shares: { data } }) => {
+        this.stocks = data;
       });
-    
   },
   data() {
     return {
@@ -125,6 +143,23 @@ export default {
     @media screen and (max-width: $tablet) {
       width: 100%;
       max-width: 100%;
+    }
+  }
+
+  &__title-block {
+    margin-bottom: 20px;
+    width:100%;
+    display: flex;align-items: center;justify-content: space-between;flex-direction:row;
+    &__button {
+      text-decoration: none;
+      &__icon {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        margin-left: 7px;
+      }
     }
   }
   &__slide {
