@@ -3,19 +3,19 @@
     <div class="shop-block__content adaptive-non">
       <img
         @click.prevent="
-            () =>
-              $store.commit('modals/open', {
-                modal_name: 'partner',
-                partner,
-              })
-          "
+          () =>
+            $store.commit('modals/open', {
+              modal_name: 'partner',
+              partner,
+            })
+        "
         v-if="partner.logo.original"
         :src="`${$axios.defaults.baseURL}${partner.logo.original}`"
         class="shop-block__content__image"
       />
       <div class="shop-block__content__info">
         <div class="shop-block__content__info__top">
-          <span class="shop-block__content__info__top__name" >
+          <span class="shop-block__content__info__top__name">
             {{ partner.name }}
           </span>
           <span
@@ -41,11 +41,7 @@
             </p>
           </span>
         </div>
-        <p
-          v-if="cuisines"
-          class="shop-block__content__info__cuisines"
-
-        >
+        <p v-if="cuisines" class="shop-block__content__info__cuisines">
           {{ cuisines }}
         </p>
         <div
@@ -75,17 +71,27 @@
           </svg>
 
           <p class="shop-block__content__info__phone__text">
-            +7{{ partner.contact_phone }}
+            +7 {{ parsePhone(`${partner.contact_phone}`)}} 
           </p>
+          <div class="shop-block__content__info__phone__socials">
+             <NuxtLink to="#" class="shop-block__content__info__phone__socials__item">
+          <svg class="shop-block__content__info__phone__socials__item__icon" width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.0037 0H14.9963C6.72563 0 0 6.7275 0 15C0 18.2812 1.0575 21.3225 2.85563 23.7919L0.98625 29.3644L6.75188 27.5213C9.12375 29.0925 11.9531 30 15.0037 30C23.2744 30 30 23.2706 30 15C30 6.72938 23.2744 0 15.0037 0Z" fill="#4CAF50"/>
+<path d="M23.7318 21.1818C23.3699 22.2037 21.9337 23.0512 20.788 23.2987C20.0043 23.4655 18.9805 23.5987 15.5343 22.1699C11.1262 20.3437 8.28741 15.8643 8.06616 15.5737C7.85429 15.283 6.28491 13.2018 6.28491 11.0493C6.28491 8.89679 7.37804 7.84866 7.81866 7.39866C8.18054 7.02928 8.77866 6.86053 9.35241 6.86053C9.53804 6.86053 9.70491 6.86991 9.85491 6.87741C10.2955 6.89616 10.5168 6.92241 10.8074 7.61804C11.1693 8.48991 12.0505 10.6424 12.1555 10.8637C12.2624 11.0849 12.3693 11.3849 12.2193 11.6755C12.0787 11.9755 11.9549 12.1087 11.7337 12.3637C11.5124 12.6187 11.3024 12.8137 11.0812 13.0874C10.8787 13.3255 10.6499 13.5805 10.9049 14.0212C11.1599 14.4524 12.0412 15.8905 13.3387 17.0455C15.013 18.5362 16.3705 19.0124 16.8562 19.2149C17.218 19.3649 17.6493 19.3293 17.9137 19.048C18.2493 18.6862 18.6637 18.0862 19.0855 17.4955C19.3855 17.0718 19.7643 17.0193 20.1618 17.1693C20.5668 17.3099 22.7099 18.3693 23.1505 18.5887C23.5912 18.8099 23.8818 18.9149 23.9887 19.1005C24.0937 19.2862 24.0937 20.158 23.7318 21.1818Z" fill="#FAFAFA"/>
+</svg>
+
+        </NuxtLink>
+        <NuxtLink to="#" class="shop-block__content__info__phone__socials__item">
+          <svg class="shop-block__content__info__phone__socials__item__icon" width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#2AABEE"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M6.78979 14.8416C11.1626 12.9364 14.0785 11.6804 15.5374 11.0736C19.7031 9.34097 20.5687 9.03997 21.1328 9.03001C21.2569 9.02784 21.5344 9.05861 21.7141 9.20445C21.9807 9.42077 21.9822 9.89034 21.9526 10.2011C21.7269 12.573 20.7501 18.3288 20.2532 20.9854C20.0429 22.1094 19.6288 22.4864 19.2281 22.5232C18.357 22.6034 17.6955 21.9475 16.8519 21.3945C15.5317 20.5291 14.7858 19.9904 13.5043 19.1459C12.0234 18.17 12.9834 17.6336 13.8274 16.757C14.0483 16.5276 17.8863 13.0367 17.9606 12.72C17.9699 12.6803 17.9785 12.5327 17.8908 12.4548C17.8031 12.3768 17.6736 12.4034 17.5802 12.4246C17.4478 12.4547 15.3388 13.8487 11.2532 16.6066C10.6545 17.0177 10.1123 17.218 9.62649 17.2075C9.09088 17.1959 8.06069 16.9047 7.29481 16.6557C6.35543 16.3504 5.60883 16.1889 5.67387 15.6703C5.70774 15.4001 6.07969 15.1239 6.78979 14.8416Z" fill="white"/>
+</svg>
+
+        </NuxtLink>
+          </div>
         </div>
         <button
-          @click.prevent="
-            () =>
-              $store.commit('modals/open', {
-                modal_name: 'partner',
-                partner,
-              })
-          "
+          @click.prevent="$store.commit('modals/open', {modal_name: 'partner',partner})"
           class="shop-block__content__info__button"
         >
           <p class="shop-block__content__info__button__text">Подробнее</p>
@@ -139,13 +145,26 @@
           </defs>
         </svg>
       </span>
-      <p
-        class="shop-block__additional__text shop-block__phone__text"
-
-      >
-        +7{{ partner.contact_phone }}
+      <p class="shop-block__additional__text shop-block__phone__text">
+        +7 {{ parsePhone(`${partner.contact_phone}`)}} 
       </p>
-      <div v-if="partner.rate" class="shop-block__additional__rating">
+      <div class="shop-block__additional__socials">
+        <NuxtLink to="#" class="shop-block__additional__socials__item">
+          <svg class="shop-block__additional__socials__item__icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.0037 0H14.9963C6.72563 0 0 6.7275 0 15C0 18.2812 1.0575 21.3225 2.85563 23.7919L0.98625 29.3644L6.75188 27.5213C9.12375 29.0925 11.9531 30 15.0037 30C23.2744 30 30 23.2706 30 15C30 6.72938 23.2744 0 15.0037 0Z" fill="#4CAF50"/>
+<path d="M23.7318 21.1818C23.3699 22.2037 21.9337 23.0512 20.788 23.2987C20.0043 23.4655 18.9805 23.5987 15.5343 22.1699C11.1262 20.3437 8.28741 15.8643 8.06616 15.5737C7.85429 15.283 6.28491 13.2018 6.28491 11.0493C6.28491 8.89679 7.37804 7.84866 7.81866 7.39866C8.18054 7.02928 8.77866 6.86053 9.35241 6.86053C9.53804 6.86053 9.70491 6.86991 9.85491 6.87741C10.2955 6.89616 10.5168 6.92241 10.8074 7.61804C11.1693 8.48991 12.0505 10.6424 12.1555 10.8637C12.2624 11.0849 12.3693 11.3849 12.2193 11.6755C12.0787 11.9755 11.9549 12.1087 11.7337 12.3637C11.5124 12.6187 11.3024 12.8137 11.0812 13.0874C10.8787 13.3255 10.6499 13.5805 10.9049 14.0212C11.1599 14.4524 12.0412 15.8905 13.3387 17.0455C15.013 18.5362 16.3705 19.0124 16.8562 19.2149C17.218 19.3649 17.6493 19.3293 17.9137 19.048C18.2493 18.6862 18.6637 18.0862 19.0855 17.4955C19.3855 17.0718 19.7643 17.0193 20.1618 17.1693C20.5668 17.3099 22.7099 18.3693 23.1505 18.5887C23.5912 18.8099 23.8818 18.9149 23.9887 19.1005C24.0937 19.2862 24.0937 20.158 23.7318 21.1818Z" fill="#FAFAFA"/>
+</svg>
+
+        </NuxtLink>
+        <NuxtLink to="#" class="shop-block__additional__socials__item">
+          <svg class="shop-block__additional__socials__item__icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#2AABEE"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M6.78979 14.8416C11.1626 12.9364 14.0785 11.6804 15.5374 11.0736C19.7031 9.34097 20.5687 9.03997 21.1328 9.03001C21.2569 9.02784 21.5344 9.05861 21.7141 9.20445C21.9807 9.42077 21.9822 9.89034 21.9526 10.2011C21.7269 12.573 20.7501 18.3288 20.2532 20.9854C20.0429 22.1094 19.6288 22.4864 19.2281 22.5232C18.357 22.6034 17.6955 21.9475 16.8519 21.3945C15.5317 20.5291 14.7858 19.9904 13.5043 19.1459C12.0234 18.17 12.9834 17.6336 13.8274 16.757C14.0483 16.5276 17.8863 13.0367 17.9606 12.72C17.9699 12.6803 17.9785 12.5327 17.8908 12.4548C17.8031 12.3768 17.6736 12.4034 17.5802 12.4246C17.4478 12.4547 15.3388 13.8487 11.2532 16.6066C10.6545 17.0177 10.1123 17.218 9.62649 17.2075C9.09088 17.1959 8.06069 16.9047 7.29481 16.6557C6.35543 16.3504 5.60883 16.1889 5.67387 15.6703C5.70774 15.4001 6.07969 15.1239 6.78979 14.8416Z" fill="white"/>
+</svg>
+
+        </NuxtLink>
+      </div>
+      <!-- <div v-if="partner.rate" class="shop-block__additional__rating">
         <svg
           class="shop-block__additional__rating__icon"
           width="15"
@@ -160,7 +179,7 @@
           />
         </svg>
         <p class="shop-block__additional__rating__value">{{ partner.rate }}</p>
-      </div>
+      </div> -->
     </div>
     <div
       v-if="partner.free_order_price"
@@ -225,7 +244,7 @@
           </defs>
         </svg>
       </span>
-      <p class="shop-block__additional__text" >
+      <p class="shop-block__additional__text">
         Бесплатная доставка при заказе от {{ partner.free_order_price }}₽
       </p>
     </div>
@@ -248,7 +267,7 @@
           />
         </svg>
       </span>
-      <p class="shop-block__additional__text" >
+      <p class="shop-block__additional__text">
         Подарок “{{ partner.order_gifts[0].product.name }}” при заказе от
         {{ partner.order_gifts[0].order_price }}₽
       </p>
@@ -257,7 +276,9 @@
 </template>
 
 <script>
+import parserMixin from "@/mixins/parser.js";
 export default {
+  mixins:[parserMixin],
   props: {
     partner: {
       required: true,
@@ -387,7 +408,7 @@ export default {
       }
       &__phone {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: flex-start;
         flex-direction: row;
         width: 100%;
@@ -396,13 +417,23 @@ export default {
           margin-right: 10px;
         }
         &__text {
-          width: 100%;
+          flex-shrink: 0;
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 500;
           font-size: 16px;
           line-height: 20px;
           color: $darkblue;
+        }
+        &__socials{
+          display: flex;align-items: center;justify-content: flex-end;flex-direction: row;
+          margin-right:auto; margin-left:30px;
+          &__item{
+            margin-right: 19px;
+            &:last-of-type{
+              margin-right: 0px;
+            }
+          }
         }
       }
       &__button {
@@ -474,7 +505,7 @@ export default {
           height: 40px;
           width: 40px;
           border: 1px solid $extra_dark_grey;
-border-radius: 50px;
+          border-radius: 50px;
         }
         margin-right: 20px;
         flex-shrink: 0;
@@ -511,6 +542,15 @@ border-radius: 50px;
         font-weight: 400;
         font-size: 15px;
         line-height: 20px;
+      }
+    }
+    &__socials{
+      display: flex;align-items: center;justify-content: flex-end;flex-direction: row;
+      &__item{
+        margin-right: 14px;
+        &:last-of-type{
+          margin-right: 0px;
+        }
       }
     }
   }

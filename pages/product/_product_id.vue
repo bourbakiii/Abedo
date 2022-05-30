@@ -422,9 +422,11 @@ export default {
       &__main {
         width: 80%;
         padding-bottom: 100px;
+        display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
         @media screen and (max-width: $tablet) {
           width: 100%;
           margin-right: 0px;
+
           padding-bottom: 0px;
         }
         @media screen and (max-width: $sidebar_dn) {
@@ -444,6 +446,7 @@ export default {
             font-size: 20px;
             line-height: 20px;
             margin-bottom: 18px;
+            order: -2;
           }
         }
 

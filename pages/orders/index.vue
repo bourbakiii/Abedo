@@ -18,13 +18,11 @@
               >
                 <p
                   class="orders-page__content__orders__content__item__data__block__name"
-
                 >
                   !!! не приходит !!!
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-
                 >
                   №{{ order.id }}
                 </p>
@@ -39,7 +37,6 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-
                 >
                   {{ order.created_at }}
                 </p>
@@ -54,7 +51,6 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-
                 >
                   {{ parseAddress(order) }}
                 </p>
@@ -69,9 +65,8 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-
                 >
-                  {{order.price_with_discount}}₽
+                  {{ order.price_with_discount }}₽
                 </p>
               </div>
               <div
@@ -84,20 +79,19 @@
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
-
                 >
-                  {{order.statuses[order.statuses.length -1].title}}
+                  {{ order.statuses[order.statuses.length - 1].title }}
                 </p>
               </div>
             </div>
             <div class="orders-page__content__orders__content__item__buttons">
               <ButtonStandart
-                @click.native="() => $router.push(`/orders/${order.id}`)"
+                @click.native="$router.push(`/orders/${order.id}`)"
                 class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_open"
                 >Открыть</ButtonStandart
               >
               <ButtonStandart
-              @click='()=>$store.commit("modals/open",{modal_name:"rate"})'
+                @click="$store.commit('modals/open', { modal_name: 'rate' })"
                 class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_rate"
                 >Оценить</ButtonStandart
               >
@@ -133,7 +127,7 @@ export default {
       return this.$store.state.account.token;
     },
   },
-  mounted(){
+  mounted() {
     this.$store.commit("variables/action", (state) => {
       state.adaptive_navigation = {
         text: `Заказы`,

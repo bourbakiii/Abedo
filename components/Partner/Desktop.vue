@@ -8,6 +8,7 @@
       class="item__block"
     >
       <img
+       @click.self="$router.push(`/partners/${partner.id}`)"
         v-if="partner.image.length"
         :src="`${$axios.defaults.baseURL}${partner.image[0].desktop}`"
         class="item__block__image"

@@ -16,6 +16,24 @@
     </svg>
 
     <p v-if="text" class="navigation-slot-label__text">{{ text }}</p>
+    <transition appear name="rate-button">
+      <div v-if="rate" class="navigation-slot-label__rate">
+        <svg
+          class="navigation-slot-label__rate__icon"
+          width="15"
+          height="15"
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.6427 14.6967C11.807 14.6967 11.9702 14.6454 12.1095 14.5447C12.3689 14.3567 12.4901 14.0335 12.4195 13.7216L11.4545 9.47082L14.7272 6.6008C14.9677 6.3908 15.0596 6.05822 14.9609 5.75392C14.8621 5.45018 14.5934 5.23514 14.2752 5.20573L9.94515 4.81262L8.23319 0.806279C8.10696 0.51193 7.81948 0.321838 7.50006 0.321838C7.18065 0.321838 6.89317 0.51193 6.76694 0.805593L5.05498 4.81262L0.725577 5.20573C0.406737 5.23446 0.138024 5.45018 0.0392599 5.75392C-0.0595055 6.05765 0.0318203 6.3908 0.272381 6.6008L3.54501 9.47025L2.58002 13.7209C2.50929 14.0335 2.6306 14.3567 2.88993 14.5441C3.14869 14.7316 3.49374 14.746 3.76623 14.5822L7.50006 12.3509L11.2339 14.5835C11.3601 14.6584 11.5008 14.6967 11.6427 14.6967ZM7.50006 11.3897C7.35815 11.3897 7.21762 11.4278 7.09127 11.5028L3.56744 13.6104L4.47818 9.59831C4.54319 9.31278 4.44625 9.01465 4.2256 8.82147L1.13551 6.11144L5.22378 5.74018C5.51813 5.71329 5.77128 5.52823 5.88629 5.257L7.50006 1.47623L9.11578 5.25757C9.22953 5.52697 9.48268 5.71203 9.77635 5.73892L13.8652 6.11018L10.7752 8.82021C10.5539 9.01396 10.4571 9.31152 10.5226 9.59774L11.4327 13.6097L7.90886 11.5028C7.78262 11.4278 7.64197 11.3897 7.50006 11.3897ZM9.97822 4.89009C9.97822 4.89009 9.97822 4.89078 9.97891 4.89135L9.97822 4.89009ZM5.02316 4.88826L5.02247 4.88952C5.02247 4.88883 5.02247 4.88883 5.02316 4.88826Z"
+            fill="#F95738"
+          />
+        </svg>
+        {{ rate }}
+      </div>
+    </transition>
     <transition appear name="info-button">
       <svg
         v-if="info_click"
@@ -46,7 +64,6 @@
         />
       </svg>
     </transition>
-
   </div>
 </template>
 <script>
@@ -58,16 +75,29 @@ export default {
     info_click() {
       return this.$store.state.variables.adaptive_navigation.info_click;
     },
+    rate() {
+      return this.$store.state.variables.adaptive_navigation.rating || null;
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
+.rate-button {
+  &-enter-active,
+  &-leave-active {
+    transition: $transition;
+  }
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+}
 .info-button {
   &-enter-active {
-    animation: $transition*2 toScaleAndBack;
+    animation: $transition * 2 toScaleAndBack;
   }
   &-leave-active {
-    animation: $transition*2 toDiscaleAndBack;
+    animation: $transition * 2 toDiscaleAndBack;
   }
   @keyframes toScaleAndBack {
     0% {
@@ -79,20 +109,22 @@ export default {
       opacity: 1;
     }
     100% {
-      font-size: 20px;
+      transform: scale(1);
     }
   }
   @keyframes toDiscaleAndBack {
     0% {
       transform: scale(1);
+      opacity: 1;
     }
     40% {
       transform: scale(1.32);
-      opacity: 1;
+    }
+    90% {
+      opacity: 0;
     }
     100% {
-      transform: scale(0.3);
-      opacity: 0;
+      transform: scale(0.1);
     }
   }
 }
@@ -115,6 +147,18 @@ export default {
     line-height: 20px;
     color: $darkblue;
     text-align: left;
+  }
+  &__rate {
+    display: flex;
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin-right: 15px;
+    &__icon {
+      margin-right: 5px;
+    }
   }
 }
 </style>

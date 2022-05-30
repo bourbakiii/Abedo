@@ -318,11 +318,7 @@ export default {
       this.door_delivery = false;
       this.self_get = true;
     },
-    parsePhone(phone) {
-      return phone
-        ? `(${phone[0]}${phone[1]}${phone[2]}) ${phone[3]}${phone[4]}${phone[5]}-${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`
-        : null;
-    },
+    
     changeRadio(value) {
       this.is_cashless_payment = Boolean(value);
     },

@@ -6,6 +6,11 @@ export default {
     parseAddress(address) {
       return `${address.city}, ${address.street ? "ул. " + address.street : ""} ${address.house}${address.block ? ", " + address.block : ""}`;
     },
+    parsePhone(phone) {
+      return phone
+        ? `(${phone[0]}${phone[1]}${phone[2]}) ${phone[3]}${phone[4]}${phone[5]}-${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`
+        : null;
+    },
     final_delivery_price(delivery_price) {
       let products = this.$store.state.cart.products
       let free_order_price = +this.$store.state.cart.partner?.free_order_price

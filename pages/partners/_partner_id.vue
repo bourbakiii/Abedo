@@ -77,6 +77,8 @@ export default {
       state.adaptive_navigation = {
         text: this.partner.name,
         slot: "label",
+        rating: this.partner.rate,
+
         info_click: ()=>
           this.$store.commit("modals/open", {
             modal_name: "partner",

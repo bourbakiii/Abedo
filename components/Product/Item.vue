@@ -1,5 +1,5 @@
-<template>
-  <div @click.self="go_by_link" class="product product-item" :class="{ 'product-item_in-cart': in_cart}">
+or<template>
+  <div @click.self="go_by_link" class="product product-item" :class="{ 'product-item_in-cart': in_cart, 'product-item__without_image': !product.image.original}">
     <div
       @click="go_by_link"
       v-if="discount_percent"
@@ -14,7 +14,7 @@
       class="product-item__image"
     />
     <div @click="go_by_link" class="product-item__info">
-      <p class="product-item__info__name">{{ product.name }}</p>
+      <p :class='{"product-item__info__name__without_image": !product.image.original}' class="product-item__info__name">{{ product.name }}</p>
       <div class="product-item__info__prices adaptive-non">
         <p class="product-item__info__prices__price">{{ product.price }}₽</p>
         <p class="product-item__info__prices__weight">
@@ -115,12 +115,15 @@ export default {
   text-decoration: none;
   transition: border $transition;
   border: 2px solid transparent;
+  min-height: 371px;
   &_in-cart{
     border: 2px solid $orange;
   }
+  
   @media screen and (max-width: $tablet) {
     border-radius: 8px;
-    height: 249px;
+    height: auto;
+    min-height: 249px;
   }
   &_in-cart {
     border: 2px solid $orange;
@@ -200,10 +203,16 @@ export default {
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 500;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 17px;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+      }
+      &__without_image{
+        margin: auto 0px;
+
+        -webkit-line-clamp: 10;
+        line-clamp: 10;
       }
     }
 
