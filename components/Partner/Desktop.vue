@@ -22,7 +22,7 @@
           class="item__block__content__icons"
         >
           <span
-            v-if="partner.order_gifts.length"
+            v-if="true"
             class="item__block__content__icons-icon item__block__content__icons-icon-gift"
             ><svg
               class="item__block__content__icons-icon-icon"
@@ -203,6 +203,7 @@ export default {
         justify-content: flex-start;
         flex-direction: row;
         margin-bottom: 15px;
+        z-index: 2;
         &-icon {
           width: 45px;
           height: 45px;
