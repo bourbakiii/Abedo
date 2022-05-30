@@ -6,7 +6,6 @@ export const state = () => ({
   adaptive_navigation: {
     text: null, slot: 'main', info_click: null
   },
-  loaded: false
 });
 
 export const mutations = {
@@ -18,7 +17,6 @@ export const mutations = {
     const local_data = JSON.parse(localStorage.getItem('variables')) ??  {
       text: null, slot: 'main', info_click: null
     }
-    local_data.loaded = true;
     Vue.set(this.state,'variables',local_data);
   }
 }

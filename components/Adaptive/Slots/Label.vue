@@ -1,5 +1,4 @@
 <template>
-  <transition name="label">
   <div class="navigation-slot navigation-slot-label">
     <svg
       @click="$router.go(-1)"
@@ -16,9 +15,7 @@
       />
     </svg>
 
- <transition appear name="text">
     <p v-if="text" class="navigation-slot-label__text">{{ text }}</p>
- </transition>
     <transition appear name="info-button">
       <svg
         v-if="info_click"
@@ -51,7 +48,6 @@
     </transition>
 
   </div>
-  </transition>
 </template>
 <script>
 export default {
@@ -66,40 +62,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.text {
-  &-enter-active {
-    animation: $transition*2 toScaleAndBackText;
-  }
-  &-leave-active {
-    animation: $transition*2 toDiscaleAndBackText;
-  }
-  @keyframes toScaleAndBackText {
-    0% {
-      font-size: 10px;
-      opacity: 0;
-    }
-    60% {
-      font-size: 22px;
-      opacity: 1;
-    }
-    100% {
-      font-size: 20px;
-    }
-  }
-  @keyframes toDiscaleAndBackText {
-    0% {
-      font-size: 20px;
-    }
-    40% {
-      font-size: 22px;
-      opacity: 1;
-    }
-    100% {
-      font-size: 10px;
-      opacity: 0;
-    }
-  }
-}
 .info-button {
   &-enter-active {
     animation: $transition*2 toScaleAndBack;

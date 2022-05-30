@@ -24,6 +24,7 @@ export default {
     width: 100%;
     background-color: $white;
     padding: 0px 20px;
+    height:60px;
     display: flex;
     align-items: center;
     justify-content: center;
