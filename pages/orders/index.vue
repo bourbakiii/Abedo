@@ -9,7 +9,7 @@
         <div class="orders-page__content__orders__content">
           <div
             class="orders-page__content__orders__content__item"
-            v-for="order in orders.reverse()"
+            v-for="order in orders"
             :key="order.id"
           >
             <div class="orders-page__content__orders__content__item__data">
@@ -114,12 +114,13 @@ export default {
   },
   fetchOnServer: false,
   async fetch() {
+    if(this.token)
     await this.$axios
       .get("/api/orderHistory", {
         headers: { Authorization: `Bearer ${this.token}` },
       })
       .then(({ data: { orders } }) => {
-        this.orders = orders;
+        this.orders = orders.reverse();
       });
   },
   computed: {
