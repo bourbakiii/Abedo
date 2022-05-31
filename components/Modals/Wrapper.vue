@@ -1,6 +1,8 @@
 <template>
   <transition name="modal">
     <div
+    type='button'
+
       @click.self="$store.commit('modals/close')"
       v-if="wrapper_show"
       class="modals-wrapper non-scrollbar"

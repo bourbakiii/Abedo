@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="login" class="login-modal modal">
     <button
+    type='button'
       @mousedown.prevent="$store.commit('modals/close')"
       class="login-modal__close"
     >

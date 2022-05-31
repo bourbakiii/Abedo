@@ -2,6 +2,8 @@
   <div class="switch-shop-modal modal">
     <h3 class="switch-shop-modal__title title-normal">Очистить корзину?</h3>
     <button
+    type='button'
+
       @click.prevent="$store.commit('modals/close')"
       class="switch-shop-modal__close"
     >

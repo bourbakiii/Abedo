@@ -4,6 +4,7 @@
       {{partner.name}}
     </h3>
     <button
+    type='button'
       @click.prevent="$store.commit('modals/close')"
       class="partner-modal__close"
     >

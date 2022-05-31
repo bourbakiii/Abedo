@@ -2,6 +2,7 @@
   <div class="rate-modal modal">
     <h3 class="rate-modal__title title-normal">Оцените ресторан и доставку</h3>
     <button
+    type='button'
       @click.prevent="$store.commit('modals/close')"
       class="rate-modal__close"
     >
