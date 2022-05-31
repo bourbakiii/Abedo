@@ -3,7 +3,7 @@
     <div class="sidebar__content sidebar-scrollbar">
       <button
         @click="$router.push(parseUrl(category))"
-        v-for="category in [...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,...categories,]"
+        v-for="category in categories"
         :key="category.id"
         class="sidebar__content__item"
         :class="{
@@ -73,7 +73,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  padding: 25px 10px 20px 25px;
+  padding: 15px 10px 15px 25px;
   border-radius: 20px;
   max-height: min(calc(100vh - 200px),500px);
   overflow: hidden;
@@ -85,6 +85,7 @@ export default {
     flex-direction: column;
     width: 100%;
     overflow-y: overlay;
+    margin-right:10px;
     &__item {
       width: 100%;
       min-height: 50px;

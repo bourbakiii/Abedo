@@ -1,8 +1,10 @@
 <template>
   <div class="navigation adaptive-navigation__wrapper">
     <div class="adaptive-navigation">
+      <client-only>
       <AdaptiveSlotsMain v-if='slot_name=="main"' class='adaptive-navigation__slot adaptive-navigation__slot__index'/>
       <AdaptiveSlotsLabel v-else class="adaptive-navigation__slot adaptive-navigation__slot__label"/>
+      </client-only>
     </div>
   </div>
 </template>

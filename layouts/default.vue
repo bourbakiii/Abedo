@@ -1,8 +1,6 @@
 <template>
   <div class="layout default-layout">
-    <client-only>
     <AdaptiveNavigation class='adaptive'/>
-    </client-only>
     <Navigation class='adaptive-non' />
 
     <nuxt />

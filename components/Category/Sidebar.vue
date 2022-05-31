@@ -88,6 +88,7 @@ export default {
     flex-direction: column;
     width: 100%;
     overflow-y: overlay;
+    margin-right:10px;
     &__item {
       width: 100%;
       min-height: 50px;

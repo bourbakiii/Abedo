@@ -19,7 +19,8 @@ export default {
         }
     },
     async fetch() {
-        console.log(123);
+        console.log(123)
+        console.log("зачем запрос, ебик?")
         this.loading = true;
         ////// Тут чтобы нормально парамсы вставить
         let filters = {};

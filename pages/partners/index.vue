@@ -6,9 +6,7 @@
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
 
         <button
-          @click="
-            show_filters = !show_filters;
-          "
+          @click="show_filters = !show_filters"
           class="partners-page__top__filter-button adaptive-non"
         >
           <svg
@@ -85,7 +83,7 @@
       </div>
       <div class="partners-page__top_adaptive adaptive">
         <ButtonStandart
-          @click="show_categories = !show_categories"
+          @click="showCategories"
           class="partners-page__top_adaptive__button"
         >
           <svg
@@ -140,9 +138,7 @@
           Категории</ButtonStandart
         >
         <button
-          @click="
-            show_filters = !show_filters;
-          "
+          @click="show_filters = !show_filters"
           class="partners-page__top_adaptive__filters-button"
         >
           <svg
@@ -172,10 +168,11 @@
           </p>
         </button>
         <transition name="opacity">
-        <CategorySidebarAdaptive
-          v-if="show_categories"
-          class="partners-page__top_adaptive__dropdown"
-        />
+          <CategorySidebarAdaptive
+            v-click-outside="() => (show_categories = false)"
+            v-if="show_categories"
+            class="partners-page__top_adaptive__dropdown"
+          />
         </transition>
       </div>
       <transition name="filter">
@@ -217,10 +214,28 @@
 import partnerFiltersMixin from "@/mixins/partner-filters.js";
 export default {
   mixins: [partnerFiltersMixin],
+  directives: {
+    "click-outside": {
+      bind(el, binding) {
+        console.log("ЙЦУККЕ");
+        el.addEventListener("click", (e) => e.stopPropagation());
+        document.body.addEventListener("click", binding.value);
+      },
+      unbind(el, binding) {
+        document.body.removeEventListener("click", binding.value);
+        console.log("UNBIND FUNCTION");
+      },
+    },
+  },
   data() {
     return {
       show_categories: false,
     };
+  },
+  methods:{
+    showCategories(){
+    show_categories = true
+    }
   },
   mounted() {
     this.$store.commit("variables/action", (state) => {
@@ -231,6 +246,14 @@ export default {
       };
     });
   },
+  watch:{
+        "$route.query.category":{
+            handler(){
+               this.show_categories = false;
+            },
+            deep:true
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
@@ -333,18 +356,18 @@ export default {
         margin-top: 0px;
         margin-bottom: 20px;
       }
-      &__dropdown{
+      &__dropdown {
         position: absolute;
         top: calc(100% + 13px);
-        left:0px;
+        left: 0px;
         min-width: 295px !important;
         width: auto !important;
-        max-width:100% !important;
+        max-width: 100% !important;
 
-background: $dark_grey;
-button{
-  background-color: red !important;
-}
+        background: $dark_grey;
+        button {
+          background-color: red !important;
+        }
       }
     }
   }
