@@ -50,7 +50,7 @@
         />
       </svg>
       <client-only>
-       
+       <transition name='cart-count'>
           <div
             class="footer__button_cart__count"
             v-if="cart_products.length"
@@ -58,6 +58,7 @@
           >
             {{ cart_products.length }}
           </div>
+       </transition>
       </client-only>
     </NuxtLink>
     <NuxtLink to="/search" class="footer__button">
@@ -206,8 +207,9 @@ export default {
         justify-content: center;
         flex-direction: row;
         white-space: nowrap;
-        left: 100%;
+        left: 95%;
         transform: translate(-50%, -50%);
+        
       }
     }
   }

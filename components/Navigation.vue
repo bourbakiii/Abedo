@@ -241,12 +241,14 @@
       <NuxtLink to="/cart" class="navigation__cart-block">
         <client-only>
           <span class="navigation__cart-block-icon">
+            <transition name='cart-count'>
             <div
               v-if="cart_products.length"
               class="navigation__cart-block-icon__indicator"
             >
               {{ cart_products.length }}
             </div>
+            </transition>
             <svg
               class="navigation__cart-block-icon-svg"
               width="20"
@@ -572,7 +574,7 @@ export default {
           width: auto;
           position: absolute;
           top: 5px;
-          left: 87%;
+          left: 82%;
           transform: translate(-50%, -50%);
           background-color: $red;
           border-radius: 90px;

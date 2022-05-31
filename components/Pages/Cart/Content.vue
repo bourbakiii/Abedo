@@ -67,16 +67,11 @@
         {{ promo.message }}
       </p>
     </form>
-    <div v-else class="cart__promo cart__promo_empty">
-      Для оформления заказа необходимо
-      <button
-        class="cart__promo_empty__button"
-        type="button"
-        @click="$store.commit('modals/open', { modal_name: 'login' })"
-      >
-        Войти в личный кабинет
-      </button>
-    </div>
+    <p v-else class="cart__promo cart__promo_empty">
+      Для оформления заказа необходимо <span  class="cart__promo_empty__button"
+        @click="$store.commit('modals/open', { modal_name: 'login' })">Войти в личный кабинет</span> 
+
+    </p>
     <div v-if="token" class="cart__prices">
       <p class="cart__prices__pre">Итого:</p>
       <p class="cart__prices__price">{{ total_price_with_discount }}₽</p>
@@ -190,7 +185,6 @@ export default {
         background-color: transparent;
         outline: none;
         border: none;
-
         &:hover {
           text-decoration: underline;
         }
@@ -368,25 +362,27 @@ export default {
       color: $red;
     }
     &_empty {
-      font-family: "SF Pro Display";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 20px;
-      line-height: 20px;
-      padding-bottom: 20px;
-      &__button {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        text-decoration: underline;
-        font-family: "SF Pro Display";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 20px;
-        margin-left: 5px;
-        font-weight: 600;
-      }
+display: inline;
+
+      font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 20px;
+margin-top:40px;
+@media screen and (max-width:$notebook) {
+  font-size: 17px;
+line-height: 17px;
+}
+@media screen and (max-width:$tablet) {
+  font-size: 16px;
+line-height: 16px;
+}
+&__button{
+  white-space: nowrap;
+  font-weight: 600;
+  text-decoration: underline;
+}
     }
   }
   &__prices {

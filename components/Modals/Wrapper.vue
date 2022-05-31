@@ -58,16 +58,19 @@ export default {
   }
   &-enter{
     .modal-content{
-      transform: translateY(50px);
+      transform: translateY(-50px);
     }
   }
   &-leave-to{
     .modal-content{
-      transform: translateY(-50px);
+      transform: translateY(50px);
     }
   }
   &-leave-active,
   &-enter-active {
+    .modal-content{
+      transition: $transition;
+    }
     transition: $transition;
   }
 }
