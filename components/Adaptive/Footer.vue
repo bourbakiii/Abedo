@@ -136,7 +136,7 @@ export default {
 }
 .lmenu-enter-active, .lmenu-leave-active{
   .left-menu-animated{
-    transition: 1s;
+    transition: all $transition;
     background-color: red;
     }
   transition: $transition*2;

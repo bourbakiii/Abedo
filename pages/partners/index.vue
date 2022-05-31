@@ -234,7 +234,7 @@ export default {
   },
   methods:{
     showCategories(){
-    show_categories = true
+    this.show_categories = true
     }
   },
   mounted() {
