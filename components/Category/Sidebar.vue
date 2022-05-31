@@ -3,7 +3,7 @@
     <h2 class="sidebar__title title-small">Категории</h2>
     <div class="sidebar__content">
       <button
-        @click="$router.push(`/partners?category=${category.id}`)"
+        @click="$router.push(parseUrl(category))"
         v-for="category in categories"
         :key="category.id"
         class="sidebar__content__item"
@@ -54,6 +54,14 @@ export default {
         this.categories = data;
       }
     );
+  },
+  methods: {
+    parseUrl(category) {
+      let to_ret = '/partners'
+      if (+this.$route.query.category != +category.id) to_ret+=`?category=${+category.id}`
+      console.log(to_ret);
+      return to_ret;
+    },
   },
 };
 </script>
