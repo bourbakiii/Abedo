@@ -45,14 +45,16 @@
                 {{ cart_partner.name }}
               </p>
             </div>
-            <img
-              v-if="cart_partner.logo"
-              :src="`${$axios.defaults.baseURL}${cart_partner.logo.cart_mini}`"
-              class="sidebar-cart__content__hood__shop-block__image"
-            />
+            <NuxtLink :to='`/partners/${cart_partner.id}`' class="sidebar-cart__content__hood__shop-block__image">
+              <img
+                v-if="cart_partner.logo"
+                :src="`${$axios.defaults.baseURL}${cart_partner.logo.cart_mini}`"
+                class="sidebar-cart__content__hood__shop-block__image__image"
+              />
+            </NuxtLink>
           </div>
         </div>
-        <div class="sidebar-cart__content__products  sidebar-scrollbar">
+        <div class="sidebar-cart__content__products sidebar-scrollbar">
           <ProductSidebar
             class="sidebar-cart__content__products__item"
             v-for="product in [...cart_products, ...cart_gifts].reverse()"
@@ -238,8 +240,13 @@ export default {
           border: 1px solid $dark_grey;
           width: 55px;
           height: 40px;
-          object-fit: contain;
-          padding: 10px;
+
+          &__image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+          }
         }
       }
     }
@@ -252,7 +259,6 @@ export default {
       &__item {
         padding-right: 10px !important;
       }
-
     }
     &__row {
       width: 100%;

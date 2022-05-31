@@ -59,7 +59,10 @@ export default {
   },
   watch: {
     in_cart(value) {
-      if (!value) Vue.set(this.product, 'selected_options', [])
+      if (!value) {
+        this.$store.commit("cart/action", state =>
+          Vue.set(this.product, 'selected_options', []));
+      }
     }
   }
 }

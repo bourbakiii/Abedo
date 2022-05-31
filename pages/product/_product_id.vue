@@ -230,6 +230,11 @@
                     v-else
                     class="product-page__over__content__main__additional__information__buttons__carted"
                   >
+                    <p
+                      class="product-page__over__content__main__additional__information__buttons__carted__text"
+                    >
+                      В корзине:
+                    </p>
                     <ButtonProduct
                       class="product-page__over__content__main__additional__information__buttons__carted__button"
                       size="40"
@@ -270,6 +275,9 @@
                 v-if="in_cart"
                 class="product-page__over__content__main__adaptive-actions__actions"
               >
+              <p class="product-page__over__content__main__adaptive-actions__actions__text">
+                В корзине:
+              </p>
                 <ButtonProduct
                   class="product-page__over__content__main__adaptive-actions__actions__button_minus product-page__over__content__main__adaptive-actions__actions__button"
                   size="30"
@@ -293,6 +301,9 @@
                 @click="add_to_cart(product.section.shop)"
                 class="product-page__over__content__main__adaptive-actions__add"
               />
+              <div class="product-page__over__content__main__adaptive-actions__otbivka">
+                Добавлено
+              </div>
             </div>
           </client-only>
           <NuxtLink
@@ -422,7 +433,10 @@ export default {
       &__main {
         width: 80%;
         padding-bottom: 100px;
-        display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
         @media screen and (max-width: $tablet) {
           width: 100%;
           margin-right: 0px;
@@ -544,7 +558,7 @@ export default {
           justify-content: flex-start;
           flex-direction: row;
           margin-top: 77px;
-
+          width:100%;
           @media screen and (max-width: $tablet) {
             margin-top: 0px;
             flex-direction: column;
@@ -795,7 +809,16 @@ export default {
                 align-items: center;
                 justify-content: center;
                 flex-direction: row;
-
+                &__text{
+                  margin-right: 15px;
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 16px;
+                  line-height: 19px;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  white-space: nowrap;
+                }
                 &__count {
                   margin: 0px 12px;
                   font-family: "SF Pro Display";
@@ -855,7 +878,9 @@ export default {
             flex-shrink: 0;
             margin-left: auto;
             overflow: hidden;
-
+            &__text{
+              margin-right: 15px;
+            }
             &__button {
               width: 100%;
               flex-shrink: 0;
@@ -876,6 +901,15 @@ export default {
 
           &__add {
             margin-left: auto;
+          }
+
+          &__otbivka{
+            background-color: $green;
+            padding: 10px;
+            color: $white;
+            border-radius: 15px;
+            margin-top: 15px;
+            position: absolute; top: 100%; right: 0px;
           }
         }
 
