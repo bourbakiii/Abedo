@@ -112,7 +112,7 @@ export default {
     position: sticky;
     top: 70px;
     background-color: $light_grey;
-    z-index: $z_navigation + 1;
+    z-index: $z_navigation;
     padding-top: 15px;
     &::before {
       z-index: 10;
@@ -130,7 +130,7 @@ export default {
       position: sticky;
       top: 60px;
       background-color: $light_grey;
-      z-index: $z_navigation + 1;
+      z-index: $z_navigation;
       &::before {
         z-index: 10;
         content: "";

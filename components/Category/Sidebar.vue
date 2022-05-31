@@ -1,7 +1,7 @@
 <template>
   <div v-if="categories.length" class="sidebar">
     <h2 class="sidebar__title title-small">Категории</h2>
-    <div class="sidebar__content">
+    <div class="sidebar__content  sidebar-scrollbar">
       <button
         @click="$router.push(parseUrl(category))"
         v-for="category in categories"
@@ -73,8 +73,10 @@ export default {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  padding: 20px;
+  padding: 20px 10px 20px 20px;
   border-radius: 20px;
+  max-height: calc(100vh - 125px);
+  overflow: hidden;
   &__title {
     margin-bottom: 15px;
     width: 100%;
@@ -85,6 +87,7 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
+    overflow-y: overlay;
     &__item {
       width: 100%;
       min-height: 50px;

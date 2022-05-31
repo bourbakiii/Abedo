@@ -120,3 +120,23 @@ button {
   user-select: none;
 }
 
+.sidebar-scrollbar{
+  &::-webkit-scrollbar {
+    width: 5px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 10px 0px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $light_grey;
+    margin: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $extra_dark_grey;
+    border-radius: 90px;
+    border: 3px none $extra_dark_grey;
+  }
+}

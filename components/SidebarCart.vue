@@ -16,90 +16,94 @@
           />
         </svg>
       </div>
-     
-        <div v-if="cart_products.length" class="sidebar-cart__content">
-          <div class="sidebar-cart__content__hood">
-            <div class="sidebar-cart__content__hood__title-row">
-              <h3
-                class="sidebar-cart__content__hood__title-row__title title-extra-small"
-              >
-                Корзина:
-              </h3>
-              <button
-                @click="$store.commit('cart/clear')"
-                class="sidebar-cart__content__hood__title-row__button"
-              >
-                Очистить
-              </button>
-            </div>
-            <div class="sidebar-cart__content__hood__shop-block">
-              <div class="sidebar-cart__content__hood__shop-block__name-block">
-                <p
-                  class="sidebar-cart__content__hood__shop-block__name-block__pre"
-                >
-                  Заведение
-                </p>
-                <p
-                  class="sidebar-cart__content__hood__shop-block__name-block__name"
-                >
-                  {{ cart_partner.name }}
-                </p>
-              </div>
-              <img
-                v-if="cart_partner.logo"
-                :src="`${$axios.defaults.baseURL}${cart_partner.logo.cart_mini}`"
-                class="sidebar-cart__content__hood__shop-block__image"
-              />
-            </div>
+
+      <div v-if="cart_products.length" class="sidebar-cart__content">
+        <div class="sidebar-cart__content__hood">
+          <div class="sidebar-cart__content__hood__title-row">
+            <h3
+              class="sidebar-cart__content__hood__title-row__title title-extra-small"
+            >
+              Корзина:
+            </h3>
+            <button
+              @click="$store.commit('cart/clear')"
+              class="sidebar-cart__content__hood__title-row__button"
+            >
+              Очистить
+            </button>
           </div>
-          <div class="sidebar-cart__content__products">
-            <ProductSidebar
-              v-for="product in [...cart_products, ...cart_gifts]"
-              :is_gift='cart_gifts.includes(product)'
-              :key="cart_gifts.includes(product)?`sidebar-gift-${product.id}`:`sidebar-product-${product.id}`"
-              :product="product"
+          <div class="sidebar-cart__content__hood__shop-block">
+            <div class="sidebar-cart__content__hood__shop-block__name-block">
+              <p
+                class="sidebar-cart__content__hood__shop-block__name-block__pre"
+              >
+                Заведение
+              </p>
+              <p
+                class="sidebar-cart__content__hood__shop-block__name-block__name"
+              >
+                {{ cart_partner.name }}
+              </p>
+            </div>
+            <img
+              v-if="cart_partner.logo"
+              :src="`${$axios.defaults.baseURL}${cart_partner.logo.cart_mini}`"
+              class="sidebar-cart__content__hood__shop-block__image"
             />
-           
-          </div>
-          <div
-            class="sidebar-cart__content__row sidebar-cart__content__row_delivery"
-          >
-            <p
-              class="sidebar-cart__content__row__name sidebar-cart__content__row_delivery__name"
-            >
-              Доставка
-            </p>
-            <p
-              class="sidebar-cart__content__row__value sidebar-cart__content__row_delivery__value"
-            >
-              {{ final_delivery_price_text() }}
-            </p>
-          </div>
-          <div
-            class="sidebar-cart__content__row sidebar-cart__content__row_least"
-          >
-            <p
-              class="sidebar-cart__content__row__name sidebar-cart__content__row_least__name"
-            >
-              Итого:
-            </p>
-            <p
-              class="sidebar-cart__content__row__value sidebar-cart__content__row_least__value"
-            >
-              {{ total_price }}₽
-            </p>
-          </div>
-          <div class="sidebar-cart__content__button">
-            <ButtonStandart
-              @click.native="() => $router.push('/cart')"
-              class="sidebar-cart__content__button__button"
-              >Оформить заказ</ButtonStandart
-            >
           </div>
         </div>
-        <div v-else class="sidebar-cart__content_empty sidebar-cart__content">
-          <h3 class="title-extra-small">Корзина пуста</h3>
+        <div class="sidebar-cart__content__products  sidebar-scrollbar">
+          <ProductSidebar
+            class="sidebar-cart__content__products__item"
+            v-for="product in [...cart_products, ...cart_gifts].reverse()"
+            :is_gift="cart_gifts.includes(product)"
+            :key="
+              cart_gifts.includes(product)
+                ? `sidebar-gift-${product.id}`
+                : `sidebar-product-${product.id}`
+            "
+            :product="product"
+          />
         </div>
+        <div
+          class="sidebar-cart__content__row sidebar-cart__content__row_delivery"
+        >
+          <p
+            class="sidebar-cart__content__row__name sidebar-cart__content__row_delivery__name"
+          >
+            Доставка
+          </p>
+          <p
+            class="sidebar-cart__content__row__value sidebar-cart__content__row_delivery__value"
+          >
+            {{ final_delivery_price_text() }}
+          </p>
+        </div>
+        <div
+          class="sidebar-cart__content__row sidebar-cart__content__row_least"
+        >
+          <p
+            class="sidebar-cart__content__row__name sidebar-cart__content__row_least__name"
+          >
+            Итого:
+          </p>
+          <p
+            class="sidebar-cart__content__row__value sidebar-cart__content__row_least__value"
+          >
+            {{ total_price }}₽
+          </p>
+        </div>
+        <div class="sidebar-cart__content__button">
+          <ButtonStandart
+            @click.native="() => $router.push('/cart')"
+            class="sidebar-cart__content__button__button"
+            >Оформить заказ</ButtonStandart
+          >
+        </div>
+      </div>
+      <div v-else class="sidebar-cart__content_empty sidebar-cart__content">
+        <h3 class="title-extra-small">Корзина пуста</h3>
+      </div>
     </client-only>
   </div>
 </template>
@@ -108,7 +112,7 @@ import parserMixin from "@/mixins/parser.js";
 export default {
   mixins: [parserMixin],
   computed: {
-    cart_gifts(){
+    cart_gifts() {
       return this.$store.state.cart.gifts;
     },
     cart_products() {
@@ -148,7 +152,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-
+  max-height: calc(100vh - 170px);
   &__icon {
     position: absolute;
     left: 26px;
@@ -169,14 +173,14 @@ export default {
   }
   &__content {
     width: 100%;
-    height: 100%;
     padding: 52px 0px 30px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-
+    flex-grow: 1;
+    overflow: hidden;
     &__hood {
       width: 100%;
       padding: 0px 20px;
@@ -241,7 +245,14 @@ export default {
     }
     &__products {
       width: 100%;
-      padding: 0px 20px;
+      padding: 0px 5px 0px 20px;
+      margin-right: 5px;
+      overflow-y: overlay;
+      height: 100%;
+      &__item {
+        padding-right: 10px !important;
+      }
+
     }
     &__row {
       width: 100%;

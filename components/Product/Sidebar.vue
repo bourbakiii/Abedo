@@ -51,7 +51,9 @@
       </p>
     </div>
     <div
-      v-if="product.selected_options && product.selected_options.length && !is_gift"
+      v-if="
+        product.selected_options && product.selected_options.length && !is_gift
+      "
       class="product-sidebar__selected-options"
     >
       <div
@@ -121,7 +123,10 @@
     </div>
     <div v-else class="product-sidebar__gift-information">
       <p class="product-sidebar__gift-information__count">
-        Количество: <span class="product-sidebar__gift-information__count__value">{{product.quantity}}</span>
+        Количество:
+        <span class="product-sidebar__gift-information__count__value">{{
+          product.quantity
+        }}</span>
       </p>
     </div>
   </div>
@@ -160,19 +165,24 @@ export default {
     border-bottom-width: 0px;
   }
   &__gift {
-    position: absolute; left: -15px;top:10px;
+    position: absolute;
+    left: -15px;
+    top: 10px;
     background-color: $green;
-    width:30px;
-    height:30px;
+    width: 30px;
+    height: 30px;
     border-radius: 90px;
-    display: flex;align-items: center;justify-content: center;flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
     svg * {
       fill: $white;
     }
   }
   &__close {
     top: 20px;
-    right: 0px;
+    right: 10px;
     position: absolute;
     background: transparent;
     outline: none;
@@ -301,27 +311,30 @@ export default {
       }
     }
   }
-  &__gift-information{
+  &__gift-information {
     margin-top: 10px;
-    width:100%;
-    display: flex;align-items: center;justify-content: flex-start;flex-direction: row;
-    &__count{
-          font-family: "SF Pro Display";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 20px;
-    flex-grow: 1;
-    color:$extra_dark_grey;
-    &__value{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    &__count {
       font-family: "SF Pro Display";
-    font-style: normal;
-    font-weight: 800;
-    font-size: 15px;
-    line-height: 20px;
-    flex-grow: 1;
-    color:$extra_dark_grey;
-    }
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 20px;
+      flex-grow: 1;
+      color: $extra_dark_grey;
+      &__value {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 800;
+        font-size: 15px;
+        line-height: 20px;
+        flex-grow: 1;
+        color: $extra_dark_grey;
+      }
     }
   }
 }

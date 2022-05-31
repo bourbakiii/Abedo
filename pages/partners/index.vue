@@ -328,6 +328,8 @@ export default {
     &__sidebar {
       flex-shrink: 0;
       margin-right: 30px;
+      position: sticky;
+      top:95px;
       width: 295px;
       max-width: 295px;
       @media screen and (max-width: $notebook) {
