@@ -44,6 +44,9 @@
   &-enter-active,
   &-leave-active {
     transition: all $transition;
+    @media screen and (max-width:$tablet_middle) {
+      transition: all $transition * 2;
+    }
   }
 }
 

@@ -6,7 +6,9 @@
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
 
         <button
-          @click="show_filters = !show_filters"
+          @click="
+            show_filters = !show_filters;
+          "
           class="partners-page__top__filter-button adaptive-non"
         >
           <svg
@@ -82,7 +84,10 @@
         </button>
       </div>
       <div class="partners-page__top_adaptive adaptive">
-        <ButtonStandart class="partners-page__top_adaptive__button">
+        <ButtonStandart
+          @click="show_categories = !show_categories"
+          class="partners-page__top_adaptive__button"
+        >
           <svg
             class="partners-page__top_adaptive__button__icon"
             width="20"
@@ -135,7 +140,9 @@
           Категории</ButtonStandart
         >
         <button
-          @click="show_filters = !show_filters"
+          @click="
+            show_filters = !show_filters;
+          "
           class="partners-page__top_adaptive__filters-button"
         >
           <svg
@@ -164,6 +171,12 @@
             Фильтры
           </p>
         </button>
+        <transition name="opacity">
+        <CategorySidebarAdaptive
+          v-if="show_categories"
+          class="partners-page__top_adaptive__dropdown"
+        />
+        </transition>
       </div>
       <transition name="filter">
         <Filters
@@ -172,6 +185,7 @@
           class="partners-page__filters"
         />
       </transition>
+
       <div class="partners-page__partners">
         <CategorySidebar
           class="partners-page__partners__sidebar adaptive-non"
@@ -203,7 +217,12 @@
 import partnerFiltersMixin from "@/mixins/partner-filters.js";
 export default {
   mixins: [partnerFiltersMixin],
-  mounted(){
+  data() {
+    return {
+      show_categories: false,
+    };
+  },
+  mounted() {
     this.$store.commit("variables/action", (state) => {
       state.adaptive_navigation = {
         text: "Заведения",
@@ -211,7 +230,7 @@ export default {
         info_click: null,
       };
     });
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -224,6 +243,7 @@ export default {
     justify-content: space-between;
     width: 100%;
     margin-bottom: 20px;
+
     &__title {
       @media screen and (max-width: $tablet) {
         font-family: "SF Pro Display";
@@ -273,17 +293,20 @@ export default {
       align-items: center;
       justify-content: space-between;
       flex-direction: row;
+      position: relative;
       &__button {
         height: 35px !important;
         background-color: transparent;
         padding: 0px 15px !important;
         svg * {
           fill: transparent !important;
+          stroke: $white;
         }
+        background-color: $darkblue;
+        color: $white;
         &:hover {
-          svg * {
-            stroke: $white;
-          }
+          background-color: $green;
+          border-color: $green;
         }
         &__icon {
           margin-right: 10px;
@@ -310,6 +333,19 @@ export default {
         margin-top: 0px;
         margin-bottom: 20px;
       }
+      &__dropdown{
+        position: absolute;
+        top: calc(100% + 13px);
+        left:0px;
+        min-width: 295px !important;
+        width: auto !important;
+        max-width:100% !important;
+
+background: $dark_grey;
+button{
+  background-color: red !important;
+}
+      }
     }
   }
 
@@ -329,7 +365,7 @@ export default {
       flex-shrink: 0;
       margin-right: 30px;
       position: sticky;
-      top:95px;
+      top: 95px;
       width: 295px;
       max-width: 295px;
       @media screen and (max-width: $notebook) {
@@ -365,7 +401,10 @@ export default {
           grid-template-columns: repeat(2, 1fr);
         }
         @media screen and (max-width: $tablet) {
-          display: flex;align-items: center;justify-content: flex-start;flex-direction: column;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-direction: column;
         }
         &__item {
           width: 100%;
@@ -381,6 +420,11 @@ export default {
         margin-top: 60px;
         background-color: $light_grey;
         text-transform: uppercase !important;
+        &:hover {
+          background-color: $green;
+          color: $white;
+          border-color: $green;
+        }
         @media screen and (max-width: $tablet) {
           margin-top: 30px;
           width: 228px;

@@ -113,6 +113,10 @@ export default {
   border-radius: 20px;
   height: 70px;
   background-color: $dark_grey;
+  &, *{
+    transition: $transition;
+   
+  }
   @media screen and (max-width: $sidebar_dn) {
     flex-wrap: wrap;
     height: 130px;
@@ -122,7 +126,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    height: 160px;
+    height: 200px;
   }
   &__input {
     width: 100%;
