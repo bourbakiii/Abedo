@@ -99,33 +99,42 @@
         Заведения
       </ButtonStandart>
       <div class="navigation__links">
-        <!--          @mouseenter.prevent="show_dropdown = true"-->
-        <!--          @mouseleave.prevent="show_dropdown = false"-->
         <button
           class="navigation__links-link navigation__links-link__dropdown"
-          @mouseenter.prevent="show_dropdown = true"
-          @mouseleave.prevent="show_dropdown = false"
-          @click.prevent="dropdownClick"
+          v-click-outside="closeDropdown"
+          @mouseleave="closeDropdown"
         >
-          <svg
-            class="navigation__links-link-svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <button
+            class="navigation__links-link__dropdown__button"
+            @mouseenter="show_dropdown = true"
+            @click="dropdownClick"
           >
-            <circle cx="12" cy="10" r="3" fill="#5C6784" />
-            <circle cx="12" cy="12" r="9" stroke="#5C6784" stroke-width="1.2" />
-            <path
-              d="M17.8719 18.8083C17.9489 18.7468 17.9799 18.6436 17.9452 18.5513C17.5693 17.5518 16.8134 16.6706 15.7814 16.0332C14.6966 15.3632 13.3674 15 12 15C10.6326 15 9.30341 15.3632 8.21858 16.0332C7.18663 16.6706 6.43066 17.5518 6.05477 18.5513C6.02009 18.6436 6.05115 18.7468 6.12813 18.8083C9.56196 21.552 14.438 21.552 17.8719 18.8083Z"
-              fill="#5C6784"
-              stroke="#5C6784"
-              stroke-width="1.2"
-              stroke-linecap="round"
-            />
-          </svg>
-          <p class="navigation__links-link__text">Кабинет</p>
+            <svg
+              class="navigation__links-link-svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="12" cy="10" r="3" fill="#5C6784" />
+              <circle
+                cx="12"
+                cy="12"
+                r="9"
+                stroke="#5C6784"
+                stroke-width="1.2"
+              />
+              <path
+                d="M17.8719 18.8083C17.9489 18.7468 17.9799 18.6436 17.9452 18.5513C17.5693 17.5518 16.8134 16.6706 15.7814 16.0332C14.6966 15.3632 13.3674 15 12 15C10.6326 15 9.30341 15.3632 8.21858 16.0332C7.18663 16.6706 6.43066 17.5518 6.05477 18.5513C6.02009 18.6436 6.05115 18.7468 6.12813 18.8083C9.56196 21.552 14.438 21.552 17.8719 18.8083Z"
+                fill="#5C6784"
+                stroke="#5C6784"
+                stroke-width="1.2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <p class="navigation__links-link__text">Кабинет</p>
+          </button>
           <client-only>
             <transition name="opacity">
               <div
@@ -151,7 +160,7 @@
                   История заказов
                 </NuxtLink>
                 <button
-                  @click.prevent="$store.dispatch('account/logout')"
+                  @click="$store.dispatch('account/logout')"
                   class="navigation__links-link__dropdown-content-link"
                 >
                   Выход
@@ -189,7 +198,6 @@
               stroke="#5C6784"
             />
           </svg>
-
           <p class="navigation__links-link__text">
             Акции <span class="delete-note">заведений</span>
           </p>
@@ -241,13 +249,13 @@
       <NuxtLink to="/cart" class="navigation__cart-block">
         <client-only>
           <span class="navigation__cart-block-icon">
-            <transition name='cart-count'>
-            <div
-              v-if="cart_products.length"
-              class="navigation__cart-block-icon__indicator"
-            >
-              {{ cart_products.length }}
-            </div>
+            <transition name="cart-count">
+              <div
+                v-if="cart_products.length"
+                class="navigation__cart-block-icon__indicator"
+              >
+                {{ cart_products.length }}
+              </div>
             </transition>
             <svg
               class="navigation__cart-block-icon-svg"
@@ -271,7 +279,9 @@
 </template>
 
 <script>
+import dropdownMixin from "@/mixins/dropdowns.js";
 export default {
+  mixins: [dropdownMixin],
   mounted() {
     document.addEventListener("scroll", () => {
       if (window.scrollY > this.$store.state.variables.navigation_transition_to)
@@ -291,8 +301,12 @@ export default {
   },
   methods: {
     dropdownClick() {
-      if (this.token) this.show_dropdown = !this.show_dropdown;
-      else this.$store.commit("modals/open", { modal_name: "login" });
+      if (this.token) return (this.show_dropdown = true);
+      this.$store.commit("modals/open", { modal_name: "login" });
+    },
+    closeDropdown() {
+      this.show_dropdown = false;
+      document.body.removeEventListener("click", this.closeDropdown);
     },
   },
   computed: {
@@ -306,7 +320,7 @@ export default {
   watch: {
     "$route.path": {
       handler() {
-        this.show_dropdown = false;
+        this.closeDropdown;
       },
       deep: true,
     },
@@ -323,7 +337,7 @@ export default {
   background-color: $white;
   box-sizing: border-box;
   padding: 5px 10px;
-  z-index: $z_navigation+1;
+  z-index: $z_navigation + 1;
   transition: height $transition;
 
   .delete-note {
@@ -332,20 +346,20 @@ export default {
     }
   }
 
-  &.scaled{
+  &.scaled {
     height: 70px;
-    .navigation{
-      &__logo{
+    .navigation {
+      &__logo {
         transform: scale(0.8);
       }
-      &__button{
+      &__button {
         height: 45px;
         width: 175px;
       }
-      &__icons{
+      &__icons {
         transform: scale(0.8);
       }
-      &__cart-block-icon{
+      &__cart-block-icon {
         transform: scale(0.8);
       }
     }
@@ -360,7 +374,7 @@ export default {
     justify-content: space-between;
 
     > * {
-      transition:$transition;
+      transition: $transition;
     }
 
     &__logo {
@@ -388,7 +402,7 @@ export default {
       width: 181px;
       height: 50px;
       padding: 5px 0px;
-      
+
       &__icon {
         margin-right: 10px;
       }
@@ -456,7 +470,14 @@ export default {
           background-color: transparent;
           border: none;
           outline: none;
-
+          &__button {
+            background-color: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+          }
           &-content {
             background-color: $white;
             position: absolute;
@@ -547,7 +568,7 @@ export default {
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      
+
       &:hover {
         .navigation__cart-block__text {
           color: $darkblue;

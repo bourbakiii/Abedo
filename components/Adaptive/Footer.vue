@@ -50,15 +50,11 @@
         />
       </svg>
       <client-only>
-       <transition name='cart-count'>
-          <div
-            class="footer__button_cart__count"
-            v-if="cart_products.length"
-            
-          >
+        <transition name="cart-count">
+          <div class="footer__button_cart__count" v-if="cart_products.length">
             {{ cart_products.length }}
           </div>
-       </transition>
+        </transition>
       </client-only>
     </NuxtLink>
     <NuxtLink to="/search" class="footer__button">
@@ -104,13 +100,13 @@
         />
       </svg>
     </button>
-  <transition name="lmenu">
+    <transition name="lmenu">
       <LeftMenu
         v-if="show_left_menu"
         @close="show_left_menu = false"
         class="footer__left-menu"
       />
-  </transition>
+    </transition>
   </div>
 </template>
 <script>
@@ -128,18 +124,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.lmenu-enter, .lmenu-leave-to{
+.lmenu-enter,
+.lmenu-leave-to {
   opacity: 0;
-  .left-menu-animated{
+  .left-menu-animated {
     transform: translateX(-50px);
-    }
+  }
 }
-.lmenu-enter-active, .lmenu-leave-active{
-  .left-menu-animated{
+.lmenu-enter-active,
+.lmenu-leave-active {
+  .left-menu-animated {
     transition: all $transition;
     background-color: red;
-    }
-  transition: $transition*2;
+  }
+  transition: $transition * 2;
 }
 .footer {
   position: sticky;
@@ -184,7 +182,7 @@ export default {
     &_cart {
       position: relative;
       @media screen and (max-width: $phone) {
-      margin: 0px auto;
+        margin: 0px auto;
       }
       &__count {
         position: absolute;
@@ -209,7 +207,6 @@ export default {
         white-space: nowrap;
         left: 95%;
         transform: translate(-50%, -50%);
-        
       }
     }
   }

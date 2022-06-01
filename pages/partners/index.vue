@@ -212,30 +212,18 @@
 
 <script>
 import partnerFiltersMixin from "@/mixins/partner-filters.js";
+import dropdownMixin from "@/mixins/dropdowns.js";
 export default {
-  mixins: [partnerFiltersMixin],
-  directives: {
-    "click-outside": {
-      bind(el, binding) {
-        console.log("ЙЦУККЕ");
-        el.addEventListener("click", (e) => e.stopPropagation());
-        document.body.addEventListener("click", binding.value);
-      },
-      unbind(el, binding) {
-        document.body.removeEventListener("click", binding.value);
-        console.log("UNBIND FUNCTION");
-      },
-    },
-  },
+  mixins: [partnerFiltersMixin, dropdownMixin],
   data() {
     return {
       show_categories: false,
     };
   },
-  methods:{
-    showCategories(){
-    this.show_categories = true
-    }
+  methods: {
+    showCategories() {
+      this.show_categories = true;
+    },
   },
   mounted() {
     this.$store.commit("variables/action", (state) => {
@@ -246,14 +234,14 @@ export default {
       };
     });
   },
-  watch:{
-        "$route.query.category":{
-            handler(){
-               this.show_categories = false;
-            },
-            deep:true
-        }
-    }
+  watch: {
+    "$route.query.category": {
+      handler() {
+        this.show_categories = false;
+      },
+      deep: true,
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

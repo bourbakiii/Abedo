@@ -47,9 +47,7 @@ line-height: 19px;
 
 
   }
-  @media screen and (max-width: $notebook) {
-    padding: 0px 30px;
-  }
+
 }
 </style>
 <script>
