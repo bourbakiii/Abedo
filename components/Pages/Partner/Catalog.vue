@@ -24,6 +24,7 @@
         :script_id="section.id"
         v-for="section in sections"
         :key="section.id"
+        v-scrolled="setCurrentSection"
       >
         <h3 class="catalog__products__section__title title-small">
           {{ section.name }}
@@ -48,6 +49,37 @@ export default {
       required: true,
     },
   },
+  directives: {
+    scrolled: {
+      inserted: function (el, binding) {
+        el.f = function (evt) {
+          console.log(window.innerHeight);
+          let breakpointOffset =
+            window.innerWidth < 768 ? window.innerHeight / 1.45 : 650;
+          console.log(breakpointOffset);
+          console.log("0--0-0-0--0--00-0-0-0-0");
+          console.log(window.scrollY);
+          console.log(el.offsetTop - breakpointOffset);
+          console.log(window.scrollY > el.offsetTop - breakpointOffset);
+          console.log("-------------------------");
+          console.log(
+            window.scrollY < el.offsetTop + el.offsetHeight - breakpointOffset
+          );
+          if (
+            window.scrollY > el.offsetTop - breakpointOffset &&
+            window.scrollY < el.offsetTop + el.offsetHeight - breakpointOffset
+          ) {
+            console.log(el.getAttribute("script_id"));
+            binding.value(el.getAttribute("script_id"));
+          }
+        };
+        window.addEventListener("scroll", el.f);
+      },
+      unbind: function (el) {
+        window.removeEventListener("scroll", el.f);
+      },
+    },
+  },
   async fetch() {
     await this.$axios
       .get(`/api/shops/${this.$route.params.partner_id}/menu`)
@@ -66,29 +98,22 @@ export default {
       delete object.products;
       return { section: object };
     },
-  },
-  mounted() {
-    document.addEventListener("scroll", (event) => {
-      for (let element of [
+    setCurrentSection(section_id) {
+      Array.from([
         ...document.querySelectorAll(".section-item"),
         ...document.querySelectorAll(".slider-section-item"),
-      ])
-        element.classList.remove("active");
-      for (let element of Array.from(document.querySelectorAll(".section"))) {
-        if (element.getBoundingClientRect().y > 0) {
-          document
-            .getElementById(`section-item-${element.getAttribute(`script_id`)}`)
-            .classList.add("active");
-          let sliderItem = document.getElementById(
-            `slider-section-item-${element.getAttribute(`script_id`)}`
-          );
-          sliderItem.classList.add("active");
-          this.$refs.sectionsSlider.slideTo( sliderItem.getAttribute(`index`));
+      ]).forEach((element) => element.classList.remove("active"));
 
-          return;
-        }
-      }
-    });
+      document
+        .getElementById(`section-item-${section_id}`)
+        .classList.add("active");
+      let sliderItem = document.getElementById(
+        `slider-section-item-${section_id}`
+      );
+      sliderItem.classList.add("active");
+      this.$refs.sectionsSlider.slideTo(sliderItem.getAttribute(`index`));
+      return;
+    },
   },
 };
 </script>

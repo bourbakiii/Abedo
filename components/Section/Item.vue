@@ -20,8 +20,11 @@ export default {
     act() {
       if (this.action) this.action();
       else {
+        console.log("ду ит сука")
         const element = document.getElementById(`section-${this.section.id}`);
-        element.scrollIntoView({ block: "center", behavior: "smooth" });
+        console.log(element.offsetTop)
+        window.scrollTo({top: element.offsetTop - 145, behavior: 'smooth'});
+        // element.scrollIntoView({ block: "end",  });
       }
     },
   },
