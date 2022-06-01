@@ -12,6 +12,7 @@
         :id="`slider-section-item-${section.id}`"
         :index="index"
         :section="section"
+        :class='{"active":index==0}'
       />
     </swiper-slide>
   </swiper>
