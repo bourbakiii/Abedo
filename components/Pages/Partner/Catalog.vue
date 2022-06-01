@@ -55,7 +55,7 @@ export default {
         el.f = function (evt) {
           console.log(window.innerHeight);
           let breakpointOffset =
-            window.innerWidth < 768 ? window.innerHeight / 1.45 : 650;
+            window.innerWidth < 768 ? window.innerHeight / 1.5 : 650;
           console.log(breakpointOffset);
           console.log("0--0-0-0--0--00-0-0-0-0");
           console.log(window.scrollY);

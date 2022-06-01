@@ -1,9 +1,8 @@
 <template>
   <div class="switch-shop-modal modal">
-    <h3 class="switch-shop-modal__title title-normal">Очистить корзину?</h3>
+    <h3 class="switch-shop-modal__title title-normal">Внимание</h3>
     <button
-    type='button'
-
+      type="button"
       @click.prevent="$store.commit('modals/close')"
       class="switch-shop-modal__close"
     >
@@ -26,8 +25,21 @@
       добавления новых.
     </p>
     <div class="switch-shop-modal__buttons">
-        <ButtonStandart @click="$store.commit('modals/close')" class="switch-shop-modal__buttons__button switch-shop-modal__buttons__button_decline">Отменить</ButtonStandart>
-        <ButtonStandart @click="$store.dispatch('cart/change_shop', {product: $store.state.modals.switch_shop.product, partner: $store.state.modals.switch_shop.partner})"  class="switch-shop-modal__buttons__button switch-shop-modal__buttons__button_accept">Продолжить</ButtonStandart>
+      <ButtonStandart
+        @click="
+          $store.dispatch('cart/change_shop', {
+            product: $store.state.modals.switch_shop.product,
+            partner: $store.state.modals.switch_shop.partner,
+          })
+        "
+        class="switch-shop-modal__buttons__button switch-shop-modal__buttons__button_accept"
+        >Добавить</ButtonStandart
+      >
+      <ButtonStandart
+        @click="$store.commit('modals/close')"
+        class="switch-shop-modal__buttons__button switch-shop-modal__buttons__button_decline"
+        >Отменить</ButtonStandart
+      >
     </div>
   </div>
 </template>
@@ -38,11 +50,13 @@ export default {};
 .switch-shop-modal {
   background-color: $white;
   position: relative;
-  padding: 50px 40px;
+  padding: 40px 24px;
   width: 100%;
   max-width: 500px;
+  border-radius: 10px;
+  max-width: calc(100% - 24px);
   @media screen and (max-width: $tablet) {
-    margin-top:10vh;
+    margin-top: 10vh;
     padding: 24px;
   }
 
@@ -52,16 +66,18 @@ export default {};
     border: none;
     outline: none;
     position: absolute;
-    right: 30px;
-    top: 30px;
-    @media screen and (max-width: $tablet) {
-      right: 24px;
-      top: 24px;
-    }
+    right: 14px;
+    top: 14px;
   }
-  &__title{
-      margin-bottom: 30px;
-      @media screen and (max-width: $tablet) {
+  &__title {
+    padding-bottom: 20px;
+    border-bottom: 1px solid $dark_grey;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: $tablet) {
+      padding-bottom: 15px;
+      border-bottom: 1px solid $dark_grey;
+      margin-bottom: 15px;
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 700;
@@ -69,43 +85,66 @@ export default {};
       line-height: 20px;
     }
   }
-  &__text{
+  &__text {
+    font-family: "SF Pro Display";
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
     @media screen and (max-width: $tablet) {
-      font-size:15px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      /* or 125% */
+
+      display: flex;
+      align-items: center;
     }
   }
-  &__buttons{
-      width:100%; margin-top: 30px;
-      display: flex;align-items: center;justify-content: center;flex-direction:row;
-      &__button{
-          width:100%;
-
-    &_decline{
-        color:$red;
-        border-color:$red !important;
-        &:hover{
-            background-color: $red;
-            color:$white
-        }
+  &__buttons {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    @media screen and (max-width: $phone_normal) {
+      justify-content: space-between;
     }
-    &_accept{
-        color:$green;
-        border-color:$green !important;
-        &:hover{
-            background-color: $green;
-            color:$white
-        }
-    }
-
-
-          &:first-child{
-            @media screen and (max-width: $phone) {
-              margin-right:20px;
-              
-            }
-              margin-right:40px;
-          }
+    &__button {
+      width: 250px;
+      @media screen and (max-width: $tablet) {
+        width: 148px;
+        height: 40px;
       }
+      @media screen and (max-width: $phone) {
+        width: 108px;
+        height: 35px;
+      }
+      &_decline {
+        color: $red;
+        border-color: $red !important;
+        &:hover {
+          background-color: $red;
+          color: $white;
+        }
+      }
+      &_accept {
+        color: $green;
+        border-color: $green !important;
+        &:hover {
+          background-color: $green;
+          color: $white;
+        }
+      }
+
+      &:first-child {
+        @media screen and (max-width: $phone) {
+          margin-right: 20px;
+        }
+        margin-right: 40px;
+      }
+    }
   }
 }
 </style>
