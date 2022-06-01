@@ -169,7 +169,7 @@
         </button>
         <transition name="opacity">
           <CategorySidebarAdaptive
-            v-click-outside="() => (show_categories = false)"
+            v-click-outside="hideCategories"
             v-if="show_categories"
             class="partners-page__top_adaptive__dropdown"
           />
@@ -224,6 +224,9 @@ export default {
     showCategories() {
       this.show_categories = true;
     },
+    hideCategories(){
+      this.show_categories = false;
+    }
   },
   mounted() {
     this.$store.commit("variables/action", (state) => {

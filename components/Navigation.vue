@@ -320,7 +320,7 @@ export default {
   watch: {
     "$route.path": {
       handler() {
-        this.closeDropdown;
+        this.closeDropdown();
       },
       deep: true,
     },
