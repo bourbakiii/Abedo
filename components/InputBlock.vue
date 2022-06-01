@@ -3,7 +3,7 @@
     <p class="input-block__name">
       {{ text }}
     </p>
-    <div class="input-block__input">
+    <div class="input-block__input" :class="{ disabled: disabled }">
       <span v-if="pre" class="input-block__input__pre">
         {{ pre }}
       </span>
@@ -20,6 +20,7 @@
         :autocomplete="autocomplete ? 'on' : 'off'"
         :minlength="minlength"
         :readonly="readonly"
+        :disabled="disabled"
       />
       <div v-if="arrow" class="input-block__input__arrow">
         <svg
@@ -47,7 +48,7 @@ export default {
     type: {
       default: "text",
     },
-    arrow: {  
+    arrow: {
       required: false,
       default: false,
     },
@@ -91,6 +92,10 @@ export default {
       required: false,
       default: false,
     },
+    disabled: {
+      required: false,
+      default: false,
+    },
   },
 };
 </script>
@@ -101,7 +106,7 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   position: relative;
-  &.arrow{
+  &.arrow {
     cursor: pointer !important;
   }
   &.error & {
@@ -130,7 +135,7 @@ export default {
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
-    border: 1px solid $extra_dark_grey;
+    border: 1px solid $dark_grey;
     border-radius: 90px;
     background-color: $white;
 
@@ -142,6 +147,9 @@ export default {
     line-height: 20px;
     transition: $transition;
     position: relative;
+    &.disabled{
+      background-color: $dark_grey;
+    }
     &__pre {
       margin-right: 1ex;
     }
@@ -158,11 +166,16 @@ export default {
       &::placeholder {
         color: $extra_dark_grey;
       }
+      &:disabled{
+        background-color: transparent;
+      }
     }
-    &__arrow{
+    &__arrow {
       height: max-content;
       width: max-content;
-      position: absolute; right: 22px; top: 50%;
+      position: absolute;
+      right: 22px;
+      top: 50%;
       transform: translateY(-50%);
     }
   }

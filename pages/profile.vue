@@ -16,6 +16,7 @@
             type="text"
             :readonly="true"
             class="profile-page__form__content__input-block"
+            :disabled='true'
           />
           <InputBlock
             :readonly="!editing"
