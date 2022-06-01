@@ -98,6 +98,7 @@
         </svg>
         Заведения
       </ButtonStandart>
+      <client-only>
       <div class="navigation__links">
         <button
           class="navigation__links-link navigation__links-link__dropdown"
@@ -202,7 +203,7 @@
             Акции <span class="delete-note">заведений</span>
           </p>
         </NuxtLink>
-      </div>
+      </div></client-only>
       <div class="navigation__icons">
         <NuxtLink to="/search" class="navigation__icons-icon">
           <svg
