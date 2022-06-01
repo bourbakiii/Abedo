@@ -1,5 +1,5 @@
 <template>
-  <button @click.prevent="act" class="section-item">
+  <button @click.prevent="act" :index='index' class="section-item">
     {{ section.name }}
   </button>
 </template>
@@ -12,6 +12,9 @@ export default {
     action: {
       required: false,
     },
+    index: {
+      default: null
+    }
   },
   methods: {
     act() {

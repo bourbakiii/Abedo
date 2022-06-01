@@ -13,6 +13,7 @@
       />
     </div>
     <SectionSlider
+      ref="sectionsSlider"
       :sections="sections"
       class="catalog__sections__slider adaptive"
     />
@@ -78,11 +79,12 @@ export default {
           document
             .getElementById(`section-item-${element.getAttribute(`script_id`)}`)
             .classList.add("active");
-          document
-            .getElementById(
-              `slider-section-item-${element.getAttribute(`script_id`)}`
-            )
-            .classList.add("active");
+          let sliderItem = document.getElementById(
+            `slider-section-item-${element.getAttribute(`script_id`)}`
+          );
+          sliderItem.classList.add("active");
+          this.$refs.sectionsSlider.slideTo( sliderItem.getAttribute(`index`));
+
           return;
         }
       }
