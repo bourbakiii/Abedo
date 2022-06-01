@@ -37,8 +37,6 @@
       </client-only>
     </div>
     <form @submit.prevent="checkPromocode" v-if="token" class="cart__promo">
-      как выводить ошибку/успех промо?
-
       <div class="cart__promo__content">
         <p class="cart__promo__content__text">Введите промокод</p>
         <input
@@ -62,15 +60,49 @@
         <ButtonStandart class="cart__promo__content__button"
           >Применить</ButtonStandart
         >
+        <transition name='opacity'>
+        <div
+          v-if="promo.message"
+          :class="`cart__promo__content__message__${
+            promo.success ? 'success' : 'decline'
+          }`"
+          class="cart__promo__content__message"
+        >
+         <transition name='promo-galka'>
+          <svg
+            v-if="promo.success"
+            class="cart__promo__content__message__icon"
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 0C6.71562 0 0 6.71562 0 15C0 23.2844 6.71562 30 15 30C23.2844 30 30 23.2844 30 15C30 6.71562 23.2844 0 15 0ZM19.1419 14.3481L13.1794 20.3106L13.1763 20.3075L12.8444 20.6381L12.84 20.6344L12.8356 20.6381L12.0919 19.8956L12.0963 19.8906L7.24688 15.0413L8.61875 13.6694L12.8488 17.9006L17.7706 12.9781L17.765 12.9725L21.375 9.36188L22.7506 10.7381L19.1419 14.3481Z"
+              fill="#0EA976"
+            />
+          </svg>
+         </transition>
+          <p
+            :class="`cart__promo__content__message__text__${
+              promo.success ? 'success' : 'decline'
+            }`"
+            class="cart__promo__content__message__text"
+          >
+            {{ promo.message }}
+          </p>
+        </div>
+        </transition>
       </div>
-      <p class="cart__promo__message">
-        {{ promo.message }}
-      </p>
     </form>
     <p v-else class="cart__promo cart__promo_empty">
-      Для оформления заказа необходимо <span  class="cart__promo_empty__button"
-        @click="$store.commit('modals/open', { modal_name: 'login' })">Войти в личный кабинет</span> 
-
+      Для оформления заказа необходимо
+      <span
+        class="cart__promo_empty__button"
+        @click="$store.commit('modals/open', { modal_name: 'login' })"
+        >Войти в личный кабинет</span
+      >
     </p>
     <div v-if="token" class="cart__prices">
       <p class="cart__prices__pre">Итого:</p>
@@ -123,6 +155,19 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.promo-galka{
+  &-enter,
+  &-leave-to {
+    width:0px;
+    margin: 0px !important;
+    opacity:0;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition: all $transition;
+  }
+}
 .cart-product {
   &-enter,
   &-leave-to {
@@ -353,36 +398,69 @@ export default {
           margin-left: 0px;
         }
       }
+      &__message {
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        color: $red;
+        background-color: $dark_grey;
+        padding: 0px 30px;
+        height: 50px;
+        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        border-radius: 20px;
+        border-color: 1px solid $dark_grey;
+        transition: $transition;
+        &__success {
+          border: 1px solid $green;
+        }
+        &__decline {
+          border: 1px solid $red;
+        }
+        &__icon {
+          margin-right: 15px;
+        }
+        &__text {
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 19px;
+          &__success {
+            color: $green;
+          }
+          &__decline {
+            color: $red;
+          }
+        }
+      }
     }
-    &__message {
+    &_empty {
+      display: inline;
+
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;
-      font-size: 15px;
-      color: $red;
-    }
-    &_empty {
-display: inline;
-
-      font-family: 'SF Pro Display';
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 20px;
-margin-top:40px;
-@media screen and (max-width:$notebook) {
-  font-size: 17px;
-line-height: 17px;
-}
-@media screen and (max-width:$tablet) {
-  font-size: 16px;
-line-height: 16px;
-}
-&__button{
-  white-space: nowrap;
-  font-weight: 600;
-  text-decoration: underline;
-}
+      font-size: 20px;
+      line-height: 20px;
+      margin-top: 40px;
+      @media screen and (max-width: $notebook) {
+        font-size: 17px;
+        line-height: 17px;
+      }
+      @media screen and (max-width: $tablet) {
+        font-size: 16px;
+        line-height: 16px;
+      }
+      &__button {
+        white-space: nowrap;
+        font-weight: 600;
+        text-decoration: underline;
+      }
     }
   }
   &__prices {

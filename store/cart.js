@@ -107,6 +107,7 @@ export const actions = {
             if (order.promo) {
               state.promo.success = true;
               state.promo.discount = order?.promoDiscount || 0;
+              state.promo.message = 'Промокод применен';
             }
             if (order.gifts)
               state.gifts = order.gifts
