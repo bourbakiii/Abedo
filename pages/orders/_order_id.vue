@@ -54,7 +54,7 @@ export default {
   mounted(){
     this.$store.commit("variables/action", (state) => {
       state.adaptive_navigation = {
-        text: `Заказ №${order.id}`,
+        text: `Заказ №${this.order.id}`,
         slot: "label",
         info_click: null,
       };

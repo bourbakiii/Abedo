@@ -1,6 +1,6 @@
 <template>
   <div class="information">
-    <h1 class="information__title title-normal">Заказ №{{order.id}}</h1>
+    <h1 class="information__title title-normal">Заказ №{{ order.id }}</h1>
     <div class="information__content">
       <div class="information__content__hood">
         <img
@@ -8,57 +8,52 @@
           :src="`${$axios.defaults.baseURL}${order.shop.image[0].small}`"
           class="information__content__hood__image"
         />
-        <p class="information__content__hood__name" >
-          {{order.shop.name}}
+        <p class="information__content__hood__name">
+          {{ order.shop.name }}
+        </p>
+        <p class="information__content__hood__date">
+          {{ order.created_at }}
         </p>
       </div>
       <div class="information__content__content">
         <div class="information__content__content__item">
-          <p class="information__content__content__item__name" >
-            Телефон
-          </p>
-          <p class="information__content__content__item__value" >
-             {{order.phone}}
+          <p class="information__content__content__item__name">Телефон</p>
+          <p class="information__content__content__item__value">
+            {{ order.phone }}
           </p>
         </div>
-        <div  class="information__content__content__item">
-          <p class="information__content__content__item__name" >
+        <div class="information__content__content__item">
+          <p class="information__content__content__item__name">
             Адрес доставки
           </p>
-          <p class="information__content__content__item__value" >
-            {{order.address?parseAddress(order):parseAddress(order.shop)}}
+          <p class="information__content__content__item__value">
+            {{ order.address ? parseAddress(order) : parseAddress(order.shop) }}
           </p>
         </div>
         <div v-if="order.entrance" class="information__content__content__item">
-          <p class="information__content__content__item__name" >
-            Подъезд
-          </p>
-          <p class="information__content__content__item__value" >
-            {{order.entrance}}
+          <p class="information__content__content__item__name">Подъезд</p>
+          <p class="information__content__content__item__value">
+            {{ order.entrance }}
           </p>
         </div>
         <div v-if="order.floor" class="information__content__content__item">
-          <p class="information__content__content__item__name" >
-            Этаж
-          </p>
-          <p class="information__content__content__item__value" >
-            {{order.floor}}
+          <p class="information__content__content__item__name">Этаж</p>
+          <p class="information__content__content__item__value">
+            {{ order.floor }}
           </p>
         </div>
         <div v-if="order.apartment" class="information__content__content__item">
-          <p class="information__content__content__item__name" >
+          <p class="information__content__content__item__name">
             № квартиры/офиса
           </p>
-          <p class="information__content__content__item__value" >
-            {{order.apartment}}
+          <p class="information__content__content__item__value">
+            {{ order.apartment }}
           </p>
         </div>
         <div v-if="order.intercom" class="information__content__content__item">
-          <p class="information__content__content__item__name" >
-            № домофона
-          </p>
-          <p class="information__content__content__item__value" >
-            {{order.intercom}}
+          <p class="information__content__content__item__name">№ домофона</p>
+          <p class="information__content__content__item__value">
+            {{ order.intercom }}
           </p>
         </div>
       </div>
@@ -66,15 +61,15 @@
   </div>
 </template>
 <script>
-import parserMixin from '@/mixins/parser.js';
+import parserMixin from "@/mixins/parser.js";
 export default {
-  props:{
+  props: {
     order: {
-      required: true
-    }
+      required: true,
+    },
   },
-  mixins: [parserMixin]
-}
+  mixins: [parserMixin],
+};
 </script>
 <style lang="scss" scoped>
 .information {
@@ -99,6 +94,9 @@ export default {
       font-size: 20px;
       line-height: 24px;
     }
+    @media screen and (max-width: $phone) {
+      display: none;
+    }
   }
   &__content {
     width: 100%;
@@ -106,6 +104,12 @@ export default {
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
+    @media screen and (max-width: $phone) {
+      background-color: $white;
+      padding: 20px 14px;
+      border: 1px solid $dark_grey;
+      border-radius: 10px;
+    }
     &__hood {
       width: 100%;
       max-width: 100%;
@@ -116,6 +120,12 @@ export default {
       margin-bottom: 40px;
       @media screen and (max-width: $tablet) {
         margin-bottom: 20px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      @media screen and (max-width: $phone) {
+        padding-bottom: 15px;
+        border-bottom: 1px solid $dark_grey;
       }
       &__image {
         margin-right: 30px;
@@ -131,6 +141,9 @@ export default {
           width: 100px;
           margin-right: 10px;
         }
+        @media screen and (max-width: $phone) {
+          display: none;
+        }
       }
       &__name {
         width: 100%;
@@ -142,6 +155,26 @@ export default {
         @media screen and (max-width: $tablet) {
           font-size: 18px;
           line-height: 20px;
+        }
+        @media screen and (max-width: $phone) {
+          font-family: "SF Pro Display";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 19px;
+        }
+      }
+      &__date {
+        display: none;
+        margin-top: 8px;
+        font-family: "SF Pro Display";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: $darkblue;
+        @media screen and (max-width: $phone) {
+          display: block;
         }
       }
     }
@@ -162,6 +195,16 @@ export default {
         &:last-of-type {
           border: none;
         }
+        @media screen and (max-width: $phone) {
+          border: none;
+          padding: 0px;
+          min-height: max-content;
+          justify-content: flex-start;
+          margin-bottom: 16px;
+          &:last-of-type {
+            margin-bottom: 0px;
+          }
+        }
         &__name {
           font-family: "SF Pro Display";
           font-style: normal;
@@ -181,6 +224,14 @@ export default {
           @media screen and (max-width: $tablet_middle) {
             width: 50%;
           }
+          @media screen and (max-width: $phone) {
+            width: max-content;
+            font-size: 15px;
+            line-height: 18px;
+
+            color: $extra_dark_grey;
+            margin-right: 14px;
+          }
         }
         &__value {
           font-family: "SF Pro Display";
@@ -198,6 +249,12 @@ export default {
           }
           @media screen and (max-width: $tablet_middle) {
             width: 50%;
+          }
+          @media screen and (max-width: $phone) {
+            width: 100%;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 18px;
           }
         }
       }
