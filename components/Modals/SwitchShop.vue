@@ -52,8 +52,8 @@ export default {};
   position: relative;
   padding: 40px 24px;
   width: 100%;
-  max-width: 500px;
   border-radius: 10px;
+  width:500px;
   max-width: calc(100% - 24px);
   @media screen and (max-width: $tablet) {
     margin-top: 10vh;

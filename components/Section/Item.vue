@@ -21,10 +21,9 @@ export default {
       if (this.action) this.action();
       else {
         console.log("ду ит сука")
-        const element = document.getElementById(`section-${this.section.id}`);
+        const element = document.getElementById(`section-${this.section.id}`)
         console.log(element.offsetTop)
-        window.scrollTo({top: element.offsetTop - 145, behavior: 'smooth'});
-        // element.scrollIntoView({ block: "end",  });
+        window.scrollTo({top: element.offsetTop - 270, behavior: 'smooth'})
       }
     },
   },

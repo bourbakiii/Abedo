@@ -134,6 +134,9 @@ export default {
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+  &__back{
+    flex-shrink: 0;
+  }
   &__text {
     width: 100%;
     margin: 0px 15px;

@@ -487,7 +487,7 @@ export default {
           justify-content: space-between;
 
           &__adaptive__slider {
-            max-width:100%;
+            max-width: 100%;
             margin-bottom: 40px;
           }
 
@@ -821,14 +821,21 @@ export default {
               &__carted {
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-content: space-between;
                 flex-direction: row;
+                width: 339px;
+                height: 60px;
+                background-color: $white;
+                padding: 0px 30px;
+                border: 1px solid $dark_grey;
+                border-radius: 20px;
                 &__text {
-                  margin-right: 15px;
+                  margin-right: 30px;
+                  font-family: "Montserrat";
                   font-style: normal;
-                  font-weight: 500;
+                  font-weight: 600;
                   font-size: 16px;
-                  line-height: 19px;
+                  line-height: 20px;
                   text-overflow: ellipsis;
                   overflow: hidden;
                   white-space: nowrap;
@@ -843,6 +850,9 @@ export default {
                   text-overflow: ellipsis;
                   overflow: hidden;
                   white-space: nowrap;
+                  flex-grow: 1;
+                  margin: 0px 10px;
+                  text-align: center;
                 }
 
                 &__button {
