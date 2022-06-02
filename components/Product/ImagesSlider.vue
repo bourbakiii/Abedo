@@ -47,10 +47,13 @@ export default {
 .swiper {
   &-wrapper {
     width: 100%;
+    max-width:100%;
+    overflow: hidden;
   }
   height: auto;
   min-height:100px;
   width:100%;
+  overflow: hidden;
   &-slide {
     display: flex;align-items: center;justify-content: center;flex-direction: row;
   }

@@ -48,12 +48,14 @@
                 >
                   <swiper-slide
                     class="product-page__over__content__main__images__slider__swiper__slide"
-                    v-for="(slide, index) in product.more_images.map(
-                      (el) => el.small
-                    )"
+                    v-for="(slide, index) in [
+                      ...product.more_images,
+                      product.image,
+                    ]"
                     :key="index"
                     ><img
-                      :src="`${$axios.defaults.baseURL}${slide}`"
+                      @click="selectImage(slide)"
+                      :src="`${$axios.defaults.baseURL}${slide.small}`"
                       class="product-page__over__content__main__images__slider__swiper__slide__image"
                   /></swiper-slide>
                 </swiper>
@@ -84,8 +86,8 @@
               </div>
             </div>
             <img
-              v-if="product.image"
-              :src="`${$axios.defaults.baseURL}${product.image.original}`"
+              v-if="currentImage.original"
+              :src="`${$axios.defaults.baseURL}${currentImage.original}`"
               class="product-page__over__content__main__images__image"
             />
           </div>
@@ -275,9 +277,11 @@
                 v-if="in_cart"
                 class="product-page__over__content__main__adaptive-actions__actions"
               >
-              <p class="product-page__over__content__main__adaptive-actions__actions__text">
-                В корзине:
-              </p>
+                <p
+                  class="product-page__over__content__main__adaptive-actions__actions__text"
+                >
+                  В корзине:
+                </p>
                 <ButtonProduct
                   class="product-page__over__content__main__adaptive-actions__actions__button_minus product-page__over__content__main__adaptive-actions__actions__button"
                   size="30"
@@ -301,7 +305,9 @@
                 @click="add_to_cart(product.section.shop)"
                 class="product-page__over__content__main__adaptive-actions__add"
               />
-              <div class="product-page__over__content__main__adaptive-actions__otbivka">
+              <div
+                class="product-page__over__content__main__adaptive-actions__otbivka"
+              >
                 Добавлено
               </div>
             </div>
@@ -381,7 +387,11 @@ export default {
             ".product-page__over__content__main__images__slider__button__prev",
         },
       },
+      currentImage: null,
     };
+  },
+  created() {
+    this.currentImage = this.product?.image || null;
   },
   mounted() {
     this.$store.commit("variables/action", (state) => {
@@ -404,6 +414,10 @@ export default {
       });
       console.log("123");
       this.$forceUpdate();
+    },
+    selectImage(image) {
+      this.currentImage = image || null;
+      console.log(image);
     },
   },
 };
@@ -473,6 +487,7 @@ export default {
           justify-content: space-between;
 
           &__adaptive__slider {
+            max-width:100%;
             margin-bottom: 40px;
           }
 
@@ -532,7 +547,6 @@ export default {
                 width: 100%;
                 height: max-content;
                 cursor: pointer;
-
                 &__image {
                   object-fit: contain;
                   width: 100%;
@@ -558,7 +572,7 @@ export default {
           justify-content: flex-start;
           flex-direction: row;
           margin-top: 77px;
-          width:100%;
+          width: 100%;
           @media screen and (max-width: $tablet) {
             margin-top: 0px;
             flex-direction: column;
@@ -809,7 +823,7 @@ export default {
                 align-items: center;
                 justify-content: center;
                 flex-direction: row;
-                &__text{
+                &__text {
                   margin-right: 15px;
                   font-style: normal;
                   font-weight: 500;
@@ -878,7 +892,7 @@ export default {
             flex-shrink: 0;
             margin-left: auto;
             overflow: hidden;
-            &__text{
+            &__text {
               margin-right: 15px;
             }
             &__button {
@@ -903,18 +917,20 @@ export default {
             margin-left: auto;
           }
 
-          &__otbivka{
+          &__otbivka {
             background-color: $green;
             padding: 10px;
             color: $white;
             border-radius: 15px;
             margin-top: 15px;
-            position: absolute; top: 100%; right: 0px;
+            position: absolute;
+            top: 100%;
+            right: 0px;
           }
         }
 
         &__back {
-          margin-top:50px !important;
+          margin-top: 50px !important;
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 500;
