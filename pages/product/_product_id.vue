@@ -914,6 +914,7 @@ export default {
         }
 
         &__back {
+          margin-top:50px !important;
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 500;
