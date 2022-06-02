@@ -9,6 +9,19 @@
     >
   </div>
 </template>
+<script>
+export default {
+  mounted(){
+    this.$store.commit('variables/action', state=>{
+      state.adaptive_navigation = { 
+        text: null,
+        slot: 'main',
+        info_click: null
+      }
+    });
+  }
+}
+</script>
 <style lang="scss" scoped>
 .error-layout {
   justify-content: center !important;

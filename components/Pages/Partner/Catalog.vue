@@ -53,23 +53,13 @@ export default {
     scrolled: {
       inserted: function (el, binding) {
         el.f = function (evt) {
-          console.log(window.innerHeight);
           let breakpointOffset =
             window.innerWidth < 768 ? window.innerHeight / 1.5 : 650;
-          console.log(breakpointOffset);
-          console.log("0--0-0-0--0--00-0-0-0-0");
-          console.log(window.scrollY);
-          console.log(el.offsetTop - breakpointOffset);
-          console.log(window.scrollY > el.offsetTop - breakpointOffset);
-          console.log("-------------------------");
-          console.log(
-            window.scrollY < el.offsetTop + el.offsetHeight - breakpointOffset
-          );
+
           if (
             window.scrollY > el.offsetTop - breakpointOffset &&
             window.scrollY < el.offsetTop + el.offsetHeight - breakpointOffset
           ) {
-            console.log(el.getAttribute("script_id"));
             binding.value(el.getAttribute("script_id"));
           }
         };

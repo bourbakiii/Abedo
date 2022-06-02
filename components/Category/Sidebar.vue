@@ -59,7 +59,6 @@ export default {
     parseUrl(category) {
       let to_ret = '/partners'
       if (+this.$route.query.category != +category.id) to_ret+=`?category=${+category.id}`
-      console.log(to_ret);
       return to_ret;
     },
   },

@@ -221,6 +221,9 @@
         <p class="order__payment__item__name">Перевод на банковскую карту</p>
       </label>
     </div>
+    <div v-if="cart_partner.order_message" class="order__some-text">
+      {{cart_partner.order_message}}
+    </div>
     <div class="order__price">
       <p class="order__price__pre">Итого:</p>
       <p class="order__price__price">{{ total_order_discount_price }}₽</p>
@@ -318,7 +321,7 @@ export default {
       this.door_delivery = false;
       this.self_get = true;
     },
-    
+
     changeRadio(value) {
       this.is_cashless_payment = Boolean(value);
     },
@@ -418,8 +421,6 @@ export default {
   },
   computed: {
     total_order_price() {
-      console.log("The text is:")
-      console.log(this.self_get?0:+this.delivery_price)
       let summ =
         +this.$store.getters["cart/total_price"] +
         +this.final_delivery_price(this.self_get?0:+this.delivery_price) +
@@ -931,7 +932,15 @@ export default {
       }
     }
   }
-
+  &__some-text{
+    background-color: red;
+    width: 100%;
+    background: $white;
+    border: 1px solid $darkblue;
+    border-radius: 10px;
+    padding: 15px 24px;
+    margin:30px 0px 40px;
+  }
   &__button {
     margin-top: 30px;
     display: flex;

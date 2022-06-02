@@ -19,7 +19,7 @@
                 <p
                   class="orders-page__content__orders__content__item__data__block__name"
                 >
-                  !!! не приходит !!!
+                  {{ order.shop.name }}
                 </p>
                 <p
                   class="orders-page__content__orders__content__item__data__block__value"
@@ -107,6 +107,7 @@
 import parserMixin from "@/mixins/parser.js";
 export default {
   mixins: [parserMixin],
+  middleware: ['auth'],
   data() {
     return {
       orders: [],
@@ -227,7 +228,6 @@ export default {
                 max-width: 130px;
                 min-width: 130px;
                 margin-right: 30px;
-                background-color: lightcoral;
                 @media screen and (max-width: $maxwidth) {
                   margin-right: 10px;
                 }

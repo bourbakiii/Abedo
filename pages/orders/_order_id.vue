@@ -33,6 +33,7 @@
 </template>
 <script>
 export default {
+  middleware: ['auth'],
   async asyncData({ $axios, route, error,store }) {
     let to_return_order = {},
       loading = true;

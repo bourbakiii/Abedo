@@ -124,10 +124,7 @@ export default {
       return this.$store.state.cart.partner;
     },
     total_price() {
-      console.log('1:')
-      console.log(this.$store.getters["cart/total_discount_price"]);
-      console.log(2)
-      console.log( this.final_delivery_price())
+
       let summ =
         this.$store.getters["cart/total_discount_price"] +
         this.final_delivery_price();

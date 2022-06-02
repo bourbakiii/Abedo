@@ -5,9 +5,7 @@ export default {
     },
   },
   methods: {
-    like() {
-console.log(Boolean(this.token))
-if(!this.token) return this.$store.commit("modals/open",{modal_name:"login"}) 
+    like() {if(!this.token) return this.$store.commit("modals/open",{modal_name:"login"})
 
       const add_if_true = (value) => {
         if (value)

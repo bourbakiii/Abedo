@@ -10,7 +10,8 @@
           :categories="categories"
           class="index-page__content__adaptive-categories adaptive"
         />
-        <PagesIndexStocksSlider class="index-page__content__stocks-slider" />
+        <PagesIndexStocksSlider class="index-page__content__stocks-slider"/>
+<!--          v-if="partners.length"-->
         <div
           class="new-shops catalog-wrapper wrapper adaptive-non-wrapper index-page__content__new-shops"
         >
@@ -124,6 +125,7 @@
             </div>
             <transition name="filter">
               <Filters
+                @send="setFilters"
                 v-if="show_filters"
                 class="index-page__content__new-shops__filters"
               />
@@ -132,7 +134,8 @@
               <client-only>
                 <PartnerItem
                   class="index-page__content__new-shops__content__item"
-                  v-for="(item, index) in 12"
+                  v-for="(item, index) in partners"
+                  :partner="item"
                   :key="index"
                 />
               </client-only>
@@ -140,7 +143,8 @@
             <ButtonStandart
               @click.native="$router.push('/partners')"
               class="index-page__content__new-shops__button"
-              >Все заведения</ButtonStandart
+            >Все заведения
+            </ButtonStandart
             >
           </div>
         </div>
@@ -153,7 +157,7 @@
         универсальный код речей. Текст генерируется абзацами случайным образом
         от двух до десяти предложений в абзаце, что позволяет сделать текст
         более привлекательным и живым для визуально-слухового восприятия.
-        <br />
+        <br/>
         По своей сути рыбатекст является альтернативой традиционному lorem
         ipsum, который вызывает у некторых людей недоумение при попытках
         прочитать рыбу текст. В отличии от lorem ipsum, текст рыба на русском
@@ -164,20 +168,33 @@
   </div>
 </template>
 <script>
+import partnerFiltersMixin from "@/mixins/partner-filters";
+
 export default {
+  mixins: [partnerFiltersMixin],
   data() {
-    return { show_filters: false, categories: [] };
+    return {show_filters: false, categories: []};
   },
-  async fetch() {
+  async created() {
+    console.log(123);
     await this.$axios
       .$get(`${this.$axios.defaults.baseURL}/api/cuisines/get`)
-      .then(({ cuisines: { data } }) => {
+      .then(({cuisines: {data}}) => {
         this.categories = data;
       });
+    // await this.$axios
+    //   .$get(`${this.$axios.defaults.baseURL}/api/shops/new`, {}, {
+    //     params: {
+    //       limit: 12
+    //     }
+    //   })
+    //   .then(({shops}) => {
+    //     this.new_shops = shops;
+    //   });
   },
-  mounted(){
-    this.$store.commit('variables/action', state=>{
-      state.adaptive_navigation = { 
+  mounted() {
+    this.$store.commit('variables/action', state => {
+      state.adaptive_navigation = {
         text: null,
         slot: 'main',
         info_click: null
@@ -192,14 +209,17 @@ export default {
   @media screen and (max-width: $tablet) {
     padding-bottom: 50px !important;
   }
+
   &__content {
     &__search {
       margin-bottom: 70px;
     }
+
     &__stocks-slider,
     &__new-shops {
       margin-bottom: 70px;
     }
+
     &__new-shops {
       @media screen and (max-width: $tablet) {
         margin-bottom: 0px;
@@ -210,12 +230,14 @@ export default {
       flex-direction: column;
       width: 100%;
       max-width: $maxwidth;
+
       &__top {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
         margin-bottom: 20px;
+
         &__title {
           @media screen and (max-width: $tablet) {
             font-family: "SF Pro Display";
@@ -225,6 +247,7 @@ export default {
             line-height: 20px;
           }
         }
+
         &__filter-button {
           height: 30px;
           width: 120px;
@@ -237,6 +260,7 @@ export default {
           align-items: center;
           justify-content: space-between;
           padding: 0px 15px;
+
           &-text {
             font-family: "SF Pro Display";
             font-style: normal;
@@ -248,6 +272,7 @@ export default {
           }
         }
       }
+
       &__content {
         width: 100%;
         display: grid;
@@ -263,11 +288,13 @@ export default {
           grid-gap: 15px;
           grid-template-columns: repeat(1, 1fr);
         }
+
         &__item {
           overflow: hidden !important;
           width: 100% !important;
         }
       }
+
       &__button {
         margin-top: 70px;
         align-self: center;
@@ -295,6 +322,7 @@ export default {
       }
     }
   }
+
   @media screen and (max-width: $tablet) {
     padding-bottom: 30px;
   }

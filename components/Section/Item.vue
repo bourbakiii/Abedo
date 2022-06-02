@@ -20,9 +20,7 @@ export default {
     act() {
       if (this.action) this.action();
       else {
-        console.log("ду ит сука")
         const element = document.getElementById(`section-${this.section.id}`)
-        console.log(element.offsetTop)
         window.scrollTo({top: element.offsetTop - 270, behavior: 'smooth'})
       }
     },

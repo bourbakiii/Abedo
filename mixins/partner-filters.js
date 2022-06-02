@@ -29,11 +29,12 @@ export default {
                 if (key != "keywords") filters[key] = +this.filters[key];
                 else filters[key] = this.filters[key];
 
-                    if (this.$route.query.category) filters['cuisine'] = this.$route.query.category; 
-                
+                    if (this.$route.query.category) filters['cuisine'] = this.$route.query.category;
+
         ////////////////////////////////////////////
+      let add_path = this.$router.path=='/'?'/new':''
         await this.$axios
-        .$get(`${this.$axios.defaults.baseURL}/api/shops`, {
+        .$get(`${this.$axios.defaults.baseURL}/api/shops${add_path}`, {
             params: qs.stringify({
                 ...this.params,
                     params: {...filters},

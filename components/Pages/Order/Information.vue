@@ -62,6 +62,7 @@
 </template>
 <script>
 import parserMixin from "@/mixins/parser.js";
+
 export default {
   props: {
     order: {
@@ -84,6 +85,7 @@ export default {
     max-width: 100%;
     min-width: auto;
   }
+
   &__title {
     margin-bottom: 40px;
     @media screen and (max-width: $tablet) {
@@ -98,6 +100,7 @@ export default {
       display: none;
     }
   }
+
   &__content {
     width: 100%;
     display: flex;
@@ -110,6 +113,7 @@ export default {
       border: 1px solid $dark_grey;
       border-radius: 10px;
     }
+
     &__hood {
       width: 100%;
       max-width: 100%;
@@ -118,7 +122,7 @@ export default {
       justify-content: flex-start;
       flex-direction: row;
       margin-bottom: 40px;
-      @media screen and (max-width: $tablet) {
+      @media screen and (max-width: $phone) {
         margin-bottom: 20px;
         align-items: flex-start;
         flex-direction: column;
@@ -127,6 +131,7 @@ export default {
         padding-bottom: 15px;
         border-bottom: 1px solid $dark_grey;
       }
+
       &__image {
         margin-right: 30px;
         background-color: $white;
@@ -145,6 +150,7 @@ export default {
           display: none;
         }
       }
+
       &__name {
         width: 100%;
         font-family: "Montserrat";
@@ -164,6 +170,7 @@ export default {
           line-height: 19px;
         }
       }
+
       &__date {
         display: none;
         margin-top: 8px;
@@ -178,12 +185,14 @@ export default {
         }
       }
     }
+
     &__content {
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
       flex-direction: column;
       width: 100%;
+
       &__item {
         padding: 10px 0px;
         width: 100%;
@@ -192,9 +201,11 @@ export default {
         justify-content: space-between;
         border-bottom: 1px solid $dark_grey;
         min-height: 60px;
+
         &:last-of-type {
           border: none;
         }
+
         @media screen and (max-width: $phone) {
           border: none;
           padding: 0px;
@@ -205,6 +216,7 @@ export default {
             margin-bottom: 0px;
           }
         }
+
         &__name {
           font-family: "SF Pro Display";
           font-style: normal;
@@ -233,6 +245,7 @@ export default {
             margin-right: 14px;
           }
         }
+
         &__value {
           font-family: "SF Pro Display";
           font-style: normal;
