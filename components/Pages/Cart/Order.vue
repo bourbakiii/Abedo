@@ -222,7 +222,7 @@
       </label>
     </div>
     <div v-if="cart_partner.order_message" class="order__some-text">
-      {{cart_partner.order_message}}
+      {{ cart_partner.order_message }}
     </div>
     <div class="order__price">
       <p class="order__price__pre">Итого:</p>
@@ -234,7 +234,7 @@
         {{ total_order_price }}₽
       </p>
     </div>
-    <ButtonStandart class="order__button">
+    <ButtonStandart :loader="loading" class="order__button">
       <svg
         class="order__button__icon"
         width="17"
@@ -292,6 +292,7 @@ export default {
         city: null,
         house: null,
       },
+      loading:false,
       description: null,
       additional: null,
       is_cashless_payment: false,
@@ -380,10 +381,11 @@ export default {
         phone: parseInt(this.phone.replace(/\D+/g, "")),
         is_cashless_payment: +this.is_cashless_payment,
         with_gifts: +this.with_gifts,
-        promo_code: this.$store.state.cart.promo.value||null
+        promo_code: this.$store.state.cart.promo.value || null
       });
       this.errors = [];
       //////////////////////////////////////////////////////
+      this.loading = true;
       this.$axios
         .post(`/api/order/make`, params, {
           // body: params,
@@ -405,7 +407,9 @@ export default {
           }
           const element = document.querySelector(`.order__messages`);
           element.scrollIntoView({block: "center", behavior: "smooth"});
-        });
+        }).finally(() => {
+        this.loading = false;
+      });
     },
     setStartAddress() {
       let index = this.addresses.map((el) => el.is_default).indexOf(true);
@@ -423,14 +427,14 @@ export default {
     total_order_price() {
       let summ =
         +this.$store.getters["cart/total_price"] +
-        +this.final_delivery_price(this.self_get?0:+this.delivery_price) +
+        +this.final_delivery_price(this.self_get ? 0 : +this.delivery_price) +
         +(this.door_delivery ? this.door_delivery_price : 0);
       return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
     total_order_discount_price() {
       let summ =
         +this.$store.getters["cart/total_discount_price"] +
-        +this.final_delivery_price(this.self_get?0:+this.delivery_price) +
+        +this.final_delivery_price(this.self_get ? 0 : +this.delivery_price) +
         +(this.door_delivery ? this.door_delivery_price : 0);
       return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
@@ -527,6 +531,7 @@ export default {
       color: $black;
       font-size: 16px;
       font-weight: 600;
+
       &.active {
         background-color: $darkblue;
         color: $white;
@@ -556,16 +561,19 @@ export default {
     flex-direction: column;
     width: 100%;
     margin-bottom: 30px;
-    &__title{
-      @media screen and (max-width: $phone_normal){
+
+    &__title {
+      @media screen and (max-width: $phone_normal) {
         font-size: 18px;
       }
     }
-    &__value{
-      @media screen and (max-width: $phone_normal){
+
+    &__value {
+      @media screen and (max-width: $phone_normal) {
         font-size: 15px;
       }
     }
+
     &__content {
       width: 100%;
       display: flex;
@@ -834,6 +842,7 @@ export default {
       .order__payment__item__radio {
         width: 22.5px;
         height: 22.5px;
+
         &.checked {
           border-color: $white;
 
@@ -847,7 +856,7 @@ export default {
         min-height: 50px;
         margin-bottom: 15px;
         border: 1px solid $darkblue;
-         padding: 8px 27px;
+        padding: 8px 27px;
       }
 
       &:last-of-type {
@@ -932,15 +941,17 @@ export default {
       }
     }
   }
-  &__some-text{
+
+  &__some-text {
     background-color: red;
     width: 100%;
     background: $white;
     border: 1px solid $darkblue;
     border-radius: 10px;
     padding: 15px 24px;
-    margin:30px 0px 40px;
+    margin: 30px 0px 40px;
   }
+
   &__button {
     margin-top: 30px;
     display: flex;
@@ -952,6 +963,7 @@ export default {
     padding: 0px 5px;
     font-size: 16px;
     font-weight: 600;
+
     svg * {
       stroke: $darkblue;
       fill: transparent !important;

@@ -57,42 +57,43 @@
             promo.success ? 'decline' : 'accept'
           } ${promo.success == null ? '' : 'result_' + promo.success}`"
         />
-        <ButtonStandart class="cart__promo__content__button"
-          >Применить</ButtonStandart
+        <ButtonStandart :loader="$store.state.cart.promo.loading" class="cart__promo__content__button"
+        >Применить
+        </ButtonStandart
         >
         <transition name='opacity'>
-        <div
-          v-if="promo.message"
-          :class="`cart__promo__content__message__${
+          <div
+            v-if="promo.message"
+            :class="`cart__promo__content__message__${
             promo.success ? 'success' : 'decline'
           }`"
-          class="cart__promo__content__message"
-        >
-         <transition name='promo-galka'>
-          <svg
-            v-if="promo.success"
-            class="cart__promo__content__message__icon"
-            width="30"
-            height="30"
-            viewBox="0 0 30 30"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            class="cart__promo__content__message"
           >
-            <path
-              d="M15 0C6.71562 0 0 6.71562 0 15C0 23.2844 6.71562 30 15 30C23.2844 30 30 23.2844 30 15C30 6.71562 23.2844 0 15 0ZM19.1419 14.3481L13.1794 20.3106L13.1763 20.3075L12.8444 20.6381L12.84 20.6344L12.8356 20.6381L12.0919 19.8956L12.0963 19.8906L7.24688 15.0413L8.61875 13.6694L12.8488 17.9006L17.7706 12.9781L17.765 12.9725L21.375 9.36188L22.7506 10.7381L19.1419 14.3481Z"
-              fill="#0EA976"
-            />
-          </svg>
-         </transition>
-          <p
-            :class="`cart__promo__content__message__text__${
+            <transition name='promo-galka'>
+              <svg
+                v-if="promo.success"
+                class="cart__promo__content__message__icon"
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 0C6.71562 0 0 6.71562 0 15C0 23.2844 6.71562 30 15 30C23.2844 30 30 23.2844 30 15C30 6.71562 23.2844 0 15 0ZM19.1419 14.3481L13.1794 20.3106L13.1763 20.3075L12.8444 20.6381L12.84 20.6344L12.8356 20.6381L12.0919 19.8956L12.0963 19.8906L7.24688 15.0413L8.61875 13.6694L12.8488 17.9006L17.7706 12.9781L17.765 12.9725L21.375 9.36188L22.7506 10.7381L19.1419 14.3481Z"
+                  fill="#0EA976"
+                />
+              </svg>
+            </transition>
+            <p
+              :class="`cart__promo__content__message__text__${
               promo.success ? 'success' : 'decline'
             }`"
-            class="cart__promo__content__message__text"
-          >
-            {{ promo.message }}
-          </p>
-        </div>
+              class="cart__promo__content__message__text"
+            >
+              {{ promo.message }}
+            </p>
+          </div>
         </transition>
       </div>
     </form>
@@ -101,7 +102,7 @@
       <span
         class="cart__promo_empty__button"
         @click="$store.commit('modals/open', { modal_name: 'login' })"
-        >Войти в личный кабинет</span
+      >Войти в личный кабинет</span
       >
     </p>
     <div v-if="token" class="cart__prices">
@@ -125,8 +126,8 @@ export default {
     };
   },
   methods: {
-    checkPromocode() {
-      this.$store.dispatch("cart/synchronization");
+    async checkPromocode() {
+      this.$store.dispatch("cart/synchronization")
     },
   },
   computed: {
@@ -155,12 +156,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.promo-galka{
+.promo-galka {
   &-enter,
   &-leave-to {
-    width:0px;
+    width: 0px;
     margin: 0px !important;
-    opacity:0;
+    opacity: 0;
   }
 
   &-enter-active,
@@ -168,6 +169,7 @@ export default {
     transition: all $transition;
   }
 }
+
 .cart-product {
   &-enter,
   &-leave-to {
@@ -183,6 +185,7 @@ export default {
     transition: all $transition;
   }
 }
+
 .cart {
   padding: 30px;
   border-radius: 20px;
@@ -197,6 +200,7 @@ export default {
     border-radius: 0px;
     padding: 0px;
   }
+
   &__hood {
     padding-bottom: 30px;
     width: 100%;
@@ -205,6 +209,7 @@ export default {
     justify-content: flex-start;
     border-bottom: 1px solid $extra_dark_grey;
     border: none;
+
     &__adaptive {
       height: max-content;
       display: flex;
@@ -213,6 +218,7 @@ export default {
       flex-direction: row;
       padding-bottom: 0px;
       margin-bottom: 30px;
+
       &__name {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -220,6 +226,7 @@ export default {
         font-size: 20px;
         line-height: 24px;
       }
+
       &__button {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -230,6 +237,7 @@ export default {
         background-color: transparent;
         outline: none;
         border: none;
+
         &:hover {
           text-decoration: underline;
         }
@@ -248,11 +256,13 @@ export default {
         height: 72px;
         margin-right: 10px;
       }
+
       &__image {
         width: 100%;
         object-fit: contain;
       }
     }
+
     &__name {
       font-family: "Montserrat";
       font-style: normal;
@@ -267,6 +277,7 @@ export default {
         line-height: 20px;
       }
     }
+
     &__button {
       font-family: "Montserrat";
       font-style: normal;
@@ -281,11 +292,13 @@ export default {
         font-size: 15px;
         line-height: 18px;
       }
+
       &:hover {
         text-decoration: underline;
       }
     }
   }
+
   &__products {
     display: flex;
     align-items: flex-start;
@@ -293,15 +306,15 @@ export default {
     flex-direction: column;
     width: 100%;
   }
+
   &__promo {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     align-self: flex-start;
-    @media screen and (max-width: $phone_normal) {
-      width: 100%;
-    }
+    width: 100%;
+
     &__content {
       display: flex;
       align-items: center;
@@ -316,18 +329,17 @@ export default {
         padding: 30px 0px;
         border-top: 1px solid $dark_grey;
         border-bottom: 1px solid $dark_grey;
-        width: 100%;
-        max-width: 336px;
-        justify-content: space-between;
+        justify-content: flex-start;
         margin-top: 0px;
+
       }
-      @media screen and (max-width: $phone_normal) {
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        flex-direction: column;
-        width: 100%;
+
+      @media screen and (max-width: $tablet_middle) {
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 350px !important;
       }
+
       &__text {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -336,11 +348,14 @@ export default {
         line-height: 19px;
         margin-right: 40px;
         flex-shrink: 0;
-
+        @media screen and (max-width: $sidebar_dn) {
+          margin-right: 10px
+        }
         @media screen and (max-width: $tablet) {
           display: none;
         }
       }
+
       &__input {
         border: 1px solid $extra_dark_grey;
         border-radius: 50px;
@@ -368,36 +383,38 @@ export default {
             opacity: 1;
           }
         }
+
         @media screen and (max-width: $tablet) {
           width: 100%;
           max-width: 169px;
           height: 40px;
           border-color: $extra_dark_grey;
         }
-        @media screen and (max-width: $phone_normal) {
-          width: 100%;
-          max-width: 100%;
-          margin-bottom: 10px;
-        }
+
         &.result_true {
+
           border-color: $green;
         }
+
         &.result_false {
           border-color: $red;
         }
       }
+
       &__button {
         margin-left: 30px;
-        padding: 0px 20px;
+        padding: 0px 10px;
+        width:132px;
+        @media screen and (max-width: $sidebar_dn) {
+          margin-left: 10px;
+        }
         @media screen and (max-width: $tablet) {
           height: 40px;
           width: 121px;
-          margin-left: 10px;
         }
-        @media screen and (max-width: $phone_normal) {
-          margin-left: 0px;
-        }
+
       }
+
       &__message {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -415,33 +432,48 @@ export default {
         border-radius: 20px;
         border-color: 1px solid $dark_grey;
         transition: $transition;
+        @media screen and (max-width: $notebook) {
+          margin-left: 10px;
+          padding: 0px 10px;
+
+        }
+        @media screen and (max-width: $tablet_middle) {
+          margin-top: 10px;
+          margin-left: 0px;
+        }
+
         &__success {
           border: 1px solid $green;
         }
+
         &__decline {
           border: 1px solid $red;
         }
+
         &__icon {
           margin-right: 15px;
         }
+
         &__text {
           font-family: "SF Pro Display";
           font-style: normal;
           font-weight: 500;
           font-size: 16px;
           line-height: 19px;
+
           &__success {
             color: $green;
           }
+
           &__decline {
             color: $red;
           }
         }
       }
     }
+
     &_empty {
       display: inline;
-
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;
@@ -456,6 +488,7 @@ export default {
         font-size: 16px;
         line-height: 16px;
       }
+
       &__button {
         white-space: nowrap;
         font-weight: 600;
@@ -463,6 +496,7 @@ export default {
       }
     }
   }
+
   &__prices {
     margin-top: 40px;
     align-self: flex-start;
@@ -475,6 +509,7 @@ export default {
     @media screen and (max-width: $tablet) {
       margin-top: 30px;
     }
+
     &__pre {
       font-family: "SF Pro Display";
       font-style: normal;
@@ -487,6 +522,7 @@ export default {
         line-height: 24px;
       }
     }
+
     &__price {
       font-family: "Montserrat";
       font-style: normal;
@@ -499,6 +535,7 @@ export default {
         line-height: 24px;
         margin-left: 10px;
       }
+
       &_full {
         font-family: "Montserrat";
         font-style: normal;

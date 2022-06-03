@@ -1,5 +1,5 @@
 <template>
-  <button @click='$emit("click")' class="button button-standart unselectable">
+  <button :disabled="loader" @click='$emit("click")' class="button button-standart unselectable">
     <transition name="opacity" appear mode="out-in">
       <loader v-if="loader" className="button-standart__loader" class="button-standart__loader"/>
       <div class="button-standart__slot" v-else>

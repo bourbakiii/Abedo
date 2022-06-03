@@ -1,7 +1,7 @@
 <template>
   <div class="page partners-page wrapper">
     <div class="partners-page__content content">
-      <Breadcrumbs class="partners-page__breadcrumbs adaptive-non" />
+      <Breadcrumbs class="partners-page__breadcrumbs adaptive-non"/>
       <div class="partners-page__top adaptive-non">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
 
@@ -135,7 +135,8 @@
               stroke-linejoin="round"
             />
           </svg>
-          Категории</ButtonStandart
+          Категории
+        </ButtonStandart
         >
         <button
           @click="show_filters = !show_filters"
@@ -188,7 +189,7 @@
           class="partners-page__partners__sidebar adaptive-non"
         />
         <div class="partners-page__partners__content">
-          <div class="partners-page__partners__content__cards">
+          <div v-if="partners && partners.length>0" class="partners-page__partners__content__cards">
             <client-only>
               <PartnerItem
                 class="partners-page__partners__content__cards__item"
@@ -198,12 +199,18 @@
               />
             </client-only>
           </div>
+          <p v-else-if="partners" class="partners-page__partners__content__cards_empty">
+            Заведения, соответсвующие заданным условиям не найдены.
+            <br>
+            Попробуйте изменить выбранне фильтры.
+          </p>
           <ButtonStandart
-            v-if="params.page <= params.last_page && !this.loading"
-            @click.native="$fetch"
+            :loader="loading"
+            v-if="params.page <= params.last_page && partners && partners.length>0"
+            @click="$fetch"
             class="partners-page__partners__content__button"
-            >Загрузить еще</ButtonStandart
-          >
+          >Загрузить еще
+          </ButtonStandart>
         </div>
       </div>
     </div>
@@ -213,6 +220,7 @@
 <script>
 import partnerFiltersMixin from "@/mixins/partner-filters.js";
 import dropdownMixin from "@/mixins/dropdowns.js";
+
 export default {
   mixins: [partnerFiltersMixin, dropdownMixin],
   data() {
@@ -224,7 +232,7 @@ export default {
     showCategories() {
       this.show_categories = true;
     },
-    hideCategories(){
+    hideCategories() {
       this.show_categories = false;
     }
   },
@@ -251,6 +259,7 @@ export default {
 .partners-page {
   align-items: center;
   justify-content: flex-start;
+
   &__top {
     display: flex;
     align-items: center;
@@ -267,6 +276,7 @@ export default {
         line-height: 20px;
       }
     }
+
     &__filter-button {
       height: 30px;
       width: 120px;
@@ -279,6 +289,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       padding: 0px 15px;
+
       &-text {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -288,10 +299,12 @@ export default {
         display: flex;
         align-items: center;
       }
+
       &:active {
         transition: 0.05s;
         transform: scale(0.96);
       }
+
       &_adaptive {
         background-color: transparent;
         border: none;
@@ -301,6 +314,7 @@ export default {
         justify-content: center;
       }
     }
+
     &_adaptive {
       width: 100%;
       display: flex;
@@ -308,24 +322,30 @@ export default {
       justify-content: space-between;
       flex-direction: row;
       position: relative;
+
       &__button {
         height: 35px !important;
         background-color: transparent;
         padding: 0px 15px !important;
+
         svg * {
           fill: transparent !important;
           stroke: $white;
         }
+
         background-color: $darkblue;
         color: $white;
+
         &:hover {
           background-color: $green;
           border-color: $green;
         }
+
         &__icon {
           margin-right: 10px;
         }
       }
+
       &__filters-button {
         display: flex;
         align-items: center;
@@ -339,14 +359,17 @@ export default {
         font-weight: 400;
         font-size: 15px;
         line-height: 17px;
+
         &__icon {
           margin-right: 10px;
         }
       }
+
       @media screen and (max-width: $tablet) {
         margin-top: 0px;
         margin-bottom: 20px;
       }
+
       &__dropdown {
         position: absolute;
         top: calc(100% + 13px);
@@ -356,6 +379,7 @@ export default {
         max-width: 100% !important;
 
         background: $dark_grey;
+
         button {
           background-color: red !important;
         }
@@ -375,6 +399,7 @@ export default {
       margin-top: 20px;
       flex-direction: column;
     }
+
     &__sidebar {
       flex-shrink: 0;
       margin-right: 30px;
@@ -393,12 +418,14 @@ export default {
         margin-bottom: 30px;
       }
     }
+
     &__content {
       display: flex;
       flex-direction: column;
       align-items: center;
       flex-direction: column;
       width: 100%;
+
       &__cards {
         flex-grow: 1;
         flex-shrink: 0;
@@ -420,25 +447,40 @@ export default {
           justify-content: flex-start;
           flex-direction: column;
         }
+
         &__item {
           width: 100%;
           overflow: hidden;
+
           &_adaptive {
             width: 100%;
           }
         }
+        &_empty{
+          text-align: left;
+          width: max-content;
+          font-family: 'SF Pro Display';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 26px;
+          align-self: flex-start;
+        }
       }
+
       &__button {
         width: 306px;
         height: 50px;
         margin-top: 60px;
         background-color: $light_grey;
         text-transform: uppercase !important;
+
         &:hover {
           background-color: $green;
           color: $white;
           border-color: $green;
         }
+
         @media screen and (max-width: $tablet) {
           margin-top: 30px;
           width: 228px;
