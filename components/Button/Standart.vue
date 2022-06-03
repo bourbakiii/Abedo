@@ -1,14 +1,17 @@
 <template>
   <button @click='$emit("click")' class="button button-standart unselectable">
-    <slot v-if="!loading"/>
-    <loading v-else className="button-standart__loading"></loading>
-
+    <transition name="opacity" appear mode="out-in">
+      <loader v-if="loader" className="button-standart__loader" class="button-standart__loader"/>
+      <div class="button-standart__slot" v-else>
+        <slot/>
+      </div>
+    </transition>
   </button>
 </template>
 <script>
 export default {
   props: {
-    loading: {
+    loader: {
       required: false,
       default: false
     }
@@ -18,7 +21,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.button {
+
+.button-standart {
   text-align: center;
   outline: none;
   border: none;
@@ -42,8 +46,16 @@ export default {
   justify-content: center;
   flex-direction: row;
 
-  * {
-    transition: $transition;
+  &__slot {
+    * {
+      transition: $transition !important;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    color: inherit;
   }
 
   &:hover {
@@ -83,6 +95,16 @@ export default {
       border-color: $green;
       color: $white;
     }
+  }
+}
+
+
+</style>
+
+<style lang="scss">
+.button-standart:hover {
+  .button-standart__loader-pulse {
+    background-color: $white;
   }
 }
 </style>

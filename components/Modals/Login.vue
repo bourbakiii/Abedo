@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="login" class="login-modal modal">
     <button
-    type='button'
+      type='button'
       @mousedown.prevent="$store.commit('modals/close')"
       class="login-modal__close"
     >
@@ -46,21 +46,24 @@
     />
     <div class="login-modal__labels">
       <NuxtLink to="/forget" class="login-modal__labels__forget"
-        >Забыли пароль?</NuxtLink
+      >Забыли пароль?
+      </NuxtLink
       >
       <NuxtLink to="/registration" class="login-modal__labels__registration"
-        >Регистрация</NuxtLink
+      >Регистрация
+      </NuxtLink
       >
     </div>
-    <ButtonStandart class="login-modal__button">Войти</ButtonStandart>
-    <div  :class="{
+    <ButtonStandart :loader="loading" class="login-modal__button">Войти</ButtonStandart>
+    <div :class="{
         'login-modal__errors_margined': errors.length,
       }" class="login-modal__errors">
-<Message
+      <Message
         v-for="error in errors"
         :key="error"
         class="login-modal__errors__item_error login-modal__errors__item"
-        >{{ error }}</Message
+      >{{ error }}
+      </Message
       >
     </div>
 
@@ -68,10 +71,12 @@
 </template>
 <script>
 import errorsMessagesMixin from "@/mixins/errors-messages.js";
+
 export default {
   mixins: [errorsMessagesMixin],
   data() {
     return {
+      loading: false,
       form: {
         phone: "",
         password: "",
@@ -80,12 +85,13 @@ export default {
   },
   methods: {
     async login() {
+      this.loading = true;
       this.$axios
         .post(`${this.$axios.defaults.baseURL}/api/login`, {
           phone: parseInt(this.form.phone.replace(/\D+/g, "")),
           password: this.form.password,
         })
-        .then(async ({ data: { token } }) => {
+        .then(async ({data: {token}}) => {
           this.$store.commit("account/action", (state) => {
             state.token = token;
             this.$cookies.set("token", token);
@@ -101,7 +107,9 @@ export default {
               .map((el) => el.flat())
               .flat();
           }
-        });
+        }).finally(() => {
+        this.loading = false;
+      });
     },
   },
 };
@@ -121,9 +129,11 @@ export default {
     max-width: 100%;
     height: 100%;
   }
+
   &__title {
     margin-bottom: 30px;
   }
+
   &__close {
     cursor: pointer;
     background-color: transparent;
@@ -137,9 +147,11 @@ export default {
       top: 24px;
     }
   }
+
   &__phone {
     margin-bottom: 20px;
   }
+
   &__labels {
     width: 100%;
     margin-top: 20px;
@@ -148,10 +160,12 @@ export default {
     justify-content: space-between;
     flex-direction: row;
   }
+
   &__button {
     width: 100%;
     margin-top: 20px;
   }
+
   &__errors {
     display: flex;
     align-items: center;
@@ -159,10 +173,13 @@ export default {
     flex-direction: column;
     width: 100%;
     transition: 0.3s;
+
     &_margined {
       margin-top: 15px;
     }
+
     transition: calc($transition * 2);
+
     .empty {
       margin-top: 0px;
     }
