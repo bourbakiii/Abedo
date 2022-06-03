@@ -60,7 +60,7 @@ export default {
   },
   mounted(){
     this.$store.commit('variables/action', state=>{
-      state.adaptive_navigation = { 
+      state.adaptive_navigation = {
         text: "Корзина",
         slot: 'label',
         info_click: null

@@ -22,7 +22,8 @@ export default {
     // '@/assets/scss/transitions.scss',
     // '@/assets/scss/fonts.scss',
     // '@/assets/scss/titles.scss',
-    "swiper/css/swiper.css"
+    "swiper/css/swiper.css",
+    "spinkit/spinkit.min.css"
   ],
   plugins: [
     '@plugins/v-mask.js',

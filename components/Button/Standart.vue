@@ -1,13 +1,19 @@
 <template>
-  <button :type='type' @click='$emit("click")' class="button button-standart unselectable">
-    <slot />
+  <button @click='$emit("click")' class="button button-standart unselectable">
+    <slot v-if="!loading"/>
+    <loading v-else className="button-standart__loading"></loading>
+
   </button>
 </template>
 <script>
 export default {
-  props:[
-    'type'
-  ]
+  props: {
+    loading: {
+      required: false,
+      default: false
+    }
+  }
+
 }
 </script>
 
@@ -35,35 +41,43 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  *{
+
+  * {
     transition: $transition;
   }
+
   &:hover {
     color: $white;
     background-color: $darkblue;
     border-color: $darkblue;
+
     svg * {
       fill: $white;
     }
   }
+
   &.green {
     &:hover {
       background-color: $green;
       border-color: $green;
     }
   }
+
   &.red {
     border-color: $red !important;
     color: $red;
+
     &:hover {
       background-color: $red;
-      color:$white;
+      color: $white;
     }
   }
+
   &.filled {
     background-color: $darkblue;
     border-color: $darkblue;
     color: $white;
+
     &.green {
       background-color: $green;
       border-color: $green;
