@@ -5,13 +5,16 @@ export default {
       lang: 'ru'
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no, maximum-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      {charset: 'utf-8'},
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no, maximum-scale=1'
+      },
+      {hid: 'description', name: 'description', content: ''},
+      {name: 'format-detection', content: 'telephone=no'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/new-logo-favicon.png' }
+      {rel: 'icon', type: 'image/x-icon', href: '/new-logo-favicon.png'}
     ]
   },
   ssr: true,
@@ -37,8 +40,8 @@ export default {
   //   }
   // },
   buildModules: [],
-  modules: [ 'cookie-universal-nuxt','@nuxtjs/axios', '@nuxtjs/style-resources'],
-  generate:{
+  modules: ['cookie-universal-nuxt', '@nuxtjs/axios', '@nuxtjs/style-resources'],
+  generate: {
     crawler: false,
     fallback: true
   },

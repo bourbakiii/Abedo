@@ -1,9 +1,9 @@
 <template>
   <div class="page orders-page wrapper">
     <div class="orders-page__content content">
-      <Breadcrumbs class="orders-page__content__breadcrumbs adaptive-non" />
+      <Breadcrumbs class="orders-page__content__breadcrumbs adaptive-non"/>
       <div class="orders-page__content__orders">
-        <h1 class="orders-page__content__orders__title title-normal">
+        <h1 class="orders-page__content__orders__title title-normal adaptive-non">
           Список заказов
         </h1>
         <div class="orders-page__content__orders__content">
@@ -88,12 +88,14 @@
               <ButtonStandart
                 @click.native="$router.push(`/orders/${order.id}`)"
                 class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_open"
-                >Открыть</ButtonStandart
+              >Открыть
+              </ButtonStandart
               >
               <ButtonStandart
                 @click="$store.commit('modals/open', { modal_name: 'rate' })"
                 class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_rate"
-                >Оценить</ButtonStandart
+              >Оценить
+              </ButtonStandart
               >
             </div>
           </div>
@@ -105,6 +107,7 @@
 
 <script>
 import parserMixin from "@/mixins/parser.js";
+
 export default {
   mixins: [parserMixin],
   middleware: ['auth'],
@@ -115,14 +118,16 @@ export default {
   },
   fetchOnServer: false,
   async fetch() {
-    if(this.token)
-    await this.$axios
-      .get("/api/orderHistory", {
-        headers: { Authorization: `Bearer ${this.token}` },
-      })
-      .then(({ data: { orders } }) => {
-        this.orders = orders.reverse();
-      });
+    if (this.token)
+      await this.$axios
+        .get("/api/orderHistory", {
+          headers: {Authorization: `Bearer ${this.token}`},
+        })
+        .then(({data: {orders: {data}}}) => {
+          console.log('the order:');
+          console.log(data);
+          this.orders = data.reverse();
+        });
   },
   computed: {
     token() {
@@ -156,8 +161,10 @@ export default {
 
     &__orders {
       width: 100%;
+
       &__title {
         margin-bottom: 70px;
+
         @media screen and (max-width: $tablet) {
           font-family: "SF Pro Display";
           font-style: normal;
@@ -167,6 +174,7 @@ export default {
           margin-bottom: 30px;
         }
       }
+
       &__content {
         width: 100%;
         border: 1px $dark_grey;
@@ -177,6 +185,14 @@ export default {
         justify-content: flex-start;
         flex-direction: column;
         background-color: $white;
+
+        @media screen and (max-width: $tablet_middle) {
+          border-radius: 0px;
+          padding: 0px;
+          border: none;
+        }
+
+
         &__item {
           max-width: 100%;
           width: 100%;
@@ -188,12 +204,26 @@ export default {
           justify-content: space-between;
           flex-direction: row;
           border-bottom: 1px solid $dark_grey;
+
           &:last-of-type {
             border-bottom: 0px;
           }
+
+          @media screen and (max-width: $tablet_middle) {
+            border: 1px solid $dark_grey;
+            border-radius: 10px;
+            padding: 20px 14px;
+            margin-bottom: 16px;
+            &:last-of-type {
+              margin-bottom: 0px;
+            }
+          }
+
           @media screen and (max-width: $sidebar_dn) {
             flex-direction: column;
           }
+
+
           &__data {
             flex-grow: 1;
             display: flex;
@@ -212,17 +242,20 @@ export default {
                 max-width: 100% !important;
                 margin: 0px !important;
                 overflow: hidden;
+
                 &_address {
                   grid-column-start: 1;
                   grid-column-end: 3;
                 }
               }
             }
+
             &__block {
               display: flex;
               align-items: flex-start;
               justify-content: flex-start;
               flex-direction: column;
+
               &_partner {
                 width: 130px;
                 max-width: 130px;
@@ -232,6 +265,7 @@ export default {
                   margin-right: 10px;
                 }
               }
+
               &_date {
                 width: 120px;
                 max-width: 120px;
@@ -244,6 +278,7 @@ export default {
                   margin-right: 30px;
                 }
               }
+
               &_address {
                 margin-right: 30px;
                 width: 100%;
@@ -252,6 +287,7 @@ export default {
                 }
                 height: auto;
               }
+
               &_price {
                 width: 80px;
                 margin-right: 30px;
@@ -259,11 +295,13 @@ export default {
                   margin-right: 10px;
                 }
               }
+
               &_status {
                 width: max-content;
                 max-width: 100px;
                 flex-shrink: 0;
               }
+
               &__name {
                 margin-bottom: 15px;
                 font-family: "SF Pro Display";
@@ -273,6 +311,7 @@ export default {
                 line-height: 17px;
                 white-space: nowrap;
               }
+
               &__value {
                 font-family: "SF Pro Display";
                 font-style: normal;
@@ -286,6 +325,7 @@ export default {
               }
             }
           }
+
           &__buttons {
             width: max-content;
             display: flex;
@@ -303,12 +343,25 @@ export default {
               align-self: flex-end;
               margin-left: 0px;
             }
-            @media screen and (max-width: $tablet) {
-              align-self: center;
+
+            @media screen and (max-width: $tablet_middle) {
+              justify-content: space-between;
+              width: 100%;
             }
+
             &__button {
               width: 104px;
               height: 40px;
+              @media screen and (max-width: $tablet_middle) {
+                width: 134px;
+                height: 35px;
+                font-family: 'SF Pro Display';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 17px;
+              }
+
               &_open {
                 margin-right: 20px;
                 @media screen and (max-width: $notebook) {
@@ -320,12 +373,19 @@ export default {
                   margin-bottom: 0px;
                 }
               }
+
               &_rate {
                 border-color: $green !important;
                 color: $green;
+
                 &:hover {
                   background-color: $green;
                   color: $white;
+                }
+
+                @media screen and (max-width: $tablet_middle) {
+                  border-color: $darkblue !important;
+                  color: $darkblue !important;
                 }
               }
             }

@@ -4,7 +4,7 @@ export const state = () => ({
   //   product: null,
   // },
   rate: {
-    show: false
+    show: true
   },
   login: {
     show: false
