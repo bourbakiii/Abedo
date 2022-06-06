@@ -20,12 +20,10 @@
           </h1>
           <div class="product-page__over__content__main__prices">
             <p class="product-page__over__content__main__prices__price"
-               :class="{red:product.discount ||  product.section.discount}">{{
-                product_price_with_discount
-                                                                            }}₽</p>
-            <p class="product-page__over__content__main__prices__weight"> / {{ product.weight }}{{
-                product.weight_unit.short_name
-                                                                          }}</p>
+               :class="{red:product.discount ||  product.section.discount}">{{ product_price_with_discount }}₽</p>
+            <p class="product-page__over__content__main__prices__weight"> / {{
+                product.weight
+                                                                          }}{{ product.weight_unit.short_name }}</p>
             <p v-if="product.discount || product.section.discount"
                class="product-page__over__content__main__prices__price_full">{{ price }}₽</p>
           </div>
