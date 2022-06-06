@@ -92,7 +92,7 @@
               </ButtonStandart
               >
               <ButtonStandart
-                @click="$store.commit('modals/open', { modal_name: 'rate' })"
+                @click="$store.commit('modals/open', { modal_name: 'rate', order_id:order.id })"
                 class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_rate"
               >Оценить
               </ButtonStandart

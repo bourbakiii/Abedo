@@ -4,7 +4,8 @@ export const state = () => ({
   //   product: null,
   // },
   rate: {
-    show: true
+    show: true,
+    order_id: null
   },
   login: {
     show: false
@@ -35,6 +36,10 @@ export const mutations = {
         state.product.product = props.product;
         break;
       }
+      case "rate": {
+        state.rate.order_id = props.order_id;
+        break;
+      }
       case "partner": {
         state.partner.partner = props.partner;
         break;
@@ -46,13 +51,14 @@ export const mutations = {
       }
     }
   },
-  close(state, props={modal_name:null}) {
+  close(state, props = {modal_name: null}) {
     for (let modal_key in state) state[modal_key].show = false;
     document.lastChild.classList.remove("html_overflow");
     // state.product.product = null;
     state.partner.partner = null;
     state.switch_shop.partner = null;
     state.switch_shop.product = null;
+    state.rate.order_id = null;
     if (!props.modal_name) return;
   },
 };
