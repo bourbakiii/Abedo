@@ -189,7 +189,10 @@
           class="partners-page__partners__sidebar adaptive-non"
         />
         <div class="partners-page__partners__content">
-          <div v-if="partners && partners.length>0" class="partners-page__partners__content__cards">
+          <div v-if="(partners == null || partners.length==0) && loading" class="partners-page__partners__content__cards_loading">
+            <loader class="partners-page__partners__content__cards_loading__loader"/>
+          </div>
+          <div v-else-if="partners && partners.length>0" class="partners-page__partners__content__cards">
             <client-only>
               <PartnerItem
                 class="partners-page__partners__content__cards__item"
@@ -199,13 +202,13 @@
               />
             </client-only>
           </div>
-          <p v-else-if="partners" class="partners-page__partners__content__cards_empty">
+          <p v-else-if="partners && !loading" class="partners-page__partners__content__cards_empty">
             Заведения, соответсвующие заданным условиям не найдены.
             <br>
             Попробуйте изменить выбранне фильтры.
           </p>
           <ButtonStandart
-            :loader="loading"
+            :loader="partners && loading"
             v-if="params.page <= params.last_page && partners && partners.length>0"
             @click="$fetch"
             class="partners-page__partners__content__button"
@@ -456,7 +459,15 @@ export default {
             width: 100%;
           }
         }
-        &_empty{
+
+        &_loading {
+          margin-top: 120px;
+          @media screen and (max-width: $tablet) {
+            margin-top: 20px;
+          }
+        }
+
+        &_empty {
           text-align: left;
           width: max-content;
           font-family: 'SF Pro Display';

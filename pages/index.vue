@@ -11,7 +11,6 @@
           class="index-page__content__adaptive-categories adaptive"
         />
         <PagesIndexStocksSlider class="index-page__content__stocks-slider"/>
-<!--          v-if="partners.length"-->
         <div
           class="new-shops catalog-wrapper wrapper adaptive-non-wrapper index-page__content__new-shops"
         >
@@ -130,7 +129,10 @@
                 class="index-page__content__new-shops__filters"
               />
             </transition>
-            <div class="index-page__content__new-shops__content">
+            <div v-if="loading" class="index-page__content__new-shops__content_loading">
+              <loader class="index-page__content__new-shops__content_loading__loader"/>
+            </div>
+            <div v-else-if="partners && partners.length>0" class="index-page__content__new-shops__content">
               <client-only>
                 <PartnerItem
                   class="index-page__content__new-shops__content__item"
@@ -140,6 +142,11 @@
                 />
               </client-only>
             </div>
+            <p v-else-if="partners && !loading" class="index-page__content__new-shops__content_empty">
+              Заведения, соответсвующие заданным условиям не найдены.
+              <br>
+              Попробуйте изменить выбранне фильтры.
+            </p>
             <ButtonStandart
               @click.native="$router.push('/partners')"
               class="index-page__content__new-shops__button"
@@ -293,7 +300,35 @@ export default {
           overflow: hidden !important;
           width: 100% !important;
         }
+
+        &_loading {
+          margin-top: 50px;
+
+          &-loader {
+            background-color: maroon;
+
+            * {
+              background-color: green !important;
+            }
+          }
+        }
+
+        &_empty {
+          margin-top: 50px;
+          text-align: left;
+          width: max-content;
+          font-family: 'SF Pro Display';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 26px;
+          align-self: flex-start;
+          @media screen and (max-width: $tablet) {
+            margin-top: 20px;
+          }
+        }
       }
+
 
       &__button {
         margin-top: 70px;

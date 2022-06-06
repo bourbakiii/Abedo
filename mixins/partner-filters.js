@@ -9,7 +9,7 @@ export default {
       params: {
         page: 1,
         last_page: null,
-        limit: 1,
+        limit: 12,
       },
       filters: {
         keywords: null,
