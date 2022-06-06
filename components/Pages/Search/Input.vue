@@ -26,7 +26,7 @@
             </g>
             <defs>
               <clipPath id="clip0_1887_4787">
-                <rect width="20" height="20" fill="white" />
+                <rect width="20" height="20" fill="white"/>
               </clipPath>
             </defs>
           </svg>
@@ -40,25 +40,25 @@
           @change="timerHandler"
           minlength='3'
         />
-          <button
-            v-if="keyword.length"
-            @click.prevent="keyword = ''"
-            class="search-input-button search-input-button-close"
+        <button
+          v-if="keyword.length"
+          @click.prevent="keyword = ''"
+          class="search-input-button search-input-button-close"
+        >
+          <svg
+            class="search-input-button-icon"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              class="search-input-button-icon"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.89533 10.0005L0.229061 1.33421C-0.0760555 1.02909 -0.0760555 0.534404 0.229061 0.229326C0.534178 -0.0757519 1.02886 -0.075791 1.33394 0.229326L10.0003 8.89565L18.6665 0.229326C18.9716 -0.075791 19.4663 -0.075791 19.7714 0.229326C20.0765 0.534443 20.0765 1.02913 19.7714 1.33421L11.1051 10.0005L19.7714 18.6668C20.0765 18.9719 20.0765 19.4666 19.7714 19.7717C19.6189 19.9242 19.4189 20.0005 19.2189 20.0005C19.019 20.0005 18.8191 19.9242 18.6665 19.7717L10.0003 11.1054L1.33398 19.7717C1.18144 19.9242 0.981482 20.0005 0.781521 20.0005C0.58156 20.0005 0.381639 19.9242 0.229061 19.7717C-0.0760555 19.4666 -0.0760555 18.9719 0.229061 18.6668L8.89533 10.0005Z"
-                fill="#A6A8A8"
-              />
-            </svg>
-          </button>
+            <path
+              d="M8.89533 10.0005L0.229061 1.33421C-0.0760555 1.02909 -0.0760555 0.534404 0.229061 0.229326C0.534178 -0.0757519 1.02886 -0.075791 1.33394 0.229326L10.0003 8.89565L18.6665 0.229326C18.9716 -0.075791 19.4663 -0.075791 19.7714 0.229326C20.0765 0.534443 20.0765 1.02913 19.7714 1.33421L11.1051 10.0005L19.7714 18.6668C20.0765 18.9719 20.0765 19.4666 19.7714 19.7717C19.6189 19.9242 19.4189 20.0005 19.2189 20.0005C19.019 20.0005 18.8191 19.9242 18.6665 19.7717L10.0003 11.1054L1.33398 19.7717C1.18144 19.9242 0.981482 20.0005 0.781521 20.0005C0.58156 20.0005 0.381639 19.9242 0.229061 19.7717C-0.0760555 19.4666 -0.0760555 18.9719 0.229061 18.6668L8.89533 10.0005Z"
+              fill="#A6A8A8"
+            />
+          </svg>
+        </button>
       </form>
     </div>
   </div>
@@ -71,31 +71,33 @@ export default {
     return {
       keyword: this.$store.state.temporary.search_keyword ?? "",
       founded: {
-        partners: [],
-        products: [],
+        partners: null,
+        products: null,
       },
     };
   },
-  created(){
-    this.$store.commit("temporary/action", (state)=>{
+  created() {
+    this.$store.commit("temporary/action", (state) => {
       state.search_keyword = null;
     })
   },
   async fetch() {
     this.show_result = false;
     if (this.keyword.length >= 3)
+    this.$emit('changeLoading', true);
+
       await this.$axios
         .get("/api/search", {
           params: {
             keyword: this.keyword ?? "",
           },
         })
-        .then(({ data: { result } }) => {
+        .then(({data: {result}}) => {
           this.founded = {
             partners: result.shops.data,
             products: result.products.data,
           };
-        });
+        }).finally(() => this.$emit('changeLoading', false));
   },
   methods: {
     timerHandler() {
@@ -117,6 +119,7 @@ export default {
 <style lang="scss" scoped>
 .search-input {
   border: 1px solid $dark_grey;
+
   &__content {
     width: 100%;
     max-width: $maxwidth;
@@ -124,13 +127,16 @@ export default {
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
+
     &__title {
       margin-bottom: 20px;
     }
   }
+
   &-wrapper {
     width: 100%;
   }
+
   width: 650px;
   height: 60px;
   @media screen and (max-width: $notebook) {
@@ -148,14 +154,17 @@ export default {
   flex-direction: row;
   position: relative;
   z-index: 5;
+
   &-button {
     outline: none;
     border: none;
     background-color: transparent;
     margin: 0px 20px;
+
     &-close {
       margin-left: 0px 8px !important;
     }
+
     transition: $transition;
     @media screen and (max-width: $tablet) {
       svg {
@@ -164,6 +173,7 @@ export default {
       }
     }
   }
+
   &-input {
     @media screen and (max-width: $tablet) {
       font-family: "SF Pro Display";
@@ -185,6 +195,7 @@ export default {
     border: none;
     overflow: hidden;
     border-radius: 0px 50px 50px 0px;
+
     &::placeholder {
       font-family: "SF Pro Display";
       font-style: normal;

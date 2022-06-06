@@ -19,8 +19,13 @@
             {{ product.name }}
           </h1>
           <div class="product-page__over__content__main__prices">
-            <p class="product-page__over__content__main__prices__price">{{ product_price_with_discount }}₽</p>
-            <p class="product-page__over__content__main__prices__weight"> / {{product.weight}}{{ product.weight_unit.short_name }}</p>
+            <p class="product-page__over__content__main__prices__price"
+               :class="{red:product.discount ||  product.section.discount}">{{
+                product_price_with_discount
+                                                                            }}₽</p>
+            <p class="product-page__over__content__main__prices__weight"> / {{ product.weight }}{{
+                product.weight_unit.short_name
+                                                                          }}</p>
             <p v-if="product.discount || product.section.discount"
                class="product-page__over__content__main__prices__price_full">{{ price }}₽</p>
           </div>
@@ -92,7 +97,7 @@
               </div>
             </div>
             <img
-              v-if="currentImage.original"
+              v-if="currentImage"
               :src="`${$axios.defaults.baseURL}${currentImage.original}`"
               class="product-page__over__content__main__images__image"
             />
@@ -153,6 +158,7 @@
               >
                 <p
                   class="product-page__over__content__main__additional__information__prices__price"
+                  :class="{'red':product.discount || product.section.discount}"
                 >
                   {{ product_price_with_discount }}₽
                 </p>
@@ -673,7 +679,6 @@ export default {
                 font-weight: 600;
                 font-size: 18px;
                 line-height: 22px;
-                color: $red;
 
                 &_full {
                   margin-left: 20px;
@@ -799,7 +804,8 @@ export default {
             }
 
             &__buttons {
-              width:100%;
+              width: 100%;
+
               &__button {
                 width: 228px;
 
@@ -810,8 +816,9 @@ export default {
 
                   margin-right: 10px;
                 }
-                @media screen and (max-width:$tablet){
-                  height:40px;
+
+                @media screen and (max-width: $tablet) {
+                  height: 40px;
                 }
               }
 
@@ -821,26 +828,27 @@ export default {
                 justify-content: space-between;
                 flex-direction: row;
                 max-width: 339px;
-                width:100%;
+                width: 100%;
                 height: 60px;
                 background-color: $white;
                 padding: 0px 30px;
                 border: 1px solid $dark_grey;
                 border-radius: 20px;
 
-                @media screen and (max-width:$maxwidth) {
+                @media screen and (max-width: $maxwidth) {
                   padding: 0px 15px;
                 }
-                @media screen and (max-width:$sidebar_dn) {
+                @media screen and (max-width: $sidebar_dn) {
                   padding: 0px 30px;
                 }
-                @media screen and (max-width:$tablet){
+                @media screen and (max-width: $tablet) {
                   padding: 0px;
-                 width: 200px;
+                  width: 200px;
                   background-color: transparent;
-                  height:40px;
-                  border:none;
+                  height: 40px;
+                  border: none;
                 }
+
                 &__text {
                   margin-right: 30px;
                   font-family: "Montserrat";
@@ -851,12 +859,12 @@ export default {
                   text-overflow: ellipsis;
                   overflow: hidden;
                   white-space: nowrap;
-                  @media screen and (max-width:$maxwidth) {
-                    margin-right:10px;
+                  @media screen and (max-width: $maxwidth) {
+                    margin-right: 10px;
 
                   }
-                  @media screen and (max-width:$sidebar_dn) {
-                    margin-right:30px;
+                  @media screen and (max-width: $sidebar_dn) {
+                    margin-right: 30px;
                   }
                   @media screen and (max-width: $tablet) {
                     font-family: 'SF Pro Display';
@@ -864,7 +872,7 @@ export default {
                     font-weight: 600;
                     font-size: 16px;
                     line-height: 19px;
-                    margin-right:20px;
+                    margin-right: 20px;
                   }
                 }
 
@@ -881,7 +889,7 @@ export default {
                   flex-grow: 1;
                   margin: 0px 10px;
                   text-align: center;
-                  @media screen and (max-width:$tablet){
+                  @media screen and (max-width: $tablet) {
                     margin: 0px 4px;
                   }
                 }
@@ -926,6 +934,7 @@ export default {
           background-color: $white;
           border: 1px solid $dark_grey;
           border-radius: 20px;
+
           &__title {
             margin-bottom: 18px;
             font-family: 'SF Pro Display';

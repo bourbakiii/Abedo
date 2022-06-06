@@ -302,15 +302,7 @@ export default {
         }
 
         &_loading {
-          margin-top: 50px;
-
-          &-loader {
-            background-color: maroon;
-
-            * {
-              background-color: green !important;
-            }
-          }
+          margin: 50px 0px;
         }
 
         &_empty {

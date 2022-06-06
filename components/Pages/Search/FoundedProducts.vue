@@ -3,7 +3,7 @@
     <h1 class="founded-products__title title-normal">Найденные позиции меню</h1>
     <div class="founded-products__content content">
       <div class="founded-products__content__item">
-        <NuxtLink :to='`partner/${partner.id}`' class="founded-products__content__item__partner">
+        <NuxtLink :to='`/partners/${partner.id}`' class="founded-products__content__item__partner">
           <img
             v-if="partner.image.length"
             :src="`${$axios.defaults.baseURL}${partner.image[0].original}`"
@@ -11,11 +11,12 @@
           />
           <p
             class="founded-products__content__item__partner__name"
-            
+
           >
-            {{partner.name}}
+            {{ partner.name }}
           </p>
-          <div v-if='+partner.rate.shop_last_order_avg_rating>=0' class="founded-products__content__item__partner__rating">
+          <div v-if='+partner.rate.shop_last_order_avg_rating>=0'
+               class="founded-products__content__item__partner__rating">
             <svg
               class="founded-products__content__item__partner__rating__icon"
               width="17"
@@ -33,7 +34,7 @@
               Рейтинг:
             </p>
             <p class="founded-products__content__item__partner__rating__value">
-              {{partner.rate.shop_last_order_avg_rating}}
+              {{ partner.rate.shop_last_order_avg_rating }}
             </p>
           </div>
         </NuxtLink>
@@ -54,12 +55,12 @@
 export default {
   props: {
     products: [],
- },
- computed:{
-   partner(){
-     return this.products[0].section.shop;
-   }
- }
+  },
+  computed: {
+    partner() {
+      return this.products[0].section.shop;
+    }
+  }
 };
 </script>
 
@@ -71,6 +72,7 @@ export default {
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
+
   &__title {
     margin-bottom: 40px;
     @media screen and (max-width: $tablet) {
@@ -82,6 +84,7 @@ export default {
       margin-bottom: 30px;
     }
   }
+
   &__content {
     border: 1px solid $dark_grey;
     display: flex;
@@ -89,6 +92,7 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
+
     &__item {
       display: flex;
       align-items: center;
@@ -98,6 +102,7 @@ export default {
       padding: 30px 0px;
       border-radius: 20px;
       background-color: $white;
+
       &__partner {
         display: flex;
         align-items: center;
@@ -116,6 +121,7 @@ export default {
           flex-wrap: wrap;
           padding: 0px 15px 10px;
         }
+
         &__image {
           height: 60px;
           width: auto;
@@ -128,6 +134,7 @@ export default {
             margin-right: 15px;
           }
         }
+
         &__name {
           width: max-content;
           max-width: 100%;
@@ -143,6 +150,7 @@ export default {
             line-height: 24px;
           }
         }
+
         &__rating {
           display: flex;
           align-items: center;
@@ -153,9 +161,11 @@ export default {
             margin-top: 15px;
             margin-left: auto;
           }
+
           &__icon {
             margin-right: 5px;
           }
+
           &__text {
             font-family: "SF Pro Display";
             font-style: normal;
@@ -164,6 +174,7 @@ export default {
             line-height: 17px;
             color: $extra_dark_grey;
           }
+
           &__value {
             margin-left: 10px;
             font-family: "SF Pro Display";
@@ -174,6 +185,7 @@ export default {
           }
         }
       }
+
       &__products {
         padding: 30px 30px 0px;
         width: 100%;
@@ -193,6 +205,7 @@ export default {
         @media screen and (max-width: $phone) {
           grid-template-columns: repeat(2, 1fr);
         }
+
         &__item {
           width: 100%;
           overflow: hidden;
