@@ -42,7 +42,7 @@
           </svg>
         </div>
       </div>
-      <p class="rate-modal__stars__value">
+      <p class="rate-modal__stars__value adaptive-non">
         {{ rating }} из 5
       </p>
     </div>
@@ -54,7 +54,7 @@
       <textarea v-model="message" class="rate-modal__message__textarea" placeholder="Текст отзыва"/>
     </div>
 
-    <ButtonStandart class="rate-modal__button filled">Отправить</ButtonStandart>
+    <ButtonStandart :loader="loading" class="rate-modal__button filled">Отправить</ButtonStandart>
   </form>
 </template>
 <script>
@@ -62,7 +62,8 @@ export default {
   data() {
     return {
       message: null,
-      rating: 0
+      rating: 0,
+      loading: false
     }
   },
   methods: {
@@ -89,18 +90,20 @@ export default {
         element.classList.remove('per');
         element.classList.remove('full');
       });
-      array[+(this.rating.toFixed(0)) - 1].classList.add(this.rating % 1 > 0 ? 'per' : 'full');
-      array.splice(0, +this.rating.toFixed(0) - 1).forEach(element => {
-        element.classList.add('full')
-      })
+      if (this.rating) {
+        array[+(this.rating.toFixed(0)) - 1].classList.add(this.rating % 1 > 0 ? 'per' : 'full');
+        array.splice(0, +this.rating.toFixed(0) - 1).forEach(element => {
+          element.classList.add('full')
+        })
+      }
     },
     setRating(index) {
       let element = event.target.closest('.rate-modal__stars__content__star');
       if (event.offsetX <= element.scrollWidth / 2) this.rating = (index * 2 - 1) / 2;
       else this.rating = index;
-
     },
     send() {
+      this.loading = true;
       this.$axios.post(`/api/order/${this.$store.state.modals.rate.order_id}/addComment`, {
         order_rating: +this.rating,
         order_comment: this.message
@@ -113,6 +116,8 @@ export default {
       }).catch((error) => {
         console.log("Order rate error:");
         console.log(error);
+      }).finally(() => {
+        this.loading = false;
       });
     }
   },
@@ -140,6 +145,12 @@ export default {
   justify-content: flex-start;
   align-items: flex-start;
   position: relative;
+  @media screen and (max-width: $tablet) {
+    margin-top: 57px;
+    max-width: calc(100% - 48px);
+    border-radius: 10px;
+    padding: 40px 20px 30px;
+  }
 
   &__close {
     position: absolute;
@@ -153,6 +164,14 @@ export default {
   &__title {
     margin-bottom: 40px;
     line-height: 30px;
+    @media screen and (max-width: $tablet) {
+      font-family: 'SF Pro Display';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 26px;
+      margin-bottom: 30px;
+    }
   }
 
   &__stars {
@@ -161,6 +180,9 @@ export default {
     justify-content: flex-start;
     flex-direction: row;
     margin-bottom: 41px;
+    @media screen and (max-width: $tablet) {
+      margin-bottom: 31px;
+    }
 
     &__content {
       display: flex;
@@ -168,7 +190,6 @@ export default {
       justify-content: flex-start;
       flex-direction: row;
       position: relative;
-      margin-right: 27px;
 
       &__star {
         position: relative;
@@ -207,6 +228,15 @@ export default {
         }
       }
     }
+
+    &__value {
+      margin-left: 27px;
+      font-family: 'SF Pro Display';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+    }
   }
 
   &__message {
@@ -222,6 +252,9 @@ export default {
       font-size: 14px;
       line-height: 17px;
       margin-bottom: 10px;
+      @media screen and (max-width: $tablet) {
+        margin-bottom: 7px;
+      }
     }
 
     &__textarea {
@@ -238,13 +271,26 @@ export default {
       border-radius: 20px;
       outline: none;
       border: 1px solid $dark_grey;
+      @media screen and (max-width: $tablet) {
+        padding: 15px 10px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+      }
     }
   }
 
   &__button {
     width: 129px;
     height: 40px;
-
+    @media screen and (max-width: $tablet) {
+      width: 102px;
+      font-family: 'SF Pro Display';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+    }
   }
 }
 </style>

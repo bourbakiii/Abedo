@@ -107,4 +107,14 @@ export default {
     background-color: $white;
   }
 }
+
+.button-standart {
+  &.filled & {
+    &__loader-pulse {
+      background-color: $white !important;
+    }
+  }
+
+
+}
 </style>

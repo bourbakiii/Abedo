@@ -56,7 +56,7 @@ export default {
   &-enter,
   &-leave-to {
     opacity: 0;
-    
+
   }
   &-enter{
     .modal-content{
@@ -119,7 +119,7 @@ export default {
   padding-bottom: 100px;
   padding-left: 5%;
   padding-right: 5%;
-  overflow: auto;
+  overflow-y: auto;
   @media screen and (max-width: $tablet) {
     padding: 0px;
   }
