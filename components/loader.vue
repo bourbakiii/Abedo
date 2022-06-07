@@ -32,32 +32,22 @@ export default {
 @keyframes pulseAnimation {
   0%,
   80% {
-    -webkit-transform: scale(1);
     transform: scale(1);
-    -webkit-opacity: 1;
-    opacity: 1;
   }
   45% {
-    -webkit-transform: scale(0);
     transform: scale(0);
-    -webkit-opacity: 0.7;
-    opacity: 0.7;
   }
 }
 
 @-webkit-keyframes pulseAnimation {
   0%,
   80% {
-    -webkit-transform: scale(1);
     transform: scale(1);
-    -webkit-opacity: 1;
-    opacity: 1;
+    //opacity: 1;
   }
   45% {
-    -webkit-transform: scale(0);
     transform: scale(0);
-    -webkit-opacity: 0.7;
-    opacity: 0.7;
+    //opacity: 0.7;
   }
 }
 

@@ -189,6 +189,7 @@
           class="partners-page__partners__sidebar adaptive-non"
         />
         <div class="partners-page__partners__content">
+          <transition name="opacity-partners-content" appear mode="out-in">
           <div v-if="(partners == null || partners.length==0) && loading" class="partners-page__partners__content__cards_loading">
             <loader class="partners-page__partners__content__cards_loading__loader"/>
           </div>
@@ -207,6 +208,7 @@
             <br>
             Попробуйте изменить выбранне фильтры.
           </p>
+          </transition>
           <ButtonStandart
             :loader="partners && loading"
             v-if="params.page <= params.last_page && partners && partners.length>0"
@@ -259,6 +261,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.opacity-partners-content{
+  &-enter, &-leave-to{
+    opacity: 0 !important;
+  }
+  &-enter-active, &-leave-active{
+    transition: 0.3s all;
+  }
+}
 .partners-page {
   align-items: center;
   justify-content: flex-start;

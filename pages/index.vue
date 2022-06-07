@@ -129,24 +129,24 @@
                 class="index-page__content__new-shops__filters"
               />
             </transition>
-            <div v-if="loading" class="index-page__content__new-shops__content_loading">
-              <loader class="index-page__content__new-shops__content_loading__loader"/>
-            </div>
-            <div v-else-if="partners && partners.length>0" class="index-page__content__new-shops__content">
-              <client-only>
-                <PartnerItem
-                  class="index-page__content__new-shops__content__item"
-                  v-for="(item, index) in partners"
-                  :partner="item"
-                  :key="index"
-                />
-              </client-only>
-            </div>
-            <p v-else-if="partners && !loading" class="index-page__content__new-shops__content_empty">
-              Заведения, соответсвующие заданным условиям не найдены.
-              <br>
-              Попробуйте изменить выбранне фильтры.
-            </p>
+              <div v-if="loading" class="index-page__content__new-shops__content_loading">
+                <loader class="index-page__content__new-shops__content_loading__loader"/>
+              </div>
+              <div v-else-if="partners && partners.length>0" class="index-page__content__new-shops__content">
+                <client-only>
+                  <PartnerItem
+                    class="index-page__content__new-shops__content__item"
+                    v-for="(item, index) in partners"
+                    :partner="item"
+                    :key="index"
+                  />
+                </client-only>
+              </div>
+              <p v-else-if="partners && !loading" class="index-page__content__new-shops__content_empty">
+                Заведения, соответсвующие заданным условиям не найдены.
+                <br>
+                Попробуйте изменить выбранне фильтры.
+              </p>
             <ButtonStandart
               @click.native="$router.push('/partners')"
               class="index-page__content__new-shops__button"
@@ -189,15 +189,6 @@ export default {
       .then(({cuisines: {data}}) => {
         this.categories = data;
       });
-    // await this.$axios
-    //   .$get(`${this.$axios.defaults.baseURL}/api/shops/new`, {}, {
-    //     params: {
-    //       limit: 12
-    //     }
-    //   })
-    //   .then(({shops}) => {
-    //     this.new_shops = shops;
-    //   });
   },
   mounted() {
     this.$store.commit('variables/action', state => {
