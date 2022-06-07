@@ -83,7 +83,7 @@ export default {
   },
   async fetch() {
     this.show_result = false;
-    if (this.keyword.length >= 3)
+    if (this.keyword.length < 3) return;
     this.$emit('changeLoading', true);
 
       await this.$axios

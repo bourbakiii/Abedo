@@ -50,21 +50,21 @@
           >Подтвердить телефон</ButtonStandart
         >
         <!-- <client-only> -->
-        <div
+        <transition-group
+          name="opacity"
+          tag="div"
           :class="{
             'registration-page__content__errors_margined': errors.length,
           }"
           class="registration-page__content__errors"
         >
           <Message
-            v-for="error in errors"
-            :key="error"
+            v-for="(error,index) in errors"
+            :key="`registration-error-${index}`"
             class="registration-page__content__errors__item_error registration-page__content__errors__item"
             >{{ error }}</Message
           >
-        </div>
-
-        >
+        </transition-group>
         <!-- </client-only> -->
       </form>
       <form
@@ -120,7 +120,7 @@ export default {
   },
   mounted(){
     this.$store.commit('variables/action', state=>{
-      state.adaptive_navigation = { 
+      state.adaptive_navigation = {
         text: "Регистрация",
         slot: 'label',
         info_click: null

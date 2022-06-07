@@ -493,6 +493,7 @@ export default {
         white-space: nowrap;
         font-weight: 600;
         text-decoration: underline;
+        cursor: pointer;
       }
     }
   }

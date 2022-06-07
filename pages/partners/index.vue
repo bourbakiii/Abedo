@@ -194,6 +194,7 @@
             <loader class="partners-page__partners__content__cards_loading__loader"/>
           </div>
           <div v-else-if="partners && partners.length>0" class="partners-page__partners__content__cards">
+
             <client-only>
               <PartnerItem
                 class="partners-page__partners__content__cards__item"

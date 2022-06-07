@@ -5,7 +5,9 @@
       <h1 class="favourites-page__content__title title-normal adaptive-non">
         Избранные заведения
       </h1>
+      <client-only>
       <div class="favourites-page__content__inner">
+        <transition name="opacity" mode="out-in">
         <div v-if="partners.length" class="favourites-page__content__inner__content">
           <client-only>
             <PartnerItem
@@ -17,7 +19,9 @@
           </client-only>
         </div>
         <p v-else class="favourites-page__content__inner__content_empty">Кажется, у вас не избранных заведений</p>
+        </transition>
       </div>
+      </client-only>
     </div>
   </div>
 </template>

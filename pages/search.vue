@@ -2,8 +2,7 @@
   <div class="page search-page wrapper">
     <div class="search-page__content content">
       <Breadcrumbs class="search-page__content__breadcrumbs adaptive-non"/>
-      <PagesSearchInput @changeLoading="changeLoading"
-                        @search='setFounded' class="search-page__content__search-input"/>
+      <PagesSearchInput @changeLoading="changeLoading" @search='setFounded' class="search-page__content__search-input"/>
       <PagesSearchByCategories
         v-if="categories.length"
         :categories="categories"
@@ -70,8 +69,6 @@ export default {
       this.founded = data;
     },
     changeLoading(value) {
-      console.log("change loading");
-      console.log(value);
       this.loading = value
     }
   }
@@ -94,9 +91,11 @@ export default {
 
     &__search {
       width: 100%;
-      &_loading{
-        margin-top:50px;
+
+      &_loading {
+        margin-top: 50px;
       }
+
       &__founded {
         width: 100%;
 
@@ -109,7 +108,8 @@ export default {
           margin-bottom: 70px;
         }
       }
-      &_empty{
+
+      &_empty {
         text-align: left;
         align-self: flex-start;
         width: max-content;
