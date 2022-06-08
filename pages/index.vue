@@ -10,6 +10,7 @@
           :categories="categories"
           class="index-page__content__adaptive-categories adaptive"
         />
+        <AdvertiseTree class="index-page__content__advertise index-page__content__advertise_big" count="3"/>
         <PagesIndexStocksSlider class="index-page__content__stocks-slider"/>
         <div
           class="new-shops catalog-wrapper wrapper adaptive-non-wrapper index-page__content__new-shops"
@@ -129,24 +130,24 @@
                 class="index-page__content__new-shops__filters"
               />
             </transition>
-              <div v-if="loading" class="index-page__content__new-shops__content_loading">
-                <loader class="index-page__content__new-shops__content_loading__loader"/>
-              </div>
-              <div v-else-if="partners && partners.length>0" class="index-page__content__new-shops__content">
-                <client-only>
-                  <PartnerItem
-                    class="index-page__content__new-shops__content__item"
-                    v-for="(item, index) in partners"
-                    :partner="item"
-                    :key="index"
-                  />
-                </client-only>
-              </div>
-              <p v-else-if="partners && !loading" class="index-page__content__new-shops__content_empty">
-                Заведения, соответсвующие заданным условиям не найдены.
-                <br>
-                Попробуйте изменить выбранне фильтры.
-              </p>
+            <div v-if="loading" class="index-page__content__new-shops__content_loading">
+              <loader class="index-page__content__new-shops__content_loading__loader"/>
+            </div>
+            <div v-else-if="partners && partners.length>0" class="index-page__content__new-shops__content">
+              <client-only>
+                <PartnerItem
+                  class="index-page__content__new-shops__content__item"
+                  v-for="(item, index) in partners"
+                  :partner="item"
+                  :key="index"
+                />
+              </client-only>
+            </div>
+            <p v-else-if="partners && !loading" class="index-page__content__new-shops__content_empty">
+              Заведения, соответсвующие заданным условиям не найдены.
+              <br>
+              Попробуйте изменить выбранне фильтры.
+            </p>
             <ButtonStandart
               @click.native="$router.push('/partners')"
               class="index-page__content__new-shops__button"
@@ -155,7 +156,9 @@
             >
           </div>
         </div>
+      <AdvertiseTree class="index-page__content__advertise index-page__content__advertise_small" count="1"/>
       </div>
+
       <PagesIndexAbout class="index-page__content__about adaptive-non">
         Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать
         несколько абзацев более менее осмысленного текста рыбы на русском языке,
@@ -330,7 +333,21 @@ export default {
         }
       }
     }
-
+    &__advertise{
+      &_big{
+        margin-bottom: 53px;
+        @media screen and (max-width:$tablet) {
+          margin-bottom: 80px;
+        }
+      }
+      &_small{
+        margin-bottom: 50px;
+        @media screen and (max-width:$tablet) {
+          margin-bottom: 0px;
+          margin-top: 126px
+        }
+      }
+    }
     @media screen and (max-width: $tablet) {
       &__adaptive-categories {
         margin: 0px 0px 30px;
