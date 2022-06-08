@@ -10,7 +10,10 @@
           :categories="categories"
           class="index-page__content__adaptive-categories adaptive"
         />
-        <AdvertiseTree class="index-page__content__advertise index-page__content__advertise_big" count="3"/>
+        {{advertise}}
+        <AdvertiseTree :ad="advertise.splice(0,3)"
+                       class="index-page__content__advertise index-page__content__advertise_big"
+                       :count="advertise.length" v-if="advertise.length"/>
         <PagesIndexStocksSlider class="index-page__content__stocks-slider"/>
         <div
           class="new-shops catalog-wrapper wrapper adaptive-non-wrapper index-page__content__new-shops"
@@ -156,7 +159,10 @@
             >
           </div>
         </div>
-      <AdvertiseTree class="index-page__content__advertise index-page__content__advertise_small" count="1"/>
+        <AdvertiseTree :ad="[...advertise[3]]"
+                       class="index-page__content__advertise index-page__content__advertise_small"
+                       count="1"
+                       v-if="advertise.length >= 4"/>
       </div>
 
       <PagesIndexAbout class="index-page__content__about adaptive-non">
@@ -179,14 +185,14 @@
 </template>
 <script>
 import partnerFiltersMixin from "@/mixins/partner-filters";
+import advertiseMixin from "@/mixins/advertise-mixin"
 
 export default {
-  mixins: [partnerFiltersMixin],
+  mixins: [partnerFiltersMixin, advertiseMixin],
   data() {
     return {show_filters: false, categories: []};
   },
   async created() {
-    console.log(123);
     await this.$axios
       .$get(`${this.$axios.defaults.baseURL}/api/cuisines/get`)
       .then(({cuisines: {data}}) => {
@@ -333,21 +339,24 @@ export default {
         }
       }
     }
-    &__advertise{
-      &_big{
+
+    &__advertise {
+      &_big {
         margin-bottom: 53px;
-        @media screen and (max-width:$tablet) {
+        @media screen and (max-width: $tablet) {
           margin-bottom: 80px;
         }
       }
-      &_small{
+
+      &_small {
         margin-bottom: 50px;
-        @media screen and (max-width:$tablet) {
+        @media screen and (max-width: $tablet) {
           margin-bottom: 0px;
           margin-top: 126px
         }
       }
     }
+
     @media screen and (max-width: $tablet) {
       &__adaptive-categories {
         margin: 0px 0px 30px;

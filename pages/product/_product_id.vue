@@ -443,7 +443,7 @@ export default {
           height: max-content;
           width: 100%;
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           flex-direction: row;
           justify-content: space-between;
 
@@ -471,6 +471,7 @@ export default {
               border: none;
               position: absolute;
               left: 50%;
+              display: none;
 
               &.swiper-button-disabled {
                 opacity: 0.5;
@@ -521,9 +522,10 @@ export default {
           }
 
           &__image {
-            width: 100%;
+            align-self: center;
             max-width: 100%;
             height: max-content;
+            max-height: 617px;
             overflow: hidden;
           }
         }
@@ -807,9 +809,19 @@ export default {
               &__button {
                 width: 228px;
 
+                &:hover & {
+                  &__icon {
+                    * {
+                      fill: $white;
+                    }
+                  }
+
+                }
+
                 &__icon {
                   * {
                     fill: $darkblue;
+                    transition: $transition;
                   }
 
                   margin-right: 10px;

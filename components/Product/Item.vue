@@ -119,7 +119,7 @@ export default {
   &_in-cart{
     border: 2px solid $orange;
   }
-  
+
   @media screen and (max-width: $tablet) {
     border-radius: 8px;
     height: auto;
@@ -161,9 +161,8 @@ export default {
   }
 
   &__image {
-    width: 100%;
     height: 190px;
-    object-fit: cover;
+    object-fit: contain;
     margin-bottom: 15px;
     @media screen and (max-width: $tablet) {
       margin-bottom: 7px;

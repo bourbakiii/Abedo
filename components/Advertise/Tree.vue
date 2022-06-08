@@ -1,7 +1,7 @@
 <template>
   <div class="advertise-wrapper">
     <div class="advertise">
-      <div class="advertise__item advertise-item">ADV1</div>
+      <div class="advertise__item advertise-item">{{ad[0].title}}</div>
       <div v-if="count>1" class="advertise__smalls">
         <div class="advertise__smalls__item advertise-item">ADV2</div>
         <div v-if="count>2" class="advertise__smalls__item advertise-item">ADV3</div>
@@ -12,14 +12,15 @@
 <script>
 export default {
   props: {
+    ad: {required: true, default: []},
     count: {
       required: false,
       default: 3,
     }
-  }, beforeMount() {
+  }, mounted() {
     this.$el.style.maxHeight = `${this.$el.scrollHeight}px`;
-    this.$el.style.transform = `scale(1)`;
-
+    this.$el.style.transform = `translateY(0px)`;
+    this.$el.style.opacity = 1;
   }
 }
 </script>
@@ -32,9 +33,10 @@ export default {
     max-height: 0px;
     transition-property: all, transform;
     transition-duration: $transition*2, $transition*3;
-    transform: scale(0);
+    transform: translateY(-100px);
+    opacity: 0;
+    z-index: $z_dropdown;
   }
-
 
   height: max-content;
   width: 100%;
