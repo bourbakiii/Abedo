@@ -1,10 +1,12 @@
 <template>
   <div class="advertise-wrapper">
     <div class="advertise">
-      <img :src="`${$axios.defaults.baseURL}${ads[0].image.original}`" class="advertise__item advertise-item">
+      <img :src="`${$axios.defaults.baseURL}${ads[0].image.original}`" class="advertise__item advertise-item"/>
       <div v-if="count>1" class="advertise__smalls">
-        <img :src="`${$axios.defaults.baseURL}${ads[1].image.original}`" class="advertise__smalls__item advertise-item"/>
-        <img :src="`${$axios.defaults.baseURL}${ads[2].image.original}`" v-if="count>2" class="advertise__smalls__item advertise-item"/>
+        <img :src="`${$axios.defaults.baseURL}${ads[1].image.original}`"
+             class="advertise__smalls__item advertise-item"/>
+        <img :src="`${$axios.defaults.baseURL}${ads[2].image.original}`" v-if="count>2"
+             class="advertise__smalls__item advertise-item"/>
       </div>
     </div>
   </div>
@@ -32,20 +34,19 @@ export default {
     width: 100%;
     max-height: 0px;
     transition-property: all, transform;
-    transition-duration: $transition*2, $transition*3;
+    transition-duration: $transition*20, $transition*30;
     transform: translateY(-100px);
     opacity: 0;
-    z-index: $z_dropdown;
-    overflow:hidden;
+    z-index: $z_ads;
   }
 
-  height: max-content;
+  position: relative;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  max-width:100%;
+  max-width: 100%;
 
   &-item {
     display: flex;
@@ -53,33 +54,41 @@ export default {
     justify-content: center;
     flex-direction: row;
     width: 100%;
+    max-width: 100%;
     font-family: 'SF Pro Display';
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
     line-height: 17px;
+    object-fit: contain;background-color: red;
+    height:100px;
+    position: relative;
+
   }
 
 
   &__smalls {
     margin-top: 30px;
-
-    @media screen and (max-width: $tablet) {
-      margin-top: 20px;
-    }
     width: 100%;
-    max-width:100%;
+    max-width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-direction: row;
+    position: relative;
+    overflow: hidden;
+    @media screen and (max-width: $tablet) {
+      margin-top: 20px;
+    }
 
     &__item {
-      width:100%;
-
+      //width: 100%;
+      object-fit: cover;
       &:nth-of-type(2) {
         margin-left: 30px;
-
+        @media screen and (max-width: $tablet){
+          margin-left: 15px;
+        }
       }
     }
   }

@@ -12,7 +12,8 @@
         />
         <client-only>
           <AdvertiseTree :ads="ads"
-                         class="index-page__content__advertise index-page__content__advertise_big"
+                         v-advertise-margin="'index-page__content__advertise_big'"
+                         class="index-page__content__advertise"
                          :count="ads.length" v-if="ads.length"/>
         </client-only>
         <PagesIndexStocksSlider class="index-page__content__stocks-slider"/>
@@ -161,7 +162,8 @@
           </div>
         </div>
         <AdvertiseTree :ads="[...ads[3]]"
-                       class="index-page__content__advertise index-page__content__advertise_small"
+                       v-advertise-margin="'index-page__content__advertise_small'"
+                       class="index-page__content__advertise"
                        count="1"
                        v-if="ads.length >= 4"/>
       </div>

@@ -1,6 +1,12 @@
 <template>
   <div class="page partners-page wrapper">
     <div class="partners-page__content content">
+      <client-only>
+        <AdvertiseTree :ads="ads"
+                       v-advertise-margin="'partners-page__advertise_big'"
+                       class="partners-page__advertise"
+                       :count="ads.length" v-if="ads.length"/>
+      </client-only>
       <Breadcrumbs class="partners-page__breadcrumbs adaptive-non"/>
       <div class="partners-page__top adaptive-non">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
@@ -190,25 +196,26 @@
         />
         <div class="partners-page__partners__content">
           <transition name="opacity-partners-content" appear mode="out-in">
-          <div v-if="(partners == null || partners.length==0) && loading" class="partners-page__partners__content__cards_loading">
-            <loader class="partners-page__partners__content__cards_loading__loader"/>
-          </div>
-          <div v-else-if="partners && partners.length>0" class="partners-page__partners__content__cards">
+            <div v-if="(partners == null || partners.length==0) && loading"
+                 class="partners-page__partners__content__cards_loading">
+              <loader class="partners-page__partners__content__cards_loading__loader"/>
+            </div>
+            <div v-else-if="partners && partners.length>0" class="partners-page__partners__content__cards">
 
-            <client-only>
-              <PartnerItem
-                class="partners-page__partners__content__cards__item"
-                v-for="item of partners"
-                :key="item.id"
-                :partner="item"
-              />
-            </client-only>
-          </div>
-          <p v-else-if="partners && !loading" class="partners-page__partners__content__cards_empty">
-            Заведения, соответсвующие заданным условиям не найдены.
-            <br>
-            Попробуйте изменить выбранне фильтры.
-          </p>
+              <client-only>
+                <PartnerItem
+                  class="partners-page__partners__content__cards__item"
+                  v-for="item of partners"
+                  :key="item.id"
+                  :partner="item"
+                />
+              </client-only>
+            </div>
+            <p v-else-if="partners && !loading" class="partners-page__partners__content__cards_empty">
+              Заведения, соответсвующие заданным условиям не найдены.
+              <br>
+              Попробуйте изменить выбранне фильтры.
+            </p>
           </transition>
           <ButtonStandart
             :loader="partners && loading"
@@ -226,9 +233,11 @@
 <script>
 import partnerFiltersMixin from "@/mixins/partner-filters.js";
 import dropdownMixin from "@/mixins/dropdowns.js";
+import advertiseMixin from "@/mixins/advertise-mixin"
 
 export default {
-  mixins: [partnerFiltersMixin, dropdownMixin],
+  mixins: [partnerFiltersMixin, dropdownMixin, advertiseMixin],
+
   data() {
     return {
       show_categories: false,
@@ -262,14 +271,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.opacity-partners-content{
-  &-enter, &-leave-to{
+.opacity-partners-content {
+  &-enter, &-leave-to {
     opacity: 0 !important;
   }
-  &-enter-active, &-leave-active{
+
+  &-enter-active, &-leave-active {
     transition: 0.3s all;
   }
 }
+
 .partners-page {
   align-items: center;
   justify-content: flex-start;
@@ -401,6 +412,12 @@ export default {
     }
   }
 
+  &__advertise {
+    &_big {
+      margin: 40px 0px 50px;
+    }
+  }
+
   &__partners {
     display: flex;
     align-items: flex-start;
@@ -439,6 +456,7 @@ export default {
       align-items: center;
       flex-direction: column;
       width: 100%;
+
 
       &__cards {
         flex-grow: 1;
