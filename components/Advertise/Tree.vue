@@ -1,10 +1,10 @@
 <template>
   <div class="advertise-wrapper">
     <div class="advertise">
-      <div class="advertise__item item">ADV1</div>
+      <div class="advertise__item advertise-item">ADV1</div>
       <div v-if="count>1" class="advertise__smalls">
-        <div class="advertise__smalls__item item">ADV2</div>
-        <div v-if="count>2" class="advertise__smalls__item item">ADV3</div>
+        <div class="advertise__smalls__item advertise-item">ADV2</div>
+        <div v-if="count>2" class="advertise__smalls__item advertise-item">ADV3</div>
       </div>
     </div>
   </div>
@@ -30,10 +30,10 @@ export default {
   &-wrapper {
     width: 100%;
     max-height: 0px;
-    transition: all $transition * 2;
+    transition-property: all, transform;
+    transition-duration: $transition*2, $transition*3;
     transform: scale(0);
-
-    }
+  }
 
 
   height: max-content;
@@ -43,7 +43,7 @@ export default {
   justify-content: center;
   flex-direction: column;
 
-  .item {
+  &-item {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,6 +57,7 @@ export default {
     font-size: 14px;
     line-height: 17px;
   }
+
 
   &__item {
     @media screen and (max-width: $tablet) {
@@ -89,5 +90,6 @@ export default {
       }
     }
   }
+
 }
 </style>
