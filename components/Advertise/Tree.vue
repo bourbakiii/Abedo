@@ -1,10 +1,10 @@
 <template>
   <div class="advertise-wrapper">
     <div class="advertise">
-      <div class="advertise__item advertise-item">{{ad[0].title}}</div>
+      <img :src="`${$axios.defaults.baseURL}${ads[0].image.original}`" class="advertise__item advertise-item">
       <div v-if="count>1" class="advertise__smalls">
-        <div class="advertise__smalls__item advertise-item">ADV2</div>
-        <div v-if="count>2" class="advertise__smalls__item advertise-item">ADV3</div>
+        <img :src="`${$axios.defaults.baseURL}${ads[1].image.original}`" class="advertise__smalls__item advertise-item"/>
+        <img :src="`${$axios.defaults.baseURL}${ads[2].image.original}`" v-if="count>2" class="advertise__smalls__item advertise-item"/>
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
 <script>
 export default {
   props: {
-    ad: {required: true, default: []},
+    ads: {required: true, default: []},
     count: {
       required: false,
       default: 3,
@@ -36,6 +36,7 @@ export default {
     transform: translateY(-100px);
     opacity: 0;
     z-index: $z_dropdown;
+    overflow:hidden;
   }
 
   height: max-content;
@@ -44,15 +45,14 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  max-width:100%;
 
   &-item {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    min-height: 120px;
     width: 100%;
-    background-color: $ad_back_color;
     font-family: 'SF Pro Display';
     font-style: normal;
     font-weight: 700;
@@ -61,34 +61,25 @@ export default {
   }
 
 
-  &__item {
-    @media screen and (max-width: $tablet) {
-      min-height: 125px;
-    }
-  }
-
   &__smalls {
     margin-top: 30px;
+
     @media screen and (max-width: $tablet) {
       margin-top: 20px;
     }
     width: 100%;
+    max-width:100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-direction: row;
 
     &__item {
-      width: 100%;
-      @media screen and (max-width: $tablet) {
-        min-height: 100px;
-      }
+      width:100%;
 
       &:nth-of-type(2) {
         margin-left: 30px;
-        @media screen and (max-width: $tablet) {
-          margin-left: 15px;
-        }
+
       }
     }
   }

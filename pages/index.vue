@@ -10,10 +10,11 @@
           :categories="categories"
           class="index-page__content__adaptive-categories adaptive"
         />
-        {{advertise}}
-        <AdvertiseTree :ad="advertise.splice(0,3)"
-                       class="index-page__content__advertise index-page__content__advertise_big"
-                       :count="advertise.length" v-if="advertise.length"/>
+        <client-only>
+          <AdvertiseTree :ads="ads"
+                         class="index-page__content__advertise index-page__content__advertise_big"
+                         :count="ads.length" v-if="ads.length"/>
+        </client-only>
         <PagesIndexStocksSlider class="index-page__content__stocks-slider"/>
         <div
           class="new-shops catalog-wrapper wrapper adaptive-non-wrapper index-page__content__new-shops"
@@ -159,10 +160,10 @@
             >
           </div>
         </div>
-        <AdvertiseTree :ad="[...advertise[3]]"
+        <AdvertiseTree :ads="[...ads[3]]"
                        class="index-page__content__advertise index-page__content__advertise_small"
                        count="1"
-                       v-if="advertise.length >= 4"/>
+                       v-if="ads.length >= 4"/>
       </div>
 
       <PagesIndexAbout class="index-page__content__about adaptive-non">
@@ -188,10 +189,14 @@ import partnerFiltersMixin from "@/mixins/partner-filters";
 import advertiseMixin from "@/mixins/advertise-mixin"
 
 export default {
+
   mixins: [partnerFiltersMixin, advertiseMixin],
   data() {
-    return {show_filters: false, categories: []};
+    return {
+      show_filters: false, categories: [],
+    };
   },
+
   async created() {
     await this.$axios
       .$get(`${this.$axios.defaults.baseURL}/api/cuisines/get`)
