@@ -44,9 +44,10 @@
             :readonly="true"
             @click="openDropdown"
           />
+          <transition name="opacity">
           <div
             v-if="show_dropdown"
-            class="order__delivery__content__select__dropdown"
+            class="order__delivery__content__select__dropdown non-scrollbar"
           >
             <button
               @click="selectAddress(address)"
@@ -58,6 +59,7 @@
               {{ address.name }}
             </button>
           </div>
+          </transition>
         </div>
         <div class="order__delivery__content__content">
           <div class="order__delivery__content__content__address">
@@ -292,7 +294,7 @@ export default {
         city: null,
         house: null,
       },
-      loading:false,
+      loading: false,
       description: null,
       additional: null,
       is_cashless_payment: false,
@@ -421,7 +423,7 @@ export default {
     this.setStartAddress();
   },
   mounted() {
-    this.self_get = Boolean(localStorage.getItem("self_get"));
+    this.self_get = JSON.parse(localStorage.getItem("self_get")) || false;
   },
   computed: {
     total_order_price() {
@@ -492,8 +494,11 @@ export default {
         document.addEventListener("click", dropdownAddressClick);
       else document.removeEventListener("click", dropdownAddressClick);
     },
-    self_get() {
-      localStorage.setItem("self_get", this.self_get);
+    self_get(value) {
+      console.log("Эта функция вызывается");
+      console.log(value);
+      console.log(this._isMounted);
+      localStorage.setItem("self_get", JSON.stringify(this.self_get));
     },
   },
 };
@@ -615,7 +620,8 @@ export default {
           flex-direction: column;
           box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
           padding: 7px 10px;
-
+          max-height: 200px;
+          overflow-y: auto;
           &__button {
             outline: none;
             border: none;

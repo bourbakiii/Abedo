@@ -68,7 +68,7 @@
           />
         </div>
         <div
-          v-if="cart_partner.delivery.price"
+          v-if="cart_partner.delivery && cart_partner.delivery.price"
           class="sidebar-cart__content__row sidebar-cart__content__row_delivery"
         >
           <p
@@ -100,7 +100,8 @@
           <ButtonStandart
             @click.native="() => $router.push('/cart')"
             class="sidebar-cart__content__button__button"
-            >Оформить заказ</ButtonStandart
+          >Оформить заказ
+          </ButtonStandart
           >
         </div>
       </div>
@@ -112,6 +113,7 @@
 </template>
 <script>
 import parserMixin from "@/mixins/parser.js";
+
 export default {
   mixins: [parserMixin],
   computed: {
@@ -142,11 +144,13 @@ export default {
     height: 0px;
     overflow: hidden;
   }
+
   &-enter-active,
   &-leave-active {
     transition: all $transition;
   }
 }
+
 .sidebar-cart {
   width: 294px;
   background-color: $white;
@@ -157,6 +161,7 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   max-height: calc(100vh - 170px);
+
   &__icon {
     position: absolute;
     left: 26px;
@@ -171,10 +176,12 @@ export default {
     z-index: 2;
     width: 60px;
     height: 60px;
+
     * {
       fill: $white;
     }
   }
+
   &__content {
     width: 100%;
     padding: 52px 0px 30px;
@@ -185,15 +192,18 @@ export default {
     flex-direction: column;
     flex-grow: 1;
     overflow: hidden;
+
     &__hood {
       width: 100%;
       padding: 0px 20px;
       border-bottom: 1px solid $dark_grey;
+
       &__title-row {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         &__button {
           background-color: transparent;
           outline: none;
@@ -204,11 +214,13 @@ export default {
           font-size: 15px;
           line-height: 20px;
           color: $red;
+
           &:hover {
             text-decoration: underline;
           }
         }
       }
+
       &__shop-block {
         display: flex;
         align-items: center;
@@ -216,11 +228,13 @@ export default {
         flex-direction: row;
         margin-top: 16px;
         margin-bottom: 28px;
+
         &__name-block {
           display: flex;
           align-items: flex-start;
           justify-content: flex-start;
           flex-direction: column;
+
           &__pre {
             font-family: "SF Pro Display";
             font-style: normal;
@@ -229,6 +243,7 @@ export default {
             line-height: 20px;
             color: $darkblue;
           }
+
           &__name {
             font-family: "SF Pro Display";
             font-style: normal;
@@ -237,6 +252,7 @@ export default {
             line-height: 20px;
           }
         }
+
         &__image {
           margin-left: 6px;
           border: 1px solid $dark_grey;
@@ -252,16 +268,19 @@ export default {
         }
       }
     }
+
     &__products {
       width: 100%;
       padding: 0px 5px 0px 20px;
       margin-right: 5px;
       overflow-y: overlay;
       height: 100%;
+
       &__item {
         padding-right: 10px !important;
       }
     }
+
     &__row {
       width: 100%;
       min-height: 47px;
@@ -271,6 +290,7 @@ export default {
       align-items: center;
       justify-content: flex-start;
       flex-direction: row;
+
       &__name {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -280,6 +300,7 @@ export default {
         flex-grow: 1;
         margin-right: 5px;
       }
+
       &__value {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -289,9 +310,11 @@ export default {
         flex-grow: 1;
         text-align: right;
       }
+
       &_least {
         min-height: max-content;
         padding-top: 15px;
+
         &__name {
           font-family: "SF Pro Display";
           font-style: normal;
@@ -299,6 +322,7 @@ export default {
           font-size: 15px;
           line-height: 20px;
         }
+
         &__value {
           font-family: "Montserrat";
           font-style: normal;
@@ -309,17 +333,20 @@ export default {
         }
       }
     }
+
     &__button {
       height: 50px;
       width: 100%;
       padding: 0px 20px;
       margin-top: 30px;
+
       &__button {
         width: 100%;
         height: 100%;
         font-size: 16px !important;
       }
     }
+
     &_empty {
       padding: 30px 0px 30px;
     }

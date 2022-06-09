@@ -52,14 +52,10 @@ export const actions = {
     if (!+state.state?.partner?.id || !state.state.products.length) state.dispatch("change_shop", {
       product, partner
     });
-    else if (+state.state?.partner?.id == +partner.id) {
+    else if (+state.state?.partner?.id === +partner.id) {
       state.commit('set_partner', partner);
       state.commit('set', {index: state.state.products.length, product})
-      console.log("ты вызываешься?");
-      if (product.in_cart_message) this.commit('modals/open', {
-        modal_name: 'add_to_cart',
-        message: product.in_cart_message
-      });
+      state.dispatch('checkForAInCartMessage', product);
     } else this.commit('modals/open', {modal_name: 'switch_shop', product: product, partner: partner});
     state.dispatch("synchronization");
   }, crease(state, product) {
@@ -84,10 +80,19 @@ export const actions = {
     this.commit("modals/close");
     state.commit('clear');
     state.commit("set", {index: state.commit('set', {index: state.state.products.length, product}), product: product});
+    state.dispatch('checkForAInCartMessage', product)
     state.commit("set_partner", partner);
     state.dispatch("synchronization");
 
-  }, async synchronization(state) {
+  },
+  checkForAInCartMessage(state,product) {
+    if (product.in_cart_message)
+      this.commit('modals/open', {
+        modal_name: 'add_to_cart',
+        message: product.in_cart_message
+      });
+  },
+  async synchronization(state) {
     const sync = async () => {
 
       const {promo, products, partner} = state.state;

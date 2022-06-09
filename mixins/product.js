@@ -2,9 +2,10 @@ import Vue from 'vue';
 
 export default {
   methods: {
-    add_to_cart(partner) {
+    async add_to_cart(partner) {
       if (!partner) alert("Не передан партнер при добавлении продукта в корзину");
-      this.$store.dispatch('cart/add_to_cart', { product: this.product, partner });
+      await this.$store.dispatch('cart/add_to_cart', {product: this.product, partner});
+
     }, crease() {
       this.$store.dispatch('cart/crease', this.product);
     }, decrease() {
