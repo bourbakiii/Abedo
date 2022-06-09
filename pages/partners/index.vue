@@ -3,8 +3,7 @@
     <div class="partners-page__content content">
       <client-only>
         <AdvertiseTree :ads="ads"
-                       v-advertise-margin="'partners-page__advertise_big'"
-                       class="partners-page__advertise"
+                       class="partners-page__advertise partners-page__advertise_big"
                        :count="ads.length" v-if="ads.length"/>
       </client-only>
       <Breadcrumbs class="partners-page__breadcrumbs adaptive-non"/>
@@ -226,7 +225,14 @@
           </ButtonStandart>
         </div>
       </div>
+      <client-only>
+      <AdvertiseTree :ads="[...ads[3]]"
+                     class="partners-page__advertise partners-page__advertise_small"
+                     count="1"
+                     v-if="ads.length >= 4"/>
+      </client-only>
     </div>
+
   </div>
 </template>
 
@@ -415,6 +421,9 @@ export default {
   &__advertise {
     &_big {
       margin: 40px 0px 50px;
+    }
+    &_small{
+      margin-top: 50px;
     }
   }
 

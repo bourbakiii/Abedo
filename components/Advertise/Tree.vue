@@ -2,20 +2,24 @@
   <div class="advertise-wrapper">
     <div class="advertise">
       <div class="advertise__item__wrapper">
-        <img :src="`${$axios.defaults.baseURL}${ads[0].image.original}`" class="advertise__item advertise-item"/>
+        <img :src="`${$axios.defaults.baseURL}${ads[0].image.original}`" class="advertise__item advertise-item adaptive-non"/>
+        <img :src="`${$axios.defaults.baseURL}${ads[0].mobile_image.original}`" class="advertise__item advertise-item adaptive"/>
       </div>
       <div v-if="count>1" class="advertise__smalls">
         <div class="advertise__smalls__item__wrapper">
           <img :src="`${$axios.defaults.baseURL}${ads[1].image.original}`"
-               class="advertise__smalls__item advertise-item"/>
+               class="advertise__smalls__item advertise-item adaptive-non"/>
+          <img :src="`${$axios.defaults.baseURL}${ads[1].mobile_image.original}`" class="advertise__smalls__item advertise-item adaptive"/>
+
         </div>
         <div v-if="count>2" class="advertise__smalls__item__wrapper">
+
           <img :src="`${$axios.defaults.baseURL}${ads[2].image.original}`"
-               class="advertise__smalls__item advertise-item"/>
+               class="advertise__smalls__item advertise-item adaptive-non"/>
+          <img :src="`${$axios.defaults.baseURL}${ads[2].mobile_image.original}`" class="advertise__smalls__item advertise-item adaptive"/>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 <script>
@@ -27,9 +31,7 @@ export default {
       default: 3,
     }
   }, mounted() {
-    this.$el.style.maxHeight = `${this.$el.scrollHeight}px`;
-    this.$el.style.transform = `translateY(0px)`;
-    this.$el.style.opacity = 1;
+
   }
 }
 </script>
@@ -39,11 +41,9 @@ export default {
 .advertise {
   &-wrapper {
     width: 100%;
-    max-height: 0px;
     transition-property: all, transform;
     transition-duration: $transition*3, $transition*3;
-    transform: translateY(-100px);
-    opacity: 0;
+    opacity: 1;
     z-index: $z_ads;
   }
 
