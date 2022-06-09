@@ -164,7 +164,7 @@ export default {
   }
   &__slide {
     overflow: hidden !important;
-    margin-right: 35px;
+    margin-right: 30px;
     width: 403px;
     height: auto;
     @media screen and (max-width: calc($maxwidth + 60px)) {

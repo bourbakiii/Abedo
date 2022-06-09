@@ -104,14 +104,15 @@ export default {
     },
     send() {
       this.loading = true;
-      this.$axios.post(`/api/order/${this.$store.state.modals.rate.order_id}/addComment`, {
+      this.$axios.post(`/api/order/${this.$store.state.modals.rate.order.id}/addComment`, {
         order_rating: +this.rating,
         order_comment: this.message
       }, {
         headers: {
           Authorization: `Bearer ${this.token}`
         }
-      }).then(() => {
+      }).then(({data:{comment}}) => {
+        this.$store.state.modals.rate.order.comments.push(comment);
         this.$store.commit('modals/close');
       }).catch((error) => {
         console.log("Order rate error:");

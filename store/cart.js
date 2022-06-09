@@ -55,6 +55,11 @@ export const actions = {
     else if (+state.state?.partner?.id == +partner.id) {
       state.commit('set_partner', partner);
       state.commit('set', {index: state.state.products.length, product})
+      console.log("ты вызываешься?");
+      if (product.in_cart_message) this.commit('modals/open', {
+        modal_name: 'add_to_cart',
+        message: product.in_cart_message
+      });
     } else this.commit('modals/open', {modal_name: 'switch_shop', product: product, partner: partner});
     state.dispatch("synchronization");
   }, crease(state, product) {

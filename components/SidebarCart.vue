@@ -68,6 +68,7 @@
           />
         </div>
         <div
+          v-if="cart_partner.delivery.price"
           class="sidebar-cart__content__row sidebar-cart__content__row_delivery"
         >
           <p

@@ -27,7 +27,7 @@ export const actions = {
     async get(state) {
         await this.$axios.get(`/api/user`, {
             headers: {
-                "Authorization": `Bearer ${state.state.token}`
+                "Authorization": `Bearer ${state.state.token}`,
             }
         }).then(async ({ data: { user } }) => {
             await state.commit("action", state => {

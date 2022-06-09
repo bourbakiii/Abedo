@@ -15,6 +15,10 @@
         v-else-if="$store.state.modals.switch_shop.show"
         class="modals-wrapper__content modal-content"
       />
+      <ModalsAddToCart
+        v-else-if="$store.state.modals.add_to_cart.show"
+        class="modals-wrapper__content modal-content"
+      />
       <ModalsLogin
         v-else-if="$store.state.modals.login.show"
         class="modals-wrapper__content modal-content"

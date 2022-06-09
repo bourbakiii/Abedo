@@ -22,6 +22,9 @@ export const state = () => ({
   authorisation: {
     show: false,
   },
+  add_to_cart: {
+    show: false, message: null
+  }
 });
 export const mutations = {
   action(state, action) {
@@ -37,11 +40,15 @@ export const mutations = {
         break;
       }
       case "rate": {
-        state.rate.order_id = props.order_id;
+        state.rate.order = props.order;
         break;
       }
       case "partner": {
         state.partner.partner = props.partner;
+        break;
+      }
+      case "add_to_cart": {
+        state.add_to_cart.message = props.message;
         break;
       }
       case "switch_shop": {
@@ -58,7 +65,8 @@ export const mutations = {
     state.partner.partner = null;
     state.switch_shop.partner = null;
     state.switch_shop.product = null;
-    state.rate.order_id = null;
+    state.rate.order = null;
+    state.add_to_cart.message = null;
     if (!props.modal_name) return;
   },
 };
