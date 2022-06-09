@@ -1,14 +1,21 @@
 <template>
   <div class="advertise-wrapper">
     <div class="advertise">
-      <img :src="`${$axios.defaults.baseURL}${ads[0].image.original}`" class="advertise__item advertise-item"/>
+      <div class="advertise__item__wrapper">
+        <img :src="`${$axios.defaults.baseURL}${ads[0].image.original}`" class="advertise__item advertise-item"/>
+      </div>
       <div v-if="count>1" class="advertise__smalls">
-        <img :src="`${$axios.defaults.baseURL}${ads[1].image.original}`"
-             class="advertise__smalls__item advertise-item"/>
-        <img :src="`${$axios.defaults.baseURL}${ads[2].image.original}`" v-if="count>2"
-             class="advertise__smalls__item advertise-item"/>
+        <div class="advertise__smalls__item__wrapper">
+          <img :src="`${$axios.defaults.baseURL}${ads[1].image.original}`"
+               class="advertise__smalls__item advertise-item"/>
+        </div>
+        <div v-if="count>2" class="advertise__smalls__item__wrapper">
+          <img :src="`${$axios.defaults.baseURL}${ads[2].image.original}`"
+               class="advertise__smalls__item advertise-item"/>
+        </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 <script>
@@ -34,7 +41,7 @@ export default {
     width: 100%;
     max-height: 0px;
     transition-property: all, transform;
-    transition-duration: $transition*20, $transition*30;
+    transition-duration: $transition*3, $transition*3;
     transform: translateY(-100px);
     opacity: 0;
     z-index: $z_ads;
@@ -47,7 +54,6 @@ export default {
   justify-content: center;
   flex-direction: column;
   max-width: 100%;
-
   &-item {
     display: flex;
     align-items: center;
@@ -60,8 +66,7 @@ export default {
     font-weight: 700;
     font-size: 14px;
     line-height: 17px;
-    object-fit: contain;background-color: red;
-    height:100px;
+    object-fit: contain;
     position: relative;
 
   }
@@ -82,12 +87,18 @@ export default {
     }
 
     &__item {
-      //width: 100%;
-      object-fit: cover;
-      &:nth-of-type(2) {
-        margin-left: 30px;
-        @media screen and (max-width: $tablet){
-          margin-left: 15px;
+
+      object-fit: contain;
+
+      &__wrapper {
+        width: 100%;
+        flex-shrink: 1;
+
+        &:nth-of-type(2) {
+          margin-left: 30px;
+          @media screen and (max-width: $tablet) {
+            margin-left: 15px;
+          }
         }
       }
     }
