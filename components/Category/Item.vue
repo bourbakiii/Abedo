@@ -1,6 +1,6 @@
 <template>
   <NuxtLink :to="`/partners?category=${category.id}`" class="category category-item">
-    <img v-if="category.image" :src="`${$axios.defaults.baseURL}${category.image.small}`" class="category-image" />
+    <img v-if="category.image" :src="`${$axios.defaults.baseURL}${category.image.resized}`" class="category-image" />
     <p class="category-name">{{ category.name }}</p>
   </NuxtLink>
 </template>

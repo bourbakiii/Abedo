@@ -14,7 +14,7 @@
       >
         <img
           v-if="category.image"
-          :src="`${$axios.defaults.baseURL}${category.image.small}`"
+          :src="`${$axios.defaults.baseURL}${category.image.resized}`"
           class="sidebar__content__item__image"
         />
         <p class="sidebar__content__item__name">
@@ -47,10 +47,10 @@ export default {
   fetch() {
     this.$axios.get("/api/cuisines/get").then(
       ({
-        data: {
-          cuisines: { data },
-        },
-      }) => {
+         data: {
+           cuisines: {data},
+         },
+       }) => {
         this.categories = data;
       }
     );
@@ -58,7 +58,7 @@ export default {
   methods: {
     parseUrl(category) {
       let to_ret = '/partners'
-      if (+this.$route.query.category != +category.id) to_ret+=`?category=${+category.id}`
+      if (+this.$route.query.category != +category.id) to_ret += `?category=${+category.id}`
       return to_ret;
     },
   },
@@ -76,10 +76,12 @@ export default {
   border-radius: 20px;
   max-height: calc(100vh - 125px);
   overflow: hidden;
+
   &__title {
     margin-bottom: 15px;
     width: 100%;
   }
+
   &__content {
     display: flex;
     align-items: center;
@@ -87,7 +89,8 @@ export default {
     flex-direction: column;
     width: 100%;
     overflow-y: overlay;
-    margin-right:10px;
+    margin-right: 10px;
+
     &__item {
       width: 100%;
       min-height: 50px;
@@ -99,19 +102,24 @@ export default {
       border: none;
       outline: none;
       border-bottom: 1px solid $dark_grey;
+
       &:last-of-type {
         border-bottom: none;
       }
+
       * {
         transition: $transition;
       }
+
       transition: $transition;
+
       &__active &,
       &:hover & {
         &__icon *,
         &__image * {
           fill: $orange;
         }
+
         &__name {
           color: $orange;
         }
@@ -125,6 +133,7 @@ export default {
         flex-shrink: 0;
         border-radius: 90px;
       }
+
       &__name {
         flex-grow: 1;
         text-align: left;
@@ -134,6 +143,7 @@ export default {
         font-size: 15px;
         line-height: 18px;
       }
+
       &__icon {
         margin-left: 11px;
         flex-shrink: 0;

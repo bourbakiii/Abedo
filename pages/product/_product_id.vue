@@ -5,11 +5,11 @@
       <div class="product-page__over__content content">
         <div class="product-page__over__content__main">
           <div
-            v-if="product.more_images.length"
+            v-if="product_concated_images.length"
             class="product-page__over__content__main__images__adaptive__slider adaptive"
           >
             <ProductImagesSlider
-              :images="product.more_images"
+              :images="product_concated_images"
               class="images-slider"
             />
           </div>
@@ -64,7 +64,7 @@
                     :key="index"
                   ><img
                     @click="selectImage(slide)"
-                    :src="`${$axios.defaults.baseURL}${slide.small}`"
+                    :src="`${$axios.defaults.baseURL}${slide.cart_mini}`"
                     class="product-page__over__content__main__images__slider__swiper__slide__image"
                   /></swiper-slide>
                 </swiper>
@@ -94,11 +94,13 @@
                 </button>
               </div>
             </div>
-            <img
-              v-if="currentImage"
-              :src="`${$axios.defaults.baseURL}${currentImage.original}`"
-              class="product-page__over__content__main__images__image"
-            />
+            <div class="product-page__over__content__main__images__image">
+              <img
+                v-if="currentImage"
+                :src="`${$axios.defaults.baseURL}${currentImage.original}`"
+                class="product-page__over__content__main__images__image__image"
+              />
+            </div>
           </div>
 
           <div class="product-page__over__content__main__additional">
@@ -367,7 +369,7 @@ export default {
   methods: {
     selectOption(option) {
       const select_option_index = this.product.selected_options.findIndex(
-        (el) => +el.id == +option.id
+        el => +el.id == +option.id
       );
       this.$store.commit("cart/action", (state) => {
         if (select_option_index >= 0)
@@ -381,6 +383,19 @@ export default {
       this.currentImage = image || null;
     },
   },
+  computed: {
+    product_concated_images() {
+      let to_return = [];
+      if (this.product.image) {
+        to_return.push(this.product.image);
+      }
+      if (this.product.more_images) {
+        to_return.push(...this.product.more_images);
+      }
+      console.log(to_return);
+      return to_return;
+    }
+  }
 };
 </script>
 
@@ -522,11 +537,24 @@ export default {
           }
 
           &__image {
-            align-self: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
             max-width: 100%;
-            height: max-content;
             max-height: 617px;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
+            align-self: center;
+            overflow: hidden;
+
+            &__image {
+              height: 100%;
+              width: auto;
+              max-width: 100%;
+              max-height: 100%;
+            }
           }
         }
 

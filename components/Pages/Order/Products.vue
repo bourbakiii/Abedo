@@ -8,8 +8,8 @@
         class="products__content__item"
       >
         <img
-          v-if="item.product.image.length"
-          :src="`${axios.defaults.baseURl}${item.product.image.original}`"
+          v-if="item.product.image"
+          :src="`${$axios.defaults.baseURL}${item.product.image.original}`"
           class="products__content__item__image"
         />
         <p class="products__content__item__name">
@@ -43,7 +43,7 @@
           <NuxtLink :to="`/product/${item.product.id}`" class="products__content_adaptive__item__data__image">
             <img
               v-if="item.product.image"
-              :src="`${$axios.defaults.baseURL}${item.product.image.small}`"
+              :src="`${$axios.defaults.baseURL}${item.product.image.cart_mini}`"
               class="products__content_adaptive__item__data__image__image"
             />
           </NuxtLink>
@@ -56,7 +56,7 @@
             </p>
             <!-- <p
               class="products__content_adaptive__item__data__prices__price_full"
-              
+
             >
               10 345 ₽
             </p> -->

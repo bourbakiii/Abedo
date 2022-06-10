@@ -13,7 +13,7 @@
       >
         <img
           v-if="category.image"
-          :src="`${$axios.defaults.baseURL}${category.image.small}`"
+          :src="`${$axios.defaults.baseURL}${category.image.resized}`"
           class="sidebar__content__item__image"
         />
         <p class="sidebar__content__item__name">

@@ -3,7 +3,7 @@
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="item,index in images" :key="index"
         >
-        <img :src="`${$axios.defaults.baseURL}${item.original}`" alt="">
+        <img :src="`${$axios.defaults.baseURL}${item.normal}`" alt="">
         </swiper-slide
       >
     </swiper>
@@ -54,6 +54,7 @@ export default {
   width:100%;
   &-slide {
     display: flex;align-items: center;justify-content: center;flex-direction: row;
+    overflow: hidden;
   }
   &-pagination {
     width:100%;

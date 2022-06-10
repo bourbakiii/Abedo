@@ -5,7 +5,7 @@
       <div class="information__content__hood">
         <img
           v-if="order.shop.image.length"
-          :src="`${$axios.defaults.baseURL}${order.shop.image[0].small}`"
+          :src="`${$axios.defaults.baseURL}${order.shop.image[0].original}`"
           class="information__content__hood__image"
         />
         <p class="information__content__hood__name">

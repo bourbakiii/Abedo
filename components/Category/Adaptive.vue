@@ -1,21 +1,21 @@
 <template>
   <NuxtLink
-  :style="`background-image: ${
-        category.image
-          ? `linear-gradient(360deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 100%), url(${$axios.defaults.baseURL}${category.image.mobile})`
-          : ''
-      };`"
-  :to="`/partners?category=${category.id}`"
+
+    :to="`/partners?category=${category.id}`"
     class="category category-adaptive"
   >
+    <img v-if="category.image" :src="`${$axios.defaults.baseURL}${category.image.resized}`"
+         class="category-adaptive__image" alt=""/>
+    <div class="category-adaptive__shadow"></div>
+
     <div class="category-adaptive__overlay"></div>
-    <p class="category-adaptive__name" >{{category.name}}</p>
+    <p class="category-adaptive__name">{{ category.name }}</p>
   </NuxtLink>
 </template>
 <script>
 export default {
-  props:{
-    category:{
+  props: {
+    category: {
       required: true
     }
   }
@@ -36,18 +36,38 @@ export default {
   position: relative;
   overflow: hidden;
   text-decoration: none;
-  background-size: cover;
-  background-repeat: no-repeat;
-  &:focus &, &:active &, &:hover &{
-      &__overlay{
-        width:100%;
-        border-radius: 10px;
-      }
+
+
+  &:focus &, &:active &, &:hover & {
+    &__overlay {
+      width: 100%;
+      border-radius: 10px;
     }
-  &__overlay {
-    opacity:0.95;
+  }
+
+  &__image {
     position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 75%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  &__shadow {
+    background: linear-gradient(360deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 100%);
     z-index: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 75%;
+    height: 100%;
+  }
+
+  &__overlay {
+    opacity: 0.95;
+    position: absolute;
     top: 50%;
     left: 0px;
     transform: translateY(-50%);
@@ -55,21 +75,24 @@ export default {
     height: 100%;
     background-color: $darkblue;
     transition: $transition;
-    
-  }
-  &__name {
     z-index: 2;
-    font-family: "SF Pro Display";
+
+  }
+
+  &__name {
+    font-family: "SF Pro Display", serif;
     font-style: normal;
     font-weight: 700;
     font-size: 15px;
     line-height: 17px;
     color: $white;
     width: 100%;
-    max-height:100%;
+    max-height: 100%;
     max-width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
+    z-index: 3;
+
   }
 }
 </style>

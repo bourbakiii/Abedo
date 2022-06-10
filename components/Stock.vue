@@ -4,7 +4,7 @@
     class="stock__wrapper"
     :style="`background: ${
       stock.image
-        ? `url(${$axios.defaults.baseURL}${stock.image.desktop})`
+        ? `url(${$axios.defaults.baseURL}${stock.image.original})`
         : 'red'
     };`"
   >
@@ -16,7 +16,7 @@
         >
           <img
             v-if="stock.shop.image.length"
-            :src="`${$axios.defaults.baseURL}${stock.shop.image[0].small}`"
+            :src="`${$axios.defaults.baseURL}${stock.shop.image[0].resized}`"
             class="stock__content__hood__logo"
           />
           <p class="stock__content__hood__name">

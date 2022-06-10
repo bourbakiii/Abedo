@@ -10,7 +10,7 @@
       <img
        @click.self="$router.push(`/partners/${partner.id}`)"
         v-if="partner.image.length"
-        :src="`${$axios.defaults.baseURL}${partner.image[0].desktop}`"
+        :src="`${$axios.defaults.baseURL}${partner.image[0].original}`"
         class="item__block__image"
       />
       <svg
@@ -132,7 +132,7 @@
         <div class="item__block__content__logo">
           <img
             @click="$router.push(`/partners/${partner.id}`)"
-            :src="`${$axios.defaults.baseURL}${partner.logo.desktop}`"
+            :src="`${$axios.defaults.baseURL}${partner.logo.original}`"
             v-if="partner.logo"
             class="item__block__content__logo-image"
           />
