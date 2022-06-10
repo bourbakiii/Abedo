@@ -6,7 +6,7 @@
         <h1 class="orders-page__content__orders__title title-normal adaptive-non">
           Список заказов
         </h1>
-        <div class="orders-page__content__orders__content">
+        <div v-if="orders.length" class="orders-page__content__orders__content">
           <div
             class="orders-page__content__orders__content__item"
             v-for="order in orders"
@@ -108,10 +108,10 @@
                     fill="#F4F6FC" stroke="#DDE2F2"/>
                 </svg>
               </div>
-
             </div>
           </div>
         </div>
+        <p class="orders-page__content__orders__content_empty">Кажется, у вас пока нет заказов</p>
       </div>
     </div>
   </div>
@@ -178,7 +178,7 @@ export default {
         margin-bottom: 70px;
 
         @media screen and (max-width: $tablet) {
-          font-family: "SF Pro Display";
+          font-family: "SF Pro Display", serif;
           font-style: normal;
           font-weight: 700;
           font-size: 20px;
@@ -436,6 +436,16 @@ export default {
               }
             }
           }
+        }
+        &_empty {
+          text-align: left;
+          width: max-content;
+          font-family: 'SF Pro Display';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 26px;
+          align-self: flex-start;
         }
       }
     }

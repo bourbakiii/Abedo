@@ -28,7 +28,7 @@
         class="gift-cart-adaptive__content__image-block"
       >
         <img
-          :src="`${$axios.defaults.baseURL}${product.image.small}`"
+          :src="`${$axios.defaults.baseURL}${product.image.cart_mini}`"
           class="gift-cart-adaptive__content__image-block__image"
         />
       </NuxtLink>
