@@ -309,7 +309,7 @@ import Checkbox from "../../components/Checkbox.vue";
 import productMixin from "@/mixins/product.js";
 
 export default {
-  name: "product-images-slider",
+  // name: "product-images-slider",
   title: "Product images slider",
   mixins: [productMixin],
   components: {
@@ -972,7 +972,7 @@ export default {
           background-color: $white;
           border: 1px solid $dark_grey;
           border-radius: 20px;
-
+          width:100%;
           &__title {
             margin-bottom: 18px;
             font-family: 'SF Pro Display';

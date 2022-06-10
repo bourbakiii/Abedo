@@ -189,7 +189,10 @@
         </div>
       </client-only>
 
-      <button type="button" @click="$store.dispatch('account/logout')">Выход</button>
+      <ButtonStandart class="left-menu__links__logout" v-if="token" type="button"
+                      @click="$store.dispatch('account/logout')">
+        Выход
+      </ButtonStandart>
     </div>
   </div>
 </template>
@@ -198,6 +201,9 @@ export default {
   computed: {
     pages() {
       return this.$store.state.pages
+    },
+    token() {
+      return this.$store.state.account.token
     }
   },
   watch: {
@@ -239,7 +245,8 @@ export default {
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
-    transform: scale(0.8);
+    width: 124px;
+
   }
 
   &__button {
@@ -273,6 +280,14 @@ export default {
       margin-top: 30px;
     }
 
+    &__logout {
+      margin-top: 50px;
+      height: 40px !important;
+      background-color: $red !important;
+      border-color: $red !important;
+      color: $white !important;
+      padding: 0px 40px !important;
+    }
 
     &__link {
       display: flex;

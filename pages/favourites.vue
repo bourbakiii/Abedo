@@ -14,7 +14,7 @@
               v-for="partner in partners"
               :key="partner.id"
               :partner="partner"
-              class="favourites-page__content__inner__content__item adaptive-non"
+              class="favourites-page__content__inner__content__item"
             />
           </client-only>
         </div>

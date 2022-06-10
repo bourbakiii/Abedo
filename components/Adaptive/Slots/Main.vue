@@ -60,7 +60,7 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    transform: scale(0.8);
+    width: 124px;
   }
 }
 </style>
