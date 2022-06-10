@@ -35,30 +35,32 @@
         <div class="order__delivery__content__select">
           <InputBlock
             :value="address.name"
+            :disabled="!Boolean(addresses.length)"
+            placeholder="У вас не добавленных адресов"
             class="order__delivery__content__select__input-block"
             name="select"
             id="select"
             type="text"
             text="Пункт доставки"
-            arrow="true"
+            :arrow="Boolean(addresses.length)"
             :readonly="true"
             @click="openDropdown"
           />
           <transition name="opacity">
-          <div
-            v-if="show_dropdown"
-            class="order__delivery__content__select__dropdown non-scrollbar"
-          >
-            <button
-              @click="selectAddress(address)"
-              type="button"
-              v-for="address in addresses"
-              :key="address.id"
-              class="order__delivery__content__select__dropdown__button"
+            <div
+              v-if="show_dropdown"
+              class="order__delivery__content__select__dropdown non-scrollbar"
             >
-              {{ address.name }}
-            </button>
-          </div>
+              <button
+                @click="selectAddress(address)"
+                type="button"
+                v-for="address in addresses"
+                :key="address.id"
+                class="order__delivery__content__select__dropdown__button"
+              >
+                {{ address.name }}
+              </button>
+            </div>
           </transition>
         </div>
         <div class="order__delivery__content__content">
@@ -262,13 +264,13 @@
       class="order__messages"
     >
       <transition name="message" appear>
-      <Message
-        v-for="error in errors"
-        :key="error"
-        class="order__messages__item_error order__messages__item"
-      >{{ error }}
-      </Message
-      >
+        <Message
+          v-for="error in errors"
+          :key="error"
+          class="order__messages__item_error order__messages__item"
+        >{{ error }}
+        </Message
+        >
       </transition>
     </div>
   </form>
@@ -334,6 +336,7 @@ export default {
       this.address = {...address};
     },
     openDropdown() {
+      if (!this.addresses.length) return;
       this.show_dropdown = true;
       document.addEventListener("click", this.nonDropdownClick);
     },
@@ -397,9 +400,9 @@ export default {
             Authorization: `Bearer ${this.token}`,
           },
         })
-        .then(({data}) => {
-          this.$store.commit("cart/clear");
-          this.$router.push("/success");
+        .then(async ({data}) => {
+          await this.$router.push("/success").finally(() =>
+            this.$store.commit("cart/clear"));
         })
         .catch((error) => {
           if (error?.response?.status == 422) {
@@ -624,6 +627,7 @@ export default {
           padding: 7px 10px;
           max-height: 200px;
           overflow-y: auto;
+
           &__button {
             outline: none;
             border: none;
