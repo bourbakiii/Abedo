@@ -64,13 +64,13 @@
             />
           </svg>
 
-          <p class="shop-block__content__info__phone__text">
+          <a :href="`tel:+7${parsePhone(partner.contact_phone)}`" class="shop-block__content__info__phone__text">
             +7 {{ parsePhone(`${partner.contact_phone}`) }}
-          </p>
+          </a>
           <div v-if="partner.socials && (partner.socials.telegram || partner.socials.whats_app)"
                class="shop-block__content__info__phone__socials">
             <a :href="partner.socials.whats_app" target="_blank" v-if="partner.socials.whats_app"
-                      class="shop-block__content__info__phone__socials__item">
+               class="shop-block__content__info__phone__socials__item">
               <svg class="shop-block__content__info__phone__socials__item__icon" width="25" height="25"
                    viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -82,8 +82,8 @@
               </svg>
 
             </a>
-            <a :href="partner.socials.telegram"  target="_blank" v-if="partner.socials.telegram"
-                      class="shop-block__content__info__phone__socials__item">
+            <a :href="partner.socials.telegram" target="_blank" v-if="partner.socials.telegram"
+               class="shop-block__content__info__phone__socials__item">
               <svg class="shop-block__content__info__phone__socials__item__icon" width="25" height="25"
                    viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -152,9 +152,9 @@
           </defs>
         </svg>
       </span>
-      <p class="shop-block__additional__text shop-block__phone__text">
+      <a :href="`tel:+7${parsePhone(partner.contact_phone)}`"  class="shop-block__additional__text shop-block__phone__text">
         +7 {{ parsePhone(`${partner.contact_phone}`) }}
-      </p>
+      </a>
       <div class="shop-block__additional__socials">
         <NuxtLink to="#" class="shop-block__additional__socials__item">
           <svg class="shop-block__additional__socials__item__icon" width="30" height="30" viewBox="0 0 30 30"
@@ -445,6 +445,7 @@ export default {
         }
 
         &__text {
+          text-decoration: none;
           flex-shrink: 0;
           font-family: "SF Pro Display";
           font-style: normal;
@@ -507,6 +508,7 @@ export default {
     font-size: 15px;
     line-height: 20px;
     color: $darkblue;
+    text-decoration: none;
   }
 
   &__additional {

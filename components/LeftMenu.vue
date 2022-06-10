@@ -181,13 +181,11 @@
         >
       </div>
       <client-only>
-        <div v-for="(page,index) in pages" :key="page.id" class="left-menu__links left-menu__links_additional">
-          <NuxtLink to="#" class="left-menu__links__link"
-          >
-
+        <div class="left-menu__links left-menu__links_additional">
+          <NuxtLink v-for="(page,index) in pages" :key="page.id" to="#"
+                    class="left-menu__links__link left-menu__links__link_additional">
             {{ page.title }}
-          </NuxtLink
-          >
+          </NuxtLink>
         </div>
       </client-only>
     </div>
@@ -273,23 +271,26 @@ export default {
       margin-top: 30px;
     }
 
+
     &__link {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       flex-direction: row;
-      font-family: "SF Pro Display";
+      font-family: "SF Pro Display", serif;
       font-style: normal;
       font-weight: 400;
       font-size: 15px;
       line-height: 17px;
       text-decoration: none;
-      margin-bottom: 23px;
+      margin-bottom: 20px;
       width: 100%;
       max-width: 100%;
 
-      &:last-of-type {
-        margin-bottom: 0px;
+      &_additional {
+        &:last-of-type {
+          margin-bottom: 0px;
+        }
       }
 
       &__icon {
