@@ -106,14 +106,17 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   position: relative;
+
   &.arrow {
     cursor: pointer !important;
   }
+
   &.error & {
     &__input {
       border-color: $red;
     }
   }
+
   &__name {
     font-family: "SF Pro Display";
     font-style: normal;
@@ -127,6 +130,7 @@ export default {
     white-space: nowrap;
     text-align: left;
   }
+
   &__input {
     width: 100%;
     height: 50px;
@@ -147,12 +151,15 @@ export default {
     line-height: 20px;
     transition: $transition;
     position: relative;
-    &.disabled{
+
+    &.disabled {
       background-color: $dark_grey;
     }
+
     &__pre {
       margin-right: 1ex;
     }
+
     &__input {
       width: 100%;
       height: 100%;
@@ -163,13 +170,16 @@ export default {
       font-weight: 400;
       font-size: 15px;
       line-height: 20px;
+
       &::placeholder {
         color: $extra_dark_grey;
       }
-      &:disabled{
+
+      &:disabled {
         background-color: transparent;
       }
     }
+
     &__arrow {
       height: max-content;
       width: max-content;

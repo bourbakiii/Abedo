@@ -150,7 +150,7 @@
             <p v-else-if="partners && !loading" class="index-page__content__new-shops__content_empty">
               Заведения, соответсвующие заданным условиям не найдены.
               <br>
-              Попробуйте изменить выбранне фильтры.
+              Попробуйте изменить выбранные фильтры.
             </p>
             <ButtonStandart
               @click.native="$router.push('/partners')"

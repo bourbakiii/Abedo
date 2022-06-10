@@ -6,112 +6,115 @@
         <h1 class="orders-page__content__orders__title title-normal adaptive-non">
           Список заказов
         </h1>
-        <div v-if="orders.length" class="orders-page__content__orders__content">
-          <div
-            class="orders-page__content__orders__content__item"
-            v-for="order in orders"
-            :key="order.id"
-          >
-            <div class="orders-page__content__orders__content__item__data">
-              <div
-                class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_partner"
-              >
-                <p
-                  class="orders-page__content__orders__content__item__data__block__name"
+        <transition appear name="opacity" mode="out-in">
+          <Loader class="orders-page__content__orders__content_loading" v-if="loading && !orders"/>
+          <div v-else-if="orders && orders.length" class="orders-page__content__orders__content">
+            <div
+              class="orders-page__content__orders__content__item"
+              v-for="order in orders"
+              :key="order.id"
+            >
+              <div class="orders-page__content__orders__content__item__data">
+                <div
+                  class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_partner"
                 >
-                  {{ order.shop.name }}
-                </p>
-                <p
-                  class="orders-page__content__orders__content__item__data__block__value"
+                  <p
+                    class="orders-page__content__orders__content__item__data__block__name"
+                  >
+                    {{ order.shop.name }}
+                  </p>
+                  <p
+                    class="orders-page__content__orders__content__item__data__block__value"
+                  >
+                    №{{ order.id }}
+                  </p>
+                </div>
+                <div
+                  class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_date"
                 >
-                  №{{ order.id }}
-                </p>
+                  <p
+                    class="orders-page__content__orders__content__item__data__block__name"
+                  >
+                    Дата и время:
+                  </p>
+                  <p
+                    class="orders-page__content__orders__content__item__data__block__value"
+                  >
+                    {{ order.created_at }}
+                  </p>
+                </div>
+                <div
+                  class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_address"
+                >
+                  <p
+                    class="orders-page__content__orders__content__item__data__block__name"
+                  >
+                    Адрес:
+                  </p>
+                  <p
+                    class="orders-page__content__orders__content__item__data__block__value"
+                  >
+                    {{ order.street ? parseAddress(order) : 'Самовывоз' }}
+                  </p>
+                </div>
+                <div
+                  class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_price"
+                >
+                  <p
+                    class="orders-page__content__orders__content__item__data__block__name"
+                  >
+                    Стоимость:
+                  </p>
+                  <p
+                    class="orders-page__content__orders__content__item__data__block__value"
+                  >
+                    {{ order.price_with_discount }}₽
+                  </p>
+                </div>
+                <div
+                  class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_status"
+                >
+                  <p
+                    class="orders-page__content__orders__content__item__data__block__name"
+                  >
+                    Статус заказа:
+                  </p>
+                  <p
+                    class="orders-page__content__orders__content__item__data__block__value"
+                  >
+                    {{ order.statuses[order.statuses.length - 1].title }}
+                  </p>
+                </div>
               </div>
-              <div
-                class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_date"
-              >
-                <p
-                  class="orders-page__content__orders__content__item__data__block__name"
+              <div class="orders-page__content__orders__content__item__buttons">
+                <ButtonStandart
+                  @click.native="$router.push(`/orders/${order.id}`)"
+                  class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_open"
+                >Открыть
+                </ButtonStandart
                 >
-                  Дата и время:
-                </p>
-                <p
-                  class="orders-page__content__orders__content__item__data__block__value"
+                <ButtonStandart
+                  @click="$store.commit('modals/open', { modal_name: 'rate', order })"
+                  class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_rate"
+                  v-if="!order.comments.length"
+                >Оценить
+                </ButtonStandart
                 >
-                  {{ order.created_at }}
-                </p>
-              </div>
-              <div
-                class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_address"
-              >
-                <p
-                  class="orders-page__content__orders__content__item__data__block__name"
-                >
-                  Адрес:
-                </p>
-                <p
-                  class="orders-page__content__orders__content__item__data__block__value"
-                >
-                  {{ parseAddress(order) }}
-                </p>
-              </div>
-              <div
-                class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_price"
-              >
-                <p
-                  class="orders-page__content__orders__content__item__data__block__name"
-                >
-                  Стоимость:
-                </p>
-                <p
-                  class="orders-page__content__orders__content__item__data__block__value"
-                >
-                  {{ order.price_with_discount }}₽
-                </p>
-              </div>
-              <div
-                class="orders-page__content__orders__content__item__data__block orders-page__content__orders__content__item__data__block_status"
-              >
-                <p
-                  class="orders-page__content__orders__content__item__data__block__name"
-                >
-                  Статус заказа:
-                </p>
-                <p
-                  class="orders-page__content__orders__content__item__data__block__value"
-                >
-                  {{ order.statuses[order.statuses.length - 1].title }}
-                </p>
-              </div>
-            </div>
-            <div class="orders-page__content__orders__content__item__buttons">
-              <ButtonStandart
-                @click.native="$router.push(`/orders/${order.id}`)"
-                class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_open"
-              >Открыть
-              </ButtonStandart
-              >
-              <ButtonStandart
-                @click="$store.commit('modals/open', { modal_name: 'rate', order })"
-                class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_rate"
-                v-if="!order.comments.length"
-              >Оценить
-              </ButtonStandart
-              >
-              <div v-else class="orders-page__content__orders__content__item__buttons__stars">
-                <svg v-for="item in 5" :key="item"
-                     :class="order.comments[0].order_rating>=(item)?'filled':order.comments[0].order_rating>=item&&order.comments[0].order_rating<=item+1?'half':''"
-                     class="orders-page__content__orders__content__item__buttons__stars__star" width="20" height="19"
-                     viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M19.496 7.37001L19.4959 7.36983C19.4863 7.34017 19.46 7.3173 19.4268 7.3125L19.4267 7.31249L13.2267 6.41522L12.9668 6.37762L12.8503 6.1424L10.0774 0.547279L10.0774 0.547213C10.0635 0.519121 10.0339 0.5 10 0.5C9.96619 0.5 9.93657 0.519099 9.92261 0.547287L7.14965 6.14241L7.03307 6.37762L6.77326 6.41522L0.573287 7.31249L0.57321 7.3125C0.53998 7.31731 0.513695 7.34026 0.504054 7.36982L0.504037 7.36987C0.494461 7.39921 0.502198 7.43181 0.525219 7.45415L0.525262 7.45419L5.0115 11.8094L5.20072 11.9931L5.15597 12.253L4.09707 18.4027L4.09705 18.4028C4.09186 18.4329 4.10403 18.4643 4.13046 18.4835L19.496 7.37001ZM19.496 7.37001C19.5055 7.39919 19.4978 7.43176 19.4748 7.45411L19.4748 7.45414L14.988 11.8094L14.7988 11.9931L14.8436 12.253L15.9028 18.4026C15.908 18.4328 15.8957 18.4643 15.8693 18.4835C15.8427 18.5027 15.8069 18.5055 15.7773 18.49C15.7772 18.49 15.7772 18.49 15.7772 18.49L10.2319 15.5865L10 15.465L9.76807 15.5865L4.22251 18.49L4.22242 18.4901M19.496 7.37001L4.22242 18.4901M4.22242 18.4901C4.20976 18.4967 4.19598 18.5 4.18185 18.5C4.16335 18.5 4.1455 18.4943 4.13056 18.4835L4.22242 18.4901Z"
-                    fill="#F4F6FC" stroke="#DDE2F2"/>
-                </svg>
+                <div v-else class="orders-page__content__orders__content__item__buttons__stars">
+                  <svg v-for="item in 5" :key="item"
+                       :class="order.comments[0].order_rating>=(item)?'filled':order.comments[0].order_rating>=item&&order.comments[0].order_rating<=item+1?'half':''"
+                       class="orders-page__content__orders__content__item__buttons__stars__star" width="20" height="19"
+                       viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M19.496 7.37001L19.4959 7.36983C19.4863 7.34017 19.46 7.3173 19.4268 7.3125L19.4267 7.31249L13.2267 6.41522L12.9668 6.37762L12.8503 6.1424L10.0774 0.547279L10.0774 0.547213C10.0635 0.519121 10.0339 0.5 10 0.5C9.96619 0.5 9.93657 0.519099 9.92261 0.547287L7.14965 6.14241L7.03307 6.37762L6.77326 6.41522L0.573287 7.31249L0.57321 7.3125C0.53998 7.31731 0.513695 7.34026 0.504054 7.36982L0.504037 7.36987C0.494461 7.39921 0.502198 7.43181 0.525219 7.45415L0.525262 7.45419L5.0115 11.8094L5.20072 11.9931L5.15597 12.253L4.09707 18.4027L4.09705 18.4028C4.09186 18.4329 4.10403 18.4643 4.13046 18.4835L19.496 7.37001ZM19.496 7.37001C19.5055 7.39919 19.4978 7.43176 19.4748 7.45411L19.4748 7.45414L14.988 11.8094L14.7988 11.9931L14.8436 12.253L15.9028 18.4026C15.908 18.4328 15.8957 18.4643 15.8693 18.4835C15.8427 18.5027 15.8069 18.5055 15.7773 18.49C15.7772 18.49 15.7772 18.49 15.7772 18.49L10.2319 15.5865L10 15.465L9.76807 15.5865L4.22251 18.49L4.22242 18.4901M19.496 7.37001L4.22242 18.4901M4.22242 18.4901C4.20976 18.4967 4.19598 18.5 4.18185 18.5C4.16335 18.5 4.1455 18.4943 4.13056 18.4835L4.22242 18.4901Z"
+                      fill="#F4F6FC" stroke="#DDE2F2"/>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <p class="orders-page__content__orders__content_empty">Кажется, у вас пока нет заказов</p>
+          <p v-else class="orders-page__content__orders__content_empty">Кажется, у вас пока нет заказов</p>
+        </transition>
       </div>
     </div>
   </div>
@@ -125,21 +128,24 @@ export default {
   middleware: ['auth'],
   data() {
     return {
-      orders: [],
+      orders: null,
+      loading: true,
     };
   },
   fetchOnServer: false,
   async fetch() {
-    if (this.token)
+    if (this.token) {
+      this.loading = true;
       await this.$axios
         .get("/api/orderHistory", {
           headers: {Authorization: `Bearer ${this.token}`},
         })
         .then(({data: {orders: {data}}}) => {
-          console.log('the order:');
-          console.log(data);
           this.orders = data.reverse();
-        });
+        }).finally(() => {
+          this.loading = false
+        })
+    }
   },
   computed: {
     token() {
@@ -154,7 +160,8 @@ export default {
         info_click: null,
       };
     });
-  },
+  }
+  ,
   watch: {
     token: {
       handler(value) {
@@ -202,6 +209,7 @@ export default {
           border-radius: 0px;
           padding: 0px;
           border: none;
+          background-color: transparent;
         }
 
 
@@ -392,63 +400,74 @@ export default {
                   margin-left: 0px;
                 }
                 @media screen and (max-width: $sidebar_dn) {
-                  margin-left: 20px;
-                }
-                border-color: $green !important;
-                color: $green;
+                  margin-left: 0px;
 
-                &:hover {
-                  background-color: $green;
-                  color: $white;
-                }
+              }
 
-                @media screen and (max-width: $tablet_middle) {
-                  border-color: $darkblue !important;
-                  color: $darkblue !important;
-                }
+              border-color: $green !important;
+              color: $green;
+
+              &:hover {
+                background-color: $green;
+                color: $white;
+              }
+
+              @media screen and (max-width: $tablet_middle) {
+                border-color: $darkblue !important;
+                color: $darkblue !important;
               }
             }
+          }
 
-            &__stars {
-              width: 104px;
-              display: flex;
-              flex-direction: row;
-              align-items: center;
-              justify-content: flex-end;
-              margin-left: 20px;
-              @media screen and (max-width: $notebook) {
-                margin-left: 0px;
-              }
-              @media screen and (max-width: $sidebar_dn) {
-                margin-left: 0px;
-              }
-              //@media screen and (max-width: $tablet) {
-              //  margin-left:0px;
-              //}
+          &__stars {
+            width: 104px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            margin-left: 20px;
+            @media screen and (max-width: $notebook) {
+              margin-left: 0px;
+            }
+            @media screen and (max-width: $sidebar_dn) {
+              margin-left: 0px;
+            }
+            //@media screen and (max-width: $tablet) {
+            //  margin-left:0px;
+            //}
 
-              &__star {
-                &.filled {
-                  * {
-                    fill: $orange;
-                    stroke: $orange;
-                  }
+            &__star {
+              &.filled {
+                * {
+                  fill: $orange;
+                  stroke: $orange;
                 }
               }
             }
           }
         }
-        &_empty {
-          text-align: left;
-          width: max-content;
-          font-family: 'SF Pro Display';
-          font-style: normal;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 26px;
-          align-self: flex-start;
-        }
+      }
+
+      &_loading {
+        width: max-content;
+        align-self: center;
+        justify-self: center;
+        margin: 10vh auto 0px;
+      }
+
+      &_empty {
+        text-align: left;
+        width: max-content;
+        font-family: 'SF Pro Display';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 26px;
+        align-self: flex-start;
       }
     }
   }
+}
+
 }
 </style>

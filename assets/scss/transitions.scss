@@ -7,7 +7,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition: all 0.2s ease;
+    transition: all $transition ease;
   }
 
   &-move {

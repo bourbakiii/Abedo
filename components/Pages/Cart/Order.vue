@@ -76,13 +76,7 @@
                 error="true"
                 :value="address.value"
                 :autocomplete="false"
-                @input="
-                  ($event) => {
-                    address.house = null;
-                    address.value = $event;
-                    get_dadata();
-                  }
-                "
+                @input="$event => {address.house = null;address.value = $event;get_dadata();}"
               />
               <div
                 v-if="suggestions.length"
@@ -153,8 +147,9 @@
       </div>
       <div
         class="order__delivery__prices"
-        v-if="delivery_price || door_delivery_price"
+        v-if="cart_partner.delivery && (delivery_price || door_delivery_price)"
       >
+
         <div class="order__delivery__prices__item" v-if="delivery_price">
           <div class="order__delivery__prices__item__name-block">
             <p class="order__delivery__prices__item__name">
@@ -258,9 +253,7 @@
     </ButtonStandart
     >
     <div
-      :class="{
-        order__messages_margined: errors.length,
-      }"
+      :class="{order__messages_margined: errors.length}"
       class="order__messages"
     >
       <transition name="message" appear>
@@ -979,6 +972,7 @@ export default {
     svg * {
       stroke: $darkblue;
       fill: transparent !important;
+      transition: $transition;
     }
 
     &:hover {

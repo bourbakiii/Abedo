@@ -213,7 +213,7 @@
             <p v-else-if="partners && !loading" class="partners-page__partners__content__cards_empty">
               Заведения, соответсвующие заданным условиям не найдены.
               <br>
-              Попробуйте изменить выбранне фильтры.
+              Попробуйте изменить выбранные фильтры.
             </p>
           </transition>
           <ButtonStandart

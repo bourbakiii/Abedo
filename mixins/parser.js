@@ -17,6 +17,7 @@ export default {
       let free_order_price = +this.$store.state.cart.partner?.free_order_price
       if (!delivery_price && delivery_price!=0) delivery_price = this.$store.state.cart.partner?.delivery?.price
       if (free_order_price) {
+        console.log("я здесь");
         let summ = 0;
         products.forEach(product => {
           let discount_percent = +product.discount?.percent || +product.section.discount?.percent || 0;
@@ -26,12 +27,17 @@ export default {
           // }, 0);
         });
         summ -= this.$store.state.cart.promo.discount;
-        return +summ >= +free_order_price ? 0 : delivery_price;
+        if(+free_order_price) summ=0;
+        else summ = delivery_price;
+
+        return summ;
       }
       return delivery_price;
     },
     final_delivery_price_text() {
       const final_delivery_price = this.final_delivery_price();
+      console.log("Final delivery price is:");
+      console.log(final_delivery_price);
       return +final_delivery_price == 0 ? "Бесплатно" : `${final_delivery_price}₽`;
     }
   }
