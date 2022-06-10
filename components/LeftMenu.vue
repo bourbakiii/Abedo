@@ -188,6 +188,8 @@
           </NuxtLink>
         </div>
       </client-only>
+
+      <button type="button" @click="$store.dispatch('account/logout')">Выход</button>
     </div>
   </div>
 </template>
@@ -263,7 +265,7 @@ export default {
 
     &:first-of-type {
       margin-top: 40px;
-      padding-bottom: 30px;
+      padding-bottom: 10px;
       border-bottom: 1px solid $dark_grey;
     }
 

@@ -514,6 +514,7 @@ export default {
           font-size: 16px;
           line-height: 26px;
           align-self: flex-start;
+          max-width:100%;
         }
       }
 

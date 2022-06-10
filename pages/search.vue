@@ -112,11 +112,12 @@ export default {
         text-align: left;
         align-self: flex-start;
         width: max-content;
-        font-family: "SF Pro Display";
+        font-family: "SF Pro Display",serif;
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
         line-height: 26px;
+        max-width:100%;
       }
     }
 

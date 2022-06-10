@@ -261,6 +261,7 @@
       }"
       class="order__messages"
     >
+      <transition name="message" appear>
       <Message
         v-for="error in errors"
         :key="error"
@@ -268,6 +269,7 @@
       >{{ error }}
       </Message
       >
+      </transition>
     </div>
   </form>
 </template>
@@ -1016,13 +1018,12 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    transition: 0.3s;
+    transition: $transition * 2;
 
     &_margined {
       margin-top: 15px;
     }
 
-    transition: calc($transition * 2);
 
     .empty {
       margin-top: 0px;

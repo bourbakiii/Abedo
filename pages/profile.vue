@@ -1,7 +1,7 @@
 <template>
   <div class="page profile-page-wrapper wrapper">
     <div class="profile-page content">
-      <Breadcrumbs class="profile-page__breadcrumbs adaptive-non" />
+      <Breadcrumbs class="profile-page__breadcrumbs adaptive-non"/>
       <h1 class="profile-page__title title-normal">Персональная информация</h1>
       <form @submit.prevent="edit" class="profile-page__form">
         <div class="profile-page__form__content">
@@ -138,8 +138,9 @@
           </ButtonStandart>
           <div v-else class="profile-page__form__buttons__edits">
             <ButtonStandart
+              :loader="loading"
               class="profile-page__form__buttons__button profile-page__form__buttons__button_save filled"
-              >Сохранить
+            >Сохранить
             </ButtonStandart>
             <ButtonStandart
               type="button"
@@ -166,7 +167,8 @@
             v-for="error in errors"
             :key="error"
             class="profile-page__form__messages__item_error profile-page__form__messages__item"
-            >{{ error }}</Message
+          >{{ error }}
+          </Message
           >
         </div>
       </form>
@@ -175,15 +177,16 @@
 </template>
 <script>
 import errorsMessagesMixin from "@/mixins/errors-messages.js";
+
 export default {
   mixins: [errorsMessagesMixin],
   middleware: ["auth"],
   data() {
     return {
       editing: false,
-      user: { ...this.$store.state.account.user },
-      start_user: { ...this.$store.state.account.user },
-      show_dropdown: false,
+      user: {...this.$store.state.account.user},
+      start_user: {...this.$store.state.account.user},
+      show_dropdown: false, loading: false
     };
   },
   methods: {
@@ -218,22 +221,23 @@ export default {
     },
     edit() {
       this.errors = [];
-      let { first_name, last_name, gender, birthday, email } = this.user;
+      let {first_name, last_name, gender, birthday, email} = this.user;
       gender = gender == "Мужской" ? "male" : "female";
+      this.loading = true;
       this.$axios
         .post(
           "/api/user/update",
-          { first_name, last_name, gender, birthday, email },
-          { headers: { Authorization: `Bearer ${this.token}` } }
+          {first_name, last_name, gender, birthday, email},
+          {headers: {Authorization: `Bearer ${this.token}`}}
         )
-        .then(({ data: { user } }) => {
+        .then(({data: {user}}) => {
           user.gender = user.gender == "male" ? "Мужской" : "Женский";
 
           this.$store.commit("account/action", (state) => {
             state.user = Object.assign(state.user, user);
           });
-          (this.user = { ...this.$store.state.account.user }),
-            (this.start_user = { ...this.$store.state.account.user });
+          (this.user = {...this.$store.state.account.user}),
+            (this.start_user = {...this.$store.state.account.user});
           this.errors = [];
           this.editing = false;
         })
@@ -244,7 +248,9 @@ export default {
               .flat();
           }
           this.editing = true;
-        });
+        }).finally(() => {
+        this.loading = false;
+      });
     },
   },
   computed: {
@@ -252,9 +258,9 @@ export default {
       return this.$store.state.account.token;
     },
   },
-  mounted(){
-    this.$store.commit('variables/action', state=>{
-      state.adaptive_navigation = { 
+  mounted() {
+    this.$store.commit('variables/action', state => {
+      state.adaptive_navigation = {
         text: "Профиль",
         slot: 'label',
         info_click: null
@@ -264,8 +270,8 @@ export default {
   watch: {
     "$store.state.account.user": {
       handler() {
-        (this.user = { ...this.$store.state.account.user }),
-          (this.start_user = { ...this.$store.state.account.user }),
+        (this.user = {...this.$store.state.account.user}),
+          (this.start_user = {...this.$store.state.account.user}),
           (this.editing = false);
       },
       deep: true,
@@ -279,16 +285,19 @@ export default {
   &-leave-to {
     opacity: 0;
   }
+
   &-enter-active,
   &-leave-active {
     transition: all 0.3s;
   }
 }
+
 .profile-page {
   &-wrapper {
     justify-content: flex-start;
     background-color: $light_grey;
   }
+
   align-items: flex-start;
 
   &__title {
@@ -302,6 +311,7 @@ export default {
       margin-bottom: 30px;
     }
   }
+
   &__form {
     width: 100%;
     max-width: 100%;
@@ -313,6 +323,7 @@ export default {
     max-width: 730px;
     padding: 30px;
     border-radius: 20px;
+
     &__content {
       width: 100%;
       display: grid;
@@ -325,6 +336,7 @@ export default {
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 15px;
       }
+
       &__gender {
         display: flex;
         align-items: flex-start;
@@ -334,9 +346,11 @@ export default {
         outline: none;
         border: none;
         position: relative;
+
         label {
           width: 100%;
         }
+
         &__dropdown {
           position: relative;
           z-index: 10;
@@ -357,6 +371,7 @@ export default {
           flex-direction: column;
           box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
           padding: 7px 10px;
+
           &__button {
             outline: none;
             border: none;
@@ -373,15 +388,19 @@ export default {
             transition: $transition;
             background-color: $white;
             outline: none;
+
+
             &:active {
               transform: scale(0.98);
             }
+
             &:last-child {
               border: none;
             }
           }
         }
       }
+
       &__input-block {
         &__name {
           font-family: "SF Pro Display";
@@ -391,6 +410,7 @@ export default {
           line-height: 17px;
           margin-bottom: 10px;
         }
+
         &__input {
           background-color: $white;
           width: 100%;
@@ -406,12 +426,15 @@ export default {
           font-weight: 400;
           font-size: 15px;
           line-height: 20px;
+
           &::placeholder {
             color: $extra_dark_grey;
           }
+
           &:disabled {
             background-color: $dark_grey;
           }
+
           &_dropdown {
             cursor: pointer;
             position: relative;
@@ -419,9 +442,11 @@ export default {
             align-items: center;
             justify-content: flex-start;
             flex-direction: row;
+
             &__selected.placeholdered {
               color: $extra_dark_grey;
             }
+
             &__content {
               overflow: hidden;
               position: absolute;
@@ -436,6 +461,7 @@ export default {
               z-index: $z_dropdown;
               box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
               border-radius: 0px 0px 20px 20px;
+
               &__button {
                 text-align: left;
                 width: 100%;
@@ -443,9 +469,11 @@ export default {
                 border: none;
                 padding: 6px 10px;
                 border-bottom: 1px solid $dark_grey;
+
                 &.indexed {
                   background-color: $light_grey;
                 }
+
                 &:last-of-type {
                   padding-bottom: 10px;
                   border: none;
@@ -456,21 +484,40 @@ export default {
         }
       }
     }
+
     &__buttons {
       margin-top: 60px;
+      @media screen and (max-width: $phone) {
+        justify-items: flex-end;
+        align-self: flex-end;
+      }
+
       &__edits {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-direction: row;
+        @media screen and (max-width: $phone) {
+          flex-direction: column;
+
+        }
       }
+
       &__button {
         width: 170px;
+        @media screen and (max-width: $phone) {
+          height: 40px;
+        }
+
         &_decline {
           margin-left: 20px;
+          @media screen and (max-width: $phone) {
+            margin: 10px 0px 0px 0px;
+          }
         }
       }
     }
+
     &__messages {
       display: flex;
       align-items: center;
@@ -478,10 +525,13 @@ export default {
       flex-direction: column;
       width: 100%;
       transition: 0.3s;
+
       &_margined {
         margin-top: 15px;
       }
+
       transition: calc($transition * 2);
+
       .empty {
         margin-top: 0px;
       }

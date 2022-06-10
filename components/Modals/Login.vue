@@ -58,6 +58,7 @@
     <div :class="{
         'login-modal__errors_margined': errors.length,
       }" class="login-modal__errors">
+      <transition name="message" appear>
       <Message
         v-for="error in errors"
         :key="error"
@@ -65,6 +66,7 @@
       >{{ error }}
       </Message
       >
+      </transition>
     </div>
 
   </form>
