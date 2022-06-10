@@ -12,10 +12,10 @@ export default {
         : null;
     },
     final_delivery_price(delivery_price) {
+      if(!delivery_price) delivery_price = 0;
       let products = this.$store.state.cart.products
       let free_order_price = +this.$store.state.cart.partner?.free_order_price
       if (!delivery_price && delivery_price!=0) delivery_price = this.$store.state.cart.partner?.delivery?.price
-      else if (delivery_price == 0) delivery_price = 0;
       if (free_order_price) {
         let summ = 0;
         products.forEach(product => {

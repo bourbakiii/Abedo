@@ -48,9 +48,9 @@
             <NuxtLink :to='`/partners/${cart_partner.id}`' class="sidebar-cart__content__hood__shop-block__image">
               <img
                 v-if="cart_partner.logo"
-                :src="`${$axios.defaults.baseURL}${cart_partner.logo.cart_mini}`"
+                :src="`${$axios.defaults.baseURL}${cart_partner.logo.resized}`"
                 class="sidebar-cart__content__hood__shop-block__image__image"
-              />
+               alt=""/>
             </NuxtLink>
           </div>
         </div>

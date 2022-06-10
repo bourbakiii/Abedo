@@ -8,7 +8,7 @@
       class="item__block"
     >
       <img
-       @click.self="$router.push(`/partners/${partner.id}`)"
+        @click.self="$router.push(`/partners/${partner.id}`)"
         v-if="partner.image.length"
         :src="`${$axios.defaults.baseURL}${partner.image[0].original}`"
         class="item__block__image"
@@ -17,8 +17,8 @@
         @click="$router.push(`/partners/${partner.id}`)"
 
         v-else class="item__block__image_empty" width="295" height="230" viewBox="0 0 295 230" fill="none"
-           xmlns="http://www.w3.org/2000/svg"
-           xmlns:xlink="http://www.w3.org/1999/xlink">
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
         <rect width="295" height="230" rx="20" fill="url(#pattern0)"/>
         <defs>
           <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -42,14 +42,14 @@
           <span
             v-if="true"
             class="item__block__content__icons-icon item__block__content__icons-icon-gift"
-            ><svg
-              class="item__block__content__icons-icon-icon"
-              width="19"
-              height="17"
-              viewBox="0 0 19 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          ><svg
+            class="item__block__content__icons-icon-icon"
+            width="19"
+            height="17"
+            viewBox="0 0 19 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
               <path
                 d="M16.7656 3.98438H14.6873C15.0086 3.56787 15.1994 3.0504 15.1994 2.49023C15.1994 1.11712 14.0538 0 12.6458 0C11.7976 0 11.1722 0.296338 10.6775 0.932576C10.2636 1.46489 9.96103 2.20811 9.58146 3.14716C9.20189 2.20807 8.89927 1.46489 8.48542 0.932576C7.99074 0.296338 7.36531 0 6.51714 0C5.10908 0 3.96354 1.11712 3.96354 2.49023C3.96354 3.0504 4.15431 3.56787 4.47566 3.98438H2.39733C1.5525 3.98438 0.865173 4.65465 0.865173 5.47852V6.47461C0.865173 7.1239 1.29217 7.67749 1.88661 7.88309V15.5059C1.88661 16.3297 2.57394 17 3.41877 17H15.7441C16.589 17 17.2763 16.3297 17.2763 15.5059V7.88309C17.8707 7.67749 18.2977 7.1239 18.2977 6.47461V5.47852C18.2977 4.65465 17.6104 3.98438 16.7656 3.98438ZM10.5189 3.5441C11.3013 1.60843 11.5988 0.996094 12.6458 0.996094C13.4906 0.996094 14.1779 1.66637 14.1779 2.49023C14.1779 3.3141 13.4906 3.98438 12.6458 3.98438H10.3403C10.4029 3.83114 10.4626 3.68362 10.5189 3.5441ZM6.51714 0.996094C7.56415 0.996094 7.86159 1.60843 8.64398 3.5441C8.70036 3.68362 8.76005 3.83114 8.82263 3.98438H6.51714C5.67231 3.98438 4.98498 3.3141 4.98498 2.49023C4.98498 1.66637 5.67231 0.996094 6.51714 0.996094ZM7.53858 16.0039H3.41877C3.13716 16.0039 2.90805 15.7805 2.90805 15.5059V7.96875H7.53858V16.0039ZM7.53858 6.97266H2.39733C2.11572 6.97266 1.88661 6.74923 1.88661 6.47461V5.47852C1.88661 5.20389 2.11572 4.98047 2.39733 4.98047H7.53858V6.97266ZM10.6029 16.0039H8.56002V4.98047C8.66703 4.98047 10.0159 4.98047 10.6029 4.98047V16.0039ZM16.2549 15.5059C16.2549 15.7805 16.0258 16.0039 15.7441 16.0039H11.6243V7.96875H16.2549V15.5059ZM17.2763 6.47461C17.2763 6.74923 17.0472 6.97266 16.7656 6.97266H11.6243V4.98047H16.7656C17.0472 4.98047 17.2763 5.20389 17.2763 5.47852V6.47461Z"
                 fill="white"
@@ -59,7 +59,7 @@
           <span
             v-if="partner.discounts.length"
             class="item__block__content__icons-icon item__block__content__icons-icon-discount"
-            >-5%</span
+          >-5%</span
           >
         </div>
         <div
@@ -71,13 +71,13 @@
             class="item__block__content__delivery-icon item__block__content__delivery-icon-gift"
             :full="`Бесплатно от ${partner.free_order_price} руб.`"
             :class="{ full: partner.free_order_price != null }"
-            ><svg
-              width="18"
-              height="17"
-              viewBox="0 0 18 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          ><svg
+            width="18"
+            height="17"
+            viewBox="0 0 18 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
               <g clip-path="url(#clip0_1962_2061)">
                 <path
                   d="M13.5222 10.1071C12.3105 10.1071 11.3248 11.0684 11.3248 12.25C11.3248 13.4316 12.3105 14.3928 13.5222 14.3928C14.734 14.3928 15.7195 13.4316 15.7195 12.25C15.7195 11.0684 14.7338 10.1071 13.5222 10.1071ZM13.5222 13.3214C12.9162 13.3214 12.4235 12.8409 12.4235 12.25C12.4235 11.6591 12.9162 11.1785 13.5222 11.1785C14.1281 11.1785 14.6209 11.6591 14.6209 12.25C14.6209 12.8409 14.1281 13.3214 13.5222 13.3214Z"
@@ -129,7 +129,7 @@
             </svg>
           </span>
         </div>
-        <div class="item__block__content__logo">
+        <div @click.self="$router.push(`/partners/${partner.id}`)" class="item__block__content__logo">
           <img
             @click="$router.push(`/partners/${partner.id}`)"
             :src="`${$axios.defaults.baseURL}${partner.logo.original}`"
@@ -172,6 +172,7 @@
 </template>
 <script>
 import partnerMixin from "@/mixins/partner.js";
+
 export default {
   mixins: [partnerMixin],
 };
@@ -182,6 +183,7 @@ export default {
   width: 295px;
   text-decoration: none;
   cursor: pointer;
+
   &__block {
     width: 100%;
     height: 230px;
@@ -189,29 +191,33 @@ export default {
     overflow: hidden;
     position: relative;
     z-index: 5;
+
     &:hover & {
       &__image {
         transform: scale(1.1);
       }
     }
+
     &__image {
       position: absolute;
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: $transition;
-      z-index:0;
-    &_empty{
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index:0;
-    }
-      &_overlay{
+      z-index: 0;
+
+      &_empty {
         position: absolute;
         width: 100%;
         height: 100%;
-        z-index:2;
+        z-index: 0;
+      }
+
+      &_overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
         background: linear-gradient(
             360deg,
             rgba(0, 0, 0, 0.8) 0%,
@@ -219,6 +225,7 @@ export default {
         );
       }
     }
+
     &__content {
       display: flex;
       align-items: flex-start;
@@ -238,6 +245,7 @@ export default {
         flex-direction: row;
         margin-bottom: 15px;
         z-index: 2;
+
         &-icon {
           width: 45px;
           height: 45px;
@@ -245,10 +253,12 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
+
           &-gift {
             background-color: $green;
             margin-right: 15px;
           }
+
           &-discount {
             background-color: $red;
             min-width: 45px;
@@ -265,6 +275,7 @@ export default {
           }
         }
       }
+
       &__delivery {
         &-icon {
           width: 45px;
@@ -276,6 +287,7 @@ export default {
           background-color: $darkblue;
           position: relative;
           z-index: 5;
+
           &.full::before {
             position: absolute;
             left: 50%;
@@ -301,6 +313,7 @@ export default {
           }
         }
       }
+
       &__logo {
         width: 100%;
         margin-top: auto;
@@ -319,6 +332,7 @@ export default {
           padding: 5px;
           margin-right: auto;
         }
+
         &-favourite-button {
           width: 45px;
           height: 45px;
@@ -330,20 +344,25 @@ export default {
           justify-content: center;
           transition: all $transition;
           z-index: 4;
+
           svg * {
             transition: $transition;
             fill: $white;
           }
+
           &:hover {
             border-color: $red;
             background-color: $red;
+
             svg * {
               fill: $white;
             }
           }
+
           &.filled {
             border: 1px solid $red;
             background-color: $red;
+
             * {
               fill: $white;
             }
@@ -352,6 +371,7 @@ export default {
       }
     }
   }
+
   &__name {
     font-family: "Montserrat";
     font-style: normal;
@@ -364,6 +384,7 @@ export default {
     width: 100%;
     margin-top: 15px;
   }
+
   &__cuisines {
     margin-top: 10px;
     font-family: "SF Pro Display";

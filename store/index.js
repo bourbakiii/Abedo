@@ -1,7 +1,8 @@
 export default {
   state() {
     return {
-      pages: []
+      pages: [],
+      preview: false,
     }
   }, mutations: {
     action(state, action) {
@@ -20,7 +21,7 @@ export default {
       if (state.account.token) dispatch("account/get");
 
       this.$axios('/api/statics/pages').then(({data: {pages}}) => {
-        this.commit('action', (state)=>state.pages = pages);
+        this.commit('action', (state) => state.pages = pages);
       })
 
 

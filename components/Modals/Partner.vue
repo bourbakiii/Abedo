@@ -25,7 +25,7 @@
     <div class="partner-modal__content">
       <img
         v-if='partner.image.length'
-        :src="`${$axios.defaults.baseURL}${partner.image[0].modal}`"
+        :src="`${$axios.defaults.baseURL}${partner.image[0].original}`"
         class="partner-modal__content__image"
       />
       <div v-if="partner.description" class="partner-modal__content__description">
@@ -84,7 +84,7 @@
           </div>
           <p
             class="partner-modal__content__information__item__content"
-            
+
           >
            {{worktime}}
           </p>
@@ -136,7 +136,7 @@
           </div>
           <p
             class="partner-modal__content__information__item__content"
-            
+
           >
             {{partner.requisites.address}}
           </p>
@@ -176,7 +176,7 @@
           </div>
           <p
             class="partner-modal__content__information__item__content"
-            
+
           >
             +7{{partner.contact_phone}}
           </p>
@@ -227,7 +227,7 @@
             Реквизиты:
           </div>
           <div
-         
+
             class="partner-modal__content__information__item__content__subcontent"
           >
             <div
@@ -241,7 +241,7 @@
               </p>
               <p
                 class="partner-modal__content__information__item__content__subcontent__item__value"
-                
+
               >
                {{partner.requisites.name}}
               </p>
@@ -257,7 +257,7 @@
               </p>
               <p
                 class="partner-modal__content__information__item__content__subcontent__item__value"
-                
+
               >
                 {{partner.requisites.inn}}
               </p>
@@ -273,7 +273,7 @@
               </p>
               <p
                 class="partner-modal__content__information__item__content__subcontent__item__value"
-                
+
               >
                 {{partner.requisites.ogrn}}
               </p>
@@ -289,7 +289,7 @@
               </p>
               <p
                 class="partner-modal__content__information__item__content__subcontent__item__value"
-                
+
               >
                 {{partner.requisites.address}}
               </p>
@@ -308,7 +308,7 @@ export default {
     },
     worktime(){
       let result = "";
-      let days ={ 
+      let days ={
         1:"Пн",
         2:"Вт",
         3:"Ср",

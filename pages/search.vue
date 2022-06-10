@@ -101,7 +101,6 @@ export default {
 
         &__partners {
           margin-bottom: 70px;
-          background-color: red;
         }
 
         &__products {
