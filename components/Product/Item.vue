@@ -319,6 +319,7 @@ export default {
 
     &__add {
       width: 100%;
+      margin-right:0px !important;
     }
 
     &__button_add {
