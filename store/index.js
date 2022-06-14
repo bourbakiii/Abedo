@@ -18,6 +18,9 @@ export default {
       commit("cart/localSet");
       dispatch("cart/refreshPartner");
       commit("account/localSet");
+
+      dispatch("cart/synchronization");
+
       commit("variables/localSet");
       if (state.account.token) dispatch("account/get");
 

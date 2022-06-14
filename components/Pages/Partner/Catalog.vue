@@ -1,7 +1,7 @@
 <template>
   <div class="catalog partner-catalog">
     <h2 class="catalog__title title-extra-normal adaptive-non">
-      Разделы каталога “{{ partner.name }}”
+      Разделы каталога «{{ partner.name }}»
     </h2>
     <div class="catalog__sections adaptive-non">
       <SectionItem

@@ -21,7 +21,6 @@ export const mutations = {
     Vue.delete(state.products, index);
     localStorage.setItem(local_storage_name, JSON.stringify(state));
   }, clear(state) {
-    console.log(1)
     Vue.set(state, "products", []);
     localStorage.setItem(local_storage_name, JSON.stringify(state));
   },
@@ -87,7 +86,6 @@ export const actions = {
       modal_name: 'add_to_cart', message: product.in_cart_message
     });
   }, async refreshPartner(state) {
-    console.log("Send me free")
     if (!state.state.partner) return;
     await this.$axios.get(`/api/shop/${state.state.partner.id}`).then(({data: {shop}}) => {
       state.commit('set_partner', shop);
@@ -113,6 +111,15 @@ export const actions = {
 
       await this.$axios.get(`/api/order/getOrder?${params}`).then(({data: {order}}) => {
         if (state.synchronization_timer == null) {
+
+          ///////
+          //Подставляю новый продукт, а так же удалаю кол-во с полученных продуктов
+          state.state.products.forEach(cart_product => {
+            const index = order.products.findIndex(order_product => cart_product.id === order_product.id);
+            delete order.products[index].count;
+            if (index >= 0) state.commit('action', state => cart_product = Object.assign(cart_product, order.products[index]));
+          });
+          ////
           state.commit('action', state => {
             state.promo.message = null;
             state.promo.success = null;
