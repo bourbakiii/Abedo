@@ -24,7 +24,7 @@
             </g>
             <defs>
               <clipPath id="clip0_1887_4787">
-                <rect width="20" height="20" fill="white" />
+                <rect width="20" height="20" fill="white"/>
               </clipPath>
             </defs>
           </svg>
@@ -37,115 +37,116 @@
           v-model="keyword"
           @input="timerHandler"
         />
-          <button
-            v-if="keyword"
-            @click.prevent="keyword = null"
-            class="search__input-button search__input-button-close"
+        <button
+          v-if="keyword"
+          @click.prevent="keyword = null"
+          class="search__input-button search__input-button-close"
+        >
+          <svg
+            class="search__input-button-icon"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              class="search__input-button-icon"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.89533 10.0005L0.229061 1.33421C-0.0760555 1.02909 -0.0760555 0.534404 0.229061 0.229326C0.534178 -0.0757519 1.02886 -0.075791 1.33394 0.229326L10.0003 8.89565L18.6665 0.229326C18.9716 -0.075791 19.4663 -0.075791 19.7714 0.229326C20.0765 0.534443 20.0765 1.02913 19.7714 1.33421L11.1051 10.0005L19.7714 18.6668C20.0765 18.9719 20.0765 19.4666 19.7714 19.7717C19.6189 19.9242 19.4189 20.0005 19.2189 20.0005C19.019 20.0005 18.8191 19.9242 18.6665 19.7717L10.0003 11.1054L1.33398 19.7717C1.18144 19.9242 0.981482 20.0005 0.781521 20.0005C0.58156 20.0005 0.381639 19.9242 0.229061 19.7717C-0.0760555 19.4666 -0.0760555 18.9719 0.229061 18.6668L8.89533 10.0005Z"
-                fill="#A6A8A8"
-              />
-            </svg>
-          </button>
-          <div
-            class="search__input__dropdown-content push-hover-active"
-            @mouseenter="showResult"
-            v-if="
+            <path
+              d="M8.89533 10.0005L0.229061 1.33421C-0.0760555 1.02909 -0.0760555 0.534404 0.229061 0.229326C0.534178 -0.0757519 1.02886 -0.075791 1.33394 0.229326L10.0003 8.89565L18.6665 0.229326C18.9716 -0.075791 19.4663 -0.075791 19.7714 0.229326C20.0765 0.534443 20.0765 1.02913 19.7714 1.33421L11.1051 10.0005L19.7714 18.6668C20.0765 18.9719 20.0765 19.4666 19.7714 19.7717C19.6189 19.9242 19.4189 20.0005 19.2189 20.0005C19.019 20.0005 18.8191 19.9242 18.6665 19.7717L10.0003 11.1054L1.33398 19.7717C1.18144 19.9242 0.981482 20.0005 0.781521 20.0005C0.58156 20.0005 0.381639 19.9242 0.229061 19.7717C-0.0760555 19.4666 -0.0760555 18.9719 0.229061 18.6668L8.89533 10.0005Z"
+              fill="#A6A8A8"
+            />
+          </svg>
+        </button>
+        <div
+          class="search__input__dropdown-content push-hover-active"
+          @mouseenter="showResult"
+          v-if="
               show_result == true &&
               (founded.partners.length || founded.products.length)
             "
+        >
+          <div
+            class="search__input__dropdown-content__shops"
+            v-if="founded.partners.length"
           >
-            <div
-              class="search__input__dropdown-content__shops"
-              v-if="founded.partners.length"
+            <NuxtLink
+              v-for="partner in founded.partners"
+              :key="`founded-partner-${partner.id}`"
+              :to="`/partners/${partner.id}`"
+              class="search__input__dropdown-content__shops-shop"
             >
-              <NuxtLink
-                v-for="partner in founded.partners"
-                :key="`founded-partner-${partner.id}`"
-                :to="`/partners/${partner.id}`"
-                class="search__input__dropdown-content__shops-shop"
-              >
-                <img
-                  v-if="partner.image.length"
-                  :src="`${$axios.defaults.baseURL}${partner.image[0].desktop}`"
-                  class="search__input__dropdown-content__shops-shop-image"
-                />
-                <p class="search__input__dropdown-content__shops-shop-name">
-                  {{ partner.name }}
-                </p>
-              </NuxtLink>
-            </div>
-            <div
-              class="search__input__dropdown-content__products"
-              v-if="founded.products.length"
-            >
-              <NuxtLink
-                v-for="product in founded.products"
-                :key="`founded-product-${product.id}`"
-                :to="`/product/${product.id}`"
-                class="search__input__dropdown-content__products-product"
-              >
-                <img
-                  v-if="product.image"
-                  :src="`${$axios.defaults.baseURL}${product.image.cart_mini}`"
-                  class="search__input__dropdown-content__products-product-image"
-                />
-                <div
-                  class="search__input__dropdown-content__products-product-content"
-                >
-                  <div
-                    class="search__input__dropdown-content__products-product-content-top"
-                  >
-                    <p
-                      class="search__input__dropdown-content__products-product-content-top-name"
-                    >
-                      {{ product.name }}
-                    </p>
-                    <p
-                      class="search__input__dropdown-content__products-product-content-top-shop"
-                    >
-                      / {{ product.section.shop.name }}
-                    </p>
-                  </div>
-                  <div
-                    class="search__input__dropdown-content__products-product-content-bottom"
-                  >
-                    <p
-                      class="search__input__dropdown-content__products-product-content-bottom-price"
-                    >
-                      {{ product.price }}руб.
-                    </p>
-                    <p
-                      class="search__input__dropdown-content__products-product-content-bottom-weight"
-                    >
-                      {{ product.weight }}{{ product.weight_unit.short_name }}
-                    </p>
-                  </div>
-                </div>
-              </NuxtLink>
-            </div>
-            <ButtonStandart
-              @click.native="watchAll"
-              class="search__input__dropdown-content__watch-all-button filled"
-              >Cмотреть все</ButtonStandart
-            >
+              <img
+                v-if="partner.logo"
+                :src="`${$axios.defaults.baseURL}${partner.logo.original}`"
+                class="search__input__dropdown-content__shops-shop-image"
+              />
+              <p class="search__input__dropdown-content__shops-shop-name">
+                {{ partner.name }}
+              </p>
+            </NuxtLink>
           </div>
           <div
-            v-else-if="show_result == true"
-            @mouseenter="showResult"
-            class="search__input__dropdown-content push-hover-active"
+            class="search__input__dropdown-content__products"
+            v-if="founded.products.length"
           >
-            Ничего не найдено
+            <NuxtLink
+              v-for="product in founded.products"
+              :key="`founded-product-${product.id}`"
+              :to="`/product/${product.id}`"
+              class="search__input__dropdown-content__products-product"
+            >
+              <img
+                v-if="product.image"
+                :src="`${$axios.defaults.baseURL}${product.image.cart_mini}`"
+                class="search__input__dropdown-content__products-product-image"
+              />
+              <div
+                class="search__input__dropdown-content__products-product-content"
+              >
+                <div
+                  class="search__input__dropdown-content__products-product-content-top"
+                >
+                  <p
+                    class="search__input__dropdown-content__products-product-content-top-name"
+                  >
+                    {{ product.name }}
+                  </p>
+                  <p
+                    class="search__input__dropdown-content__products-product-content-top-shop"
+                  >
+                    / {{ product.section.shop.name }}
+                  </p>
+                </div>
+                <div
+                  class="search__input__dropdown-content__products-product-content-bottom"
+                >
+                  <p
+                    class="search__input__dropdown-content__products-product-content-bottom-price"
+                  >
+                    {{ product.price }}руб.
+                  </p>
+                  <p
+                    class="search__input__dropdown-content__products-product-content-bottom-weight"
+                  >
+                    {{ product.weight }}{{ product.weight_unit.short_name }}
+                  </p>
+                </div>
+              </div>
+            </NuxtLink>
           </div>
+          <ButtonStandart
+            @click.native="watchAll"
+            class="search__input__dropdown-content__watch-all-button filled"
+          >Cмотреть все
+          </ButtonStandart
+          >
+        </div>
+        <div
+          v-else-if="show_result == true"
+          @mouseenter="showResult"
+          class="search__input__dropdown-content push-hover-active"
+        >
+          Ничего не найдено
+        </div>
       </form>
 
       <div class="search__categories" v-if="categories.length">
@@ -180,7 +181,8 @@ export default {
       },
     };
   },
-  async fetch() {},
+  async fetch() {
+  },
   methods: {
     search() {
       this.show_result = false;
@@ -191,7 +193,7 @@ export default {
               keyword: this.keyword ?? "",
             },
           })
-          .then(({ data: { result } }) => {
+          .then(({data: {result}}) => {
             this.showResult();
 
             this.founded = {
@@ -249,13 +251,16 @@ export default {
   height: 100%;
   flex-grow: 1;
   max-width: $maxwidth;
+
   &-wrapper {
     background-color: $dark_grey;
     padding: 70px 10px !important;
   }
+
   .title {
     margin-bottom: 40px;
   }
+
   &__input {
     width: 730px;
     height: 60px;
@@ -277,11 +282,13 @@ export default {
       background-color: $white;
       border-radius: 0px 0px 10px 10px;
       padding: 10px 20px 20px 20px;
+
       &__shops {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         border-bottom: 1px solid $dark_grey;
         padding-bottom: 10px;
+
         &-shop {
           display: flex;
           align-items: center;
@@ -289,13 +296,16 @@ export default {
           flex-direction: column;
           text-decoration: none;
           overflow: hidden;
+
           &-image {
             background-color: $blue_grey;
             width: 120px;
             height: 60px;
             object-fit: contain;
             margin-bottom: 9px;
+            padding: 8px 10px;
           }
+
           &-name {
             font-family: "SF Pro Display";
             font-style: normal;
@@ -309,12 +319,14 @@ export default {
           }
         }
       }
+
       &__products {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-direction: column;
+
         &-product {
           width: 100%;
           display: flex;
@@ -325,6 +337,7 @@ export default {
           padding: 10px 0px;
           border-bottom: 1px solid $dark_grey;
           text-decoration: none;
+
           &-image {
             width: 50px;
             height: 40px;
@@ -334,6 +347,7 @@ export default {
             flex-shrink: 0;
             flex-grow: 0;
           }
+
           &-content {
             display: flex;
             align-items: center;
@@ -341,6 +355,7 @@ export default {
             flex-direction: column;
             flex-grow: 1;
             overflow: hidden;
+
             &-top {
               display: flex;
               align-items: center;
@@ -348,6 +363,7 @@ export default {
               flex-direction: row;
               width: 100%;
               margin-bottom: 4px;
+
               &-name {
                 font-family: "SF Pro Display";
                 font-style: normal;
@@ -361,6 +377,7 @@ export default {
                 overflow: hidden;
                 text-overflow: ellipsis;
               }
+
               &-shop {
                 font-family: "SF Pro Display";
                 font-style: normal;
@@ -375,12 +392,14 @@ export default {
                 text-overflow: ellipsis;
               }
             }
+
             &-bottom {
               display: flex;
               align-items: center;
               justify-content: flex-start;
               flex-direction: row;
               width: 100%;
+
               &-price {
                 font-family: "SF Pro Display";
                 font-style: normal;
@@ -394,6 +413,7 @@ export default {
                 overflow: hidden;
                 text-overflow: ellipsis;
               }
+
               &-weight {
                 font-family: "SF Pro Display";
                 font-style: normal;
@@ -411,6 +431,7 @@ export default {
           }
         }
       }
+
       &__watch-all-button {
         width: 145px;
         height: 32px;
@@ -419,16 +440,20 @@ export default {
         text-transform: none;
       }
     }
+
     &-button {
       outline: none;
       border: none;
       background-color: transparent;
       margin: 0px 20px;
+
       &-close {
         margin-left: 0px 8px !important;
       }
+
       transition: $transition;
     }
+
     &-input {
       height: 100%;
       flex-grow: 1;
@@ -443,6 +468,7 @@ export default {
       border: none;
       overflow: hidden;
       border-radius: 0px 50px 50px 0px;
+
       &::placeholder {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -454,6 +480,7 @@ export default {
       }
     }
   }
+
   &__categories {
     width: 100%;
     max-width: 100%;

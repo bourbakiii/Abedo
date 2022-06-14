@@ -2,20 +2,20 @@
   <div class="founded-products">
     <h1 class="founded-products__title title-normal">Найденные позиции меню</h1>
     <div class="founded-products__content content">
-      <div class="founded-products__content__item">
-        <NuxtLink :to='`/partners/${partner.id}`' class="founded-products__content__item__partner">
+      <div v-for="block in blocks" class="founded-products__content__item">
+        <NuxtLink :to='`/partners/${block.partner.id}`' class="founded-products__content__item__partner">
           <img
-            v-if="partner.image.length"
-            :src="`${$axios.defaults.baseURL}${partner.image[0].original}`"
+            v-if="block.partner.image.length"
+            :src="`${$axios.defaults.baseURL}${block.partner.image[0].original}`"
             class="founded-products__content__item__partner__image"
           />
           <p
             class="founded-products__content__item__partner__name"
 
           >
-            {{ partner.name }}
+            {{ block.partner.name }}
           </p>
-          <div v-if='+partner.rate.shop_last_order_avg_rating>=0'
+          <div v-if='block.partner.rate && +block.partner.rate.shop_last_order_avg_rating>=0'
                class="founded-products__content__item__partner__rating">
             <svg
               class="founded-products__content__item__partner__rating__icon"
@@ -34,13 +34,13 @@
               Рейтинг:
             </p>
             <p class="founded-products__content__item__partner__rating__value">
-              {{ partner.rate.shop_last_order_avg_rating }}
+              {{ block.partner.rate.shop_last_order_avg_rating }}
             </p>
           </div>
         </NuxtLink>
         <div class="founded-products__content__item__products">
           <ProductSmall
-            v-for="product in products"
+            v-for="product in block.products"
             :key="product.id"
             :product="product"
             class="founded-products__content__item__products__item"
@@ -55,6 +55,23 @@
 export default {
   props: {
     products: [],
+  },
+  data() {
+    return {
+      blocks: []
+    }
+  },
+  created() {
+    const all_partners_ids = new Set(this.products.map(el => el.section.shop.id));
+
+
+    for (let id of all_partners_ids) {
+      let partner_products = this.products.filter(el => el.section.shop.id === id);
+      this.blocks.push({
+        partner: partner_products[0].section.shop,
+        products: partner_products
+      });
+    }
   },
   computed: {
     partner() {
@@ -99,10 +116,13 @@ export default {
       justify-content: flex-start;
       flex-direction: column;
       width: 100%;
-      padding: 30px 0px;
+      padding: 30px 0;
       border-radius: 20px;
       background-color: $white;
-
+      margin-bottom: 30px;
+      &:last-of-type{
+        margin-bottom: 0;
+      }
       &__partner {
         display: flex;
         align-items: center;
