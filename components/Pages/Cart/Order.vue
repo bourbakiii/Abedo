@@ -429,11 +429,6 @@ export default {
     with_gifts() {
       return Boolean(this.$store.state.cart.gifts.length);
     },
-    addresses_names() {
-      return (this.$store.state.account?.user.addresses ?? []).map(
-        (el) => el.name
-      );
-    },
     addresses() {
       return this.$store.state.account?.user.addresses ?? [];
     },
