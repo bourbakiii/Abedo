@@ -181,8 +181,6 @@ export default {
       },
     };
   },
-  async fetch() {
-  },
   methods: {
     search() {
       this.show_result = false;
