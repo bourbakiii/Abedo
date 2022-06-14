@@ -91,7 +91,7 @@ export default {
   created() {
     this.$store.commit('action', state => {
       try {
-        console.log(Boolean(JSON.parse(this.$route.query.preview || false)));
+        // console.log(Boolean(JSON.parse(this.$route.query.preview || false)));
         state.preview = Boolean(JSON.parse(this.$route.query.preview || false));
       } catch (error) {
         this.$nuxt.error({statusCode: 404, message: "Ошибка в поле предпросмотра"});

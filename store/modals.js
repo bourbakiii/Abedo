@@ -31,7 +31,7 @@ export const mutations = {
     action(state);
   },
   open(state, props) {
-    console.warn("OPEN");
+    // console.warn("OPEN");
     for (let modal_key in state) state[modal_key].show = false;
     state[props.modal_name].show = true;
     document.lastChild.classList.add("html_overflow");
@@ -60,7 +60,7 @@ export const mutations = {
     }
   },
   close(state, props = {modal_name: null}) {
-    console.warn("CLOSE");
+    // console.warn("CLOSE");
 
     for (let modal_key in state) state[modal_key].show = false;
     document.lastChild.classList.remove("html_overflow");

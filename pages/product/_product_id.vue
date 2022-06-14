@@ -392,7 +392,7 @@ export default {
       if (this.product.more_images) {
         to_return.push(...this.product.more_images);
       }
-      console.log(to_return);
+      // console.log(to_return);
       return to_return;
     }
   }

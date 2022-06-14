@@ -147,17 +147,16 @@
       </div>
       <div
         class="order__delivery__prices"
-        v-if="cart_partner.delivery && (delivery_price || door_delivery_price)"
+        v-if="parsed_delivery_text!==null || door_delivery_price"
       >
-
-        <div class="order__delivery__prices__item" v-if="delivery_price">
+        <div class="order__delivery__prices__item" v-if="parsed_delivery_text!==null">
           <div class="order__delivery__prices__item__name-block">
             <p class="order__delivery__prices__item__name">
               Стоимость доставки
             </p>
           </div>
           <p class="order__delivery__prices__item__price">
-            {{ final_delivery_price_text(delivery_price) }}
+            {{ parsed_delivery_text }}
           </p>
         </div>
         <label
@@ -297,24 +296,10 @@ export default {
       is_cashless_payment: false,
       door_delivery: false,
       delivery_price: +this.$store.state.cart?.partner?.delivery?.price,
-      door_delivery_price: null,
+      door_delivery_price: +this.$store.state.cart?.partner?.delivery?.door_delivery_price || null,
       show_dropdown: false,
       self_get: false,
     };
-  },
-  fetchOnServer: false,
-  fetch() {
-    if (!this.$store.state.cart.partner.id) return;
-    this.$axios
-      .get("/api/shops/delivery", {
-        params: {
-          shop_id: this.$store.state.cart.partner.id,
-        },
-      })
-      .then(({data: {delivery}}) => {
-        this.delivery_price = delivery.delivery_price;
-        this.door_delivery_price = delivery.door_delivery_price;
-      });
   },
   methods: {
     enableSelfGet() {
@@ -425,17 +410,11 @@ export default {
   },
   computed: {
     total_order_price() {
-      let summ =
-        +this.$store.getters["cart/total_price"] +
-        +this.final_delivery_price(this.self_get ? 0 : +this.delivery_price) +
-        +(this.door_delivery ? this.door_delivery_price : 0);
+      let summ = +this.$store.getters["cart/total_price"] + (this.self_get ? 0 : +this.final_delivery_price) + (this.door_delivery ? this.door_delivery_price : 0);
       return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
     total_order_discount_price() {
-      let summ =
-        +this.$store.getters["cart/total_discount_price"] +
-        +this.final_delivery_price(this.self_get ? 0 : +this.delivery_price) +
-        +(this.door_delivery ? this.door_delivery_price : 0);
+      let summ = +this.$store.getters["cart/total_discount_price"] + (this.self_get ? 0 : +this.final_delivery_price) + (this.door_delivery ? this.door_delivery_price : 0);
       return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
     cart_products() {
@@ -493,9 +472,6 @@ export default {
       else document.removeEventListener("click", dropdownAddressClick);
     },
     self_get(value) {
-      console.log("Эта функция вызывается");
-      console.log(value);
-      console.log(this._isMounted);
       localStorage.setItem("self_get", JSON.stringify(this.self_get));
     },
   },

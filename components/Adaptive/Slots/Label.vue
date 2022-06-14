@@ -1,7 +1,7 @@
 <template>
   <div class="navigation-slot navigation-slot-label">
+    <button  @click="$router.go(-1)"  class="navigation-slot-label__back__overlay"></button>
     <svg
-      @click="$router.go(-1)"
       class="navigation-slot-label__back"
       width="12"
       height="18"
@@ -134,8 +134,19 @@ export default {
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+  position: relative;
   &__back{
     flex-shrink: 0;
+    &__overlay{
+      position: absolute;
+      top: 50%;
+      left:-20px;
+      height:100%;
+      width:80px;
+      transform: translateY(-50%);
+      z-index: 2;
+      opacity: 0;
+    }
   }
   &__text {
     width: 100%;

@@ -96,7 +96,7 @@
               >
                 <img
                   v-if="product.image"
-                  :src="`${$axios.defaults.baseURL}${product.image.mobile}`"
+                  :src="`${$axios.defaults.baseURL}${product.image.cart_mini}`"
                   class="search__input__dropdown-content__products-product-image"
                 />
                 <div

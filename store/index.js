@@ -15,9 +15,10 @@ export default {
       });
 
     }, clientHook({state, dispatch, commit}) {
-      commit("cart/local_set");
-      commit("account/local_set");
-      commit("variables/local_set");
+      commit("cart/localSet");
+      dispatch("cart/refreshPartner");
+      commit("account/localSet");
+      commit("variables/localSet");
       if (state.account.token) dispatch("account/get");
 
       this.$axios('/api/statics/pages').then(({data: {pages}}) => {

@@ -13,7 +13,7 @@ export const mutations = {
     action(state);
     localStorage.setItem('variables', JSON.stringify(state));
   },
-  local_set(state) {
+  localSet(state) {
     const local_data = JSON.parse(localStorage.getItem('variables')) ??  {
       navigation_transition_to: 100,
       navigation_transition_back: 60,

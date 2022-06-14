@@ -21,10 +21,10 @@ export const mutations = {
     Vue.delete(state.products, index);
     localStorage.setItem(local_storage_name, JSON.stringify(state));
   }, clear(state) {
+    console.log(1)
     Vue.set(state, "products", []);
     localStorage.setItem(local_storage_name, JSON.stringify(state));
   },
-
 
   clearPromo(state) {
     state.promo = Object.assign(state.promo, {
@@ -34,7 +34,7 @@ export const mutations = {
   }, set_partner(state, partner) {
     Vue.set(state, 'partner', partner);
     localStorage.setItem(local_storage_name, JSON.stringify(state));
-  }, local_set(state) {
+  }, localSet(state) {
     const local_data = JSON.parse(localStorage.getItem(local_storage_name) ?? null);
     if (local_data) {
       state.partner = local_data.partner;
@@ -51,8 +51,7 @@ export const actions = {
     Vue.set(product, "count", product.min_count);
     if (!+state.state?.partner?.id || !state.state.products.length) state.dispatch("change_shop", {
       product, partner
-    });
-    else if (+state.state?.partner?.id === +partner.id) {
+    }); else if (+state.state?.partner?.id === +partner.id) {
       state.commit('set_partner', partner);
       state.commit('set', {index: state.state.products.length, product})
       state.dispatch('checkForAInCartMessage', product);
@@ -66,8 +65,7 @@ export const actions = {
 
   }, decrease(state, product) {
     state.commit("action", () => product.count--);
-    if (product.count < product.min_count) state.commit("remove", state.state.products.findIndex(el => +el.id == +product.id));
-    else state.commit('set', {
+    if (product.count < product.min_count) state.commit("remove", state.state.products.findIndex(el => +el.id == +product.id)); else state.commit('set', {
       index: state.state.products.findIndex(el => +el.id == +product.id), product
     });
     state.dispatch("synchronization");
@@ -84,15 +82,18 @@ export const actions = {
     state.commit("set_partner", partner);
     state.dispatch("synchronization");
 
-  },
-  checkForAInCartMessage(state,product) {
-    if (product.in_cart_message)
-      this.commit('modals/open', {
-        modal_name: 'add_to_cart',
-        message: product.in_cart_message
-      });
-  },
-  async synchronization(state) {
+  }, checkForAInCartMessage(state, product) {
+    if (product.in_cart_message) this.commit('modals/open', {
+      modal_name: 'add_to_cart', message: product.in_cart_message
+    });
+  }, async refreshPartner(state) {
+    console.log("Send me free")
+    if (!state.state.partner) return;
+    await this.$axios.get(`/api/shop/${state.state.partner.id}`).then(({data: {shop}}) => {
+      state.commit('set_partner', shop);
+    })
+
+  }, async synchronization(state) {
     const sync = async () => {
 
       const {promo, products, partner} = state.state;
@@ -121,9 +122,7 @@ export const actions = {
               state.promo.discount = order?.promoDiscount || 0;
               state.promo.message = 'Промокод применен';
             }
-            if (order.gifts)
-              state.gifts = order.gifts
-            else state.gifts = [];
+            if (order.gifts) state.gifts = order.gifts; else state.gifts = [];
           });
         }
       }).catch(error => {
@@ -135,7 +134,6 @@ export const actions = {
         }
         state.gifts = [];
       }).finally(() => {
-        console.log('раз раз раз эь')
         state.commit('action', state => {
           state.promo.loading = false;
         });

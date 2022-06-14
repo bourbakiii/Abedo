@@ -15,8 +15,8 @@
           :class="{ befored: !stock.shop.image.length }"
         >
           <img
-            v-if="stock.shop.image.length"
-            :src="`${$axios.defaults.baseURL}${stock.shop.image[0].resized}`"
+            v-if="stock.shop.image"
+            :src="`${$axios.defaults.baseURL}${stock.image.resized}`"
             class="stock__content__hood__logo"
           />
           <p class="stock__content__hood__name">

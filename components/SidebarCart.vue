@@ -50,7 +50,7 @@
                 v-if="cart_partner.logo"
                 :src="`${$axios.defaults.baseURL}${cart_partner.logo.resized}`"
                 class="sidebar-cart__content__hood__shop-block__image__image"
-               alt=""/>
+                alt=""/>
             </NuxtLink>
           </div>
         </div>
@@ -68,7 +68,7 @@
           />
         </div>
         <div
-          v-if="cart_partner.delivery && cart_partner.delivery.price"
+          v-if="parsed_delivery_text!=null"
           class="sidebar-cart__content__row sidebar-cart__content__row_delivery"
         >
           <p
@@ -79,7 +79,7 @@
           <p
             class="sidebar-cart__content__row__value sidebar-cart__content__row_delivery__value"
           >
-            {{ final_delivery_price_text() }}
+            {{ parsed_delivery_text }}
           </p>
         </div>
         <div
@@ -129,8 +129,8 @@ export default {
     total_price() {
 
       let summ =
-        this.$store.getters["cart/total_discount_price"] +
-        this.final_delivery_price();
+        this.$store.getters["cart/total_discount_price"]
+      // + this.final_delivery_price();
       return summ % 1 == 0 ? summ : summ.toFixed(2);
     },
   },

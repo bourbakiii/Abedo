@@ -17,7 +17,7 @@ export const mutations = {
             state.favourites = [];
         localStorage.setItem('account', JSON.stringify(state));
     },
-    local_set(state) {
+    localSet(state) {
         const local_data = JSON.parse(localStorage.getItem('account') ?? null);
         if (local_data) for (const key in state) state[key] = local_data[key] ?? null
     }
