@@ -117,7 +117,6 @@ export default {
       &__image {
         width: 30px;
         height: 30px;
-        object-fit: contain;
         margin-right: 13px;
         flex-shrink: 0;
         border-radius: 90px;

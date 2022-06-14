@@ -173,6 +173,7 @@
             Фильтры
           </p>
         </button>
+        1
         <transition name="opacity">
           <CategorySidebarAdaptive
             v-click-outside="hideCategories"
@@ -180,6 +181,7 @@
             class="partners-page__top_adaptive__dropdown"
           />
         </transition>
+        2
       </div>
       <transition name="filter">
         <Filters

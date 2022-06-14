@@ -29,9 +29,9 @@
         class="partner-modal__content__image"
       />
       <div v-if="partner.description" class="partner-modal__content__description">
-        <p class="partner-modal__content__description__pre">
-          Описание ресторана “{{partner.name}}”
-        </p>
+<!--        <p class="partner-modal__content__description__pre">-->
+<!--          Описание ресторана “{{partner.name}}”-->
+<!--        </p>-->
         <p class="partner-modal__content__description__text" >
           {{partner.description}}
         </p>

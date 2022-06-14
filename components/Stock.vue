@@ -15,8 +15,8 @@
           :class="{ befored: !stock.shop.image.length }"
         >
           <img
-            v-if="stock.shop.image"
-            :src="`${$axios.defaults.baseURL}${stock.image.resized}`"
+            v-if="stock.shop.logo"
+            :src="`${$axios.defaults.baseURL}${stock.shop.logo.resized}`"
             class="stock__content__hood__logo"
           />
           <p class="stock__content__hood__name">
@@ -35,63 +35,7 @@ export default {
   props: {
     stock: {
       required: true,
-      default() {
-        return {
-          id: 1,
-          shop_id: 1,
-          title: "Всем по пицце",
-          image: {
-            desktop: "/storage/images/4b383868425ee2df2f67f3f60a01d43a.jpeg",
-            mobile: "/storage/images/6c8be4c41859abaf2f8eb9ded0f9cef4.jpeg",
-            small: "/storage/images/e9a8f132c57dad974d5efdbabacd47a0.jpeg",
-            original: "/storage/images/199d97b6297dca9ae1ec16f066d87325.jpeg",
-          },
-          created_at: "29.03.2021 08:34",
-          updated_at: "29.03.2021 08:34",
-          shop: {
-            id: 1,
-            name: "Лимончелло",
-            image: [
-              {
-                desktop:
-                  "/storage/images/9c6a55be47da6a16a38919c51297b889.jpeg",
-                mobile: "/storage/images/fb3e69c013c03077699569d5771fd3b8.jpeg",
-                modal: "/storage/images/1634840abae0817f20a0cb29905ecf52.jpeg",
-                small: "/storage/images/290eae09bf1f0208d4380e9ce316de6d.jpeg",
-                original:
-                  "/storage/images/4e80b64ea3a25c03c888482580fd7f00.jpeg",
-              },
-            ],
-            logo: {
-              detail: "/storage/images/d1eb65c4efc91fb8a031488984332b31.png",
-              desktop: "/storage/images/1989383073f2fdaa3c7229f643fcd020.png",
-              search_logo:
-                "/storage/images/efa0991efb0cbfdc74882ac58ddab35c.png",
-              cart_mini: "/storage/images/c5f0a0100fac7fd0362f3731f7db4cbf.png",
-              cart_detail_mini:
-                "/storage/images/d6d1049dd47d802906bc6b1c9536699b.png",
-              small: "/storage/images/4b5d28d346e491458ac64b968d04f1cc.png",
-              original: "/storage/images/06ef79f1ecf04567982409d01914dddf.png",
-            },
-            city: "Владикавказ",
-            street: "Пушкинская",
-            house: "76/2",
-            latitude: "43.039134",
-            longitude: "44.699118",
-            delivery_by_shop: 1,
-            free_order_price: 1000,
-            contact_phone: "9992344323",
-            description:
-              "фывфы вфы вфы вфыв фы вфы вфы вфыв фыв фыв фыв фыв фыв фы вфыв фы вфы вфыв фыв фыв фы вфы вфыв фыs",
-            tags: null,
-            is_active: 1,
-            is_work_now: 0,
-            created_at: null,
-            updated_at: "2022-04-29T10:04:49.000000Z",
-            is_favourite: false,
-          },
-        };
-      },
+
     },
   },
 };
@@ -123,6 +67,7 @@ export default {
     width: 100%;
     height: 134px;
   }
+
   &__content {
     position: absolute;
     top: 0px;
@@ -138,6 +83,7 @@ export default {
     justify-content: space-between;
     flex-direction: column;
     cursor: pointer;
+
     &__hood {
       display: flex;
       align-items: center;
@@ -150,10 +96,12 @@ export default {
       @media screen and (max-width: $tablet) {
         height: 40px;
       }
+
       &.befored {
         align-items: flex-start;
         justify-content: flex-start;
         height: 35px;
+
         &::before {
           position: absolute;
           bottom: 0px;
@@ -166,6 +114,7 @@ export default {
           z-index: 2;
         }
       }
+
       &__logo {
         height: 100%;
         width: 100px;
@@ -180,6 +129,7 @@ export default {
         padding: 5px;
         flex-shrink: 0;
       }
+
       &__name {
         flex-grow: 1;
         color: $white;

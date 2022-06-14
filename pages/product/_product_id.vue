@@ -18,7 +18,7 @@
           >
             {{ product.name }}
           </h1>
-          <div class="product-page__over__content__main__prices">
+          <div class="product-page__over__content__main__prices adaptive">
             <p class="product-page__over__content__main__prices__price"
                :class="{red:product.discount ||  product.section.discount}">{{ product_price_with_discount }}₽</p>
             <p class="product-page__over__content__main__prices__weight"> / {{
