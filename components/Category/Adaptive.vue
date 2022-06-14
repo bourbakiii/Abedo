@@ -49,7 +49,7 @@ export default {
     position: absolute;
     top: 0px;
     right: 0px;
-    width: 75%;
+    width: 80%;
     height: 100%;
     object-fit: cover;
     z-index: 0;

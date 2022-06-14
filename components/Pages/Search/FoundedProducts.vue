@@ -103,7 +103,6 @@ export default {
   }
 
   &__content {
-    border: 1px solid $dark_grey;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -111,6 +110,8 @@ export default {
     width: 100%;
 
     &__item {
+      border: 1px solid $dark_grey;
+
       display: flex;
       align-items: center;
       justify-content: flex-start;
