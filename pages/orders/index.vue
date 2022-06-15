@@ -1,7 +1,7 @@
 <template>
   <div class="page orders-page wrapper">
     <div class="orders-page__content content">
-      <Breadcrumbs class="orders-page__content__breadcrumbs adaptive-non"/>
+      <Breadcrumbs class="orders-page__content__breadcrumbs adaptive-non"  :way="[{name:'История заказов', link:`/orders`}]"/>
       <div class="orders-page__content__orders">
         <h1 class="orders-page__content__orders__title title-normal adaptive-non">
           Список заказов

@@ -6,7 +6,7 @@
                        class="partners-page__advertise partners-page__advertise_big"
                        :count="ads.length" v-if="ads.length"/>
       </client-only>
-      <Breadcrumbs class="partners-page__breadcrumbs adaptive-non"/>
+      <Breadcrumbs class="partners-page__breadcrumbs adaptive-non"  :way="[{name:'Партнеры', link:`/partners`}]"/>
       <div class="partners-page__top adaptive-non">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
 

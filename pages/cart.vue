@@ -1,7 +1,7 @@
 <template>
   <div class="page cart-page wrapper">
     <div class="cart-page__content-wrapper content">
-      <Breadcrumbs class="cart-page__breadcrumbs adaptive-non" />
+      <Breadcrumbs class="cart-page__breadcrumbs adaptive-non"  :way="[{name:'Корзина', link:`/cart`}]" />
       <div class="cart-page__contents">
 
             <client-only>

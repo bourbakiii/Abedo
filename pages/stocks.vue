@@ -1,7 +1,7 @@
 <template>
   <div class="page stocks-page wrapper">
     <div class="stocks-page__content content">
-      <Breadcrumbs class="stocks-page__content__breadcrumbs adaptive-non" />
+      <Breadcrumbs class="stocks-page__content__breadcrumbs adaptive-non"  :way="[{name:'Акции', link:`/stocks`}]" />
       <h1 class="stocks-page__content__title title-normal">Список партнеров</h1>
       <div class="stocks-page__content__content">
         <Stock
@@ -32,7 +32,7 @@ export default {
     },
     mounted(){
       this.$store.commit('variables/action', state=>{
-      state.adaptive_navigation = { 
+      state.adaptive_navigation = {
         text: "Акции",
         slot: 'label',
         info_click: null

@@ -1,7 +1,7 @@
 <template>
   <div class="page favourites-page wrapper">
     <div class="favourites-page__content content">
-      <Breadcrumbs class="favourites-page__content__breadcrumbs adaptive-non"/>
+      <Breadcrumbs class="favourites-page__content__breadcrumbs adaptive-non"  :way="[{name:'Избранное', link:`/favourites`}]"/>
       <h1 class="favourites-page__content__title title-normal adaptive-non">
         Избранные заведения
       </h1>

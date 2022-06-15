@@ -1,8 +1,9 @@
 <template>
   <div class="page static-page wrapper">
     <div class="static-page__content content">
-      <Breadcrumbs class="static-page__content__breadcrumbs adaptive-non"/>
-      <h1 class="static-page__content__title title-normal">{{page.title}}</h1>
+      <Breadcrumbs class="static-page__content__breadcrumbs adaptive-non"
+                   :way="[{name:'Информация', link:``},{name:page.title, link:`/statics/${page.id}`}]"/>
+      <h1 class="static-page__content__title title-normal">{{ page.title }}</h1>
       <div v-html="page.content" class="static-page__content__content">
 
       </div>
@@ -54,9 +55,10 @@ export default {
         margin-top: 20px;
       }
     }
-    &__content{
+
+    &__content {
       text-align: left;
-      align-self:flex-start;
+      align-self: flex-start;
       font-family: "SF Pro Display";
       font-style: normal;
       font-weight: 400;

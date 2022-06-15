@@ -1,7 +1,7 @@
 <template>
   <div class="page profile-page-wrapper wrapper">
     <div class="profile-page content">
-      <Breadcrumbs class="profile-page__breadcrumbs adaptive-non"/>
+      <Breadcrumbs class="profile-page__breadcrumbs adaptive-non"  :way="[{name:'Персональная информация', link:`/profile`}]"/>
       <h1 class="profile-page__title title-normal">Персональная информация</h1>
       <form @submit.prevent="edit" class="profile-page__form">
         <div class="profile-page__form__content">

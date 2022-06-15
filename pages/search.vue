@@ -1,7 +1,7 @@
 <template>
   <div class="page search-page wrapper">
     <div class="search-page__content content">
-      <Breadcrumbs class="search-page__content__breadcrumbs adaptive-non"/>
+      <Breadcrumbs class="search-page__content__breadcrumbs adaptive-non"  :way="[{name:'Поиск', link:`/search`}]"/>
       <PagesSearchInput @changeLoading="changeLoading" @search='setFounded' class="search-page__content__search-input"/>
       <PagesSearchByCategories
         v-if="categories.length"

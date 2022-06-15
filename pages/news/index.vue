@@ -1,7 +1,7 @@
 <template>
   <div class="page news-page__wrapper wrapper">
     <div class="news-page content">
-      <Breadcrumbs class="news-page__breadcrumbs adaptive-non"/>
+      <Breadcrumbs class="news-page__breadcrumbs adaptive-non" :way="[{name:'Новости', link:`/news`}]"/>
       <h1 class="news-page__title adaptive-non">Новости</h1>
       <div class="news-page__content" v-if="news.length">
         <NuxtLink class="news-page__content__link" :to="`/news/${item.id}`" v-for="item in news" :key='item.id'>
@@ -14,7 +14,7 @@
       <p class="news-page__content_empty" v-else>
         Кажется, новостей пока нет
       </p>
-<!--      <Loader v-else-if="loading" class="news-page__content_loading"/>-->
+      <!--      <Loader v-else-if="loading" class="news-page__content_loading"/>-->
 
       <div class="news-page__pagination">
         <button
@@ -179,9 +179,11 @@ export default {
       background-color: transparent;
       margin-right: 15px;
       transition: $transition;
-      &:hover{
+
+      &:hover {
         transform: scale(1.1);
       }
+
       &:last-child {
         margin-right: 0;
       }

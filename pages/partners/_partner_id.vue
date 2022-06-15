@@ -1,7 +1,7 @@
 <template>
   <div class="page partner-page wrapper">
     <div class="partner-page__over">
-      <Breadcrumbs class="partner-page__over__breadcrumbs adaptive-non"/>
+      <Breadcrumbs class="partner-page__over__breadcrumbs adaptive-non" :way="[{name:'Партнеры', link:`/partners`},{name:partner.name, link:`/partners/${partner.id}`}]"/>
       <div class="partner-page__over__content content">
         <div class="partner-page__over__content__main">
           <PagesPartnerShopBlock
