@@ -15,7 +15,6 @@
         Кажется, новостей пока нет
       </p>
       <!--      <Loader v-else-if="loading" class="news-page__content_loading"/>-->
-
       <div class="news-page__pagination">
         <button
           @click='fetchPage({page:item})'
