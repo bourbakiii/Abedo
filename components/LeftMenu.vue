@@ -182,6 +182,7 @@
       </div>
       <client-only>
         <div class="left-menu__links left-menu__links_additional">
+          <NuxtLink class="left-menu__links__link left-menu__links__link_additional" to="/news">Новости</NuxtLink>
           <NuxtLink v-for="page in pages" :key="page.id" :to="page.link?page.link:`/statics/${page.id}`"
                     class="left-menu__links__link left-menu__links__link_additional">
             {{ page.title }}
