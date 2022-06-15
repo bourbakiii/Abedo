@@ -141,7 +141,7 @@ export default {
 }
 .footer {
   position: sticky;
-  bottom: 0px;
+  bottom: 0;
   z-index: $z_navigation;
   width: 100%;
   height: 54px;
@@ -149,7 +149,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 28.5px;
+  padding: 0 28.5px;
 
   &__button {
     background-color: transparent;
@@ -182,7 +182,7 @@ export default {
     &_cart {
       position: relative;
       @media screen and (max-width: $phone) {
-        margin: 0px auto;
+        margin: 0 auto;
       }
       &__count {
         position: absolute;
@@ -197,8 +197,8 @@ export default {
         font-weight: 400;
         font-size: 11px;
         line-height: 13px;
-        padding: 0px 4px;
-        top: 0px;
+        padding: 0 4px;
+        top: 0;
         z-index: 2;
         display: flex;
         align-items: center;
@@ -212,8 +212,8 @@ export default {
   }
   &__left-menu {
     position: fixed;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
   }
 }
 </style>

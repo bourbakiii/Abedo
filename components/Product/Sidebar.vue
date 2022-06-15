@@ -158,11 +158,11 @@ export default {
   flex-direction: column;
   border-bottom: 1px dashed $dark_grey;
   position: relative;
-  padding: 20px 0px;
+  padding: 20px 0;
   transition: $transition;
 
   &:last-of-type {
-    border-bottom-width: 0px;
+    border-bottom-width: 0;
   }
   &__gift {
     position: absolute;

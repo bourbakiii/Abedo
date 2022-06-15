@@ -24,6 +24,9 @@ export const state = () => ({
   },
   add_to_cart: {
     show: false, message: null
+  },
+  left_menu: {
+    show: false
   }
 });
 export const mutations = {
