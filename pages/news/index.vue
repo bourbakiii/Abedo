@@ -3,14 +3,26 @@
     <div class="news-page content">
       <Breadcrumbs class="news-page__breadcrumbs adaptive-non"/>
       <h1 class="news-page__title adaptive-non">Новости</h1>
-      <div class="news-page__content">
+      <div class="news-page__content" v-if="news.length">
         <NuxtLink class="news-page__content__link" :to="`/news/${item.id}`" v-for="item in news" :key='item.id'>
         <span class="news-page__content__link__date">
           {{ parseDate(item.created_at, {with_time: false}) }}
         </span>
           <h3 class="news-page__content__link__title">{{ item.title }}</h3>
         </NuxtLink>
+      </div>
+      <p class="news-page__content_empty" v-else>
+        Кажется, новостей пока нет
+      </p>
+<!--      <Loader v-else-if="loading" class="news-page__content_loading"/>-->
 
+      <div class="news-page__pagination">
+        <button
+          @click='fetchPage({page:item})'
+          v-for="item in params.last_page" :key="item" class="news-page__pagination__item unselectable"
+          :class="{'news-page__pagination__item_active': params.page===item }">
+          {{ item }}
+        </button>
       </div>
     </div>
   </div>
@@ -28,14 +40,32 @@ export default {
       loading: false,
       params: {
         page: 1,
-        limit: 10,
+        limit: 8,
         last_page: 1
       }
     }
   },
   async fetch() {
     this.loading = true;
-    await this.$axios.get("/api/news").then(({data: {news}}) => this.news = news.data).finally(() => this.loading = false);
+    await this.$axios.get("/api/news", {params: this.params})
+      .then(({
+               data: {
+                 news: {
+                   data,
+                   last_page
+                 }
+               }
+             }) => {
+          this.news = data;
+          this.params.last_page = last_page;
+        }
+      ).finally(() => this.loading = false);
+  },
+  methods: {
+    fetchPage({page = 1}) {
+      this.params.page = page;
+      this.$fetch();
+    }
   }
 }
 </script>
@@ -79,6 +109,7 @@ export default {
         width: 100%;
         border-radius: 10px;
         padding: 20px 14px;
+        border: 1px solid $dark_grey;
       }
 
       &__date {
@@ -100,7 +131,7 @@ export default {
         font-style: normal;
         font-weight: 600;
         font-size: 18px;
-        line-height: 34px;
+        line-height: 24px;
         @media screen and (max-width: $tablet) {
           font-weight: 400;
           font-size: 16px;
@@ -115,7 +146,50 @@ export default {
       }
 
     }
+
+    &_empty {
+      text-align: left;
+      width: max-content;
+      font-family: 'SF Pro Display';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 26px;
+      align-self: flex-start;
+    }
+
+    //&_loading {
+    //  margin-top: 50px;
+    //  align-self: center;
+    //}
   }
 
+  &__pagination {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 50px;
+
+    &__item {
+      width: 30px;
+      height: 30px;
+      border: 1px solid $darkblue;
+      border-radius: 15px;
+      background-color: transparent;
+      margin-right: 15px;
+      transition: $transition;
+      &:hover{
+        transform: scale(1.1);
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &_active {
+        border-color: $orange;
+      }
+    }
+  }
 }
 </style>
