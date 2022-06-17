@@ -96,6 +96,18 @@ export default {
       color: $white;
     }
   }
+
+  &.hover-orange:hover {
+    background-color: $orange !important;
+    border-color: $orange !important;
+    color: $white !important;
+  }
+
+  &.hover-green:hover {
+    background-color: $green !important;
+    border-color: $green !important;
+    color: $white !important;
+  }
 }
 
 

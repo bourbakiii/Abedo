@@ -37,116 +37,121 @@
           v-model="keyword"
           @input="timerHandler"
         />
-        <button
-          v-if="keyword"
-          @click.prevent="keyword = null"
-          class="search__input-button search__input-button-close"
-        >
-          <svg
-            class="search__input-button-icon"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        <transition name="opacity-close">
+          <button
+            v-if="keyword"
+            @click.prevent="keyword = null"
+            class="search__input-button search__input-button-close"
           >
-            <path
-              d="M8.89533 10.0005L0.229061 1.33421C-0.0760555 1.02909 -0.0760555 0.534404 0.229061 0.229326C0.534178 -0.0757519 1.02886 -0.075791 1.33394 0.229326L10.0003 8.89565L18.6665 0.229326C18.9716 -0.075791 19.4663 -0.075791 19.7714 0.229326C20.0765 0.534443 20.0765 1.02913 19.7714 1.33421L11.1051 10.0005L19.7714 18.6668C20.0765 18.9719 20.0765 19.4666 19.7714 19.7717C19.6189 19.9242 19.4189 20.0005 19.2189 20.0005C19.019 20.0005 18.8191 19.9242 18.6665 19.7717L10.0003 11.1054L1.33398 19.7717C1.18144 19.9242 0.981482 20.0005 0.781521 20.0005C0.58156 20.0005 0.381639 19.9242 0.229061 19.7717C-0.0760555 19.4666 -0.0760555 18.9719 0.229061 18.6668L8.89533 10.0005Z"
-              fill="#A6A8A8"
-            />
-          </svg>
-        </button>
-        <div
-          class="search__input__dropdown-content push-hover-active"
-          @mouseenter="showResult"
-          v-if="
-              show_result == true &&
+            <svg
+              class="search__input-button-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.89533 10.0005L0.229061 1.33421C-0.0760555 1.02909 -0.0760555 0.534404 0.229061 0.229326C0.534178 -0.0757519 1.02886 -0.075791 1.33394 0.229326L10.0003 8.89565L18.6665 0.229326C18.9716 -0.075791 19.4663 -0.075791 19.7714 0.229326C20.0765 0.534443 20.0765 1.02913 19.7714 1.33421L11.1051 10.0005L19.7714 18.6668C20.0765 18.9719 20.0765 19.4666 19.7714 19.7717C19.6189 19.9242 19.4189 20.0005 19.2189 20.0005C19.019 20.0005 18.8191 19.9242 18.6665 19.7717L10.0003 11.1054L1.33398 19.7717C1.18144 19.9242 0.981482 20.0005 0.781521 20.0005C0.58156 20.0005 0.381639 19.9242 0.229061 19.7717C-0.0760555 19.4666 -0.0760555 18.9719 0.229061 18.6668L8.89533 10.0005Z"
+                fill="#A6A8A8"
+              />
+            </svg>
+          </button>
+        </transition>
+        <transition name="opacity" appear>
+          <div
+            class="search__input__dropdown-content push-hover-active"
+            @mouseenter="showResult"
+            v-if="
+              show_result === true &&
               (founded.partners.length || founded.products.length)
             "
-        >
-          <div
-            class="search__input__dropdown-content__shops"
-            v-if="founded.partners.length"
           >
-            <NuxtLink
-              v-for="partner in founded.partners"
-              :key="`founded-partner-${partner.id}`"
-              :to="`/partners/${partner.id}`"
-              class="search__input__dropdown-content__shops-shop"
+            <div
+              class="search__input__dropdown-content__shops"
+              v-if="founded.partners.length"
             >
-              <img
-                v-if="partner.logo"
-                :src="`${$axios.defaults.baseURL}${partner.logo.original}`"
-                class="search__input__dropdown-content__shops-shop-image"
-              />
-              <p class="search__input__dropdown-content__shops-shop-name">
-                {{ partner.name }}
-              </p>
-            </NuxtLink>
-          </div>
-          <div
-            class="search__input__dropdown-content__products"
-            v-if="founded.products.length"
-          >
-            <NuxtLink
-              v-for="product in founded.products"
-              :key="`founded-product-${product.id}`"
-              :to="`/product/${product.id}`"
-              class="search__input__dropdown-content__products-product"
-            >
-              <img
-                v-if="product.image"
-                :src="`${$axios.defaults.baseURL}${product.image.cart_mini}`"
-                class="search__input__dropdown-content__products-product-image"
-              />
-              <div
-                class="search__input__dropdown-content__products-product-content"
+              <NuxtLink
+                v-for="partner in founded.partners"
+                :key="`founded-partner-${partner.id}`"
+                :to="`/partners/${partner.id}`"
+                class="search__input__dropdown-content__shops-shop"
               >
+                <img
+                  v-if="partner.logo"
+                  :src="`${$axios.defaults.baseURL}${partner.logo.original}`"
+                  class="search__input__dropdown-content__shops-shop-image"
+                />
+                <p class="search__input__dropdown-content__shops-shop-name">
+                  {{ partner.name }}
+                </p>
+              </NuxtLink>
+            </div>
+            <div
+              class="search__input__dropdown-content__products"
+              v-if="founded.products.length"
+            >
+              <NuxtLink
+                v-for="product in founded.products"
+                :key="`founded-product-${product.id}`"
+                :to="`/product/${product.id}`"
+                class="search__input__dropdown-content__products-product"
+              >
+                <img
+                  v-if="product.image"
+                  :src="`${$axios.defaults.baseURL}${product.image.cart_mini}`"
+                  class="search__input__dropdown-content__products-product-image"
+                />
                 <div
-                  class="search__input__dropdown-content__products-product-content-top"
+                  class="search__input__dropdown-content__products-product-content"
                 >
-                  <p
-                    class="search__input__dropdown-content__products-product-content-top-name"
+                  <div
+                    class="search__input__dropdown-content__products-product-content-top"
                   >
-                    {{ product.name }}
-                  </p>
-                  <p
-                    class="search__input__dropdown-content__products-product-content-top-shop"
+                    <p
+                      class="search__input__dropdown-content__products-product-content-top-name"
+                    >
+                      {{ product.name }}
+                    </p>
+                    <p
+                      class="search__input__dropdown-content__products-product-content-top-shop"
+                    >
+                      / {{ product.section.shop.name }}
+                    </p>
+                  </div>
+                  <div
+                    class="search__input__dropdown-content__products-product-content-bottom"
                   >
-                    / {{ product.section.shop.name }}
-                  </p>
+                    <p
+                      class="search__input__dropdown-content__products-product-content-bottom-price"
+                    >
+                      {{ product.price }}руб.
+                    </p>
+                    <p
+                      class="search__input__dropdown-content__products-product-content-bottom-weight"
+                    >
+                      {{ product.weight }}{{ product.weight_unit.short_name }}
+                    </p>
+                  </div>
                 </div>
-                <div
-                  class="search__input__dropdown-content__products-product-content-bottom"
-                >
-                  <p
-                    class="search__input__dropdown-content__products-product-content-bottom-price"
-                  >
-                    {{ product.price }}руб.
-                  </p>
-                  <p
-                    class="search__input__dropdown-content__products-product-content-bottom-weight"
-                  >
-                    {{ product.weight }}{{ product.weight_unit.short_name }}
-                  </p>
-                </div>
-              </div>
-            </NuxtLink>
+              </NuxtLink>
+            </div>
+            <ButtonStandart
+              @click.native="watchAll"
+              class="search__input__dropdown-content__watch-all-button filled"
+            >Cмотреть все
+            </ButtonStandart
+            >
           </div>
-          <ButtonStandart
-            @click.native="watchAll"
-            class="search__input__dropdown-content__watch-all-button filled"
-          >Cмотреть все
-          </ButtonStandart
+          <div
+            v-else-if="show_result === true"
+            @mouseenter="showResult"
+            class="search__input__dropdown-content push-hover-active"
           >
-        </div>
-        <div
-          v-else-if="show_result == true"
-          @mouseenter="showResult"
-          class="search__input__dropdown-content push-hover-active"
-        >
-          Ничего не найдено
-        </div>
+            Ничего не найдено
+          </div>
+        </transition>
+
       </form>
 
       <div class="search__categories" v-if="categories.length">
@@ -244,6 +249,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.opacity-close {
+  &-enter, &-leave-to {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  &-enter-active, &-leave-active {
+    transition: $transition;
+  }
+}
+
 .search {
   width: 100%;
   height: 100%;
@@ -444,12 +460,17 @@ export default {
       border: none;
       background-color: transparent;
       margin: 0px 20px;
+      transition: $transition;
 
-      &-close {
-        margin-left: 0px 8px !important;
+
+      &:active {
+        transform: scale(0.9);
       }
 
-      transition: $transition;
+      &-close {
+        margin-left: 0 8px !important;
+      }
+
     }
 
     &-input {

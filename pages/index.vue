@@ -154,7 +154,7 @@
             </p>
             <ButtonStandart
               @click.native="$router.push('/partners')"
-              class="index-page__content__new-shops__button"
+              class="index-page__content__new-shops__button hover-green"
             >Все заведения
             </ButtonStandart
             >

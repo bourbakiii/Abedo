@@ -30,7 +30,7 @@
           v-for="stock in stocks"
           :key="stock.id"
         >
-          <Stock :stock="stock" class="stocks__slide__item" />
+          <Stock :stock="stock" class="stocks__slide__item"/>
         </swiper-slide>
       </swiper>
       <button
@@ -85,7 +85,8 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import {Swiper, SwiperSlide} from "vue-awesome-swiper";
+
 export default {
   name: "swiper-example-carousel-mode",
   title: "Auto slides per view / Carousel mode",
@@ -97,7 +98,7 @@ export default {
   async fetch() {
     await this.$axios
       .$get(`${this.$axios.defaults.baseURL}/api/shares`)
-      .then(({ shares: { data } }) => {
+      .then(({shares: {data}}) => {
         this.stocks = data;
       });
   },
@@ -132,6 +133,7 @@ export default {
   display: flex !important;
   width: 100%;
   height: max-content;
+
   &__wrapper {
     position: relative;
     max-width: 100%;
@@ -148,10 +150,15 @@ export default {
 
   &__title-block {
     margin-bottom: 20px;
-    width:100%;
-    display: flex;align-items: center;justify-content: space-between;flex-direction:row;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
     &__button {
       text-decoration: none;
+
       &__icon {
         font-family: "SF Pro Display";
         font-style: normal;
@@ -162,6 +169,7 @@ export default {
       }
     }
   }
+
   &__slide {
     overflow: hidden !important;
     margin-right: 30px;
@@ -183,9 +191,11 @@ export default {
       margin-right: 0px;
       width: 100%;
     }
+
     &:last-of-type {
       margin-right: 0px;
     }
+
     &__item {
       width: 100%;
       height: auto;
@@ -194,6 +204,7 @@ export default {
       }
     }
   }
+
   &__pagination {
     position: absolute;
     top: calc(100% + 20px);
@@ -202,8 +213,8 @@ export default {
     width: 100%;
     z-index: 1;
   }
+
   &__button {
-    transform: translateY(-25%);
     width: 50px;
     height: 50px;
     border-radius: 90px;
@@ -211,23 +222,52 @@ export default {
     outline: none;
     border: none;
     z-index: 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: $transition;
+
+
     @media screen and (max-width: $tablet) {
       display: none;
     }
+    &:hover{
+      box-shadow: 0 0 15px 1px rgba(0,0,0,.2);
+    }
     &_prev {
-      left: 0px;
+      left: 0;
       transform: translate(-90px, -50%);
+
+      &:hover {
+        transform: translate(-90px, -50%) scale(1.04);
+      }
+
       @media screen and (max-width: calc($maxwidth + 200px)) {
         transform: translate(-30px, -50%);
+        &:hover {
+          transform: translate(-30px, -50%) scale(1.04);
+        }
       }
     }
+
     &_next {
-      right: 0px;
+      right: 0;
       transform: translate(90px, -50%);
+
+      &:hover {
+        transform: translate(90px, -50%) scale(1.04);
+      }
+
       @media screen and (max-width: calc($maxwidth + 200px)) {
         transform: translate(30px, -50%);
+        &:hover {
+          transform: translate(30px, -50%) scale(1.04);
+        }
       }
+
     }
+
     &::before,
     &::after {
       display: none;
@@ -243,6 +283,10 @@ export default {
     width: 10px;
     height: 10px;
     margin-right: 9px;
+    transition: $transition;
+    &:not(&-active):hover{
+      transform: scale(1.3);
+    }
     @media screen and (max-width: $tablet) {
       width: 8px;
       height: 8px;
@@ -250,9 +294,11 @@ export default {
       background-color: transparent;
       margin-right: 10px;
     }
+
     &:last-of-type {
       margin-right: 0px;
     }
+
     &-active {
       background-color: $orange;
       @media screen and (max-width: $tablet) {

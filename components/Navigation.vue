@@ -45,7 +45,7 @@
       </NuxtLink>
       <ButtonStandart
         @click.native="() => $router.push('/partners')"
-        class="navigation__button"
+        class="navigation__button hover-orange"
       >
         <svg
           class="navigation__button__icon"
