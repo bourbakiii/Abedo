@@ -86,7 +86,7 @@ export const actions = {
       modal_name: 'add_to_cart', message: product.in_cart_message
     });
   }, async refreshPartner(state) {
-    if (!state.state.partner) return;
+    if (!state.state?.partner?.id) return;
     await this.$axios.get(`/api/shop/${state.state.partner.id}`).then(({data: {shop}}) => {
       state.commit('set_partner', shop);
     })

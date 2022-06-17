@@ -15,7 +15,7 @@
         Кажется, новостей пока нет
       </p>
       <!--      <Loader v-else-if="loading" class="news-page__content_loading"/>-->
-      <div class="news-page__pagination">
+      <div v-if="!loading && news.length" class="news-page__pagination">
         <button
           @click='fetchPage({page:item})'
           v-for="item in params.last_page" :key="item" class="news-page__pagination__item unselectable"

@@ -3,7 +3,7 @@
     <div class="registration-page__over content">
       <h1 class="registration-page__title title-normal">Регистрация</h1>
       <form
-        v-if="!remember_phone"
+        v-if="remember_phone"
         @submit.prevent="registrate"
         class="registration-page__content"
       >
@@ -47,7 +47,8 @@
           входящего номера.
         </p>
         <ButtonStandart class="registration-page__content__button"
-          >Подтвердить телефон</ButtonStandart
+        >Подтвердить телефон
+        </ButtonStandart
         >
         <!-- <client-only> -->
         <transition-group
@@ -62,7 +63,8 @@
             v-for="(error,index) in errors"
             :key="`registration-error-${index}`"
             class="registration-page__content__errors__item_error registration-page__content__errors__item"
-            >{{ error }}</Message
+          >{{ error }}
+          </Message
           >
         </transition-group>
         <!-- </client-only> -->
@@ -85,7 +87,7 @@
           type="number"
           text="Код подтверждения"
         />
-        <div class="registration-page__content_code__confirmation">
+        <label for="code__confirmation" class="registration-page__content_code__confirmation">
           <Checkbox
             id="code__confirmation"
             :checked="confirmation"
@@ -93,12 +95,13 @@
             @change="confirmation = !$event"
             class="registration-page__content_code__confirmation__checkbox"
           />
-          <p class="registration-page__content_code__confirmation__text">
+          <span class="registration-page__content_code__confirmation__text">
             Принимаю условия использования и политику конфиденциальности
-          </p>
-        </div>
+          </span>
+        </label>
         <ButtonStandart class="registration-page__content_code__button"
-          >Отправить</ButtonStandart
+        >Отправить
+        </ButtonStandart
         >
       </form>
     </div>
@@ -106,6 +109,7 @@
 </template>
 <script>
 import errorsMessagesMixin from "@/mixins/errors-messages.js";
+
 export default {
   mixins: [errorsMessagesMixin],
   data() {
@@ -118,8 +122,8 @@ export default {
       confirmation: false,
     };
   },
-  mounted(){
-    this.$store.commit('variables/action', state=>{
+  mounted() {
+    this.$store.commit('variables/action', state => {
       state.adaptive_navigation = {
         text: "Регистрация",
         slot: 'label',
@@ -132,7 +136,7 @@ export default {
       if (this.form.password != this.form.password_confirmation) {
         document
           .querySelector(".registration-page__content__errors")
-          .scrollIntoView({ block: "nearest", behavior: "smooth" });
+          .scrollIntoView({block: "nearest", behavior: "smooth"});
         return (this.errors = ["Пароли не совпадают"]);
       }
       this.$axios
@@ -146,7 +150,7 @@ export default {
             state.registration_phone = response.data.user.phone;
           });
         })
-        .catch(({ response }) => {
+        .catch(({response}) => {
           if (response?.status == 422) {
             this.errors = Object.values(response.data.errors)
               .map((el) => el.flat())
@@ -177,10 +181,12 @@ export default {
   }
   padding-top: 100px;
   padding-bottom: 100px;
+
   &__over {
     align-items: flex-start;
     justify-content: flex-start;
   }
+
   &__title {
     margin-bottom: 70px;
     @media screen and (max-width: $notebook) {
@@ -194,22 +200,26 @@ export default {
       line-height: 20px;
     }
   }
+
   &__content {
     border-radius: 20px;
     background-color: $white;
     padding: 20px;
     width: 100%;
     max-width: 450px;
+
     &__input-block {
       margin-bottom: 20px;
     }
+
     &__text {
-      margin: 20px 0px;
+      margin: 20px 0;
       font-size: 16px;
       @media screen and (max-width: $tablet) {
         font-size: 15px;
       }
     }
+
     &__button {
       width: 100%;
       max-width: 200px;
@@ -217,46 +227,55 @@ export default {
         height: 40px;
       }
     }
+
     &__errors {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       flex-direction: column;
       width: 100%;
-      transition: 0.3s;
+      transition: calc($transition * 2);
+
       &_margined {
         margin-top: 15px;
       }
-      transition: calc($transition * 2);
+
+
       .empty {
-        margin-top: 0px;
+        margin-top: 0;
       }
     }
+
     &_code {
       border-radius: 20px;
       background-color: $white;
       padding: 20px;
       width: 100%;
       max-width: 450px;
+
       &__text {
-        margin: 20px 0px;
+        margin: 20px 0;
         font-size: 16px;
         @media screen and (max-width: $tablet) {
           font-size: 15px;
         }
       }
+
       &__confirmation {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-direction: row;
-        margin: 20px 0px;
+        margin: 20px 0;
+        cursor: pointer;
+
         &__checkbox {
           flex-shrink: 0;
           margin-right: 15px;
           width: 25px;
           height: 25px;
         }
+
         &__text {
           font-size: 16px;
           @media screen and (max-width: $tablet) {
@@ -264,6 +283,7 @@ export default {
           }
         }
       }
+
       &__button {
         width: 100%;
         max-width: 200px;
