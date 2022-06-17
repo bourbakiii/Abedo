@@ -33,7 +33,7 @@ export default {
       return this.$store.state.account.favourites.map(favourite => +favourite.id).includes(+this.partner.id)
     },
     cuisines() {
-      return this.partner.cuisines.map((cuisine) => cuisine.name).join("/");
+      return this.partner.cuisines.map((cuisine) => cuisine.name).join(" / ");
     },
   },
 };

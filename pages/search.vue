@@ -3,10 +3,10 @@
     <div class="search-page__content content">
       <Breadcrumbs class="search-page__content__breadcrumbs adaptive-non"  :way="[{name:'Поиск', link:`/search`}]"/>
       <PagesSearchInput @changeLoading="changeLoading" @search='setFounded' class="search-page__content__search-input"/>
-      <PagesSearchByCategories
-        v-if="categories.length"
-        :categories="categories"
-        class="search-page__content__by-categories"/>
+<!--      <PagesSearchByCategories-->
+<!--        v-if="categories.length"-->
+<!--        :categories="categories"-->
+<!--        class="search-page__content__by-categories"/>-->
       <div class="search-page__content__search_loading" v-if="loading">
         <loader class="search-page__content__search_loading__loader"/>
       </div>

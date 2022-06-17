@@ -1,9 +1,10 @@
 <template>
   <div class="page news-page__wrapper wrapper">
     <div class="news-page content">
-      <Breadcrumbs class="news-page__breadcrumbs adaptive-non" :way="[{name:'Новости', link:`/news`}]"/>
+      <Breadcrumbs class="news-page__breadcrumbs adaptive-non" :way="[{name:'Новости', link:`/news?page=1`}]"/>
       <h1 class="news-page__title adaptive-non">Новости</h1>
-      <div class="news-page__content" v-if="news.length">
+      <Loader v-if="$fetchState.pending" class="news-page__content_loading"/>
+      <div class="news-page__content" v-else-if="news.length">
         <NuxtLink class="news-page__content__link" :to="`/news/${item.id}`" v-for="item in news" :key='item.id'>
         <span class="news-page__content__link__date">
           {{ parseDate(item.created_at, {with_time: false}) }}
@@ -14,12 +15,11 @@
       <p class="news-page__content_empty" v-else>
         Кажется, новостей пока нет
       </p>
-      <!--      <Loader v-else-if="loading" class="news-page__content_loading"/>-->
-      <div v-if="!loading && news.length" class="news-page__pagination">
+      <div v-if="!$fetchState.pending && news.length" class="news-page__pagination">
         <button
           @click='fetchPage({page:item})'
           v-for="item in params.last_page" :key="item" class="news-page__pagination__item unselectable"
-          :class="{'news-page__pagination__item_active': params.page===item }">
+          :class="{'news-page__pagination__item_active': params.page==item }">
           {{ item }}
         </button>
       </div>
@@ -36,7 +36,6 @@ export default {
   data() {
     return {
       news: [],
-      loading: false,
       params: {
         page: 1,
         limit: 8,
@@ -44,8 +43,11 @@ export default {
       }
     }
   },
+  created() {
+    this.params.page = this.$route.query.page || 1;
+  },
+  fetchOnServer: false,
   async fetch() {
-    this.loading = true;
     await this.$axios.get("/api/news", {params: this.params})
       .then(({
                data: {
@@ -55,17 +57,26 @@ export default {
                  }
                }
              }) => {
-          this.news = data;
-          this.params.last_page = last_page;
-        }
-      ).finally(() => this.loading = false);
+        this.news = data;
+        this.params.last_page = last_page;
+        if (this.params.last_page < +this.params.page) this.fetchPage({page: this.params.last_page});
+      });
   },
   methods: {
     fetchPage({page = 1}) {
-      this.params.page = page;
-      this.$fetch();
+      this.$router.push({path: this.$route.path, query: {page: page}});
     }
-  }
+  },
+  watch: {
+    "$route.query.page": {
+      handler(value) {
+        if (this.params.page == value) return;
+        this.params.page = value;
+        this.$fetch();
+      },
+      deep: true
+    }
+  },
 }
 </script>
 

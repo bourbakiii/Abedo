@@ -390,7 +390,8 @@ export default {
     font-family: "SF Pro Display";
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 14px;
+    color:$darkblue;
     line-height: 17px;
     white-space: nowrap;
     text-overflow: ellipsis;

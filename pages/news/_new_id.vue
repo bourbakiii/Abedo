@@ -2,7 +2,7 @@
   <div class="page new-page wrapper">
     <div class="new-page__content content">
       <Breadcrumbs class="new-page__content__breadcrumbs adaptive-non"
-                   :way="[{name:'Новости', link:`/news`}, {name:`Новость`, link:`/news/${item.id}`}]"
+                   :way="[{name:'Новости', link:`/news?page=1`}, {name:`Новость`, link:`/news/${item.id}`}]"
       />
       <div class="new-page__content__content">
         <h1 class="new-page__content__content__title title-extra-normal">{{ item.title }}</h1>

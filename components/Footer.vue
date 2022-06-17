@@ -48,7 +48,7 @@
         </NuxtLink>
 
         <NuxtLink
-          to="/news"
+          to="/news?page=1"
           class="footer__links__link">
           Новости сервиса
         </NuxtLink>
