@@ -1,17 +1,17 @@
 <template>
-  <div class="page authorisation-page wrapper">
-    <div class="authorisation-page__over content">
-      <h1 class="authorisation-page__title title-normal">Регистрация</h1>
+  <div class="page authorization-page wrapper">
+    <div class="authorization-page__over content">
+      <h1 class="authorization-page__title title-normal">Регистрация</h1>
       <form
-        @submit.prevent="authorisateAdmin"
-        class="authorisation-page__content"
+        @submit.prevent="authorizateAdmin"
+        class="authorization-page__content"
       >
         <InputBlock
           v-model="form.phone"
           pre="+7"
           mask="(###) ###-##-##"
           placeholder="(000) 000 000 00"
-          class="authorisation-page__content__input-block authorisation-page__content__phone"
+          class="authorization-page__content__input-block authorization-page__content__phone"
           name="phone"
           id="login_phone"
           type="text"
@@ -22,7 +22,7 @@
         <InputBlock
           v-model="form.password"
           placeholder="Введите пароль"
-          class="authorisation-page__content__input-block authorisation-page__content__password"
+          class="authorization-page__content__input-block authorization-page__content__password"
           name="registration_password"
           id="registration_password"
           type="password"
@@ -31,8 +31,9 @@
           :required="true"
         />
 
+        To route - {{ to_route }}
 
-        <ButtonStandart :disabled="loading" :loader="loading" class="authorisation-page__content__button"
+        <ButtonStandart :disabled="loading" :loader="loading" class="authorization-page__content__button"
         >Войти
         </ButtonStandart
         >
@@ -40,14 +41,14 @@
           name="opacity"
           tag="div"
           :class="{
-            'authorisation-page__content__errors_margined': errors.length,
+            'authorization-page__content__errors_margined': errors.length,
           }"
-          class="authorisation-page__content__errors"
+          class="authorization-page__content__errors"
         >
           <Message
             v-for="(error,index) in errors"
             :key="`registration-error-${index}`"
-            class="authorisation-page__content__errors__item_error authorisation-page__content__errors__item"
+            class="authorization-page__content__errors__item_error authorization-page__content__errors__item"
           >{{ error }}
           </Message
           >
@@ -67,8 +68,26 @@ export default {
         phone: "",
         password: "",
       },
+      to_route: null,
       loading: false,
     };
+  },
+  created() {
+
+    let {shop_id, product_id} = this.$route.query;
+    [shop_id, product_id] = [(shop_id || '').replace(/[^0-9]/g, ""), (product_id || '').replace(/[^0-9]/g, "")]
+
+    try {
+
+
+      if (shop_id && !product_id)
+        this.to_route = `/partners/${shop_id}`
+      else if (shop_id && product_id)
+        this.to_route = `/product/${product_id}`
+      // else throw('asf');
+    } catch (error) {
+      this.to_route = 'try/catched error';
+    }
   },
   mounted() {
     this.$store.commit('variables/action', state => {
@@ -80,16 +99,22 @@ export default {
     });
   },
   methods: {
-    authorisateAdmin() {
-      if(this.loading) return;
+    authorizateAdmin() {
+      if (this.loading) return;
       this.loading = true;
       this.errors = [];
       this.$axios.post('/api/admin/login', {
-
+        api: 1,
         phone: parseInt(this.form.phone.replace(/\D+/g, "")),
         password: this.form.password
 
-      }).then(({data}) => console.log("the result is")).catch(({response}) => {
+      }).then(({data: {token}}) => {
+        this.$store.commit("admin_account/action", state => {
+          state.token = token
+          state.shop_id = this.$route.query.shop_id
+        });
+        this.$router.push({path: this.to_route, query: {preview: 1}});
+      }).catch(({response}) => {
         if ((response?.status === 422)) {
           this.errors = Object.values(response.data.errors)
             .map((el) => el.flat())
@@ -102,7 +127,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.authorisation-page {
+.authorization-page {
   @media screen and (max-width: $notebook) {
     padding-top: 50px;
     padding-bottom: 50px;

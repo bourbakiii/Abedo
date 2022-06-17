@@ -2,7 +2,7 @@
   <form @submit.prevent="login" class="login-modal modal">
     <button
       type='button'
-      @mousedown.prevent="$store.commit('modals/close')"
+      @click="$store.commit('modals/close')"
       class="login-modal__close"
     >
       <svg
@@ -45,11 +45,11 @@
       :required="true"
     />
     <div class="login-modal__labels">
-      <NuxtLink to="/forget" class="login-modal__labels__forget"
+      <NuxtLink to="/forget" class="login-modal__labels__label login-modal__labels__forget"
       >Забыли пароль?
       </NuxtLink
       >
-      <NuxtLink to="/registration" class="login-modal__labels__registration"
+      <NuxtLink to="/registration" class="login-modal__labels__label login-modal__labels__registration"
       >Регистрация
       </NuxtLink
       >
@@ -59,13 +59,13 @@
         'login-modal__errors_margined': errors.length,
       }" class="login-modal__errors">
       <transition name="message" appear>
-      <Message
-        v-for="error in errors"
-        :key="error"
-        class="login-modal__errors__item_error login-modal__errors__item"
-      >{{ error }}
-      </Message
-      >
+        <Message
+          v-for="error in errors"
+          :key="error"
+          class="login-modal__errors__item_error login-modal__errors__item"
+        >{{ error }}
+        </Message
+        >
       </transition>
     </div>
 
@@ -161,6 +161,14 @@ export default {
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+
+    &__label {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   &__button {

@@ -1,7 +1,8 @@
 <template>
   <div class="page product-page wrapper">
     <div class="product-page__over">
-      <Breadcrumbs class="product-page__over__breadcrumbs adaptive-non"  :way="[{name:'Партнеры', link:`/partners`},{name:product.section.shop.name, link:`/partners/${product.section.shop.id}`}]"/>
+      <Breadcrumbs class="product-page__over__breadcrumbs adaptive-non"
+                   :way="[{name:'Партнеры', link:`/partners`},{name:product.section.shop.name, link:`/partners/${product.section.shop.id}`}]"/>
       <div class="product-page__over__content content">
         <div class="product-page__over__content__main">
           <div
@@ -317,12 +318,28 @@ export default {
     SwiperSlide,
     Checkbox,
   },
-  async asyncData({$axios, route, error}) {
+  async asyncData({$axios, route, error, store}) {
     let to_return_product = {},
       loading = true;
-    await $axios
+
+    if (route.query.preview && +route.query.preview === 1) {
+      await $axios
+        .$get(
+          `${$axios.defaults.baseURL}/api/admin/preview/shop/${store.state.admin_account.shop_id}/product/${route.params.product_id}`, {
+            headers: {Authorization: `Bearer ${store.state.admin_account.token}`}
+          }
+        ).then(({product}) => {
+          console.log('getted side');
+          if (!product)
+            return error({statusCode: 404, message: "Продукт неактивен"});
+          to_return_product = product;
+        }).catch((error) => {
+          console.log("getted error")
+          console.log(error);
+        });
+    } else await $axios
       .$get(
-        `${$axios.defaults.baseURL}/api/product/${route.params.product_id}}`
+        `${$axios.defaults.baseURL}/api/product/${route.params.product_id}`
       )
       .then(({product}) => {
         if (!product)
@@ -335,6 +352,8 @@ export default {
       .finally(() => {
         loading = false;
       });
+
+
     return {loading, product: to_return_product};
   },
   data() {
@@ -972,7 +991,8 @@ export default {
           background-color: $white;
           border: 1px solid $dark_grey;
           border-radius: 20px;
-          width:100%;
+          width: 100%;
+
           &__title {
             margin-bottom: 18px;
             font-family: 'SF Pro Display';

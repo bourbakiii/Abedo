@@ -18,6 +18,7 @@ export default {
       commit("cart/localSet");
       dispatch("cart/refreshPartner");
       commit("account/localSet");
+      commit("admin_account/localSet");
 
       dispatch("cart/synchronization");
 

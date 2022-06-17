@@ -132,7 +132,7 @@ button {
 .unselectable {
 
   -moz-user-select: none;
-  -khtml-user-select: none;
+  -html-user-select: none;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -161,3 +161,4 @@ button {
 .red {
   color: $red;
 }
+

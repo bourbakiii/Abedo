@@ -303,13 +303,19 @@ export default {
             font-size: 10px;
             line-height: 10px;
             align-items: center;
-            padding: 0px 7px 0px 30px;
-            border-radius: 0px 90px 90px 0px;
+            padding: 0;
+            border-radius: 0 90px 90px 0;
             display: flex;
             align-items: center;
             justify-content: center;
             white-space: nowrap;
             z-index: -1;
+            animation: slowSlide $transition forwards;
+            @keyframes slowSlide {
+              100% {
+                padding: 0 7px 0 30px;
+              }
+            }
           }
         }
       }
@@ -391,7 +397,7 @@ export default {
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    color:$darkblue;
+    color: $darkblue;
     line-height: 17px;
     white-space: nowrap;
     text-overflow: ellipsis;
