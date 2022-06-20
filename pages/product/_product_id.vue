@@ -274,7 +274,7 @@
           </div>
 
           <NuxtLink
-            :to="`/partners/${product.section.shop_id}`"
+            :to="parseLink(`/partners/${product.section.shop_id}`)"
             class="product-page__over__content__main__back adaptive-non"
           >
             <svg
@@ -308,11 +308,12 @@
 import {Swiper, SwiperSlide} from "vue-awesome-swiper";
 import Checkbox from "../../components/Checkbox.vue";
 import productMixin from "@/mixins/product.js";
+import previewHider from "@/mixins/preview-hider";
 
 export default {
   // name: "product-images-slider",
   title: "Product images slider",
-  mixins: [productMixin],
+  mixins: [productMixin, previewHider],
   components: {
     Swiper,
     SwiperSlide,
@@ -333,8 +334,8 @@ export default {
           if (!product) return error({statusCode: 404, message: "Продукт неактивен"});
           to_return_product = product;
         }).catch(({response}) => {
-          console.log("response status is:");
-          console.log(response.status);
+            console.log("response status is:");
+            console.log(response.status);
             if (response?.status === 401 || response?.status === 403) return error({
               statusCode: 403,
               message: "У вас недостаточно прав"
@@ -362,8 +363,7 @@ export default {
 
 
     return {loading, product: to_return_product};
-  }
-  ,
+  },
   data() {
     return {
       swiperOption: {
@@ -380,12 +380,10 @@ export default {
       },
       currentImage: null,
     };
-  }
-  ,
+  },
   created() {
     this.currentImage = this.product?.image || null;
-  }
-  ,
+  },
   mounted() {
     this.$store.commit("variables/action", (state) => {
       state.adaptive_navigation = {
@@ -394,8 +392,7 @@ export default {
         info_click: null,
       };
     });
-  }
-  ,
+  },
   methods: {
     "selectOption"(option) {
       const select_option_index = this.product.selected_options.findIndex(
@@ -431,8 +428,7 @@ export default {
       return to_return;
     }
   }
-}
-;
+};
 </script>
 
 <style lang="scss" scoped>

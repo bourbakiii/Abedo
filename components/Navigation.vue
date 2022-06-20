@@ -288,9 +288,9 @@
 
 <script>
 import dropdownMixin from "@/mixins/dropdowns.js";
-
+import previewHider from "@/mixins/preview-hider.js";
 export default {
-  mixins: [dropdownMixin],
+  mixins: [dropdownMixin, previewHider],
   mounted() {
     document.addEventListener("scroll", () => {
       if (window.scrollY > this.$store.state.variables.navigation_transition_to)
@@ -312,10 +312,6 @@ export default {
     windowRedirect(){
       window.location.href = "https://abedo.ru/admin"
     },
-    parseLink(link, alternate = false) {
-      if (alternate) return this.is_preview ? link : this.$route.fullPath;
-      return this.is_preview ? this.$route.fullPath : link;
-    },
     dropdownClick() {
       if (this.token) return (this.show_dropdown = true);
       this.$store.commit("modals/open", {modal_name: "login"});
@@ -331,9 +327,6 @@ export default {
     },
     cart_products() {
       return this.$store.state.cart.products;
-    },
-    is_preview() {
-      return +this.$route.query.preview === 1;
     }
   },
   watch: {

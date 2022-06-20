@@ -2,7 +2,7 @@
   <div class="footer__wrapper wrapper adaptive-non">
     <div class="footer">
       <div class="footer__logo-block">
-        <NuxtLink to="/" class="footer__logo-block-logo">
+        <NuxtLink :to="parseLink('/')" class="footer__logo-block-logo">
           <svg class="footer__logo-block-logo__icon" width="107" height="30" viewBox="0 0 107 30" fill="none"
                xmlns="http://www.w3.org/2000/svg">
             <path
@@ -34,7 +34,7 @@
         </NuxtLink>
         <p class="footer__logo-block-text">© {{ new Date().getFullYear() }}. Все права защищены</p>
       </div>
-      <div class="footer__links">
+      <div v-if="!is_preview" class="footer__links">
         <NuxtLink
           to=""
           class="footer__links__link">
@@ -60,13 +60,14 @@
                                               }}
         </NuxtLink>
       </div>
+      <p v-else class="footer__links_empty">Режим предварительного просмотра</p>
 
-      <div class="footer__contacts">
+      <div v-if="!is_preview" class="footer__contacts">
         <a class="footer__contacts__email" href="mailto:pismo@abedo.ru">pismo@abedo.ru</a>
         <p class="footer__contacts__after-text">Для жалоб и предложений</p>
       </div>
     </div>
-    <div class="footer__wrapper__bottom-wrapper">
+    <div v-if="!is_preview" class="footer__wrapper__bottom-wrapper">
       <div class="footer__wrapper__bottom">
         <NuxtLink class="footer__wrapper__bottom-link" to="#"
         >Условия использования
@@ -82,11 +83,15 @@
 </template>
 
 <script>
+import previewHider from "@/mixins/preview-hider";
+
 export default {
+  mixins: [previewHider],
   computed: {
     pages() {
       return this.$store.state.pages;
     },
+
   }
 };
 </script>
@@ -105,6 +110,7 @@ export default {
   padding: 63px 0;
   color: inherit;
   position: relative;
+
   &__wrapper {
     background-color: $black;
     flex-direction: column !important;
@@ -216,13 +222,23 @@ export default {
       text-decoration: none;
       color: inherit;
       text-align: center;
-      &:hover{
+
+      &:hover {
         text-decoration: underline;
       }
     }
 
     &:last-of-type {
       margin-bottom: 0;
+    }
+
+    &_empty {
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 30px;
+      color: inherit;
     }
   }
 

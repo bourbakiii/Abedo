@@ -3,14 +3,21 @@ import Vue from 'vue';
 export default {
   methods: {
     async add_to_cart(partner) {
+      if(+this.$route.query.preview === 1) return;
       if (!partner) alert("Не передан партнер при добавлении продукта в корзину");
       await this.$store.dispatch('cart/add_to_cart', {product: this.product, partner});
 
     }, crease() {
+      if(+this.$route.query.preview === 1) return;
+
       this.$store.dispatch('cart/crease', this.product);
     }, decrease() {
+      if(+this.$route.query.preview === 1) return;
+
       this.$store.dispatch('cart/decrease', this.product);
     }, remove() {
+      if(+this.$route.query.preview === 1) return;
+
       this.$store.commit('cart/unlocal_action', state => {
         Vue.set(this.product, 'selected_options', []);
       })
@@ -60,6 +67,8 @@ export default {
   },
   watch: {
     in_cart(value) {
+      if(+this.$route.query.preview === 1) return false;
+
       if (!value) {
         this.$store.commit("cart/action", state =>
           Vue.set(this.product, 'selected_options', []));

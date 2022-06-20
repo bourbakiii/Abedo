@@ -17,7 +17,7 @@
         </svg>
       </div>
 
-      <div v-if="cart_products.length" class="sidebar-cart__content">
+      <div v-if="cart_products.length && !is_preview" class="sidebar-cart__content">
         <div class="sidebar-cart__content__hood">
           <div class="sidebar-cart__content__hood__title-row">
             <h3
@@ -113,9 +113,9 @@
 </template>
 <script>
 import parserMixin from "@/mixins/parser.js";
-
+import previewHider from "@/mixins/preview-hider";
 export default {
-  mixins: [parserMixin],
+  mixins: [parserMixin, previewHider],
   computed: {
     cart_gifts() {
       return this.$store.state.cart.gifts;
