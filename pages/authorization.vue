@@ -1,7 +1,7 @@
 <template>
   <div class="page authorization-page wrapper">
     <div class="authorization-page__over content">
-      <h1 class="authorization-page__title title-normal">Регистрация</h1>
+      <h1 class="authorization-page__title title-normal">Авторизация администратора</h1>
       <form
         @submit.prevent="authorizateAdmin"
         class="authorization-page__content"
@@ -109,10 +109,10 @@ export default {
         password: this.form.password
 
       }).then(({data: {token}}) => {
-        this.$store.commit("admin_account/action", state => {
-          state.token = token
-          state.shop_id = this.$route.query.shop_id
-        });
+        this.$store.commit("admin_account/set", {
+          token,
+          shop_id: this.$route.query.shop_id
+        })
         this.$router.push({path: this.to_route, query: {preview: 1}});
       }).catch(({response}) => {
         if ((response?.status === 422)) {

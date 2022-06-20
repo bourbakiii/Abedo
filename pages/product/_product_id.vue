@@ -318,25 +318,32 @@ export default {
     SwiperSlide,
     Checkbox,
   },
-  async asyncData({$axios, route, error, store}) {
+  async asyncData({app, $axios, route, error, redirect}) {
     let to_return_product = {},
       loading = true;
-
     if (route.query.preview && +route.query.preview === 1) {
+      const token = app.$cookies.get('admin_token' || null);
+      const preview_shop_id = app.$cookies.get('preview_shop_id' || null);
       await $axios
         .$get(
-          `${$axios.defaults.baseURL}/api/admin/preview/shop/${store.state.admin_account.shop_id}/product/${route.params.product_id}`, {
-            headers: {Authorization: `Bearer ${store.state.admin_account.token}`}
+          `${$axios.defaults.baseURL}/api/admin/preview/shop/${preview_shop_id}/product/${route.params.product_id}`, {
+            headers: {Authorization: `Bearer ${token}`}
           }
         ).then(({product}) => {
-          console.log('getted side');
-          if (!product)
-            return error({statusCode: 404, message: "Продукт неактивен"});
+          if (!product) return error({statusCode: 404, message: "Продукт неактивен"});
           to_return_product = product;
-        }).catch((error) => {
-          console.log("getted error")
-          console.log(error);
-        });
+        }).catch(({response}) => {
+          console.log("response status is:");
+          console.log(response.status);
+            if (response?.status === 401 || response?.status === 403) return error({
+              statusCode: 403,
+              message: "У вас недостаточно прав"
+            });
+            return error({statusCode: 404, message: "Ошибка при получении продукта"});
+          }
+        ).finally(() => {
+          console.log("ну по крайней мере оно выполняется");
+        })
     } else await $axios
       .$get(
         `${$axios.defaults.baseURL}/api/product/${route.params.product_id}`
@@ -355,7 +362,8 @@ export default {
 
 
     return {loading, product: to_return_product};
-  },
+  }
+  ,
   data() {
     return {
       swiperOption: {
@@ -372,10 +380,12 @@ export default {
       },
       currentImage: null,
     };
-  },
+  }
+  ,
   created() {
     this.currentImage = this.product?.image || null;
-  },
+  }
+  ,
   mounted() {
     this.$store.commit("variables/action", (state) => {
       state.adaptive_navigation = {
@@ -384,9 +394,10 @@ export default {
         info_click: null,
       };
     });
-  },
+  }
+  ,
   methods: {
-    selectOption(option) {
+    "selectOption"(option) {
       const select_option_index = this.product.selected_options.findIndex(
         el => +el.id == +option.id
       );
@@ -397,11 +408,16 @@ export default {
       });
       // console.log("123");
       this.$forceUpdate();
-    },
-    selectImage(image) {
+    }
+    ,
+    "selectImage"(image) {
       this.currentImage = image || null;
-    },
-  },
+    }
+    ,
+
+
+  }
+  ,
   computed: {
     product_concated_images() {
       let to_return = [];
@@ -415,7 +431,8 @@ export default {
       return to_return;
     }
   }
-};
+}
+;
 </script>
 
 <style lang="scss" scoped>

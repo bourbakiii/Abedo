@@ -1,7 +1,7 @@
 <template>
   <div class="navigation-wrapper wrapper">
     <div class="navigation">
-      <NuxtLink to="/" class="navigation__logo">
+      <NuxtLink :to="parseLink('/')" class="navigation__logo">
         <svg
           width="156"
           height="44"
@@ -44,7 +44,8 @@
         </svg>
       </NuxtLink>
       <ButtonStandart
-        @click.native="() => $router.push('/partners')"
+        v-if="!is_preview"
+        @click.native="() => $router.push(parseLink('/partners'))"
         class="navigation__button hover-orange"
       >
         <svg
@@ -98,18 +99,84 @@
         </svg>
         Заведения
       </ButtonStandart>
+      <p v-if="is_preview" class="navigation__links_empty">Режим предварительного просмотра</p>
+
       <client-only>
-      <div class="navigation__links">
-        <button
-          class="navigation__links-link navigation__links-link__dropdown"
-          v-click-outside="closeDropdown"
-          @mouseleave="closeDropdown"
-        >
+        <div class="navigation__links">
           <button
-            class="navigation__links-link__dropdown__button"
-            @mouseenter="show_dropdown = true"
-            @click="dropdownClick"
+            class="navigation__links-link navigation__links-link__dropdown"
+            v-click-outside="closeDropdown"
+            @mouseleave="closeDropdown"
+            @click='windowRedirect'
           >
+
+            <button
+              class="navigation__links-link__dropdown__button"
+              @mouseenter="show_dropdown = true"
+              @click="dropdownClick"
+            >
+              <svg
+                class="navigation__links-link-svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="12" cy="10" r="3" fill="#5C6784"/>
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="#5C6784"
+                  stroke-width="1.2"
+                />
+                <path
+                  d="M17.8719 18.8083C17.9489 18.7468 17.9799 18.6436 17.9452 18.5513C17.5693 17.5518 16.8134 16.6706 15.7814 16.0332C14.6966 15.3632 13.3674 15 12 15C10.6326 15 9.30341 15.3632 8.21858 16.0332C7.18663 16.6706 6.43066 17.5518 6.05477 18.5513C6.02009 18.6436 6.05115 18.7468 6.12813 18.8083C9.56196 21.552 14.438 21.552 17.8719 18.8083Z"
+                  fill="#5C6784"
+                  stroke="#5C6784"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <p class="navigation__links-link__text">Кабинет</p>
+            </button>
+            <client-only>
+              <transition name="opacity">
+                <div
+                  v-if="show_dropdown && token && !is_preview"
+
+                  class="navigation__links-link__dropdown-content"
+                >
+                  <NuxtLink
+                    to="/profile"
+                    class="navigation__links-link__dropdown-content-link"
+                  >
+                    Мои данные
+                  </NuxtLink>
+                  <NuxtLink
+                    to="/addresses"
+                    class="navigation__links-link__dropdown-content-link"
+                  >
+                    Адреса доставки
+                  </NuxtLink>
+                  <NuxtLink
+                    to="/orders"
+                    class="navigation__links-link__dropdown-content-link"
+                  >
+                    История заказов
+                  </NuxtLink>
+                  <button
+                    @click="$store.dispatch('account/logout')"
+                    class="navigation__links-link__dropdown-content-link"
+                  >
+                    Выход
+                  </button>
+                </div>
+              </transition>
+            </client-only>
+          </button>
+          <NuxtLink v-if="!is_preview" to="/stocks" class="navigation__links-link">
             <svg
               class="navigation__links-link-svg"
               width="24"
@@ -118,93 +185,33 @@
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <circle cx="12" cy="10" r="3" fill="#5C6784" />
-              <circle
-                cx="12"
-                cy="12"
-                r="9"
-                stroke="#5C6784"
-                stroke-width="1.2"
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M14.6845 2.47362C13.9235 2.16764 13.0942 2 12.2292 2C8.8731 2 6.05373 4.52345 5.68312 7.85899L5.43132 10.1252L5.42527 10.1793C5.31244 11.1625 4.9924 12.1106 4.48627 12.9611L4.45832 13.0077L3.88029 13.9711L3.85614 14.0114C3.61462 14.4138 3.3958 14.7785 3.25005 15.0879C3.10193 15.4024 2.94356 15.8286 3.01979 16.3117C3.09514 16.7893 3.34092 17.2233 3.71164 17.5337C4.08671 17.8476 4.53359 17.931 4.87948 17.9658C5.21985 18.0001 5.6451 18 6.11449 18L6.16139 18H18.2969L18.3438 18C18.8132 18 19.2385 18.0001 19.5788 17.9658C19.9247 17.931 20.3716 17.8476 20.7467 17.5337C21.1174 17.2233 21.3632 16.7893 21.4385 16.3117C21.5148 15.8286 21.3564 15.4024 21.2083 15.0879C21.0625 14.7785 20.8437 14.4138 20.6022 14.0114L20.578 13.9711L20 13.0077L19.9721 12.9611C19.5933 12.3247 19.3188 11.6336 19.1573 10.914C18.8565 10.9705 18.5463 11 18.2292 11C17.8452 11 17.4713 10.9567 17.1122 10.8748C17.2968 11.9715 17.6832 13.0259 18.2534 13.9839L18.285 14.0367L18.863 15.0001C19.1365 15.456 19.3014 15.733 19.3989 15.9401C19.4042 15.9514 19.4091 15.9621 19.4136 15.972C19.4027 15.9733 19.3911 15.9746 19.3786 15.9759C19.1509 15.9988 18.8285 16 18.2969 16H6.16139C5.6298 16 5.30742 15.9988 5.07968 15.9759C5.06722 15.9746 5.05558 15.9733 5.04471 15.972C5.0492 15.9621 5.05409 15.9514 5.05942 15.9401C5.15695 15.733 5.32177 15.456 5.59527 15.0001L6.17331 14.0367L6.20494 13.9839C6.85568 12.8904 7.26716 11.6714 7.41223 10.4073L7.41908 10.3461L7.67089 8.07985C7.92896 5.75718 9.8922 4 12.2292 4C12.6922 4 13.1405 4.06898 13.5639 4.19767C13.8158 3.54594 14.2004 2.96023 14.6845 2.47362ZM17.2113 4.27804C16.6233 4.62632 16.2292 5.26713 16.2292 6C16.2292 6.14503 16.2446 6.28645 16.2739 6.42272C16.3943 6.6476 16.4967 6.88404 16.5789 7.13021C16.9393 7.65547 17.544 8 18.2292 8C18.421 8 18.6066 7.97298 18.7823 7.92254L18.7752 7.85899C18.623 6.48875 18.0575 5.25555 17.2113 4.27804Z"
+                fill="#5C6784"
               />
               <path
-                d="M17.8719 18.8083C17.9489 18.7468 17.9799 18.6436 17.9452 18.5513C17.5693 17.5518 16.8134 16.6706 15.7814 16.0332C14.6966 15.3632 13.3674 15 12 15C10.6326 15 9.30341 15.3632 8.21858 16.0332C7.18663 16.6706 6.43066 17.5518 6.05477 18.5513C6.02009 18.6436 6.05115 18.7468 6.12813 18.8083C9.56196 21.552 14.438 21.552 17.8719 18.8083Z"
-                fill="#5C6784"
+                d="M9.33123 17.6647C9.50215 18.6215 9.87879 19.467 10.4027 20.0701C10.9267 20.6731 11.5686 21 12.229 21C12.8894 21 13.5314 20.6731 14.0553 20.0701C14.5792 19.467 14.9559 18.6215 15.1268 17.6647"
                 stroke="#5C6784"
-                stroke-width="1.2"
+                stroke-width="2"
                 stroke-linecap="round"
               />
+              <circle
+                cx="18.229"
+                cy="6"
+                r="2.5"
+                fill="#5C6784"
+                stroke="#5C6784"
+              />
             </svg>
-            <p class="navigation__links-link__text">Кабинет</p>
-          </button>
-          <client-only>
-            <transition name="opacity">
-              <div
-                v-if="show_dropdown && token"
-                class="navigation__links-link__dropdown-content"
-              >
-                <NuxtLink
-                  to="/profile"
-                  class="navigation__links-link__dropdown-content-link"
-                >
-                  Мои данные
-                </NuxtLink>
-                <NuxtLink
-                  to="/addresses"
-                  class="navigation__links-link__dropdown-content-link"
-                >
-                  Адреса доставки
-                </NuxtLink>
-                <NuxtLink
-                  to="/orders"
-                  class="navigation__links-link__dropdown-content-link"
-                >
-                  История заказов
-                </NuxtLink>
-                <button
-                  @click="$store.dispatch('account/logout')"
-                  class="navigation__links-link__dropdown-content-link"
-                >
-                  Выход
-                </button>
-              </div>
-            </transition>
-          </client-only>
-        </button>
-        <NuxtLink to="/stocks" class="navigation__links-link">
-          <svg
-            class="navigation__links-link-svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M14.6845 2.47362C13.9235 2.16764 13.0942 2 12.2292 2C8.8731 2 6.05373 4.52345 5.68312 7.85899L5.43132 10.1252L5.42527 10.1793C5.31244 11.1625 4.9924 12.1106 4.48627 12.9611L4.45832 13.0077L3.88029 13.9711L3.85614 14.0114C3.61462 14.4138 3.3958 14.7785 3.25005 15.0879C3.10193 15.4024 2.94356 15.8286 3.01979 16.3117C3.09514 16.7893 3.34092 17.2233 3.71164 17.5337C4.08671 17.8476 4.53359 17.931 4.87948 17.9658C5.21985 18.0001 5.6451 18 6.11449 18L6.16139 18H18.2969L18.3438 18C18.8132 18 19.2385 18.0001 19.5788 17.9658C19.9247 17.931 20.3716 17.8476 20.7467 17.5337C21.1174 17.2233 21.3632 16.7893 21.4385 16.3117C21.5148 15.8286 21.3564 15.4024 21.2083 15.0879C21.0625 14.7785 20.8437 14.4138 20.6022 14.0114L20.578 13.9711L20 13.0077L19.9721 12.9611C19.5933 12.3247 19.3188 11.6336 19.1573 10.914C18.8565 10.9705 18.5463 11 18.2292 11C17.8452 11 17.4713 10.9567 17.1122 10.8748C17.2968 11.9715 17.6832 13.0259 18.2534 13.9839L18.285 14.0367L18.863 15.0001C19.1365 15.456 19.3014 15.733 19.3989 15.9401C19.4042 15.9514 19.4091 15.9621 19.4136 15.972C19.4027 15.9733 19.3911 15.9746 19.3786 15.9759C19.1509 15.9988 18.8285 16 18.2969 16H6.16139C5.6298 16 5.30742 15.9988 5.07968 15.9759C5.06722 15.9746 5.05558 15.9733 5.04471 15.972C5.0492 15.9621 5.05409 15.9514 5.05942 15.9401C5.15695 15.733 5.32177 15.456 5.59527 15.0001L6.17331 14.0367L6.20494 13.9839C6.85568 12.8904 7.26716 11.6714 7.41223 10.4073L7.41908 10.3461L7.67089 8.07985C7.92896 5.75718 9.8922 4 12.2292 4C12.6922 4 13.1405 4.06898 13.5639 4.19767C13.8158 3.54594 14.2004 2.96023 14.6845 2.47362ZM17.2113 4.27804C16.6233 4.62632 16.2292 5.26713 16.2292 6C16.2292 6.14503 16.2446 6.28645 16.2739 6.42272C16.3943 6.6476 16.4967 6.88404 16.5789 7.13021C16.9393 7.65547 17.544 8 18.2292 8C18.421 8 18.6066 7.97298 18.7823 7.92254L18.7752 7.85899C18.623 6.48875 18.0575 5.25555 17.2113 4.27804Z"
-              fill="#5C6784"
-            />
-            <path
-              d="M9.33123 17.6647C9.50215 18.6215 9.87879 19.467 10.4027 20.0701C10.9267 20.6731 11.5686 21 12.229 21C12.8894 21 13.5314 20.6731 14.0553 20.0701C14.5792 19.467 14.9559 18.6215 15.1268 17.6647"
-              stroke="#5C6784"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-            <circle
-              cx="18.229"
-              cy="6"
-              r="2.5"
-              fill="#5C6784"
-              stroke="#5C6784"
-            />
-          </svg>
-          <p class="navigation__links-link__text">
-            Акции <span class="delete-note">заведений</span>
-          </p>
-        </NuxtLink>
-      </div></client-only>
-      <div class="navigation__icons">
+            <p class="navigation__links-link__text">
+              Акции <span class="delete-note">заведений</span>
+            </p>
+          </NuxtLink>
+        </div>
+      </client-only>
+      <div v-if="!is_preview" class="navigation__icons">
         <NuxtLink to="/search" class="navigation__icons-icon">
           <svg
             class="navigation__icons-icon-svg"
@@ -226,7 +233,7 @@
             </g>
             <defs>
               <clipPath id="clip0_1887_4787">
-                <rect width="20" height="20" fill="white" />
+                <rect width="20" height="20" fill="white"/>
               </clipPath>
             </defs>
           </svg>
@@ -247,7 +254,7 @@
           </svg>
         </NuxtLink>
       </div>
-      <NuxtLink to="/cart" class="navigation__cart-block">
+      <NuxtLink v-if="!is_preview" to="/cart" class="navigation__cart-block">
         <client-only>
           <span class="navigation__cart-block-icon">
             <transition name="cart-count">
@@ -281,6 +288,7 @@
 
 <script>
 import dropdownMixin from "@/mixins/dropdowns.js";
+
 export default {
   mixins: [dropdownMixin],
   mounted() {
@@ -301,9 +309,16 @@ export default {
     };
   },
   methods: {
+    windowRedirect(){
+      window.location.href = "https://abedo.ru/admin"
+    },
+    parseLink(link, alternate = false) {
+      if (alternate) return this.is_preview ? link : this.$route.fullPath;
+      return this.is_preview ? this.$route.fullPath : link;
+    },
     dropdownClick() {
       if (this.token) return (this.show_dropdown = true);
-      this.$store.commit("modals/open", { modal_name: "login" });
+      this.$store.commit("modals/open", {modal_name: "login"});
     },
     closeDropdown() {
       this.show_dropdown = false;
@@ -317,6 +332,9 @@ export default {
     cart_products() {
       return this.$store.state.cart.products;
     },
+    is_preview() {
+      return +this.$route.query.preview === 1;
+    }
   },
   watch: {
     "$route.path": {
@@ -349,17 +367,21 @@ export default {
 
   &.scaled {
     height: 70px;
+
     .navigation {
       &__logo {
         transform: scale(0.8);
       }
+
       &__button {
         height: 45px;
         width: 175px;
       }
+
       &__icons {
         transform: scale(0.8);
       }
+
       &__cart-block-icon {
         transform: scale(0.8);
       }
@@ -471,6 +493,7 @@ export default {
           background-color: transparent;
           border: none;
           outline: none;
+
           &__button {
             background-color: transparent;
             border: none;
@@ -479,6 +502,7 @@ export default {
             justify-content: center;
             flex-direction: row;
           }
+
           &-content {
             background-color: $white;
             position: absolute;
@@ -515,6 +539,7 @@ export default {
               font-weight: 400;
               font-size: 15px;
               line-height: 17px;
+
               &:active {
                 transform: scale(0.98);
               }
@@ -525,6 +550,15 @@ export default {
             }
           }
         }
+      }
+
+      &_empty {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
       }
     }
 
@@ -589,6 +623,7 @@ export default {
         border: 1px solid $darkblue;
         margin-right: 15px;
         transition: $transition;
+
         &__indicator {
           height: 24px;
           min-width: 24px;
