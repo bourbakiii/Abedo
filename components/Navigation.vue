@@ -313,6 +313,7 @@ export default {
       if (this.is_preview) window.location.href = "https://abedo.ru/admin"
     },
     dropdownClick() {
+      if (this.is_preview) return;
       if (this.token) return (this.show_dropdown = true);
       this.$store.commit("modals/open", {modal_name: "login"});
     },
