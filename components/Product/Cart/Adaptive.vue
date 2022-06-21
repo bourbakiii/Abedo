@@ -30,7 +30,7 @@
         />
       </NuxtLink>
       <div
-        v-if="product.is_active"
+        v-if="product.section.is_work_now"
         class="product-cart-adaptive__data__buttons"
       >
         <ButtonProduct

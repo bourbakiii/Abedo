@@ -219,7 +219,7 @@
               </div>
               <client-only>
                 <div
-                  v-if="product.is_active"
+                  v-if="product.section.is_work_now"
 
                   class="product-page__over__content__main__additional__information__buttons"
                 >

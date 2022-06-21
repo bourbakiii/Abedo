@@ -45,7 +45,7 @@ or
         </p>
       </div>
     </div>
-    <div v-if="product.is_active" @click.self="go_by_link" class="product-item__buttons">
+    <div v-if="product.section.is_work_now" @click.self="go_by_link" class="product-item__buttons">
       <client-only>
         <div
           @click.self="go_by_link"

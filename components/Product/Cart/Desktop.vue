@@ -57,7 +57,7 @@
     </NuxtLink>
 
     <p class="product-cart__price">{{ product_price_with_discount }}₽</p>
-    <div class="product-cart__buttons" v-if="product.is_active">
+    <div class="product-cart__buttons" v-if="product.section.is_work_now">
       <ButtonProduct
         class="product-cart__buttons__button"
         size="40"
@@ -75,7 +75,7 @@
     <p class="product-cart__price product-cart__price_full">
       {{ product_total_price_with_discount }}₽
     </p>
-    
+
     <button @click="remove" class="product-cart__close">
       <svg
         class="product-cart__close__icon"

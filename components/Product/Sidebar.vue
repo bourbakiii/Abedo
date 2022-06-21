@@ -92,7 +92,7 @@
       </div>
     </div>
     <div v-if="!is_gift" class="product-sidebar__actions">
-      <div v-if="product.is_active" class="product-sidebar__actions__buttons">
+      <div v-if="product.section.is_work_now" class="product-sidebar__actions__buttons">
         <ButtonProduct
           class="product-sidebar__actions__buttons__button"
           size="26"
