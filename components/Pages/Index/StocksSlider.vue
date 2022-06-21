@@ -27,10 +27,10 @@
       >
         <swiper-slide
           class="stocks__slide"
-          v-for="stock in stocks"
+          v-for="(stock,index) in stocks"
           :key="stock.id"
         >
-          <Stock :stock="stock" class="stocks__slide__item"/>
+          <Stock :index="index" :stock="stock" class="stocks__slide__item"/>
         </swiper-slide>
       </swiper>
       <button

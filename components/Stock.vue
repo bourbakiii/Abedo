@@ -2,13 +2,10 @@
   <button
     @click.prevent="() => $router.push(parseLink(`/partners/${stock.shop.id}`))"
     class="stock__wrapper"
-    :style="`background: ${
-      stock.image
-        ? `url(${$axios.defaults.baseURL}${stock.image.original})`
-        : 'red'
-    };`"
+    :style="stock.image?`background: url(${$axios.defaults.baseURL}${stock.image.original})`:''"
+
   >
-    <div class="stock">
+    <div class="stock" :class="parseColor(index)">
       <div class="stock__content">
         <div
           class="stock__content__hood"
@@ -38,8 +35,27 @@ export default {
   props: {
     stock: {
       required: true,
+    },
+    index: {
+      required: true,
+      index: 0
     }
   },
+  methods: {
+    parseColor() {
+      const index_of_color = this.index % 4;
+      switch (index_of_color) {
+        case 0:
+          return 'blue';
+        case 1:
+          return 'red';
+        case 2:
+          return 'orange';
+        case 3:
+          return 'green';
+      }
+    }
+  }
 
 };
 </script>
@@ -61,6 +77,28 @@ export default {
 
   position: relative;
   padding-bottom: calc(100% * (172 / 403));
+
+  &.blue {
+    background-color: rgba($darkblue, 0.9)
+  }
+
+  &.orange {
+    background-color: rgba($orange, 0.9)
+  }
+
+
+  &.red {
+    background-color: rgba($red, 0.9)
+  }
+
+  &.orange {
+    background-color: rgba($orange, 0.9)
+  }
+
+  &.green {
+    background-color: rgba($green, 0.9);
+  }
+
   @media screen and (max-width: $tablet) {
     height: 134px;
     width: 335px;
@@ -80,7 +118,6 @@ export default {
     padding: 20px;
     width: 100%;
     height: 100%;
-    background-color: rgba($orange, 0.9);
     display: flex;
     align-items: flex-start;
     justify-content: space-between;

@@ -9,11 +9,11 @@
       >
         <swiper-slide
           class="stocks__slide"
-      v-for="stock in stocks"
-      :key="stock.id"
+          v-for="(stock,index) in stocks"
+          :key="stock.id"
         >
-          <Stock           :stock="stock"
- class="stocks__slide__item" />
+          <Stock :index="index" :stock="stock"
+                 class="stocks__slide__item"/>
         </swiper-slide>
       </swiper>
       <button
@@ -68,7 +68,8 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import {Swiper, SwiperSlide} from "vue-awesome-swiper";
+
 export default {
   props: {
     stocks: {
@@ -112,6 +113,7 @@ export default {
 .stocks {
   width: 100%;
   height: max-content;
+
   &__title {
     font-family: "SF Pro Display";
     font-style: normal;
@@ -120,6 +122,7 @@ export default {
     line-height: 20px;
     margin-bottom: 20px;
   }
+
   &__wrapper {
     position: relative;
     max-width: 100%;
@@ -133,6 +136,7 @@ export default {
       max-width: 100%;
     }
   }
+
   &__slide {
     overflow: hidden !important;
     margin-right: 35px;
@@ -154,9 +158,11 @@ export default {
       margin-right: 0px;
       width: 100%;
     }
+
     &:last-of-type {
       margin-right: 0px;
     }
+
     &__item {
       width: 100%;
       height: auto;
@@ -165,6 +171,7 @@ export default {
       }
     }
   }
+
   &__pagination {
     position: absolute;
     top: calc(100% + 20px);
@@ -173,6 +180,7 @@ export default {
     width: 100%;
     z-index: 1;
   }
+
   &__button {
     transform: translateY(-25%);
     width: 50px;
@@ -184,6 +192,7 @@ export default {
     @media screen and (max-width: $tablet) {
       display: none;
     }
+
     &_prev {
       left: 0px;
       transform: translate(-90px, -50%);
@@ -191,6 +200,7 @@ export default {
         transform: translate(-30px, -50%);
       }
     }
+
     &_next {
       right: 0px;
       transform: translate(90px, -50%);
@@ -198,6 +208,7 @@ export default {
         transform: translate(30px, -50%);
       }
     }
+
     &::before,
     &::after {
       display: none;
@@ -220,9 +231,11 @@ export default {
       background-color: transparent;
       margin-right: 10px;
     }
+
     &:last-of-type {
       margin-right: 0px;
     }
+
     &-active {
       background-color: $orange;
       @media screen and (max-width: $tablet) {

@@ -2,7 +2,8 @@
   <div class="partner-stocks">
     <Stock
       :stock="stock"
-      v-for="stock in stocks"
+      v-for="(stock,index) in stocks"
+      :index="index"
       :key="stock.id"
       class="partner-stocks__item"
     />
