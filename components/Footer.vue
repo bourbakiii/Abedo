@@ -35,30 +35,79 @@
         <p class="footer__logo-block-text">© {{ new Date().getFullYear() }}. Все права защищены</p>
       </div>
       <div v-if="!is_preview" class="footer__links">
-        <NuxtLink
-          to=""
-          class="footer__links__link">
-          О сервисе
-        </NuxtLink>
+        <div class="footer__links__top">
+          <NuxtLink
+            to=""
+            class="footer__links__top__link">
+            О сервисе
+          </NuxtLink>
 
-        <NuxtLink
-          to=""
-          class="footer__links__link">
-          Добавить заведение
-        </NuxtLink>
+          <NuxtLink
+            to=""
+            class="footer__links__top__link">
+            Добавить заведение
+          </NuxtLink>
 
-        <NuxtLink
-          to="/news?page=1"
-          class="footer__links__link">
-          Новости сервиса
-        </NuxtLink>
+          <NuxtLink
+            to="/news?page=1"
+            class="footer__links__top__link">
+            Новости сервиса
+          </NuxtLink>
 
-        <NuxtLink v-for="page in pages" :key="page.id"
-                  :to="page.link?page.link:`/statics/${page.id}`"
-                  class="footer__links__link">{{
-            page.title
-                                              }}
-        </NuxtLink>
+          <NuxtLink v-for="page in pages" :key="page.id"
+                    :to="page.link?page.link:`/statics/${page.id}`"
+                    class="footer__links__top__link">{{
+              page.title
+                                                     }}
+          </NuxtLink>
+        </div>
+        <div class="footer__links__bottom">
+          <NuxtLink to="" class="footer__links__bottom__item footer__links__bottom__item_apple unselectable">
+            <svg class="footer__links__bottom__item__icon" width="15" height="15" viewBox="0 0 15 15" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_4602_14710)">
+                <path
+                  d="M10.0718 0.555664C10.1056 0.555664 10.1395 0.555664 10.1753 0.555664C10.2583 1.55865 9.86676 2.30807 9.39091 2.85078C8.92401 3.38974 8.28466 3.91247 7.25058 3.83315C7.1816 2.84453 7.57377 2.15069 8.04897 1.60923C8.48969 1.10462 9.29766 0.655587 10.0718 0.555664Z"
+                  fill="white"/>
+                <path
+                  d="M13.2021 10.9952C13.2021 11.0052 13.2021 11.0139 13.2021 11.0233C12.9115 11.8839 12.497 12.6214 11.9911 13.3059C11.5293 13.9273 10.9634 14.7635 9.95299 14.7635C9.07986 14.7635 8.49991 14.2146 7.60507 14.1996C6.6585 14.1846 6.13794 14.6586 5.27249 14.7779C5.17348 14.7779 5.07448 14.7779 4.9774 14.7779C4.34188 14.688 3.82899 14.1958 3.45534 13.7524C2.35356 12.4422 1.50215 10.7497 1.34375 8.5839C1.34375 8.37156 1.34375 8.15985 1.34375 7.94751C1.41082 6.39745 2.18111 5.13716 3.20497 4.52638C3.74532 4.20163 4.48814 3.92496 5.31528 4.04862C5.66977 4.10233 6.03192 4.22099 6.34936 4.3384C6.65019 4.45144 7.0264 4.65191 7.3828 4.64129C7.62423 4.63442 7.86439 4.51139 8.10774 4.42458C8.82055 4.1729 9.5193 3.88437 10.4403 4.01989C11.5472 4.18352 12.3328 4.6644 12.8183 5.40633C11.8819 5.98901 11.1416 6.86709 11.2681 8.36656C11.3805 9.72864 12.1904 10.5255 13.2021 10.9952Z"
+                  fill="white"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_4602_14710">
+                  <rect width="14.5455" height="14.2222" fill="white" transform="translate(0 0.555664)"/>
+                </clipPath>
+              </defs>
+            </svg>
+            <p class="footer__links__bottom__item__name">App Store</p>
+          </NuxtLink>
+          <NuxtLink to="" class="footer__links__bottom__item footer__links__bottom__item_google unselectable">
+            <svg class="footer__links__bottom__item__icon" width="15" height="15" viewBox="0 0 15 15" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_4602_14718)">
+                <path
+                  d="M3.08115 0.67191C2.52883 0.364372 1.88034 0.371483 1.33154 0.676354L7.76353 6.65379L9.92429 4.47703L3.08115 0.67191Z"
+                  fill="white"/>
+                <path
+                  d="M0.688451 1.28784C0.531401 1.54649 0.441406 1.84248 0.441406 2.15624V12.9521C0.441406 13.2561 0.52346 13.5458 0.671687 13.7991L7.13985 7.28306L0.688451 1.28784Z"
+                  fill="white"/>
+                <path
+                  d="M12.7892 6.06979L10.7282 4.92407L8.41211 7.25639L11.2505 9.89357L12.7901 9.03762C13.3442 8.7283 13.6759 8.17367 13.6759 7.55326C13.675 6.93285 13.3442 6.37821 12.7892 6.06979Z"
+                  fill="white"/>
+                <path
+                  d="M7.78854 7.88574L1.30273 14.4196C1.58419 14.5814 1.893 14.6667 2.20357 14.6667C2.50355 14.6667 2.8053 14.5903 3.08146 14.4365L10.4372 10.3469L7.78854 7.88574Z"
+                  fill="white"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_4602_14718">
+                  <rect width="14.1176" height="14.2222" fill="white" transform="translate(0 0.444458)"/>
+                </clipPath>
+              </defs>
+            </svg>
+            <p class="footer__links__bottom__item__name">Google Play</p>
+
+          </NuxtLink>
+        </div>
       </div>
       <p v-else class="footer__links_empty">Режим предварительного просмотра</p>
 
@@ -202,34 +251,78 @@ export default {
 
   &__links {
     color: inherit;
-    height: 100%;
-    display: grid;
-    margin: 0 10px;
-    grid-template-columns: repeat(4, auto);
-    grid-gap: 10px 30px;
-    width: max-content;
-    @media screen and (max-width: $notebook + 20px) {
-      grid-gap: 10px 20px;
-      grid-template-columns: repeat(3, auto);
-    }
-    @media screen and (max-width: $sidebar_dn) {
-      grid-gap: 10px 15px;
-      grid-template-columns: repeat(2, auto);
-    }
 
-    &__link {
-      width: max-content;
-      text-decoration: none;
+    &__top {
       color: inherit;
-      text-align: center;
+      height: 100%;
+      display: grid;
+      margin: 0 10px;
+      grid-template-columns: repeat(4, auto);
+      grid-gap: 10px 30px;
+      width: max-content;
+      @media screen and (max-width: $notebook + 20px) {
+        grid-gap: 10px 20px;
+        grid-template-columns: repeat(3, auto);
+      }
+      @media screen and (max-width: $sidebar_dn) {
+        grid-gap: 10px 15px;
+        grid-template-columns: repeat(2, auto);
+      }
 
-      &:hover {
-        text-decoration: underline;
+      &__link {
+        width: max-content;
+        text-decoration: none;
+        color: inherit;
+        text-align: center;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
       }
     }
 
-    &:last-of-type {
-      margin-bottom: 0;
+    &__bottom {
+      color: inherit;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      &__item {
+        width: 140px;
+        height: 40px;
+        background-color: $lightblack;
+        border: 1px solid $white;
+        border-radius: 10px;
+        color: inherit;
+        text-decoration: none;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        &:first-of-type{
+          margin-right: 20px;
+        }
+        &__name{
+          text-decoration: inherit;
+          font-family: 'Roboto',serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 16px;
+          letter-spacing: 0.05em;
+          color: inherit;
+        }
+        &__icon {
+          margin-right: 5px;
+        }
+      }
     }
 
     &_empty {
