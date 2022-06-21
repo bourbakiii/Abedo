@@ -314,7 +314,7 @@ export default {
     },
     dropdownClick() {
       if (this.is_preview) return;
-      if (this.token) return (this.show_dropdown = true);
+      if (this.token) return this.show_dropdown = true;
       this.$store.commit("modals/open", {modal_name: "login"});
     },
     closeDropdown() {

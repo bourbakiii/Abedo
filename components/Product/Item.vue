@@ -1,4 +1,3 @@
-or
 <template>
   <div @click.self="go_by_link" class="product product-item"
        :class="{ 'product-item_in-cart': in_cart, 'product-item__without_image': !product.image.original}">
@@ -19,7 +18,7 @@ or
       <p :class='{"product-item__info__name__without_image": !product.image.original}' class="product-item__info__name">
         {{ product.name }}</p>
       <div class="product-item__info__prices adaptive-non">
-        <p class="product-item__info__prices__price">{{ product.price }}₽</p>
+        <p class="product-item__info__prices__price" :class="{red: discount_percent}">{{ product.price }}₽</p>
         <p class="product-item__info__prices__weight">
           / {{ product.weight }}{{ product.weight_unit.short_name }}
         </p>
@@ -34,7 +33,7 @@ or
         {{ product.weight }}г
       </div>
       <div class="product-item__info__prices__mobile adaptive">
-        <p class="product-item__info__prices__mobile__price">
+        <p class="product-item__info__prices__mobile__price"  :class="{red: discount_percent}">
           {{ product.price }}₽
         </p>
         <p
@@ -334,14 +333,14 @@ export default {
       align-items: center;
       justify-content: center;
       flex-direction: row;
-      width:100%;
+      width: 100%;
       border-radius: 50px;
       font-family: 'SF Pro Display';
       font-style: normal;
       font-weight: 500;
       font-size: 14px;
       line-height: 17px;
-      max-width:228px;
+      max-width: 228px;
     }
 
     &__add {

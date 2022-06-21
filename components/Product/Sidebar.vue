@@ -116,7 +116,7 @@
         >
           {{ product.price }}₽
         </p>
-        <p class="product-sidebar__actions__prices__price">
+        <p class="product-sidebar__actions__prices__price"  :class="{red: discount_percent}">
           {{ product_price_with_discount }}₽
         </p>
       </div>

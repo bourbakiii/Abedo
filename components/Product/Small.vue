@@ -9,7 +9,7 @@
       {{ product.name }}
     </p>
     <div class="product-small__info">
-      <p class="product-small__info__price">{{ product_price_with_discount }}₽</p>
+      <p class="product-small__info__price"  :class="{red: discount_percent}">{{ product_price_with_discount }}₽</p>
       <p class="product-small__info__weight">/ {{ product.weight }}{{ product.weight_unit.short_name }}</p>
       <div v-if='discount_percent' class="product-small__info__full-price">{{ product.price }}₽</div>
     </div>

@@ -5,7 +5,7 @@
     class="button button-product"
   >
     <svg
-      v-if="icon == 'minus'"
+      v-if="icon === 'minus'"
       class="button-product__icon"
       width="12"
       height="2"
@@ -21,7 +21,7 @@
       />
     </svg>
     <svg
-      v-if="icon == 'plus'"
+      v-if="icon === 'plus'"
       class="button-product__icon"
       width="10"
       height="10"
