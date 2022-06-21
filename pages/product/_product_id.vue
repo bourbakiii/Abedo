@@ -311,17 +311,14 @@ import productMixin from "@/mixins/product.js";
 import previewHider from "@/mixins/preview-hider";
 
 export default {
-  // name: "product-images-slider",
-  title: "Product images slider",
   mixins: [productMixin, previewHider],
   components: {
     Swiper,
     SwiperSlide,
     Checkbox,
   },
-  async asyncData({app, $axios, route, error, redirect}) {
-    let to_return_product = {},
-      loading = true;
+  async asyncData({app, $axios, route, error}) {
+    let to_return_product = {};
     if (route.query.preview && +route.query.preview === 1) {
       const token = app.$cookies.get('admin_token' || null);
       const preview_shop_id = app.$cookies.get('preview_shop_id' || null);
@@ -334,17 +331,13 @@ export default {
           if (!product) return error({statusCode: 404, message: "Продукт неактивен"});
           to_return_product = product;
         }).catch(({response}) => {
-            console.log("response status is:");
-            console.log(response.status);
             if (response?.status === 401 || response?.status === 403) return error({
               statusCode: 403,
               message: "У вас недостаточно прав"
             });
             return error({statusCode: 404, message: "Ошибка при получении продукта"});
           }
-        ).finally(() => {
-          console.log("ну по крайней мере оно выполняется");
-        })
+        );
     } else await $axios
       .$get(
         `${$axios.defaults.baseURL}/api/product/${route.params.product_id}`
@@ -356,13 +349,9 @@ export default {
       })
       .catch(() => {
         error({statusCode: 404, message: "Ошибка при получении продукта"});
-      })
-      .finally(() => {
-        loading = false;
       });
 
-
-    return {loading, product: to_return_product};
+    return {product: to_return_product};
   },
   data() {
     return {

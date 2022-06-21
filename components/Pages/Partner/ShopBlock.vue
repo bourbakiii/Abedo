@@ -152,11 +152,14 @@
           </defs>
         </svg>
       </span>
-      <a :href="`tel:+7${parsePhone(partner.contact_phone)}`"  class="shop-block__additional__text shop-block__phone__text">
+      <a :href="`tel:+7${parsePhone(partner.contact_phone)}`"
+         class="shop-block__additional__text shop-block__phone__text">
         +7 {{ parsePhone(`${partner.contact_phone}`) }}
       </a>
-      <div class="shop-block__additional__socials">
-        <NuxtLink to="#" class="shop-block__additional__socials__item">
+      <div v-if="partner.socials && (partner.socials.telegram || partner.socials.whats_app)"
+           class="shop-block__additional__socials">
+        <a target="_blank" :href="partner.socials.whats_app" v-if="partner.socials.whats_app"
+           class="shop-block__additional__socials__item">
           <svg class="shop-block__additional__socials__item__icon" width="30" height="30" viewBox="0 0 30 30"
                fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -167,8 +170,9 @@
               fill="#FAFAFA"/>
           </svg>
 
-        </NuxtLink>
-        <NuxtLink to="#" class="shop-block__additional__socials__item">
+        </a>
+        <a target="_blank" :href="partner.socials.telegram" v-if="partner.socials.telegram"
+           class="shop-block__additional__socials__item">
           <svg class="shop-block__additional__socials__item__icon" width="30" height="30" viewBox="0 0 30 30"
                fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -179,7 +183,7 @@
                   fill="white"/>
           </svg>
 
-        </NuxtLink>
+        </a>
       </div>
       <!-- <div v-if="partner.rate" class="shop-block__additional__rating">
         <svg

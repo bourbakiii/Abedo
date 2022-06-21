@@ -38,6 +38,8 @@ export default {
     }, cart_products() {
       return this.$store.state.cart.products;
     }, in_cart() {
+      if(+this.$route.query.preview === 1) return false;
+
       return this.cart_products.map(product => +product.id).includes(+this.product.id);
     }, count() {
       if (!this.in_cart) return -1;
@@ -67,7 +69,7 @@ export default {
   },
   watch: {
     in_cart(value) {
-      if(+this.$route.query.preview === 1) return false;
+
 
       if (!value) {
         this.$store.commit("cart/action", state =>

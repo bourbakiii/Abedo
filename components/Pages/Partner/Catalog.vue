@@ -43,7 +43,10 @@
   </div>
 </template>
 <script>
+import previewHider from "@/mixins/preview-hider";
+
 export default {
+  mixins: [previewHider],
   props: {
     partner: {
       required: true,
@@ -71,9 +74,14 @@ export default {
     },
   },
   async fetch() {
+    const token = this.$cookies.get('admin_token') || null;
     await this.$axios
-      .get(`/api/shops/${this.$route.params.partner_id}/menu`)
-      .then(({ data: { sections } }) => {
+      .get(this.is_preview ? `/api/admin/preview/shop/${this.$route.params.partner_id}/menu` : `/api/shops/${this.$route.params.partner_id}/menu`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(({data: {sections}}) => {
         this.sections = sections;
       });
   },
@@ -84,9 +92,9 @@ export default {
   },
   methods: {
     sectionWithoutProducts(section) {
-      let object = { ...section };
+      let object = {...section};
       delete object.products;
-      return { section: object };
+      return {section: object};
     },
     setCurrentSection(section_id) {
       Array.from([
@@ -114,10 +122,12 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   width: 100%;
+
   &__title {
     align-self: flex-start;
     margin-bottom: 15px;
   }
+
   &__sections {
     width: 100%;
     display: flex;
@@ -131,6 +141,7 @@ export default {
     background-color: $light_grey;
     z-index: $z_navigation;
     padding-top: 15px;
+
     &::before {
       z-index: 10;
       content: "";
@@ -141,6 +152,7 @@ export default {
       top: 100%;
       left: 0px;
     }
+
     &__slider {
       margin-bottom: 15px;
       padding: 15px 0px;
@@ -148,6 +160,7 @@ export default {
       top: 60px;
       background-color: $light_grey;
       z-index: $z_navigation;
+
       &::before {
         z-index: 10;
         content: "";
@@ -159,6 +172,7 @@ export default {
         left: 0px;
       }
     }
+
     &__item {
       flex-grow: 0;
       flex-shrink: 0;
@@ -166,12 +180,14 @@ export default {
       margin-bottom: 10px;
     }
   }
+
   &__products {
     width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
+
     &__section {
       width: 100%;
       display: flex;
@@ -179,12 +195,15 @@ export default {
       justify-content: flex-start;
       flex-direction: column;
       margin-bottom: 30px;
+
       &:last-of-type {
         margin-bottom: 0px;
       }
+
       &__title {
         margin-bottom: 30px;
       }
+
       &__content {
         width: 100%;
         display: grid;
@@ -201,6 +220,7 @@ export default {
           grid-template-columns: repeat(2, 1fr);
           grid-gap: 15px;
         }
+
         &__item {
           width: auto;
           overflow: hidden;

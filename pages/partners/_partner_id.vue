@@ -1,7 +1,8 @@
 <template>
   <div class="page partner-page wrapper">
     <div class="partner-page__over">
-      <Breadcrumbs class="partner-page__over__breadcrumbs adaptive-non" :way="[{name:'Партнеры', link:`/partners`},{name:partner.name, link:`/partners/${partner.id}`}]"/>
+      <Breadcrumbs class="partner-page__over__breadcrumbs adaptive-non"
+                   :way="[{name:'Партнеры', link:`/partners`},{name:partner.name, link:`/partners/${partner.id}`}]"/>
       <div class="partner-page__over__content content">
         <div class="partner-page__over__content__main">
           <PagesPartnerShopBlock
@@ -30,37 +31,38 @@
 </template>
 <script>
 import {Swiper, SwiperSlide} from "vue-awesome-swiper";
+import previewHider from "@/mixins/preview-hider";
 
 export default {
-  name: "swiper-example-mousewheel-control",
-  title: "Mousewheel control",
+  mixins: [previewHider],
   components: {
     Swiper,
     SwiperSlide,
   },
-  async asyncData({$axios, route, error}) {
+  async asyncData({app, $axios, route, error}) {
     let partner = {},
-      loading = true,
       stocks = [];
+    const is_preview = route.query.preview && +route.query.preview === 1;
+    const URL = is_preview ? `${$axios.defaults.baseURL}/api/admin/preview/shop/${route.params.partner_id}` : `${$axios.defaults.baseURL}/api/shop/${route.params.partner_id}`
+    const admin_token = app.$cookies.get('admin_token' || null);
     await $axios
-      .$get(`${$axios.defaults.baseURL}/api/shop/${route.params.partner_id}`)
+      .$get(URL, {
+        headers: {Authorization: `Bearer ${admin_token}`}
+      })
       .then(async ({shop}) => {
         partner = shop;
-        await $axios
-          .$get(
-            `${$axios.defaults.baseURL}/api/shares/shop/${route.params.partner_id}`
-          )
-          .then(({shares: {data}}) => {
-            stocks = data;
-          });
+        if (!is_preview) await $axios.$get(`${$axios.defaults.baseURL}/api/shares/shop/${route.params.partner_id}`).then(({shares: {data}}) => {
+          stocks = data;
+        });
       })
-      .catch(() => {
-        error({statusCode: 404, message: "Ошибка при получении партнера"});
-      })
-      .finally(() => {
-        loading = false;
+      .catch(err => {
+        if (err.response?.status === 401 || err.response?.status === 403) return error({
+          statusCode: 403,
+          message: "У вас недостаточно прав"
+        });
+        return error({statusCode: 404, message: "Ошибка при получении партнера"});
       });
-    return {loading, partner, stocks};
+    return {partner, stocks};
   },
   data() {
     return {
@@ -79,7 +81,6 @@ export default {
         text: this.partner.name,
         slot: "label",
         rating: this.partner.rate,
-
         info_click: () =>
           this.$store.commit("modals/open", {
             modal_name: "partner",
@@ -91,7 +92,6 @@ export default {
   created() {
     this.$store.commit('action', state => {
       try {
-        // console.log(Boolean(JSON.parse(this.$route.query.preview || false)));
         state.preview = Boolean(JSON.parse(this.$route.query.preview || false));
       } catch (error) {
         this.$nuxt.error({statusCode: 404, message: "Ошибка в поле предпросмотра"});
@@ -104,8 +104,8 @@ export default {
     },
     cart_partner() {
       return this.$store.state.cart.partner;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

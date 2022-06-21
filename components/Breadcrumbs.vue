@@ -1,23 +1,23 @@
 <template>
   <div class="breadcrumbs">
-    <NuxtLink to="/" class="breadcrumbs__item">Главная</NuxtLink>
-
-    <NuxtLink :to="index+1 === way?'':item.link" class="breadcrumbs__item" v-for="(item,index) in way" :key="index">
+    <NuxtLink :to="parseLink('/')" class="breadcrumbs__item">Главная</NuxtLink>
+    <NuxtLink :to="parseLink(index+1 === way?'':item.link)" class="breadcrumbs__item" v-for="(item,index) in way"
+              :key="index">
       <svg class="breadcrumbs__item__icon" width="6" height="10" viewBox="0 0 6 10" fill="none"
            xmlns="http://www.w3.org/2000/svg">
         <path
           d="M1.05187e-07 1.17918L3.71005 5L1.40616e-08 8.82082L1.14496 10L6 5L1.14496 1.36535e-08L1.05187e-07 1.17918Z"
           fill="#5C6784"/>
       </svg>
-
-
       {{ item.name }}
     </NuxtLink>
-
   </div>
 </template>
 <script>
+import previewHider from "@/mixins/preview-hider";
+
 export default {
+  mixins: [previewHider],
   props: {
     way: {
       required: true,
@@ -25,7 +25,7 @@ export default {
         return [];
       }
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>

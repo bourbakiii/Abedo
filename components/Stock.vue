@@ -1,6 +1,6 @@
 <template>
   <button
-    @click.prevent="() => $router.push(`/partners/${stock.shop.id}`)"
+    @click.prevent="() => $router.push(parseLink(`/partners/${stock.shop.id}`))"
     class="stock__wrapper"
     :style="`background: ${
       stock.image
@@ -31,13 +31,16 @@
   </button>
 </template>
 <script>
+import previewHider from "@/mixins/preview-hider";
+
 export default {
+  mixins: [previewHider],
   props: {
     stock: {
       required: true,
-
-    },
+    }
   },
+
 };
 </script>
 <style lang="scss" scoped>

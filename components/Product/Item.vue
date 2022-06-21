@@ -1,5 +1,7 @@
-or<template>
-  <div @click.self="go_by_link" class="product product-item" :class="{ 'product-item_in-cart': in_cart, 'product-item__without_image': !product.image.original}">
+or
+<template>
+  <div @click.self="go_by_link" class="product product-item"
+       :class="{ 'product-item_in-cart': in_cart, 'product-item__without_image': !product.image.original}">
     <div
       @click="go_by_link"
       v-if="discount_percent"
@@ -14,7 +16,8 @@ or<template>
       class="product-item__image"
     />
     <div @click="go_by_link" class="product-item__info">
-      <p :class='{"product-item__info__name__without_image": !product.image.original}' class="product-item__info__name">{{ product.name }}</p>
+      <p :class='{"product-item__info__name__without_image": !product.image.original}' class="product-item__info__name">
+        {{ product.name }}</p>
       <div class="product-item__info__prices adaptive-non">
         <p class="product-item__info__prices__price">{{ product.price }}₽</p>
         <p class="product-item__info__prices__weight">
@@ -43,7 +46,7 @@ or<template>
         </p>
       </div>
     </div>
-    <div v-if='product.is_active' @click.self="go_by_link" class="product-item__buttons">
+    <div @click.self="go_by_link" class="product-item__buttons" :class="{invisible: !product.is_active }">
       <client-only>
         <div
           @click.self="go_by_link"
@@ -96,7 +99,7 @@ export default {
   },
   methods: {
     go_by_link() {
-      this.$router.push(`/product/${this.product.id}`);
+      if(this.is_preview) this.$router.push(`/product/${this.product.id}`);
     },
   },
 };
@@ -116,7 +119,8 @@ export default {
   transition: border $transition;
   border: 2px solid transparent;
   min-height: 371px;
-  &_in-cart{
+
+  &_in-cart {
     border: 2px solid $orange;
   }
 
@@ -125,9 +129,11 @@ export default {
     height: auto;
     min-height: 249px;
   }
+
   &_in-cart {
     border: 2px solid $orange;
   }
+
   &__discount {
     position: absolute;
     top: 20px;
@@ -207,7 +213,8 @@ export default {
         -webkit-line-clamp: 3;
         line-clamp: 3;
       }
-      &__without_image{
+
+      &__without_image {
         margin: auto 0px;
 
         -webkit-line-clamp: 10;
@@ -319,7 +326,7 @@ export default {
 
     &__add {
       width: 100%;
-      margin-right:0px !important;
+      margin-right: 0px !important;
     }
 
     &__button_add {

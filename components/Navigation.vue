@@ -109,7 +109,6 @@
             @mouseleave="closeDropdown"
             @click='windowRedirect'
           >
-
             <button
               class="navigation__links-link__dropdown__button"
               @mouseenter="show_dropdown = true"
@@ -289,6 +288,7 @@
 <script>
 import dropdownMixin from "@/mixins/dropdowns.js";
 import previewHider from "@/mixins/preview-hider.js";
+
 export default {
   mixins: [dropdownMixin, previewHider],
   mounted() {
@@ -309,8 +309,8 @@ export default {
     };
   },
   methods: {
-    windowRedirect(){
-      window.location.href = "https://abedo.ru/admin"
+    windowRedirect() {
+      if (this.is_preview) window.location.href = "https://abedo.ru/admin"
     },
     dropdownClick() {
       if (this.token) return (this.show_dropdown = true);
