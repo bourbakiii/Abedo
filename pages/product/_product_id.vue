@@ -219,6 +219,8 @@
               </div>
               <client-only>
                 <div
+                  v-if="product.is_active"
+
                   class="product-page__over__content__main__additional__information__buttons"
                 >
                   <ButtonStandart
@@ -268,6 +270,11 @@
                       @click="crease"
                     />
                   </div>
+                </div>
+                <div v-else class="product-page__over__content__main__additional__information__buttons">
+                  <p
+                    class="product-page__over__content__main__additional__information__buttons__button product-page__over__content__main__additional__information__buttons__disactive">
+                    Недоступен</p>
                 </div>
               </client-only>
             </div>
@@ -854,6 +861,19 @@ export default {
 
             &__buttons {
               width: 100%;
+
+              &__disactive {
+                width: 100%;
+                max-width: 228px;
+                height: 50px;
+                border: 1px solid $extra_dark_grey;
+                border-radius: 50px;
+                font-family: "SF Pro Display", serif;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+              }
 
               &__button {
                 width: 228px;

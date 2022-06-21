@@ -40,13 +40,12 @@ or
         <p
           v-if="discount_percent"
           class="product-item__info__prices__mobile__price_full"
-
         >
           {{ product_price_with_discount }}₽
         </p>
       </div>
     </div>
-    <div @click.self="go_by_link" class="product-item__buttons" :class="{invisible: !product.is_active }">
+    <div v-if="product.is_active" @click.self="go_by_link" class="product-item__buttons">
       <client-only>
         <div
           @click.self="go_by_link"
@@ -82,6 +81,9 @@ or
         </div>
       </client-only>
     </div>
+    <div v-else class="product-item__buttons">
+      <span class="product-item__buttons__disactive">Недоступен</span>
+    </div>
   </div>
 </template>
 <script>
@@ -99,7 +101,7 @@ export default {
   },
   methods: {
     go_by_link() {
-      if(this.is_preview) this.$router.push(`/product/${this.product.id}`);
+      if (!this.is_preview) this.$router.push(`/product/${this.product.id}`);
     },
   },
 };
@@ -308,6 +310,7 @@ export default {
     }
   }
 
+
   &__buttons {
     margin-top: 25px;
     margin-bottom: 25px;
@@ -316,17 +319,34 @@ export default {
     justify-content: center;
     flex-direction: row;
     width: 100%;
-    padding: 0px 20px;
+    padding: 0 20px;
     @media screen and (max-width: $tablet) {
-      padding: 0px 15px;
+      padding: 0 15px;
       justify-content: flex-start;
       margin-top: 10px;
       margin-bottom: 17px;
     }
 
+    &__disactive {
+      height: 40px;
+      background-color: $blue_grey;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      width:100%;
+      border-radius: 50px;
+      font-family: 'SF Pro Display';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      max-width:228px;
+    }
+
     &__add {
       width: 100%;
-      margin-right: 0px !important;
+      margin-right: 0 !important;
     }
 
     &__button_add {
@@ -363,5 +383,7 @@ export default {
       }
     }
   }
+
+
 }
 </style>
