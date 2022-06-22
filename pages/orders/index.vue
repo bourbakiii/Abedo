@@ -1,7 +1,8 @@
 <template>
   <div class="page orders-page wrapper">
     <div class="orders-page__content content">
-      <Breadcrumbs class="orders-page__content__breadcrumbs adaptive-non"  :way="[{name:'История заказов', link:`/orders`}]"/>
+      <Breadcrumbs class="orders-page__content__breadcrumbs adaptive-non"
+                   :way="[{name:'История заказов', link:`/orders`}]"/>
       <div class="orders-page__content__orders">
         <h1 class="orders-page__content__orders__title title-normal adaptive-non">
           Список заказов
@@ -98,17 +99,29 @@
                   class="orders-page__content__orders__content__item__buttons__button orders-page__content__orders__content__item__buttons__button_rate"
                   v-if="!order.comments.length"
                 >Оценить
-                </ButtonStandart
-                >
+                </ButtonStandart>
                 <div v-else class="orders-page__content__orders__content__item__buttons__stars">
-                  <svg v-for="item in 5" :key="item"
-                       :class="order.comments[0].order_rating>=(item)?'filled':order.comments[0].order_rating>=item&&order.comments[0].order_rating<=item+1?'half':''"
-                       class="orders-page__content__orders__content__item__buttons__stars__star" width="20" height="19"
-                       viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M19.496 7.37001L19.4959 7.36983C19.4863 7.34017 19.46 7.3173 19.4268 7.3125L19.4267 7.31249L13.2267 6.41522L12.9668 6.37762L12.8503 6.1424L10.0774 0.547279L10.0774 0.547213C10.0635 0.519121 10.0339 0.5 10 0.5C9.96619 0.5 9.93657 0.519099 9.92261 0.547287L7.14965 6.14241L7.03307 6.37762L6.77326 6.41522L0.573287 7.31249L0.57321 7.3125C0.53998 7.31731 0.513695 7.34026 0.504054 7.36982L0.504037 7.36987C0.494461 7.39921 0.502198 7.43181 0.525219 7.45415L0.525262 7.45419L5.0115 11.8094L5.20072 11.9931L5.15597 12.253L4.09707 18.4027L4.09705 18.4028C4.09186 18.4329 4.10403 18.4643 4.13046 18.4835L19.496 7.37001ZM19.496 7.37001C19.5055 7.39919 19.4978 7.43176 19.4748 7.45411L19.4748 7.45414L14.988 11.8094L14.7988 11.9931L14.8436 12.253L15.9028 18.4026C15.908 18.4328 15.8957 18.4643 15.8693 18.4835C15.8427 18.5027 15.8069 18.5055 15.7773 18.49C15.7772 18.49 15.7772 18.49 15.7772 18.49L10.2319 15.5865L10 15.465L9.76807 15.5865L4.22251 18.49L4.22242 18.4901M19.496 7.37001L4.22242 18.4901M4.22242 18.4901C4.20976 18.4967 4.19598 18.5 4.18185 18.5C4.16335 18.5 4.1455 18.4943 4.13056 18.4835L4.22242 18.4901Z"
-                      fill="#F4F6FC" stroke="#DDE2F2"/>
-                  </svg>
+                  <div v-for="item in 5" :key="item"
+                       class="orders-page__content__orders__content__item__buttons__stars__star__wrapper">
+                    <svg
+                      class="orders-page__content__orders__content__item__buttons__stars__star" width="20"
+                      height="19"
+                      viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M19.496 7.37001L19.4959 7.36983C19.4863 7.34017 19.46 7.3173 19.4268 7.3125L19.4267 7.31249L13.2267 6.41522L12.9668 6.37762L12.8503 6.1424L10.0774 0.547279L10.0774 0.547213C10.0635 0.519121 10.0339 0.5 10 0.5C9.96619 0.5 9.93657 0.519099 9.92261 0.547287L7.14965 6.14241L7.03307 6.37762L6.77326 6.41522L0.573287 7.31249L0.57321 7.3125C0.53998 7.31731 0.513695 7.34026 0.504054 7.36982L0.504037 7.36987C0.494461 7.39921 0.502198 7.43181 0.525219 7.45415L0.525262 7.45419L5.0115 11.8094L5.20072 11.9931L5.15597 12.253L4.09707 18.4027L4.09705 18.4028C4.09186 18.4329 4.10403 18.4643 4.13046 18.4835L19.496 7.37001ZM19.496 7.37001C19.5055 7.39919 19.4978 7.43176 19.4748 7.45411L19.4748 7.45414L14.988 11.8094L14.7988 11.9931L14.8436 12.253L15.9028 18.4026C15.908 18.4328 15.8957 18.4643 15.8693 18.4835C15.8427 18.5027 15.8069 18.5055 15.7773 18.49C15.7772 18.49 15.7772 18.49 15.7772 18.49L10.2319 15.5865L10 15.465L9.76807 15.5865L4.22251 18.49L4.22242 18.4901M19.496 7.37001L4.22242 18.4901M4.22242 18.4901C4.20976 18.4967 4.19598 18.5 4.18185 18.5C4.16335 18.5 4.1455 18.4943 4.13056 18.4835L4.22242 18.4901Z"
+                        fill="#F4F6FC" stroke="#DDE2F2"/>
+                    </svg>
+                    <svg
+                      class="orders-page__content__orders__content__item__buttons__stars__star"
+                      :class="classByValue(order.comments[0].order_rating,item)"
+                      width="20"
+                      height="19"
+                      viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M19.496 7.37001L19.4959 7.36983C19.4863 7.34017 19.46 7.3173 19.4268 7.3125L19.4267 7.31249L13.2267 6.41522L12.9668 6.37762L12.8503 6.1424L10.0774 0.547279L10.0774 0.547213C10.0635 0.519121 10.0339 0.5 10 0.5C9.96619 0.5 9.93657 0.519099 9.92261 0.547287L7.14965 6.14241L7.03307 6.37762L6.77326 6.41522L0.573287 7.31249L0.57321 7.3125C0.53998 7.31731 0.513695 7.34026 0.504054 7.36982L0.504037 7.36987C0.494461 7.39921 0.502198 7.43181 0.525219 7.45415L0.525262 7.45419L5.0115 11.8094L5.20072 11.9931L5.15597 12.253L4.09707 18.4027L4.09705 18.4028C4.09186 18.4329 4.10403 18.4643 4.13046 18.4835L19.496 7.37001ZM19.496 7.37001C19.5055 7.39919 19.4978 7.43176 19.4748 7.45411L19.4748 7.45414L14.988 11.8094L14.7988 11.9931L14.8436 12.253L15.9028 18.4026C15.908 18.4328 15.8957 18.4643 15.8693 18.4835C15.8427 18.5027 15.8069 18.5055 15.7773 18.49C15.7772 18.49 15.7772 18.49 15.7772 18.49L10.2319 15.5865L10 15.465L9.76807 15.5865L4.22251 18.49L4.22242 18.4901M19.496 7.37001L4.22242 18.4901M4.22242 18.4901C4.20976 18.4967 4.19598 18.5 4.18185 18.5C4.16335 18.5 4.1455 18.4943 4.13056 18.4835L4.22242 18.4901Z"
+                        fill="#F4F6FC" stroke="#DDE2F2"/>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -146,6 +159,16 @@ export default {
           this.loading = false
         })
     }
+  },
+  methods: {
+    classByValue(rating, value) {
+      console.log(rating, value);
+      let to_return = null;
+      if (rating < value && rating > value - 1) to_return = '_half'
+      else if (rating > value) to_return = '_filled';
+      console.log(to_return);
+      return 'orders-page__content__orders__content__item__buttons__stars__star' + to_return;
+    },
   },
   computed: {
     token() {
@@ -402,72 +425,79 @@ export default {
                 @media screen and (max-width: $sidebar_dn) {
                   margin-left: 0px;
 
-              }
+                }
 
-              border-color: $green !important;
-              color: $green;
+                border-color: $green !important;
+                color: $green;
 
-              &:hover {
-                background-color: $green;
-                color: $white;
-              }
+                &:hover {
+                  background-color: $green;
+                  color: $white;
+                }
 
-              @media screen and (max-width: $tablet_middle) {
-                border-color: $darkblue !important;
-                color: $darkblue !important;
+                @media screen and (max-width: $tablet_middle) {
+                  border-color: $darkblue !important;
+                  color: $darkblue !important;
+                }
               }
             }
-          }
 
-          &__stars {
-            width: 104px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-end;
-            margin-left: 20px;
-            @media screen and (max-width: $notebook) {
-              margin-left: 0px;
-            }
-            @media screen and (max-width: $sidebar_dn) {
-              margin-left: 0px;
-            }
-            //@media screen and (max-width: $tablet) {
-            //  margin-left:0px;
-            //}
+            &__stars {
+              width: 104px;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: flex-end;
+              margin-left: 20px;
+              position: relative;
+              @media screen and (max-width: $notebook) {
+                margin-left: 0;
+              }
+              @media screen and (max-width: $sidebar_dn) {
+                margin-left: 0;
+              }
 
-            &__star {
-              &.filled {
-                * {
-                  fill: $orange;
-                  stroke: $orange;
+              &__star {
+                &__wrapper{
+                  width:20px;
+                  height:20px;
+                }
+                width: 20px;
+                position: absolute;
+                &_half,&_filled{
+                  *{
+                    fill:$orange;
+                    stroke: $orange;
+                  }
+                }
+                &_half{
+                  clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
                 }
               }
             }
           }
         }
-      }
 
-      &_loading {
-        width: max-content;
-        align-self: center;
-        justify-self: center;
-        margin: 10vh auto 0px;
-      }
+        &_loading {
+          width: max-content;
+          align-self: center;
+          justify-self: center;
+          margin: 10vh auto 0px;
+        }
 
-      &_empty {
-        text-align: left;
-        width: max-content;
-        font-family: 'SF Pro Display';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 26px;
-        align-self: flex-start;
+        &_empty {
+          text-align: left;
+          width: max-content;
+          font-family: 'SF Pro Display';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 26px;
+          align-self: flex-start;
+        }
       }
     }
   }
-}
 
 }
 </style>

@@ -5,8 +5,8 @@
       <div v-for="block in blocks" class="founded-products__content__item">
         <NuxtLink :to='`/partners/${block.partner.id}`' class="founded-products__content__item__partner">
           <img
-            v-if="block.partner.image.length"
-            :src="`${$axios.defaults.baseURL}${block.partner.image[0].original}`"
+            v-if="block.partner.logo"
+            :src="`${$axios.defaults.baseURL}${block.partner.logo.original}`"
             class="founded-products__content__item__partner__image"
           />
           <p
