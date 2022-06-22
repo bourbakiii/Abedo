@@ -35,32 +35,23 @@
         <p class="footer__logo-block-text">© {{ new Date().getFullYear() }}. Все права защищены</p>
       </div>
       <div v-if="!is_preview" class="footer__links">
-        <div class="footer__links__top">
-          <NuxtLink
-            to=""
-            class="footer__links__top__link">
-            О сервисе
-          </NuxtLink>
-
-          <NuxtLink
-            to=""
-            class="footer__links__top__link">
-            Добавить заведение
-          </NuxtLink>
-
-          <NuxtLink
-            to="/news?page=1"
-            class="footer__links__top__link">
-            Новости сервиса
-          </NuxtLink>
-
-          <NuxtLink v-for="page in pages" :key="page.id"
-                    :to="page.link?page.link:`/statics/${page.id}`"
-                    class="footer__links__top__link">{{
-              page.title
-                                                     }}
-          </NuxtLink>
-        </div>
+        <client-only>
+          <div class="footer__links__top">
+            <div v-for="page in pages" :key="page.id" class="footer__links__link__wrapper">
+              <NuxtLink
+                v-if="page.is_inner"
+                :to="page.link"
+                class="footer__links__top__link">{{ page.title }}
+              </NuxtLink>
+              <a
+                v-else
+                :href="page.link"
+                target="_blank"
+                class="footer__links__top__link">{{ page.title }}
+              </a>
+            </div>
+          </div>
+        </client-only>
         <div class="footer__links__bottom">
           <NuxtLink to="" class="footer__links__bottom__item footer__links__bottom__item_apple unselectable">
             <svg class="footer__links__bottom__item__icon" width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -110,7 +101,6 @@
         </div>
       </div>
       <p v-else class="footer__links_empty">Режим предварительного просмотра</p>
-
       <div v-if="!is_preview" class="footer__contacts">
         <a class="footer__contacts__email" href="mailto:pismo@abedo.ru">pismo@abedo.ru</a>
         <p class="footer__contacts__after-text">Для жалоб и предложений</p>
@@ -122,10 +112,8 @@
         >Условия использования
         </NuxtLink
         >
-        <NuxtLink class="footer__wrapper__bottom-link" to="#"
-        >Политика конфиденциальности
-        </NuxtLink
-        >
+        <NuxtLink class="footer__wrapper__bottom-link" to="#">Политика конфиденциальности
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -139,14 +127,13 @@ export default {
   computed: {
     pages() {
       return this.$store.state.pages;
-    },
-
+    }
   }
 };
+
 </script>
 
 <style lang="scss" scoped>
-
 .footer {
   width: 100%;
   max-width: $maxwidth;
@@ -251,12 +238,12 @@ export default {
 
   &__links {
     color: inherit;
+    margin: 0 10px;
 
     &__top {
       color: inherit;
       height: 100%;
       display: grid;
-      margin: 0 10px;
       grid-template-columns: repeat(4, auto);
       grid-gap: 10px 30px;
       width: max-content;
@@ -272,8 +259,11 @@ export default {
       &__link {
         width: max-content;
         text-decoration: none;
-        color: inherit;
+        color: $white;
         text-align: center;
+        &__wrapper {
+          color: inherit;
+        }
 
         &:hover {
           text-decoration: underline;
@@ -306,10 +296,17 @@ export default {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        &:first-of-type{
+        transition: $transition;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        &:first-of-type {
           margin-right: 20px;
         }
-        &__name{
+
+        &__name {
           text-decoration: inherit;
           font-family: 'SF Pro Display';
           font-style: normal;
@@ -319,6 +316,7 @@ export default {
           letter-spacing: 0.05em;
           color: inherit;
         }
+
         &__icon {
           margin-right: 5px;
         }

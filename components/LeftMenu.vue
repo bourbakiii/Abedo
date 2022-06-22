@@ -181,12 +181,23 @@
         >
       </div>
       <client-only>
+
         <div class="left-menu__links left-menu__links_additional">
-          <NuxtLink class="left-menu__links__link left-menu__links__link_additional" to="/news">Новости</NuxtLink>
-          <NuxtLink v-for="page in pages" :key="Math.random()+page.id" :to="page.link?page.link:`/statics/${page.id}`"
-                    class="left-menu__links__link left-menu__links__link_additional">
-            {{ page.title }}
-          </NuxtLink>
+
+          <div v-for="page in pages" :key="`left-menu-link-${page.id}`" class="left-menu__links__link__wrapper">
+            <NuxtLink
+              v-if="page.is_inner"
+              :to="page.link"
+              class="left-menu__links__link left-menu__links__link_additional">{{ page.title }}
+            </NuxtLink>
+            <a
+              v-else
+              :href="page.link"
+              target="_blank"
+              class="left-menu__links__link left-menu__links__link_additional">{{ page.title }}
+            </a>
+          </div>
+
         </div>
       </client-only>
 
@@ -201,7 +212,7 @@
 export default {
   computed: {
     pages() {
-      return [...this.$store.state.pages, ...this.$store.state.pages]
+      return this.$store.state.pages;
     },
     token() {
       return this.$store.state.account.token
@@ -235,6 +246,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.3);
     z-index: $z_navigation;
   }
+
   overflow-y: auto;
   // border-radius: 0px 15px 15px 0px;
   width: 100%;
@@ -264,7 +276,8 @@ export default {
     height: 35px !important;
     padding: 0 15px !important;
     margin-top: 30px;
-flex-shrink: 0;
+    flex-shrink: 0;
+
     &__icon {
       margin-right: 10px;
     }
@@ -312,7 +325,8 @@ flex-shrink: 0;
       width: 100%;
       max-width: 100%;
 
-      &_additional {
+
+      &__wrapper {
         &:last-of-type {
           margin-bottom: 0;
         }

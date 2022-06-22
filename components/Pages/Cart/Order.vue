@@ -810,6 +810,10 @@ export default {
       flex-direction: row;
       margin-bottom: 20px;
 
+      &:not(&_checked):hover {
+        transform: scale(1.05);
+      }
+
       &,
       * {
         transition: all $transition;
