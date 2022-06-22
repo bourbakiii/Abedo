@@ -1,8 +1,6 @@
 <template>
   <transition name="modal">
     <div
-    type='button'
-
       @click.self="$store.commit('modals/close')"
       v-if="wrapper_show"
       class="modals-wrapper non-scrollbar"
@@ -11,10 +9,15 @@
         v-if="$store.state.modals.rate.show"
         class="modals-wrapper__content modal-content"
       />
+      <ModalsAppRemind
+        v-else-if="$store.state.modals.app_remind.show"
+        class="modals-wrapper__content modal-content"
+      />
       <ModalsSwitchShop
         v-else-if="$store.state.modals.switch_shop.show"
         class="modals-wrapper__content modal-content"
       />
+
       <ModalsAddToCart
         v-else-if="$store.state.modals.add_to_cart.show"
         class="modals-wrapper__content modal-content"

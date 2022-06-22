@@ -31,8 +31,6 @@
           :required="true"
         />
 
-        To route - {{ to_route }}
-
         <ButtonStandart :disabled="loading" :loader="loading" class="authorization-page__content__button"
         >Войти
         </ButtonStandart

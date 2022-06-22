@@ -114,6 +114,7 @@
 <script>
 import parserMixin from "@/mixins/parser.js";
 import previewHider from "@/mixins/preview-hider";
+
 export default {
   mixins: [parserMixin, previewHider],
   computed: {
@@ -337,18 +338,19 @@ export default {
     &__button {
       height: 50px;
       width: 100%;
-      padding: 0px 20px;
+      padding: 0 20px;
       margin-top: 30px;
 
       &__button {
         width: 100%;
         height: 100%;
         font-size: 16px !important;
+        flex-shrink: 0;
       }
     }
 
     &_empty {
-      padding: 30px 0px 30px;
+      padding: 30px 0 30px;
     }
   }
 }

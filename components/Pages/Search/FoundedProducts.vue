@@ -1,6 +1,6 @@
 <template>
   <div class="founded-products">
-    <h1 class="founded-products__title title-normal">Найденные позиции меню</h1>
+    <h1 class="founded-products__title title-normal">Результаты поиска</h1>
     <div class="founded-products__content content">
       <div v-for="block in blocks" class="founded-products__content__item">
         <NuxtLink :to='`/partners/${block.partner.id}`' class="founded-products__content__item__partner">
