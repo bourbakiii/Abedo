@@ -1,18 +1,21 @@
 <template>
   <div class="page cart-page wrapper">
     <div class="cart-page__content-wrapper content">
-      <Breadcrumbs class="cart-page__breadcrumbs adaptive-non"  :way="[{name:'Корзина', link:`/cart`}]" />
+      <Breadcrumbs class="cart-page__breadcrumbs adaptive-non" :way="[{name:'Корзина', link:`/cart`}]"/>
       <div class="cart-page__contents">
-
-            <client-only>
+        <client-only>
           <div v-if="cart_products.length" class="cart-page__content">
             <h1
               class="cart-page__content_empty__title title-normal adaptive-non"
             >
               Оформления заказа
             </h1>
-            <PagesCartContent class="cart-page__content__cart" />
-            <PagesCartOrder v-if="token" class="cart-page__content__order" />
+            <p v-if="cart_partner.is_work_now === 0" class="cart-page__content__closed">
+              <span class="cart-page__content__closed__alert">Внимание!</span>
+              Заведение уже закрыто, но вы можете оформить заказ и его обработают в рабочее время
+            </p>
+            <PagesCartContent class="cart-page__content__cart"/>
+            <PagesCartOrder v-if="token" class="cart-page__content__order"/>
           </div>
           <div v-else class="cart-page__content_empty">
             <h1 class="cart-page__content_empty__title title-normal">
@@ -37,10 +40,11 @@
             <ButtonStandart
               @click.native="() => $router.push('/partners')"
               class="cart-page__content_empty__button filled"
-              >За покупками</ButtonStandart
+            >За покупками
+            </ButtonStandart
             >
           </div>
-            </client-only>
+        </client-only>
       </div>
     </div>
   </div>
@@ -48,6 +52,9 @@
 <script>
 export default {
   computed: {
+    cart_partner() {
+      return this.$store.state.cart.partner;
+    },
     cart_products() {
       return this.$store.state.cart.products;
     },
@@ -58,8 +65,8 @@ export default {
   beforeDestroy() {
     this.$store.commit("cart/clearPromo");
   },
-  mounted(){
-    this.$store.commit('variables/action', state=>{
+  mounted() {
+    this.$store.commit('variables/action', state => {
       state.adaptive_navigation = {
         text: "Корзина",
         slot: 'label',
@@ -67,7 +74,7 @@ export default {
       }
     });
   },
-  watch:{
+  watch: {
     "$route.path": {
       handler() {
         this.$store.commit("cart/clearPromo");
@@ -89,19 +96,23 @@ export default {
     transition: all $transition;
   }
 }
+
 .cart-page {
   align-items: center;
   justify-content: flex-start;
+
   &__contents {
     transition: 1s;
     width: 100%;
   }
+
   &__content {
     width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
+
     &-wrapper {
       position: relative;
       @media screen and (max-width: $tablet) {
@@ -109,15 +120,37 @@ export default {
         flex-grow: 1;
       }
     }
+
     &__title {
       margin-bottom: 70px;
     }
+
+    &__closed {
+      font-family: 'SF Pro Display';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 20px;
+      margin-top: -30px;
+      margin-bottom: 40px;
+      @media screen and (max-width: $tablet) {
+        font-size: 16px;
+        line-height: 22px;
+        margin-top: 0;
+      }
+
+      &__alert {
+        color: $red;
+      }
+    }
+
     &__cart {
       margin-bottom: 70px;
       @media screen and (max-width: $tablet) {
         margin-bottom: 30px;
       }
     }
+
     /////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
@@ -128,6 +161,7 @@ export default {
       align-items: center;
       justify-content: center;
       flex-direction: column;
+
       &__title {
         margin-bottom: 68px;
         @media screen and (max-width: $tablet) {
@@ -138,6 +172,7 @@ export default {
           line-height: 24px;
         }
       }
+
       &__icon {
         @media screen and (max-width: $tablet) {
           width: 120px;
@@ -147,6 +182,7 @@ export default {
           }
         }
       }
+
       &__text {
         margin: 58px 0px;
         @media screen and (max-width: $tablet) {
@@ -157,6 +193,7 @@ export default {
           line-height: 20px;
         }
       }
+
       &__button {
         width: 219px;
         @media screen and (max-width: $tablet) {
