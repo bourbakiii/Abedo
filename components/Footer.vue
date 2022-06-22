@@ -311,11 +311,11 @@ export default {
         }
         &__name{
           text-decoration: inherit;
-          font-family: 'Roboto',serif;
+          font-family: 'SF Pro Display';
           font-style: normal;
           font-weight: 400;
           font-size: 14px;
-          line-height: 16px;
+          line-height: 17px;
           letter-spacing: 0.05em;
           color: inherit;
         }
