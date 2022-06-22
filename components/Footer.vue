@@ -36,7 +36,7 @@
       </div>
       <div v-if="!is_preview" class="footer__links">
         <client-only>
-          <div class="footer__links__top">
+          <div v-if="pages.length" class="footer__links__top">
             <div v-for="page in pages" :key="page.id" class="footer__links__link__wrapper">
               <NuxtLink
                 v-if="page.is_inner"

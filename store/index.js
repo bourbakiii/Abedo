@@ -1,8 +1,7 @@
 export default {
   state() {
     return {
-      pages: [],
-      preview: false,
+      pages: [], preview: false,
     }
   }, mutations: {
     action(state, action) {
@@ -28,12 +27,8 @@ export default {
       this.$axios('/api/statics/pages').then(({data: {pages}}) => {
         const hostname = window.location.origin;
         pages.forEach(el => el.is_inner = Boolean(!el.link || el.link.includes(hostname)));
-        pages.filter(el => el.is_inner && el.link).forEach(el => {
-          el.link = el.link.substring(hostname.length, el.link.length)
-        });
-        pages.filter(el => el.is_inner && el.link === null).forEach(el => {
-          el.link = `/statics/${el.id}`
-        });
+        pages.filter(el => el.is_inner && el.link).forEach(el => el.link = el.link.substring(hostname.length, el.link.length));
+        pages.filter(el => el.is_inner && el.link === null).forEach(el => el.link = `/statics/${el.id}`);
         this.commit('action', state => state.pages = pages);
       })
     }
