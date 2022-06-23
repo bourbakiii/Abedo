@@ -20,7 +20,7 @@ export const state = () => ({
     partner: null
   },
   app_remind: {
-    show: true,
+    show: false,
   },
   authorisation: {
     show: false,

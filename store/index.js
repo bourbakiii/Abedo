@@ -33,7 +33,7 @@ export default {
       })
 
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent))
-        alert("Вы используете мобильное устройство (телефон или планшет).")
+        commit('modals/open', {modal_name: 'app_remind'});
 
     }
   }
