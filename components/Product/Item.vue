@@ -18,7 +18,7 @@
       <p :class='{"product-item__info__name__without_image": !product.image.original}' class="product-item__info__name">
         {{ product.name }}</p>
       <div class="product-item__info__prices adaptive-non">
-        <p class="product-item__info__prices__price" :class="{red: discount_percent}">{{ product.price }}₽</p>
+        <p class="product-item__info__prices__price" :class="{red: discount_percent}">{{ product_price_with_discount }}₽</p>
         <p class="product-item__info__prices__weight">
           / {{ product.weight }}{{ product.weight_unit.short_name }}
         </p>
@@ -26,7 +26,7 @@
           v-if="discount_percent"
           class="product-item__info__prices__price_full"
         >
-          {{ product_price_with_discount }}₽
+          {{ product.price }}₽
         </p>
       </div>
       <div class="product-item__info__weight adaptive">
@@ -34,13 +34,13 @@
       </div>
       <div class="product-item__info__prices__mobile adaptive">
         <p class="product-item__info__prices__mobile__price"  :class="{red: discount_percent}">
-          {{ product.price }}₽
+          {{  product_price_with_discount }}₽
         </p>
         <p
           v-if="discount_percent"
           class="product-item__info__prices__mobile__price_full"
         >
-          {{ product_price_with_discount }}₽
+          {{ product.price }}₽
         </p>
       </div>
     </div>

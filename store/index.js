@@ -31,6 +31,10 @@ export default {
         pages.filter(el => el.is_inner && el.link === null).forEach(el => el.link = `/statics/${el.id}`);
         this.commit('action', state => state.pages = pages);
       })
+
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent))
+        alert("Вы используете мобильное устройство (телефон или планшет).")
+
     }
   }
 }
