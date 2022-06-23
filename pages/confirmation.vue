@@ -1,74 +1,41 @@
 <template>
   <div class="page registration-page wrapper">
     <div class="registration-page__over content">
-      <h1 class="registration-page__title title-normal">Регистрация</h1>
+      <h1 class="registration-page__title title-normal">Подтверждение</h1>
       <form
-        @submit.prevent="registrate"
-        class="registration-page__content"
+        @submit.prevent="sendCode"
+        class="registration-page__content_code"
       >
-        <InputBlock
-          v-model="form.phone"
-          pre="+7"
-          mask="(###) ###-##-##"
-          placeholder="(000) 000 000 00"
-          class="registration-page__content__input-block registration-page__content__phone"
-          name="phone"
-          id="login_phone"
-          type="text"
-          text="Телефон"
-          :required="true"
-          :autocomplete="false"
-        />
-        <InputBlock
-          v-model="form.password"
-          placeholder="Введите пароль"
-          class="registration-page__content__input-block registration-page__content__password"
-          name="registration_password"
-          id="registration_password"
-          type="password"
-          text="Пароль"
-          minlength="8"
-          :required="true"
-        />
-        <InputBlock
-          v-model="form.password_confirmation"
-          placeholder="Введите пароль"
-          class="registration-page__content__input-block registration-page__content__password_confirmation"
-          name="registration_password_confirmation"
-          id="registration_password_confirmation"
-          type="password"
-          text="Повтор пароля"
-          :required="true"
-          minlength="8"
-        />
-        <p class="registration-page__content__text">
-          Сейчас мы вам позвоним. Пожалуйста, введите последние 4 цифры
-          входящего номера.
+        <h4 class="title title-extra-normal">Подтверждение</h4>
+        <p class="registration-page__content_code__text">
+          Пожалуйста, введите последние 4 цифры входящего номера.
         </p>
-        <ButtonStandart class="registration-page__content__button"
-        >Подтвердить телефон
+        <InputBlock
+          @input="() => {}"
+          placeholder="Введите код"
+          class="registration-page__content_code__input-block registration-page__content_code__phone"
+          name="сode"
+          id="code"
+          type="number"
+          text="Код подтверждения"
+        />
+        <label for="code__confirmation" class="registration-page__content_code__confirmation">
+          <Checkbox
+            id="code__confirmation"
+            :checked="confirmation"
+            :value="!confirmation"
+            @change="confirmation = !$event"
+            class="registration-page__content_code__confirmation__checkbox"
+          />
+          <span class="registration-page__content_code__confirmation__text">
+            Принимаю условия использования и политику конфиденциальности
+          </span>
+        </label>
+        <ButtonStandart class="registration-page__content_code__button"
+        >Отправить
         </ButtonStandart
         >
-        <!-- <client-only> -->
-        <transition-group
-          name="opacity"
-          tag="div"
-          :class="{
-            'registration-page__content__errors_margined': errors.length,
-          }"
-          class="registration-page__content__errors"
-        >
-          <Message
-            v-for="(error,index) in errors"
-            :key="`registration-error-${index}`"
-            class="registration-page__content__errors__item_error registration-page__content__errors__item"
-          >{{ error }}
-          </Message
-          >
-        </transition-group>
-        <!-- </client-only> -->
       </form>
-
     </div>
   </div>
 </template>

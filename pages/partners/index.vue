@@ -6,7 +6,7 @@
                        class="partners-page__advertise partners-page__advertise_big"
                        :count="ads.length" v-if="ads.length"/>
       </client-only>
-      <Breadcrumbs class="partners-page__breadcrumbs adaptive-non"  :way="[{name:'Партнеры', link:`/partners`}]"/>
+      <Breadcrumbs class="partners-page__breadcrumbs adaptive-non" :way="[{name:'Партнеры', link:`/partners`}]"/>
       <div class="partners-page__top adaptive-non">
         <h2 class="partners-page__top__title title-normal">Список партнеров</h2>
 
@@ -226,10 +226,10 @@
         </div>
       </div>
       <client-only>
-      <AdvertiseTree :ads="[...ads[3]]"
-                     class="partners-page__advertise partners-page__advertise_small"
-                     count="1"
-                     v-if="ads.length >= 4"/>
+        <AdvertiseTree :ads="[...ads[3]]"
+                       class="partners-page__advertise partners-page__advertise_small"
+                       count="1"
+                       v-if="ads.length >= 4"/>
       </client-only>
     </div>
 
@@ -422,7 +422,8 @@ export default {
     &_big {
       margin: 40px 0px 50px;
     }
-    &_small{
+
+    &_small {
       margin-top: 50px;
     }
   }
@@ -514,7 +515,7 @@ export default {
           font-size: 16px;
           line-height: 26px;
           align-self: flex-start;
-          max-width:100%;
+          max-width: 100%;
         }
       }
 
@@ -543,6 +544,6 @@ export default {
 }
 
 .breadcrumbs {
-  margin-top: 25px;
+  margin-top: 20px;
 }
 </style>

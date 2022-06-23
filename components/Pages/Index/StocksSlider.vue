@@ -88,9 +88,6 @@
 import {Swiper, SwiperSlide} from "vue-awesome-swiper";
 
 export default {
-  name: "swiper-example-carousel-mode",
-  title: "Auto slides per view / Carousel mode",
-  name: "slider",
   components: {
     Swiper,
     SwiperSlide,
@@ -138,7 +135,7 @@ export default {
     position: relative;
     max-width: 100%;
     width: 100%;
-    @media screen and (max-width: calc($maxwidth + 60px)) {
+    @media screen and (max-width: $maxwidth + 60px) {
       width: calc(100% - 60px);
       max-width: calc(100% - 60px);
     }
@@ -160,7 +157,7 @@ export default {
       text-decoration: none;
 
       &__icon {
-        font-family: "SF Pro Display";
+        font-family: "SF Pro Display",serif;
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
@@ -175,7 +172,8 @@ export default {
     margin-right: 30px;
     width: 403px;
     height: auto;
-    @media screen and (max-width: calc($maxwidth + 60px)) {
+    border-radius: 20px !important;
+    @media screen and (max-width: $maxwidth + 60px) {
       margin-right: 17px;
       width: 350px;
     }
@@ -188,12 +186,12 @@ export default {
       width: 335px;
     }
     @media screen and (max-width: $phone) {
-      margin-right: 0px;
+      margin-right: 0;
       width: 100%;
     }
 
     &:last-of-type {
-      margin-right: 0px;
+      margin-right: 0;
     }
 
     &__item {
@@ -243,7 +241,7 @@ export default {
         transform: translate(-90px, -50%) scale(1.04);
       }
 
-      @media screen and (max-width: calc($maxwidth + 200px)) {
+      @media screen and (max-width: $maxwidth + 200px) {
         transform: translate(-30px, -50%);
         &:hover {
           transform: translate(-30px, -50%) scale(1.04);
@@ -259,7 +257,7 @@ export default {
         transform: translate(90px, -50%) scale(1.04);
       }
 
-      @media screen and (max-width: calc($maxwidth + 200px)) {
+      @media screen and (max-width: $maxwidth + 200px) {
         transform: translate(30px, -50%);
         &:hover {
           transform: translate(30px, -50%) scale(1.04);
@@ -296,7 +294,7 @@ export default {
     }
 
     &:last-of-type {
-      margin-right: 0px;
+      margin-right: 0;
     }
 
     &-active {

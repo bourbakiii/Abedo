@@ -1,9 +1,8 @@
 <template>
-  <button
-    @click.prevent="() => $router.push(parseLink(`/partners/${stock.shop.id}`))"
+  <NuxtLink
+    :to="parseLink(`/partners/${stock.shop.id}`)"
     class="stock__wrapper"
     :style="stock.image?`background: url(${$axios.defaults.baseURL}${stock.image.original})`:''"
-
   >
     <div class="stock" :class="parseColor(index)">
       <div class="stock__content">
@@ -25,7 +24,7 @@
         </p>
       </div>
     </div>
-  </button>
+  </NuxtLink>
 </template>
 <script>
 import previewHider from "@/mixins/preview-hider";
@@ -62,22 +61,22 @@ export default {
 <style lang="scss" scoped>
 .stock {
   &__wrapper {
-    border-radius: 20px;
+    border-radius: 20px !important;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
     overflow: hidden;
     transition: $transition;
-    position: relative;
     width: 100%;
     max-width: 403px;
     outline: none;
     border: none;
+    color: $white;
   }
 
   position: relative;
   padding-bottom: calc(100% * (172 / 403));
-
+  color: inherit;
   &.blue {
     background-color: rgba($darkblue, 0.9)
   }
@@ -102,7 +101,7 @@ export default {
   @media screen and (max-width: $tablet) {
     height: 134px;
     width: 335px;
-    padding-bottom: 0px;
+    padding-bottom: 0;
   }
   @media screen and (max-width: $tablet) {
     width: 100%;
@@ -111,10 +110,10 @@ export default {
 
   &__content {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     padding: 20px;
     width: 100%;
     height: 100%;
@@ -123,7 +122,7 @@ export default {
     justify-content: space-between;
     flex-direction: column;
     cursor: pointer;
-
+    color:inherit;
     &__hood {
       display: flex;
       align-items: center;
@@ -133,6 +132,7 @@ export default {
       max-width: 100%;
       flex-shrink: 0;
       position: relative;
+      color: inherit;
       @media screen and (max-width: $tablet) {
         height: 40px;
       }
@@ -144,8 +144,8 @@ export default {
 
         &::before {
           position: absolute;
-          bottom: 0px;
-          left: 0px;
+          bottom: 0;
+          left: 0;
           width: 69px;
           height: 1px;
           border-radius: 10px;
@@ -158,7 +158,6 @@ export default {
       &__logo {
         height: 100%;
         width: 100px;
-        height: 100%;
         @media screen and (max-width: $tablet) {
           width: 80px;
         }
@@ -172,8 +171,8 @@ export default {
 
       &__name {
         flex-grow: 1;
-        color: $white;
-        font-family: "Montserrat";
+        color: inherit;
+        font-family: "Montserrat",serif;
         font-style: normal;
         font-weight: 600;
         font-size: 18px;
@@ -183,7 +182,7 @@ export default {
         overflow: hidden;
         text-align: left;
         @media screen and (max-width: $tablet) {
-          font-family: "SF Pro Display";
+          font-family: "SF Pro Display",serif;
           font-style: normal;
           font-weight: 600;
           font-size: 16px;
@@ -196,19 +195,18 @@ export default {
       max-height: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-family: "Montserrat";
+      font-family: "Montserrat",serif;
       font-style: normal;
       font-weight: 600;
       font-size: 18px;
       line-height: 26px;
-      color: $white;
+      color: inherit;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
-      overflow: hidden;
       text-align: left;
       @media screen and (max-width: $tablet) {
-        font-family: "SF Pro Display";
+        font-family: "SF Pro Display",serif;
         font-style: normal;
         font-weight: 600;
         font-size: 18px;

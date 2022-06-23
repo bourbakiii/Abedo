@@ -217,7 +217,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .index-page {
-  padding-bottom: 0px !important;
+  padding-bottom: 0 !important;
   @media screen and (max-width: $tablet) {
     padding-bottom: 50px !important;
   }
@@ -234,7 +234,7 @@ export default {
 
     &__new-shops {
       @media screen and (max-width: $tablet) {
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
       display: flex;
       align-items: center;
@@ -252,7 +252,7 @@ export default {
 
         &__title {
           @media screen and (max-width: $tablet) {
-            font-family: "SF Pro Display";
+            font-family: "SF Pro Display", serif;
             font-style: normal;
             font-weight: 700;
             font-size: 20px;
@@ -271,10 +271,10 @@ export default {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0px 15px;
+          padding: 0 15px;
 
           &-text {
-            font-family: "SF Pro Display";
+            font-family: "SF Pro Display", serif;
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
@@ -307,14 +307,14 @@ export default {
         }
 
         &_loading {
-          margin: 50px 0px;
+          margin: 50px 0;
         }
 
         &_empty {
           margin-top: 50px;
           text-align: left;
           width: max-content;
-          font-family: 'SF Pro Display';
+          font-family: 'SF Pro Display', serif;
           font-style: normal;
           font-weight: 500;
           font-size: 16px;
@@ -356,7 +356,7 @@ export default {
       &_small {
         margin-bottom: 50px;
         @media screen and (max-width: $tablet) {
-          margin-bottom: 0px;
+          margin-bottom: 0;
           margin-top: 126px
         }
       }
@@ -364,7 +364,7 @@ export default {
 
     @media screen and (max-width: $tablet) {
       &__adaptive-categories {
-        margin: 0px 0px 30px;
+        margin: 0 0 30px;
       }
       &__stocks-slider {
         margin-bottom: 60px;
