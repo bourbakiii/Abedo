@@ -32,9 +32,6 @@ export default {
         this.commit('action', state => state.pages = pages);
       })
 
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent))
-        commit('modals/open', {modal_name: 'app_remind'});
-
     }
   }
 }
