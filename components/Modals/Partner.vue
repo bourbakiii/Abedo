@@ -334,12 +334,12 @@ export default {
       //   int
       //   skips = 0;
 
-      this.partner.timetable.reduce((acc, element) => {
-          if (!element.days.length || !element.startTime) {
-
-          }
-        }, 0
-      );
+      // this.partner.timetable.reduce((acc, element) => {
+      //     if (!element.days.length || !element.startTime) {
+      //
+      //     }
+      //   }, 0
+      // );
 
 
 //   for (var i = 0; i < days.length; i++) {

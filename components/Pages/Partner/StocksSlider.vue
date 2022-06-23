@@ -77,9 +77,6 @@ export default {
       default: []
     },
   },
-  name: "swiper-example-carousel-mode",
-  title: "Auto slides per view / Carousel mode",
-  name: "slider",
   components: {
     Swiper,
     SwiperSlide,
@@ -115,7 +112,7 @@ export default {
   height: max-content;
 
   &__title {
-    font-family: "SF Pro Display";
+    font-family: "SF Pro Display", serif;
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -127,7 +124,7 @@ export default {
     position: relative;
     max-width: 100%;
     width: 100%;
-    @media screen and (max-width: calc($maxwidth + 60px)) {
+    @media screen and (max-width: $maxwidth) {
       width: calc(100% - 60px);
       max-width: calc(100% - 60px);
     }
@@ -143,7 +140,7 @@ export default {
     width: 403px;
     height: auto;
     border-radius: 20px !important;
-    @media screen and (max-width: calc($maxwidth + 60px)) {
+    @media screen and (max-width: $maxwidth) {
       margin-right: 17px;
       width: 350px;
     }
@@ -156,12 +153,12 @@ export default {
       width: 335px;
     }
     @media screen and (max-width: $phone) {
-      margin-right: 0px;
+      margin-right: 0;
       width: 100%;
     }
 
     &:last-of-type {
-      margin-right: 0px;
+      margin-right: 0;
     }
 
     &__item {
@@ -198,15 +195,15 @@ export default {
     &_prev {
       left: 0px;
       transform: translate(-90px, -50%);
-      @media screen and (max-width: calc($maxwidth + 200px)) {
+      @media screen and (max-width: 200px) {
         transform: translate(-30px, -50%);
       }
     }
 
     &_next {
-      right: 0px;
+      right: 0;
       transform: translate(90px, -50%);
-      @media screen and (max-width: calc($maxwidth + 200px)) {
+      @media screen and (max-width: 200px) {
         transform: translate(30px, -50%);
       }
     }
@@ -235,7 +232,7 @@ export default {
     }
 
     &:last-of-type {
-      margin-right: 0px;
+      margin-right: 0;
     }
 
     &-active {
