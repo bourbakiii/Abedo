@@ -142,6 +142,7 @@ export default {
     margin-right: 35px;
     width: 403px;
     height: auto;
+    border-radius: 20px !important;
     @media screen and (max-width: calc($maxwidth + 60px)) {
       margin-right: 17px;
       width: 350px;
@@ -166,6 +167,7 @@ export default {
     &__item {
       width: 100%;
       height: auto;
+
       @media screen and (max-width: $tablet) {
         max-width: 100%;
       }

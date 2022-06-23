@@ -1,10 +1,10 @@
 <template>
   <div class="partner-modal modal">
-    <h3 class="partner-modal__title title-normal" >
-      {{partner.name}}
+    <h3 class="partner-modal__title title-normal">
+      {{ partner.name }}
     </h3>
     <button
-    type='button'
+      type='button'
       @click.prevent="$store.commit('modals/close')"
       class="partner-modal__close"
     >
@@ -29,11 +29,11 @@
         class="partner-modal__content__image"
       />
       <div v-if="partner.description" class="partner-modal__content__description">
-<!--        <p class="partner-modal__content__description__pre">-->
-<!--          Описание ресторана “{{partner.name}}”-->
-<!--        </p>-->
-        <p class="partner-modal__content__description__text" >
-          {{partner.description}}
+        <!--        <p class="partner-modal__content__description__pre">-->
+        <!--          Описание ресторана “{{partner.name}}”-->
+        <!--        </p>-->
+        <p class="partner-modal__content__description__text">
+          {{ partner.description }}
         </p>
       </div>
       <div class="partner-modal__content__information">
@@ -73,10 +73,10 @@
                   fill="#F95738"
                 />
               </g>
-              <rect x="0.5" y="0.5" width="14" height="14" stroke="#DDE2F2" />
+              <rect x="0.5" y="0.5" width="14" height="14" stroke="#DDE2F2"/>
               <defs>
                 <clipPath id="clip0_1905_5416">
-                  <rect width="15" height="15" fill="white" />
+                  <rect width="15" height="15" fill="white"/>
                 </clipPath>
               </defs>
             </svg>
@@ -86,7 +86,7 @@
             class="partner-modal__content__information__item__content"
 
           >
-           {{worktime}}
+            {{ worktime }}
           </p>
         </div>
         <div v-if='partner.requisites.address' class="partner-modal__content__information__item">
@@ -125,10 +125,10 @@
                   fill="#F95738"
                 />
               </g>
-              <rect x="0.5" y="0.5" width="14" height="14" stroke="#DDE2F2" />
+              <rect x="0.5" y="0.5" width="14" height="14" stroke="#DDE2F2"/>
               <defs>
                 <clipPath id="clip0_1905_5395">
-                  <rect width="15" height="15" fill="white" />
+                  <rect width="15" height="15" fill="white"/>
                 </clipPath>
               </defs>
             </svg>
@@ -138,7 +138,7 @@
             class="partner-modal__content__information__item__content"
 
           >
-            {{partner.requisites.address}}
+            {{ partner.requisites.address }}
           </p>
         </div>
         <div v-if="partner.contact_phone" class="partner-modal__content__information__item">
@@ -165,10 +165,10 @@
                   fill="#F95738"
                 />
               </g>
-              <rect x="0.5" y="0.5" width="14" height="14" stroke="#DDE2F2" />
+              <rect x="0.5" y="0.5" width="14" height="14" stroke="#DDE2F2"/>
               <defs>
                 <clipPath id="clip0_1905_5386">
-                  <rect width="15" height="15" fill="white" />
+                  <rect width="15" height="15" fill="white"/>
                 </clipPath>
               </defs>
             </svg>
@@ -178,10 +178,10 @@
             class="partner-modal__content__information__item__content"
 
           >
-            +7{{partner.contact_phone}}
+            +7{{ partner.contact_phone }}
           </p>
         </div>
-        <div  v-if="partner.requisites.length" class="partner-modal__content__information__item">
+        <div v-if="partner.requisites.length" class="partner-modal__content__information__item">
           <div class="partner-modal__content__information__item__hood">
             <svg
               class="partner-modal__content__information__item__hood__icon"
@@ -217,10 +217,10 @@
                   fill="#F95738"
                 />
               </g>
-              <rect x="0.5" y="0.5" width="14" height="14" stroke="#DDE2F2" />
+              <rect x="0.5" y="0.5" width="14" height="14" stroke="#DDE2F2"/>
               <defs>
                 <clipPath id="clip0_1905_5364">
-                  <rect width="15" height="15" fill="white" />
+                  <rect width="15" height="15" fill="white"/>
                 </clipPath>
               </defs>
             </svg>
@@ -231,7 +231,7 @@
             class="partner-modal__content__information__item__content__subcontent"
           >
             <div
-             v-if="partner.requisites.name"
+              v-if="partner.requisites.name"
               class="partner-modal__content__information__item__content__subcontent__item"
             >
               <p
@@ -243,11 +243,11 @@
                 class="partner-modal__content__information__item__content__subcontent__item__value"
 
               >
-               {{partner.requisites.name}}
+                {{ partner.requisites.name }}
               </p>
             </div>
             <div
-            v-if="partner.requisites.inn"
+              v-if="partner.requisites.inn"
               class="partner-modal__content__information__item__content__subcontent__item"
             >
               <p
@@ -259,11 +259,11 @@
                 class="partner-modal__content__information__item__content__subcontent__item__value"
 
               >
-                {{partner.requisites.inn}}
+                {{ partner.requisites.inn }}
               </p>
             </div>
             <div
-            v-if="partner.requisites.ogrn"
+              v-if="partner.requisites.ogrn"
               class="partner-modal__content__information__item__content__subcontent__item"
             >
               <p
@@ -275,11 +275,11 @@
                 class="partner-modal__content__information__item__content__subcontent__item__value"
 
               >
-                {{partner.requisites.ogrn}}
+                {{ partner.requisites.ogrn }}
               </p>
             </div>
             <div
-            v-if="partner.requisites.address"
+              v-if="partner.requisites.address"
               class="partner-modal__content__information__item__content__subcontent__item"
             >
               <p
@@ -291,7 +291,7 @@
                 class="partner-modal__content__information__item__content__subcontent__item__value"
 
               >
-                {{partner.requisites.address}}
+                {{ partner.requisites.address }}
               </p>
             </div>
           </div>
@@ -302,21 +302,71 @@
 </template>
 <script>
 export default {
-  computed:{
-    partner(){
+  computed: {
+    partner() {
       return this.$store.state.modals.partner.partner;
     },
-    worktime(){
+    worktime() {
       let result = "";
-      let days ={
-        1:"Пн",
-        2:"Вт",
-        3:"Ср",
-        4:"Чт",
-        5:"Пн",
-        6:"Сб",
-        7:"Вс"
+      let days = {
+        1: "Пн",
+        2: "Вт",
+        3: "Ср",
+        4: "Чт",
+        5: "Пн",
+        6: "Сб",
+        7: "Вс"
       }
+
+      // return timetables.fold < String > ('', (lines, e)
+      // {
+      //   if (e.days.isEmpty  e.startTime.isEmpty
+      //   e.endTime.isEmpty
+      // )
+      //   {
+      //     return lines;
+      //   }
+      //
+      //   final
+      //   days = e.days.entries.toList();
+      //   String
+      //   range = '';
+      //   int
+      //   skips = 0;
+
+      this.partner.timetable.reduce((acc, element) => {
+          if (!element.days.length || !element.startTime) {
+
+          }
+        }, 0
+      );
+
+
+//   for (var i = 0; i < days.length; i++) {
+//     if (i == days.length - 1) {
+//       if (days.length > 1 && !range.endsWith(', ')) {
+//         range += skips > 1 ? '-' : ', ';
+//       }
+//       range += days.last.value + ', ';
+//       break;
+//     }
+//
+//     if (days[i].key + 1 == days[i + 1].key) {
+//       if (range.isEmpty || range.endsWith(', ')) range += days[i].value;
+//       skips++;
+//       continue;
+//     }
+//
+//     if (!range.endsWith(', ') && i != 0) range += skips > 1 ? '-' : ', ';
+//     range += days[i].value + ', ';
+//     skips = 0;
+//   }
+//
+//   final time = e.startTime + '-' + e.endTime;
+//   return lines + range + time + '\n';
+// }).trim();
+
+
       return "Нужно будет спарсить";
     }
   }
@@ -333,20 +383,22 @@ export default {
     padding: 45px;
   }
   @media screen and (max-width: $tablet) {
-    height:100%;
-      padding: 55px 24px 40px 24px;
-    }
+    height: 100%;
+    padding: 55px 24px 40px 24px;
+  }
+
   &__title {
     margin-bottom: 30px;
-     @media screen and (max-width: $notebook) {
-       font-size: 25px;
-     }
+    @media screen and (max-width: $notebook) {
+      font-size: 25px;
+    }
     @media screen and (max-width: $tablet) {
       font-weight: 700;
       font-size: 20px;
       line-height: 20px;
     }
   }
+
   &__close {
     cursor: pointer;
     background-color: transparent;
@@ -356,13 +408,14 @@ export default {
     right: 30px;
     top: 30px;
   }
+
   &__content {
     @media screen and (max-width: $notebook) {
       padding: 30px;
     }
     @media screen and (max-width: $tablet) {
       padding: 0px;
-      border:none;
+      border: none;
     }
     padding: 50px;
     width: 100%;
@@ -372,6 +425,7 @@ export default {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
+
     &__image {
       width: 100%;
       height: auto;
@@ -381,13 +435,16 @@ export default {
         margin-bottom: 36px;
       }
     }
+
     &__description {
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
       flex-direction: column;
       margin-bottom: 30px;
-      width:100%; text-align: left;
+      width: 100%;
+      text-align: left;
+
       &__pre,
       &__text {
         font-family: "SF Pro Display";
@@ -404,6 +461,7 @@ export default {
         }
       }
     }
+
     &__information {
       width: 100%;
       display: flex;
@@ -418,9 +476,11 @@ export default {
         justify-content: flex-start;
         flex-direction: column;
         margin-bottom: 32px;
+
         &:last-of-type {
           margin-bottom: 0px;
         }
+
         &__hood {
           margin-bottom: 15px;
           width: 100%;
@@ -441,10 +501,12 @@ export default {
             font-size: 15px;
             line-height: 17px;
           }
+
           &__icon {
             margin-right: 5px;
           }
         }
+
         &__content {
           font-family: "SF Pro Display";
           font-style: normal;
@@ -459,12 +521,14 @@ export default {
             font-size: 15px;
             line-height: 20px;
           }
+
           &__subcontent {
             display: flex;
             align-items: flex-start;
             justify-content: flex-start;
             flex-direction: column;
             width: 100%;
+
             &__item {
               display: flex;
               align-items: center;
@@ -472,9 +536,11 @@ export default {
               flex-direction: row;
               width: 100%;
               margin-bottom: 15px;
+
               &:last-of-type {
                 margin-bottom: 0px;
               }
+
               &__name {
                 font-family: "Montserrat";
                 font-style: normal;
@@ -485,6 +551,7 @@ export default {
                 width: 125px;
                 margin-right: 10px;
               }
+
               &__value {
                 font-family: "Montserrat";
                 font-style: normal;
