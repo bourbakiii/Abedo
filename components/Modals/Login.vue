@@ -55,6 +55,8 @@
       >
     </div>
     <ButtonStandart :loader="loading" class="login-modal__button">Войти</ButtonStandart>
+
+
     <div :class="{
         'login-modal__errors_margined': errors.length,
       }" class="login-modal__errors">
@@ -68,7 +70,11 @@
         >
       </transition>
     </div>
-
+    <transition name="opacity" mode="out-in" appear>
+      <ButtonStandart v-if="last_loaded_phone" type="button" class="login-modal__button" @click="confirmClick">
+        Подтвердить номер телефона
+      </ButtonStandart>
+    </transition>
   </form>
 </template>
 <script>
@@ -83,14 +89,24 @@ export default {
         phone: "",
         password: "",
       },
+      last_loaded_phone: null
     };
   },
   methods: {
+    confirmClick() {
+      this.$store.commit('temporary/action', state => {
+        state.confirmation_phone = this.last_loaded_phone;
+      })
+      console.log(this.last_loaded_phone);
+      console.log(this.$store.state.temporary.confirmation_phone);
+      this.$router.push('/confirmation');
+    },
     async login() {
       this.loading = true;
+      let phone = parseInt(this.form.phone.replace(/\D+/g, ""));
       this.$axios
         .post(`${this.$axios.defaults.baseURL}/api/login`, {
-          phone: parseInt(this.form.phone.replace(/\D+/g, "")),
+          phone,
           password: this.form.password,
         })
         .then(async ({data: {token}}) => {
@@ -102,12 +118,18 @@ export default {
           await this.$store.dispatch("account/get").then(() => {
             this.$store.commit("modals/close");
           });
+          this.last_loaded_phone = null;
+
         })
         .catch((error) => {
-          if (error?.response?.status == 422) {
+          this.last_loaded_phone = null;
+
+          if (+error?.response?.status === 422) {
             this.errors = Object.values(error.response.data.errors)
               .map((el) => el.flat())
               .flat();
+            console.log(Object.keys(error.response.data.errors).includes('confirmation'));
+            if (Object.keys(error.response.data.errors).includes('confirmation')) this.last_loaded_phone = phone;
           }
         }).finally(() => {
         this.loading = false;
@@ -182,16 +204,15 @@ export default {
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    transition: 0.3s;
+    transition: $transition * 2;
 
     &_margined {
       margin-top: 15px;
     }
 
-    transition: calc($transition * 2);
 
     .empty {
-      margin-top: 0px;
+      margin-top: 0;
     }
   }
 }

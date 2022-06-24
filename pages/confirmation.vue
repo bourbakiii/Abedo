@@ -94,8 +94,20 @@ export default {
 
   },
 
-  async asyncData({store, redirect}) {
-    if (!store.state.temporary.confirmation_phone) redirect('/');
+  async created() {
+    if (!this.$store.state.temporary.confirmation_phone) this.$router.push('/');
+    else {
+      const recall_time = this.$cookies.get(`confirmation-${this.$store.state.temporary.confirmation_phone}` || null);
+      console.log(1);
+      console.log(this.$store.state.temporary.confirmation_phone);
+      console.log(2)
+      console.log(recall_time);
+      if (recall_time) {
+        console.log(3);
+        console.log(new Date(recall_time));
+        this.recall_time = new Date(recall_time);
+      }
+    }
   },
   methods: {
     getTimeInterval(start, end) {
@@ -103,21 +115,19 @@ export default {
       let [minutes, seconds] = [interval.getUTCMinutes(), interval.getUTCSeconds()];
       if (minutes.toString().length === 1) minutes = '0' + minutes;
       if (seconds.toString().length === 1) seconds = '0' + seconds;
-      return `${minutes}:${seconds}`
+      return `${minutes}:${seconds}`;
     },
 
     call() {
       this.loading_call = true;
-      this.$axios.$post('/api/confirm/phone', {phone: this.$store.state.temporary.confirmation_phone}).then(() => {
+      this.$axios.$post('/api/confirm/phone', {phone: this.confirmation_phone}).then(() => {
         this.called = true;
-        this.recall_time = new Date();
-        this.recall_time.setSeconds(this.recall_time.getSeconds() + 119);
-        this.recall_interval = setInterval(() => this.$forceUpdate(), 1000);
-        setTimeout(() => {
-          this.recall_time = null;
-          clearInterval(this.recall_interval)
-        }, 1000 * 118);
-      }).catch((error) => {
+        const time_now = new Date();
+        this.recall_time = new Date(time_now.setSeconds(time_now.getSeconds() + 120));
+        console.log("needed");
+        console.log(this.recall_time);
+        this.$cookies.set(`confirmation-${this.confirmation_phone}`, JSON.stringify(this.recall_time), {expires: this.recall_time});
+      }).catch(error => {
           if (error?.response?.status === 422) {
             this.call_errors = Object.values(error.response.data.errors)
               .map((el) => el.flat())
@@ -131,11 +141,19 @@ export default {
     },
   },
   computed: {
-    remember_phone() {
-      return this.$store.state.temporary.registration_phone;
+    confirmation_phone() {
+      return this.$store.state.temporary.confirmation_phone;
     },
   },
   watch: {
+    recall_time(value) {
+      if (!value) return;
+      this.recall_interval = setInterval(() => this.$forceUpdate(), 1000);
+      setTimeout(() => {
+        this.recall_time = null;
+        clearInterval(this.recall_interval)
+      }, 1000 * value.getSeconds());
+    },
     call_errors() {
       clearTimeout(this.call_errors_timer);
       this.call_errors_timer = setTimeout(() => {
@@ -152,8 +170,17 @@ export default {
         this.code_errors = [];
       }, 6000);
     },
+    '$store.state.temporary.confirmation_phone':
+      {
+        handler(value) {
+          if (!value) this.$router.push('/');
+        }
+        ,
+        deep: true
+      }
   }
-};
+}
+;
 </script>
 <style lang="scss" scoped>
 .confirmation-page {

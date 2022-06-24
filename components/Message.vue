@@ -33,9 +33,9 @@ export default {
     };
   },
   mounted() {
+    this.$el.style.padding = "20px 30px";
     this.$el.style.height =
       Math.max(parseInt(this.$el.scrollHeight), this.minHeight) + "px";
-    this.$el.style.padding = "15px 30px";
   },
   destroyed() {
     this.$el.style.height = 0;
@@ -52,18 +52,18 @@ export default {
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
-  padding: 0px 30px;
+  padding: 0 30px;
   border-radius: 20px;
   color: $red;
-  height: 0px;
+  height: 0;
   border: 1px solid $red;
   overflow: hidden;
   margin-top: 15px;
   &:first-of-type {
-    margin-top: 0px;
+    margin-top: 0;
   }
   &_success {
-    border-width: 0px;
+    border-width: 0;
     color: $light_green !important;
   }
   &__icon-block {
@@ -80,7 +80,7 @@ export default {
     }
   }
   &__text {
-    font-family: "SF Pro Display";
+    font-family: "SF Pro Display",serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
