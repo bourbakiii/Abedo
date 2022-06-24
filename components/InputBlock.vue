@@ -8,7 +8,7 @@
         {{ pre }}
       </span>
       <input
-        @input="$emit('input', $event.target.value)"
+        @input="onInput"
         :value="value"
         v-mask="mask"
         :id="id"
@@ -19,9 +19,10 @@
         :required="required"
         :autocomplete="autocomplete ? 'on' : 'off'"
         :minlength="minlength"
+        :maxlength="maxlength"
         :readonly="readonly"
         :disabled="disabled"
-      />
+        @keypress="event=>digits_only?removeDigits(event):null" />
       <div v-if="arrow" class="input-block__input__arrow">
         <svg
           width="12"
@@ -51,6 +52,10 @@ export default {
     arrow: {
       required: false,
       default: false,
+    },
+    digits_only: {
+      required: false,
+      default: false
     },
     text: {
       required: true,
@@ -85,6 +90,10 @@ export default {
       required: false,
       default: "",
     },
+    maxlength: {
+      required: false,
+      default: "",
+    },
     value: {
       required: false,
     },
@@ -97,6 +106,16 @@ export default {
       default: false,
     },
   },
+  methods: {
+    removeDigits(event) {
+      console.log(event.key);
+      if (!"1234567890".includes(event.key))
+        event.preventDefault();
+    },
+    onInput($event) {
+      this.$emit('input', $event.target.value)
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

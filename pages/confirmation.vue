@@ -1,41 +1,69 @@
 <template>
-  <div class="page registration-page wrapper">
-    <div class="registration-page__over content">
-      <h1 class="registration-page__title title-normal">Подтверждение</h1>
+  <div class="page confirmation-page wrapper">
+    <div class="confirmation-page__over content">
+      <h1 class="confirmation-page__title title-normal">Подтверждение</h1>
       <form
-        @submit.prevent="sendCode"
-        class="registration-page__content_code"
+        @submit.prevent="call"
+        class="confirmation-page__content_call"
       >
-        <h4 class="title title-extra-normal">Подтверждение</h4>
-        <p class="registration-page__content_code__text">
-          Пожалуйста, введите последние 4 цифры входящего номера.
+        <h4 class="title title-extra-normal">Звонок</h4>
+        <p class="confirmation-page__content_call__text">
+          Для верификации профиля нужно подтвердить номер телефона. После нажатия на кнопку
+          «{{ called ? "Позвонить еще раз" : "Позвонить" }}»
+          к вам поступит
+          звонок. Прослушайте его и введите 4 названных символа в соответствующее поле.
         </p>
-        <InputBlock
-          @input="() => {}"
-          placeholder="Введите код"
-          class="registration-page__content_code__input-block registration-page__content_code__phone"
-          name="сode"
-          id="code"
-          type="number"
-          text="Код подтверждения"
-        />
-        <label for="code__confirmation" class="registration-page__content_code__confirmation">
-          <Checkbox
-            id="code__confirmation"
-            :checked="confirmation"
-            :value="!confirmation"
-            @change="confirmation = !$event"
-            class="registration-page__content_code__confirmation__checkbox"
-          />
-          <span class="registration-page__content_code__confirmation__text">
-            Принимаю условия использования и политику конфиденциальности
-          </span>
-        </label>
-        <ButtonStandart class="registration-page__content_code__button"
-        >Отправить
+        {{ recall_time }}
+        <ButtonStandart :loader="loading_call" :disabled="recall_time!==0"
+                        class="confirmation-page__content_call__button"
+        > {{
+            called ? "Позвонить еще раз" : "Позвонить"
+          }}
         </ButtonStandart
         >
+        <div
+          :class="{'confirmation-page__content_call__errors_margined': call_errors.length}"
+          class="confirmation-page__content_call__errors"
+        >
+          <transition name="message" appear>
+            <Message
+              v-for="error in call_errors"
+              :key="error"
+              class="confirmation-page__content_call__errors__item_error confirmation-page__content_call__errors__item"
+            >{{ error }}
+            </Message
+            >
+          </transition>
+        </div>
       </form>
+      <transition name="opacity" appear>
+        <form
+          v-if="called"
+          @submit.prevent="sendCode"
+          class="confirmation-page__content_code"
+        >
+          <h4 class="title title-extra-normal">Подтверждение</h4>
+          <p class="confirmation-page__content_code__text">
+            Пожалуйста, введите последние 4 цифры входящего номера.
+          </p>
+          <InputBlock
+            @input="() => {}"
+            placeholder="Введите код"
+            class="confirmation-page__content_code__input-block confirmation-page__content_code__phone"
+            name="сode"
+            id="code"
+            type="text"
+            maxlength="4"
+            :digits_only="true"
+            text="Код подтверждения"
+
+          />
+          <ButtonStandart class="confirmation-page__content_code__button"
+          >Отправить
+          </ButtonStandart
+          >
+        </form>
+      </transition>
     </div>
   </div>
 </template>
@@ -46,12 +74,15 @@ export default {
   mixins: [errorsMessagesMixin],
   data() {
     return {
-      form: {
-        phone: "",
-        password: "",
-        password_confirmation: "",
-      },
+      called: true,
       confirmation: false,
+      loading_call: false,
+      recall_time: 0,
+      recall_interval: 0,
+      call_errors: [],
+      call_errors_timer: null,
+      code_errors: [],
+      code_errors_timer: null
     };
   },
   mounted() {
@@ -63,46 +94,55 @@ export default {
       }
     });
   },
+
+
   methods: {
-    registrate() {
-      if (this.form.password != this.form.password_confirmation) {
-        document
-          .querySelector(".registration-page__content__errors")
-          .scrollIntoView({block: "nearest", behavior: "smooth"});
-        return (this.errors = ["Пароли не совпадают"]);
-      }
-      this.$axios
-        .post(`${this.$axios.defaults.baseURL}/api/register`, {
-          phone: parseInt(this.form.phone.replace(/\D+/g, "")),
-          password: this.form.password,
-          password_confirmation: this.form.password_confirmation,
-        })
-        .then((response) => {
-          this.$store.commit("temporary/action", (state) => {
-            state.registration_phone = response.data.user.phone;
-          });
-        })
-        .catch(({response}) => {
-          if (+response?.status === 422) {
-            this.errors = Object.values(response.data.errors)
-              .map(el => el.flat())
+    call() {
+      this.loading_call = true;
+      this.$axios.$post('/api/confirm/phone', {phone: 9289999999}).then(() => {
+        this.called = true;
+        this.recall_time = 120;
+      }).catch((error) => {
+          if (error?.response?.status === 422) {
+            this.call_errors = Object.values(error.response.data.errors)
+              .map((el) => el.flat())
               .flat();
           }
-        });
+        }
+      ).finally(() => this.loading_call = false);
     },
     sendCode() {
       console.log("Send code function");
-    },
+    }
+    ,
   },
   computed: {
     remember_phone() {
       return this.$store.state.temporary.registration_phone;
     },
   },
+  watch: {
+    call_errors() {
+      clearTimeout(this.call_errors_timer);
+      this.call_errors_timer = setTimeout(() => {
+        clearTimeout(this.call_errors_timer);
+        this.call_errors_timer = null;
+        this.call_errors = [];
+      }, 6000);
+    },
+    code_errors() {
+      clearTimeout(this.code_errors_timer);
+      this.code_errors_timer = setTimeout(() => {
+        clearTimeout(this.code_errors_timer);
+        this.code_errors_timer = null;
+        this.code_errors = [];
+      }, 6000);
+    },
+  }
 };
 </script>
 <style lang="scss" scoped>
-.registration-page {
+.confirmation-page {
   @media screen and (max-width: $notebook) {
     padding-top: 50px;
     padding-bottom: 50px;
@@ -178,7 +218,7 @@ export default {
       }
     }
 
-    &_code {
+    &_call, &_code {
       border-radius: 20px;
       background-color: $white;
       padding: 20px;
@@ -193,30 +233,26 @@ export default {
         }
       }
 
-      &__confirmation {
+      &__errors {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        flex-direction: row;
-        margin: 20px 0;
-        cursor: pointer;
+        flex-direction: column;
+        width: 100%;
+        transition: $transition * 2;
 
-        &__checkbox {
-          flex-shrink: 0;
-          margin-right: 15px;
-          width: 25px;
-          height: 25px;
+        &_margined {
+          margin-top: 15px;
         }
 
-        &__text {
-          font-size: 16px;
-          @media screen and (max-width: $tablet) {
-            font-size: 15px;
-          }
+
+        .empty {
+          margin-top: 0px;
         }
       }
 
       &__button {
+        margin-top: 20px;
         width: 100%;
         max-width: 200px;
         @media screen and (max-width: $tablet) {

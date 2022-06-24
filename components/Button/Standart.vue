@@ -1,5 +1,6 @@
 <template>
-  <button :disabled="loader" @click='$emit("click")' class="button button-standart unselectable">
+  <button :disabled="loader || disabled" :class="{'disabled': disabled}" @click='$emit("click")'
+          class="button button-standart unselectable">
     <transition name="opacity" appear mode="out-in">
       <loader v-if="loader" className="button-standart__loader" class="button-standart__loader"/>
       <div class="button-standart__slot" v-else>
@@ -14,6 +15,10 @@ export default {
     loader: {
       required: false,
       default: false
+    },
+    disabled: {
+      required: false,
+      default: false
     }
   }
 
@@ -25,7 +30,6 @@ export default {
 .button-standart {
   text-align: center;
   outline: none;
-  border: none;
   border-radius: 50px;
   white-space: nowrap;
   overflow: hidden;
@@ -34,12 +38,12 @@ export default {
   color: $darkblue;
   height: 50px;
   transition: $transition;
-  font-family: "SF Pro Display";
+  font-family: "SF Pro Display", serif;
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 17px;
-  padding: 0px 4px;
+  padding: 0 4px;
   display: flex;
   background-color: transparent;
   align-items: center;

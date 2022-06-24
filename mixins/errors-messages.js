@@ -2,15 +2,15 @@ export default{
     data(){
         return{
             errors: [],
-            errorsTimer: null,
+            errors_timer: null,
         }
     },
     watch: {
         errors() {
-          clearTimeout(this.errorsTimer);
-          this.errorsTimer = setTimeout(() => {
-            clearTimeout(this.errorsTimer);
-            this.errorsTimer = null;
+          clearTimeout(this.errors_timer);
+          this.errors_timer = setTimeout(() => {
+            clearTimeout(this.errors_timer);
+            this.errors_timer = null;
             this.errors = [];
           }, 6000);
         },

@@ -41,14 +41,24 @@
           :required="true"
           minlength="8"
         />
-        <p class="registration-page__content__text">
-          Сейчас мы вам позвоним. Пожалуйста, введите последние 4 цифры
-          входящего номера.
-        </p>
-        <ButtonStandart class="registration-page__content__button"
-        >Подтвердить телефон
-        </ButtonStandart
-        >
+
+        <label for="registration-page__content__confirmation__checkbox"
+               class="registration-page__content__confirmation">
+          <Checkbox
+            id="registration-page__content__confirmation__checkbox"
+            :checked="confirmation"
+            :value="!confirmation"
+            @change="confirmation = !$event"
+            class="registration-page__content__confirmation__checkbox"
+          />
+          <span class="registration-page__content__confirmation__text">
+            Принимаю условия использования и политику конфиденциальности
+          </span>
+        </label>
+
+        <ButtonStandart :disabled="!confirmation" :loader="loading" class="registration-page__content__button">
+          Зарегистрироваться
+        </ButtonStandart>
         <!-- <client-only> -->
         <transition-group
           name="opacity"
@@ -65,6 +75,7 @@
           >{{ error }}
           </Message
           >
+
         </transition-group>
         <!-- </client-only> -->
       </form>
@@ -85,6 +96,7 @@ export default {
         password_confirmation: "",
       },
       confirmation: false,
+      loading: false
     };
   },
   mounted() {
@@ -97,13 +109,20 @@ export default {
     });
   },
   methods: {
+    clickOnDisabledButton() {
+      if (!this.confirmation) {
+        console.log("епта")
+        this.errors = ['Вы должны принять условия пользовательского соглашения'];
+      }
+    },
     registrate() {
-      if (this.form.password != this.form.password_confirmation) {
+      if (this.form.password !== this.form.password_confirmation) {
         document
           .querySelector(".registration-page__content__errors")
           .scrollIntoView({block: "nearest", behavior: "smooth"});
         return (this.errors = ["Пароли не совпадают"]);
       }
+      this.loading = true;
       this.$axios
         .post(`${this.$axios.defaults.baseURL}/api/register`, {
           phone: parseInt(this.form.phone.replace(/\D+/g, "")),
@@ -121,11 +140,13 @@ export default {
               .map(el => el.flat())
               .flat();
           }
-        });
-    },
+        }).finally(() => this.loading = false);
+    }
+    ,
     sendCode() {
       console.log("Send code function");
-    },
+    }
+    ,
   },
   computed: {
     remember_phone() {
@@ -185,13 +206,46 @@ export default {
       }
     }
 
+    &__confirmation {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row;
+      margin: 20px 0;
+      cursor: pointer;
+
+      &__checkbox {
+        flex-shrink: 0;
+        margin-right: 15px;
+        width: 25px;
+        height: 25px;
+      }
+
+      &__text {
+        font-size: 16px;
+        @media screen and (max-width: $tablet) {
+          font-size: 15px;
+        }
+      }
+    }
+
     &__button {
       width: 100%;
       max-width: 200px;
+      &.disabled{
+        background-color: $dark_grey;
+        opacity: 0.8;
+        border:none;
+        &:hover{
+          //border: 1px solid $darkblue !important;
+          color: $darkblue !important;
+        }
+      }
       @media screen and (max-width: $tablet) {
         height: 40px;
       }
     }
+
 
     &__errors {
       display: flex;
@@ -211,52 +265,6 @@ export default {
       }
     }
 
-    &_code {
-      border-radius: 20px;
-      background-color: $white;
-      padding: 20px;
-      width: 100%;
-      max-width: 450px;
-
-      &__text {
-        margin: 20px 0;
-        font-size: 16px;
-        @media screen and (max-width: $tablet) {
-          font-size: 15px;
-        }
-      }
-
-      &__confirmation {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-direction: row;
-        margin: 20px 0;
-        cursor: pointer;
-
-        &__checkbox {
-          flex-shrink: 0;
-          margin-right: 15px;
-          width: 25px;
-          height: 25px;
-        }
-
-        &__text {
-          font-size: 16px;
-          @media screen and (max-width: $tablet) {
-            font-size: 15px;
-          }
-        }
-      }
-
-      &__button {
-        width: 100%;
-        max-width: 200px;
-        @media screen and (max-width: $tablet) {
-          height: 40px;
-        }
-      }
-    }
   }
 }
 </style>
