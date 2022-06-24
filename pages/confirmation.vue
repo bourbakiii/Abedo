@@ -13,14 +13,13 @@
           к вам поступит
           звонок. Прослушайте его и введите 4 названных символа в соответствующее поле.
         </p>
-        {{ recall_time }}
-        <ButtonStandart :loader="loading_call" :disabled="recall_time!==0"
-                        class="confirmation-page__content_call__button"
-        > {{
+        {{ recall_time == null ? '' : getTimeInterval(new Date(), recall_time) }}
+
+        <ButtonStandart :loader="loading_call" :disabled="recall_time!==null"
+                        class="confirmation-page__content_call__button"> {{
             called ? "Позвонить еще раз" : "Позвонить"
-          }}
-        </ButtonStandart
-        >
+                                                                         }}
+        </ButtonStandart>
         <div
           :class="{'confirmation-page__content_call__errors_margined': call_errors.length}"
           class="confirmation-page__content_call__errors"
@@ -31,8 +30,7 @@
               :key="error"
               class="confirmation-page__content_call__errors__item_error confirmation-page__content_call__errors__item"
             >{{ error }}
-            </Message
-            >
+            </Message>
           </transition>
         </div>
       </form>
@@ -77,7 +75,7 @@ export default {
       called: true,
       confirmation: false,
       loading_call: false,
-      recall_time: 0,
+      recall_time: null,
       recall_interval: 0,
       call_errors: [],
       call_errors_timer: null,
@@ -93,15 +91,32 @@ export default {
         info_click: null
       }
     });
+
   },
 
-
+  async asyncData({store, redirect}) {
+    if (!store.state.temporary.confirmation_phone) redirect('/');
+  },
   methods: {
+    getTimeInterval(start, end) {
+      let interval = new Date(end - start);
+      let [minutes, seconds] = [interval.getUTCMinutes(), interval.getUTCSeconds()];
+      if (minutes.toString().length === 1) minutes = '0' + minutes;
+      if (seconds.toString().length === 1) seconds = '0' + seconds;
+      return `${minutes}:${seconds}`
+    },
+
     call() {
       this.loading_call = true;
-      this.$axios.$post('/api/confirm/phone', {phone: 9289999999}).then(() => {
+      this.$axios.$post('/api/confirm/phone', {phone: this.$store.state.temporary.confirmation_phone}).then(() => {
         this.called = true;
-        this.recall_time = 120;
+        this.recall_time = new Date();
+        this.recall_time.setSeconds(this.recall_time.getSeconds() + 119);
+        this.recall_interval = setInterval(() => this.$forceUpdate(), 1000);
+        setTimeout(() => {
+          this.recall_time = null;
+          clearInterval(this.recall_interval)
+        }, 1000 * 118);
       }).catch((error) => {
           if (error?.response?.status === 422) {
             this.call_errors = Object.values(error.response.data.errors)
@@ -113,8 +128,7 @@ export default {
     },
     sendCode() {
       console.log("Send code function");
-    }
-    ,
+    },
   },
   computed: {
     remember_phone() {
@@ -255,6 +269,18 @@ export default {
         margin-top: 20px;
         width: 100%;
         max-width: 200px;
+
+        &.disabled {
+          background-color: $dark_grey;
+          opacity: 0.8;
+          border: none;
+
+          &:hover {
+            //border: 1px solid $darkblue !important;
+            color: $darkblue !important;
+          }
+        }
+
         @media screen and (max-width: $tablet) {
           height: 40px;
         }

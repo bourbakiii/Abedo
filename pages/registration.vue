@@ -130,8 +130,9 @@ export default {
           password_confirmation: this.form.password_confirmation,
         })
         .then((response) => {
-          this.$store.commit("temporary/action", (state) => {
-            state.registration_phone = response.data.user.phone;
+          this.$router.push('/confirmation');
+          this.$store.commit("temporary/action", state => {
+            state.confirmation_phone = response.data.user.phone;
           });
         })
         .catch(({response}) => {
@@ -232,15 +233,18 @@ export default {
     &__button {
       width: 100%;
       max-width: 200px;
-      &.disabled{
+
+      &.disabled {
         background-color: $dark_grey;
         opacity: 0.8;
-        border:none;
-        &:hover{
+        border: none;
+
+        &:hover {
           //border: 1px solid $darkblue !important;
           color: $darkblue !important;
         }
       }
+
       @media screen and (max-width: $tablet) {
         height: 40px;
       }
@@ -253,7 +257,7 @@ export default {
       justify-content: flex-start;
       flex-direction: column;
       width: 100%;
-      transition: calc($transition * 2);
+      transition: $transition * 2;
 
       &_margined {
         margin-top: 15px;
