@@ -98,15 +98,7 @@ export default {
     if (!this.$store.state.temporary.confirmation_phone) this.$router.push('/');
     else {
       const recall_time = this.$cookies.get(`confirmation-${this.$store.state.temporary.confirmation_phone}` || null);
-      console.log(1);
-      console.log(this.$store.state.temporary.confirmation_phone);
-      console.log(2)
-      console.log(recall_time);
-      if (recall_time) {
-        console.log(3);
-        console.log(new Date(recall_time));
-        this.recall_time = new Date(recall_time);
-      }
+      if (recall_time) this.recall_time = new Date(recall_time);
     }
   },
   methods: {
@@ -117,34 +109,50 @@ export default {
       if (seconds.toString().length === 1) seconds = '0' + seconds;
       return `${minutes}:${seconds}`;
     },
-
+    getTimeNowWithAdding({seconds = 0}) {
+      const time_now = new Date();
+      console.log("Fucking time - ");
+      console.log(new Date(time_now.setSeconds(time_now.getSeconds() + seconds)));
+      return new Date(time_now.setSeconds(time_now.getSeconds() + seconds));
+    },
     call() {
       this.loading_call = true;
       this.$axios.$post('/api/confirm/phone', {phone: this.confirmation_phone}).then(() => {
         this.called = true;
-        const time_now = new Date();
-        this.recall_time = new Date(time_now.setSeconds(time_now.getSeconds() + 120));
-        console.log("needed");
-        console.log(this.recall_time);
+        this.recall_time = this.getTimeNowWithAdding({seconds: 120});
         this.$cookies.set(`confirmation-${this.confirmation_phone}`, JSON.stringify(this.recall_time), {expires: this.recall_time});
       }).catch(error => {
+          console.log(error.response);
           if (error?.response?.status === 422) {
             this.call_errors = Object.values(error.response.data.errors)
               .map((el) => el.flat())
               .flat();
+          }
+          if (error.response.data.message) {
+            let index_of_double_dot = error.response.data.message.indexOf(':');
+            if (index_of_double_dot === -1) return;
+            let time_now = new Date();
+            let minutes = error.response.data.message.substring(index_of_double_dot - 2, index_of_double_dot) + time_now.getMinutes();
+            let seconds = error.response.data.message.substring(index_of_double_dot + 1, index_of_double_dot + 3) + time_now.getSeconds();
+            console.log(minutes, seconds);
+            this.recall_time = null;
+            this.recall_time = this.getTimeNowWithAdding({seconds: (+minutes * 60) + +seconds});
+            this.$cookies.set(`confirmation-${this.confirmation_phone}`, JSON.stringify(this.recall_time), {expires: this.recall_time});
           }
         }
       ).finally(() => this.loading_call = false);
     },
     sendCode() {
       console.log("Send code function");
-    },
+    }
+    ,
   },
   computed: {
     confirmation_phone() {
       return this.$store.state.temporary.confirmation_phone;
     },
-  },
+  }
+  ,
   watch: {
     recall_time(value) {
       if (!value) return;
@@ -153,7 +161,8 @@ export default {
         this.recall_time = null;
         clearInterval(this.recall_interval)
       }, 1000 * value.getSeconds());
-    },
+    }
+    ,
     call_errors() {
       clearTimeout(this.call_errors_timer);
       this.call_errors_timer = setTimeout(() => {
@@ -161,7 +170,8 @@ export default {
         this.call_errors_timer = null;
         this.call_errors = [];
       }, 6000);
-    },
+    }
+    ,
     code_errors() {
       clearTimeout(this.code_errors_timer);
       this.code_errors_timer = setTimeout(() => {
@@ -169,7 +179,8 @@ export default {
         this.code_errors_timer = null;
         this.code_errors = [];
       }, 6000);
-    },
+    }
+    ,
     '$store.state.temporary.confirmation_phone':
       {
         handler(value) {
