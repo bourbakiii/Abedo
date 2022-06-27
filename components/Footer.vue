@@ -108,11 +108,11 @@
     </div>
     <div v-if="!is_preview" class="footer__wrapper__bottom-wrapper">
       <div class="footer__wrapper__bottom">
-        <NuxtLink class="footer__wrapper__bottom-link" to="#"
+        <NuxtLink class="footer__wrapper__bottom-link" to="/terms"
         >Условия использования
         </NuxtLink
         >
-        <NuxtLink class="footer__wrapper__bottom-link" to="#">Политика конфиденциальности
+        <NuxtLink class="footer__wrapper__bottom-link" to="/politics">Политика конфиденциальности
         </NuxtLink>
       </div>
     </div>
