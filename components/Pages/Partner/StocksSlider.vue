@@ -193,7 +193,7 @@ export default {
     }
 
     &_prev {
-      left: 0px;
+      left: 0;
       transform: translate(-90px, -50%);
       @media screen and (max-width: 200px) {
         transform: translate(-30px, -50%);

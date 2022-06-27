@@ -194,7 +194,7 @@ export default {
       width: 100%;
 
       &__item {
-        padding: 10px 0px;
+        padding: 10px 0;
         width: 100%;
         display: flex;
         align-items: center;
@@ -208,12 +208,12 @@ export default {
 
         @media screen and (max-width: $phone) {
           border: none;
-          padding: 0px;
+          padding: 0;
           min-height: max-content;
           justify-content: flex-start;
           margin-bottom: 16px;
           &:last-of-type {
-            margin-bottom: 0px;
+            margin-bottom: 0;
           }
         }
 

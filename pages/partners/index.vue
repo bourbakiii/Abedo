@@ -319,7 +319,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0px 15px;
+      padding: 0 15px;
 
       &-text {
         font-family: "SF Pro Display";
@@ -357,7 +357,7 @@ export default {
       &__button {
         height: 35px !important;
         background-color: transparent;
-        padding: 0px 15px !important;
+        padding: 0 15px !important;
 
         svg * {
           fill: transparent !important;
@@ -397,14 +397,14 @@ export default {
       }
 
       @media screen and (max-width: $tablet) {
-        margin-top: 0px;
+        margin-top: 0;
         margin-bottom: 20px;
       }
 
       &__dropdown {
         position: absolute;
         top: calc(100% + 13px);
-        left: 0px;
+        left: 0;
         min-width: 295px !important;
         width: auto !important;
         max-width: 100% !important;
@@ -420,7 +420,7 @@ export default {
 
   &__advertise {
     &_big {
-      margin: 40px 0px 50px;
+      margin: 40px 0 50px;
     }
 
     &_small {
@@ -455,7 +455,7 @@ export default {
       @media screen and (max-width: $tablet) {
         width: 100%;
         max-width: 100%;
-        margin-right: 0px;
+        margin-right: 0;
         margin-bottom: 30px;
       }
     }

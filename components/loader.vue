@@ -82,7 +82,7 @@ export default {
     }
 
     &:last-of-type {
-      margin-right: 0px;
+      margin-right: 0;
       animation-delay: 0.36s;
     }
   }

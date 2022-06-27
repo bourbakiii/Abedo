@@ -47,8 +47,8 @@ export default {
 
   &__image {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     width: 80%;
     height: 100%;
     object-fit: cover;
@@ -69,7 +69,7 @@ export default {
     opacity: 0.95;
     position: absolute;
     top: 50%;
-    left: 0px;
+    left: 0;
     transform: translateY(-50%);
     width: 25%;
     height: 100%;

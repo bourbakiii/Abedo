@@ -260,15 +260,15 @@ export default {
   &-enter,
   &-leave-to {
     opacity: 0;
-    height: 0px !important;
+    height: 0 !important;
     margin-left: auto !important;
-    margin-top: 0px !important;
+    margin-top: 0 !important;
     @media screen and (min-width: $phone) {
       height: 50px !important;
-      width: 0px !important;
-      padding-left: 0px !important;
-      padding-right: 0px !important;
-      margin: 0px !important;
+      width: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin: 0 !important;
     }
   }
   &-enter-active,
@@ -279,13 +279,13 @@ export default {
 .address-item__buttons-transition {
   &-enter,
   &-leave-to {
-    margin-top: 0px !important;
+    margin-top: 0 !important;
     opacity: 0 !important;
     label {
-      height: 0px;
+      height: 0;
     }
     button {
-      height: 0px !important;
+      height: 0 !important;
     }
   }
   &-enter-active,
@@ -337,7 +337,7 @@ export default {
     &:not(.editing) {
       border-bottom: 1px solid transparent;
       margin-bottom: 32px;
-      padding-bottom: 0px;
+      padding-bottom: 0;
     }
   }
   &__content {
@@ -368,7 +368,7 @@ export default {
         align-items: center;
         justify-content: flex-start;
         flex-direction: column;
-        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
         padding-top: 7px;
         padding-bottom: 17px;
         z-index: $z_navigation + 1;
@@ -427,14 +427,14 @@ export default {
       @media screen and (max-width: $tablet_start) {
         width: 100%;
         &:first-child {
-          margin-left: 0px;
+          margin-left: 0;
         }
       }
       @media screen and (max-width: $tablet_middle) {
-        margin-left: 0px;
+        margin-left: 0;
       }
       &_dadata {
-        margin-left: 0px !important;
+        margin-left: 0 !important;
         width: 100%;
       }
       &:not(&_dadata) {
@@ -468,7 +468,7 @@ export default {
     flex-direction: row;
     align-self: flex-start;
     width: max-content;
-    margin: 10px 0px;
+    margin: 10px 0;
     cursor: pointer;
 
     &__text {
@@ -510,7 +510,7 @@ export default {
     }
     transition: calc($transition * 2);
     .empty {
-      margin-top: 0px;
+      margin-top: 0;
     }
   }
 }

@@ -344,7 +344,7 @@ export default {
 <style lang="scss" scoped>
 .navigation-wrapper {
   position: sticky;
-  top: 0px;
+  top: 0;
   flex-direction: row;
   height: 90px;
   background-color: $white;
@@ -418,7 +418,7 @@ export default {
       line-height: 20px;
       width: 181px;
       height: 50px;
-      padding: 5px 0px;
+      padding: 5px 0;
 
       &__icon {
         margin-right: 10px;
@@ -503,14 +503,14 @@ export default {
             top: 100%;
             left: 0%;
             width: 257px;
-            border-radius: 0px 0px 20px 20px;
+            border-radius: 0 0 20px 20px;
             overflow: hidden;
             height: auto;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             flex-direction: column;
-            box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
             padding-top: 7px;
             padding-bottom: 17px;
 
@@ -621,7 +621,7 @@ export default {
         &__indicator {
           height: 24px;
           min-width: 24px;
-          padding: 0px 5px;
+          padding: 0 5px;
           width: auto;
           position: absolute;
           top: 5px;

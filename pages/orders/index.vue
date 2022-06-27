@@ -221,7 +221,7 @@ export default {
         width: 100%;
         border: 1px $dark_grey;
         border-radius: 20px;
-        padding: 0px 20px;
+        padding: 0 20px;
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -229,8 +229,8 @@ export default {
         background-color: $white;
 
         @media screen and (max-width: $tablet_middle) {
-          border-radius: 0px;
-          padding: 0px;
+          border-radius: 0;
+          padding: 0;
           border: none;
           background-color: transparent;
         }
@@ -239,7 +239,7 @@ export default {
         &__item {
           max-width: 100%;
           width: 100%;
-          padding: 30px 0px;
+          padding: 30px 0;
           background-color: $white;
           background: $white;
           display: flex;
@@ -249,7 +249,7 @@ export default {
           border-bottom: 1px solid $dark_grey;
 
           &:last-of-type {
-            border-bottom: 0px;
+            border-bottom: 0;
           }
 
           @media screen and (max-width: $tablet_middle) {
@@ -258,7 +258,7 @@ export default {
             padding: 20px 14px;
             margin-bottom: 16px;
             &:last-of-type {
-              margin-bottom: 0px;
+              margin-bottom: 0;
             }
           }
 
@@ -283,7 +283,7 @@ export default {
                 width: 100% !important;
                 min-width: 100% !important;
                 max-width: 100% !important;
-                margin: 0px !important;
+                margin: 0 !important;
                 overflow: hidden;
 
                 &_address {
@@ -385,7 +385,7 @@ export default {
               flex-direction: row;
               justify-self: flex-end;
               align-self: flex-end;
-              margin-left: 0px;
+              margin-left: 0;
             }
 
             @media screen and (max-width: $tablet_middle) {
@@ -408,22 +408,22 @@ export default {
 
               &_open {
                 @media screen and (max-width: $notebook) {
-                  margin-right: 0px;
+                  margin-right: 0;
                   margin-bottom: 10px;
                 }
                 @media screen and (max-width: $sidebar_dn) {
                   margin-right: 20px;
-                  margin-bottom: 0px;
+                  margin-bottom: 0;
                 }
               }
 
               &_rate {
                 margin-left: 20px;
                 @media screen and (max-width: $notebook) {
-                  margin-left: 0px;
+                  margin-left: 0;
                 }
                 @media screen and (max-width: $sidebar_dn) {
-                  margin-left: 0px;
+                  margin-left: 0;
 
                 }
 
@@ -482,7 +482,7 @@ export default {
           width: max-content;
           align-self: center;
           justify-self: center;
-          margin: 10vh auto 0px;
+          margin: 10vh auto 0;
         }
 
         &_empty {

@@ -184,7 +184,7 @@ export default {
       }
 
       &__text {
-        margin: 58px 0px;
+        margin: 58px 0;
         @media screen and (max-width: $tablet) {
           font-family: "SF Pro Display";
           font-style: normal;

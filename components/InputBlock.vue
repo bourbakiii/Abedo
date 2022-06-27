@@ -94,6 +94,10 @@ export default {
       required: false,
       default: "",
     },
+    minlength: {
+      required: false,
+      default: "",
+    },
     value: {
       required: false,
     },
@@ -108,7 +112,6 @@ export default {
   },
   methods: {
     removeDigits(event) {
-      console.log(event.key);
       if (!"1234567890".includes(event.key))
         event.preventDefault();
     },
@@ -153,7 +156,7 @@ export default {
   &__input {
     width: 100%;
     height: 50px;
-    padding: 0px calc(max(2.5%, 10px));
+    padding: 0 calc(max(2.5%, 10px));
     display: flex;
     align-items: center;
     justify-content: flex-start;

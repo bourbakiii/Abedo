@@ -111,8 +111,8 @@ export default {
 // }
 .modals-wrapper {
   position: fixed;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   min-height: 100%;
@@ -128,7 +128,7 @@ export default {
   padding-right: 5%;
   overflow-y: auto;
   @media screen and (max-width: $tablet) {
-    padding: 0px;
+    padding: 0;
   }
 }
 </style>

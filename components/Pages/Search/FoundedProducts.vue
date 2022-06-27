@@ -130,17 +130,17 @@ export default {
         justify-content: flex-start;
         flex-direction: row;
         width: 100%;
-        padding: 0px 30px;
+        padding: 0 30px;
         margin-bottom: 17px;
         overflow: hidden;
         max-width: 100%;
         text-decoration: none;
         @media screen and (max-width: $notebook) {
-          padding: 0px 20px 15px;
+          padding: 0 20px 15px;
         }
         @media screen and (max-width: $tablet) {
           flex-wrap: wrap;
-          padding: 0px 15px 10px;
+          padding: 0 15px 10px;
         }
 
         &__image {
@@ -208,7 +208,7 @@ export default {
       }
 
       &__products {
-        padding: 30px 30px 0px;
+        padding: 30px 30px 0;
         width: 100%;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
@@ -218,7 +218,7 @@ export default {
         @media screen and (max-width: $notebook) {
           grid-template-columns: repeat(4, 1fr);
           grid-gap: 15px;
-          padding: 20px 20px 0px;
+          padding: 20px 20px 0;
         }
         @media screen and (max-width: $tablet) {
           grid-template-columns: repeat(3, 1fr);

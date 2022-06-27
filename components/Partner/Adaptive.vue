@@ -275,7 +275,7 @@ export default {
     }
   }
   &:last-of-type {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
   &__info {
     height: 100%;

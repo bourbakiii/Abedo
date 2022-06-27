@@ -22,10 +22,10 @@ export default {
 .adaptive-navigation {
   &__wrapper {
     position: sticky;
-    top: 0px;
+    top: 0;
     width: 100%;
     background-color: $white;
-    padding: 0px 20px;
+    padding: 0 20px;
     height:60px;
     display: flex;
     align-items: center;

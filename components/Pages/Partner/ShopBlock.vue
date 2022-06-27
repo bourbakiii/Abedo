@@ -324,9 +324,9 @@ export default {
   max-width: 100%;
   @media screen and (max-width: $tablet) {
     background-color: transparent;
-    padding-top: 0px;
+    padding-top: 0;
     margin-right: 10px;
-    border-radius: 0px;
+    border-radius: 0;
   }
 
   &__content {
@@ -335,7 +335,7 @@ export default {
     justify-content: flex-start;
     flex-direction: row;
     width: 100%;
-    padding: 0px 20px 30px;
+    padding: 0 20px 30px;
 
     &__image {
       cursor: pointer;
@@ -471,7 +471,7 @@ export default {
             margin-right: 19px;
 
             &:last-of-type {
-              margin-right: 0px;
+              margin-right: 0;
             }
           }
         }
@@ -533,7 +533,7 @@ export default {
     overflow: hidden;
     @media screen and (max-width: $tablet) {
       min-height: 90px;
-      padding: 8px 0px;
+      padding: 8px 0;
       border-top: none;
       border-bottom: 1px solid $dark_grey;
     }
@@ -609,7 +609,7 @@ export default {
         margin-right: 14px;
 
         &:last-of-type {
-          margin-right: 0px;
+          margin-right: 0;
         }
       }
     }

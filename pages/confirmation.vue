@@ -45,21 +45,36 @@
             Пожалуйста, введите последние 4 цифры входящего номера.
           </p>
           <InputBlock
-            @input="() => {}"
+            v-model="code"
             placeholder="Введите код"
             class="confirmation-page__content_code__input-block confirmation-page__content_code__phone"
             name="сode"
             id="code"
             type="text"
+            :autocomplete="false"
             maxlength="4"
+            minlength="4"
             :digits_only="true"
             text="Код подтверждения"
-
+            :required='true'
           />
-          <ButtonStandart class="confirmation-page__content_code__button"
+          <ButtonStandart :loader="loading_code" class="confirmation-page__content_code__button"
           >Отправить
           </ButtonStandart
           >
+          <div
+            :class="{'confirmation-page__content_code__errors_margined': code_errors.length}"
+            class="confirmation-page__content_code__errors"
+          >
+            <transition name="message" appear>
+              <Message
+                v-for="error in code_errors"
+                :key="error"
+                class="confirmation-page__content_call__errors__item_error confirmation-page__content_call__errors__item"
+              >{{ error }}
+              </Message>
+            </transition>
+          </div>
         </form>
       </transition>
     </div>
@@ -72,7 +87,6 @@ export default {
   mixins: [errorsMessagesMixin],
   data() {
     return {
-      called: true,
       confirmation: false,
       loading_call: false,
       recall_time: null,
@@ -80,7 +94,9 @@ export default {
       call_errors: [],
       call_errors_timer: null,
       code_errors: [],
-      code_errors_timer: null
+      code_errors_timer: null,
+      code: null,
+      loading_code: false
     };
   },
   mounted() {
@@ -91,10 +107,9 @@ export default {
         info_click: null
       }
     });
-
   },
 
-  async created() {
+  created() {
     if (!this.$store.state.temporary.confirmation_phone) this.$router.push('/');
     else {
       const recall_time = this.$cookies.get(`confirmation-${this.$store.state.temporary.confirmation_phone}` || null);
@@ -111,8 +126,6 @@ export default {
     },
     getTimeNowWithAdding({seconds = 0}) {
       const time_now = new Date();
-      console.log("Fucking time - ");
-      console.log(new Date(time_now.setSeconds(time_now.getSeconds() + seconds)));
       return new Date(time_now.setSeconds(time_now.getSeconds() + seconds));
     },
     call() {
@@ -122,7 +135,6 @@ export default {
         this.recall_time = this.getTimeNowWithAdding({seconds: 120});
         this.$cookies.set(`confirmation-${this.confirmation_phone}`, JSON.stringify(this.recall_time), {expires: this.recall_time});
       }).catch(error => {
-          console.log(error.response);
           if (error?.response?.status === 422) {
             this.call_errors = Object.values(error.response.data.errors)
               .map((el) => el.flat())
@@ -131,10 +143,8 @@ export default {
           if (error.response.data.message) {
             let index_of_double_dot = error.response.data.message.indexOf(':');
             if (index_of_double_dot === -1) return;
-            let time_now = new Date();
-            let minutes = error.response.data.message.substring(index_of_double_dot - 2, index_of_double_dot) + time_now.getMinutes();
-            let seconds = error.response.data.message.substring(index_of_double_dot + 1, index_of_double_dot + 3) + time_now.getSeconds();
-            console.log(minutes, seconds);
+            let minutes = error.response.data.message.substring(index_of_double_dot - 2, index_of_double_dot);
+            let seconds = error.response.data.message.substring(index_of_double_dot + 1, index_of_double_dot + 3);
             this.recall_time = null;
             this.recall_time = this.getTimeNowWithAdding({seconds: (+minutes * 60) + +seconds});
             this.$cookies.set(`confirmation-${this.confirmation_phone}`, JSON.stringify(this.recall_time), {expires: this.recall_time});
@@ -143,26 +153,36 @@ export default {
       ).finally(() => this.loading_call = false);
     },
     sendCode() {
-      console.log("Send code function");
-    }
-    ,
+      this.code_errors = [];
+      this.loading_code = true;
+      this.$axios.post(`api/confirm/phone/verify`, {
+        phone: this.confirmation_phone,
+        code: this.code
+      }).then(() => this.$router.push('/')).catch((error) => {
+        if (error?.response?.status === 422) {
+          this.code_errors = Object.values(error.response.data.errors)
+            .map((el) => el.flat())
+            .flat();
+        }
+        if (error.response.data.message) this.code_errors.push(error.response.data.message);
+      }).finally(() => this.loading_code = false);
+    },
   },
   computed: {
     confirmation_phone() {
       return this.$store.state.temporary.confirmation_phone;
     },
-  }
-  ,
+  },
   watch: {
     recall_time(value) {
       if (!value) return;
       this.recall_interval = setInterval(() => this.$forceUpdate(), 1000);
+      const difference = new Date(value - new Date());
       setTimeout(() => {
         this.recall_time = null;
         clearInterval(this.recall_interval)
-      }, 1000 * value.getSeconds());
-    }
-    ,
+      }, 1000 * (difference.getMinutes() * 60 + difference.getSeconds()));
+    },
     call_errors() {
       clearTimeout(this.call_errors_timer);
       this.call_errors_timer = setTimeout(() => {
@@ -170,8 +190,7 @@ export default {
         this.call_errors_timer = null;
         this.call_errors = [];
       }, 6000);
-    }
-    ,
+    },
     code_errors() {
       clearTimeout(this.code_errors_timer);
       this.code_errors_timer = setTimeout(() => {
@@ -185,13 +204,11 @@ export default {
       {
         handler(value) {
           if (!value) this.$router.push('/');
-        }
-        ,
+        },
         deep: true
       }
   }
-}
-;
+};
 </script>
 <style lang="scss" scoped>
 .confirmation-page {
@@ -258,7 +275,7 @@ export default {
       justify-content: flex-start;
       flex-direction: column;
       width: 100%;
-      transition: calc($transition * 2);
+      transition: $transition;
 
       &_margined {
         margin-top: 15px;
@@ -268,6 +285,10 @@ export default {
       .empty {
         margin-top: 0;
       }
+    }
+
+    &_code {
+      margin-top: 30px;
     }
 
     &_call, &_code {
@@ -299,7 +320,7 @@ export default {
 
 
         .empty {
-          margin-top: 0px;
+          margin-top: 0;
         }
       }
 

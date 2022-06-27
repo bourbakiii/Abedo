@@ -109,7 +109,7 @@ export default {
       width: 100%;
       margin-bottom: 40px;
       @media screen and (max-width: $tablet) {
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
 
       &__pre {

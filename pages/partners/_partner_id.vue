@@ -127,7 +127,7 @@ export default {
   justify-content: center;
   padding-bottom: 30px !important;
   @media screen and (max-width: $tablet) {
-    padding-top: 0px !important;
+    padding-top: 0 !important;
   }
 
   &__over {
@@ -150,7 +150,7 @@ export default {
         width: 100%;
         @media screen and (max-width: $sidebar_dn) {
           width: 100%;
-          padding-bottom: 0px;
+          padding-bottom: 0;
         }
 
         &__shop-block {

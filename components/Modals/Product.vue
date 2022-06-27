@@ -211,7 +211,7 @@
           justify-content: flex-start;
           width: 100%;
           min-height: 75px;
-          padding: 10px 0px;
+          padding: 10px 0;
           border-bottom: 1px solid $dark_grey;
           &__name {
             width: 520px;
@@ -287,7 +287,7 @@
         height: 50px;
         margin-left: 70px;
         &__button {
-          padding: 0px 25px;
+          padding: 0 25px;
           height: 100%;
           width: 100%;
         }
@@ -299,7 +299,7 @@
           justify-content: space-between;
           &__count {
             flex-grow: 1;
-            margin: 0px 8px;
+            margin: 0 8px;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;

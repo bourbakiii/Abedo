@@ -369,7 +369,7 @@ export default {
           align-items: center;
           justify-content: flex-start;
           flex-direction: column;
-          box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
           padding: 7px 10px;
 
           &__button {
@@ -419,7 +419,7 @@ export default {
           border: 1px solid $dark_grey;
           box-sizing: border-box;
           border-radius: 50px;
-          padding: 0px 30px;
+          padding: 0 30px;
           outline: none;
           font-family: "SF Pro Display";
           font-style: normal;
@@ -459,8 +459,8 @@ export default {
               width: calc(100% - 50px);
               background-color: $white;
               z-index: $z_dropdown;
-              box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-              border-radius: 0px 0px 20px 20px;
+              box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+              border-radius: 0 0 20px 20px;
 
               &__button {
                 text-align: left;
@@ -512,7 +512,7 @@ export default {
         &_decline {
           margin-left: 20px;
           @media screen and (max-width: $phone) {
-            margin: 10px 0px 0px 0px;
+            margin: 10px 0 0 0;
           }
         }
       }
@@ -533,7 +533,7 @@ export default {
       transition: calc($transition * 2);
 
       .empty {
-        margin-top: 0px;
+        margin-top: 0;
       }
     }
   }

@@ -39,7 +39,7 @@ export default {
   line-height: 19px;
   white-space: nowrap;
   height: 45px;
-  padding: 0px 25px;
+  padding: 0 25px;
   transition: $transition;
   &:hover,
   &.active {

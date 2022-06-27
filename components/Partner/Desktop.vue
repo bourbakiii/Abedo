@@ -263,7 +263,7 @@ export default {
             background-color: $red;
             min-width: 45px;
             width: max-content;
-            padding: 0px 5px;
+            padding: 0 5px;
             color: $white;
             font-family: "SF Pro Display";
             font-style: normal;

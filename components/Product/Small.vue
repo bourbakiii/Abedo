@@ -51,7 +51,7 @@ $product_inner_padding: 9px;
   }
 
   &__name {
-    padding: 0px $product_inner_padding;
+    padding: 0 $product_inner_padding;
     width: 100%;
     font-family: "SF Pro Display";
     font-style: normal;
@@ -66,7 +66,7 @@ $product_inner_padding: 9px;
     &.without-image {
       text-overflow: ellipsis;
       white-space: normal;
-      margin: auto 0px;
+      margin: auto 0;
       -moz-box-orient: vertical;
       display: -webkit-box;
       -webkit-line-clamp: 6;
@@ -79,7 +79,7 @@ $product_inner_padding: 9px;
     display: flex;
     align-items: baseline;
     justify-content: flex-start;
-    padding: 0px $product_inner_padding;
+    padding: 0 $product_inner_padding;
     margin-bottom: 15px;
     flex-shrink: 0;
 

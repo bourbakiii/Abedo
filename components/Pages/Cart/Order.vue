@@ -484,8 +484,8 @@ export default {
   width: 100%;
   @media screen and (max-width: $tablet) {
     background-color: transparent;
-    border-radius: 0px;
-    padding: 0px;
+    border-radius: 0;
+    padding: 0;
   }
 
   &__buttons {
@@ -518,7 +518,7 @@ export default {
       }
 
       &:last-of-type {
-        margin-right: 0px;
+        margin-right: 0;
       }
     }
   }
@@ -587,7 +587,7 @@ export default {
           align-items: center;
           justify-content: flex-start;
           flex-direction: column;
-          box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
           padding: 7px 10px;
           max-height: 200px;
           overflow-y: auto;
@@ -658,7 +658,7 @@ export default {
               align-items: center;
               justify-content: flex-start;
               flex-direction: column;
-              box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
               padding-top: 7px;
               padding-bottom: 17px;
               z-index: $z_navigation + 1;
@@ -718,9 +718,9 @@ export default {
       align-items: center;
       justify-content: flex-start;
       flex-direction: column;
-      margin: 70px 0px 40px;
+      margin: 70px 0 40px;
       @media screen and (max-width: $tablet) {
-        margin: 30px 0px;
+        margin: 30px 0;
       }
 
       &__item {
@@ -840,7 +840,7 @@ export default {
       }
 
       &:last-of-type {
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
 
       &_checked {
@@ -876,7 +876,7 @@ export default {
     flex-direction: row;
     padding-top: 30px;
     @media screen and (max-width: $tablet) {
-      padding-top: 0px;
+      padding-top: 0;
     }
 
     &__pre {
@@ -929,7 +929,7 @@ export default {
     border: 1px solid $darkblue;
     border-radius: 10px;
     padding: 15px 24px;
-    margin: 30px 0px 40px;
+    margin: 30px 0 40px;
   }
 
   &__button {
@@ -940,7 +940,7 @@ export default {
     flex-direction: row;
     height: 50px;
     width: 228px;
-    padding: 0px 5px;
+    padding: 0 5px;
     font-size: 16px;
     font-weight: 600;
 
@@ -999,7 +999,7 @@ export default {
 
 
     .empty {
-      margin-top: 0px;
+      margin-top: 0;
     }
   }
 }

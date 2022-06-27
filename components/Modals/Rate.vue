@@ -198,7 +198,7 @@ export default {
         cursor: pointer;
 
         &:last-of-type {
-          margin-right: 0px;
+          margin-right: 0;
         }
 
         position: relative;
@@ -218,7 +218,7 @@ export default {
             &.per {
               visibility: visible;
               z-index: 2;
-              clip-path: polygon(0px 0px, 50% 0px, 50% 100%, 0px 100%);
+              clip-path: polygon(0px 0, 50% 0, 50% 100%, 0 100%);
             }
 
             &.full {

@@ -233,7 +233,7 @@ export default {
       flex-direction: row;
 
       &__count {
-        margin: 0px 5px;
+        margin: 0 5px;
         font-family: "SF Pro Display";
         font-style: normal;
         font-weight: 400;
@@ -272,7 +272,7 @@ export default {
 
   &__selected-options {
     width: 100%;
-    margin: 8px 0px 0px;
+    margin: 8px 0 0;
 
     &__item {
       width: 100%;
@@ -283,7 +283,7 @@ export default {
       margin-bottom: 9px;
 
       &:last-of-type {
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
       &__icon {
         flex-shrink: 0;
@@ -297,7 +297,7 @@ export default {
         color: $extra_dark_grey;
         flex-grow: 1;
         margin-right: 10px;
-        margin: 0px 12px;
+        margin: 0 12px;
       }
 
       &__price {

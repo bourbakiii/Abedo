@@ -88,7 +88,7 @@ export default {
     &__item {
       width: 100%;
       min-height: 50px;
-      padding: 10px 0px;
+      padding: 10px 0;
       display: flex;
       align-items: center;
       justify-content: flex-start;

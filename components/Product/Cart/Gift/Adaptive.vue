@@ -57,13 +57,13 @@ export default {
 
   overflow: hidden;
   &:last-of-type {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
   &__top {
     width: 100%;
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;

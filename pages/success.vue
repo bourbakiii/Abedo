@@ -46,7 +46,7 @@ export default {
   flex-direction: column;
   &__content {
     &__image {
-      margin: 55px 0px;
+      margin: 55px 0;
       width: 90px;
       height: 90px;
       display: flex;

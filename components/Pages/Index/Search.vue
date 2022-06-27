@@ -288,13 +288,13 @@ export default {
     z-index: 5;
 
     &__dropdown-content {
-      box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
       position: absolute;
       top: 100%;
       left: 25px;
       width: calc(100% - 50px);
       background-color: $white;
-      border-radius: 0px 0px 10px 10px;
+      border-radius: 0 0 10px 10px;
       padding: 10px 20px 20px 20px;
 
       &__shops {
@@ -348,7 +348,7 @@ export default {
           justify-content: flex-start;
           flex-direction: row;
           min-height: 75px;
-          padding: 10px 0px;
+          padding: 10px 0;
           border-bottom: 1px solid $dark_grey;
           text-decoration: none;
 
@@ -459,7 +459,7 @@ export default {
       outline: none;
       border: none;
       background-color: transparent;
-      margin: 0px 20px;
+      margin: 0 20px;
       transition: $transition;
 
 
@@ -486,7 +486,7 @@ export default {
       outline: none;
       border: none;
       overflow: hidden;
-      border-radius: 0px 50px 50px 0px;
+      border-radius: 0 50px 50px 0;
 
       &::placeholder {
         font-family: "SF Pro Display";

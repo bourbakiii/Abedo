@@ -140,7 +140,7 @@ export default {
     top: 20px;
     left: 20px;
     min-width: 45px;
-    padding: 0px 5px;
+    padding: 0 5px;
     height: 45px;
     border-radius: 90px;
     background-color: $red;
@@ -182,9 +182,9 @@ export default {
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
-    padding: 0px 20px;
+    padding: 0 20px;
     @media screen and (max-width: $tablet) {
-      padding: 0px 15px;
+      padding: 0 15px;
     }
     width: 100%;
     flex-grow: 1;
@@ -216,7 +216,7 @@ export default {
       }
 
       &__without_image {
-        margin: auto 0px;
+        margin: auto 0;
 
         -webkit-line-clamp: 10;
         line-clamp: 10;
@@ -372,12 +372,12 @@ export default {
         font-size: 16px;
         line-height: 19px;
         text-align: center;
-        margin: 0px 10px;
+        margin: 0 10px;
         @media screen and (max-width: $tablet) {
           font-size: 16px;
           line-height: 19px;
           width: 34px;
-          margin: 0px 4px;
+          margin: 0 4px;
         }
       }
     }

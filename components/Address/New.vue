@@ -6,7 +6,7 @@
       v-model="address.name"
       placeholder="Введите название"
       class="address-item__name"
-      
+
     />
     <div class="address-item__content">
       <div
@@ -26,7 +26,7 @@
             }
           "
         />
-       
+
           <div
             v-if="suggestions.length"
             class="address-item__content__dadata__suggestions"
@@ -183,7 +183,7 @@ export default {
         align-items: center;
         justify-content: flex-start;
         flex-direction: column;
-        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
         padding-top: 7px;
         padding-bottom: 17px;
         z-index: $z_navigation + 1;
@@ -241,14 +241,14 @@ export default {
       @media screen and (max-width: $tablet_start) {
         width: 100%;
         &:first-child {
-          margin-left: 0px;
+          margin-left: 0;
         }
       }
       @media screen and (max-width: $tablet_middle) {
-        margin-left: 0px;
+        margin-left: 0;
       }
       &_dadata {
-        margin-left: 0px !important;
+        margin-left: 0 !important;
         width: 100%;
       }
       &:not(&_dadata) {

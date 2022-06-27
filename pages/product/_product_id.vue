@@ -457,13 +457,13 @@ export default {
         flex-direction: column;
         @media screen and (max-width: $tablet) {
           width: 100%;
-          margin-right: 0px;
+          margin-right: 0;
 
-          padding-bottom: 0px;
+          padding-bottom: 0;
         }
         @media screen and (max-width: $sidebar_dn) {
           width: 100%;
-          padding-bottom: 0px;
+          padding-bottom: 0;
         }
 
         &__name {
@@ -521,12 +521,12 @@ export default {
               }
 
               &__prev {
-                top: 0px;
+                top: 0;
                 transform: translate(-50%, -50%);
               }
 
               &__next {
-                bottom: 0px;
+                bottom: 0;
                 transform: translate(-50%, 50%);
               }
             }
@@ -634,7 +634,7 @@ export default {
           margin-top: 77px;
           width: 100%;
           @media screen and (max-width: $tablet) {
-            margin-top: 0px;
+            margin-top: 0;
             flex-direction: column;
           }
 
@@ -701,7 +701,7 @@ export default {
               margin-bottom: 30px;
               @media screen and (max-width: $tablet) {
                 min-height: 60px;
-                padding: 20px 0px;
+                padding: 20px 0;
                 margin-bottom: 20px;
                 border-top: 1px solid $dark_grey;
                 border-bottom: 1px solid $dark_grey;
@@ -766,7 +766,7 @@ export default {
               margin-bottom: 30px;
               background: $white;
               border-radius: 20px;
-              padding: 20px 0px;
+              padding: 20px 0;
 
               &__pre {
                 font-family: "Montserrat";
@@ -910,18 +910,18 @@ export default {
                 width: 100%;
                 height: 60px;
                 background-color: $white;
-                padding: 0px 30px;
+                padding: 0 30px;
                 border: 1px solid $dark_grey;
                 border-radius: 20px;
 
                 @media screen and (max-width: $maxwidth) {
-                  padding: 0px 15px;
+                  padding: 0 15px;
                 }
                 @media screen and (max-width: $sidebar_dn) {
-                  padding: 0px 30px;
+                  padding: 0 30px;
                 }
                 @media screen and (max-width: $tablet) {
-                  padding: 0px;
+                  padding: 0;
                   width: 200px;
                   background-color: transparent;
                   height: 40px;
@@ -956,7 +956,7 @@ export default {
                 }
 
                 &__count {
-                  margin: 0px 12px;
+                  margin: 0 12px;
                   font-family: "SF Pro Display";
                   font-style: normal;
                   font-weight: 400;
@@ -966,10 +966,10 @@ export default {
                   overflow: hidden;
                   white-space: nowrap;
                   flex-grow: 1;
-                  margin: 0px 10px;
+                  margin: 0 10px;
                   text-align: center;
                   @media screen and (max-width: $tablet) {
-                    margin: 0px 4px;
+                    margin: 0 4px;
                   }
                 }
 

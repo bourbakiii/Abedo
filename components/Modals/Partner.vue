@@ -414,7 +414,7 @@ export default {
       padding: 30px;
     }
     @media screen and (max-width: $tablet) {
-      padding: 0px;
+      padding: 0;
       border: none;
     }
     padding: 50px;
@@ -478,7 +478,7 @@ export default {
         margin-bottom: 32px;
 
         &:last-of-type {
-          margin-bottom: 0px;
+          margin-bottom: 0;
         }
 
         &__hood {
@@ -538,7 +538,7 @@ export default {
               margin-bottom: 15px;
 
               &:last-of-type {
-                margin-bottom: 0px;
+                margin-bottom: 0;
               }
 
               &__name {

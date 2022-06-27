@@ -150,12 +150,12 @@ export default {
       height: 7px;
       background: linear-gradient(0deg, transparent, $light_grey);
       top: 100%;
-      left: 0px;
+      left: 0;
     }
 
     &__slider {
       margin-bottom: 15px;
-      padding: 15px 0px;
+      padding: 15px 0;
       position: sticky;
       top: 60px;
       background-color: $light_grey;
@@ -169,7 +169,7 @@ export default {
         height: 7px;
         background: linear-gradient(0deg, transparent, $light_grey);
         top: 100%;
-        left: 0px;
+        left: 0;
       }
     }
 
@@ -197,7 +197,7 @@ export default {
       margin-bottom: 30px;
 
       &:last-of-type {
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
 
       &__title {

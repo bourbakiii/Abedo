@@ -114,7 +114,7 @@ export default {
           margin-bottom: 15px;
 
           &:last-of-type {
-            margin-bottom: 0px;
+            margin-bottom: 0;
           }
         }
       }

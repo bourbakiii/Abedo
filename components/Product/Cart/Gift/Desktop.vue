@@ -83,7 +83,7 @@ export default {
 .product-cart {
   width: 100%;
   min-height: 103px;
-  padding: 10px 0px;
+  padding: 10px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -112,7 +112,7 @@ export default {
         display: flex;align-items: center;justify-self: center;flex-direction: row;
         border-radius: 90px;
         svg{
-            margin: 0px auto;
+            margin: 0 auto;
         }
         svg * {
             fill: $white;
@@ -159,7 +159,7 @@ export default {
           flex-direction: row;
           margin-bottom: 6px;
           &:last-of-type {
-            margin-bottom: 0px;
+            margin-bottom: 0;
           }
           &__name {
             font-family: "SF Pro Display";
@@ -167,7 +167,7 @@ export default {
             font-weight: 400;
             font-size: 15px;
             line-height: 18px;
-            margin: 0px 6px 0px 16px;
+            margin: 0 6px 0 16px;
             color: $extra_dark_grey;
           }
           &__price {
@@ -204,11 +204,11 @@ export default {
       font-size: 16px;
       line-height: 19px;
       text-align: center;
-      margin: 0px 10px;
+      margin: 0 10px;
       @media screen and (max-width: $notebook) {
         max-width: 40px;
         width: 50px;
-        margin: 0px 5px;
+        margin: 0 5px;
       }
     }
   }

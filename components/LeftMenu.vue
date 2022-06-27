@@ -248,7 +248,7 @@ export default {
   }
 
   overflow-y: auto;
-  // border-radius: 0px 15px 15px 0px;
+  // border-radius: 0 15px 15px 0;
   width: 100%;
   max-width: 287px;
   height: 100%;

@@ -193,7 +193,7 @@ export default {
       &__count {
         width: 40px;
         max-width: 40px;
-        margin: 0px 5px;
+        margin: 0 5px;
         text-align: center;
         font-family: "SF Pro Display";
         font-style: normal;
@@ -234,7 +234,7 @@ line-height: 16px;
     }
   }
   &:last-of-type {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
   &__options {
     display: flex;
@@ -249,7 +249,7 @@ line-height: 16px;
       justify-content: flex-start;
       flex-direction: column;
       width: 100%;
-      padding: 10px 0px;
+      padding: 10px 0;
       border-top: 1px solid $dark_grey;
       border-bottom: 1px solid $dark_grey;
       margin-bottom: 14px;
@@ -261,7 +261,7 @@ line-height: 16px;
         justify-content: flex-start;
         flex-direction: row;
         &:last-of-type {
-          margin-bottom: 0px;
+          margin-bottom: 0;
         }
         &__icon {
           flex-shrink: 0;
@@ -272,12 +272,12 @@ line-height: 16px;
           font-weight: 400;
           font-size: 14px;
           line-height: 17px;
-          margin: 0px 0px 0px 12px;
+          margin: 0 0 0 12px;
         }
         &__dots {
           flex-grow: 1;
           border-bottom: 1px dotted $dark_grey;
-          margin: 0px 6px;
+          margin: 0 6px;
         }
         &__price {
           flex-shrink: 0;

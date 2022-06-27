@@ -60,7 +60,7 @@ export default {
     overflow: hidden !important;
     width: min-content;
     &:last-of-type {
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
 }

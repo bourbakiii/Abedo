@@ -159,8 +159,8 @@ export default {
 .promo-galka {
   &-enter,
   &-leave-to {
-    width: 0px;
-    margin: 0px !important;
+    width: 0;
+    margin: 0 !important;
     opacity: 0;
   }
 
@@ -173,11 +173,11 @@ export default {
 .cart-product {
   &-enter,
   &-leave-to {
-    height: 0px !important;
+    height: 0 !important;
     opacity: 0 !important;
     overflow: hidden !important;
-    padding: 0px !important;
-    min-height: 0px !important;
+    padding: 0 !important;
+    min-height: 0 !important;
   }
 
   &-enter-active,
@@ -197,8 +197,8 @@ export default {
   width: 100%;
   @media screen and (max-width: $tablet) {
     background-color: transparent;
-    border-radius: 0px;
-    padding: 0px;
+    border-radius: 0;
+    padding: 0;
   }
 
   &__hood {
@@ -207,7 +207,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    border-bottom: 1px solid $extra_dark_grey;
     border: none;
 
     &__adaptive {
@@ -216,11 +215,11 @@ export default {
       align-items: center;
       justify-content: space-between;
       flex-direction: row;
-      padding-bottom: 0px;
+      padding-bottom: 0;
       margin-bottom: 30px;
 
       &__name {
-        font-family: "SF Pro Display";
+        font-family: "SF Pro Display",serif;
         font-style: normal;
         font-weight: 900;
         font-size: 20px;
@@ -228,7 +227,7 @@ export default {
       }
 
       &__button {
-        font-family: "SF Pro Display";
+        font-family: "SF Pro Display",serif;
         font-style: normal;
         font-weight: 700;
         font-size: 15px;
@@ -264,7 +263,7 @@ export default {
     }
 
     &__name {
-      font-family: "Montserrat";
+      font-family: "Montserrat",serif;
       font-style: normal;
       font-weight: 400;
       font-size: 24px;
@@ -279,7 +278,7 @@ export default {
     }
 
     &__button {
-      font-family: "Montserrat";
+      font-family: "Montserrat",serif;
       font-style: normal;
       font-weight: 400;
       font-size: 16px;
@@ -326,11 +325,11 @@ export default {
       align-self: flex-start;
 
       @media screen and (max-width: $tablet) {
-        padding: 30px 0px;
+        padding: 30px 0;
         border-top: 1px solid $dark_grey;
         border-bottom: 1px solid $dark_grey;
         justify-content: flex-start;
-        margin-top: 0px;
+        margin-top: 0;
 
       }
 
@@ -341,7 +340,7 @@ export default {
       }
 
       &__text {
-        font-family: "SF Pro Display";
+        font-family: "SF Pro Display",serif;
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
@@ -360,20 +359,20 @@ export default {
         border: 1px solid $extra_dark_grey;
         border-radius: 50px;
         text-align: center;
-        padding: 0px 10px;
+        padding: 0 10px;
         outline: none;
         max-width: 180px;
         height: 50px;
         flex-grow: 1;
         flex-shrink: 0;
-        font-family: "SF Pro Display";
+        font-family: "SF Pro Display",serif;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
         line-height: 20px;
 
         &::placeholder {
-          font-family: "SF Pro Display";
+          font-family: "SF Pro Display",serif;
           font-style: normal;
           font-weight: 500;
           font-size: 14px;
@@ -403,7 +402,7 @@ export default {
 
       &__button {
         margin-left: 30px;
-        padding: 0px 10px;
+        padding: 0 10px;
         width:132px;
         @media screen and (max-width: $sidebar_dn) {
           margin-left: 10px;
@@ -416,13 +415,13 @@ export default {
       }
 
       &__message {
-        font-family: "SF Pro Display";
+        font-family: "SF Pro Display",serif;
         font-style: normal;
         font-weight: 400;
         font-size: 15px;
         color: $red;
         background-color: $dark_grey;
-        padding: 0px 30px;
+        padding: 0 30px;
         height: 50px;
         margin-left: 15px;
         display: flex;
@@ -434,12 +433,12 @@ export default {
         transition: $transition;
         @media screen and (max-width: $notebook) {
           margin-left: 10px;
-          padding: 0px 10px;
+          padding: 0 10px;
 
         }
         @media screen and (max-width: $tablet_middle) {
           margin-top: 10px;
-          margin-left: 0px;
+          margin-left: 0;
         }
 
         &__success {
@@ -455,7 +454,7 @@ export default {
         }
 
         &__text {
-          font-family: "SF Pro Display";
+          font-family: "SF Pro Display",serif;
           font-style: normal;
           font-weight: 500;
           font-size: 16px;
@@ -474,7 +473,7 @@ export default {
 
     &_empty {
       display: inline;
-      font-family: "SF Pro Display";
+      font-family: "SF Pro Display",serif;
       font-style: normal;
       font-weight: 400;
       font-size: 20px;
@@ -512,7 +511,7 @@ export default {
     }
 
     &__pre {
-      font-family: "SF Pro Display";
+      font-family: "SF Pro Display",serif;
       font-style: normal;
       font-weight: 700;
       font-size: 24px;
@@ -538,7 +537,7 @@ export default {
       }
 
       &_full {
-        font-family: "Montserrat";
+        font-family: "Montserrat",serif;
         font-style: normal;
         font-weight: 600;
         font-size: 18px;

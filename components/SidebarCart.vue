@@ -142,7 +142,7 @@ export default {
   &-enter,
   &-leave-to {
     opacity: 0;
-    height: 0px;
+    height: 0;
     overflow: hidden;
   }
 
@@ -166,7 +166,7 @@ export default {
   &__icon {
     position: absolute;
     left: 26px;
-    top: 0px;
+    top: 0;
     transform: translateY(-50%);
     border-radius: 90px;
     background-color: $red;
@@ -185,7 +185,7 @@ export default {
 
   &__content {
     width: 100%;
-    padding: 52px 0px 30px;
+    padding: 52px 0 30px;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -196,7 +196,7 @@ export default {
 
     &__hood {
       width: 100%;
-      padding: 0px 20px;
+      padding: 0 20px;
       border-bottom: 1px solid $dark_grey;
 
       &__title-row {
@@ -272,7 +272,7 @@ export default {
 
     &__products {
       width: 100%;
-      padding: 0px 5px 0px 20px;
+      padding: 0 5px 0 20px;
       margin-right: 5px;
       overflow-y: overlay;
       height: 100%;

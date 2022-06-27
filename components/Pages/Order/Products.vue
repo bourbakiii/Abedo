@@ -108,13 +108,13 @@ export default {
     background-color: $white;
     border: 1px solid $blue_grey;
     border-radius: 20px;
-    padding: 0px 30px;
+    padding: 0 30px;
     @media screen and (max-width: $notebook) {
-      padding: 0px 15px;
+      padding: 0 15px;
     }
 
     &__item {
-      padding: 0px 10px;
+      padding: 0 10px;
       min-height: 116px;
       display: flex;
       align-items: center;
@@ -184,16 +184,16 @@ export default {
         flex-grow: 1;
         text-align: center;
         width: 100%;
-        margin: 0px 30px;
+        margin: 0 30px;
         text-overflow: ellipsis;
         overflow: hidden;
         @media screen and (max-width: $notebook) {
-          margin: 0px 15px;
+          margin: 0 15px;
         }
 
         &__all {
           text-align: right;
-          margin: 0px;
+          margin: 0;
         }
       }
     }
@@ -257,7 +257,7 @@ export default {
             &__count {
               width: 40px;
               max-width: 40px;
-              margin: 0px 5px;
+              margin: 0 5px;
               text-align: center;
               font-family: "SF Pro Display";
               font-style: normal;
@@ -317,7 +317,7 @@ export default {
         }
 
         &:last-of-type {
-          margin-bottom: 0px;
+          margin-bottom: 0;
         }
       }
     }

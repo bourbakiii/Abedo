@@ -150,7 +150,7 @@ export default {
   }
   &__text {
     width: 100%;
-    margin: 0px 15px;
+    margin: 0 15px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
