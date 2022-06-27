@@ -128,7 +128,6 @@ export default {
             this.errors = Object.values(error.response.data.errors)
               .map((el) => el.flat())
               .flat();
-            console.log(Object.keys(error.response.data.errors).includes('confirmation'));
             if (Object.keys(error.response.data.errors).includes('confirmation')) this.last_loaded_phone = phone;
           }
         }).finally(() => {

@@ -22,7 +22,7 @@
         :maxlength="maxlength"
         :readonly="readonly"
         :disabled="disabled"
-        @keypress="event=>digits_only?removeDigits(event):null" />
+        @keypress="event=>digits_only?removeDigits(event):null"/>
       <div v-if="arrow" class="input-block__input__arrow">
         <svg
           width="12"
@@ -86,10 +86,6 @@ export default {
       required: false,
       default: true,
     },
-    minlength: {
-      required: false,
-      default: "",
-    },
     maxlength: {
       required: false,
       default: "",
@@ -112,7 +108,7 @@ export default {
   },
   methods: {
     removeDigits(event) {
-      if (!"1234567890".includes(event.key))
+      if (!"1234567890".includes(event.key) && event.key !== 'Enter')
         event.preventDefault();
     },
     onInput($event) {
@@ -140,7 +136,7 @@ export default {
   }
 
   &__name {
-    font-family: "SF Pro Display";
+    font-family: "SF Pro Display", serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -166,7 +162,7 @@ export default {
     background-color: $white;
 
     overflow: hidden;
-    font-family: "SF Pro Display";
+    font-family: "SF Pro Display", serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -187,7 +183,7 @@ export default {
       height: 100%;
       border: none;
       outline: none;
-      font-family: "SF Pro Display";
+      font-family: "SF Pro Display", serif;
       font-style: normal;
       font-weight: 400;
       font-size: 15px;

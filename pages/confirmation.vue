@@ -13,11 +13,13 @@
           к вам поступит
           звонок. Прослушайте его и введите 4 названных символа в соответствующее поле.
         </p>
-        {{ recall_time == null ? '' : getTimeInterval(new Date(), recall_time) }}
 
         <ButtonStandart :loader="loading_call" :disabled="recall_time!==null"
                         class="confirmation-page__content_call__button"> {{
             called ? "Позвонить еще раз" : "Позвонить"
+                                                                         }}
+                                                                         {{
+            recall_time == null ? '' : `(${getTimeInterval(new Date(), recall_time)})`
                                                                          }}
         </ButtonStandart>
         <div
@@ -41,9 +43,6 @@
           class="confirmation-page__content_code"
         >
           <h4 class="title title-extra-normal">Подтверждение</h4>
-          <p class="confirmation-page__content_code__text">
-            Пожалуйста, введите последние 4 цифры входящего номера.
-          </p>
           <InputBlock
             v-model="code"
             placeholder="Введите код"
@@ -82,16 +81,17 @@
 </template>
 <script>
 import errorsMessagesMixin from "@/mixins/errors-messages.js";
+import phoneCallHelper from "@/mixins/phone-call-helper.js";
 
 export default {
-  mixins: [errorsMessagesMixin],
+
+  mixins: [errorsMessagesMixin, phoneCallHelper],
   data() {
     return {
-      confirmation: false,
-
       code_errors: [],
       code_errors_timer: null,
       code: null,
+      phone: this.$store.state.temporary.confirmation_phone || null,
       loading_code: false
     };
   },
@@ -105,54 +105,14 @@ export default {
     });
   },
 
-  created() {
-    if (!this.$store.state.temporary.confirmation_phone) this.$router.push('/');
-    else {
-      const recall_time = this.$cookies.get(`confirmation-${this.$store.state.temporary.confirmation_phone}` || null);
-      if (recall_time) this.recall_time = new Date(recall_time);
-    }
-  },
+
   methods: {
-    getTimeInterval(start, end) {
-      let interval = new Date(end - start);
-      let [minutes, seconds] = [interval.getUTCMinutes(), interval.getUTCSeconds()];
-      if (minutes.toString().length === 1) minutes = '0' + minutes;
-      if (seconds.toString().length === 1) seconds = '0' + seconds;
-      return `${minutes}:${seconds}`;
-    },
-    getTimeNowWithAdding({seconds = 0}) {
-      const time_now = new Date();
-      return new Date(time_now.setSeconds(time_now.getSeconds() + seconds));
-    },
-    call() {
-      this.loading_call = true;
-      this.$axios.$post('/api/confirm/phone', {phone: this.confirmation_phone}).then(() => {
-        this.called = true;
-        this.recall_time = this.getTimeNowWithAdding({seconds: 120});
-        this.$cookies.set(`confirmation-${this.confirmation_phone}`, JSON.stringify(this.recall_time), {expires: this.recall_time});
-      }).catch(error => {
-          if (error?.response?.status === 422) {
-            this.call_errors = Object.values(error.response.data.errors)
-              .map((el) => el.flat())
-              .flat();
-          }
-          if (error.response.data.message) {
-            let index_of_double_dot = error.response.data.message.indexOf(':');
-            if (index_of_double_dot === -1) return;
-            let minutes = error.response.data.message.substring(index_of_double_dot - 2, index_of_double_dot);
-            let seconds = error.response.data.message.substring(index_of_double_dot + 1, index_of_double_dot + 3);
-            this.recall_time = null;
-            this.recall_time = this.getTimeNowWithAdding({seconds: (+minutes * 60) + +seconds});
-            this.$cookies.set(`confirmation-${this.confirmation_phone}`, JSON.stringify(this.recall_time), {expires: this.recall_time});
-          }
-        }
-      ).finally(() => this.loading_call = false);
-    },
+
     sendCode() {
       this.code_errors = [];
       this.loading_code = true;
       this.$axios.post(`api/confirm/phone/verify`, {
-        phone: this.confirmation_phone,
+        phone: this.phone,
         code: this.code
       }).then(() => this.$router.push('/')).catch((error) => {
         if (error?.response?.status === 422) {
@@ -164,29 +124,9 @@ export default {
       }).finally(() => this.loading_code = false);
     },
   },
-  computed: {
-    confirmation_phone() {
-      return this.$store.state.temporary.confirmation_phone;
-    },
-  },
+
   watch: {
-    recall_time(value) {
-      if (!value) return;
-      this.recall_interval = setInterval(() => this.$forceUpdate(), 1000);
-      const difference = new Date(value - new Date());
-      setTimeout(() => {
-        this.recall_time = null;
-        clearInterval(this.recall_interval)
-      }, 1000 * (difference.getMinutes() * 60 + difference.getSeconds()));
-    },
-    call_errors() {
-      clearTimeout(this.call_errors_timer);
-      this.call_errors_timer = setTimeout(() => {
-        clearTimeout(this.call_errors_timer);
-        this.call_errors_timer = null;
-        this.call_errors = [];
-      }, 6000);
-    },
+
     code_errors() {
       clearTimeout(this.code_errors_timer);
       this.code_errors_timer = setTimeout(() => {
@@ -195,14 +135,6 @@ export default {
         this.code_errors = [];
       }, 6000);
     }
-    ,
-    '$store.state.temporary.confirmation_phone':
-      {
-        handler(value) {
-          if (!value) this.$router.push('/');
-        },
-        deep: true
-      }
   }
 };
 </script>
@@ -224,9 +156,10 @@ export default {
     justify-content: flex-start;
   }
 
-  @media screen and (max-width: $tablet){
-   justify-content: flex-start;
+  @media screen and (max-width: $tablet) {
+    justify-content: flex-start;
   }
+
   &__title {
     margin-bottom: 70px;
     @media screen and (max-width: $notebook) {
@@ -260,13 +193,6 @@ export default {
       }
     }
 
-    &__button {
-      width: 100%;
-      max-width: 200px;
-      @media screen and (max-width: $tablet) {
-        height: 40px;
-      }
-    }
 
     &__errors {
       display: flex;
@@ -325,9 +251,8 @@ export default {
 
       &__button {
         margin-top: 20px;
-        width: 100%;
-        max-width: 200px;
-
+        padding: 0 20px;
+        min-width: 200px;
         &.disabled {
           background-color: $dark_grey;
           opacity: 0.8;
