@@ -42,7 +42,7 @@ export default {
               .map((el) => el.flat())
               .flat();
           }
-          if (error.response.data.message) {
+          if (error?.response?.data?.message) {
             let index_of_double_dot = error.response.data.message.indexOf(':');
             if (index_of_double_dot === -1) return;
             let minutes = error.response.data.message.substring(index_of_double_dot - 2, index_of_double_dot);

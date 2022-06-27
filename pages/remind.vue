@@ -120,7 +120,7 @@ export default {
         code: this.code,
         password: this.password,
         password_confirmation: this.password_confirmation
-      }).catch(error => {
+      }).then(() => this.$router.push('/')).catch(error => {
         if (+error?.response?.status === 422) {
           this.errors = Object.values(error.response.data.errors)
             .map((el) => el.flat())
