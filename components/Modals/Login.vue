@@ -45,7 +45,7 @@
       :required="true"
     />
     <div class="login-modal__labels">
-      <NuxtLink to="/forget" class="login-modal__labels__label login-modal__labels__forget"
+      <NuxtLink to="/remind" class="login-modal__labels__label login-modal__labels__forget"
       >Забыли пароль?
       </NuxtLink
       >

@@ -88,11 +88,7 @@ export default {
   data() {
     return {
       confirmation: false,
-      loading_call: false,
-      recall_time: null,
-      recall_interval: 0,
-      call_errors: [],
-      call_errors_timer: null,
+
       code_errors: [],
       code_errors_timer: null,
       code: null,
@@ -228,6 +224,9 @@ export default {
     justify-content: flex-start;
   }
 
+  @media screen and (max-width: $tablet){
+   justify-content: flex-start;
+  }
   &__title {
     margin-bottom: 70px;
     @media screen and (max-width: $notebook) {
