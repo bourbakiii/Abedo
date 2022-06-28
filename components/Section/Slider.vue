@@ -12,7 +12,7 @@
         :id="`slider-section-item-${section.id}`"
         :index="index"
         :section="section"
-        :class='{"active":index==0}'
+        :class='{"active":+index===0}'
       />
     </swiper-slide>
   </swiper>
@@ -23,9 +23,6 @@
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 
 export default {
-  name: "swiper-example-carousel-mode",
-  title: "Auto slides per view / Carousel mode",
-  name: "slider",
   props: {
     sections: {
       required: true,
@@ -35,7 +32,6 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  methods: {},
   data() {
     return {
       swiperOption: {
@@ -56,7 +52,6 @@ export default {
 .slider {
   width: 100%;
   .swiper-slide {
-    width: 100%;
     overflow: hidden !important;
     width: min-content;
     &:last-of-type {

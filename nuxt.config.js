@@ -45,6 +45,24 @@ export default {
       '@assets/scss/style.scss'
     ]
   },
+  build: {
+    html: {
+      minify: {
+        collapseBooleanAttributes: true,
+        decodeEntities: true,
+        minifyCSS: true,
+        minifyJS: true,
+        processConditionalComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
+        trimCustomFragments: true,
+        useShortDoctype: true,
+        minifyURLs: true,
+        removeComments: true,
+        removeEmptyElements: true
+      }
+    }
+  },
   axios: {
     // baseUrl: "http://127.0.0.1:8000"
     baseUrl: "https://abedo.ru"
