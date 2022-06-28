@@ -25,25 +25,15 @@ export default {
   ssr: true,
   target: 'server',
   css: [
-    '@/assets/scss/style.scss',
-    // '@/assets/scss/variables.scss',
-    // '@/assets/scss/transitions.scss',
-    // '@/assets/scss/fonts.scss',
-    // '@/assets/scss/titles.scss',
+    '@assets/scss/style.scss',
     "swiper/css/swiper.css"
   ],
   plugins: [
     '@plugins/v-mask.js',
-    '@/plugins/clientHook.client.js'
+    '@plugins/clientHook.client.js'
   ],
   components: true,
-  // build: {
-  //   extend(config, ctx) {
-  //     if (ctx.isDev) {
-  //       config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-  //     }
-  //   }
-  // },
+
   buildModules: [],
   modules: ['cookie-universal-nuxt', '@nuxtjs/axios', '@nuxtjs/style-resources'],
   generate: {
@@ -52,11 +42,7 @@ export default {
   },
   styleResources: {
     scss: [
-      // '@assets/scss/variables.scss',
       '@assets/scss/style.scss'
-      // '@assets/scss/transitions.scss',
-      // '@/assets/scss/fonts.scss',
-      // '@/assets/scss/titles.scss',
     ]
   },
   axios: {
