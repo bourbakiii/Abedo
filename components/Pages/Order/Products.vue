@@ -114,7 +114,7 @@ export default {
     }
 
     &__item {
-      padding: 0 10px;
+      padding: 10px 10px;
       min-height: 116px;
       display: flex;
       align-items: center;

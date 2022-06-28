@@ -37,7 +37,7 @@
         </p>
       </div>
       <div class="partner-modal__content__information">
-        <div v-if="worktime" class="partner-modal__content__information__item">
+        <div v-if="copy_timetable.length" class="partner-modal__content__information__item">
           <div class="partner-modal__content__information__item__hood">
             <svg
               class="partner-modal__content__information__item__hood__icon"
@@ -84,9 +84,9 @@
           </div>
           <p
             class="partner-modal__content__information__item__content"
-
+            v-for="time of copy_timetable"
           >
-            {{ worktime }}
+            {{ worktime(time) }}
           </p>
         </div>
         <div v-if='partner.requisites.address' class="partner-modal__content__information__item">
@@ -306,68 +306,28 @@ export default {
     partner() {
       return this.$store.state.modals.partner.partner;
     },
-    worktime() {
-      let result = "";
-      let days = {
-        1: "Пн",
-        2: "Вт",
-        3: "Ср",
-        4: "Чт",
-        5: "Пн",
-        6: "Сб",
-        7: "Вс"
+    copy_timetable() {
+      return this.partner.timetable;
+    }
+  },
+  methods: {
+    worktime({start_time, end_time, periodic}) {
+      periodic = [...periodic.map(el => el.day_of_week)];
+      const days = {
+        1: "Пн", 2: "Вт", 3: "Ср", 4: "Чт", 5: "Пт", 6: "Сб", 7: "Вс"
       }
-
-      // return timetables.fold < String > ('', (lines, e)
-      // {
-      //   if (e.days.isEmpty  e.startTime.isEmpty
-      //   e.endTime.isEmpty
-      // )
-      //   {
-      //     return lines;
-      //   }
-      //
-      //   final
-      //   days = e.days.entries.toList();
-      //   String
-      //   range = '';
-      //   int
-      //   skips = 0;
-
-      // this.partner.timetable.reduce((acc, element) => {
-      //     if (!element.days.length || !element.startTime) {
-      //
-      //     }
-      //   }, 0
-      // );
-
-
-//   for (var i = 0; i < days.length; i++) {
-//     if (i == days.length - 1) {
-//       if (days.length > 1 && !range.endsWith(', ')) {
-//         range += skips > 1 ? '-' : ', ';
-//       }
-//       range += days.last.value + ', ';
-//       break;
-//     }
-//
-//     if (days[i].key + 1 == days[i + 1].key) {
-//       if (range.isEmpty || range.endsWith(', ')) range += days[i].value;
-//       skips++;
-//       continue;
-//     }
-//
-//     if (!range.endsWith(', ') && i != 0) range += skips > 1 ? '-' : ', ';
-//     range += days[i].value + ', ';
-//     skips = 0;
-//   }
-//
-//   final time = e.startTime + '-' + e.endTime;
-//   return lines + range + time + '\n';
-// }).trim();
-
-
-      return "Нужно будет спарсить";
+      periodic.sort((a, b) => {
+        if (a > b) return 1;
+        if (a < b) return -1;
+        return 0;
+      });
+      let to_return = '';
+      periodic.forEach(el => {
+        if (periodic.includes(el - 1)) {
+          if (!periodic.includes(el + 1)) to_return += `-${days[+el]}, `;
+        } else to_return += `${days[+el]}${!periodic.includes(el + 1) ? ', ' : ''}`
+      });
+      return `${to_return.substring(0, to_return.length - 2)} ${start_time} - ${end_time}`;
     }
   }
 }

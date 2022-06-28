@@ -1,7 +1,7 @@
 <template>
   <div class="search-wrapper index-page-search wrapper adaptive-non-wrapper">
     <div class="search">
-      <h1 class="title title-big">Быстрая доставка еды</h1>
+      <h1 class="title title-big">Маркетплейс РСО-Алания</h1>
       <form @submit.prevent="timerHandler" class="search__input">
         <button class="search__input-button push-hover-active">
           <svg
