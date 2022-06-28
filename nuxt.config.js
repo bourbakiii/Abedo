@@ -11,7 +11,12 @@ export default {
         content: 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no, maximum-scale=1'
       },
       {hid: 'description', name: 'description', content: ''},
-      {name: 'format-detection', content: 'telephone=no'}
+      {name: 'format-detection', content: 'telephone=no'},
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: '/open-graph-main.png'
+      }
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/new-logo-favicon.png'}
@@ -25,7 +30,7 @@ export default {
     // '@/assets/scss/transitions.scss',
     // '@/assets/scss/fonts.scss',
     // '@/assets/scss/titles.scss',
-    "swiper/css/swiper.css",
+    "swiper/css/swiper.css"
   ],
   plugins: [
     '@plugins/v-mask.js',
