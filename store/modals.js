@@ -26,7 +26,7 @@ export const state = () => ({
     show: false,
   },
   add_to_cart: {
-    show: true, message: 'тут сразу два ебучих стиля'
+    show: false, message: null
   },
   left_menu: {
     show: false
