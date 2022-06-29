@@ -39,21 +39,13 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      categories: [],
-    };
-  },
-  fetch() {
-    this.$axios.get("/api/cuisines/get").then(
-      ({
-         data: {
-           cuisines: {data},
-         },
-       }) => {
-        this.categories = data;
+  props: {
+    categories: {
+      required: true,
+      default() {
+        return [];
       }
-    );
+    },
   },
   methods: {
     parseUrl(category) {

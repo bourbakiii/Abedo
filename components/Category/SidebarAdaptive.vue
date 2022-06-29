@@ -38,22 +38,15 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      categories: [],
-    };
-  },
-  fetch() {
-    this.$axios.get("/api/cuisines/get").then(
-      ({
-        data: {
-          cuisines: { data },
-        },
-      }) => {
-        this.categories = data;
+  props: {
+    categories: {
+      required: true,
+      default() {
+        return [];
       }
-    );
+    },
   },
+
   methods: {
     parseUrl(category) {
       let to_ret = "/partners";
@@ -74,9 +67,10 @@ export default {
   flex-direction: column;
   padding: 15px 10px 15px 25px;
   border-radius: 20px;
-  max-height: min(calc(100vh - 200px),500px);
+  max-height: min(calc(100vh - 200px), 500px);
   overflow: hidden;
   z-index: $z_dropdown;
+
   &__content {
     display: flex;
     align-items: center;
@@ -84,7 +78,8 @@ export default {
     flex-direction: column;
     width: 100%;
     overflow-y: overlay;
-    margin-right:10px;
+    margin-right: 10px;
+
     &__item {
       width: 100%;
       min-height: 50px;
@@ -96,19 +91,24 @@ export default {
       border: none;
       outline: none;
       border-bottom: 1px solid $white;
+
       &:last-of-type {
         border-bottom: none;
       }
+
       * {
         transition: $transition;
       }
+
       transition: $transition;
+
       &__active &,
       &:hover & {
         &__icon *,
         &__image * {
           fill: $orange;
         }
+
         &__name {
           color: $orange;
         }
@@ -121,6 +121,7 @@ export default {
         flex-shrink: 0;
         border-radius: 90px;
       }
+
       &__name {
         flex-grow: 1;
         text-align: left;
@@ -130,6 +131,7 @@ export default {
         font-size: 15px;
         line-height: 18px;
       }
+
       &__icon {
         margin-left: 11px;
         flex-shrink: 0;

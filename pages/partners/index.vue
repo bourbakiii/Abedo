@@ -175,6 +175,7 @@
         </button>
         <transition name="opacity">
           <CategorySidebarAdaptive
+            :categories="categories"
             v-click-outside="hideCategories"
             v-if="show_categories"
             class="partners-page__top_adaptive__dropdown"
@@ -191,6 +192,7 @@
 
       <div class="partners-page__partners">
         <CategorySidebar
+          :categories="categories"
           class="partners-page__partners__sidebar adaptive-non"
         />
         <div class="partners-page__partners__content">
@@ -244,21 +246,37 @@ import advertiseMixin from "@/mixins/advertise-mixin"
 export default {
   mixins: [partnerFiltersMixin, dropdownMixin, advertiseMixin],
   head() {
+    const category = this.categories.find(el => +el.id === +this.$route.query.category) || null;
+
     return {
-      title: `Список партнеров - Abedo`,
+      title: `${category ? category.name : ''} - Abedo`,
       meta:
         [
           {
             hid: 'description',
             name: 'description',
-            content: 'На странице представлен список заведений малого и среднего бизнеса, на маркетплейсе Abedo. Удобное оформление заказа, Акции и Скидки.'
+            content: `В разделе ${category ? category.name : ''} представлены заведения Владикавказа, на маркетплейсе Abedo. Удобное оформление заказа, Акции и Скидки.`
           }
         ]
     }
   },
+  async asyncData({$axios}) {
+    let categories = [];
+    await $axios.$get(`${$axios.defaults.baseURL}/api/cuisines/get`).then(
+      ({
+         cuisines
+       }) => {
+        categories = cuisines.data;
+        console.log(categories);
+      }
+    );
+    return {categories};
+  },
+
   data() {
     return {
       show_categories: false,
+      categories: []
     };
   },
   methods: {
@@ -268,6 +286,10 @@ export default {
     hideCategories() {
       this.show_categories = false;
     }
+  },
+  created() {
+    console.log("created - ");
+    console.log(this.categories);
   },
   mounted() {
     this.$store.commit("variables/action", (state) => {
