@@ -1,6 +1,6 @@
 export default {
   head: {
-    title: 'Abedo',
+    title: 'Abedo - маркетплейс малого и среднего бизнеса',
     htmlAttrs: {
       lang: 'ru'
     },
@@ -10,12 +10,22 @@ export default {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no, maximum-scale=1'
       },
-      {hid: 'description', name: 'description', content: ''},
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Маркетплейс Abedo - место где представлены товары и услуги малого и среднего бизнеса. Рестораны и кафе, товары от производителей и ручной работы, продукты питания, товары для дома, одежда и обувь, товары и услуги для детей, и многое другое.'
+      },
       {name: 'format-detection', content: 'telephone=no'},
+
       {
         hid: 'og:image',
         property: 'og:image',
         content: '/open-graph-main.png'
+      },
+      {
+        hid: ' og:site_name',
+        property: ' og:site_name',
+        content: 'Abedo - маркетплейс малого и среднего бизнеса'
       }
     ],
     link: [
