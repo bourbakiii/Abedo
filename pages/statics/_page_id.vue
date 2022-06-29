@@ -23,7 +23,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: (page.content || '').substring(0, 170)
+          content: (this.page.content || '').substring(0, 170)
         }
       ]
     }
