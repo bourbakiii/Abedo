@@ -36,7 +36,12 @@ export default {
   target: 'server',
   css: [
 
-    // '@assets/scss/style.scss',
+    '@assets/scss/_variables.scss',
+    '@assets/scss/_fonts.scss',
+    '@assets/scss/_spinner-styles.scss',
+    '@assets/scss/_titles.scss',
+    '@assets/scss/_transitions.scss',
+    '@assets/scss/_style.scss',
     "swiper/css/swiper.css"
   ],
   plugins: [
@@ -53,11 +58,11 @@ export default {
   },
   styleResources: {
     scss: [
+      '@assets/scss/_variables.scss',
       '@assets/scss/_fonts.scss',
       '@assets/scss/_spinner-styles.scss',
-      '@assets/scss/_title.scss',
+      '@assets/scss/_titles.scss',
       '@assets/scss/_transitions.scss',
-      '@assets/scss/_variables.scss',
       '@assets/scss/_style.scss'
     ]
   },
