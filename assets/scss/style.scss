@@ -1,8 +1,8 @@
-@import "./variables.scss";
-@import "./fonts.scss";
-@import "./titles.scss";
-@import "./transitions.scss";
-@import "./spinner-styles.scss";
+@import "_variables.scss";
+@import "_fonts.scss";
+@import "_titles.scss";
+@import "_transitions.scss";
+@import "_spinner-styles.scss";
 
 * {
   color: $black;
