@@ -32,7 +32,7 @@ export default {
           {
             hid: 'og:image',
             property: 'og:image',
-            image: `${this.item.image ? (this.$axios.defaults.baseURL + this.item.image.original) : null}`
+            content: `${this.item.image ? (this.$axios.defaults.baseURL + this.item.image.original) : null}`
           }
         ],
     }

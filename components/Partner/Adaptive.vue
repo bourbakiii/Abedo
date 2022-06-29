@@ -1,5 +1,5 @@
 <template>
-  <div  @click.self="$router.push(`/partners/${partner.id}`)" class="shop-adaptive shop">
+  <div @click.self="$router.push(`/partners/${partner.id}`)" class="shop-adaptive shop">
     <button @click="like" class="shop-adaptive__favourite" :class='{"shop-adaptive__favourite_filled": is_favourite}'>
       <svg
         class="shop-adaptive__favourite__icon"
@@ -16,10 +16,10 @@
       </svg>
     </button>
     <div @click="$router.push(`/partners/${partner.id}`)" class="shop-adaptive__info">
-      <p class="shop-adaptive__info__name" >
+      <p class="shop-adaptive__info__name">
         {{ partner.name }}
       </p>
-      <p class="shop-adaptive__info__category" >
+      <p class="shop-adaptive__info__category">
         {{ cuisines }}
       </p>
     </div>
@@ -109,14 +109,14 @@
           </g>
           <defs>
             <clipPath id="clip0_2510_5576">
-              <rect width="17" height="17" fill="white" />
+              <rect width="17" height="17" fill="white"/>
             </clipPath>
           </defs>
         </svg>
       </span>
     </div>
     <svg
-    @click="$router.push(`/partners/${partner.id}`)"
+      @click="$router.push(`/partners/${partner.id}`)"
       class="shop-adaptive__icon"
       width="9"
       height="15"
@@ -133,87 +133,13 @@
 </template>
 <script>
 import partnerMixin from "@/mixins/partner.js";
+
 export default {
   mixins: [partnerMixin],
   props: {
     partner: {
-      required: false,
+      required: true,
       type: Object,
-      default: () => {
-        return {
-          id: 1,
-          name: "Prop default",
-          image: [
-            {
-              desktop: "/storage/images/b53faa1dd6fb57a38bf5b754e2735cc8.jpeg",
-              mobile: "/storage/images/de727808fbf2862d02a878ea2a74466d.jpeg",
-              modal: "/storage/images/64b2cc8139a3b1655836bba4368a00c3.jpeg",
-              small: "/storage/images/41389ed2c9511ba6cd4156edfb76ae05.jpeg",
-              original: "/storage/images/86f3708df1f1be00bcc4b6790b22d09c.jpeg",
-            },
-          ],
-          logo: {
-            detail: "/storage/images/d1eb65c4efc91fb8a031488984332b31.png",
-            desktop: "/storage/images/1989383073f2fdaa3c7229f643fcd020.png",
-            search_logo: "/storage/images/efa0991efb0cbfdc74882ac58ddab35c.png",
-            cart_mini: "/storage/images/c5f0a0100fac7fd0362f3731f7db4cbf.png",
-            cart_detail_mini:
-              "/storage/images/d6d1049dd47d802906bc6b1c9536699b.png",
-            small: "/storage/images/4b5d28d346e491458ac64b968d04f1cc.png",
-            original: "/storage/images/06ef79f1ecf04567982409d01914dddf.png",
-          },
-          description:
-            "фывфы вфы вфы вфыв фы вфы вфы вфыв фыв фыв фыв фыв фыв фы вфыв фы вфы вфыв фыв фыв фы вфы вфыв фыs",
-          rate: "5",
-          is_work_now: 1,
-          free_order_price: 4000,
-          is_favourite: false,
-          discounts: [
-            {
-              id: 4,
-              discountable_type: "App\\Models\\Product",
-              discountable_id: 25,
-              percent: 12,
-              shop_id: 1,
-              is_work_now: 1,
-            },
-          ],
-          order_gifts: [1, 2],
-          cuisines: [
-            {
-              id: 1,
-              name: "Рестораны и кафе",
-              icon: "/storage/images/hU77DF0GGdnm6aPzSaWYlL4XuxwbiLnzyP67fNVs.svg",
-              image: {
-                desktop:
-                  "/storage/images/aed8f8af878517a1f4bb74629ddd4889.jpeg",
-                mobile: "/storage/images/34b82a6984dad2ad4e6102093219760a.jpeg",
-                small: "/storage/images/f28c46e0aa6801a148c8b15405c0e9ca.jpeg",
-                original:
-                  "/storage/images/7946cd7b407fc849b945f9674bd3354b.jpeg",
-              },
-              created_at: null,
-              updated_at: "2022-04-12T10:30:40.000000Z",
-            },
-            {
-              id: 2,
-              name: "Еще что-то",
-              icon: "/storage/images/hU77DF0GGdnm6aPzSaWYlL4XuxwbiLnzyP67fNVs.svg",
-              image: {
-                desktop:
-                  "/storage/images/aed8f8af878517a1f4bb74629ddd4889.jpeg",
-                mobile: "/storage/images/34b82a6984dad2ad4e6102093219760a.jpeg",
-                small: "/storage/images/f28c46e0aa6801a148c8b15405c0e9ca.jpeg",
-                original:
-                  "/storage/images/7946cd7b407fc849b945f9674bd3354b.jpeg",
-              },
-              created_at: null,
-              updated_at: "2022-04-12T10:30:40.000000Z",
-            },
-          ],
-          delivery: { id: 2, shop_id: 1, price: 120, door_delivery_price: 30 },
-        };
-      },
     },
   },
   computed: {
@@ -238,45 +164,55 @@ export default {
   background-color: $white;
   text-decoration: none;
   transition: $transition;
+
   &:hover {
     background-color: $darkblue;
   }
-  &__favourite{
+
+  &__favourite {
     background-color: transparent;
-    &_filled{
+
+    &_filled {
       border-color: $red !important;
-        background-color: $red !important;
-        svg * {
-          fill:$white;
-        }
+      background-color: $red !important;
+
+      svg * {
+        fill: $white;
       }
+    }
   }
+
   &:hover & {
-    &__favourite{
-      &:not(&_filled)
-      {
+    &__favourite {
+      &:not(&_filled) {
         border-color: $white;
+
         svg * {
           fill: $white;
         }
       }
 
-  }
+    }
+
     &__info {
       &__name {
         color: $white;
       }
+
       &__category {
         color: $white;
       }
     }
+
     &__icon * {
       fill: white;
     }
   }
+
   &:last-of-type {
     margin-bottom: 0;
   }
+
   &__info {
     height: 100%;
     display: flex;
@@ -299,6 +235,7 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     &__category {
       font-family: "SF Pro Display";
       font-style: normal;
@@ -312,6 +249,7 @@ export default {
       text-overflow: ellipsis;
     }
   }
+
   &__favourite {
     width: 30px;
     height: 30px;
@@ -324,14 +262,17 @@ export default {
     align-items: center;
     justify-content: center;
     transition: $transition;
+
     &:hover {
       svg * {
         fill: $white;
       }
+
       border-color: $red !important;
       background-color: $red;
     }
   }
+
   &__icons {
     margin-left: 15px;
     display: flex;
@@ -339,16 +280,20 @@ export default {
     justify-content: center;
     flex-direction: row;
     position: relative;
+
     &__icon {
       &__delivery {
         background-color: $orange;
       }
+
       &__gift {
         background-color: $green;
       }
+
       &__discount {
         background-color: $red;
       }
+
       &__wrapper {
         width: 30px;
         height: 30px;
@@ -357,10 +302,12 @@ export default {
         align-items: center;
         justify-content: center;
         flex-direction: row;
+
         &:nth-last-child(2) {
           transform: translate(33%);
           z-index: 2;
         }
+
         &:nth-last-child(3) {
           transform: translate(66%);
           z-index: 3;
@@ -368,6 +315,7 @@ export default {
       }
     }
   }
+
   &__icon {
     margin-left: 17px;
   }

@@ -337,7 +337,7 @@ export default {
           {
             hid: 'og:image',
             property: 'og:image',
-            image: this.$axios.defaults.baseURL + this.product.image.original
+            content: this.$axios.defaults.baseURL + this.product.image.original
           }
         ],
     }
