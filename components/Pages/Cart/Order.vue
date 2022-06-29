@@ -206,21 +206,20 @@
       </label>
       <label
         for="payment_type-1"
-        :class="{ order__payment__item_checked: is_cashless_payment == true }"
+        :class="{ order__payment__item_checked: is_cashless_payment === true }"
         class="order__payment__item unselectable"
       >
         <Radiobutton
           class="order__payment__item__radio"
           id="payment_type-1"
           :value="true"
-          :checked="is_cashless_payment == true"
+          :checked="is_cashless_payment === true"
           @change="changeRadio"
         />
         <p class="order__payment__item__name">Перевод на банковскую карту</p>
       </label>
     </div>
-    <div v-if="cart_partner.order_message" class="order__some-text">
-      {{ cart_partner.order_message }}
+    <div v-html="cart_partner.order_message.split('\n').join('<br>')" v-if="cart_partner.order_message" class="order__some-text">
     </div>
     <div class="order__price">
       <p class="order__price__pre">Итого:</p>
