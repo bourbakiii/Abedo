@@ -243,14 +243,19 @@ import advertiseMixin from "@/mixins/advertise-mixin"
 
 export default {
   mixins: [partnerFiltersMixin, dropdownMixin, advertiseMixin],
-  title: `Список партнеров - Abedo`,
-  meta: [
-    {
-      hid: 'description',
-      name: 'description',
-      content: 'На странице представлен список заведений малого и среднего бизнеса, на маркетплейсе Abedo. Удобное оформление заказа, Акции и Скидки.'
+  head() {
+    return {
+      title: `Список партнеров - Abedo`,
+      meta:
+        [
+          {
+            hid: 'description',
+            name: 'description',
+            content: 'На странице представлен список заведений малого и среднего бизнеса, на маркетплейсе Abedo. Удобное оформление заказа, Акции и Скидки.'
+          }
+        ]
     }
-  ],
+  },
   data() {
     return {
       show_categories: false,

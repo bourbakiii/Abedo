@@ -19,6 +19,19 @@
 <script>
 export default {
   name: "StocksPage",
+  head() {
+    return {
+      title: `Новости - Abedo`,
+      meta:
+        [
+          {
+            hid: 'description',
+            name: 'description',
+            content: 'Будьте в курсе новостей маркетплейса Abedo.ru. Узнавайте об обновлениях, о расширении функционала, новых партнерах, интересных акциях и многом другом.'
+          }
+        ],
+    }
+  },
   async fetch() {
     await this.$axios
       .$get(`${this.$axios.defaults.baseURL}/api/shares`)

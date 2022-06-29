@@ -13,6 +13,22 @@
 
 <script>
 export default {
+  // Статичные страницы
+  // description: первые 170 символов из текста
+
+  head() {
+    return {
+      title: this.page.name || null,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: (page.content || '').substring(0, 170)
+        }
+      ]
+    }
+  },
+
   data() {
     return {
       page: {}
