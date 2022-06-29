@@ -17,6 +17,25 @@
 
 <script>
 export default {
+  head() {
+    return {
+
+      title: item.title ? `${item.title} - Abedo` : null,
+      meta:
+        [
+          {
+            hid: 'description',
+            name: 'description',
+            content: (item.content || '').substring(0, 170) || null
+          },
+          {
+            hid: 'og:image',
+            property: 'og:image',
+            image: `${item.image ? ($axios.defaults.baseURL + item.image.original) : null}`
+          }
+        ],
+    }
+  },
   data() {
     return {
       item: {}
