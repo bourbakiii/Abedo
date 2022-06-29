@@ -35,7 +35,7 @@ export default {
   ssr: true,
   target: 'server',
   css: [
-    '@assets/scss/style.scss',
+    // '@assets/scss/style.scss',
     "swiper/css/swiper.css"
   ],
   plugins: [
