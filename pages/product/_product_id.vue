@@ -324,6 +324,24 @@ export default {
     SwiperSlide,
     Checkbox,
   },
+  head() {
+    return {
+      title: `${this.product.name} - Abedo`,
+      meta:
+        [
+          {
+            hid: 'description',
+            name: 'description',
+            content: `Заказать ${this.product.name} в заведении {НАЗВАНИЕ_ЗАВЕДЕНИЯ}. Удобное оформление заказа через сайт или мобильное приложение.`
+          },
+          {
+            hid: 'og:image',
+            property: 'og:image',
+            image: this.$axios.defaults.baseURL + this.product.image.original
+          }
+        ],
+    }
+  },
   async asyncData({app, $axios, route, error}) {
     let to_return_product = {};
     if (route.query.preview && +route.query.preview === 1) {

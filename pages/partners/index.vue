@@ -247,15 +247,15 @@ export default {
   mixins: [partnerFiltersMixin, dropdownMixin, advertiseMixin],
   head() {
     const category = this.categories.find(el => +el.id === +this.$route.query.category) || null;
-
+    const description_content = category?`В разделе «${category.name}» представлены заведения Владикавказа, на маркетплейсе Abedo. Удобное оформление заказа, Акции и Скидки.`:'На странице представлен список заведений малого и среднего бизнеса, на маркетплейсе Abedo. Удобное оформление заказа, Акции и Скидки.';
     return {
-      title: `${category ? category.name : ''} - Abedo`,
+      title: `${category ? category.name : 'Партнеры'} - Abedo`,
       meta:
         [
           {
             hid: 'description',
             name: 'description',
-            content: `В разделе ${category ? category.name : ''} представлены заведения Владикавказа, на маркетплейсе Abedo. Удобное оформление заказа, Акции и Скидки.`
+            content: description_content
           }
         ]
     }

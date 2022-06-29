@@ -39,6 +39,26 @@ export default {
     Swiper,
     SwiperSlide,
   },
+  head() {
+    return {
+      title: `${this.partner.name} - Abedo`,
+      meta:
+        [
+          {
+            hid: 'description',
+            name: 'description',
+            content: `Страница заведения «${this.partner.name}» на маркетплейсе Abedo. Контактные данные, каталог товаров, услуг, удобное оформление заказа, акции и скидки.`
+          },
+          {
+            hid: 'og:image',
+            property: 'og:image',
+            image: this.$axios.defaults.baseURL + this.partner.logo.original
+          }
+        ],
+    }
+  },
+
+
   async asyncData({app, $axios, route, error}) {
     let partner = {},
       stocks = [];
@@ -63,7 +83,8 @@ export default {
         return error({statusCode: 404, message: "Ошибка при получении партнера"});
       });
     return {partner, stocks};
-  },
+  }
+  ,
   data() {
     return {
       swiperOption: {
@@ -74,7 +95,8 @@ export default {
       },
       partner: {},
     };
-  },
+  }
+  ,
   mounted() {
     this.$store.commit("variables/action", (state) => {
       state.adaptive_navigation = {
@@ -88,7 +110,8 @@ export default {
           }),
       };
     });
-  },
+  }
+  ,
   created() {
     this.$store.commit('action', state => {
       try {
@@ -97,16 +120,19 @@ export default {
         this.$nuxt.error({statusCode: 404, message: "Ошибка в поле предпросмотра"});
       }
     });
-  },
+  }
+  ,
   computed: {
     cart_products() {
       return this.$store.state.cart.products;
-    },
+    }
+    ,
     cart_partner() {
       return this.$store.state.cart.partner;
     }
   }
-};
+}
+;
 </script>
 <style lang="scss" scoped>
 .sidebar-cart {

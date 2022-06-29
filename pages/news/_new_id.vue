@@ -19,19 +19,20 @@
 export default {
   head() {
     return {
+      // div.innerHTML = str;
 
-      title: item.title ? `${item.title} - Abedo` : null,
+      title: this.item.title ? `${this.item.title} - Abedo` : `Новость - Abedo`,
       meta:
         [
           {
             hid: 'description',
             name: 'description',
-            content: (item.content || '').substring(0, 170) || null
+            content: (this.item.content.replace(/(<([^>]+)>)/g, "") || '').substring(0, 170) || null
           },
           {
             hid: 'og:image',
             property: 'og:image',
-            image: `${item.image ? ($axios.defaults.baseURL + item.image.original) : null}`
+            image: `${this.item.image ? (this.$axios.defaults.baseURL + this.item.image.original) : null}`
           }
         ],
     }
@@ -41,6 +42,7 @@ export default {
       item: {}
     }
   },
+
   async asyncData({$axios, route, error, store}) {
     let to_return_new = {},
       loading = true;
