@@ -60,6 +60,11 @@ import errorsMessagesMixin from "@/mixins/errors-messages.js";
 
 export default {
   mixins: [errorsMessagesMixin],
+  head() {
+    return {
+      title: `Авторизация администратора - Abedo`,
+    }
+  },
   data() {
     return {
       form: {

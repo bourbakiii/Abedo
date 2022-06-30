@@ -84,7 +84,11 @@ import errorsMessagesMixin from "@/mixins/errors-messages.js";
 import phoneCallHelper from "@/mixins/phone-call-helper.js";
 
 export default {
-
+  head() {
+    return {
+      title: `Подтверждение - Abedo`,
+    }
+  },
   mixins: [errorsMessagesMixin, phoneCallHelper],
   data() {
     return {

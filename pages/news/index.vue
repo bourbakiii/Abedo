@@ -33,6 +33,11 @@ import parser from "@/mixins/parser";
 
 export default {
   mixins: [parser],
+  head() {
+    return {
+      title: `Новости - Abedo`,
+    }
+  },
   data() {
     return {
       news: [],

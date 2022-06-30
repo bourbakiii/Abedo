@@ -88,6 +88,11 @@ import errorsMessagesMixin from "@/mixins/errors-messages.js";
 
 export default {
   mixins: [errorsMessagesMixin],
+  head() {
+    return {
+      title: `Регистрация - Abedo`,
+    }
+  },
   data() {
     return {
       form: {

@@ -28,6 +28,11 @@
 <script>
 export default {
   middleware: ['auth'],
+  head() {
+    return {
+      title: `Избранное - Abedo`,
+    }
+  },
   computed: {
     partners() {
       return this.$store.state.account.favourites;

@@ -52,6 +52,11 @@ import dadataMixin from "@/mixins/dadata.js";
 export default {
   middleware: ['auth'],
   mixins: [dadataMixin],
+  head() {
+    return {
+      title: `Адреса доставки - Abedo`,
+    }
+  },
   data() {
     return {
       show_add_form: false,

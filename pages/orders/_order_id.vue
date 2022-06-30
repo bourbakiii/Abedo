@@ -37,6 +37,11 @@
 <script>
 export default {
   middleware: ['auth'],
+  head() {
+    return {
+      title: `Заказ №${this.order.id} - Abedo`,
+    }
+  },
   async asyncData({$axios, route, error, store}) {
     let to_return_order = {},
       loading = true;

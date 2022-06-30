@@ -25,6 +25,11 @@
 </template>
 <script>
 export default {
+  head() {
+    return {
+      title: `Заказ оформлен - Abedo`,
+    }
+  },
   mounted() {
     this.$store.commit("variables/action", (state) => {
       state.adaptive_navigation = {

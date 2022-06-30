@@ -1,12 +1,12 @@
 <template>
   <div class="page search-page wrapper">
     <div class="search-page__content content">
-      <Breadcrumbs class="search-page__content__breadcrumbs adaptive-non"  :way="[{name:'Поиск', link:`/search`}]"/>
+      <Breadcrumbs class="search-page__content__breadcrumbs adaptive-non" :way="[{name:'Поиск', link:`/search`}]"/>
       <PagesSearchInput @changeLoading="changeLoading" @search='setFounded' class="search-page__content__search-input"/>
-<!--      <PagesSearchByCategories-->
-<!--        v-if="categories.length"-->
-<!--        :categories="categories"-->
-<!--        class="search-page__content__by-categories"/>-->
+      <!--      <PagesSearchByCategories-->
+      <!--        v-if="categories.length"-->
+      <!--        :categories="categories"-->
+      <!--        class="search-page__content__by-categories"/>-->
       <div class="search-page__content__search_loading" v-if="loading">
         <loader class="search-page__content__search_loading__loader"/>
       </div>
@@ -33,6 +33,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: `${((founded.partners && founded.partners.length) || (founded.products && founded.products.length)) ? 'Результаты поиска' : 'Поиск'} - Abedo`,
+    }
+  },
   data() {
     return {
       founded: {
@@ -112,12 +117,12 @@ export default {
         text-align: left;
         align-self: flex-start;
         width: max-content;
-        font-family: "SF Pro Display",serif;
+        font-family: "SF Pro Display", serif;
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
         line-height: 26px;
-        max-width:100%;
+        max-width: 100%;
       }
     }
 

@@ -181,6 +181,11 @@ import errorsMessagesMixin from "@/mixins/errors-messages.js";
 export default {
   mixins: [errorsMessagesMixin],
   middleware: ["auth"],
+  head() {
+    return {
+      title: `Профиль - Abedo`,
+    }
+  },
   data() {
     return {
       editing: false,

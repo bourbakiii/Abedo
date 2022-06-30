@@ -96,6 +96,11 @@ export default {
       loading: false
     }
   },
+  head() {
+    return {
+      title: `Восстановление пароля - Abedo`,
+    }
+  },
   mixins: [errorsMessagesMixin, phoneCallHelper],
   beforeCreate() {
     this.$store.commit('temporary/action', state => {

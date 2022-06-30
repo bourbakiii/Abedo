@@ -51,6 +51,11 @@
 </template>
 <script>
 export default {
+  head() {
+    return {
+      title: `Корзина - Abedo`,
+    }
+  },
   computed: {
     cart_partner() {
       return this.$store.state.cart.partner;

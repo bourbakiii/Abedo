@@ -139,6 +139,11 @@ import parserMixin from "@/mixins/parser.js";
 export default {
   mixins: [parserMixin],
   middleware: ['auth'],
+  head() {
+    return {
+      title: `История заказов - Abedo`,
+    }
+  },
   data() {
     return {
       orders: null,
