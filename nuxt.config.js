@@ -23,8 +23,8 @@ export default {
         content: '/open-graph-main.png'
       },
       {
-        hid: ' og:site_name',
-        property: ' og:site_name',
+        hid: 'og:site_name',
+        property: 'og:site_name',
         content: 'Abedo - маркетплейс малого и среднего бизнеса'
       }
     ],
