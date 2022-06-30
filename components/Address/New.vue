@@ -29,7 +29,7 @@
 
           <div
             v-if="suggestions.length"
-            class="address-item__content__dadata__suggestions"
+            class="address-item__content__dadata__suggestions non-scrollbar"
           >
             <button
               type="button"
@@ -142,7 +142,7 @@ export default {
     padding: 15px;
   }
   &__name {
-    font-family: "SF Pro Display";
+    font-family: "SF Pro Display",serif;
     font-style: normal;
     font-weight: 400;
     font-size: 22px;
@@ -174,10 +174,11 @@ export default {
         background-color: $white;
         position: absolute;
         top: 100%;
-        left: 0%;
+        left: 0;
         width: 100%;
         border-radius: 20px;
-        overflow: hidden;
+        overflow-y: auto;
+        max-height: 40vh;
         height: auto;
         display: flex;
         align-items: center;
@@ -191,7 +192,6 @@ export default {
           width: 100%;
           box-sizing: border-box;
           text-decoration: none;
-          border-bottom: 1px solid $dark_grey;
           min-height: 50px;
           padding: 5px 10px;
           display: flex;

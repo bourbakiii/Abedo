@@ -8,7 +8,7 @@
         <h1 class="addresses-page__content__addresses__title title-normal">
           Адреса доставки
         </h1>
-        <div class="addresses-page__content__addresses__content">
+        <div v-if="addresses.length" class="addresses-page__content__addresses__content">
           <AddressItem
             class="addresses-page__content__addresses__content__item"
             :key="address.id"
@@ -17,6 +17,7 @@
 
           />
         </div>
+        <p v-else-if="!show_add_form" class="addresses-page__content__addresses__content_empty">Кажется, у вас нет добавленных адресов</p>
         <AddressNew
           @close="show_add_form = false"
           class="addresses-page__content__addresses__new"
@@ -73,7 +74,7 @@ export default {
   },
   computed: {
     addresses() {
-      return this.$store.state.account.user.addresses;
+      return this.$store.state.account.user.addresses || [];
     },
   },
 };
@@ -121,6 +122,11 @@ export default {
           &:last-of-type {
             margin-bottom: 0;
           }
+        }
+        &_empty{
+          margin-bottom: 40px;
+          align-self: flex-start;
+          text-align: left;
         }
       }
 
