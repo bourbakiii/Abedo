@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <footer class="footer">
     <NuxtLink to="/partners" class="footer__button footer__button_partners">
       <svg
         width="30"
@@ -107,7 +107,7 @@
         class="footer__left-menu"
       />
     </transition>
-  </div>
+  </footer>
 </template>
 <script>
 export default {

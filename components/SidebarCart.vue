@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-cart">
+  <aside class="sidebar-cart">
     <client-only>
       <div class="sidebar-cart__icon">
         <svg
@@ -109,7 +109,7 @@
         <h3 class="title-extra-small">Корзина пуста</h3>
       </div>
     </client-only>
-  </div>
+  </aside>
 </template>
 <script>
 import parserMixin from "@/mixins/parser.js";

@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation-wrapper wrapper">
+  <header class="navigation-wrapper wrapper">
     <div class="navigation">
       <NuxtLink :to="parseLink('/')" class="navigation__logo">
         <svg
@@ -282,7 +282,7 @@
         </client-only>
       </NuxtLink>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>

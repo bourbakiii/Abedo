@@ -1,5 +1,5 @@
 <template>
-  <div class="footer__wrapper wrapper adaptive-non">
+  <footer class="footer__wrapper wrapper adaptive-non">
     <div class="footer">
       <div class="footer__logo-block">
         <NuxtLink :to="parseLink('/')" class="footer__logo-block-logo">
@@ -116,7 +116,7 @@
         </NuxtLink>
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>
