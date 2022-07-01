@@ -343,7 +343,6 @@ export default {
   data() {
     return {
       show_dropdown: false,
-      announcement: this.$cookies.get('announcement') || true
     };
   },
   methods: {
@@ -361,6 +360,9 @@ export default {
     },
   },
   computed: {
+    announcement() {
+      return this.$store.state.announcement || false;
+    },
     token() {
       return this.$store.state.account.token;
     },
@@ -719,6 +721,10 @@ export default {
           font-weight: 500;
           font-size: 18px;
           line-height: 22px;
+          text-decoration: none;
+          &:hover{
+            text-decoration: underline;
+          }
         }
 
         &__time {

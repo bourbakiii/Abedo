@@ -6,8 +6,8 @@
     <nuxt/>
 
     <ModalsWrapper/>
-    <Footer class='adaptive-non'/>
-    <AdaptiveFooter class='adaptive'/>
+    <Footer class='adaptive-non' v-if="!announcement"/>
+    <AdaptiveFooter class='adaptive' v-if="!announcement"/>
   </div>
 </template>
 <script>
@@ -19,6 +19,11 @@ export default {
         this.$cookies.set('app_remind_last_show_time', new Date(Date.now() + 1000 * 60 * 60 * 24));
         this.$store.commit('modals/open', {modal_name: 'app_remind'});
       }
+    }
+  },
+  computed: {
+    announcement() {
+      return this.$store.state.announcement || false;
     }
   }
 }

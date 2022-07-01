@@ -56,6 +56,9 @@ export default {
       '@assets/scss/style.scss'
     ]
   },
+  router: {
+    middleware: 'announcement-middleware'
+  },
   build: {
     html: {
       minify: {
