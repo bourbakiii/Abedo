@@ -6,6 +6,7 @@ export default async function ({store, route, redirect}) {
   // console.log(+route.query.preview === 1);
   // console.log('---route.query.preview---');
   // console.log(route.query.preview === 1 && (route.name === 'partners-partner_id' || route.name === 'product_id'));
+  if (route.name === 'announcement') return;
   if (+route.query.preview === 1 && (route.name === 'partners-partner_id' || route.name === 'product_id')) return;
 
   if (route.name === 'authorization' &&
@@ -14,7 +15,5 @@ export default async function ({store, route, redirect}) {
     return;
 
 
-  console.log("Перекидывает");
-  redirect('/announcement');
-
+  return redirect('/announcement');
 };
