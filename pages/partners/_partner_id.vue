@@ -41,8 +41,6 @@ export default {
   },
   head() {
     const adding_object = [];
-    console.log("ты меня клинишь")
-    console.log(this.partner.logo.original)
     if (this.partner.logo.original) adding_object.push({
       hid: 'og:image',
       property: 'og:image',
@@ -87,8 +85,7 @@ export default {
         return error({statusCode: 404, message: "Ошибка при получении партнера"});
       });
     return {partner, stocks};
-  }
-  ,
+  },
   data() {
     return {
       swiperOption: {
@@ -114,8 +111,7 @@ export default {
           }),
       };
     });
-  }
-  ,
+  },
   created() {
     this.$store.commit('action', state => {
       try {
@@ -129,8 +125,7 @@ export default {
   computed: {
     cart_products() {
       return this.$store.state.cart.products;
-    }
-    ,
+    },
     cart_partner() {
       return this.$store.state.cart.partner;
     }

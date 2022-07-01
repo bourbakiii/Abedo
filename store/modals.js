@@ -19,6 +19,10 @@ export const state = () => ({
     show: false,
     partner: null
   },
+  full_view: {
+    show: true,
+    images: null,
+  },
   app_remind: {
     show: false,
   },
@@ -47,6 +51,10 @@ export const mutations = {
       }
       case "rate": {
         state.rate.order = props.order;
+        break;
+      }
+      case "full_view": {
+        state.full_view.images = props.images;
         break;
       }
       case "partner": {

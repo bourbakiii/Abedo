@@ -109,8 +109,7 @@ export default {
         `slider-section-item-${section_id}`
       );
       sliderItem.classList.add("active");
-      this.$refs.sectionsSlider.slideTo(sliderItem.getAttribute(`index`));
-      return;
+      return this.$refs.sectionsSlider.slideTo(sliderItem.getAttribute(`index`));
     },
   },
 };

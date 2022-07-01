@@ -1,7 +1,7 @@
 export default {
   state() {
     return {
-      pages: [], preview: false, announcement: true
+      pages: [], preview: false, announcement: false
     }
   }, mutations: {
     action(state, action) {

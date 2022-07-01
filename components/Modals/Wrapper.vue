@@ -17,7 +17,10 @@
         v-else-if="$store.state.modals.switch_shop.show"
         class="modals-wrapper__content modal-content"
       />
-
+      <ModalsFullView
+        v-else-if="$store.state.modals.full_view.show"
+        class="modals-wrapper__content modal-content"
+      />
       <ModalsAddToCart
         v-else-if="$store.state.modals.add_to_cart.show"
         class="modals-wrapper__content modal-content"
@@ -65,21 +68,25 @@ export default {
     opacity: 0;
 
   }
-  &-enter{
-    .modal-content{
+
+  &-enter {
+    .modal-content {
       transform: translateY(-50px);
     }
   }
-  &-leave-to{
-    .modal-content{
+
+  &-leave-to {
+    .modal-content {
       transform: translateY(50px);
     }
   }
+
   &-leave-active,
   &-enter-active {
-    .modal-content{
+    .modal-content {
       transition: $transition;
     }
+
     transition: $transition;
   }
 }

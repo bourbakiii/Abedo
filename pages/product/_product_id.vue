@@ -97,6 +97,7 @@
             </div>
             <div class="product-page__over__content__main__images__image">
               <img
+                @click="openFullViewModal"
                 v-if="currentImage"
                 :src="`${$axios.defaults.baseURL}${currentImage.original}`"
                 class="product-page__over__content__main__images__image__image"
@@ -408,7 +409,15 @@ export default {
     });
   },
   methods: {
-    "selectOption"(option) {
+    openFullViewModal() {
+      this.$store.commit('modals/open', {
+        modal_name: 'full_view', images: [
+          ...(this.product.more_images ? this.product.more_images : []),
+          this.product.image
+        ]
+      });
+    },
+    selectOption(option) {
       const select_option_index = this.product.selected_options.findIndex(
         el => +el.id == +option.id
       );
@@ -419,16 +428,11 @@ export default {
       });
       // console.log("123");
       this.$forceUpdate();
-    }
-    ,
-    "selectImage"(image) {
+    },
+    selectImage(image) {
       this.currentImage = image || null;
-    }
-    ,
-
-
-  }
-  ,
+    },
+  },
   computed: {
     product_concated_images() {
       let to_return = [];
