@@ -1,6 +1,6 @@
 export default async function ({store, route, redirect}) {
   // console.log(store.state.announcement);
-  // console.log(route.name);
+  console.log(route.name);
   if (!store.state.announcement) return;
   // console.log('---route.query.preview---');
   // console.log(+route.query.preview === 1);
